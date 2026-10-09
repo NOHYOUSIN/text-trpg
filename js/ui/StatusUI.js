@@ -1,8 +1,8 @@
-import { catalog, getItem } from "../data/catalog.js";
-import { GRADES, INVENTORY } from "../data/rules.js";
-import { formatNumber as fmt } from "../systems/NumberRules.js";
-import { getProfile } from "../systems/TraitSystem.js";
-import { describeStats } from "./ItemText.js";
+import { catalog, getItem } from "../data/catalog.js?v=20261009-201221";
+import { GRADES, INVENTORY } from "../data/rules.js?v=20261009-201221";
+import { formatNumber as fmt } from "../systems/NumberRules.js?v=20261009-201221";
+import { getProfile } from "../systems/TraitSystem.js?v=20261009-201221";
+import { describeStats } from "./ItemText.js?v=20261009-201221";
 
 const SLOT_LABELS = { weapon: "무기", armor: "방어구", ring: "반지", necklace: "목걸이" };
 

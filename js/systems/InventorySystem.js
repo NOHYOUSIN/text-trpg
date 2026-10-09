@@ -1,8 +1,8 @@
-import { catalog, getItem, isEquipment } from "../data/catalog.js";
-import { GRADES, INVENTORY } from "../data/rules.js";
-import { parseToken } from "./EffectParser.js";
-import { formatNumber as fmt, roundValue } from "./NumberRules.js";
-import { getMaxHp } from "./TraitSystem.js";
+import { catalog, getItem, isEquipment } from "../data/catalog.js?v=20261009-201221";
+import { GRADES, INVENTORY } from "../data/rules.js?v=20261009-201221";
+import { parseToken } from "./EffectParser.js?v=20261009-201221";
+import { formatNumber as fmt, roundValue } from "./NumberRules.js?v=20261009-201221";
+import { getMaxHp } from "./TraitSystem.js?v=20261009-201221";
 
 export function maxStackOf(id) {
   return isEquipment(id) ? INVENTORY.equipmentStack : catalog.consumables.get(id)?.maxStack ?? INVENTORY.defaultMaxStack;

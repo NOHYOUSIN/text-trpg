@@ -1,6 +1,6 @@
-import { catalog, getItem } from "../data/catalog.js";
-import { formatNumber as fmt } from "../systems/NumberRules.js";
-import { renderScene } from "./SceneUI.js";
+import { catalog, getItem } from "../data/catalog.js?v=20261009-201221";
+import { formatNumber as fmt } from "../systems/NumberRules.js?v=20261009-201221";
+import { renderScene } from "./SceneUI.js?v=20261009-201221";
 
 const STAT_LABELS = { str: "힘", agi: "민첩", wis: "지혜" };
 
