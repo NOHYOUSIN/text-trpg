@@ -1,9 +1,9 @@
-import { catalog } from "../data/catalog.js?v=20261009-203002";
-import { parseToken } from "../systems/EffectParser.js?v=20261009-203002";
-import { formatNumber as fmt } from "../systems/NumberRules.js?v=20261009-203002";
+import { catalog } from "../data/catalog.js?v=20261009-232617";
+import { parseToken } from "../systems/EffectParser.js?v=20261009-232617";
+import { formatNumber as fmt } from "../systems/NumberRules.js?v=20261009-232617";
 
 // 장비·스킬·소모품의 수치를 한 줄 설명으로 만든다. (선택 판단용)
-const STAT_LABELS = { str: "힘", agi: "민첩", wis: "지혜" };
+const STAT_LABELS = { str: "힘", agi: "민첩", wis: "지혜", main: "주 능력치" };
 const SLOT_LABELS = { weapon: "무기", armor: "방어구", ring: "반지", necklace: "목걸이" };
 const SKILL_TYPE_LABELS = {
   attack: "공격",
@@ -32,7 +32,11 @@ export function describeEffectToken(token) {
     case "vulnerable":
       return `취약(받는 피해 ×${a}) ${b}턴`;
     case "guard":
-      return `효과량만큼 피해 감소 ${a}턴`;
+      return `효과량만큼 받는 피해 감소 ${a}턴`;
+    case "strike":
+      return `피해 ${a} + 연결 능력치`;
+    case "empower":
+      return `효과량만큼 주는 피해 증가 ${a}턴`;
     case "cleanse":
       return "상태이상 해제";
     case "basicAttackBonus":
@@ -84,7 +88,8 @@ export function describeEquipment(item) {
 }
 
 export function describeSkill(skill) {
-  const parts = [SKILL_TYPE_LABELS[skill.type], `${STAT_LABELS[skill.stat]} 연결`];
+  const owner = skill.class ? `${catalog.classes.get(skill.class)?.name ?? skill.class} 전용` : "공용";
+  const parts = [owner, SKILL_TYPE_LABELS[skill.type], `${STAT_LABELS[skill.stat]} 연결`];
 
   if (skill.type !== "passive") {
     if (skill.baseEffect > 0) {

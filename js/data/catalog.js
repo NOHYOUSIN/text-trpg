@@ -1,6 +1,6 @@
 // 생성 데이터를 ID로 찾기 쉽게 정리한다.
-import { commonData } from "./generated/common.js?v=20261009-203002";
-import { dungeonForestData } from "./generated/dungeon_forest.js?v=20261009-203002";
+import { commonData } from "./generated/common.js?v=20261009-232617";
+import { dungeonForestData } from "./generated/dungeon_forest.js?v=20261009-232617";
 
 const byId = (rows) => new Map(rows.map((row) => [row.id, row]));
 

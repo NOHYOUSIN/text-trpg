@@ -1,27 +1,36 @@
-import { catalog } from "../data/catalog.js?v=20261009-203002";
-import { COMBAT, DICE } from "../data/rules.js?v=20261009-203002";
-import { Enemy } from "../models/Enemy.js?v=20261009-203002";
-import { applyReduction, computeEffect, describeCalculation, describeRoll, rollTier } from "./DamageSystem.js?v=20261009-203002";
-import { parseEffects, parseToken, STATUS_LABELS, toStatusSpec } from "./EffectParser.js?v=20261009-203002";
-import { josa } from "./Josa.js?v=20261009-203002";
-import { clamp, formatNumber as fmt, roundValue } from "./NumberRules.js?v=20261009-203002";
+import { catalog } from "../data/catalog.js?v=20261009-232617";
+import { COMBAT, DICE } from "../data/rules.js?v=20261009-232617";
+import { Enemy } from "../models/Enemy.js?v=20261009-232617";
+import { applyReduction, computeEffect, describeCalculation, describeRoll, rollTier } from "./DamageSystem.js?v=20261009-232617";
+import { parseEffects, parseToken, STATUS_LABELS, toStatusSpec } from "./EffectParser.js?v=20261009-232617";
+import { josa } from "./Josa.js?v=20261009-232617";
+import { clamp, formatNumber as fmt, roundValue } from "./NumberRules.js?v=20261009-232617";
 import {
   applyStatus,
   beginAction,
   clearStatuses,
   endAction,
   getDealtMultiplier,
+  getEmpowerAmount,
   getGuardAmount,
   getTakenMultiplier,
   removeStatus,
-} from "./StatusSystem.js?v=20261009-203002";
-import { getClassTrait, getProfile } from "./TraitSystem.js?v=20261009-203002";
+} from "./StatusSystem.js?v=20261009-232617";
+import { getClassTrait, getProfile } from "./TraitSystem.js?v=20261009-232617";
 
-const SELF_EFFECTS = new Set(["guard", "cleanse"]);
-const TIER_TAGS = { none: "", low: " (약하게)", normal: "", high: " (강하게)", critical: " (치명타!)" };
+const SELF_EFFECTS = new Set(["guard", "empower", "cleanse"]);
+// 효과량을 자신에게 거는 스킬: 방어(받는 피해 감소), 강화(주는 피해 증가)
+const SELF_AMOUNT_STATUS = { defense: "guard", buff: "empower" };
+// 피해 줄에 붙는 판정 표시: (🎲굴린 값 · 판정 이름)
+const HIT_LABELS = { low: "스침", normal: "명중", high: "강타", critical: "치명타!" };
 
-function tierTag(tier) {
-  return TIER_TAGS[tier.id] ?? "";
+function hitTag(roll, tier) {
+  if (roll === undefined) {
+    return "";
+  }
+
+  const label = HIT_LABELS[tier.id];
+  return label ? ` (🎲${roll} · ${label})` : ` (🎲${roll})`;
 }
 const NEGATIVE_STATUSES = ["poison", "stun", "weaken", "vulnerable"];
 
@@ -45,6 +54,8 @@ export class Combat {
     this.trait = getClassTrait(adventurer.classId);
     this.player = {
       kind: "player",
+      // 공용 스킬의 "main" 능력치는 직업의 주 능력치로 계산한다.
+      mainStat: catalog.classes.get(adventurer.classId)?.mainStat ?? "str",
       name: adventurer.name,
       ref: adventurer,
       profile,
@@ -342,13 +353,14 @@ export class Combat {
   basicAttack(attacker, defender, { base, stat = 0, multipliers = [], label }) {
     const roll = rollTier(this.dice, { critMin: this.critMinOf(attacker) });
     this.log(attacker.kind, `${attacker.name} — ${label}`, describeRoll(roll));
-    const damage = this.dealDamage(attacker, defender, { base, stat, tier: roll.tier, multipliers });
+    const damage = this.dealDamage(attacker, defender, { base, stat, tier: roll.tier, multipliers, roll: roll.roll });
     return { tier: roll.tier, damage };
   }
 
   useSkill(user, target, skill) {
     const isPlayer = user.kind === "player";
-    const stat = isPlayer ? user.profile.stats[skill.stat] : 0;
+    const statKey = skill.stat === "main" ? user.mainStat : skill.stat;
+    const stat = isPlayer ? user.profile.stats[statKey] : 0;
     const roll = rollTier(this.dice, { critMin: this.critMinOf(user) });
     const cooldown = Math.max(1, skill.cooldown - (isPlayer ? user.profile.modifiers.cooldownReduction : 0));
 
@@ -363,31 +375,39 @@ export class Combat {
       skillMultipliers.push({ value: this.trait.skillDamageMultiplier, label: "집중" });
     }
 
+    // 방어·강화 스킬의 strike:N은 보조 효과와 함께 주는 피해의 기본값이다.
+    const strike = parseEffects(skill.effects).find((effect) => effect.key === "strike");
+
     if (skill.type === "attack" || (skill.type === "debuff" && skill.baseEffect > 0)) {
-      const multipliers = [...skillMultipliers];
+      this.dealSkillDamage(user, target, { base: skill.baseEffect, stat, tier, roll: roll.roll, skillMultipliers });
+    } else if (strike) {
+      this.dealSkillDamage(user, target, { base: Number(strike.args[0]), stat, tier, roll: roll.roll, skillMultipliers });
+    }
 
-      if (isPlayer && user.firstStrikePending) {
-        multipliers.push({ value: this.trait.firstStrikeMultiplier, label: "선공" });
-      }
+    if (this.result) {
+      return;
+    }
 
-      const base = roundValue(skill.baseEffect + (isPlayer ? user.profile.modifiers.skillDamageBonus : 0));
-      this.dealDamage(user, target, { base, stat, tier, multipliers });
+    if (skill.type === "attack" || skill.type === "debuff") {
+      // 피해는 위에서 처리했다.
     } else if (skill.type === "heal") {
       const amount = computeEffect({ base: skill.baseEffect, stat, tier });
       this.log("calc", "", describeCalculation({ base: skill.baseEffect, stat, tier, raw: amount }));
       this.heal(user, amount, skill.name);
-    } else if (skill.type === "defense") {
+    } else if (SELF_AMOUNT_STATUS[skill.type]) {
+      const statusType = SELF_AMOUNT_STATUS[skill.type];
       const amount = computeEffect({ base: skill.baseEffect, stat, tier });
       this.log("calc", "", describeCalculation({ base: skill.baseEffect, stat, tier, raw: amount }));
 
       if (amount > 0) {
-        const guard = parseEffects(skill.effects).find((effect) => effect.key === "guard");
-        this.inflict(user, { type: "guard", amount, duration: guard ? Number(guard.args[0]) : 1 }, user);
+        const token = parseEffects(skill.effects).find((effect) => effect.key === statusType);
+        this.inflict(user, { type: statusType, amount, duration: token ? Number(token.args[0]) : 1 }, user);
       }
     }
 
     if (tier.multiplier === 0) {
-      if (skill.type !== "attack") {
+      // 피해를 준 스킬은 이미 "빗나갔다"가 출력됐다.
+      if (skill.type !== "attack" && !strike && !(skill.type === "debuff" && skill.baseEffect > 0)) {
         this.log("result", "→ 효과가 없었다.");
       }
       return;
@@ -398,7 +418,7 @@ export class Combat {
     }
 
     for (const effect of parseEffects(skill.effects)) {
-      if (effect.key === "guard") {
+      if (effect.key === "guard" || effect.key === "empower" || effect.key === "strike") {
         continue;
       }
 
@@ -423,6 +443,18 @@ export class Combat {
     }
   }
 
+  dealSkillDamage(user, target, { base, stat, tier, roll, skillMultipliers }) {
+    const isPlayer = user.kind === "player";
+    const multipliers = [...skillMultipliers];
+
+    if (isPlayer && user.firstStrikePending) {
+      multipliers.push({ value: this.trait.firstStrikeMultiplier, label: "선공" });
+    }
+
+    const total = roundValue(base + (isPlayer ? user.profile.modifiers.skillDamageBonus : 0));
+    this.dealDamage(user, target, { base: total, stat, tier, multipliers, roll });
+  }
+
   useItem(itemId) {
     const item = catalog.consumables.get(itemId);
     const { key, args } = parseToken(item.effect);
@@ -443,7 +475,8 @@ export class Combat {
 
   // ---------- 피해·회복·상태 ----------
 
-  dealDamage(attacker, defender, { base, stat = 0, tier, multipliers = [] }) {
+  // roll: 굴린 주사위 값(보정 전). 결과 줄에 표시한다.
+  dealDamage(attacker, defender, { base, stat = 0, tier, multipliers = [], roll }) {
     const all = [...multipliers];
     const dealt = getDealtMultiplier(attacker);
     const taken = getTakenMultiplier(defender);
@@ -456,6 +489,8 @@ export class Combat {
       all.push({ value: taken, label: "취약" });
     }
 
+    // 강화 상태면 효과량만큼 기본값에 더한다.
+    base = roundValue(base + getEmpowerAmount(attacker));
     const raw = computeEffect({ base, stat, tier, multipliers: all });
     const reduction = this.reductionOf(defender);
     const final = applyReduction(raw, reduction, tier);
@@ -464,7 +499,9 @@ export class Combat {
     defender.ref.hp = Math.max(0, roundValue(defender.ref.hp - final));
     this.log(
       "damage",
-      final > 0 ? `→ ${defender.name}에게 ${fmt(final)} 피해${tierTag(tier)}` : "→ 빗나갔다!",
+      final > 0
+        ? `→ ${defender.name}에게 ${fmt(final)} 피해${hitTag(roll, tier)}`
+        : `→ 빗나갔다!${hitTag(roll, tier)}`,
       describeCalculation({ base, stat, tier, multipliers: all, raw, reduction, final }),
     );
     this.afterDamage(defender, before);

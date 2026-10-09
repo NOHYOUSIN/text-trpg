@@ -1,6 +1,6 @@
-import { STATUS } from "../data/rules.js?v=20261009-203002";
-import { STATUS_LABELS } from "./EffectParser.js?v=20261009-203002";
-import { formatNumber as fmt } from "./NumberRules.js?v=20261009-203002";
+import { STATUS } from "../data/rules.js?v=20261009-232617";
+import { STATUS_LABELS } from "./EffectParser.js?v=20261009-232617";
+import { formatNumber as fmt } from "./NumberRules.js?v=20261009-232617";
 
 // 상태이상과 지속 효과. 지속시간은 효과를 받은 쪽의 행동 횟수로 센다.
 // combatant: { statuses: [], stunImmunity: 0, immune: Set }
@@ -53,6 +53,11 @@ export function getTakenMultiplier(target) {
 
 export function getGuardAmount(target) {
   return getStatus(target, "guard")?.amount ?? 0;
+}
+
+// 강화: 효과량만큼 주는 피해의 기본값에 더한다.
+export function getEmpowerAmount(target) {
+  return getStatus(target, "empower")?.amount ?? 0;
 }
 
 // 행동 직전: 독 피해량과 기절 여부를 알려 준다. 기절이면 기절을 소모하고 면역을 준다.

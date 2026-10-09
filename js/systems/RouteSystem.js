@@ -1,5 +1,5 @@
-import { ROUTE } from "../data/rules.js?v=20261009-203002";
-import { isEventAvailable } from "./EventSystem.js?v=20261009-203002";
+import { ROUTE } from "../data/rules.js?v=20261009-232617";
+import { isEventAvailable } from "./EventSystem.js?v=20261009-232617";
 
 export const CONTENT_LABELS = Object.freeze({
   combat: "전투",
@@ -19,8 +19,10 @@ export function getBossForRound(zone, round) {
     return { rank: "boss", enemyId: zone.bossId };
   }
 
-  if (round === zone.midBossRound && zone.midBossId) {
-    return { rank: "midboss", enemyId: zone.midBossId };
+  const midBoss = zone.midBosses.find((entry) => entry.round === round);
+
+  if (midBoss) {
+    return { rank: "midboss", enemyId: midBoss.enemyId };
   }
 
   return null;

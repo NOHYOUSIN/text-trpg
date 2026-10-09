@@ -1,5 +1,5 @@
-import { catalog } from "../data/catalog.js?v=20261009-203002";
-import { BOSS_REWARD_CANDIDATES, BOSS_REWARD_GRADE, GRADE_WEIGHTS_BY_ZONE, LOOT } from "../data/rules.js?v=20261009-203002";
+import { catalog } from "../data/catalog.js?v=20261009-232617";
+import { BOSS_REWARD_CANDIDATES, BOSS_REWARD_GRADE, GRADE_WEIGHTS_BY_ZONE, LOOT, SKILL_POOL } from "../data/rules.js?v=20261009-232617";
 
 const GRADE_ORDER = ["common", "uncommon", "rare", "unique"];
 
@@ -28,9 +28,12 @@ function availableEquipment(run, excludeIds = []) {
   );
 }
 
+// 공용 스킬과 자기 직업의 전용 스킬만 나온다. 이미 장착한 스킬은 제외한다.
 function availableSkills(adventurer, excludeIds = []) {
   return [...catalog.skills.values()].filter(
-    (skill) => !adventurer.skills.includes(skill.id) && !excludeIds.includes(skill.id),
+    (skill) => (!skill.class || skill.class === adventurer.classId)
+      && !adventurer.skills.includes(skill.id)
+      && !excludeIds.includes(skill.id),
   );
 }
 
@@ -44,8 +47,16 @@ export function pickEquipment({ run, dice, grade = rollGrade(run.zone, dice), ex
   return item;
 }
 
+// 직업 전용(SKILL_POOL.classChance%) 또는 공용 중 하나를 먼저 고르고, 그 안에서 등급으로 고른다.
+// 고른 분류에 후보가 없으면 다른 분류에서 고른다.
 export function pickSkill({ run, adventurer, dice, grade = rollGrade(run.zone, dice), excludeIds = [] }) {
-  return pickByGrade(availableSkills(adventurer, excludeIds), grade, dice);
+  const candidates = availableSkills(adventurer, excludeIds);
+  const classSkills = candidates.filter((skill) => skill.class);
+  const commonSkills = candidates.filter((skill) => !skill.class);
+  const preferClass = dice.chance(SKILL_POOL.classChance);
+  const first = preferClass ? classSkills : commonSkills;
+  const second = preferClass ? commonSkills : classSkills;
+  return pickByGrade(first.length ? first : second, grade, dice);
 }
 
 export function pickConsumable({ dice, excludeIds = [] }) {

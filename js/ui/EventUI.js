@@ -1,5 +1,5 @@
-import { checkCondition } from "../systems/EventSystem.js?v=20261009-203002";
-import { renderScene } from "./SceneUI.js?v=20261009-203002";
+import { checkCondition } from "../systems/EventSystem.js?v=20261009-232617";
+import { renderScene } from "./SceneUI.js?v=20261009-232617";
 
 // 사건 선택지. 조건을 채우지 못한 선택지는 비활성으로 보여 준다. 난이도는 표시하지 않는다.
 export function renderEvent(root, { place, event, adventurer, onChoose }) {

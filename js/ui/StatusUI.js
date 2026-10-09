@@ -1,8 +1,8 @@
-import { catalog, getItem } from "../data/catalog.js?v=20261009-203002";
-import { GRADES, INVENTORY } from "../data/rules.js?v=20261009-203002";
-import { formatNumber as fmt } from "../systems/NumberRules.js?v=20261009-203002";
-import { getProfile } from "../systems/TraitSystem.js?v=20261009-203002";
-import { describeStats } from "./ItemText.js?v=20261009-203002";
+import { catalog, getItem } from "../data/catalog.js?v=20261009-232617";
+import { GRADES, INVENTORY } from "../data/rules.js?v=20261009-232617";
+import { formatNumber as fmt } from "../systems/NumberRules.js?v=20261009-232617";
+import { getProfile } from "../systems/TraitSystem.js?v=20261009-232617";
+import { describeStats } from "./ItemText.js?v=20261009-232617";
 
 const SLOT_LABELS = { weapon: "무기", armor: "방어구", ring: "반지", necklace: "목걸이" };
 
@@ -30,7 +30,7 @@ export function renderStatus(root, { dungeon, zone, run, adventurer, onOpenInven
   root.append(
     section(`${dungeon.name} · ${zone.name}`, [
       line(`라운드 ${run.round} / ${zone.rounds}`),
-      line(`중간보스 ${zone.midBossRound}라운드 · 구역 보스 ${zone.bossRound}라운드`),
+      line(`중간보스 ${zone.midBosses.map((entry) => entry.round).join("·") || "없음"}라운드 · 구역 보스 ${zone.bossRound}라운드`),
     ]),
     section(adventurer.name, [
       hpBar,

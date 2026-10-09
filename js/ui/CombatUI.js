@@ -1,8 +1,8 @@
-import { GRADES } from "../data/rules.js?v=20261009-203002";
-import { formatNumber as fmt } from "../systems/NumberRules.js?v=20261009-203002";
-import { describeStatuses } from "../systems/StatusSystem.js?v=20261009-203002";
-import { describeConsumable, describeSkill, STAT_LABELS } from "./ItemText.js?v=20261009-203002";
-import { isTextEffectEnabled } from "./TextEffect.js?v=20261009-203002";
+import { GRADES } from "../data/rules.js?v=20261009-232617";
+import { formatNumber as fmt } from "../systems/NumberRules.js?v=20261009-232617";
+import { statusChip } from "./StatusTooltip.js?v=20261009-232617";
+import { describeConsumable, describeSkill, STAT_LABELS } from "./ItemText.js?v=20261009-232617";
+import { isTextEffectEnabled } from "./TextEffect.js?v=20261009-232617";
 
 const SKILL_TYPE_LABELS = {
   attack: "공격",
@@ -184,7 +184,7 @@ export class CombatUI {
         `기본 피해 ${fmt(combat.enemy.ref.damage)} · 민첩 ${fmt(combat.enemy.ref.agi)} · 피해 감소 ${fmt(combat.enemy.ref.damageReduction)}`,
         describeEnemySkills(combat),
       ],
-      statuses: describeStatuses(combat.enemy),
+      statuses: combat.enemy.statuses,
     });
 
     const { stats, maxHp, damageReduction } = combat.player.profile;
@@ -195,7 +195,7 @@ export class CombatUI {
       maxHp,
       summary: "",
       details: [`힘 ${fmt(stats.str)} · 민첩 ${fmt(stats.agi)} · 지혜 ${fmt(stats.wis)} · 피해 감소 ${fmt(damageReduction)}`],
-      statuses: describeStatuses(combat.player),
+      statuses: combat.player.statuses,
     });
   }
 
@@ -216,7 +216,7 @@ export class CombatUI {
     bar.append(fill, textNode("span", "hp-bar-text", `HP ${fmt(hp)} / ${fmt(maxHp)}`));
 
     element.append(head, bar);
-    element.append(textNode("p", "combat-statuses", statuses.length ? statuses.join(" · ") : "상태이상 없음"));
+    element.append(renderStatuses(statuses));
 
     if (summary) {
       element.append(textNode("p", "combat-side-summary", summary));
@@ -309,6 +309,33 @@ export class CombatUI {
     this.enemyEl.replaceChildren();
     this.playerEl.replaceChildren();
   }
+}
+
+// 상태이상 목록: 마우스를 올리거나(누르면) 작은 설명이 뜬다.
+function renderStatuses(statuses) {
+  const line = document.createElement("p");
+  line.className = "combat-statuses";
+
+  if (!statuses.length) {
+    line.textContent = "상태이상 없음";
+    return line;
+  }
+
+  statuses.forEach((status, index) => {
+    const { text, tip } = statusChip(status);
+    const chip = textNode("span", "status-chip", text);
+    chip.dataset.tip = tip;
+    chip.tabIndex = 0;
+    chip.setAttribute("aria-label", `${text}. ${tip}`);
+
+    if (index > 0) {
+      line.append(" · ");
+    }
+
+    line.append(chip);
+  });
+
+  return line;
 }
 
 function readCalcSetting() {

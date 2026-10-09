@@ -34,7 +34,7 @@ export const EXPLORE_DIFFICULTIES = Object.freeze({
 export const CLASS_TRAITS = Object.freeze({
   warrior: { healRatio: 0.25, triggerRatio: 0.5, usesPerCombat: 1 },
   rogue: { firstStrikeMultiplier: 1.5, surpriseModifier: 3 },
-  mage: { skillDamageMultiplier: 1.1 },
+  mage: { skillDamageMultiplier: 1.25 },
 });
 
 export const STATUS = Object.freeze({
@@ -85,14 +85,19 @@ export const BOSS_REWARD_CANDIDATES = Object.freeze({ min: 2, max: 3 });
 export const LOOT = Object.freeze({
   combatConsumableChance: 20,
   combatEquipmentChance: 10,
-  treasureWeights: { equipment: 60, consumable: 30, skill: 10 },
+  treasureWeights: { equipment: 50, consumable: 25, skill: 25 },
 });
 
 // 1구역 앞부분 사건 보너스: 판정이 있는 선택지의 결과가 실패가 아니고 빈 스킬 슬롯이 있으면 확률로 무작위 스킬 추가 (2026-10-09)
 export const EARLY_SKILL = Object.freeze({
   zone: 1,
-  maxRound: 3,
+  maxRound: 6,
   chance: 50,
+});
+
+// 무작위 스킬: 직업 전용을 뽑을 확률(%). 나머지는 공용. (2026-10-09)
+export const SKILL_POOL = Object.freeze({
+  classChance: 60,
 });
 
 export const SHOP = Object.freeze({

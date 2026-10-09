@@ -265,3 +265,45 @@
 .combat.show-calc .combat-log-detail {
   display: block;
 }
+
+/* 상태이상 설명 툴팁: 마우스를 올리거나 누르면 작게 뜬다 */
+
+.status-chip {
+  position: relative;
+  border-bottom: 1px dotted var(--muted);
+  cursor: help;
+}
+
+.status-chip:focus-visible {
+  outline: 1px solid var(--accent-strong);
+  outline-offset: 2px;
+}
+
+.status-chip::after {
+  content: attr(data-tip);
+  position: absolute;
+  bottom: calc(100% + 6px);
+  left: 0;
+  z-index: 5;
+  width: max-content;
+  max-width: 220px;
+  padding: 6px 9px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: var(--text);
+  background: #1b1f27;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
+  font-size: 12px;
+  line-height: 1.5;
+  white-space: normal;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.12s ease;
+}
+
+.status-chip:hover::after,
+.status-chip:focus::after {
+  opacity: 1;
+  visibility: visible;
+}

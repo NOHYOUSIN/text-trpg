@@ -22,6 +22,8 @@ export function toStatusSpec({ key, args }) {
       return { type: "vulnerable", multiplier: Number(args[0]), duration: Number(args[1]) };
     case "guard":
       return { type: "guard", duration: Number(args[0]) };
+    case "empower":
+      return { type: "empower", duration: Number(args[0]) };
     default:
       return null;
   }
@@ -32,5 +34,6 @@ export const STATUS_LABELS = Object.freeze({
   stun: "기절",
   weaken: "약화",
   vulnerable: "취약",
-  guard: "방어 태세",
+  guard: "방어",
+  empower: "강화",
 });

@@ -7,32 +7,47 @@ export const dungeonForestData = {
     {
       "zone": 1,
       "name": "숲 초입",
-      "rounds": 12,
-      "midBossRound": 6,
-      "bossRound": 12,
-      "midBossId": "ene_tusk",
+      "rounds": 20,
+      "midBosses": [
+        {
+          "round": 7,
+          "enemyId": "ene_tusk"
+        },
+        {
+          "round": 14,
+          "enemyId": "ene_tusk"
+        }
+      ],
+      "bossRound": 20,
       "bossId": "ene_whisper_warden",
       "entryText": "햇빛이 잎 사이로 드문드문 내려온다. 어디선가 낮은 속삭임이 바람에 섞여 들린다."
     },
     {
       "zone": 2,
       "name": "깊은 숲",
-      "rounds": 13,
-      "midBossRound": 7,
-      "bossRound": 13,
-      "midBossId": null,
+      "rounds": 20,
+      "midBosses": [],
+      "bossRound": 20,
       "bossId": null,
       "entryText": "(2구역 콘텐츠는 이후 작성)"
     },
     {
       "zone": 3,
       "name": "어두운 숲",
-      "rounds": 14,
-      "midBossRound": 7,
-      "bossRound": 14,
-      "midBossId": null,
+      "rounds": 20,
+      "midBosses": [],
+      "bossRound": 20,
       "bossId": null,
       "entryText": "(3구역 콘텐츠는 이후 작성)"
+    },
+    {
+      "zone": 4,
+      "name": "속삭임의 근원",
+      "rounds": 20,
+      "midBosses": [],
+      "bossRound": 20,
+      "bossId": null,
+      "entryText": "(4구역 콘텐츠는 이후 작성. 구역 이름은 임시)"
     }
   ],
   "places": [

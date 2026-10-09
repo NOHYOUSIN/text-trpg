@@ -1,7 +1,7 @@
-import { catalog } from "../data/catalog.js?v=20261009-203002";
-import { CLASS_TRAITS, EFFECT_TIERS } from "../data/rules.js?v=20261009-203002";
-import { parseEffects } from "./EffectParser.js?v=20261009-203002";
-import { roundValue } from "./NumberRules.js?v=20261009-203002";
+import { catalog } from "../data/catalog.js?v=20261009-232617";
+import { CLASS_TRAITS, EFFECT_TIERS } from "../data/rules.js?v=20261009-232617";
+import { parseEffects } from "./EffectParser.js?v=20261009-232617";
+import { roundValue } from "./NumberRules.js?v=20261009-232617";
 
 const STAT_KEYS = ["str", "agi", "wis"];
 const DEFAULT_CRIT_MIN = EFFECT_TIERS.find((tier) => tier.id === "critical").min;
