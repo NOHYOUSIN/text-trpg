@@ -1,5 +1,5 @@
-import { ROUTE } from "../data/rules.js?v=20261009-232617";
-import { isEventAvailable } from "./EventSystem.js?v=20261009-232617";
+import { ROUTE } from "../data/rules.js?v=20261010-000920";
+import { isEventAvailable } from "./EventSystem.js?v=20261010-000920";
 
 export const CONTENT_LABELS = Object.freeze({
   combat: "전투",
@@ -52,17 +52,24 @@ export function pickEnemy(dungeon, place, run, dice) {
 }
 
 // 장소 후보 중 등장 가능한 사건, 없으면 구역 공통 풀에서 고른다.
+// 조건(requiresFlags)을 갖춘 후속 사건이 후보에 있으면 그것을 먼저 고른다.
 export function pickEvent(dungeon, place, run, dice) {
   const fromPlace = place.eventPool
     .map((id) => dungeon.eventsById.get(id))
     .filter((event) => event && isEventAvailable(event, run));
 
   if (fromPlace.length) {
-    return dice.pick(fromPlace);
+    return dice.pick(preferFollowups(fromPlace));
   }
 
   const fromZone = dungeon.events.filter(
     (event) => event.zone === run.zone && isEventAvailable(event, run),
   );
-  return dice.pick(fromZone);
+  return dice.pick(preferFollowups(fromZone));
+}
+
+// 등장 가능한 사건 중 후속 사건(조건 플래그가 있는 사건)만 추린다. 없으면 전체를 돌려준다.
+function preferFollowups(events) {
+  const followups = events.filter((event) => event.requiresFlags.length > 0);
+  return followups.length ? followups : events;
 }

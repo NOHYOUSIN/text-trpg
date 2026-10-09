@@ -71,7 +71,14 @@ export const dungeonForestData = {
         "evt_lost_child",
         "evt_old_tracks",
         "evt_trail_marker",
-        "evt_wandering_merchant"
+        "evt_wandering_merchant",
+        "evt_carved_stones",
+        "evt_abandoned_cart",
+        "evt_wounded_soldier",
+        "evt_fog_bank",
+        "evt_crow_flock",
+        "evt_rotten_bridge",
+        "evt_knight_spirit"
       ]
     },
     {
@@ -95,7 +102,12 @@ export const dungeonForestData = {
         "evt_snare_trap",
         "evt_wounded_wolf",
         "evt_spider_nest",
-        "evt_goblin_toll"
+        "evt_goblin_toll",
+        "evt_hollow_log",
+        "evt_wolf_tracks",
+        "evt_poison_flowers",
+        "evt_fog_bank",
+        "evt_mother_wolf"
       ]
     },
     {
@@ -120,7 +132,11 @@ export const dungeonForestData = {
         "evt_hunter_cache",
         "evt_lost_child",
         "evt_storm_shelter",
-        "evt_bandit_camp"
+        "evt_bandit_camp",
+        "evt_hermit_hut",
+        "evt_wounded_soldier",
+        "evt_grateful_parent",
+        "evt_hunter_return"
       ]
     },
     {
@@ -143,7 +159,12 @@ export const dungeonForestData = {
         "evt_whispering_voice",
         "evt_mushroom_ring",
         "evt_echoing_well",
-        "evt_whisper_stone"
+        "evt_whisper_stone",
+        "evt_rotten_bridge",
+        "evt_glowing_moss",
+        "evt_moonlit_pond",
+        "evt_fog_bank",
+        "evt_whisper_answer"
       ]
     },
     {
@@ -164,7 +185,13 @@ export const dungeonForestData = {
         "evt_old_altar",
         "evt_fallen_knight",
         "evt_echoing_well",
-        "evt_whisper_stone"
+        "evt_whisper_stone",
+        "evt_crow_flock",
+        "evt_goblin_shaman",
+        "evt_carved_stones",
+        "evt_strange_shrine",
+        "evt_knight_spirit",
+        "evt_whisper_answer"
       ]
     },
     {
@@ -187,7 +214,10 @@ export const dungeonForestData = {
         "evt_mossy_chest",
         "evt_hunter_cache",
         "evt_spider_nest",
-        "evt_trail_marker"
+        "evt_trail_marker",
+        "evt_glowing_moss",
+        "evt_hollow_log",
+        "evt_poison_flowers"
       ]
     },
     {
@@ -210,7 +240,10 @@ export const dungeonForestData = {
         "evt_toll_bandits",
         "evt_wandering_merchant",
         "evt_storm_shelter",
-        "evt_bandit_camp"
+        "evt_bandit_camp",
+        "evt_drunk_bandit",
+        "evt_abandoned_cart",
+        "evt_grateful_parent"
       ]
     },
     {
@@ -233,7 +266,11 @@ export const dungeonForestData = {
         "evt_snare_trap",
         "evt_wounded_wolf",
         "evt_goblin_toll",
-        "evt_old_tracks"
+        "evt_old_tracks",
+        "evt_wolf_tracks",
+        "evt_goblin_shaman",
+        "evt_mother_wolf",
+        "evt_hunter_return"
       ]
     }
   ],
@@ -1632,6 +1669,1157 @@ export const dungeonForestData = {
             "success": {
               "text": "도적들이 돌아오기 전에 떠나는 편이 낫다.",
               "result": []
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "evt_mother_wolf",
+      "zone": 1,
+      "title": "어미 늑대",
+      "description": "커다란 늑대가 길 한가운데 앉아 있다. 곁에는 낯익은 새끼 늑대가 꼬리를 흔든다.",
+      "repeatable": false,
+      "requiresFlags": [
+        "savedWolfCub"
+      ],
+      "forbiddenFlags": [],
+      "choices": [
+        {
+          "id": "bow_head",
+          "order": 1,
+          "text": "고개를 숙이고 기다린다",
+          "condition": [],
+          "difficulty": "none",
+          "outcomes": {
+            "success": {
+              "text": "어미 늑대가 물고 온 것을 발치에 내려놓고 사라졌다.",
+              "result": [
+                "item:random:equipment"
+              ]
+            }
+          }
+        },
+        {
+          "id": "pass_quietly",
+          "order": 2,
+          "text": "조용히 지나간다",
+          "condition": [],
+          "difficulty": "none",
+          "outcomes": {
+            "success": {
+              "text": "늑대들은 끝까지 길을 비켜 주었다.",
+              "result": [
+                "hp:5"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "evt_knight_spirit",
+      "zone": 1,
+      "title": "기사의 영혼",
+      "description": "묻어 준 기사의 칼 옆에 희미한 빛이 서 있다. \"은혜를 갚게 해 주게.\"",
+      "repeatable": false,
+      "requiresFlags": [
+        "buriedFallenKnight"
+      ],
+      "forbiddenFlags": [],
+      "choices": [
+        {
+          "id": "receive_blessing",
+          "order": 1,
+          "text": "축복을 받는다",
+          "condition": [],
+          "difficulty": "none",
+          "outcomes": {
+            "success": {
+              "text": "따스한 빛이 몸을 감싼다. 상처가 아문다.",
+              "result": [
+                "hp:15"
+              ]
+            }
+          }
+        },
+        {
+          "id": "ask_teaching",
+          "order": 2,
+          "text": "가르침을 청한다",
+          "condition": [],
+          "difficulty": "normal",
+          "outcomes": {
+            "fail": {
+              "text": "빛이 흔들리더니 말없이 사라졌다.",
+              "result": []
+            },
+            "partial": {
+              "text": "기사가 검을 쥐는 법을 짧게 일러 주었다.",
+              "result": [
+                "hp:5"
+              ]
+            },
+            "success": {
+              "text": "기사가 평생 갈고닦은 기술 하나를 전해 주었다.",
+              "result": [
+                "skill:random"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "evt_grateful_parent",
+      "zone": 1,
+      "title": "아이의 아버지",
+      "description": "나무꾼 차림의 사내가 다가와 모자를 벗는다. \"우리 아이를 도와준 분이시군요.\"",
+      "repeatable": false,
+      "requiresFlags": [
+        "guidedLostChild"
+      ],
+      "forbiddenFlags": [],
+      "choices": [
+        {
+          "id": "accept_reward",
+          "order": 1,
+          "text": "보답을 받는다",
+          "condition": [],
+          "difficulty": "none",
+          "outcomes": {
+            "success": {
+              "text": "사내가 동전 주머니와 약병을 건넸다.",
+              "result": [
+                "gold:10",
+                "item:con_potion"
+              ]
+            }
+          }
+        },
+        {
+          "id": "decline_reward",
+          "order": 2,
+          "text": "사양한다",
+          "condition": [],
+          "difficulty": "none",
+          "outcomes": {
+            "success": {
+              "text": "사내가 고개를 숙이며 숲길의 안전한 쉼터를 알려 주었다.",
+              "result": [
+                "hp:10"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "evt_whisper_answer",
+      "zone": 1,
+      "title": "속삭임의 대답",
+      "description": "속삭이는 돌에서 들었던 이름이 바람에 실려 다시 들려온다. 이번에는 대답을 기다리는 듯하다.",
+      "repeatable": false,
+      "requiresFlags": [
+        "heardStoneWhisper"
+      ],
+      "forbiddenFlags": [],
+      "choices": [
+        {
+          "id": "call_name",
+          "order": 1,
+          "text": "그 이름을 부른다",
+          "condition": [],
+          "difficulty": "hard",
+          "outcomes": {
+            "fail": {
+              "text": "숲 전체가 비명처럼 울렸다. 귀에서 피가 흐른다.",
+              "result": [
+                "hp:-12"
+              ]
+            },
+            "partial": {
+              "text": "바람이 잦아들며 발치에 무언가를 떨어뜨렸다.",
+              "result": [
+                "item:random:equipment"
+              ]
+            },
+            "success": {
+              "text": "속삭임이 대답하며 오래된 힘을 나누어 주었다.",
+              "result": [
+                "skill:random"
+              ]
+            }
+          }
+        },
+        {
+          "id": "cover_ears_again",
+          "order": 2,
+          "text": "귀를 막는다",
+          "condition": [],
+          "difficulty": "none",
+          "outcomes": {
+            "success": {
+              "text": "속삭임이 아쉬운 듯 멀어진다.",
+              "result": []
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "evt_hunter_return",
+      "zone": 1,
+      "title": "돌아온 사냥꾼",
+      "description": "쪽지를 남겼던 사냥꾼이 활을 메고 나타났다. \"짐승 굴 근처는 피했나?\"",
+      "repeatable": false,
+      "requiresFlags": [
+        "readHunterNote"
+      ],
+      "forbiddenFlags": [],
+      "choices": [
+        {
+          "id": "tell_traps",
+          "order": 1,
+          "text": "덫이 있던 곳을 알려 준다",
+          "condition": [],
+          "difficulty": "none",
+          "outcomes": {
+            "success": {
+              "text": "사냥꾼이 고맙다며 동전을 건넸다.",
+              "result": [
+                "gold:6"
+              ]
+            }
+          }
+        },
+        {
+          "id": "join_hunt",
+          "order": 2,
+          "text": "사냥을 돕는다",
+          "condition": [],
+          "difficulty": "normal",
+          "outcomes": {
+            "fail": {
+              "text": "사냥감에게 들이받혀 나동그라졌다.",
+              "result": [
+                "hp:-8"
+              ]
+            },
+            "partial": {
+              "text": "작은 사냥감을 잡아 몫을 나눴다.",
+              "result": [
+                "gold:4"
+              ]
+            },
+            "success": {
+              "text": "큰 사냥감을 잡았다. 사냥꾼이 아끼던 장비를 내주었다.",
+              "result": [
+                "item:random:equipment"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "evt_rotten_bridge",
+      "zone": 1,
+      "title": "썩은 다리",
+      "description": "개울 위에 걸린 통나무 다리가 군데군데 썩어 있다.",
+      "repeatable": false,
+      "requiresFlags": [],
+      "forbiddenFlags": [],
+      "choices": [
+        {
+          "id": "cross_bridge",
+          "order": 1,
+          "text": "다리를 건넌다",
+          "condition": [],
+          "difficulty": "normal",
+          "outcomes": {
+            "fail": {
+              "text": "통나무가 부러지며 개울에 빠졌다.",
+              "result": [
+                "hp:-8"
+              ]
+            },
+            "partial": {
+              "text": "삐걱거렸지만 겨우 건넜다.",
+              "result": [
+                "hp:-3"
+              ]
+            },
+            "success": {
+              "text": "가볍게 건너며 다리 틈에 끼인 동전을 주웠다.",
+              "result": [
+                "gold:3"
+              ]
+            }
+          }
+        },
+        {
+          "id": "wade_stream",
+          "order": 2,
+          "text": "개울을 걸어서 건넌다",
+          "condition": [],
+          "difficulty": "none",
+          "outcomes": {
+            "success": {
+              "text": "차가운 물에 발이 얼얼하다.",
+              "result": [
+                "hp:-2"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "evt_glowing_moss",
+      "zone": 1,
+      "title": "빛나는 이끼",
+      "description": "고목 밑동에 푸르스름하게 빛나는 이끼가 두껍게 자라 있다.",
+      "repeatable": false,
+      "requiresFlags": [],
+      "forbiddenFlags": [],
+      "choices": [
+        {
+          "id": "scrape_moss",
+          "order": 1,
+          "text": "이끼를 긁어 모은다",
+          "condition": [],
+          "difficulty": "easy",
+          "outcomes": {
+            "fail": {
+              "text": "이끼가 손에서 바스러졌다.",
+              "result": []
+            },
+            "partial": {
+              "text": "조금만 챙겼다.",
+              "result": [
+                "gold:2"
+              ]
+            },
+            "success": {
+              "text": "상처에 바르기 좋은 이끼를 붕대에 싸 두었다.",
+              "result": [
+                "item:con_bandage"
+              ]
+            }
+          }
+        },
+        {
+          "id": "eat_moss",
+          "order": 2,
+          "text": "이끼를 먹어 본다",
+          "condition": [],
+          "difficulty": "hard",
+          "outcomes": {
+            "fail": {
+              "text": "속이 뒤집혀 한참을 구역질했다.",
+              "result": [
+                "hp:-10"
+              ]
+            },
+            "partial": {
+              "text": "입안이 얼얼하다. 별일은 없었다.",
+              "result": []
+            },
+            "success": {
+              "text": "몸속 깊은 곳까지 생기가 퍼진다.",
+              "result": [
+                "hp:20"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "evt_crow_flock",
+      "zone": 1,
+      "title": "까마귀 떼",
+      "description": "까마귀 떼가 무언가를 둘러싸고 시끄럽게 울어 댄다. 그 사이로 반짝이는 것이 보인다.",
+      "repeatable": false,
+      "requiresFlags": [],
+      "forbiddenFlags": [],
+      "choices": [
+        {
+          "id": "scare_crows",
+          "order": 1,
+          "text": "까마귀를 쫓아낸다",
+          "condition": [],
+          "difficulty": "normal",
+          "outcomes": {
+            "fail": {
+              "text": "성난 까마귀들이 얼굴을 쪼아 댔다.",
+              "result": [
+                "hp:-5"
+              ]
+            },
+            "partial": {
+              "text": "까마귀는 쫓았지만 반짝이던 건 깨진 유리였다.",
+              "result": []
+            },
+            "success": {
+              "text": "까마귀들이 모아 둔 동전을 챙겼다.",
+              "result": [
+                "gold:6"
+              ]
+            }
+          }
+        },
+        {
+          "id": "watch_crows",
+          "order": 2,
+          "text": "멀리서 지켜본다",
+          "condition": [],
+          "difficulty": "none",
+          "outcomes": {
+            "success": {
+              "text": "까마귀들이 무언가를 물고 날아가 버렸다.",
+              "result": []
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "evt_hollow_log",
+      "zone": 1,
+      "title": "쓰러진 통나무",
+      "description": "속이 텅 빈 통나무 안쪽에서 무언가 바스락거린다.",
+      "repeatable": false,
+      "requiresFlags": [],
+      "forbiddenFlags": [],
+      "choices": [
+        {
+          "id": "reach_inside",
+          "order": 1,
+          "text": "통나무 안에 손을 넣는다",
+          "condition": [],
+          "difficulty": "normal",
+          "outcomes": {
+            "fail": {
+              "text": "안에 있던 독거미가 손을 타고 올라왔다.",
+              "result": [
+                "fight:ene_venom_spider:ambushed"
+              ]
+            },
+            "partial": {
+              "text": "동전 몇 닢이 손에 잡혔다.",
+              "result": [
+                "gold:2"
+              ]
+            },
+            "success": {
+              "text": "누군가 숨겨 둔 물건을 찾았다.",
+              "result": [
+                "item:random:consumable"
+              ]
+            }
+          }
+        },
+        {
+          "id": "kick_log",
+          "order": 2,
+          "text": "통나무를 걷어찬다",
+          "condition": [],
+          "difficulty": "none",
+          "outcomes": {
+            "success": {
+              "text": "작은 짐승 몇 마리가 달아났다.",
+              "result": []
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "evt_drunk_bandit",
+      "zone": 1,
+      "title": "취한 도적",
+      "description": "모닥불 옆에서 도적 하나가 술병을 끌어안고 코를 골고 있다. 허리춤의 지갑이 불룩하다.",
+      "repeatable": false,
+      "requiresFlags": [],
+      "forbiddenFlags": [],
+      "choices": [
+        {
+          "id": "steal_purse",
+          "order": 1,
+          "text": "몰래 지갑을 턴다",
+          "condition": [],
+          "difficulty": "hard",
+          "outcomes": {
+            "fail": {
+              "text": "도적이 눈을 번쩍 떴다.",
+              "result": [
+                "fight:ene_forest_bandit"
+              ]
+            },
+            "partial": {
+              "text": "지갑을 반쯤 비웠을 때 도적이 뒤척여 손을 뺐다.",
+              "result": [
+                "gold:4"
+              ]
+            },
+            "success": {
+              "text": "불룩한 지갑을 통째로 챙겼다.",
+              "result": [
+                "gold:10"
+              ]
+            }
+          }
+        },
+        {
+          "id": "wake_threaten",
+          "order": 2,
+          "text": "깨워서 겁을 준다",
+          "condition": [],
+          "difficulty": "normal",
+          "outcomes": {
+            "fail": {
+              "text": "도적이 비틀거리며 칼을 뽑는다.",
+              "result": [
+                "fight:ene_forest_bandit"
+              ]
+            },
+            "partial": {
+              "text": "도적이 허둥지둥 달아났다.",
+              "result": []
+            },
+            "success": {
+              "text": "도적이 지갑을 던지고 달아났다.",
+              "result": [
+                "gold:5"
+              ]
+            }
+          }
+        },
+        {
+          "id": "leave_drunk",
+          "order": 3,
+          "text": "그냥 내버려 둔다",
+          "condition": [],
+          "difficulty": "none",
+          "outcomes": {
+            "success": {
+              "text": "괜히 깨워 봐야 좋을 게 없다.",
+              "result": []
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "evt_hermit_hut",
+      "zone": 1,
+      "title": "은둔자의 오두막",
+      "description": "약초 냄새가 풍기는 오두막에서 백발의 노파가 손짓한다. \"차 한잔하고 가게.\"",
+      "repeatable": false,
+      "requiresFlags": [],
+      "forbiddenFlags": [],
+      "choices": [
+        {
+          "id": "drink_tea",
+          "order": 1,
+          "text": "차를 얻어 마신다",
+          "condition": [],
+          "difficulty": "none",
+          "outcomes": {
+            "success": {
+              "text": "쌉쌀한 차가 지친 몸을 데운다.",
+              "result": [
+                "hp:10"
+              ]
+            }
+          }
+        },
+        {
+          "id": "buy_herbs",
+          "order": 2,
+          "text": "해독초를 산다 (골드 6)",
+          "condition": [
+            "gold:6"
+          ],
+          "difficulty": "none",
+          "outcomes": {
+            "success": {
+              "text": "노파가 잘 말린 해독초를 건넨다.",
+              "result": [
+                "gold:-6",
+                "item:con_antidote"
+              ]
+            }
+          }
+        },
+        {
+          "id": "hear_tale",
+          "order": 3,
+          "text": "숲 이야기를 듣는다",
+          "condition": [],
+          "difficulty": "easy",
+          "outcomes": {
+            "fail": {
+              "text": "노파가 꾸벅꾸벅 졸기 시작했다.",
+              "result": []
+            },
+            "partial": {
+              "text": "숲의 오래된 이야기를 들었다.",
+              "result": []
+            },
+            "success": {
+              "text": "노파가 이야기 끝에 손때 묻은 물건을 쥐여 주었다.",
+              "result": [
+                "item:random:consumable"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "evt_wolf_tracks",
+      "zone": 1,
+      "title": "늑대 발자국",
+      "description": "아직 마르지 않은 늑대 발자국이 덤불 안쪽으로 이어진다.",
+      "repeatable": false,
+      "requiresFlags": [],
+      "forbiddenFlags": [],
+      "choices": [
+        {
+          "id": "hunt_wolf",
+          "order": 1,
+          "text": "발자국을 따라가 덮친다",
+          "condition": [],
+          "difficulty": "none",
+          "outcomes": {
+            "success": {
+              "text": "잠든 늑대를 발견했다.",
+              "result": [
+                "fight:ene_starving_wolf:surprise"
+              ]
+            }
+          }
+        },
+        {
+          "id": "avoid_tracks",
+          "order": 2,
+          "text": "발자국을 피해 돌아간다",
+          "condition": [],
+          "difficulty": "none",
+          "outcomes": {
+            "success": {
+              "text": "괜한 싸움은 피하는 게 낫다.",
+              "result": []
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "evt_abandoned_cart",
+      "zone": 1,
+      "title": "버려진 수레",
+      "description": "바퀴가 빠진 수레가 길가에 기울어져 있다. 짐칸에 덮개가 씌워져 있다.",
+      "repeatable": false,
+      "requiresFlags": [],
+      "forbiddenFlags": [],
+      "choices": [
+        {
+          "id": "search_cart",
+          "order": 1,
+          "text": "짐칸을 뒤진다",
+          "condition": [],
+          "difficulty": "normal",
+          "outcomes": {
+            "fail": {
+              "text": "덮개 아래 숨어 있던 가시에 손을 찔렸다.",
+              "result": [
+                "hp:-5"
+              ]
+            },
+            "partial": {
+              "text": "부서진 상자에서 동전을 찾았다.",
+              "result": [
+                "gold:3"
+              ]
+            },
+            "success": {
+              "text": "쓸 만한 장비가 짐칸 구석에 남아 있었다.",
+              "result": [
+                "item:random:equipment"
+              ]
+            }
+          }
+        },
+        {
+          "id": "fix_wheel",
+          "order": 2,
+          "text": "바퀴를 끼워 준다",
+          "condition": [],
+          "difficulty": "hard",
+          "outcomes": {
+            "fail": {
+              "text": "수레가 무너지며 발등을 찧었다.",
+              "result": [
+                "hp:-3"
+              ]
+            },
+            "partial": {
+              "text": "바퀴를 끼웠지만 주인은 오지 않았다.",
+              "result": []
+            },
+            "success": {
+              "text": "때마침 돌아온 주인이 사례금을 건넸다.",
+              "result": [
+                "gold:8"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "evt_moonlit_pond",
+      "zone": 1,
+      "title": "달빛 연못",
+      "description": "낮인데도 연못 위에 달빛 같은 은빛이 어른거린다.",
+      "repeatable": false,
+      "requiresFlags": [],
+      "forbiddenFlags": [],
+      "choices": [
+        {
+          "id": "wash_body",
+          "order": 1,
+          "text": "몸을 씻는다",
+          "condition": [],
+          "difficulty": "none",
+          "outcomes": {
+            "success": {
+              "text": "차가운 물이 상처를 씻어 낸다.",
+              "result": [
+                "hp:12"
+              ]
+            }
+          }
+        },
+        {
+          "id": "toss_coin_pond",
+          "order": 2,
+          "text": "동전을 던진다 (골드 2)",
+          "condition": [
+            "gold:2"
+          ],
+          "difficulty": "easy",
+          "outcomes": {
+            "fail": {
+              "text": "동전이 물에 닿자마자 빛이 꺼졌다.",
+              "result": [
+                "gold:-2"
+              ]
+            },
+            "partial": {
+              "text": "물결이 잔잔해지며 마음이 편해진다.",
+              "result": [
+                "gold:-2",
+                "hp:8"
+              ]
+            },
+            "success": {
+              "text": "연못 바닥에서 무언가가 떠올랐다.",
+              "result": [
+                "gold:-2",
+                "item:random:consumable"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "evt_poison_flowers",
+      "zone": 1,
+      "title": "독꽃 군락",
+      "description": "보랏빛 꽃이 길을 뒤덮었다. 달콤한 향에 머리가 핑 돈다.",
+      "repeatable": false,
+      "requiresFlags": [],
+      "forbiddenFlags": [],
+      "choices": [
+        {
+          "id": "pick_flowers",
+          "order": 1,
+          "text": "꽃을 꺾어 간다",
+          "condition": [],
+          "difficulty": "normal",
+          "outcomes": {
+            "fail": {
+              "text": "꽃가루를 들이마셔 숨이 막힌다.",
+              "result": [
+                "hp:-6"
+              ]
+            },
+            "partial": {
+              "text": "몇 송이 꺾었지만 금세 시들어 버렸다.",
+              "result": []
+            },
+            "success": {
+              "text": "꽃의 뿌리가 해독초였다. 잘 챙겨 두었다.",
+              "result": [
+                "item:con_antidote"
+              ]
+            }
+          }
+        },
+        {
+          "id": "hold_breath",
+          "order": 2,
+          "text": "숨을 참고 빠르게 지나간다",
+          "condition": [],
+          "difficulty": "easy",
+          "outcomes": {
+            "fail": {
+              "text": "결국 숨을 들이켜 어지러웠다.",
+              "result": [
+                "hp:-4"
+              ]
+            },
+            "partial": {
+              "text": "조금 어지러웠지만 빠져나왔다.",
+              "result": [
+                "hp:-2"
+              ]
+            },
+            "success": {
+              "text": "꽃밭을 무사히 지나왔다.",
+              "result": []
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "evt_goblin_shaman",
+      "zone": 1,
+      "title": "고블린 주술사",
+      "description": "이끼 고블린 하나가 뼈를 흔들며 이상한 주문을 외우고 있다.",
+      "repeatable": false,
+      "requiresFlags": [],
+      "forbiddenFlags": [],
+      "choices": [
+        {
+          "id": "disrupt_ritual",
+          "order": 1,
+          "text": "주술을 방해한다",
+          "condition": [],
+          "difficulty": "hard",
+          "outcomes": {
+            "fail": {
+              "text": "주술사가 눈치채고 동료를 불렀다.",
+              "result": [
+                "fight:ene_moss_goblin:ambushed"
+              ]
+            },
+            "partial": {
+              "text": "주술사가 놀라 도망쳤다.",
+              "result": []
+            },
+            "success": {
+              "text": "주술사가 놓고 간 주머니를 챙겼다.",
+              "result": [
+                "gold:8",
+                "item:random:consumable"
+              ]
+            }
+          }
+        },
+        {
+          "id": "attack_shaman",
+          "order": 2,
+          "text": "기습한다",
+          "condition": [],
+          "difficulty": "none",
+          "outcomes": {
+            "success": {
+              "text": "주문에 정신이 팔린 고블린에게 달려든다.",
+              "result": [
+                "fight:ene_moss_goblin:surprise"
+              ]
+            }
+          }
+        },
+        {
+          "id": "back_away",
+          "order": 3,
+          "text": "물러난다",
+          "condition": [],
+          "difficulty": "none",
+          "outcomes": {
+            "success": {
+              "text": "주문 소리가 등 뒤에서 오래 이어졌다.",
+              "result": []
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "evt_carved_stones",
+      "zone": 1,
+      "title": "새겨진 돌무더기",
+      "description": "누군가 쌓아 둔 돌무더기마다 같은 문양이 새겨져 있다.",
+      "repeatable": false,
+      "requiresFlags": [],
+      "forbiddenFlags": [],
+      "choices": [
+        {
+          "id": "stack_stone",
+          "order": 1,
+          "text": "돌을 하나 더 얹는다",
+          "condition": [],
+          "difficulty": "easy",
+          "outcomes": {
+            "fail": {
+              "text": "돌무더기가 와르르 무너졌다.",
+              "result": [
+                "hp:-3"
+              ]
+            },
+            "partial": {
+              "text": "돌이 조용히 자리를 잡았다.",
+              "result": []
+            },
+            "success": {
+              "text": "돌을 얹자 마음이 맑아진다.",
+              "result": [
+                "hp:8"
+              ]
+            }
+          }
+        },
+        {
+          "id": "topple_stones",
+          "order": 2,
+          "text": "돌무더기를 무너뜨린다",
+          "condition": [],
+          "difficulty": "normal",
+          "outcomes": {
+            "fail": {
+              "text": "무너진 돌에 다리를 맞았다.",
+              "result": [
+                "hp:-8"
+              ]
+            },
+            "partial": {
+              "text": "돌 아래에는 아무것도 없었다.",
+              "result": []
+            },
+            "success": {
+              "text": "돌 아래 묻혀 있던 동전을 찾았다.",
+              "result": [
+                "gold:6"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "evt_wounded_soldier",
+      "zone": 1,
+      "title": "다친 병사",
+      "description": "낡은 갑옷을 입은 병사가 다리를 감싸 쥐고 신음한다.",
+      "repeatable": false,
+      "requiresFlags": [],
+      "forbiddenFlags": [],
+      "choices": [
+        {
+          "id": "give_potion_soldier",
+          "order": 1,
+          "text": "회복약을 건넨다",
+          "condition": [
+            "item:con_potion"
+          ],
+          "difficulty": "none",
+          "outcomes": {
+            "success": {
+              "text": "병사가 고맙다며 자신의 장비를 내주었다. \"나는 이제 쓸 일이 없을 것 같소.\"",
+              "result": [
+                "item:-con_potion",
+                "item:random:equipment"
+              ]
+            }
+          }
+        },
+        {
+          "id": "bandage_soldier",
+          "order": 2,
+          "text": "붕대를 감아 준다",
+          "condition": [],
+          "difficulty": "easy",
+          "outcomes": {
+            "fail": {
+              "text": "상처가 깊어 할 수 있는 게 없었다.",
+              "result": []
+            },
+            "partial": {
+              "text": "병사가 고맙다며 동전 몇 닢을 건넸다.",
+              "result": [
+                "gold:3"
+              ]
+            },
+            "success": {
+              "text": "병사가 고맙다며 품에서 약을 꺼냈다.",
+              "result": [
+                "gold:3",
+                "item:con_bandage"
+              ]
+            }
+          }
+        },
+        {
+          "id": "rob_soldier",
+          "order": 3,
+          "text": "장비를 빼앗는다",
+          "condition": [],
+          "difficulty": "normal",
+          "outcomes": {
+            "fail": {
+              "text": "병사가 마지막 힘을 짜내 칼을 휘둘렀다.",
+              "result": [
+                "hp:-8"
+              ]
+            },
+            "partial": {
+              "text": "동전 주머니만 빼앗았다.",
+              "result": [
+                "gold:5"
+              ]
+            },
+            "success": {
+              "text": "병사의 장비를 빼앗았다. 뒷맛이 쓰다.",
+              "result": [
+                "item:random:equipment"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "evt_strange_shrine",
+      "zone": 1,
+      "title": "낯선 성소",
+      "description": "덩굴에 감긴 작은 성소가 있다. 처음 보는 신의 얼굴이 새겨져 있다.",
+      "repeatable": false,
+      "requiresFlags": [],
+      "forbiddenFlags": [],
+      "choices": [
+        {
+          "id": "pray_strange",
+          "order": 1,
+          "text": "낯선 신에게 기도한다",
+          "condition": [],
+          "difficulty": "normal",
+          "outcomes": {
+            "fail": {
+              "text": "차가운 기운이 등줄기를 훑고 지나갔다.",
+              "result": [
+                "hp:-5"
+              ]
+            },
+            "partial": {
+              "text": "아무 일도 일어나지 않았다.",
+              "result": []
+            },
+            "success": {
+              "text": "따뜻한 빛이 몸을 감싼다.",
+              "result": [
+                "hp:12"
+              ]
+            }
+          }
+        },
+        {
+          "id": "offer_coins",
+          "order": 2,
+          "text": "제물을 바친다 (골드 5)",
+          "condition": [
+            "gold:5"
+          ],
+          "difficulty": "none",
+          "outcomes": {
+            "success": {
+              "text": "제단 아래 틈에서 무언가가 밀려 나왔다.",
+              "result": [
+                "gold:-5",
+                "item:random:equipment"
+              ]
+            }
+          }
+        },
+        {
+          "id": "leave_shrine",
+          "order": 3,
+          "text": "그냥 지나간다",
+          "condition": [],
+          "difficulty": "none",
+          "outcomes": {
+            "success": {
+              "text": "성소의 얼굴이 뒤를 따라 고개를 돌리는 것 같다.",
+              "result": []
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "evt_fog_bank",
+      "zone": 1,
+      "title": "짙은 안개",
+      "description": "갑자기 짙은 안개가 밀려와 한 치 앞도 보이지 않는다.",
+      "repeatable": false,
+      "requiresFlags": [],
+      "forbiddenFlags": [],
+      "choices": [
+        {
+          "id": "press_on_fog",
+          "order": 1,
+          "text": "조심스럽게 나아간다",
+          "condition": [],
+          "difficulty": "normal",
+          "outcomes": {
+            "fail": {
+              "text": "안개 속에서 늑대가 덮쳐 왔다.",
+              "result": [
+                "fight:ene_starving_wolf:ambushed"
+              ]
+            },
+            "partial": {
+              "text": "한참을 헤맨 끝에 빠져나왔다.",
+              "result": []
+            },
+            "success": {
+              "text": "안개 속에서 누군가 떨어뜨린 동전을 주웠다.",
+              "result": [
+                "gold:3"
+              ]
+            }
+          }
+        },
+        {
+          "id": "wait_fog",
+          "order": 2,
+          "text": "안개가 걷히기를 기다린다",
+          "condition": [],
+          "difficulty": "none",
+          "outcomes": {
+            "success": {
+              "text": "자리에 앉아 숨을 고르는 사이 안개가 걷혔다.",
+              "result": [
+                "hp:5"
+              ]
             }
           }
         }
