@@ -1,8 +1,8 @@
-import { GRADES } from "../data/rules.js?v=20261009-201221";
-import { formatNumber as fmt } from "../systems/NumberRules.js?v=20261009-201221";
-import { describeStatuses } from "../systems/StatusSystem.js?v=20261009-201221";
-import { describeConsumable, describeSkill, STAT_LABELS } from "./ItemText.js?v=20261009-201221";
-import { isTextEffectEnabled } from "./TextEffect.js?v=20261009-201221";
+import { GRADES } from "../data/rules.js?v=20261009-203002";
+import { formatNumber as fmt } from "../systems/NumberRules.js?v=20261009-203002";
+import { describeStatuses } from "../systems/StatusSystem.js?v=20261009-203002";
+import { describeConsumable, describeSkill, STAT_LABELS } from "./ItemText.js?v=20261009-203002";
+import { isTextEffectEnabled } from "./TextEffect.js?v=20261009-203002";
 
 const SKILL_TYPE_LABELS = {
   attack: "공격",

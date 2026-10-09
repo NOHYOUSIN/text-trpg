@@ -1,6 +1,6 @@
-import { catalog } from "../data/catalog.js?v=20261009-201221";
-import { parseToken } from "../systems/EffectParser.js?v=20261009-201221";
-import { formatNumber as fmt } from "../systems/NumberRules.js?v=20261009-201221";
+import { catalog } from "../data/catalog.js?v=20261009-203002";
+import { parseToken } from "../systems/EffectParser.js?v=20261009-203002";
+import { formatNumber as fmt } from "../systems/NumberRules.js?v=20261009-203002";
 
 // 장비·스킬·소모품의 수치를 한 줄 설명으로 만든다. (선택 판단용)
 const STAT_LABELS = { str: "힘", agi: "민첩", wis: "지혜" };

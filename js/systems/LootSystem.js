@@ -1,5 +1,5 @@
-import { catalog } from "../data/catalog.js?v=20261009-201221";
-import { BOSS_REWARD_CANDIDATES, BOSS_REWARD_GRADE, GRADE_WEIGHTS_BY_ZONE, LOOT } from "../data/rules.js?v=20261009-201221";
+import { catalog } from "../data/catalog.js?v=20261009-203002";
+import { BOSS_REWARD_CANDIDATES, BOSS_REWARD_GRADE, GRADE_WEIGHTS_BY_ZONE, LOOT } from "../data/rules.js?v=20261009-203002";
 
 const GRADE_ORDER = ["common", "uncommon", "rare", "unique"];
 

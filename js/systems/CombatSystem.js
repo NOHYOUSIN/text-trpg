@@ -1,10 +1,10 @@
-import { catalog } from "../data/catalog.js?v=20261009-201221";
-import { COMBAT, DICE } from "../data/rules.js?v=20261009-201221";
-import { Enemy } from "../models/Enemy.js?v=20261009-201221";
-import { applyReduction, computeEffect, describeCalculation, describeRoll, rollTier } from "./DamageSystem.js?v=20261009-201221";
-import { parseEffects, parseToken, STATUS_LABELS, toStatusSpec } from "./EffectParser.js?v=20261009-201221";
-import { josa } from "./Josa.js?v=20261009-201221";
-import { clamp, formatNumber as fmt, roundValue } from "./NumberRules.js?v=20261009-201221";
+import { catalog } from "../data/catalog.js?v=20261009-203002";
+import { COMBAT, DICE } from "../data/rules.js?v=20261009-203002";
+import { Enemy } from "../models/Enemy.js?v=20261009-203002";
+import { applyReduction, computeEffect, describeCalculation, describeRoll, rollTier } from "./DamageSystem.js?v=20261009-203002";
+import { parseEffects, parseToken, STATUS_LABELS, toStatusSpec } from "./EffectParser.js?v=20261009-203002";
+import { josa } from "./Josa.js?v=20261009-203002";
+import { clamp, formatNumber as fmt, roundValue } from "./NumberRules.js?v=20261009-203002";
 import {
   applyStatus,
   beginAction,
@@ -14,8 +14,8 @@ import {
   getGuardAmount,
   getTakenMultiplier,
   removeStatus,
-} from "./StatusSystem.js?v=20261009-201221";
-import { getClassTrait, getProfile } from "./TraitSystem.js?v=20261009-201221";
+} from "./StatusSystem.js?v=20261009-203002";
+import { getClassTrait, getProfile } from "./TraitSystem.js?v=20261009-203002";
 
 const SELF_EFFECTS = new Set(["guard", "cleanse"]);
 const TIER_TAGS = { none: "", low: " (약하게)", normal: "", high: " (강하게)", critical: " (치명타!)" };

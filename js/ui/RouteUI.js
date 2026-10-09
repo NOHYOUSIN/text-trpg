@@ -1,4 +1,4 @@
-import { renderScene } from "./SceneUI.js?v=20261009-201221";
+import { renderScene } from "./SceneUI.js?v=20261009-203002";
 
 // 갈림길: 장소 이름과 묘사만 보여 준다(내용 종류·위험도는 숨긴다).
 export function renderRoute(root, { zone, round, candidates, onChoose }) {
