@@ -1,0 +1,313 @@
+/* 탐험 화면 레이아웃과 장면·상태 패널 */
+
+.game-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+/* 어두운 화면에 맞춘 스크롤바 */
+* {
+  scrollbar-color: rgba(214, 179, 111, 0.35) transparent;
+  scrollbar-width: thin;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 999px;
+  background: rgba(214, 179, 111, 0.35);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(214, 179, 111, 0.55);
+}
+
+.game-header h1 {
+  font-size: clamp(24px, 3vw, 32px);
+}
+
+.game-grid {
+  display: grid;
+  flex: 1;
+  min-height: 0;
+  grid-template-columns: minmax(0, 1.6fr) minmax(300px, 0.9fr);
+  gap: 20px;
+}
+
+.scene-panel {
+  min-height: 0;
+  padding: 24px;
+  overflow-y: auto;
+}
+
+.game-side {
+  overflow-y: auto;
+}
+
+/* 장면 */
+
+.scene {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.scene-eyebrow {
+  color: var(--accent);
+  font-size: 13px;
+  letter-spacing: 0.08em;
+}
+
+.scene-title {
+  font-size: 24px;
+}
+
+.scene-text {
+  line-height: 1.75;
+  white-space: pre-line;
+}
+
+.scene-details {
+  margin: 0;
+  padding: 12px 16px 12px 32px;
+  border-radius: 12px;
+  background: var(--panel-soft-2);
+  line-height: 1.8;
+}
+
+.scene-note {
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.scene-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 4px;
+}
+
+.scene-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 12px;
+  margin-top: 4px;
+}
+
+.scene-button {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
+  padding: 14px 16px;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  color: var(--text);
+  background: var(--panel-soft);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.scene-button:hover:not(:disabled) {
+  border-color: var(--accent);
+}
+
+.scene-button:focus-visible {
+  outline: 2px solid var(--accent-strong);
+  outline-offset: 2px;
+}
+
+.scene-button:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.scene-button.is-primary {
+  align-items: center;
+  border-color: var(--accent);
+  color: #1b1c20;
+  background: var(--accent-strong);
+  font-weight: 700;
+}
+
+.scene-button-label {
+  font-weight: 700;
+}
+
+.scene-button-sub {
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.6;
+  white-space: pre-line;
+}
+
+/* 상태 패널 */
+
+.status-root {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.status-section {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.status-title {
+  color: var(--accent);
+  font-size: 14px;
+}
+
+.status-line {
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.status-label {
+  color: var(--muted);
+}
+
+.hp-bar-fill.is-player {
+  background: linear-gradient(90deg, #4f8a5c, #88d39b);
+}
+
+/* 여정 기록 */
+
+.journey-root {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-height: 0;
+}
+
+.journey-log {
+  max-height: 260px;
+  margin: 0;
+  padding: 0;
+  overflow-y: auto;
+  list-style: none;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.journey-log-item {
+  padding: 3px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.journey-log-item.kind-system {
+  color: var(--accent);
+}
+
+.journey-log-item.kind-boss,
+.journey-log-item.kind-danger {
+  color: var(--danger);
+}
+
+.journey-log-item.kind-heal,
+.journey-log-item.kind-success {
+  color: var(--success);
+}
+
+/* 소지품 창 */
+
+.status-root > .combat-button {
+  margin-top: 4px;
+}
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 10;
+  display: grid;
+  place-items: center;
+  padding: 16px;
+  background: rgba(0, 0, 0, 0.55);
+}
+
+.overlay[hidden] {
+  display: none;
+}
+
+.overlay-dialog {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: min(640px, 100%);
+  max-height: 90dvh;
+  padding: 22px;
+  overflow-y: auto;
+}
+
+.overlay-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.overlay-message {
+  color: var(--accent-strong);
+  font-size: 14px;
+}
+
+.overlay-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.overlay-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 12px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--panel-soft-2);
+}
+
+.overlay-name {
+  flex: 1 1 auto;
+  font-weight: 700;
+}
+
+.overlay-desc {
+  flex: 1 1 100%;
+  order: 3;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+@media (max-width: 900px) {
+  html,
+  body {
+    overflow: auto;
+    height: auto;
+  }
+
+  .page-shell {
+    height: auto;
+    padding: 16px;
+  }
+
+  .game-grid {
+    grid-template-columns: 1fr;
+  }
+}
