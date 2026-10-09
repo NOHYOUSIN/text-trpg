@@ -1,5 +1,5 @@
-import { catalog } from "../data/catalog.js?v=20261010-012341";
-import { BOSS_REWARD_CANDIDATES, BOSS_REWARD_GRADE, GRADE_WEIGHTS_BY_ZONE, LOOT, SKILL_POOL } from "../data/rules.js?v=20261010-012341";
+import { catalog } from "../data/catalog.js?v=20261010-022808";
+import { BOSS_REWARD_CANDIDATES, BOSS_REWARD_GRADE, EVENT_SKILL_CHOICE, GRADE_WEIGHTS_BY_ZONE, LOOT, SKILL_POOL } from "../data/rules.js?v=20261010-022808";
 
 const GRADE_ORDER = ["common", "uncommon", "rare", "unique"];
 
@@ -59,12 +59,34 @@ export function pickSkill({ run, adventurer, dice, grade = rollGrade(run.zone, d
   return pickByGrade(first.length ? first : second, grade, dice);
 }
 
+// 서로 다른 스킬 후보 여러 개
+export function pickSkillChoices({ run, adventurer, dice }) {
+  const count = dice.int(EVENT_SKILL_CHOICE.min, EVENT_SKILL_CHOICE.max);
+  const ids = [];
+
+  for (let i = 0; i < count; i += 1) {
+    const skill = pickSkill({ run, adventurer, dice, excludeIds: ids });
+
+    if (skill) {
+      ids.push(skill.id);
+    }
+  }
+
+  return ids;
+}
+
 export function pickConsumable({ dice, excludeIds = [] }) {
   return dice.pick([...catalog.consumables.values()].filter((item) => !excludeIds.includes(item.id)));
 }
 
 // 획득 표기({ kind, id } 또는 { kind, random })를 실제 ID로 정한다.
 export function resolveAcquisition(acquisition, { run, adventurer, dice }) {
+  // 사건의 skill:choice — 후보 2~3개를 정해 두고, 플레이어가 고른다.
+  if (acquisition.kind === "skill" && acquisition.choice) {
+    const options = pickSkillChoices({ run, adventurer, dice });
+    return options.length ? { kind: "skillChoice", options } : null;
+  }
+
   if (acquisition.kind === "skill") {
     const skill = acquisition.id
       ? catalog.skills.get(acquisition.id)

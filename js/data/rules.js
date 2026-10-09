@@ -100,6 +100,9 @@ export const SKILL_POOL = Object.freeze({
   classChance: 60,
 });
 
+// 사건 결과 skill:choice — 후보 수 (2026-10-10)
+export const EVENT_SKILL_CHOICE = Object.freeze({ min: 2, max: 3 });
+
 export const SHOP = Object.freeze({
   guaranteedItem: "con_potion",
   randomConsumables: 1,

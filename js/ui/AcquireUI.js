@@ -1,9 +1,9 @@
-import { catalog, getItem } from "../data/catalog.js?v=20261010-012341";
-import { GRADES } from "../data/rules.js?v=20261010-012341";
-import { canUseOutsideCombat, entryName } from "../systems/InventorySystem.js?v=20261010-012341";
-import { josa } from "../systems/Josa.js?v=20261010-012341";
-import { describeFull, describeStats } from "./ItemText.js?v=20261010-012341";
-import { renderScene } from "./SceneUI.js?v=20261010-012341";
+import { catalog, getItem } from "../data/catalog.js?v=20261010-022808";
+import { GRADES } from "../data/rules.js?v=20261010-022808";
+import { canUseOutsideCombat, entryName } from "../systems/InventorySystem.js?v=20261010-022808";
+import { josa } from "../systems/Josa.js?v=20261010-022808";
+import { describeFull, describeStats } from "./ItemText.js?v=20261010-022808";
+import { renderScene } from "./SceneUI.js?v=20261010-022808";
 
 function entryOf(kind, id) {
   return kind === "skill" ? catalog.skills.get(id) : getItem(id);
@@ -87,6 +87,27 @@ export function renderSkillChoice(root, { adventurer, skillId, onReplace, onGive
         onClick: () => onReplace(slot),
       })),
       { label: giveUpLabel, onClick: onGiveUp },
+    ],
+  });
+}
+
+// 사건의 스킬 선택: 후보 중 하나를 배운다(또는 배우지 않는다).
+export function renderSkillOffer(root, { options, onChoose, onSkip }) {
+  renderScene(root, {
+    eyebrow: "새 기술",
+    title: "배울 기술을 하나 고른다",
+    buttonLayout: "cards",
+    buttons: [
+      ...options.map((id) => {
+        const skill = catalog.skills.get(id);
+        return {
+          label: `스킬 · ${entryName("skill", id)}`,
+          sub: describeFull("skill", id),
+          onClick: () => onChoose(id),
+          color: GRADES[skill.grade]?.color,
+        };
+      }),
+      { label: "배우지 않는다", onClick: onSkip },
     ],
   });
 }

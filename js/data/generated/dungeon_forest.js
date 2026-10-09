@@ -74,7 +74,9 @@ export const dungeonForestData = {
         "evt_fog_bank",
         "evt_crow_flock",
         "evt_rotten_bridge",
-        "evt_knight_spirit"
+        "evt_knight_spirit",
+        "evt_wandering_swordsman",
+        "evt_fallen_mage"
       ]
     },
     {
@@ -103,7 +105,8 @@ export const dungeonForestData = {
         "evt_wolf_tracks",
         "evt_poison_flowers",
         "evt_fog_bank",
-        "evt_mother_wolf"
+        "evt_mother_wolf",
+        "evt_beast_movement"
       ]
     },
     {
@@ -132,7 +135,9 @@ export const dungeonForestData = {
         "evt_hermit_hut",
         "evt_wounded_soldier",
         "evt_grateful_parent",
-        "evt_hunter_return"
+        "evt_hunter_return",
+        "evt_ancient_tome",
+        "evt_fallen_mage"
       ]
     },
     {
@@ -160,7 +165,9 @@ export const dungeonForestData = {
         "evt_glowing_moss",
         "evt_moonlit_pond",
         "evt_fog_bank",
-        "evt_whisper_answer"
+        "evt_whisper_answer",
+        "evt_forest_ascetic",
+        "evt_fallen_mage"
       ]
     },
     {
@@ -187,7 +194,9 @@ export const dungeonForestData = {
         "evt_carved_stones",
         "evt_strange_shrine",
         "evt_knight_spirit",
-        "evt_whisper_answer"
+        "evt_whisper_answer",
+        "evt_ancient_tome",
+        "evt_shrine_trial"
       ]
     },
     {
@@ -213,7 +222,8 @@ export const dungeonForestData = {
         "evt_trail_marker",
         "evt_glowing_moss",
         "evt_hollow_log",
-        "evt_poison_flowers"
+        "evt_poison_flowers",
+        "evt_forest_ascetic"
       ]
     },
     {
@@ -239,7 +249,8 @@ export const dungeonForestData = {
         "evt_bandit_camp",
         "evt_drunk_bandit",
         "evt_abandoned_cart",
-        "evt_grateful_parent"
+        "evt_grateful_parent",
+        "evt_wandering_swordsman"
       ]
     },
     {
@@ -266,7 +277,8 @@ export const dungeonForestData = {
         "evt_wolf_tracks",
         "evt_goblin_shaman",
         "evt_mother_wolf",
-        "evt_hunter_return"
+        "evt_hunter_return",
+        "evt_beast_movement"
       ]
     }
   ],
@@ -2816,6 +2828,344 @@ export const dungeonForestData = {
               "result": [
                 "hp:5"
               ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "evt_wandering_swordsman",
+      "zone": 1,
+      "title": "떠돌이 검객",
+      "description": "칼집을 등에 멘 검객이 나무 그루터기에 앉아 칼날을 닦고 있다. \"한 수 겨뤄 보겠나?\"",
+      "repeatable": false,
+      "requiresFlags": [],
+      "forbiddenFlags": [],
+      "choices": [
+        {
+          "id": "spar_swordsman",
+          "order": 1,
+          "text": "대련을 청한다",
+          "condition": [],
+          "difficulty": "normal",
+          "outcomes": {
+            "fail": {
+              "text": "검객의 칼등에 손목을 세게 맞았다.",
+              "result": [
+                "hp:-10"
+              ]
+            },
+            "partial": {
+              "text": "몇 합 버티지 못했지만 움직임을 조금 익혔다.",
+              "result": [
+                "hp:-4"
+              ]
+            },
+            "success": {
+              "text": "검객이 웃으며 칼을 거둔다. \"좋은 눈을 가졌군. 하나 가르쳐 주지.\"",
+              "result": [
+                "skill:choice"
+              ]
+            }
+          }
+        },
+        {
+          "id": "pay_lesson",
+          "order": 2,
+          "text": "가르침을 청한다 (골드 15)",
+          "condition": [
+            "gold:15"
+          ],
+          "difficulty": "none",
+          "outcomes": {
+            "success": {
+              "text": "검객이 동전을 받고 기술 몇 가지를 보여 준다.",
+              "result": [
+                "gold:-15",
+                "skill:choice"
+              ]
+            }
+          }
+        },
+        {
+          "id": "decline_spar",
+          "order": 3,
+          "text": "정중히 사양한다",
+          "condition": [],
+          "difficulty": "none",
+          "outcomes": {
+            "success": {
+              "text": "검객이 어깨를 으쓱하고 다시 칼을 닦는다.",
+              "result": []
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "evt_ancient_tome",
+      "zone": 1,
+      "title": "낡은 비급서",
+      "description": "무너진 서가 아래에 가죽 표지의 책 한 권이 묻혀 있다. 표지에 낯선 기술의 이름이 적혀 있다.",
+      "repeatable": false,
+      "requiresFlags": [],
+      "forbiddenFlags": [],
+      "choices": [
+        {
+          "id": "study_tome",
+          "order": 1,
+          "text": "자리에 앉아 읽어 본다",
+          "condition": [],
+          "difficulty": "normal",
+          "outcomes": {
+            "fail": {
+              "text": "글자가 머릿속에서 뒤엉켜 두통이 밀려온다.",
+              "result": [
+                "hp:-6"
+              ]
+            },
+            "partial": {
+              "text": "몇 장 읽었지만 뜻을 다 알 수 없었다.",
+              "result": []
+            },
+            "success": {
+              "text": "책에 적힌 기술 몇 가지가 손에 잡힐 듯 이해된다.",
+              "result": [
+                "skill:choice"
+              ]
+            }
+          }
+        },
+        {
+          "id": "sell_tome",
+          "order": 2,
+          "text": "책을 챙겨 둔다",
+          "condition": [],
+          "difficulty": "none",
+          "outcomes": {
+            "success": {
+              "text": "값나가 보이는 표지 장식만 뜯어 챙겼다.",
+              "result": [
+                "gold:5"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "evt_forest_ascetic",
+      "zone": 1,
+      "title": "숲의 수련자",
+      "description": "맨발의 수련자가 바위 위에서 천천히 몸을 움직이고 있다. 숨소리 하나 흐트러지지 않는다.",
+      "repeatable": false,
+      "requiresFlags": [],
+      "forbiddenFlags": [],
+      "choices": [
+        {
+          "id": "train_together",
+          "order": 1,
+          "text": "함께 수련한다",
+          "condition": [],
+          "difficulty": "easy",
+          "outcomes": {
+            "fail": {
+              "text": "따라 하다 다리가 꼬여 넘어졌다.",
+              "result": []
+            },
+            "partial": {
+              "text": "호흡을 맞추자 몸이 한결 가벼워졌다.",
+              "result": [
+                "hp:8"
+              ]
+            },
+            "success": {
+              "text": "수련자가 고개를 끄덕이며 자신의 기술을 나누어 준다.",
+              "result": [
+                "skill:choice"
+              ]
+            }
+          }
+        },
+        {
+          "id": "ask_advice",
+          "order": 2,
+          "text": "조언을 구한다",
+          "condition": [],
+          "difficulty": "none",
+          "outcomes": {
+            "success": {
+              "text": "\"싸움은 숨에서 시작된다.\" 수련자가 짧게 말하고 눈을 감는다.",
+              "result": [
+                "hp:5"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "evt_beast_movement",
+      "zone": 1,
+      "title": "짐승의 몸놀림",
+      "description": "덤불 너머에서 늑대 한 마리가 사냥감을 노리고 있다. 군더더기 없는 움직임이다.",
+      "repeatable": false,
+      "requiresFlags": [],
+      "forbiddenFlags": [],
+      "choices": [
+        {
+          "id": "observe_beast",
+          "order": 1,
+          "text": "숨죽여 관찰한다",
+          "condition": [],
+          "difficulty": "hard",
+          "outcomes": {
+            "fail": {
+              "text": "늑대가 냄새를 맡고 이쪽으로 달려들었다.",
+              "result": [
+                "fight:ene_starving_wolf:ambushed"
+              ]
+            },
+            "partial": {
+              "text": "늑대는 사냥에 실패하고 사라졌다.",
+              "result": []
+            },
+            "success": {
+              "text": "늑대의 몸놀림에서 새로운 싸움법을 깨달았다.",
+              "result": [
+                "skill:choice"
+              ]
+            }
+          }
+        },
+        {
+          "id": "leave_beast",
+          "order": 2,
+          "text": "조용히 물러난다",
+          "condition": [],
+          "difficulty": "none",
+          "outcomes": {
+            "success": {
+              "text": "괜히 늑대의 눈에 띄지 않는 편이 낫다.",
+              "result": []
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "evt_shrine_trial",
+      "zone": 1,
+      "title": "성소의 시험",
+      "description": "이끼 낀 석판에 글귀가 새겨져 있다. \"시험을 견딘 자에게 길을 보이리라.\"",
+      "repeatable": false,
+      "requiresFlags": [],
+      "forbiddenFlags": [],
+      "choices": [
+        {
+          "id": "take_trial",
+          "order": 1,
+          "text": "시험을 받는다",
+          "condition": [],
+          "difficulty": "hard",
+          "outcomes": {
+            "fail": {
+              "text": "석판에서 뿜어 나온 빛이 몸을 할퀴었다.",
+              "result": [
+                "hp:-12"
+              ]
+            },
+            "partial": {
+              "text": "빛이 몸을 훑고 지나갔다. 견디기는 했다.",
+              "result": [
+                "hp:-5"
+              ]
+            },
+            "success": {
+              "text": "빛이 가라앉으며 머릿속에 여러 기술이 떠오른다.",
+              "result": [
+                "skill:choice"
+              ]
+            }
+          }
+        },
+        {
+          "id": "read_only",
+          "order": 2,
+          "text": "글귀만 읽고 지나간다",
+          "condition": [],
+          "difficulty": "none",
+          "outcomes": {
+            "success": {
+              "text": "시험은 다음 기회로 미뤄 둔다.",
+              "result": []
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "evt_fallen_mage",
+      "zone": 1,
+      "title": "쓰러진 마법사",
+      "description": "로브를 입은 마법사가 나무에 기대 숨을 몰아쉰다. 손에 쥔 지팡이가 희미하게 빛난다.",
+      "repeatable": false,
+      "requiresFlags": [],
+      "forbiddenFlags": [],
+      "choices": [
+        {
+          "id": "give_potion_mage",
+          "order": 1,
+          "text": "회복약을 건넨다",
+          "condition": [
+            "item:con_potion"
+          ],
+          "difficulty": "none",
+          "outcomes": {
+            "success": {
+              "text": "기운을 차린 마법사가 감사의 뜻으로 기술 하나를 가르쳐 주겠다고 한다.",
+              "result": [
+                "item:-con_potion",
+                "skill:choice"
+              ]
+            }
+          }
+        },
+        {
+          "id": "tend_mage",
+          "order": 2,
+          "text": "상처를 살펴 준다",
+          "condition": [],
+          "difficulty": "easy",
+          "outcomes": {
+            "fail": {
+              "text": "할 수 있는 게 없었다.",
+              "result": []
+            },
+            "partial": {
+              "text": "마법사가 고맙다며 동전을 건넸다.",
+              "result": [
+                "gold:4"
+              ]
+            },
+            "success": {
+              "text": "마법사가 숨을 고르며 짧은 주문 하나를 일러 주었다.",
+              "result": [
+                "skill:random"
+              ]
+            }
+          }
+        },
+        {
+          "id": "leave_mage",
+          "order": 3,
+          "text": "지나친다",
+          "condition": [],
+          "difficulty": "none",
+          "outcomes": {
+            "success": {
+              "text": "등 뒤에서 지팡이의 빛이 가물거린다.",
+              "result": []
             }
           }
         }

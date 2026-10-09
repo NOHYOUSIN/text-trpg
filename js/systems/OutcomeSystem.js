@@ -1,8 +1,8 @@
-import { catalog, getItem } from "../data/catalog.js?v=20261010-012341";
-import { parseToken } from "./EffectParser.js?v=20261010-012341";
-import { josa } from "./Josa.js?v=20261010-012341";
-import { formatNumber as fmt, roundValue } from "./NumberRules.js?v=20261010-012341";
-import { getMaxHp } from "./TraitSystem.js?v=20261010-012341";
+import { catalog, getItem } from "../data/catalog.js?v=20261010-022808";
+import { parseToken } from "./EffectParser.js?v=20261010-022808";
+import { josa } from "./Josa.js?v=20261010-022808";
+import { formatNumber as fmt, roundValue } from "./NumberRules.js?v=20261010-022808";
+import { getMaxHp } from "./TraitSystem.js?v=20261010-022808";
 
 // 사건 결과 표기(hp:-0.5;gold:3;item:...;fight:...)를 적용한다.
 // 아이템·스킬 획득은 인벤토리·획득 화면이 처리하도록 acquisitions로 돌려준다.
@@ -44,7 +44,11 @@ export function applyOutcome(tokens, { adventurer, run }) {
         }
         break;
       case "skill":
-        acquisitions.push(args[0] === "random" ? { kind: "skill", random: true } : { kind: "skill", id: args[0] });
+        if (args[0] === "choice") {
+          acquisitions.push({ kind: "skill", choice: true });
+        } else {
+          acquisitions.push(args[0] === "random" ? { kind: "skill", random: true } : { kind: "skill", id: args[0] });
+        }
         break;
       case "flag":
         run.setFlag(args[0]);
@@ -62,6 +66,10 @@ export function applyOutcome(tokens, { adventurer, run }) {
 
 export function describeAcquisition(acquisition) {
   if (acquisition.kind === "skill") {
+    if (acquisition.choice) {
+      return "스킬 선택";
+    }
+
     return acquisition.random ? "무작위 스킬" : catalog.skills.get(acquisition.id)?.name ?? acquisition.id;
   }
 
