@@ -1,4 +1,4 @@
-// 시트 표기("poison:0.3:3" 등)를 해석한다. 표기 규칙: data-sheets/README.md
+// 시트 표기("poison:0.3:3" 등)를 해석한다.
 
 export function parseToken(token) {
   const [key, ...args] = token.split(":");

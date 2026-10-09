@@ -283,10 +283,6 @@ export class GameManager {
     const profile = getProfile(this.adventurer);
     const result = resolveChoice(choice, { dice: this.dice, modifier: profile.modifiers.exploreBonus });
     const applied = applyOutcome(result.outcome.result, { adventurer: this.adventurer, run: this.run });
-    const rollText = result.rolled
-      ? `1d20: ${result.roll}${result.modifier ? ` +${result.modifier} = ${result.total}` : ""} → ${OUTCOME_LABELS[result.outcomeId]}`
-      : null;
-
     // 선택 결과를 먼저 기록하고, 획득은 grant()가 그 뒤에 한 번씩 기록한다.
     this.logUI.add(`「${choice.text}」 ${result.rolled ? OUTCOME_LABELS[result.outcomeId] : ""} ${applied.lines.join(", ")}`.trim());
 
@@ -313,8 +309,11 @@ export class GameManager {
     this.show(() => renderScene(this.sceneRoot, {
       eyebrow: event.title,
       title: choice.text,
+      dice: result.rolled
+        ? { roll: result.roll, modifier: result.modifier, total: result.total, label: OUTCOME_LABELS[result.outcomeId] }
+        : null,
       paragraphs,
-      details: rollText ? [rollText, ...details] : details,
+      details,
       buttons: [{
         label: applied.fight ? "전투에 들어간다" : "계속",
         primary: true,
@@ -564,18 +563,13 @@ export class GameManager {
       dice: this.dice,
       surprise,
     });
+    // 출력이 모두 재생된 뒤에 상태 패널을 갱신해 결과가 미리 보이지 않게 한다.
     const ui = new CombatUI(this.sceneRoot, {
-      onAction: (action) => {
-        ui.appendEvents(combat.act(action));
-        ui.render(combat);
-        this.renderStatus();
-      },
+      onAction: (action) => ui.play(combat.act(action), combat, () => this.renderStatus()),
       onFinish: (result) => this.finishCombat(combat, result),
     });
 
-    ui.appendEvents(combat.begin());
-    ui.render(combat);
-    this.renderStatus();
+    ui.play(combat.begin(), combat, () => this.renderStatus());
   }
 
   finishCombat(combat, result) {

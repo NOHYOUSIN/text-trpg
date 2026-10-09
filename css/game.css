@@ -152,6 +152,44 @@
   white-space: pre-line;
 }
 
+/* 사건 판정 주사위 */
+
+.scene-dice {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.scene-dice-face {
+  display: grid;
+  place-items: center;
+  width: 52px;
+  height: 52px;
+  border: 2px solid var(--border);
+  border-radius: 12px;
+  background: var(--panel-soft);
+  font-size: 22px;
+  font-weight: 700;
+}
+
+.scene-dice.is-settled .scene-dice-face {
+  border-color: var(--accent-strong);
+  color: var(--accent-strong);
+}
+
+.scene-dice-label {
+  color: var(--muted);
+}
+
+.scene-dice.is-settled .scene-dice-label {
+  color: var(--text);
+  font-weight: 700;
+}
+
+.scene-pending {
+  visibility: hidden;
+}
+
 /* 상태 패널 */
 
 .status-root {

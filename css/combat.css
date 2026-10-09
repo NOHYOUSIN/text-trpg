@@ -177,3 +177,91 @@
 .combat-button.is-primary .combat-button-sub {
   color: #3a3524;
 }
+
+/* 차례 진행 연출 */
+
+.combat-side {
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.combat-side.is-acting {
+  border-color: var(--accent-strong);
+  box-shadow: 0 0 0 1px var(--accent-strong), 0 0 18px rgba(242, 200, 121, 0.25);
+}
+
+.combat-side.is-hit {
+  animation: combat-hit 0.35s ease;
+}
+
+@keyframes combat-hit {
+  0% { transform: translateX(0); background: rgba(217, 142, 130, 0.18); }
+  25% { transform: translateX(-4px); }
+  50% { transform: translateX(4px); }
+  100% { transform: translateX(0); background: var(--panel-soft-2); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .combat-side.is-hit {
+    animation: none;
+  }
+}
+
+.combat-side-summary {
+  margin-top: 6px;
+  color: var(--accent);
+  font-size: 13px;
+}
+
+.combat-side-more {
+  margin-top: 6px;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.combat-side-more summary {
+  cursor: pointer;
+}
+
+.combat-log-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.combat-calc-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  cursor: pointer;
+}
+
+.combat-log {
+  cursor: pointer;
+}
+
+.combat-log-item.kind-turn {
+  margin-top: 10px;
+  padding: 4px 10px;
+  border-left: 0;
+  border-top: 1px solid var(--border);
+  color: var(--accent);
+  font-size: 12px;
+  letter-spacing: 0.04em;
+}
+
+.combat-log-item.kind-damage,
+.combat-log-item.kind-heal,
+.combat-log-item.kind-status {
+  padding-left: 22px;
+}
+
+.combat-log-detail {
+  display: none;
+}
+
+.combat.show-calc .combat-log-detail {
+  display: block;
+}

@@ -18,6 +18,11 @@ import {
 import { getClassTrait, getProfile } from "./TraitSystem.js";
 
 const SELF_EFFECTS = new Set(["guard", "cleanse"]);
+const TIER_TAGS = { none: "", low: " (약하게)", normal: "", high: " (강하게)", critical: " (치명타!)" };
+
+function tierTag(tier) {
+  return TIER_TAGS[tier.id] ?? "";
+}
 const NEGATIVE_STATUSES = ["poison", "stun", "weaken", "vulnerable"];
 
 // 1:1 전투 한 번. 플레이어 입력이 필요할 때까지 자동으로 진행한다.
@@ -33,6 +38,8 @@ export class Combat {
     this.awaitingInput = false;
     this.turnOwner = null;
     this.round = 0;
+    // 출력 줄마다 기록할 "지금 행동 중인 쪽" (화면 강조용)
+    this.actor = null;
 
     const profile = getProfile(adventurer);
     this.trait = getClassTrait(adventurer.classId);
@@ -69,7 +76,7 @@ export class Combat {
   // ---------- 진행 ----------
 
   begin() {
-    this.log("system", `${this.enemy.name} — ${this.enemy.ref.description}`);
+    this.log("system", `${this.enemy.ref.description}`);
     this.applyCombatStartHeal();
     this.resolveSurprise();
 
@@ -79,7 +86,8 @@ export class Combat {
       this.player.firstStrikePending = playerFirst && Boolean(this.trait.firstStrikeMultiplier);
       this.log(
         "system",
-        `선공: ${playerFirst ? this.player.name : this.enemy.name} (민첩 ${fmt(this.playerAgi())} : ${fmt(this.enemy.ref.agi)})`,
+        `${josa(playerFirst ? this.player.name : this.enemy.name, "이/가")} 먼저 움직인다.`,
+        `민첩 ${fmt(this.playerAgi())} : ${fmt(this.enemy.ref.agi)}`,
       );
       this.advance();
     }
@@ -96,6 +104,7 @@ export class Combat {
       }
 
       this.round += 1;
+      this.beginTurnLog(this.player);
       const start = this.startTurn(this.player);
 
       if (this.result) {
@@ -186,7 +195,7 @@ export class Combat {
     if (poisonDamage > 0) {
       const before = side.ref.hp;
       side.ref.hp = Math.max(0, round1(side.ref.hp - poisonDamage));
-      this.log("status", `${josa(side.name, "이/가")} 독으로 ${fmt(poisonDamage)} 피해를 입었다. (HP ${fmt(side.ref.hp)})`);
+      this.log("status", `독이 퍼진다. ${josa(side.name, "이/가")} ${fmt(poisonDamage)} 피해를 입었다.`);
       this.afterDamage(side, before);
     }
 
@@ -209,6 +218,7 @@ export class Combat {
   }
 
   runEnemyTurn() {
+    this.beginTurnLog(this.enemy);
     const start = this.startTurn(this.enemy);
 
     if (this.result) {
@@ -276,13 +286,15 @@ export class Combat {
 
     this.log(
       "system",
-      `${attacker.name}의 기습! ${defender.name} 방어 판정 ${defended ? "성공" : "실패"}`,
+      `${attacker.name}의 기습! ${defended ? `${josa(defender.name, "이/가")} 막아 냈다.` : `${josa(defender.name, "이/가")} 대비하지 못했다.`}`,
       `1d20: ${roll}${modText} / 기준 ${COMBAT.surpriseDefenseTarget} 이상`,
     );
 
     if (defended) {
       return;
     }
+
+    this.actor = attacker.kind;
 
     if (attacker === this.player) {
       this.playerBasicAttack({ isSurprise: true });
@@ -329,7 +341,7 @@ export class Combat {
 
   basicAttack(attacker, defender, { base, stat = 0, multipliers = [], label }) {
     const roll = rollTier(this.dice, { critMin: this.critMinOf(attacker) });
-    this.log(attacker.kind, `${attacker.name}: ${label}`, describeRoll(roll));
+    this.log(attacker.kind, `${attacker.name} — ${label}`, describeRoll(roll));
     const damage = this.dealDamage(attacker, defender, { base, stat, tier: roll.tier, multipliers });
     return { tier: roll.tier, damage };
   }
@@ -342,7 +354,7 @@ export class Combat {
 
     user.cooldowns.set(skill.id, cooldown);
     user.usedSkill = skill.id;
-    this.log(user.kind, `${user.name}: ${skill.name}`, describeRoll(roll));
+    this.log(user.kind, `${user.name} — 「${skill.name}」`, describeRoll(roll));
 
     const tier = roll.tier;
     const skillMultipliers = [];
@@ -376,7 +388,7 @@ export class Combat {
 
     if (tier.multiplier === 0) {
       if (skill.type !== "attack") {
-        this.log("result", "효과가 없었다.");
+        this.log("result", "→ 효과가 없었다.");
       }
       return;
     }
@@ -416,7 +428,7 @@ export class Combat {
     const { key, args } = parseToken(item.effect);
 
     this.player.ref.inventory.remove(itemId, 1);
-    this.log("player", `${this.player.name}: ${item.name} 사용`);
+    this.log("player", `${this.player.name} — ${item.name} 사용`);
 
     if (key === "heal") {
       this.heal(this.player, item.amount, item.name);
@@ -452,7 +464,7 @@ export class Combat {
     defender.ref.hp = Math.max(0, round1(defender.ref.hp - final));
     this.log(
       "damage",
-      final > 0 ? `${defender.name}에게 ${fmt(final)} 피해. (HP ${fmt(defender.ref.hp)})` : "빗나갔다.",
+      final > 0 ? `→ ${defender.name}에게 ${fmt(final)} 피해${tierTag(tier)}` : "→ 빗나갔다!",
       describeCalculation({ base, stat, tier, multipliers: all, raw, reduction, final }),
     );
     this.afterDamage(defender, before);
@@ -491,7 +503,7 @@ export class Combat {
     const maxHp = side.kind === "player" ? side.profile.maxHp : side.ref.maxHp;
     const before = side.ref.hp;
     side.ref.hp = Math.min(maxHp, round1(side.ref.hp + amount));
-    this.log("heal", `${source}: ${side.name} HP ${fmt(round1(side.ref.hp - before))} 회복. (HP ${fmt(side.ref.hp)})`);
+    this.log("heal", `→ ${side.name} HP ${fmt(round1(side.ref.hp - before))} 회복 (${source})`);
   }
 
   inflict(target, spec, source) {
@@ -499,12 +511,12 @@ export class Combat {
     const label = STATUS_LABELS[spec.type] ?? spec.type;
 
     if (!outcome.applied) {
-      this.log("status", `${target.name}에게 ${josa(label, "이/가")} 통하지 않았다.`);
+      this.log("status", `→ ${target.name}에게 ${josa(label, "이/가")} 통하지 않았다.`);
       return;
     }
 
     const value = spec.amount ? ` ${fmt(spec.amount)}` : spec.multiplier ? ` ×${spec.multiplier}` : "";
-    this.log("status", `${target.name}: ${label}${value} (${spec.duration}턴)${outcome.refreshed ? " 갱신" : ""}`);
+    this.log("status", `→ ${target.name}: ${label}${value} ${spec.duration}턴${outcome.refreshed ? " (갱신)" : ""}`);
   }
 
   finish(result) {
@@ -564,8 +576,21 @@ export class Combat {
     return { skills, items };
   }
 
+  // 출력 줄: 그 시점의 HP와 행동 중인 쪽을 함께 기록해 화면이 순서대로 재생할 수 있게 한다.
   log(kind, text, detail = "") {
-    this.events.push({ kind, text, detail });
+    this.events.push({
+      kind,
+      text,
+      detail,
+      actor: this.actor,
+      hp: { player: this.player.ref.hp, enemy: this.enemy.ref.hp },
+    });
+  }
+
+  beginTurnLog(side) {
+    this.actor = side.kind;
+    const label = side.kind === "player" ? `${this.round}턴 · ${side.name}의 차례` : `${side.name}의 차례`;
+    this.log("turn", label);
   }
 
   takeEvents() {

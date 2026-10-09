@@ -1,4 +1,4 @@
-// 자동 생성 파일: data-sheets/common에서 scripts/convert-sheets.py로 만든다. 직접 수정하지 않는다.
+// 자동 생성 파일. 직접 수정하지 않는다.
 export const commonData = {
   "skills": [
     {
