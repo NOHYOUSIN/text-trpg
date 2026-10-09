@@ -1,6 +1,6 @@
-import { catalog } from "../data/catalog.js?v=20261010-000920";
-import { SHOP } from "../data/rules.js?v=20261010-000920";
-import { pickConsumable, pickEquipment, pickSkill } from "./LootSystem.js?v=20261010-000920";
+import { catalog } from "../data/catalog.js?v=20261010-012341";
+import { SHOP } from "../data/rules.js?v=20261010-012341";
+import { pickConsumable, pickEquipment, pickSkill } from "./LootSystem.js?v=20261010-012341";
 
 // 상점 품목 4개: 회복약(여러 개 구매 가능) + 무작위 소모품 1 + 장비 1 + 스킬 1
 export function createShopStock({ run, adventurer, dice }) {

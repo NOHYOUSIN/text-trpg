@@ -1,4 +1,4 @@
-import { DICE } from "../data/rules.js?v=20261010-000920";
+import { DICE } from "../data/rules.js?v=20261010-012341";
 
 // 시드를 주면 같은 결과를 재현한다. (테스트·시뮬레이션용)
 function createSeededRandom(seed) {

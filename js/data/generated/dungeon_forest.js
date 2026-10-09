@@ -10,11 +10,7 @@ export const dungeonForestData = {
       "rounds": 20,
       "midBosses": [
         {
-          "round": 7,
-          "enemyId": "ene_tusk"
-        },
-        {
-          "round": 14,
+          "round": 10,
           "enemyId": "ene_tusk"
         }
       ],

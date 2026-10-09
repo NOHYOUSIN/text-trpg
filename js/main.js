@@ -1,5 +1,5 @@
-import { GameManager } from "./core/GameManager.js?v=20261010-000920";
-import { isTextEffectEnabled, setTextEffectEnabled } from "./ui/TextEffect.js?v=20261010-000920";
+import { GameManager } from "./core/GameManager.js?v=20261010-012341";
+import { isTextEffectEnabled, setTextEffectEnabled } from "./ui/TextEffect.js?v=20261010-012341";
 
 const gameManager = new GameManager({
   sceneRoot: document.querySelector("#scene"),
