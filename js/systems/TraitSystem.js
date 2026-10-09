@@ -1,7 +1,7 @@
 import { catalog } from "../data/catalog.js";
 import { CLASS_TRAITS, EFFECT_TIERS } from "../data/rules.js";
 import { parseEffects } from "./EffectParser.js";
-import { round1 } from "./NumberRules.js";
+import { roundValue } from "./NumberRules.js";
 
 const STAT_KEYS = ["str", "agi", "wis"];
 const DEFAULT_CRIT_MIN = EFFECT_TIERS.find((tier) => tier.id === "critical").min;
@@ -111,14 +111,14 @@ export function getStats(adventurer, modifiers = collectModifiers(adventurer)) {
   const stats = {};
 
   for (const key of STAT_KEYS) {
-    stats[key] = round1(adventurer.baseStats[key] + modifiers.statBonus[key]);
+    stats[key] = roundValue(adventurer.baseStats[key] + modifiers.statBonus[key]);
   }
 
   return stats;
 }
 
 export function getMaxHp(adventurer, modifiers = collectModifiers(adventurer)) {
-  return round1(adventurer.baseMaxHp + modifiers.maxHp);
+  return roundValue(adventurer.baseMaxHp + modifiers.maxHp);
 }
 
 export function getDamageReduction(adventurer, modifiers, stats) {
@@ -126,7 +126,7 @@ export function getDamageReduction(adventurer, modifiers, stats) {
     (sum, entry) => sum + stats[entry.stat] * entry.ratio,
     0,
   );
-  return round1(modifiers.damageReduction + fromStats);
+  return roundValue(modifiers.damageReduction + fromStats);
 }
 
 // 모험가의 현재 전투 수치를 한 번에 계산한다.

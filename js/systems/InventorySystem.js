@@ -1,7 +1,7 @@
 import { catalog, getItem, isEquipment } from "../data/catalog.js";
 import { GRADES, INVENTORY } from "../data/rules.js";
 import { parseToken } from "./EffectParser.js";
-import { formatNumber as fmt, round1 } from "./NumberRules.js";
+import { formatNumber as fmt, roundValue } from "./NumberRules.js";
 import { getMaxHp } from "./TraitSystem.js";
 
 export function maxStackOf(id) {
@@ -78,8 +78,8 @@ export function useConsumableOutsideCombat(adventurer, itemId, { fromInventory =
 
   const maxHp = getMaxHp(adventurer);
   const before = adventurer.hp;
-  adventurer.hp = Math.min(maxHp, round1(before + item.amount));
-  return `${item.name} 사용: HP ${fmt(round1(adventurer.hp - before))} 회복 (HP ${fmt(adventurer.hp)})`;
+  adventurer.hp = Math.min(maxHp, roundValue(before + item.amount));
+  return `${item.name} 사용: HP ${fmt(roundValue(adventurer.hp - before))} 회복 (HP ${fmt(adventurer.hp)})`;
 }
 
 // 인벤토리 칸의 장비를 장착한다. 기존 장비는 그 칸으로 들어간다.

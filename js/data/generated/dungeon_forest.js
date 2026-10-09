@@ -213,13 +213,13 @@ export const dungeonForestData = {
             "fail": {
               "text": "숨어 있던 가시에 손을 깊이 찔렸다.",
               "result": [
-                "hp:-0.8"
+                "hp:-8"
               ]
             },
             "partial": {
               "text": "상자는 열렸지만 손등을 긁혔다.",
               "result": [
-                "hp:-0.3",
+                "hp:-3",
                 "gold:3"
               ]
             },
@@ -242,7 +242,7 @@ export const dungeonForestData = {
             "fail": {
               "text": "장치를 건드려 가시가 튀어나왔다.",
               "result": [
-                "hp:-0.5"
+                "hp:-5"
               ]
             },
             "partial": {
@@ -378,7 +378,7 @@ export const dungeonForestData = {
             "fail": {
               "text": "속삭임이 머릿속을 긁는다. 정신이 아득해진다.",
               "result": [
-                "hp:-0.8"
+                "hp:-8"
               ]
             },
             "partial": {
@@ -403,19 +403,19 @@ export const dungeonForestData = {
             "fail": {
               "text": "물이 쓰다. 속이 뒤집힌다.",
               "result": [
-                "hp:-0.3"
+                "hp:-3"
               ]
             },
             "partial": {
               "text": "시원한 물이 목을 적신다.",
               "result": [
-                "hp:0.5"
+                "hp:5"
               ]
             },
             "success": {
               "text": "맑은 물이 온몸에 스며든다.",
               "result": [
-                "hp:1.5"
+                "hp:15"
               ]
             }
           }
@@ -526,13 +526,13 @@ export const dungeonForestData = {
             "partial": {
               "text": "마음이 조금 가라앉는다.",
               "result": [
-                "hp:0.5"
+                "hp:5"
               ]
             },
             "success": {
               "text": "따스한 기운이 상처를 감싼다.",
               "result": [
-                "hp:1.5"
+                "hp:15"
               ]
             }
           }
@@ -556,7 +556,7 @@ export const dungeonForestData = {
               "text": "제단이 희미하게 빛났다.",
               "result": [
                 "gold:-3",
-                "hp:1.0"
+                "hp:10"
               ]
             },
             "success": {
@@ -579,14 +579,14 @@ export const dungeonForestData = {
               "text": "손을 대는 순간 저주받은 듯 몸이 무거워졌다.",
               "result": [
                 "gold:4",
-                "hp:-1.0"
+                "hp:-10"
               ]
             },
             "partial": {
               "text": "동전을 챙겼지만 등골이 서늘하다.",
               "result": [
                 "gold:4",
-                "hp:-0.3"
+                "hp:-3"
               ]
             },
             "success": {
@@ -618,13 +618,13 @@ export const dungeonForestData = {
             "fail": {
               "text": "줄이 더 조여 발목이 쓸렸다.",
               "result": [
-                "hp:-0.6"
+                "hp:-6"
               ]
             },
             "partial": {
               "text": "한참 버둥거린 끝에 빠져나왔다.",
               "result": [
-                "hp:-0.2"
+                "hp:-2"
               ]
             },
             "success": {
@@ -643,13 +643,13 @@ export const dungeonForestData = {
             "fail": {
               "text": "칼끝이 미끄러져 다리를 베었다.",
               "result": [
-                "hp:-0.5"
+                "hp:-5"
               ]
             },
             "partial": {
               "text": "줄은 끊었지만 발목을 접질렸다.",
               "result": [
-                "hp:-0.2"
+                "hp:-2"
               ]
             },
             "success": {
@@ -669,9 +669,9 @@ export const dungeonForestData = {
       "zone": 1,
       "name": "굶주린 늑대",
       "rank": "normal",
-      "hp": 3.5,
-      "damage": 0.5,
-      "agi": 0.6,
+      "hp": 35,
+      "damage": 5,
+      "agi": 6,
       "damageReduction": 0,
       "skills": [],
       "pattern": "default",
@@ -684,9 +684,9 @@ export const dungeonForestData = {
       "zone": 1,
       "name": "이끼 고블린",
       "rank": "normal",
-      "hp": 4.0,
-      "damage": 0.5,
-      "agi": 0.3,
+      "hp": 40,
+      "damage": 5,
+      "agi": 3,
       "damageReduction": 0,
       "skills": [
         "eskl_sling_stone"
@@ -701,9 +701,9 @@ export const dungeonForestData = {
       "zone": 1,
       "name": "독거미",
       "rank": "normal",
-      "hp": 4.0,
-      "damage": 0.5,
-      "agi": 0.4,
+      "hp": 40,
+      "damage": 5,
+      "agi": 4,
       "damageReduction": 0,
       "skills": [
         "eskl_venom_bite"
@@ -718,10 +718,10 @@ export const dungeonForestData = {
       "zone": 1,
       "name": "숲 도적",
       "rank": "normal",
-      "hp": 4.5,
-      "damage": 0.5,
-      "agi": 0.4,
-      "damageReduction": 0.1,
+      "hp": 45,
+      "damage": 5,
+      "agi": 4,
+      "damageReduction": 1,
       "skills": [],
       "pattern": "default",
       "goldMin": 5,
@@ -733,9 +733,9 @@ export const dungeonForestData = {
       "zone": 1,
       "name": "엄니",
       "rank": "midboss",
-      "hp": 8,
-      "damage": 0.5,
-      "agi": 0.2,
+      "hp": 80,
+      "damage": 5,
+      "agi": 2,
       "damageReduction": 0,
       "skills": [
         "eskl_charge",
@@ -751,10 +751,10 @@ export const dungeonForestData = {
       "zone": 1,
       "name": "속삭이는 수호목",
       "rank": "boss",
-      "hp": 12,
-      "damage": 0.6,
+      "hp": 120,
+      "damage": 6,
       "agi": 0,
-      "damageReduction": 0.1,
+      "damageReduction": 1,
       "skills": [
         "eskl_root_bind",
         "eskl_branch_slam"
@@ -770,7 +770,7 @@ export const dungeonForestData = {
       "id": "eskl_sling_stone",
       "name": "돌팔매",
       "type": "attack",
-      "baseEffect": 0.9,
+      "baseEffect": 9,
       "cooldown": 3,
       "effects": [],
       "description": "빙빙 돌던 돌이 날아든다."
@@ -779,10 +779,10 @@ export const dungeonForestData = {
       "id": "eskl_venom_bite",
       "name": "독니",
       "type": "attack",
-      "baseEffect": 0.4,
+      "baseEffect": 4,
       "cooldown": 3,
       "effects": [
-        "poison:0.2:2"
+        "poison:2:2"
       ],
       "description": "독니가 살갗을 파고든다."
     },
@@ -790,7 +790,7 @@ export const dungeonForestData = {
       "id": "eskl_charge",
       "name": "돌진",
       "type": "attack",
-      "baseEffect": 1.0,
+      "baseEffect": 10,
       "cooldown": 3,
       "effects": [],
       "description": "몸을 낮추고 들이받는다."
@@ -810,7 +810,7 @@ export const dungeonForestData = {
       "id": "eskl_root_bind",
       "name": "뿌리 휘감기",
       "type": "attack",
-      "baseEffect": 0.6,
+      "baseEffect": 6,
       "cooldown": 4,
       "effects": [
         "stun:1"
@@ -821,7 +821,7 @@ export const dungeonForestData = {
       "id": "eskl_branch_slam",
       "name": "가지 내려치기",
       "type": "attack",
-      "baseEffect": 1.4,
+      "baseEffect": 14,
       "cooldown": 3,
       "effects": [],
       "description": "굵은 가지가 머리 위로 떨어진다."

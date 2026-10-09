@@ -25,7 +25,7 @@ import {
   rollCombatLoot,
   rollTreasure,
 } from "../systems/LootSystem.js";
-import { formatNumber as fmt, round1 } from "../systems/NumberRules.js";
+import { formatNumber as fmt, roundValue } from "../systems/NumberRules.js";
 import { applyOutcome } from "../systems/OutcomeSystem.js";
 import {
   CONTENT_LABELS,
@@ -259,8 +259,8 @@ export class GameManager {
   rest() {
     const maxHp = getMaxHp(this.adventurer);
     const before = this.adventurer.hp;
-    this.adventurer.hp = Math.min(maxHp, round1(before + maxHp * RECOVERY.restRatio));
-    const healed = round1(this.adventurer.hp - before);
+    this.adventurer.hp = Math.min(maxHp, roundValue(before + maxHp * RECOVERY.restRatio));
+    const healed = roundValue(this.adventurer.hp - before);
     this.logUI.add(`휴식: HP ${fmt(healed)} 회복`, "heal");
     this.showNotice({
       title: "휴식",
@@ -650,8 +650,8 @@ export class GameManager {
 
     const maxHp = getMaxHp(this.adventurer);
     const before = this.adventurer.hp;
-    this.adventurer.hp = Math.min(maxHp, round1(before + maxHp * RECOVERY.zoneTransitionRatio));
-    this.logUI.add(`구역 이동: HP ${fmt(round1(this.adventurer.hp - before))} 회복`, "heal");
+    this.adventurer.hp = Math.min(maxHp, roundValue(before + maxHp * RECOVERY.zoneTransitionRatio));
+    this.logUI.add(`구역 이동: HP ${fmt(roundValue(this.adventurer.hp - before))} 회복`, "heal");
     this.run.zone += 1;
     this.enterZone();
   }

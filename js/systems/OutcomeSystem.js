@@ -1,7 +1,7 @@
 import { catalog, getItem } from "../data/catalog.js";
 import { parseToken } from "./EffectParser.js";
 import { josa } from "./Josa.js";
-import { formatNumber as fmt, round1 } from "./NumberRules.js";
+import { formatNumber as fmt, roundValue } from "./NumberRules.js";
 import { getMaxHp } from "./TraitSystem.js";
 
 // 사건 결과 표기(hp:-0.5;gold:3;item:...;fight:...)를 적용한다.
@@ -19,8 +19,8 @@ export function applyOutcome(tokens, { adventurer, run }) {
         const amount = Number(args[0]);
         const maxHp = getMaxHp(adventurer);
         const before = adventurer.hp;
-        adventurer.hp = Math.max(0, Math.min(maxHp, round1(adventurer.hp + amount)));
-        const change = round1(adventurer.hp - before);
+        adventurer.hp = Math.max(0, Math.min(maxHp, roundValue(adventurer.hp + amount)));
+        const change = roundValue(adventurer.hp - before);
         lines.push(change >= 0 ? `HP ${fmt(change)} 회복 (HP ${fmt(adventurer.hp)})` : `HP ${fmt(-change)} 감소 (HP ${fmt(adventurer.hp)})`);
         break;
       }

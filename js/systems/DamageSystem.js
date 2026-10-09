@@ -1,5 +1,5 @@
 import { COMBAT, DICE, EFFECT_TIERS } from "../data/rules.js";
-import { clamp, formatNumber as fmt, round1 } from "./NumberRules.js";
+import { clamp, formatNumber as fmt, roundValue } from "./NumberRules.js";
 
 const CRITICAL = EFFECT_TIERS.find((tier) => tier.id === "critical");
 
@@ -19,7 +19,7 @@ export function getTierByValue(value) {
 // (기본 + 능력치) × 단계 배율 × 그 밖의 배율. 마지막에 한 번 반올림.
 export function computeEffect({ base, stat = 0, tier, multipliers = [] }) {
   const product = multipliers.reduce((acc, item) => acc * item.value, 1);
-  return round1((base + stat) * tier.multiplier * product);
+  return roundValue((base + stat) * tier.multiplier * product);
 }
 
 // 피해 감소를 빼고 최소 피해를 적용한다. 효과 없음이면 0.
@@ -28,7 +28,7 @@ export function applyReduction(amount, reduction, tier) {
     return 0;
   }
 
-  return Math.max(COMBAT.minDamage, round1(amount - reduction));
+  return Math.max(COMBAT.minDamage, roundValue(amount - reduction));
 }
 
 // 계산 과정을 사람이 읽을 수 있는 문장으로 만든다.

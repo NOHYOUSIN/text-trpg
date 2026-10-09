@@ -4,7 +4,7 @@ import { Enemy } from "../models/Enemy.js";
 import { applyReduction, computeEffect, describeCalculation, describeRoll, rollTier } from "./DamageSystem.js";
 import { parseEffects, parseToken, STATUS_LABELS, toStatusSpec } from "./EffectParser.js";
 import { josa } from "./Josa.js";
-import { clamp, formatNumber as fmt, round1 } from "./NumberRules.js";
+import { clamp, formatNumber as fmt, roundValue } from "./NumberRules.js";
 import {
   applyStatus,
   beginAction,
@@ -194,7 +194,7 @@ export class Combat {
 
     if (poisonDamage > 0) {
       const before = side.ref.hp;
-      side.ref.hp = Math.max(0, round1(side.ref.hp - poisonDamage));
+      side.ref.hp = Math.max(0, roundValue(side.ref.hp - poisonDamage));
       this.log("status", `독이 퍼진다. ${josa(side.name, "이/가")} ${fmt(poisonDamage)} 피해를 입었다.`);
       this.afterDamage(side, before);
     }
@@ -311,7 +311,7 @@ export class Combat {
       ? catalog.equipment.get(this.player.ref.equipment.weapon)
       : null;
     const bonus = profile.modifiers.basicAttackBonus + this.player.buffs.basicAttackBonus;
-    const base = round1((weapon ? weapon.damage : COMBAT.unarmedDamage) + bonus);
+    const base = roundValue((weapon ? weapon.damage : COMBAT.unarmedDamage) + bonus);
     const stat = weapon ? profile.stats[weapon.stat] : 0;
     const multipliers = [];
 
@@ -331,7 +331,7 @@ export class Combat {
         if (this.dice.chance(poison.chance)) {
           this.inflict(this.enemy, {
             type: "poison",
-            amount: round1(poison.amount * hit.tier.multiplier),
+            amount: roundValue(poison.amount * hit.tier.multiplier),
             duration: poison.duration,
           }, this.player);
         }
@@ -370,7 +370,7 @@ export class Combat {
         multipliers.push({ value: this.trait.firstStrikeMultiplier, label: "선공" });
       }
 
-      const base = round1(skill.baseEffect + (isPlayer ? user.profile.modifiers.skillDamageBonus : 0));
+      const base = roundValue(skill.baseEffect + (isPlayer ? user.profile.modifiers.skillDamageBonus : 0));
       this.dealDamage(user, target, { base, stat, tier, multipliers });
     } else if (skill.type === "heal") {
       const amount = computeEffect({ base: skill.baseEffect, stat, tier });
@@ -416,7 +416,7 @@ export class Combat {
 
       if (spec.type === "poison") {
         const product = skillMultipliers.reduce((acc, item) => acc * item.value, 1);
-        spec.amount = round1(spec.amount * tier.multiplier * product);
+        spec.amount = roundValue(spec.amount * tier.multiplier * product);
       }
 
       this.inflict(SELF_EFFECTS.has(effect.key) ? user : target, spec, user);
@@ -461,7 +461,7 @@ export class Combat {
     const final = applyReduction(raw, reduction, tier);
     const before = defender.ref.hp;
 
-    defender.ref.hp = Math.max(0, round1(defender.ref.hp - final));
+    defender.ref.hp = Math.max(0, roundValue(defender.ref.hp - final));
     this.log(
       "damage",
       final > 0 ? `→ ${defender.name}에게 ${fmt(final)} 피해${tierTag(tier)}` : "→ 빗나갔다!",
@@ -495,15 +495,15 @@ export class Combat {
 
     if (hpBefore > threshold && player.ref.hp <= threshold) {
       player.traitUsed = true;
-      this.heal(player, round1(player.profile.maxHp * trait.healRatio), "투지");
+      this.heal(player, roundValue(player.profile.maxHp * trait.healRatio), "투지");
     }
   }
 
   heal(side, amount, source) {
     const maxHp = side.kind === "player" ? side.profile.maxHp : side.ref.maxHp;
     const before = side.ref.hp;
-    side.ref.hp = Math.min(maxHp, round1(side.ref.hp + amount));
-    this.log("heal", `→ ${side.name} HP ${fmt(round1(side.ref.hp - before))} 회복 (${source})`);
+    side.ref.hp = Math.min(maxHp, roundValue(side.ref.hp + amount));
+    this.log("heal", `→ ${side.name} HP ${fmt(roundValue(side.ref.hp - before))} 회복 (${source})`);
   }
 
   inflict(target, spec, source) {
@@ -546,7 +546,7 @@ export class Combat {
 
   reductionOf(side) {
     const base = side.kind === "player" ? side.profile.damageReduction : side.ref.damageReduction;
-    return round1(base + getGuardAmount(side));
+    return roundValue(base + getGuardAmount(side));
   }
 
   getActionOptions() {

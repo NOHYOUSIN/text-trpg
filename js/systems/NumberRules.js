@@ -1,8 +1,8 @@
-// 모든 수치는 소수점 둘째 자리에서 반올림해 한 자리까지 남긴다.
+// 모든 수치는 정수로 반올림한다(0.5는 올림).
 // 소수 계산 오차를 막기 위해 반올림은 이 함수로만 한다.
-export function round1(value) {
+export function roundValue(value) {
   const sign = value < 0 ? -1 : 1;
-  return (sign * Math.round((Math.abs(value) + Number.EPSILON) * 10)) / 10;
+  return sign * Math.round(Math.abs(value) + Number.EPSILON);
 }
 
 export function clamp(value, min, max) {
@@ -10,7 +10,7 @@ export function clamp(value, min, max) {
 }
 
 export function formatNumber(value) {
-  return round1(value).toFixed(1);
+  return String(roundValue(value));
 }
 
 export function formatSigned(value) {

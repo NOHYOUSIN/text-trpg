@@ -1,6 +1,7 @@
 // 진행 중인 탐험 자동 저장 1개. 탐험이 끝나면 지운다. 수동 저장·불러오기는 없다.
 const STORAGE_KEY = "trpg-webgame-run";
-const SAVE_VERSION = 1;
+// 2: 수치 정수 전환(10배). 이전 버전 저장은 규모가 달라 불러오지 않는다.
+const SAVE_VERSION = 2;
 
 export class SaveManager {
   constructor(storage = globalThis.localStorage) {

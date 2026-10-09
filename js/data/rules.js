@@ -17,8 +17,8 @@ export const DICE = Object.freeze({
 });
 
 export const COMBAT = Object.freeze({
-  minDamage: 0.2,
-  unarmedDamage: 0.3,
+  minDamage: 2,
+  unarmedDamage: 3,
   surpriseDefenseTarget: 11,
   // 동률이면 플레이어 선공
   playerWinsAgilityTie: true,
