@@ -1,11 +1,11 @@
-import { formatNumber as fmt } from "../systems/NumberRules.js?v=20261012-030143";
-import { renderScene } from "./SceneUI.js?v=20261012-030143";
+import { formatNumber as fmt } from "../systems/NumberRules.js?v=20261012-030821";
+import { renderScene } from "./SceneUI.js?v=20261012-030821";
 
 const GAME_TITLE = "Text TRPG";
 
 // 로비: 게임 제목, 새로하기, 이어하기(진행 중인 탐험이 있을 때만), 설정
 export function renderLobby(root, { saveSummary, onNew, onContinue, onSettings }) {
-  renderScene(root, {
+  const scene = renderScene(root, {
     eyebrow: "TEXT TRPG ADVENTURE",
     title: GAME_TITLE,
     paragraphs: ["매번 새로운 모험가로 던전에 들어선다. 갈림길을 고르고, 주사위에 운을 맡기고, 탐험 중에 얻은 스킬과 장비로 살아남는다."],
@@ -20,24 +20,24 @@ export function renderLobby(root, { saveSummary, onNew, onContinue, onSettings }
       { label: "설정", onClick: onSettings },
     ],
   });
+  scene.classList.add("lobby");
 }
 
 // 저장된 탐험 한 줄 요약
 export function describeSave(saved, dungeon, zone) {
   const savedAt = new Date(saved.savedAt).toLocaleString("ko-KR");
+  // 버튼 보조 문구는 줄바꿈을 그대로 보여 준다: 1줄 위치, 2줄 모험가 상태
   return [
     `${dungeon?.name ?? "?"} · ${zone?.name ?? "?"} ${saved.run.round} / ${zone?.rounds ?? "?"} 라운드`,
-    `${saved.adventurer.name} · HP ${fmt(saved.adventurer.hp)} · 골드 ${saved.adventurer.gold}`,
-    `저장: ${savedAt}`,
-  ].join(" · ");
+    `${saved.adventurer.name} · HP ${fmt(saved.adventurer.hp)} · 골드 ${saved.adventurer.gold} · ${savedAt}`,
+  ].join("\n");
 }
 
-// 던전 선택: 데이터에 있는 던전만 보여 준다.
+// 던전 선택: 데이터에 있는 던전만 위에서 아래로 보여 주고, 맨 아래에 로비로 버튼을 둔다.
 export function renderDungeonSelect(root, { dungeons, onPick, onBack }) {
   renderScene(root, {
     eyebrow: "새로하기",
     title: "던전을 고른다",
-    buttonLayout: "cards",
     buttons: [
       ...dungeons.map((dungeon) => ({
         label: dungeon.name,

@@ -1,12 +1,12 @@
-import { catalog } from "../data/catalog.js?v=20261012-030143";
-import { BOSS_RANKS, EARLY_SKILL, EVENT_CHOICES, RECOVERY, ROUTE } from "../data/rules.js?v=20261012-030143";
-import { Adventurer } from "../models/Adventurer.js?v=20261012-030143";
-import { RunState } from "../models/RunState.js?v=20261012-030143";
-import { SaveManager } from "../save/SaveManager.js?v=20261012-030143";
-import { Combat } from "../systems/CombatSystem.js?v=20261012-030143";
-import { DiceSystem } from "../systems/DiceSystem.js?v=20261012-030143";
-import { rollEnemyVariant } from "../systems/EnemyVariantSystem.js?v=20261012-030143";
-import { getSkillBonus, OUTCOME_LABELS, pickShownChoices, resolveChoice } from "../systems/EventSystem.js?v=20261012-030143";
+import { catalog } from "../data/catalog.js?v=20261012-030821";
+import { BOSS_RANKS, EARLY_SKILL, EVENT_CHOICES, RECOVERY, ROUTE } from "../data/rules.js?v=20261012-030821";
+import { Adventurer } from "../models/Adventurer.js?v=20261012-030821";
+import { RunState } from "../models/RunState.js?v=20261012-030821";
+import { SaveManager } from "../save/SaveManager.js?v=20261012-030821";
+import { Combat } from "../systems/CombatSystem.js?v=20261012-030821";
+import { DiceSystem } from "../systems/DiceSystem.js?v=20261012-030821";
+import { rollEnemyVariant } from "../systems/EnemyVariantSystem.js?v=20261012-030821";
+import { getSkillBonus, OUTCOME_LABELS, pickShownChoices, resolveChoice } from "../systems/EventSystem.js?v=20261012-030821";
 import {
   addItem,
   discardSlot,
@@ -17,17 +17,17 @@ import {
   tryAutoAcquire,
   unequip,
   useConsumableOutsideCombat,
-} from "../systems/InventorySystem.js?v=20261012-030143";
-import { josa } from "../systems/Josa.js?v=20261012-030143";
+} from "../systems/InventorySystem.js?v=20261012-030821";
+import { josa } from "../systems/Josa.js?v=20261012-030821";
 import {
   createBossRewardCandidates,
   markUniqueSeen,
   resolveAcquisition,
   rollCombatLoot,
   rollTreasure,
-} from "../systems/LootSystem.js?v=20261012-030143";
-import { formatNumber as fmt, roundValue } from "../systems/NumberRules.js?v=20261012-030143";
-import { applyOutcome } from "../systems/OutcomeSystem.js?v=20261012-030143";
+} from "../systems/LootSystem.js?v=20261012-030821";
+import { formatNumber as fmt, roundValue } from "../systems/NumberRules.js?v=20261012-030821";
+import { applyOutcome } from "../systems/OutcomeSystem.js?v=20261012-030821";
 import {
   CONTENT_LABELS,
   createRouteCandidates,
@@ -36,13 +36,13 @@ import {
   pickEnemy,
   pickEvent,
   rollPlaceContent,
-} from "../systems/RouteSystem.js?v=20261012-030143";
-import { createShopStock } from "../systems/ShopSystem.js?v=20261012-030143";
-import { getMaxHp, getProfile } from "../systems/TraitSystem.js?v=20261012-030143";
-import { renderBossReward, renderEquipChoice, renderInventoryFull, renderSkillChoice, renderSkillOffer } from "../ui/AcquireUI.js?v=20261012-030143";
-import { renderClassSelect } from "../ui/ClassSelectUI.js?v=20261012-030143";
-import { CombatUI } from "../ui/CombatUI.js?v=20261012-030143";
-import { renderBossIntro } from "../ui/BossIntroUI.js?v=20261012-030143";
+} from "../systems/RouteSystem.js?v=20261012-030821";
+import { createShopStock } from "../systems/ShopSystem.js?v=20261012-030821";
+import { getMaxHp, getProfile } from "../systems/TraitSystem.js?v=20261012-030821";
+import { renderBossReward, renderEquipChoice, renderInventoryFull, renderSkillChoice, renderSkillOffer } from "../ui/AcquireUI.js?v=20261012-030821";
+import { renderClassSelect } from "../ui/ClassSelectUI.js?v=20261012-030821";
+import { CombatUI } from "../ui/CombatUI.js?v=20261012-030821";
+import { renderBossIntro } from "../ui/BossIntroUI.js?v=20261012-030821";
 import {
   describeSave,
   renderDungeonCard,
@@ -50,17 +50,17 @@ import {
   renderLobby,
   renderOverwriteConfirm,
   renderSettings,
-} from "../ui/LobbyUI.js?v=20261012-030143";
-import { readCalcSetting, writeCalcSetting } from "../ui/Settings.js?v=20261012-030143";
-import { isTextEffectEnabled, setTextEffectEnabled } from "../ui/TextEffect.js?v=20261012-030143";
-import { renderEvent } from "../ui/EventUI.js?v=20261012-030143";
-import { InventoryUI } from "../ui/InventoryUI.js?v=20261012-030143";
-import { LogUI } from "../ui/LogUI.js?v=20261012-030143";
-import { renderRoute } from "../ui/RouteUI.js?v=20261012-030143";
-import { renderScene } from "../ui/SceneUI.js?v=20261012-030143";
-import { renderShop } from "../ui/ShopUI.js?v=20261012-030143";
-import { renderStatus } from "../ui/StatusUI.js?v=20261012-030143";
-import { renderSummary } from "../ui/SummaryUI.js?v=20261012-030143";
+} from "../ui/LobbyUI.js?v=20261012-030821";
+import { readCalcSetting, writeCalcSetting } from "../ui/Settings.js?v=20261012-030821";
+import { isTextEffectEnabled, setTextEffectEnabled } from "../ui/TextEffect.js?v=20261012-030821";
+import { renderEvent } from "../ui/EventUI.js?v=20261012-030821";
+import { InventoryUI } from "../ui/InventoryUI.js?v=20261012-030821";
+import { LogUI } from "../ui/LogUI.js?v=20261012-030821";
+import { renderRoute } from "../ui/RouteUI.js?v=20261012-030821";
+import { renderScene } from "../ui/SceneUI.js?v=20261012-030821";
+import { renderShop } from "../ui/ShopUI.js?v=20261012-030821";
+import { renderStatus } from "../ui/StatusUI.js?v=20261012-030821";
+import { renderSummary } from "../ui/SummaryUI.js?v=20261012-030821";
 
 
 // 탐험 전체 흐름: 직업 선택 → 라운드(갈림길 → 장소 내용) → 보스 → 요약
@@ -95,7 +95,9 @@ export class GameManager {
 
   // ---------- 장면 표시 ----------
 
-  show(render) {
+  // menu: 로비·던전 선택·설정처럼 탐험 밖의 메뉴 화면. 상단 머리말과 상태·기록 패널을 숨기고 가운데 한 단으로 보여 준다.
+  show(render, { menu = false } = {}) {
+    document.body.classList.toggle("menu-mode", menu);
     this.refreshScene = render;
     this.renderStatus();
     render();
@@ -116,7 +118,7 @@ export class GameManager {
       onNew: () => this.showDungeonSelect(),
       onContinue: () => this.resume(saved),
       onSettings: () => this.showSettings(),
-    }));
+    }), { menu: true });
   }
 
   describeSave(saved) {
@@ -129,7 +131,7 @@ export class GameManager {
       dungeons: [...catalog.dungeons.values()],
       onPick: (dungeon) => this.showDungeonCard(dungeon),
       onBack: () => this.showLobby(),
-    }));
+    }), { menu: true });
   }
 
   // 던전 설명은 자유롭게 볼 수 있고, 출발할 때 진행 중인 탐험이 있으면 확인한다.
@@ -157,9 +159,9 @@ export class GameManager {
             depart();
           },
           onCancel: () => this.showDungeonCard(dungeon),
-        }));
+        }), { menu: true });
       },
-    }));
+    }), { menu: true });
   }
 
   showSettings() {
@@ -176,7 +178,7 @@ export class GameManager {
         this.showSettings();
       },
       onBack: () => this.showLobby(),
-    }));
+    }), { menu: true });
   }
 
   // ---------- 저장·이어하기 ----------

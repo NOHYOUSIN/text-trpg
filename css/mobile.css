@@ -266,3 +266,24 @@
     transition: none;
   }
 }
+
+@media (max-width: 900px) {
+  /* 메뉴 화면에서는 상단 요약 바와 하단 버튼을 숨긴다 */
+  body.menu-mode .mobile-bar,
+  body.menu-mode .mobile-dock,
+  body.menu-mode .mobile-backdrop {
+    display: none;
+  }
+
+  body.menu-mode .page-shell {
+    padding-bottom: 16px;
+  }
+
+  body.menu-mode .scene-panel {
+    padding: 24px 16px;
+  }
+
+  .lobby .scene-title {
+    font-size: 32px;
+  }
+}

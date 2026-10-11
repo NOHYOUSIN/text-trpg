@@ -1,7 +1,7 @@
-import { catalog } from "../data/catalog.js?v=20261012-030143";
-import { parseAbility } from "../systems/AbilitySystem.js?v=20261012-030143";
-import { parseToken } from "../systems/EffectParser.js?v=20261012-030143";
-import { formatNumber as fmt } from "../systems/NumberRules.js?v=20261012-030143";
+import { catalog } from "../data/catalog.js?v=20261012-030821";
+import { parseAbility } from "../systems/AbilitySystem.js?v=20261012-030821";
+import { parseToken } from "../systems/EffectParser.js?v=20261012-030821";
+import { formatNumber as fmt } from "../systems/NumberRules.js?v=20261012-030821";
 
 // 장비·스킬·소모품의 수치를 한 줄 설명으로 만든다. (선택 판단용)
 // "능력치 배율" = 1 + 연결 능력치 × 5%

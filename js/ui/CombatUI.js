@@ -1,11 +1,11 @@
-import { GRADES } from "../data/rules.js?v=20261012-030143";
-import { formatNumber as fmt } from "../systems/NumberRules.js?v=20261012-030143";
-import { rankNameClasses } from "./BossIntroUI.js?v=20261012-030143";
-import { playCombatFx } from "./CombatFx.js?v=20261012-030143";
-import { readCalcSetting, writeCalcSetting } from "./Settings.js?v=20261012-030143";
-import { statusChip } from "./StatusTooltip.js?v=20261012-030143";
-import { describeConsumable, describeSkill, STAT_LABELS } from "./ItemText.js?v=20261012-030143";
-import { isTextEffectEnabled } from "./TextEffect.js?v=20261012-030143";
+import { GRADES } from "../data/rules.js?v=20261012-030821";
+import { formatNumber as fmt } from "../systems/NumberRules.js?v=20261012-030821";
+import { rankNameClasses } from "./BossIntroUI.js?v=20261012-030821";
+import { playCombatFx } from "./CombatFx.js?v=20261012-030821";
+import { readCalcSetting, writeCalcSetting } from "./Settings.js?v=20261012-030821";
+import { statusChip } from "./StatusTooltip.js?v=20261012-030821";
+import { describeConsumable, describeSkill, STAT_LABELS } from "./ItemText.js?v=20261012-030821";
+import { isTextEffectEnabled } from "./TextEffect.js?v=20261012-030821";
 
 const SKILL_TYPE_LABELS = {
   attack: "공격",

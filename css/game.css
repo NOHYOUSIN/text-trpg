@@ -397,3 +397,45 @@
 .scene-button.is-primary .scene-button-sub {
   color: #4a3f26;
 }
+
+/* 메뉴 화면(로비·던전 선택·설정): 상단 머리말과 상태·기록 패널을 숨기고 가운데 한 단으로 */
+body.menu-mode .game-header,
+body.menu-mode .game-side {
+  display: none;
+}
+
+body.menu-mode .game-grid {
+  grid-template-columns: minmax(0, 520px);
+  align-content: center;
+  justify-content: center;
+}
+
+body.menu-mode .scene-panel {
+  height: auto;
+  padding: 32px 28px;
+}
+
+body.menu-mode .scene-button {
+  align-items: center;
+  text-align: center;
+}
+
+/* 로비: 큰 제목, 가운데 정렬 */
+.lobby {
+  align-items: center;
+  text-align: center;
+}
+
+.lobby .scene-title {
+  font-size: 40px;
+  letter-spacing: 0.02em;
+}
+
+.lobby .scene-text {
+  color: var(--muted);
+}
+
+.lobby .scene-buttons {
+  align-self: stretch;
+  margin-top: 12px;
+}
