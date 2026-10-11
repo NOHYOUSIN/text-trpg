@@ -7,6 +7,7 @@ export class RunState {
     flags = [],
     seenEvents = [],
     recentPlaces = [],
+    lastShownPlaces = [],
     recentEventGroups = [],
     seenUniques = [],
     defeatedBosses = [],
@@ -19,6 +20,8 @@ export class RunState {
     this.flags = new Set(flags);
     this.seenEvents = new Set(seenEvents);
     this.recentPlaces = [...recentPlaces];
+    // 직전 갈림길에 보였던 장소. 다음 갈림길 후보에서 뺀다.
+    this.lastShownPlaces = [...lastShownPlaces];
     // 최근 라운드에 나온 사건 묶음(group). 비슷한 사건이 연달아 나오지 않게 한다.
     this.recentEventGroups = [...recentEventGroups];
     this.seenUniques = new Set(seenUniques);
@@ -61,6 +64,7 @@ export class RunState {
       flags: [...this.flags],
       seenEvents: [...this.seenEvents],
       recentPlaces: [...this.recentPlaces],
+      lastShownPlaces: [...this.lastShownPlaces],
       recentEventGroups: [...this.recentEventGroups],
       seenUniques: [...this.seenUniques],
       defeatedBosses: [...this.defeatedBosses],

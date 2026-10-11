@@ -1,5 +1,5 @@
-import { ROUTE } from "../data/rules.js?v=20261012-012115";
-import { isEventAvailable } from "./EventSystem.js?v=20261012-012115";
+import { ROUTE } from "../data/rules.js?v=20261012-012659";
+import { isEventAvailable } from "./EventSystem.js?v=20261012-012659";
 
 export const CONTENT_LABELS = Object.freeze({
   combat: "전투",
@@ -28,13 +28,17 @@ export function getBossForRound(zone, round) {
   return null;
 }
 
-// 갈림길 후보: 2~3개, 한 갈림길 안에서 중복 없음, 최근 N라운드 장소 제외
+// 갈림길 후보: 2~3개, 한 갈림길 안에서 중복 없음.
+// 최근 N라운드에 고른 장소와 직전 갈림길에 보였던 장소를 빼고, 후보가 모자라면 단계적으로 다시 넣는다.
 export function createRouteCandidates(dungeon, run, dice) {
   const places = dungeon.places.filter((place) => place.zone === run.zone);
   const count = dice.int(ROUTE.minCandidates, ROUTE.maxCandidates);
-  const fresh = places.filter((place) => !run.recentPlaces.includes(place.id));
-  const pool = fresh.length >= count ? fresh : places;
-  return dice.shuffle(pool).slice(0, count);
+  const notRecent = places.filter((place) => !run.recentPlaces.includes(place.id));
+  const fresh = notRecent.filter((place) => !run.lastShownPlaces.includes(place.id));
+  const pool = [fresh, notRecent, places].find((list) => list.length >= count);
+  const candidates = dice.shuffle(pool).slice(0, count);
+  run.lastShownPlaces = candidates.map((place) => place.id);
+  return candidates;
 }
 
 export function rollPlaceContent(place, dice) {

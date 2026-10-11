@@ -1,8 +1,8 @@
-import { catalog } from "../data/catalog.js?v=20261012-012115";
-import { CLASS_TRAITS } from "../data/rules.js?v=20261012-012115";
-import { capEvade, capLifesteal, critMinFrom, parseAbility } from "./AbilitySystem.js?v=20261012-012115";
-import { parseToken } from "./EffectParser.js?v=20261012-012115";
-import { roundValue } from "./NumberRules.js?v=20261012-012115";
+import { catalog } from "../data/catalog.js?v=20261012-012659";
+import { CLASS_TRAITS } from "../data/rules.js?v=20261012-012659";
+import { capEvade, capLifesteal, critMinFrom, parseAbility } from "./AbilitySystem.js?v=20261012-012659";
+import { parseToken } from "./EffectParser.js?v=20261012-012659";
+import { roundValue } from "./NumberRules.js?v=20261012-012659";
 
 const STAT_KEYS = ["str", "agi", "wis"];
 

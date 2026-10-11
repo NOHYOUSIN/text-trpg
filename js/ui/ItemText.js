@@ -1,7 +1,7 @@
-import { catalog } from "../data/catalog.js?v=20261012-012115";
-import { parseAbility } from "../systems/AbilitySystem.js?v=20261012-012115";
-import { parseToken } from "../systems/EffectParser.js?v=20261012-012115";
-import { formatNumber as fmt } from "../systems/NumberRules.js?v=20261012-012115";
+import { catalog } from "../data/catalog.js?v=20261012-012659";
+import { parseAbility } from "../systems/AbilitySystem.js?v=20261012-012659";
+import { parseToken } from "../systems/EffectParser.js?v=20261012-012659";
+import { formatNumber as fmt } from "../systems/NumberRules.js?v=20261012-012659";
 
 // 장비·스킬·소모품의 수치를 한 줄 설명으로 만든다. (선택 판단용)
 const STAT_LABELS = { str: "힘", agi: "민첩", wis: "지혜", main: "주 능력치" };
