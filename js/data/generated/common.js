@@ -295,7 +295,7 @@ export const commonData = {
       "baseEffect": null,
       "cooldown": null,
       "effects": [
-        "critRange:16"
+        "crit:3"
       ],
       "description": "급소가 눈에 들어온다. 치명타 범위가 16~20으로 넓어진다."
     },
@@ -514,7 +514,9 @@ export const commonData = {
       "damageReduction": 0,
       "maxHp": 0,
       "statBonus": {},
-      "effects": [],
+      "effects": [
+        "onHit@20>bleed:1"
+      ],
       "unique": false,
       "starter": false,
       "price": 20,
@@ -548,7 +550,9 @@ export const commonData = {
       "statBonus": {
         "str": 2
       },
-      "effects": [],
+      "effects": [
+        "lifesteal:10"
+      ],
       "unique": false,
       "starter": false,
       "price": 30,
@@ -565,12 +569,12 @@ export const commonData = {
       "maxHp": 0,
       "statBonus": {},
       "effects": [
-        "onHitPoison:20:2:2"
+        "onHit@20>poison:2:2"
       ],
       "unique": false,
       "starter": false,
       "price": 30,
-      "description": "칼날에 가시덩굴 즙이 배어 있다. 명중 시 20% 확률로 독."
+      "description": "칼날에 가시덩굴 즙이 배어 있다."
     },
     {
       "id": "wpn_willow_staff",
@@ -584,7 +588,9 @@ export const commonData = {
       "statBonus": {
         "wis": 2
       },
-      "effects": [],
+      "effects": [
+        "onSkill@30>cooldown:-1"
+      ],
       "unique": false,
       "starter": false,
       "price": 30,
@@ -602,7 +608,10 @@ export const commonData = {
       "statBonus": {
         "str": 2
       },
-      "effects": [],
+      "effects": [
+        "onHit>guard:2:1",
+        "reflect:1"
+      ],
       "unique": false,
       "starter": false,
       "price": 40,
@@ -621,7 +630,8 @@ export const commonData = {
         "agi": 2
       },
       "effects": [
-        "onHitPoison:25:3:2"
+        "onHit@25>poison:3:2",
+        "onCrit>bleed:2"
       ],
       "unique": false,
       "starter": false,
@@ -641,12 +651,13 @@ export const commonData = {
         "wis": 2
       },
       "effects": [
-        "skillDamageBonus:2"
+        "skillDamageBonus:2",
+        "onSkill@25>weaken:0.7:1"
       ],
       "unique": false,
       "starter": false,
       "price": 40,
-      "description": "달빛을 머금은 지팡이. 스킬 피해 +2."
+      "description": "달빛을 머금은 지팡이."
     },
     {
       "id": "arm_leather_basic",
@@ -690,7 +701,9 @@ export const commonData = {
       "damageReduction": 2,
       "maxHp": 10,
       "statBonus": {},
-      "effects": [],
+      "effects": [
+        "onHurt@25>guard:3:1"
+      ],
       "unique": false,
       "starter": false,
       "price": 30,
@@ -707,12 +720,13 @@ export const commonData = {
       "maxHp": 20,
       "statBonus": {},
       "effects": [
-        "immune:poison"
+        "immune:poison",
+        "onTurnStart>heal:2"
       ],
       "unique": false,
       "starter": false,
       "price": 40,
-      "description": "살아 있는 나무껍질로 엮었다. 독에 걸리지 않는다."
+      "description": "살아 있는 나무껍질로 엮었다."
     },
     {
       "id": "rng_strength",
@@ -781,12 +795,12 @@ export const commonData = {
         "agi": 3
       },
       "effects": [
-        "exploreBonus:1"
+        "evade:1"
       ],
       "unique": false,
       "starter": false,
       "price": 30,
-      "description": "탐험 판정 +1."
+      "description": "숲 사냥꾼들이 끼던 반지."
     },
     {
       "id": "rng_oak_heart",
@@ -796,17 +810,17 @@ export const commonData = {
       "stat": null,
       "damage": null,
       "damageReduction": 0,
-      "maxHp": 0,
+      "maxHp": 10,
       "statBonus": {
         "str": 4
       },
       "effects": [
-        "maxHp:10"
+        "lifesteal:10"
       ],
       "unique": false,
       "starter": false,
       "price": 40,
-      "description": "최대 HP +10."
+      "description": "참나무 심장을 깎아 만든 반지."
     },
     {
       "id": "nck_lucky_charm",
@@ -824,7 +838,7 @@ export const commonData = {
       "unique": false,
       "starter": false,
       "price": 20,
-      "description": "탐험 판정 +1."
+      "description": "네잎클로버를 엮은 부적."
     },
     {
       "id": "nck_vigor",
@@ -837,12 +851,12 @@ export const commonData = {
       "maxHp": 0,
       "statBonus": {},
       "effects": [
-        "combatStartHeal:3"
+        "onBattleStart>heal:3"
       ],
       "unique": false,
       "starter": false,
       "price": 30,
-      "description": "전투 시작 시 HP 3 회복."
+      "description": "맥박처럼 따뜻하게 뛰는 목걸이."
     },
     {
       "id": "nck_wolf_fang",
@@ -855,12 +869,13 @@ export const commonData = {
       "maxHp": 0,
       "statBonus": {},
       "effects": [
-        "critRange:18"
+        "crit:1",
+        "onCrit>bleed:2"
       ],
       "unique": false,
       "starter": false,
       "price": 40,
-      "description": "기본공격·스킬의 치명타 범위가 18~20으로 넓어진다."
+      "description": "늑대 이빨을 꿴 목걸이."
     },
     {
       "id": "wpn_wood_club",
@@ -886,15 +901,15 @@ export const commonData = {
       "stat": "str",
       "damage": 12,
       "damageReduction": 0,
-      "maxHp": 0,
+      "maxHp": 10,
       "statBonus": {},
       "effects": [
-        "maxHp:10"
+        "lowHp>basicAttackBonus:3"
       ],
       "unique": false,
       "starter": false,
       "price": 30,
-      "description": "두꺼운 날이 달린 도끼. 쥐고 있으면 든든하다. 최대 HP +10."
+      "description": "두꺼운 날이 달린 도끼. 쥐고 있으면 든든하다."
     },
     {
       "id": "wpn_bear_hammer",
@@ -904,17 +919,17 @@ export const commonData = {
       "stat": "str",
       "damage": 15,
       "damageReduction": 0,
-      "maxHp": 0,
+      "maxHp": 10,
       "statBonus": {
         "str": 2
       },
       "effects": [
-        "maxHp:10"
+        "onCrit>stun:1"
       ],
       "unique": false,
       "starter": false,
       "price": 40,
-      "description": "곰의 두개골도 깬다는 망치. 최대 HP +10."
+      "description": "곰의 두개골도 깬다는 망치."
     },
     {
       "id": "wpn_short_bow",
@@ -944,7 +959,9 @@ export const commonData = {
       "statBonus": {
         "agi": 2
       },
-      "effects": [],
+      "effects": [
+        "onHit>bleed:1"
+      ],
       "unique": false,
       "starter": false,
       "price": 30,
@@ -963,12 +980,12 @@ export const commonData = {
         "agi": 2
       },
       "effects": [
-        "onHitPoison:30:3:2"
+        "onHit@30>poison:3:2"
       ],
       "unique": false,
       "starter": false,
       "price": 40,
-      "description": "독사의 이빨을 박아 넣은 칼. 명중 시 30% 확률로 독."
+      "description": "독사의 이빨을 박아 넣은 칼."
     },
     {
       "id": "wpn_bone_wand",
@@ -1002,7 +1019,7 @@ export const commonData = {
       "unique": false,
       "starter": false,
       "price": 30,
-      "description": "끝에서 작은 불씨가 꺼지지 않는다. 스킬 피해 +2."
+      "description": "끝에서 작은 불씨가 꺼지지 않는다."
     },
     {
       "id": "wpn_star_staff",
@@ -1017,12 +1034,13 @@ export const commonData = {
         "wis": 2
       },
       "effects": [
-        "combatStartHeal:5"
+        "onBattleStart>heal:5",
+        "onSkill>heal:2"
       ],
       "unique": false,
       "starter": false,
       "price": 40,
-      "description": "별빛이 깃든 홀. 전투 시작 시 HP 5 회복."
+      "description": "별빛이 깃든 홀."
     },
     {
       "id": "arm_hide_vest",
@@ -1050,7 +1068,9 @@ export const commonData = {
       "damageReduction": 2,
       "maxHp": 10,
       "statBonus": {},
-      "effects": [],
+      "effects": [
+        "onBattleStart>guard:3:1"
+      ],
       "unique": false,
       "starter": false,
       "price": 30,
@@ -1067,12 +1087,12 @@ export const commonData = {
       "maxHp": 10,
       "statBonus": {},
       "effects": [
-        "immune:poison"
+        "reflect:2"
       ],
       "unique": false,
       "starter": false,
       "price": 30,
-      "description": "가시덩굴 즙에 담가 독에 강하다."
+      "description": "가시가 돋친 조끼."
     },
     {
       "id": "arm_moonweave_robe",
@@ -1087,12 +1107,13 @@ export const commonData = {
         "wis": 2
       },
       "effects": [
-        "combatStartHeal:3"
+        "onBattleStart>heal:3",
+        "evade:1"
       ],
       "unique": false,
       "starter": false,
       "price": 40,
-      "description": "달빛으로 짠 로브. 전투 시작 시 HP 3 회복."
+      "description": "달빛으로 짠 로브."
     },
     {
       "id": "rng_warrior",
@@ -1102,17 +1123,17 @@ export const commonData = {
       "stat": null,
       "damage": null,
       "damageReduction": 0,
-      "maxHp": 0,
+      "maxHp": 10,
       "statBonus": {
         "str": 3
       },
       "effects": [
-        "maxHp:10"
+        "reflect:1"
       ],
       "unique": false,
       "starter": false,
       "price": 30,
-      "description": "최대 HP +10."
+      "description": "오래된 전사의 문장이 새겨진 반지."
     },
     {
       "id": "rng_sage",
@@ -1132,7 +1153,7 @@ export const commonData = {
       "unique": false,
       "starter": false,
       "price": 30,
-      "description": "스킬 피해 +1."
+      "description": "현자의 문양이 새겨진 반지."
     },
     {
       "id": "rng_shadow",
@@ -1147,12 +1168,13 @@ export const commonData = {
         "agi": 4
       },
       "effects": [
-        "critRange:19"
+        "crit:1",
+        "onCrit>empower:3:1"
       ],
       "unique": false,
       "starter": false,
       "price": 40,
-      "description": "치명타 범위 19~20."
+      "description": "그림자처럼 빛을 삼키는 반지."
     },
     {
       "id": "nck_bone_charm",
@@ -1170,7 +1192,7 @@ export const commonData = {
       "unique": false,
       "starter": false,
       "price": 20,
-      "description": "기본공격 피해 +2."
+      "description": "짐승 뼈를 깎아 만든 부적."
     },
     {
       "id": "nck_antidote_pendant",
@@ -1188,7 +1210,7 @@ export const commonData = {
       "unique": false,
       "starter": false,
       "price": 30,
-      "description": "독에 걸리지 않는다."
+      "description": "해독초 향이 배어 있는 펜던트."
     },
     {
       "id": "nck_owl_eye",
@@ -1202,12 +1224,12 @@ export const commonData = {
       "statBonus": {},
       "effects": [
         "exploreBonus:2",
-        "critRange:19"
+        "evade:1"
       ],
       "unique": false,
       "starter": false,
       "price": 40,
-      "description": "탐험 판정 +2, 치명타 범위 19~20."
+      "description": "어둠 속에서도 빛나는 부엉이 눈."
     },
     {
       "id": "wpn_u_whisper_heart",
@@ -1222,12 +1244,13 @@ export const commonData = {
         "wis": 3
       },
       "effects": [
-        "cooldownReduction:1"
+        "cooldownReduction:1",
+        "onSkill@30>vulnerable:1.3:1"
       ],
       "unique": true,
       "starter": false,
       "price": 40,
-      "description": "숲의 속삭임이 깃든 지팡이. 모든 스킬 대기시간 -1."
+      "description": "숲의 속삭임이 깃든 지팡이."
     },
     {
       "id": "wpn_u_alpha_fang",
@@ -1242,12 +1265,13 @@ export const commonData = {
         "agi": 3
       },
       "effects": [
-        "onHitPoison:40:4:3"
+        "onHit>bleed:2",
+        "onKill>heal:10"
       ],
       "unique": true,
       "starter": false,
       "price": 40,
-      "description": "숲 늑대 무리 우두머리의 송곳니. 명중 시 40% 확률로 독."
+      "description": "숲 늑대 무리 우두머리의 송곳니."
     },
     {
       "id": "arm_u_ancient_bark",
@@ -1260,12 +1284,13 @@ export const commonData = {
       "maxHp": 30,
       "statBonus": {},
       "effects": [
-        "immune:poison"
+        "immune:poison",
+        "reflect:3"
       ],
       "unique": true,
       "starter": false,
       "price": 40,
-      "description": "천 년 묵은 고목의 껍질. 독에 걸리지 않는다."
+      "description": "천 년 묵은 고목의 껍질."
     }
   ],
   "consumables": [

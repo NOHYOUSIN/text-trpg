@@ -1,10 +1,11 @@
-import { catalog } from "../data/catalog.js?v=20261012-005505";
-import { COMBAT, DICE } from "../data/rules.js?v=20261012-005505";
-import { Enemy } from "../models/Enemy.js?v=20261012-005505";
-import { applyReduction, computeEffect, describeCalculation, describeRoll, rollTier } from "./DamageSystem.js?v=20261012-005505";
-import { parseEffects, parseToken, STATUS_LABELS, toStatusSpec } from "./EffectParser.js?v=20261012-005505";
-import { josa } from "./Josa.js?v=20261012-005505";
-import { clamp, formatNumber as fmt, roundValue } from "./NumberRules.js?v=20261012-005505";
+import { catalog } from "../data/catalog.js?v=20261012-011118";
+import { COMBAT, DICE } from "../data/rules.js?v=20261012-011118";
+import { Enemy } from "../models/Enemy.js?v=20261012-011118";
+import { lowHpBonus, runAbilities } from "./AbilitySystem.js?v=20261012-011118";
+import { applyReduction, computeEffect, describeCalculation, describeRoll, rollTier } from "./DamageSystem.js?v=20261012-011118";
+import { parseEffects, parseToken, STATUS_LABELS, toStatusSpec } from "./EffectParser.js?v=20261012-011118";
+import { josa } from "./Josa.js?v=20261012-011118";
+import { clamp, formatNumber as fmt, roundValue } from "./NumberRules.js?v=20261012-011118";
 import {
   applyStatus,
   beginAction,
@@ -15,8 +16,8 @@ import {
   getGuardAmount,
   getTakenMultiplier,
   removeStatus,
-} from "./StatusSystem.js?v=20261012-005505";
-import { getClassTrait, getProfile } from "./TraitSystem.js?v=20261012-005505";
+} from "./StatusSystem.js?v=20261012-011118";
+import { getClassTrait, getProfile } from "./TraitSystem.js?v=20261012-011118";
 
 const SELF_EFFECTS = new Set(["guard", "empower", "cleanse"]);
 // 효과량을 자신에게 거는 스킬: 방어(받는 피해 감소), 강화(주는 피해 증가)
@@ -32,7 +33,7 @@ function hitTag(roll, tier) {
   const label = HIT_LABELS[tier.id];
   return label ? ` (🎲${roll} · ${label})` : ` (🎲${roll})`;
 }
-const NEGATIVE_STATUSES = ["poison", "stun", "weaken", "vulnerable"];
+const NEGATIVE_STATUSES = ["poison", "bleed", "stun", "weaken", "vulnerable"];
 
 // 1:1 전투 한 번. 플레이어 입력이 필요할 때까지 자동으로 진행한다.
 // 사용: const combat = new Combat({ adventurer, enemyData, dungeon, dice, surprise });
@@ -88,7 +89,7 @@ export class Combat {
 
   begin() {
     this.log("system", `${this.enemy.ref.description}`);
-    this.applyCombatStartHeal();
+    runAbilities(this, "onBattleStart");
     this.resolveSurprise();
 
     if (!this.result) {
@@ -152,7 +153,9 @@ export class Combat {
     if (action.type === "attack") {
       this.playerBasicAttack();
     } else if (action.type === "skill") {
-      this.useSkill(this.player, this.enemy, catalog.skills.get(this.player.ref.skills[action.slot]));
+      const skill = catalog.skills.get(this.player.ref.skills[action.slot]);
+      this.useSkill(this.player, this.enemy, skill);
+      runAbilities(this, "onSkill", { skillId: skill.id });
     } else if (action.type === "item") {
       this.useItem(action.itemId);
     }
@@ -201,7 +204,7 @@ export class Combat {
   }
 
   startTurn(side) {
-    const { poisonDamage, stunned } = beginAction(side);
+    const { poisonDamage, bleedDamage, stunned } = beginAction(side);
 
     if (poisonDamage > 0) {
       const before = side.ref.hp;
@@ -213,6 +216,14 @@ export class Combat {
         amount: poisonDamage,
       });
       this.afterDamage(side, before);
+    }
+
+    if (!this.result && bleedDamage > 0) {
+      this.dealFixedDamage(side, bleedDamage, "출혈");
+    }
+
+    if (!this.result && side.kind === "player") {
+      runAbilities(this, "onTurnStart");
     }
 
     if (!this.result && stunned) {
@@ -274,14 +285,6 @@ export class Combat {
 
   // ---------- 기습·전투 시작 ----------
 
-  applyCombatStartHeal() {
-    const amount = this.player.profile.modifiers.combatStartHeal;
-
-    if (amount > 0) {
-      this.heal(this.player, amount, "전투 시작 회복");
-    }
-  }
-
   resolveSurprise() {
     if (!this.surprise) {
       return;
@@ -326,7 +329,9 @@ export class Combat {
     const weapon = this.player.ref.equipment.weapon
       ? catalog.equipment.get(this.player.ref.equipment.weapon)
       : null;
-    const bonus = profile.modifiers.basicAttackBonus + this.player.buffs.basicAttackBonus;
+    const bonus = profile.modifiers.basicAttackBonus
+      + this.player.buffs.basicAttackBonus
+      + lowHpBonus(this.player, "basicAttackBonus");
     const base = roundValue((weapon ? weapon.damage : COMBAT.unarmedDamage) + bonus);
     const stat = weapon ? profile.stats[weapon.stat] : 0;
     const multipliers = [];
@@ -342,21 +347,13 @@ export class Combat {
       label: isSurprise ? "기습 공격" : weapon ? `${josa(weapon.name, "으로/로")} 공격` : "맨손 공격",
     });
 
-    if (hit.tier.multiplier > 0 && !this.result) {
-      for (const poison of profile.modifiers.onHitPoison) {
-        if (this.dice.chance(poison.chance)) {
-          this.inflict(this.enemy, {
-            type: "poison",
-            amount: roundValue(poison.amount * hit.tier.multiplier),
-            duration: poison.duration,
-          }, this.player);
-        }
-      }
+    if (hit.damage > 0 && !this.result) {
+      runAbilities(this, "onHit");
     }
   }
 
   basicAttack(attacker, defender, { base, stat = 0, multipliers = [], label }) {
-    const roll = rollTier(this.dice, { critMin: this.critMinOf(attacker) });
+    const roll = rollTier(this.dice, { critMin: this.critMinOf(attacker), missBonus: this.evadeOf(defender) });
     this.log(attacker.kind, `${attacker.name} — ${label}`, describeRoll(roll));
     const damage = this.dealDamage(attacker, defender, { base, stat, tier: roll.tier, multipliers, roll: roll.roll });
     return { tier: roll.tier, damage };
@@ -366,7 +363,7 @@ export class Combat {
     const isPlayer = user.kind === "player";
     const statKey = skill.stat === "main" ? user.mainStat : skill.stat;
     const stat = isPlayer ? user.profile.stats[statKey] : 0;
-    const roll = rollTier(this.dice, { critMin: this.critMinOf(user) });
+    const roll = rollTier(this.dice, { critMin: this.critMinOf(user), missBonus: this.evadeOf(target) });
     const cooldown = Math.max(1, skill.cooldown - (isPlayer ? user.profile.modifiers.cooldownReduction : 0));
 
     user.cooldowns.set(skill.id, cooldown);
@@ -456,7 +453,8 @@ export class Combat {
       multipliers.push({ value: this.trait.firstStrikeMultiplier, label: "선공" });
     }
 
-    const total = roundValue(base + (isPlayer ? user.profile.modifiers.skillDamageBonus : 0));
+    const bonus = isPlayer ? user.profile.modifiers.skillDamageBonus + lowHpBonus(user, "skillDamageBonus") : 0;
+    const total = roundValue(base + bonus);
     this.dealDamage(user, target, { base: total, stat, tier, multipliers, roll });
   }
 
@@ -513,7 +511,56 @@ export class Combat {
         : { target: defender.kind, type: "miss", tier: tier.id },
     );
     this.afterDamage(defender, before);
+
+    if (final > 0 && !this.result) {
+      this.afterHit(attacker, defender, { final, tier });
+    }
+
     return final;
+  }
+
+  // 피해를 준 뒤의 장비 능력: 흡혈·치명타 시 발동(공격자가 플레이어), 반사·피격 시 발동(맞은 쪽이 플레이어)
+  afterHit(attacker, defender, { final, tier }) {
+    if (attacker.kind === "player") {
+      const lifesteal = roundValue(final * attacker.profile.modifiers.lifesteal / 100);
+
+      if (lifesteal > 0) {
+        this.heal(attacker, lifesteal, "흡혈", { quiet: true });
+      }
+
+      if (tier.id === "critical") {
+        runAbilities(this, "onCrit");
+      }
+
+      return;
+    }
+
+    const reflect = defender.profile.modifiers.reflect;
+
+    if (reflect > 0) {
+      this.dealFixedDamage(attacker, reflect, "반사");
+    }
+
+    if (!this.result) {
+      runAbilities(this, "onHurt");
+    }
+  }
+
+  // 판정 없이 정해진 피해(출혈·반사 등). 피해 감소를 무시한다.
+  dealFixedDamage(target, amount, source) {
+    if (amount <= 0 || this.result) {
+      return;
+    }
+
+    const before = target.ref.hp;
+    target.ref.hp = Math.max(0, roundValue(target.ref.hp - amount));
+    this.log("status", `→ ${source}: ${josa(target.name, "이/가")} ${fmt(amount)} 피해를 입었다.`, "", {
+      target: target.kind,
+      type: "damage",
+      tier: "low",
+      amount,
+    });
+    this.afterDamage(target, before);
   }
 
   afterDamage(side, hpBefore) {
@@ -524,6 +571,7 @@ export class Combat {
     if (this.player.ref.hp <= 0) {
       this.finish("defeat");
     } else if (this.enemy.ref.hp <= 0) {
+      runAbilities(this, "onKill");
       this.finish("victory");
     }
   }
@@ -544,11 +592,17 @@ export class Combat {
     }
   }
 
-  heal(side, amount, source) {
+  // quiet: 장비 능력처럼 자동으로 일어나는 회복은 HP가 가득 차 있으면 출력하지 않는다.
+  heal(side, amount, source, { quiet = false } = {}) {
     const maxHp = side.kind === "player" ? side.profile.maxHp : side.ref.maxHp;
     const before = side.ref.hp;
     side.ref.hp = Math.min(maxHp, roundValue(side.ref.hp + amount));
     const healed = roundValue(side.ref.hp - before);
+
+    if (quiet && healed <= 0) {
+      return;
+    }
+
     this.log("heal", `→ ${side.name} HP ${fmt(healed)} 회복 (${source})`, "", { target: side.kind, type: "heal", amount: healed });
   }
 
@@ -562,7 +616,10 @@ export class Combat {
     }
 
     const value = spec.amount ? ` ${fmt(spec.amount)}` : spec.multiplier ? ` ×${spec.multiplier}` : "";
-    this.log("status", `→ ${target.name}: ${label}${value} ${spec.duration}턴${outcome.refreshed ? " (갱신)" : ""}`, "", {
+    const text = outcome.stacked !== undefined
+      ? `→ ${target.name}: ${label} +${fmt(spec.amount)} (쌓인 출혈 ${fmt(outcome.stacked)})`
+      : `→ ${target.name}: ${label}${value} ${spec.duration}턴${outcome.refreshed ? " (갱신)" : ""}`;
+    this.log("status", text, "", {
       target: target.kind,
       type: "status",
       label,
@@ -592,6 +649,10 @@ export class Combat {
 
   critMinOf(side) {
     return side.kind === "player" ? side.profile.modifiers.critMin : undefined;
+  }
+
+  evadeOf(side) {
+    return side.kind === "player" ? side.profile.modifiers.evade : 0;
   }
 
   reductionOf(side) {

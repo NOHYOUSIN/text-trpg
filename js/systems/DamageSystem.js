@@ -1,14 +1,23 @@
-import { COMBAT, DICE, EFFECT_TIERS } from "../data/rules.js?v=20261012-005505";
-import { clamp, formatNumber as fmt, roundValue } from "./NumberRules.js?v=20261012-005505";
+import { COMBAT, DICE, EFFECT_TIERS } from "../data/rules.js?v=20261012-011118";
+import { clamp, formatNumber as fmt, roundValue } from "./NumberRules.js?v=20261012-011118";
 
 const CRITICAL = EFFECT_TIERS.find((tier) => tier.id === "critical");
+const NONE = EFFECT_TIERS.find((tier) => tier.id === "none");
 
 // 5단계 판정: 굴린 값 + 보정(최대치 제한)을 1~20으로 자르고 단계를 정한다.
-export function rollTier(dice, { modifier = 0, critMin = CRITICAL.min } = {}) {
+// critMin: 공격하는 쪽의 치명타 시작 값, missBonus: 맞는 쪽의 회피(빗나감 구간 확대)
+export function rollTier(dice, { modifier = 0, critMin = CRITICAL.min, missBonus = 0 } = {}) {
   const roll = dice.rollD20();
   const appliedModifier = clamp(modifier, -DICE.maxModifier, DICE.maxModifier);
   const total = clamp(roll + appliedModifier, 1, DICE.sides);
-  const tier = total >= critMin ? CRITICAL : getTierByValue(total);
+  let tier = getTierByValue(total);
+
+  if (total >= critMin) {
+    tier = CRITICAL;
+  } else if (total <= NONE.max + missBonus) {
+    tier = NONE;
+  }
+
   return { roll, modifier: appliedModifier, total, tier };
 }
 

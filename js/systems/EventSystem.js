@@ -1,7 +1,7 @@
-import { DICE, EXPLORE_DIFFICULTIES } from "../data/rules.js?v=20261012-005505";
-import { catalog } from "../data/catalog.js?v=20261012-005505";
-import { parseToken } from "./EffectParser.js?v=20261012-005505";
-import { clamp } from "./NumberRules.js?v=20261012-005505";
+import { DICE, EXPLORE_DIFFICULTIES } from "../data/rules.js?v=20261012-011118";
+import { catalog } from "../data/catalog.js?v=20261012-011118";
+import { parseToken } from "./EffectParser.js?v=20261012-011118";
+import { clamp } from "./NumberRules.js?v=20261012-011118";
 
 export const OUTCOME_LABELS = Object.freeze({
   fail: "실패",

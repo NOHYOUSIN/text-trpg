@@ -1,6 +1,6 @@
-import { STATUS } from "../data/rules.js?v=20261012-005505";
-import { STATUS_LABELS } from "./EffectParser.js?v=20261012-005505";
-import { formatNumber as fmt } from "./NumberRules.js?v=20261012-005505";
+import { STATUS } from "../data/rules.js?v=20261012-011118";
+import { STATUS_LABELS } from "./EffectParser.js?v=20261012-011118";
+import { formatNumber as fmt } from "./NumberRules.js?v=20261012-011118";
 
 // 상태이상과 지속 효과. 지속시간은 효과를 받은 쪽의 행동 횟수로 센다.
 // combatant: { statuses: [], stunImmunity: 0, immune: Set }
@@ -16,7 +16,15 @@ export function applyStatus(target, spec, { appliedBySelf = false } = {}) {
 
   const existing = target.statuses.find((status) => status.type === spec.type);
 
-  // 같은 상태이상은 누적하지 않고 긴 지속시간으로 갱신한다.
+  // 출혈은 쌓인다: 수치를 더하고 지속시간을 처음으로 되돌린다.
+  if (existing && spec.type === "bleed") {
+    existing.amount += spec.amount;
+    existing.duration = spec.duration;
+    existing.appliedThisAction = existing.appliedThisAction || appliedBySelf;
+    return { applied: true, refreshed: true, stacked: existing.amount };
+  }
+
+  // 그 밖의 상태이상은 누적하지 않고 긴 지속시간으로 갱신한다.
   if (existing) {
     existing.duration = Math.max(existing.duration, spec.duration);
     existing.amount = Math.max(existing.amount ?? 0, spec.amount ?? 0);
@@ -60,9 +68,10 @@ export function getEmpowerAmount(target) {
   return getStatus(target, "empower")?.amount ?? 0;
 }
 
-// 행동 직전: 독 피해량과 기절 여부를 알려 준다. 기절이면 기절을 소모하고 면역을 준다.
+// 행동 직전: 독·출혈 피해량과 기절 여부를 알려 준다. 기절이면 기절을 소모하고 면역을 준다.
 export function beginAction(target) {
   const poison = getStatus(target, "poison");
+  const bleed = getStatus(target, "bleed");
   const stun = getStatus(target, "stun");
 
   // 기절은 건너뛴 행동마다 1씩 줄고, 풀리면 면역을 얻는다.
@@ -78,6 +87,7 @@ export function beginAction(target) {
 
   return {
     poisonDamage: poison ? poison.amount : 0,
+    bleedDamage: bleed ? bleed.amount : 0,
     stunned: Boolean(stun),
   };
 }

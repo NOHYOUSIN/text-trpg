@@ -111,3 +111,16 @@ export const SHOP = Object.freeze({
   // 스킬 가격 범위 (장비·소모품은 데이터의 price 사용)
   skillPrice: { common: 30, uncommon: 40, rare: 50 },
 });
+
+// 장비·패시브 추가 능력 (2026-10-12)
+export const ABILITY = Object.freeze({
+  // 합친 값의 상한
+  maxChance: 50, // 발동 확률(%)
+  maxCrit: 3, // 치명타 범위 증가량 (기본 19~20 → 최대 16~20)
+  maxEvade: 3, // 상대 빗나감 구간 증가량 (기본 1~2 → 최대 1~5)
+  maxLifesteal: 20, // 준 피해 중 회복 비율(%)
+  // 출혈: 새로 쌓일 때마다 지속시간을 이 값으로 되돌린다.
+  bleedDuration: 2,
+  // HP가 최대 HP의 이 비율 이하이면 lowHp 조건이 켜진다.
+  lowHpRatio: 0.5,
+});

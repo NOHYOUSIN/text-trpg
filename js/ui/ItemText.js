@@ -1,6 +1,7 @@
-import { catalog } from "../data/catalog.js?v=20261012-005505";
-import { parseToken } from "../systems/EffectParser.js?v=20261012-005505";
-import { formatNumber as fmt } from "../systems/NumberRules.js?v=20261012-005505";
+import { catalog } from "../data/catalog.js?v=20261012-011118";
+import { parseAbility } from "../systems/AbilitySystem.js?v=20261012-011118";
+import { parseToken } from "../systems/EffectParser.js?v=20261012-011118";
+import { formatNumber as fmt } from "../systems/NumberRules.js?v=20261012-011118";
 
 // 장비·스킬·소모품의 수치를 한 줄 설명으로 만든다. (선택 판단용)
 const STAT_LABELS = { str: "힘", agi: "민첩", wis: "지혜", main: "주 능력치" };
@@ -14,9 +15,48 @@ const SKILL_TYPE_LABELS = {
   passive: "패시브",
 };
 
+const TRIGGER_LABELS = {
+  onHit: "기본공격 적중 시",
+  onCrit: "치명타 시",
+  onSkill: "스킬 사용 시",
+  onHurt: "피격 시",
+  onBattleStart: "전투 시작 시",
+  onTurnStart: "내 턴 시작 시",
+  onKill: "적 처치 시",
+  lowHp: "HP 절반 이하일 때",
+};
+
+// "조건 > 효과" 능력 한 줄 설명
+function describeAbility({ trigger, chance, effect }) {
+  const { key, args } = effect;
+  const [a, b] = args;
+  const head = `${TRIGGER_LABELS[trigger] ?? trigger}${chance < 100 ? ` ${chance}% 확률로` : ""}`;
+  const body = {
+    poison: () => `독 ${fmt(Number(a))} (${b}턴)`,
+    bleed: () => `출혈 ${fmt(Number(a))} 쌓기`,
+    stun: () => "기절",
+    weaken: () => `약화(주는 피해 ×${a}) ${b}턴`,
+    vulnerable: () => `취약(받는 피해 ×${a}) ${b}턴`,
+    guard: () => `방어 ${fmt(Number(a))} (${b}턴)`,
+    empower: () => `강화 ${fmt(Number(a))} (${b}턴)`,
+    heal: () => `HP ${fmt(Number(a))} 회복`,
+    damage: () => `추가 피해 ${fmt(Number(a))}`,
+    cooldown: () => `그 스킬 대기 ${a}`,
+    basicAttackBonus: () => `기본공격 피해 +${fmt(Number(a))}`,
+    skillDamageBonus: () => `스킬 피해 +${fmt(Number(a))}`,
+  }[key];
+  return `${head} ${body ? body() : key}`;
+}
+
 export function describeEffectToken(token) {
+  const ability = parseAbility(token);
+
+  if (ability) {
+    return describeAbility(ability);
+  }
+
   const { key, args } = parseToken(token);
-  const [a, b, c] = args;
+  const [a, b] = args;
 
   if (STAT_LABELS[key]) {
     return `${STAT_LABELS[key]} +${fmt(Number(a))}`;
@@ -47,18 +87,22 @@ export function describeEffectToken(token) {
       return `연결 능력치 × ${b} 피해 감소`;
     case "cooldownReduction":
       return `모든 스킬 대기 -${a}`;
-    case "onHitPoison":
-      return `기본공격 명중 시 ${a}% 확률로 독 ${fmt(Number(b))} × ${c}턴`;
     case "immune":
       return a === "poison" ? "독 면역" : `${a} 면역`;
     case "maxHp":
       return `최대 HP +${fmt(Number(a))}`;
     case "exploreBonus":
       return `탐험 판정 +${a}`;
-    case "combatStartHeal":
-      return `전투 시작 시 HP ${fmt(Number(a))} 회복`;
-    case "critRange":
-      return `치명타 ${a}~20`;
+    case "crit":
+      return `치명타 범위 +${a}`;
+    case "evade":
+      return `회피 +${a}`;
+    case "reflect":
+      return `피격 시 반사 ${fmt(Number(a))}`;
+    case "lifesteal":
+      return `준 피해의 ${a}% 회복`;
+    case "bleed":
+      return `출혈 ${fmt(Number(a))} 쌓기`;
     default:
       return token;
   }

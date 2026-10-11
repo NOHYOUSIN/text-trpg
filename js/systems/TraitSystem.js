@@ -1,10 +1,10 @@
-import { catalog } from "../data/catalog.js?v=20261012-005505";
-import { CLASS_TRAITS, EFFECT_TIERS } from "../data/rules.js?v=20261012-005505";
-import { parseEffects } from "./EffectParser.js?v=20261012-005505";
-import { roundValue } from "./NumberRules.js?v=20261012-005505";
+import { catalog } from "../data/catalog.js?v=20261012-011118";
+import { CLASS_TRAITS } from "../data/rules.js?v=20261012-011118";
+import { capEvade, capLifesteal, critMinFrom, parseAbility } from "./AbilitySystem.js?v=20261012-011118";
+import { parseToken } from "./EffectParser.js?v=20261012-011118";
+import { roundValue } from "./NumberRules.js?v=20261012-011118";
 
 const STAT_KEYS = ["str", "agi", "wis"];
-const DEFAULT_CRIT_MIN = EFFECT_TIERS.find((tier) => tier.id === "critical").min;
 
 // 장착 장비와 패시브 스킬의 효과를 모은다.
 export function collectModifiers(adventurer) {
@@ -16,11 +16,16 @@ export function collectModifiers(adventurer) {
     basicAttackBonus: 0,
     skillDamageBonus: 0,
     cooldownReduction: 0,
-    onHitPoison: [],
     immune: new Set(),
     exploreBonus: 0,
-    combatStartHeal: 0,
-    critMin: DEFAULT_CRIT_MIN,
+    // 합친 뒤 상한을 적용하는 값
+    crit: 0,
+    evade: 0,
+    reflect: 0,
+    lifesteal: 0,
+    // "조건 > 효과" 능력 목록 (AbilitySystem)
+    abilities: [],
+    critMin: 0,
   };
 
   const sources = [];
@@ -38,23 +43,32 @@ export function collectModifiers(adventurer) {
 
     modifiers.damageReduction += item.damageReduction;
     modifiers.maxHp += item.maxHp;
-    sources.push({ effects: item.effects, stat: item.stat });
+    sources.push({ effects: item.effects, stat: item.stat, name: item.name });
   }
 
   for (const skillId of adventurer.skills) {
     const skill = skillId ? catalog.skills.get(skillId) : null;
 
     if (skill?.type === "passive") {
-      sources.push({ effects: skill.effects, stat: skill.stat });
+      sources.push({ effects: skill.effects, stat: skill.stat, name: skill.name });
     }
   }
 
   for (const source of sources) {
-    for (const effect of parseEffects(source.effects)) {
-      applyEffect(modifiers, effect, source.stat);
+    for (const token of source.effects) {
+      const ability = parseAbility(token, source.name);
+
+      if (ability) {
+        modifiers.abilities.push(ability);
+      } else {
+        applyEffect(modifiers, parseToken(token), source.stat);
+      }
     }
   }
 
+  modifiers.critMin = critMinFrom(modifiers.crit);
+  modifiers.evade = capEvade(modifiers.evade);
+  modifiers.lifesteal = capLifesteal(modifiers.lifesteal);
   return modifiers;
 }
 
@@ -82,11 +96,11 @@ function applyEffect(modifiers, { key, args }, sourceStat) {
     case "exploreBonus":
       modifiers.exploreBonus += value;
       break;
-    case "combatStartHeal":
-      modifiers.combatStartHeal += value;
-      break;
-    case "critRange":
-      modifiers.critMin = Math.min(modifiers.critMin, value);
+    case "crit":
+    case "evade":
+    case "reflect":
+    case "lifesteal":
+      modifiers[key] += value;
       break;
     case "immune":
       modifiers.immune.add(args[0]);
@@ -94,13 +108,6 @@ function applyEffect(modifiers, { key, args }, sourceStat) {
     case "damageReduction":
       // damageReduction:stat:0.4 → 연결 능력치 × 0.4
       modifiers.reductionByStat.push({ stat: sourceStat, ratio: Number(args[1]) });
-      break;
-    case "onHitPoison":
-      modifiers.onHitPoison.push({
-        chance: Number(args[0]),
-        amount: Number(args[1]),
-        duration: Number(args[2]),
-      });
       break;
     default:
       break;

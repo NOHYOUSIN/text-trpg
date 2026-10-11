@@ -1,3 +1,5 @@
+import { ABILITY } from "../data/rules.js?v=20261012-011118";
+
 // 시트 표기("poison:0.3:3" 등)를 해석한다.
 
 export function parseToken(token) {
@@ -16,6 +18,8 @@ export function toStatusSpec({ key, args }) {
       return { type: "poison", amount: Number(args[0]), duration: Number(args[1]) };
     case "stun":
       return { type: "stun", duration: Number(args[0]) };
+    case "bleed":
+      return { type: "bleed", amount: Number(args[0]), duration: ABILITY.bleedDuration };
     case "weaken":
       return { type: "weaken", multiplier: Number(args[0]), duration: Number(args[1]) };
     case "vulnerable":
@@ -31,6 +35,7 @@ export function toStatusSpec({ key, args }) {
 
 export const STATUS_LABELS = Object.freeze({
   poison: "독",
+  bleed: "출혈",
   stun: "기절",
   weaken: "약화",
   vulnerable: "취약",

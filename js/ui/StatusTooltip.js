@@ -1,11 +1,13 @@
-import { STATUS_LABELS } from "../systems/EffectParser.js?v=20261012-005505";
-import { formatNumber as fmt } from "../systems/NumberRules.js?v=20261012-005505";
+import { STATUS_LABELS } from "../systems/EffectParser.js?v=20261012-011118";
+import { formatNumber as fmt } from "../systems/NumberRules.js?v=20261012-011118";
 
 // 상태이상 이름 옆에 보여 줄 짧은 표시와, 마우스를 올렸을 때 보여 줄 설명.
 function effectText(status) {
   switch (status.type) {
     case "poison":
       return `행동하기 직전마다 ${fmt(status.amount)} 피해를 입는다. 피해 감소로 막을 수 없다.`;
+    case "bleed":
+      return `행동하기 직전마다 ${fmt(status.amount)} 피해를 입는다. 적중할 때마다 쌓이고, 새로 쌓이지 않으면 사라진다. 피해 감소로 막을 수 없다.`;
     case "stun":
       return "다음 행동을 건너뛴다. 풀린 직후 1회는 다시 기절하지 않는다.";
     case "weaken":
