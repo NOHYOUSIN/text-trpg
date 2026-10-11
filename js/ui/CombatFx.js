@@ -1,5 +1,5 @@
-import { formatNumber as fmt } from "../systems/NumberRules.js?v=20261012-011118";
-import { isTextEffectEnabled } from "./TextEffect.js?v=20261012-011118";
+import { formatNumber as fmt } from "../systems/NumberRules.js?v=20261012-012115";
+import { isTextEffectEnabled } from "./TextEffect.js?v=20261012-012115";
 
 // 전투 연출: 판정 결과에 따라 정보 칸을 흔들고, 피해·회복 숫자와 상태 이름을 띄운다.
 // 연출 효과를 끄면 아무것도 하지 않는다. 흔들림은 CSS에서 동작 줄이기 설정을 따른다.

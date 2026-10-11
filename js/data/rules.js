@@ -124,3 +124,14 @@ export const ABILITY = Object.freeze({
   // HP가 최대 HP의 이 비율 이하이면 lowHp 조건이 켜진다.
   lowHpRatio: 0.5,
 });
+
+// 사건 선택지 노출 (2026-10-11 확정 → 2026-10-12 구현)
+export const EVENT_CHOICES = Object.freeze({
+  // 한 번에 보여 줄 선택지 수("지나친다" 포함)
+  minShown: 4,
+  maxShown: 5,
+  // 실제로 고를 수 있는 선택지 최소 수("지나친다" 제외)
+  minSelectable: 2,
+  // 같은 group의 사건은 최근 이 횟수의 사건 안에 다시 나오지 않는다.
+  recentGroupExclusion: 3,
+});

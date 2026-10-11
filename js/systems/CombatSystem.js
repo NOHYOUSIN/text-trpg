@@ -1,11 +1,11 @@
-import { catalog } from "../data/catalog.js?v=20261012-011118";
-import { COMBAT, DICE } from "../data/rules.js?v=20261012-011118";
-import { Enemy } from "../models/Enemy.js?v=20261012-011118";
-import { lowHpBonus, runAbilities } from "./AbilitySystem.js?v=20261012-011118";
-import { applyReduction, computeEffect, describeCalculation, describeRoll, rollTier } from "./DamageSystem.js?v=20261012-011118";
-import { parseEffects, parseToken, STATUS_LABELS, toStatusSpec } from "./EffectParser.js?v=20261012-011118";
-import { josa } from "./Josa.js?v=20261012-011118";
-import { clamp, formatNumber as fmt, roundValue } from "./NumberRules.js?v=20261012-011118";
+import { catalog } from "../data/catalog.js?v=20261012-012115";
+import { COMBAT, DICE } from "../data/rules.js?v=20261012-012115";
+import { Enemy } from "../models/Enemy.js?v=20261012-012115";
+import { lowHpBonus, runAbilities } from "./AbilitySystem.js?v=20261012-012115";
+import { applyReduction, computeEffect, describeCalculation, describeRoll, rollTier } from "./DamageSystem.js?v=20261012-012115";
+import { parseEffects, parseToken, STATUS_LABELS, toStatusSpec } from "./EffectParser.js?v=20261012-012115";
+import { josa } from "./Josa.js?v=20261012-012115";
+import { clamp, formatNumber as fmt, roundValue } from "./NumberRules.js?v=20261012-012115";
 import {
   applyStatus,
   beginAction,
@@ -16,8 +16,8 @@ import {
   getGuardAmount,
   getTakenMultiplier,
   removeStatus,
-} from "./StatusSystem.js?v=20261012-011118";
-import { getClassTrait, getProfile } from "./TraitSystem.js?v=20261012-011118";
+} from "./StatusSystem.js?v=20261012-012115";
+import { getClassTrait, getProfile } from "./TraitSystem.js?v=20261012-012115";
 
 const SELF_EFFECTS = new Set(["guard", "empower", "cleanse"]);
 // 효과량을 자신에게 거는 스킬: 방어(받는 피해 감소), 강화(주는 피해 증가)

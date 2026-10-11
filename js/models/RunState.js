@@ -7,6 +7,7 @@ export class RunState {
     flags = [],
     seenEvents = [],
     recentPlaces = [],
+    recentEventGroups = [],
     seenUniques = [],
     defeatedBosses = [],
     enemiesDefeated = 0,
@@ -18,6 +19,8 @@ export class RunState {
     this.flags = new Set(flags);
     this.seenEvents = new Set(seenEvents);
     this.recentPlaces = [...recentPlaces];
+    // 최근 라운드에 나온 사건 묶음(group). 비슷한 사건이 연달아 나오지 않게 한다.
+    this.recentEventGroups = [...recentEventGroups];
     this.seenUniques = new Set(seenUniques);
     this.defeatedBosses = [...defeatedBosses];
     this.enemiesDefeated = enemiesDefeated;
@@ -41,6 +44,15 @@ export class RunState {
     }
   }
 
+  // 사건이 나온 라운드마다 묶음을 기록한다(묶음이 없으면 빈칸으로 자리만 채운다).
+  rememberEventGroup(group, keep) {
+    this.recentEventGroups.push(group ?? "");
+
+    while (this.recentEventGroups.length > keep) {
+      this.recentEventGroups.shift();
+    }
+  }
+
   toJSON() {
     return {
       dungeonId: this.dungeonId,
@@ -49,6 +61,7 @@ export class RunState {
       flags: [...this.flags],
       seenEvents: [...this.seenEvents],
       recentPlaces: [...this.recentPlaces],
+      recentEventGroups: [...this.recentEventGroups],
       seenUniques: [...this.seenUniques],
       defeatedBosses: [...this.defeatedBosses],
       enemiesDefeated: this.enemiesDefeated,

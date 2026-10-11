@@ -1,6 +1,6 @@
-import { ABILITY } from "../data/rules.js?v=20261012-011118";
-import { parseToken, toStatusSpec } from "./EffectParser.js?v=20261012-011118";
-import { clamp } from "./NumberRules.js?v=20261012-011118";
+import { ABILITY } from "../data/rules.js?v=20261012-012115";
+import { parseToken, toStatusSpec } from "./EffectParser.js?v=20261012-012115";
+import { clamp } from "./NumberRules.js?v=20261012-012115";
 
 // 장비·패시브 스킬의 "조건 > 효과" 능력.
 // 표기: "onHit>bleed:1", "onSkill@30>cooldown:-1" (@ 뒤는 발동 확률 %)

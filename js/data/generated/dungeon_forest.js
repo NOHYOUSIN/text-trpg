@@ -137,7 +137,8 @@ export const dungeonForestData = {
         "evt_grateful_parent",
         "evt_hunter_return",
         "evt_ancient_tome",
-        "evt_fallen_mage"
+        "evt_fallen_mage",
+        "evt_hunters_storehouse"
       ]
     },
     {
@@ -250,7 +251,8 @@ export const dungeonForestData = {
         "evt_drunk_bandit",
         "evt_abandoned_cart",
         "evt_grateful_parent",
-        "evt_wandering_swordsman"
+        "evt_wandering_swordsman",
+        "evt_hunters_storehouse"
       ]
     },
     {
@@ -291,12 +293,15 @@ export const dungeonForestData = {
       "repeatable": false,
       "requiresFlags": [],
       "forbiddenFlags": [],
+      "group": "",
       "choices": [
         {
           "id": "force_lid",
           "order": 1,
           "text": "뚜껑을 억지로 비틀어 연다",
+          "verb": "",
           "condition": [],
+          "skillBonus": [],
           "difficulty": "normal",
           "outcomes": {
             "fail": {
@@ -325,7 +330,9 @@ export const dungeonForestData = {
           "id": "inspect_gap",
           "order": 2,
           "text": "틈을 살펴 장치를 풀어 본다",
+          "verb": "",
           "condition": [],
+          "skillBonus": [],
           "difficulty": "hard",
           "outcomes": {
             "fail": {
@@ -353,7 +360,9 @@ export const dungeonForestData = {
           "id": "leave_chest",
           "order": 3,
           "text": "그냥 지나친다",
+          "verb": "",
           "condition": [],
+          "skillBonus": [],
           "difficulty": "none",
           "outcomes": {
             "success": {
@@ -372,12 +381,15 @@ export const dungeonForestData = {
       "repeatable": false,
       "requiresFlags": [],
       "forbiddenFlags": [],
+      "group": "",
       "choices": [
         {
           "id": "tend_wound",
           "order": 1,
           "text": "상처를 치료해 준다",
+          "verb": "",
           "condition": [],
+          "skillBonus": [],
           "difficulty": "easy",
           "outcomes": {
             "fail": {
@@ -403,9 +415,11 @@ export const dungeonForestData = {
           "id": "give_potion",
           "order": 2,
           "text": "회복약을 나눠 준다",
+          "verb": "",
           "condition": [
             "item:con_potion"
           ],
+          "skillBonus": [],
           "difficulty": "none",
           "outcomes": {
             "success": {
@@ -422,7 +436,9 @@ export const dungeonForestData = {
           "id": "search_belongings",
           "order": 3,
           "text": "짐을 뒤진다",
+          "verb": "",
           "condition": [],
+          "skillBonus": [],
           "difficulty": "normal",
           "outcomes": {
             "fail": {
@@ -456,12 +472,15 @@ export const dungeonForestData = {
       "repeatable": false,
       "requiresFlags": [],
       "forbiddenFlags": [],
+      "group": "",
       "choices": [
         {
           "id": "listen_voice",
           "order": 1,
           "text": "귀를 기울인다",
+          "verb": "",
           "condition": [],
+          "skillBonus": [],
           "difficulty": "normal",
           "outcomes": {
             "fail": {
@@ -486,7 +505,9 @@ export const dungeonForestData = {
           "id": "drink_spring",
           "order": 2,
           "text": "샘물을 마신다",
+          "verb": "",
           "condition": [],
+          "skillBonus": [],
           "difficulty": "easy",
           "outcomes": {
             "fail": {
@@ -513,7 +534,9 @@ export const dungeonForestData = {
           "id": "cover_ears",
           "order": 3,
           "text": "귀를 막고 지나간다",
+          "verb": "",
           "condition": [],
+          "skillBonus": [],
           "difficulty": "none",
           "outcomes": {
             "success": {
@@ -532,14 +555,17 @@ export const dungeonForestData = {
       "repeatable": false,
       "requiresFlags": [],
       "forbiddenFlags": [],
+      "group": "",
       "choices": [
         {
           "id": "pay_toll",
           "order": 1,
           "text": "통행료를 낸다 (골드 5)",
+          "verb": "",
           "condition": [
             "gold:5"
           ],
+          "skillBonus": [],
           "difficulty": "none",
           "outcomes": {
             "success": {
@@ -554,7 +580,9 @@ export const dungeonForestData = {
           "id": "fight_bandit",
           "order": 2,
           "text": "맞서 싸운다",
+          "verb": "",
           "condition": [],
+          "skillBonus": [],
           "difficulty": "none",
           "outcomes": {
             "success": {
@@ -569,7 +597,9 @@ export const dungeonForestData = {
           "id": "sneak_around",
           "order": 3,
           "text": "덤불 속으로 몰래 돌아간다",
+          "verb": "",
           "condition": [],
+          "skillBonus": [],
           "difficulty": "hard",
           "outcomes": {
             "fail": {
@@ -600,12 +630,15 @@ export const dungeonForestData = {
       "repeatable": false,
       "requiresFlags": [],
       "forbiddenFlags": [],
+      "group": "",
       "choices": [
         {
           "id": "pray_altar",
           "order": 1,
           "text": "무릎 꿇고 기도한다",
+          "verb": "",
           "condition": [],
+          "skillBonus": [],
           "difficulty": "easy",
           "outcomes": {
             "fail": {
@@ -630,9 +663,11 @@ export const dungeonForestData = {
           "id": "offer_gold",
           "order": 2,
           "text": "동전을 바친다 (골드 3)",
+          "verb": "",
           "condition": [
             "gold:3"
           ],
+          "skillBonus": [],
           "difficulty": "normal",
           "outcomes": {
             "fail": {
@@ -661,7 +696,9 @@ export const dungeonForestData = {
           "id": "take_coins",
           "order": 3,
           "text": "동전을 챙긴다",
+          "verb": "",
           "condition": [],
+          "skillBonus": [],
           "difficulty": "normal",
           "outcomes": {
             "fail": {
@@ -696,12 +733,15 @@ export const dungeonForestData = {
       "repeatable": true,
       "requiresFlags": [],
       "forbiddenFlags": [],
+      "group": "",
       "choices": [
         {
           "id": "wriggle_free",
           "order": 1,
           "text": "몸을 비틀어 빠져나온다",
+          "verb": "",
           "condition": [],
+          "skillBonus": [],
           "difficulty": "normal",
           "outcomes": {
             "fail": {
@@ -726,7 +766,9 @@ export const dungeonForestData = {
           "id": "cut_rope",
           "order": 2,
           "text": "칼로 줄을 끊는다",
+          "verb": "",
           "condition": [],
+          "skillBonus": [],
           "difficulty": "easy",
           "outcomes": {
             "fail": {
@@ -759,12 +801,15 @@ export const dungeonForestData = {
       "repeatable": false,
       "requiresFlags": [],
       "forbiddenFlags": [],
+      "group": "",
       "choices": [
         {
           "id": "search_bundle",
           "order": 1,
           "text": "꾸러미를 뒤진다",
+          "verb": "",
           "condition": [],
+          "skillBonus": [],
           "difficulty": "normal",
           "outcomes": {
             "fail": {
@@ -792,7 +837,9 @@ export const dungeonForestData = {
           "id": "read_note",
           "order": 2,
           "text": "쪽지만 읽고 지나간다",
+          "verb": "",
           "condition": [],
+          "skillBonus": [],
           "difficulty": "none",
           "outcomes": {
             "success": {
@@ -813,12 +860,15 @@ export const dungeonForestData = {
       "repeatable": false,
       "requiresFlags": [],
       "forbiddenFlags": [],
+      "group": "",
       "choices": [
         {
           "id": "strip_armor",
           "order": 1,
           "text": "쓸 만한 장비를 챙긴다",
+          "verb": "",
           "condition": [],
+          "skillBonus": [],
           "difficulty": "hard",
           "outcomes": {
             "fail": {
@@ -845,7 +895,9 @@ export const dungeonForestData = {
           "id": "bury_knight",
           "order": 2,
           "text": "기사를 묻어 준다",
+          "verb": "",
           "condition": [],
+          "skillBonus": [],
           "difficulty": "easy",
           "outcomes": {
             "fail": {
@@ -873,7 +925,9 @@ export const dungeonForestData = {
           "id": "leave_knight",
           "order": 3,
           "text": "그대로 지나친다",
+          "verb": "",
           "condition": [],
+          "skillBonus": [],
           "difficulty": "none",
           "outcomes": {
             "success": {
@@ -892,12 +946,15 @@ export const dungeonForestData = {
       "repeatable": false,
       "requiresFlags": [],
       "forbiddenFlags": [],
+      "group": "",
       "choices": [
         {
           "id": "free_cub",
           "order": 1,
           "text": "올가미를 풀어 준다",
+          "verb": "",
           "condition": [],
+          "skillBonus": [],
           "difficulty": "normal",
           "outcomes": {
             "fail": {
@@ -925,7 +982,9 @@ export const dungeonForestData = {
           "id": "take_snare",
           "order": 2,
           "text": "올가미 줄만 챙긴다",
+          "verb": "",
           "condition": [],
+          "skillBonus": [],
           "difficulty": "none",
           "outcomes": {
             "success": {
@@ -940,7 +999,9 @@ export const dungeonForestData = {
           "id": "ignore_cub",
           "order": 3,
           "text": "못 본 척 지나간다",
+          "verb": "",
           "condition": [],
+          "skillBonus": [],
           "difficulty": "none",
           "outcomes": {
             "success": {
@@ -959,12 +1020,15 @@ export const dungeonForestData = {
       "repeatable": false,
       "requiresFlags": [],
       "forbiddenFlags": [],
+      "group": "",
       "choices": [
         {
           "id": "eat_mushroom",
           "order": 1,
           "text": "버섯을 하나 먹어 본다",
+          "verb": "",
           "condition": [],
+          "skillBonus": [],
           "difficulty": "normal",
           "outcomes": {
             "fail": {
@@ -991,7 +1055,9 @@ export const dungeonForestData = {
           "id": "pick_mushroom",
           "order": 2,
           "text": "버섯을 따서 챙긴다",
+          "verb": "",
           "condition": [],
+          "skillBonus": [],
           "difficulty": "easy",
           "outcomes": {
             "fail": {
@@ -1016,7 +1082,9 @@ export const dungeonForestData = {
           "id": "avoid_ring",
           "order": 3,
           "text": "원 밖으로 돌아간다",
+          "verb": "",
           "condition": [],
+          "skillBonus": [],
           "difficulty": "none",
           "outcomes": {
             "success": {
@@ -1035,14 +1103,17 @@ export const dungeonForestData = {
       "repeatable": true,
       "requiresFlags": [],
       "forbiddenFlags": [],
+      "group": "",
       "choices": [
         {
           "id": "buy_potion",
           "order": 1,
           "text": "회복약을 산다 (골드 8)",
+          "verb": "",
           "condition": [
             "gold:8"
           ],
+          "skillBonus": [],
           "difficulty": "none",
           "outcomes": {
             "success": {
@@ -1058,9 +1129,11 @@ export const dungeonForestData = {
           "id": "haggle_price",
           "order": 2,
           "text": "값을 깎아 본다 (골드 4)",
+          "verb": "",
           "condition": [
             "gold:4"
           ],
+          "skillBonus": [],
           "difficulty": "normal",
           "outcomes": {
             "fail": {
@@ -1087,7 +1160,9 @@ export const dungeonForestData = {
           "id": "ask_way",
           "order": 3,
           "text": "길만 묻고 지나간다",
+          "verb": "",
           "condition": [],
+          "skillBonus": [],
           "difficulty": "none",
           "outcomes": {
             "success": {
@@ -1106,14 +1181,17 @@ export const dungeonForestData = {
       "repeatable": false,
       "requiresFlags": [],
       "forbiddenFlags": [],
+      "group": "",
       "choices": [
         {
           "id": "toss_coin",
           "order": 1,
           "text": "동전을 던져 소원을 빈다 (골드 3)",
+          "verb": "",
           "condition": [
             "gold:3"
           ],
+          "skillBonus": [],
           "difficulty": "normal",
           "outcomes": {
             "fail": {
@@ -1142,7 +1220,9 @@ export const dungeonForestData = {
           "id": "peer_well",
           "order": 2,
           "text": "몸을 숙여 들여다본다",
+          "verb": "",
           "condition": [],
+          "skillBonus": [],
           "difficulty": "hard",
           "outcomes": {
             "fail": {
@@ -1167,7 +1247,9 @@ export const dungeonForestData = {
           "id": "leave_well",
           "order": 3,
           "text": "우물을 지나친다",
+          "verb": "",
           "condition": [],
+          "skillBonus": [],
           "difficulty": "none",
           "outcomes": {
             "success": {
@@ -1186,12 +1268,15 @@ export const dungeonForestData = {
       "repeatable": false,
       "requiresFlags": [],
       "forbiddenFlags": [],
+      "group": "",
       "choices": [
         {
           "id": "burn_web",
           "order": 1,
           "text": "거미줄을 불로 태운다",
+          "verb": "",
           "condition": [],
+          "skillBonus": [],
           "difficulty": "easy",
           "outcomes": {
             "fail": {
@@ -1219,7 +1304,9 @@ export const dungeonForestData = {
           "id": "push_inside",
           "order": 2,
           "text": "거미줄을 헤치고 들어간다",
+          "verb": "",
           "condition": [],
+          "skillBonus": [],
           "difficulty": "hard",
           "outcomes": {
             "fail": {
@@ -1246,7 +1333,9 @@ export const dungeonForestData = {
           "id": "avoid_nest",
           "order": 3,
           "text": "멀찍이 돌아간다",
+          "verb": "",
           "condition": [],
+          "skillBonus": [],
           "difficulty": "none",
           "outcomes": {
             "success": {
@@ -1265,12 +1354,15 @@ export const dungeonForestData = {
       "repeatable": false,
       "requiresFlags": [],
       "forbiddenFlags": [],
+      "group": "",
       "choices": [
         {
           "id": "point_way",
           "order": 1,
           "text": "마을 방향을 알려 준다",
+          "verb": "",
           "condition": [],
+          "skillBonus": [],
           "difficulty": "easy",
           "outcomes": {
             "fail": {
@@ -1296,7 +1388,9 @@ export const dungeonForestData = {
           "id": "escort_child",
           "order": 2,
           "text": "숲 어귀까지 데려다준다",
+          "verb": "",
           "condition": [],
+          "skillBonus": [],
           "difficulty": "none",
           "outcomes": {
             "success": {
@@ -1313,7 +1407,9 @@ export const dungeonForestData = {
           "id": "ignore_child",
           "order": 3,
           "text": "모른 척 지나간다",
+          "verb": "",
           "condition": [],
+          "skillBonus": [],
           "difficulty": "none",
           "outcomes": {
             "success": {
@@ -1332,14 +1428,17 @@ export const dungeonForestData = {
       "repeatable": false,
       "requiresFlags": [],
       "forbiddenFlags": [],
+      "group": "",
       "choices": [
         {
           "id": "throw_food",
           "order": 1,
           "text": "회복약을 던져 준다",
+          "verb": "",
           "condition": [
             "item:con_potion"
           ],
+          "skillBonus": [],
           "difficulty": "none",
           "outcomes": {
             "success": {
@@ -1354,7 +1453,9 @@ export const dungeonForestData = {
           "id": "fight_goblins",
           "order": 2,
           "text": "무기를 뽑는다",
+          "verb": "",
           "condition": [],
+          "skillBonus": [],
           "difficulty": "none",
           "outcomes": {
             "success": {
@@ -1369,7 +1470,9 @@ export const dungeonForestData = {
           "id": "threaten_goblins",
           "order": 3,
           "text": "크게 소리쳐 위협한다",
+          "verb": "",
           "condition": [],
+          "skillBonus": [],
           "difficulty": "hard",
           "outcomes": {
             "fail": {
@@ -1402,12 +1505,15 @@ export const dungeonForestData = {
       "forbiddenFlags": [
         "foundTrailClue"
       ],
+      "group": "",
       "choices": [
         {
           "id": "follow_tracks",
           "order": 1,
           "text": "발자국을 따라간다",
+          "verb": "",
           "condition": [],
+          "skillBonus": [],
           "difficulty": "normal",
           "outcomes": {
             "fail": {
@@ -1435,7 +1541,9 @@ export const dungeonForestData = {
           "id": "ignore_tracks",
           "order": 2,
           "text": "발자국을 무시한다",
+          "verb": "",
           "condition": [],
+          "skillBonus": [],
           "difficulty": "none",
           "outcomes": {
             "success": {
@@ -1456,12 +1564,15 @@ export const dungeonForestData = {
         "foundTrailClue"
       ],
       "forbiddenFlags": [],
+      "group": "",
       "choices": [
         {
           "id": "dig_roots",
           "order": 1,
           "text": "뿌리 사이를 파 본다",
+          "verb": "",
           "condition": [],
+          "skillBonus": [],
           "difficulty": "none",
           "outcomes": {
             "success": {
@@ -1477,7 +1588,9 @@ export const dungeonForestData = {
           "id": "erase_marker",
           "order": 2,
           "text": "표식을 지우고 떠난다",
+          "verb": "",
           "condition": [],
+          "skillBonus": [],
           "difficulty": "none",
           "outcomes": {
             "success": {
@@ -1498,12 +1611,15 @@ export const dungeonForestData = {
       "repeatable": false,
       "requiresFlags": [],
       "forbiddenFlags": [],
+      "group": "",
       "choices": [
         {
           "id": "wait_shelter",
           "order": 1,
           "text": "나무 아래에서 비를 피한다",
+          "verb": "",
           "condition": [],
+          "skillBonus": [],
           "difficulty": "none",
           "outcomes": {
             "success": {
@@ -1518,7 +1634,9 @@ export const dungeonForestData = {
           "id": "push_through",
           "order": 2,
           "text": "비를 뚫고 나아간다",
+          "verb": "",
           "condition": [],
+          "skillBonus": [],
           "difficulty": "normal",
           "outcomes": {
             "fail": {
@@ -1549,12 +1667,15 @@ export const dungeonForestData = {
       "repeatable": false,
       "requiresFlags": [],
       "forbiddenFlags": [],
+      "group": "",
       "choices": [
         {
           "id": "touch_stone",
           "order": 1,
           "text": "홈에 손바닥을 얹는다",
+          "verb": "",
           "condition": [],
+          "skillBonus": [],
           "difficulty": "hard",
           "outcomes": {
             "fail": {
@@ -1581,7 +1702,9 @@ export const dungeonForestData = {
           "id": "listen_stone",
           "order": 2,
           "text": "귀를 대고 듣는다",
+          "verb": "",
           "condition": [],
+          "skillBonus": [],
           "difficulty": "easy",
           "outcomes": {
             "fail": {
@@ -1604,7 +1727,9 @@ export const dungeonForestData = {
           "id": "leave_stone",
           "order": 3,
           "text": "바위에서 떨어진다",
+          "verb": "",
           "condition": [],
+          "skillBonus": [],
           "difficulty": "none",
           "outcomes": {
             "success": {
@@ -1623,12 +1748,15 @@ export const dungeonForestData = {
       "repeatable": false,
       "requiresFlags": [],
       "forbiddenFlags": [],
+      "group": "",
       "choices": [
         {
           "id": "search_camp",
           "order": 1,
           "text": "남은 짐을 뒤진다",
+          "verb": "",
           "condition": [],
+          "skillBonus": [],
           "difficulty": "normal",
           "outcomes": {
             "fail": {
@@ -1656,7 +1784,9 @@ export const dungeonForestData = {
           "id": "warm_up",
           "order": 2,
           "text": "남은 불씨로 몸을 녹인다",
+          "verb": "",
           "condition": [],
+          "skillBonus": [],
           "difficulty": "none",
           "outcomes": {
             "success": {
@@ -1671,7 +1801,9 @@ export const dungeonForestData = {
           "id": "leave_camp",
           "order": 3,
           "text": "서둘러 자리를 뜬다",
+          "verb": "",
           "condition": [],
+          "skillBonus": [],
           "difficulty": "none",
           "outcomes": {
             "success": {
@@ -1692,12 +1824,15 @@ export const dungeonForestData = {
         "savedWolfCub"
       ],
       "forbiddenFlags": [],
+      "group": "",
       "choices": [
         {
           "id": "bow_head",
           "order": 1,
           "text": "고개를 숙이고 기다린다",
+          "verb": "",
           "condition": [],
+          "skillBonus": [],
           "difficulty": "none",
           "outcomes": {
             "success": {
@@ -1712,7 +1847,9 @@ export const dungeonForestData = {
           "id": "pass_quietly",
           "order": 2,
           "text": "조용히 지나간다",
+          "verb": "",
           "condition": [],
+          "skillBonus": [],
           "difficulty": "none",
           "outcomes": {
             "success": {
@@ -1735,12 +1872,15 @@ export const dungeonForestData = {
         "buriedFallenKnight"
       ],
       "forbiddenFlags": [],
+      "group": "",
       "choices": [
         {
           "id": "receive_blessing",
           "order": 1,
           "text": "축복을 받는다",
+          "verb": "",
           "condition": [],
+          "skillBonus": [],
           "difficulty": "none",
           "outcomes": {
             "success": {
@@ -1755,7 +1895,9 @@ export const dungeonForestData = {
           "id": "ask_teaching",
           "order": 2,
           "text": "가르침을 청한다",
+          "verb": "",
           "condition": [],
+          "skillBonus": [],
           "difficulty": "normal",
           "outcomes": {
             "fail": {
@@ -1788,12 +1930,15 @@ export const dungeonForestData = {
         "guidedLostChild"
       ],
       "forbiddenFlags": [],
+      "group": "",
       "choices": [
         {
           "id": "accept_reward",
           "order": 1,
           "text": "보답을 받는다",
+          "verb": "",
           "condition": [],
+          "skillBonus": [],
           "difficulty": "none",
           "outcomes": {
             "success": {
@@ -1809,7 +1954,9 @@ export const dungeonForestData = {
           "id": "decline_reward",
           "order": 2,
           "text": "사양한다",
+          "verb": "",
           "condition": [],
+          "skillBonus": [],
           "difficulty": "none",
           "outcomes": {
             "success": {
@@ -1832,12 +1979,15 @@ export const dungeonForestData = {
         "heardStoneWhisper"
       ],
       "forbiddenFlags": [],
+      "group": "",
       "choices": [
         {
           "id": "call_name",
           "order": 1,
           "text": "그 이름을 부른다",
+          "verb": "",
           "condition": [],
+          "skillBonus": [],
           "difficulty": "hard",
           "outcomes": {
             "fail": {
@@ -1864,7 +2014,9 @@ export const dungeonForestData = {
           "id": "cover_ears_again",
           "order": 2,
           "text": "귀를 막는다",
+          "verb": "",
           "condition": [],
+          "skillBonus": [],
           "difficulty": "none",
           "outcomes": {
             "success": {
@@ -1885,12 +2037,15 @@ export const dungeonForestData = {
         "readHunterNote"
       ],
       "forbiddenFlags": [],
+      "group": "",
       "choices": [
         {
           "id": "tell_traps",
           "order": 1,
           "text": "덫이 있던 곳을 알려 준다",
+          "verb": "",
           "condition": [],
+          "skillBonus": [],
           "difficulty": "none",
           "outcomes": {
             "success": {
@@ -1905,7 +2060,9 @@ export const dungeonForestData = {
           "id": "join_hunt",
           "order": 2,
           "text": "사냥을 돕는다",
+          "verb": "",
           "condition": [],
+          "skillBonus": [],
           "difficulty": "normal",
           "outcomes": {
             "fail": {
@@ -1938,12 +2095,15 @@ export const dungeonForestData = {
       "repeatable": false,
       "requiresFlags": [],
       "forbiddenFlags": [],
+      "group": "",
       "choices": [
         {
           "id": "cross_bridge",
           "order": 1,
           "text": "다리를 건넌다",
+          "verb": "",
           "condition": [],
+          "skillBonus": [],
           "difficulty": "normal",
           "outcomes": {
             "fail": {
@@ -1970,7 +2130,9 @@ export const dungeonForestData = {
           "id": "wade_stream",
           "order": 2,
           "text": "개울을 걸어서 건넌다",
+          "verb": "",
           "condition": [],
+          "skillBonus": [],
           "difficulty": "none",
           "outcomes": {
             "success": {
@@ -1991,12 +2153,15 @@ export const dungeonForestData = {
       "repeatable": false,
       "requiresFlags": [],
       "forbiddenFlags": [],
+      "group": "",
       "choices": [
         {
           "id": "scrape_moss",
           "order": 1,
           "text": "이끼를 긁어 모은다",
+          "verb": "",
           "condition": [],
+          "skillBonus": [],
           "difficulty": "easy",
           "outcomes": {
             "fail": {
@@ -2021,7 +2186,9 @@ export const dungeonForestData = {
           "id": "eat_moss",
           "order": 2,
           "text": "이끼를 먹어 본다",
+          "verb": "",
           "condition": [],
+          "skillBonus": [],
           "difficulty": "hard",
           "outcomes": {
             "fail": {
@@ -2052,12 +2219,15 @@ export const dungeonForestData = {
       "repeatable": false,
       "requiresFlags": [],
       "forbiddenFlags": [],
+      "group": "",
       "choices": [
         {
           "id": "scare_crows",
           "order": 1,
           "text": "까마귀를 쫓아낸다",
+          "verb": "",
           "condition": [],
+          "skillBonus": [],
           "difficulty": "normal",
           "outcomes": {
             "fail": {
@@ -2082,7 +2252,9 @@ export const dungeonForestData = {
           "id": "watch_crows",
           "order": 2,
           "text": "멀리서 지켜본다",
+          "verb": "",
           "condition": [],
+          "skillBonus": [],
           "difficulty": "none",
           "outcomes": {
             "success": {
@@ -2101,12 +2273,15 @@ export const dungeonForestData = {
       "repeatable": false,
       "requiresFlags": [],
       "forbiddenFlags": [],
+      "group": "",
       "choices": [
         {
           "id": "reach_inside",
           "order": 1,
           "text": "통나무 안에 손을 넣는다",
+          "verb": "",
           "condition": [],
+          "skillBonus": [],
           "difficulty": "normal",
           "outcomes": {
             "fail": {
@@ -2133,7 +2308,9 @@ export const dungeonForestData = {
           "id": "kick_log",
           "order": 2,
           "text": "통나무를 걷어찬다",
+          "verb": "",
           "condition": [],
+          "skillBonus": [],
           "difficulty": "none",
           "outcomes": {
             "success": {
@@ -2152,12 +2329,15 @@ export const dungeonForestData = {
       "repeatable": false,
       "requiresFlags": [],
       "forbiddenFlags": [],
+      "group": "",
       "choices": [
         {
           "id": "steal_purse",
           "order": 1,
           "text": "몰래 지갑을 턴다",
+          "verb": "",
           "condition": [],
+          "skillBonus": [],
           "difficulty": "hard",
           "outcomes": {
             "fail": {
@@ -2184,7 +2364,9 @@ export const dungeonForestData = {
           "id": "wake_threaten",
           "order": 2,
           "text": "깨워서 겁을 준다",
+          "verb": "",
           "condition": [],
+          "skillBonus": [],
           "difficulty": "normal",
           "outcomes": {
             "fail": {
@@ -2209,7 +2391,9 @@ export const dungeonForestData = {
           "id": "leave_drunk",
           "order": 3,
           "text": "그냥 내버려 둔다",
+          "verb": "",
           "condition": [],
+          "skillBonus": [],
           "difficulty": "none",
           "outcomes": {
             "success": {
@@ -2228,12 +2412,15 @@ export const dungeonForestData = {
       "repeatable": false,
       "requiresFlags": [],
       "forbiddenFlags": [],
+      "group": "",
       "choices": [
         {
           "id": "drink_tea",
           "order": 1,
           "text": "차를 얻어 마신다",
+          "verb": "",
           "condition": [],
+          "skillBonus": [],
           "difficulty": "none",
           "outcomes": {
             "success": {
@@ -2248,9 +2435,11 @@ export const dungeonForestData = {
           "id": "buy_herbs",
           "order": 2,
           "text": "해독초를 산다 (골드 6)",
+          "verb": "",
           "condition": [
             "gold:6"
           ],
+          "skillBonus": [],
           "difficulty": "none",
           "outcomes": {
             "success": {
@@ -2266,7 +2455,9 @@ export const dungeonForestData = {
           "id": "hear_tale",
           "order": 3,
           "text": "숲 이야기를 듣는다",
+          "verb": "",
           "condition": [],
+          "skillBonus": [],
           "difficulty": "easy",
           "outcomes": {
             "fail": {
@@ -2295,12 +2486,15 @@ export const dungeonForestData = {
       "repeatable": false,
       "requiresFlags": [],
       "forbiddenFlags": [],
+      "group": "",
       "choices": [
         {
           "id": "hunt_wolf",
           "order": 1,
           "text": "발자국을 따라가 덮친다",
+          "verb": "",
           "condition": [],
+          "skillBonus": [],
           "difficulty": "none",
           "outcomes": {
             "success": {
@@ -2315,7 +2509,9 @@ export const dungeonForestData = {
           "id": "avoid_tracks",
           "order": 2,
           "text": "발자국을 피해 돌아간다",
+          "verb": "",
           "condition": [],
+          "skillBonus": [],
           "difficulty": "none",
           "outcomes": {
             "success": {
@@ -2334,12 +2530,15 @@ export const dungeonForestData = {
       "repeatable": false,
       "requiresFlags": [],
       "forbiddenFlags": [],
+      "group": "",
       "choices": [
         {
           "id": "search_cart",
           "order": 1,
           "text": "짐칸을 뒤진다",
+          "verb": "",
           "condition": [],
+          "skillBonus": [],
           "difficulty": "normal",
           "outcomes": {
             "fail": {
@@ -2366,7 +2565,9 @@ export const dungeonForestData = {
           "id": "fix_wheel",
           "order": 2,
           "text": "바퀴를 끼워 준다",
+          "verb": "",
           "condition": [],
+          "skillBonus": [],
           "difficulty": "hard",
           "outcomes": {
             "fail": {
@@ -2397,12 +2598,15 @@ export const dungeonForestData = {
       "repeatable": false,
       "requiresFlags": [],
       "forbiddenFlags": [],
+      "group": "",
       "choices": [
         {
           "id": "wash_body",
           "order": 1,
           "text": "몸을 씻는다",
+          "verb": "",
           "condition": [],
+          "skillBonus": [],
           "difficulty": "none",
           "outcomes": {
             "success": {
@@ -2417,9 +2621,11 @@ export const dungeonForestData = {
           "id": "toss_coin_pond",
           "order": 2,
           "text": "동전을 던진다 (골드 2)",
+          "verb": "",
           "condition": [
             "gold:2"
           ],
+          "skillBonus": [],
           "difficulty": "easy",
           "outcomes": {
             "fail": {
@@ -2454,12 +2660,15 @@ export const dungeonForestData = {
       "repeatable": false,
       "requiresFlags": [],
       "forbiddenFlags": [],
+      "group": "",
       "choices": [
         {
           "id": "pick_flowers",
           "order": 1,
           "text": "꽃을 꺾어 간다",
+          "verb": "",
           "condition": [],
+          "skillBonus": [],
           "difficulty": "normal",
           "outcomes": {
             "fail": {
@@ -2484,7 +2693,9 @@ export const dungeonForestData = {
           "id": "hold_breath",
           "order": 2,
           "text": "숨을 참고 빠르게 지나간다",
+          "verb": "",
           "condition": [],
+          "skillBonus": [],
           "difficulty": "easy",
           "outcomes": {
             "fail": {
@@ -2515,12 +2726,15 @@ export const dungeonForestData = {
       "repeatable": false,
       "requiresFlags": [],
       "forbiddenFlags": [],
+      "group": "",
       "choices": [
         {
           "id": "disrupt_ritual",
           "order": 1,
           "text": "주술을 방해한다",
+          "verb": "",
           "condition": [],
+          "skillBonus": [],
           "difficulty": "hard",
           "outcomes": {
             "fail": {
@@ -2546,7 +2760,9 @@ export const dungeonForestData = {
           "id": "attack_shaman",
           "order": 2,
           "text": "기습한다",
+          "verb": "",
           "condition": [],
+          "skillBonus": [],
           "difficulty": "none",
           "outcomes": {
             "success": {
@@ -2561,7 +2777,9 @@ export const dungeonForestData = {
           "id": "back_away",
           "order": 3,
           "text": "물러난다",
+          "verb": "",
           "condition": [],
+          "skillBonus": [],
           "difficulty": "none",
           "outcomes": {
             "success": {
@@ -2580,12 +2798,15 @@ export const dungeonForestData = {
       "repeatable": false,
       "requiresFlags": [],
       "forbiddenFlags": [],
+      "group": "",
       "choices": [
         {
           "id": "stack_stone",
           "order": 1,
           "text": "돌을 하나 더 얹는다",
+          "verb": "",
           "condition": [],
+          "skillBonus": [],
           "difficulty": "easy",
           "outcomes": {
             "fail": {
@@ -2610,7 +2831,9 @@ export const dungeonForestData = {
           "id": "topple_stones",
           "order": 2,
           "text": "돌무더기를 무너뜨린다",
+          "verb": "",
           "condition": [],
+          "skillBonus": [],
           "difficulty": "normal",
           "outcomes": {
             "fail": {
@@ -2641,14 +2864,17 @@ export const dungeonForestData = {
       "repeatable": false,
       "requiresFlags": [],
       "forbiddenFlags": [],
+      "group": "",
       "choices": [
         {
           "id": "give_potion_soldier",
           "order": 1,
           "text": "회복약을 건넨다",
+          "verb": "",
           "condition": [
             "item:con_potion"
           ],
+          "skillBonus": [],
           "difficulty": "none",
           "outcomes": {
             "success": {
@@ -2664,7 +2890,9 @@ export const dungeonForestData = {
           "id": "bandage_soldier",
           "order": 2,
           "text": "붕대를 감아 준다",
+          "verb": "",
           "condition": [],
+          "skillBonus": [],
           "difficulty": "easy",
           "outcomes": {
             "fail": {
@@ -2690,7 +2918,9 @@ export const dungeonForestData = {
           "id": "rob_soldier",
           "order": 3,
           "text": "장비를 빼앗는다",
+          "verb": "",
           "condition": [],
+          "skillBonus": [],
           "difficulty": "normal",
           "outcomes": {
             "fail": {
@@ -2723,12 +2953,15 @@ export const dungeonForestData = {
       "repeatable": false,
       "requiresFlags": [],
       "forbiddenFlags": [],
+      "group": "",
       "choices": [
         {
           "id": "pray_strange",
           "order": 1,
           "text": "낯선 신에게 기도한다",
+          "verb": "",
           "condition": [],
+          "skillBonus": [],
           "difficulty": "normal",
           "outcomes": {
             "fail": {
@@ -2753,9 +2986,11 @@ export const dungeonForestData = {
           "id": "offer_coins",
           "order": 2,
           "text": "제물을 바친다 (골드 5)",
+          "verb": "",
           "condition": [
             "gold:5"
           ],
+          "skillBonus": [],
           "difficulty": "none",
           "outcomes": {
             "success": {
@@ -2771,7 +3006,9 @@ export const dungeonForestData = {
           "id": "leave_shrine",
           "order": 3,
           "text": "그냥 지나간다",
+          "verb": "",
           "condition": [],
+          "skillBonus": [],
           "difficulty": "none",
           "outcomes": {
             "success": {
@@ -2790,12 +3027,15 @@ export const dungeonForestData = {
       "repeatable": false,
       "requiresFlags": [],
       "forbiddenFlags": [],
+      "group": "",
       "choices": [
         {
           "id": "press_on_fog",
           "order": 1,
           "text": "조심스럽게 나아간다",
+          "verb": "",
           "condition": [],
+          "skillBonus": [],
           "difficulty": "normal",
           "outcomes": {
             "fail": {
@@ -2820,7 +3060,9 @@ export const dungeonForestData = {
           "id": "wait_fog",
           "order": 2,
           "text": "안개가 걷히기를 기다린다",
+          "verb": "",
           "condition": [],
+          "skillBonus": [],
           "difficulty": "none",
           "outcomes": {
             "success": {
@@ -2841,12 +3083,15 @@ export const dungeonForestData = {
       "repeatable": false,
       "requiresFlags": [],
       "forbiddenFlags": [],
+      "group": "",
       "choices": [
         {
           "id": "spar_swordsman",
           "order": 1,
           "text": "대련을 청한다",
+          "verb": "",
           "condition": [],
+          "skillBonus": [],
           "difficulty": "normal",
           "outcomes": {
             "fail": {
@@ -2873,9 +3118,11 @@ export const dungeonForestData = {
           "id": "pay_lesson",
           "order": 2,
           "text": "가르침을 청한다 (골드 15)",
+          "verb": "",
           "condition": [
             "gold:15"
           ],
+          "skillBonus": [],
           "difficulty": "none",
           "outcomes": {
             "success": {
@@ -2891,7 +3138,9 @@ export const dungeonForestData = {
           "id": "decline_spar",
           "order": 3,
           "text": "정중히 사양한다",
+          "verb": "",
           "condition": [],
+          "skillBonus": [],
           "difficulty": "none",
           "outcomes": {
             "success": {
@@ -2910,12 +3159,15 @@ export const dungeonForestData = {
       "repeatable": false,
       "requiresFlags": [],
       "forbiddenFlags": [],
+      "group": "",
       "choices": [
         {
           "id": "study_tome",
           "order": 1,
           "text": "자리에 앉아 읽어 본다",
+          "verb": "",
           "condition": [],
+          "skillBonus": [],
           "difficulty": "normal",
           "outcomes": {
             "fail": {
@@ -2940,7 +3192,9 @@ export const dungeonForestData = {
           "id": "sell_tome",
           "order": 2,
           "text": "책을 챙겨 둔다",
+          "verb": "",
           "condition": [],
+          "skillBonus": [],
           "difficulty": "none",
           "outcomes": {
             "success": {
@@ -2961,12 +3215,15 @@ export const dungeonForestData = {
       "repeatable": false,
       "requiresFlags": [],
       "forbiddenFlags": [],
+      "group": "",
       "choices": [
         {
           "id": "train_together",
           "order": 1,
           "text": "함께 수련한다",
+          "verb": "",
           "condition": [],
+          "skillBonus": [],
           "difficulty": "easy",
           "outcomes": {
             "fail": {
@@ -2991,7 +3248,9 @@ export const dungeonForestData = {
           "id": "ask_advice",
           "order": 2,
           "text": "조언을 구한다",
+          "verb": "",
           "condition": [],
+          "skillBonus": [],
           "difficulty": "none",
           "outcomes": {
             "success": {
@@ -3012,12 +3271,15 @@ export const dungeonForestData = {
       "repeatable": false,
       "requiresFlags": [],
       "forbiddenFlags": [],
+      "group": "",
       "choices": [
         {
           "id": "observe_beast",
           "order": 1,
           "text": "숨죽여 관찰한다",
+          "verb": "",
           "condition": [],
+          "skillBonus": [],
           "difficulty": "hard",
           "outcomes": {
             "fail": {
@@ -3042,7 +3304,9 @@ export const dungeonForestData = {
           "id": "leave_beast",
           "order": 2,
           "text": "조용히 물러난다",
+          "verb": "",
           "condition": [],
+          "skillBonus": [],
           "difficulty": "none",
           "outcomes": {
             "success": {
@@ -3061,12 +3325,15 @@ export const dungeonForestData = {
       "repeatable": false,
       "requiresFlags": [],
       "forbiddenFlags": [],
+      "group": "",
       "choices": [
         {
           "id": "take_trial",
           "order": 1,
           "text": "시험을 받는다",
+          "verb": "",
           "condition": [],
+          "skillBonus": [],
           "difficulty": "hard",
           "outcomes": {
             "fail": {
@@ -3093,7 +3360,9 @@ export const dungeonForestData = {
           "id": "read_only",
           "order": 2,
           "text": "글귀만 읽고 지나간다",
+          "verb": "",
           "condition": [],
+          "skillBonus": [],
           "difficulty": "none",
           "outcomes": {
             "success": {
@@ -3112,14 +3381,17 @@ export const dungeonForestData = {
       "repeatable": false,
       "requiresFlags": [],
       "forbiddenFlags": [],
+      "group": "",
       "choices": [
         {
           "id": "give_potion_mage",
           "order": 1,
           "text": "회복약을 건넨다",
+          "verb": "",
           "condition": [
             "item:con_potion"
           ],
+          "skillBonus": [],
           "difficulty": "none",
           "outcomes": {
             "success": {
@@ -3135,7 +3407,9 @@ export const dungeonForestData = {
           "id": "tend_mage",
           "order": 2,
           "text": "상처를 살펴 준다",
+          "verb": "",
           "condition": [],
+          "skillBonus": [],
           "difficulty": "easy",
           "outcomes": {
             "fail": {
@@ -3160,11 +3434,318 @@ export const dungeonForestData = {
           "id": "leave_mage",
           "order": 3,
           "text": "지나친다",
+          "verb": "",
           "condition": [],
+          "skillBonus": [],
           "difficulty": "none",
           "outcomes": {
             "success": {
               "text": "등 뒤에서 지팡이의 빛이 가물거린다.",
+              "result": []
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "evt_hunters_storehouse",
+      "zone": 1,
+      "title": "사냥꾼의 창고",
+      "description": "통나무로 지은 창고의 문이 굵은 쇠사슬로 잠겨 있다. 문 옆 그루터기에서 늙은 사냥꾼이 활을 무릎에 얹고 졸고 있다.",
+      "repeatable": false,
+      "requiresFlags": [],
+      "forbiddenFlags": [],
+      "group": "locked_storage",
+      "choices": [
+        {
+          "id": "break_chain",
+          "order": 1,
+          "text": "쇠사슬째 문을 부순다",
+          "verb": "force",
+          "condition": [
+            "str:5"
+          ],
+          "skillBonus": [
+            {
+              "skillId": "skl_bash",
+              "bonus": 3
+            },
+            {
+              "skillId": "skl_heavy_swing",
+              "bonus": 3
+            }
+          ],
+          "difficulty": "normal",
+          "outcomes": {
+            "fail": {
+              "text": "문은 꿈쩍도 않고 손목만 저린다.",
+              "result": [
+                "hp:-6"
+              ]
+            },
+            "partial": {
+              "text": "문이 반쯤 부서져 손만 넣어 집었다.",
+              "result": [
+                "gold:3"
+              ]
+            },
+            "success": {
+              "text": "문짝이 통째로 넘어간다. 소란에 사냥꾼이 깼지만 이미 늦었다.",
+              "result": [
+                "item:random:consumable",
+                "gold:6"
+              ]
+            }
+          }
+        },
+        {
+          "id": "push_door",
+          "order": 2,
+          "text": "어깨로 문을 밀어 틈을 낸다",
+          "verb": "force",
+          "condition": [
+            "str:2"
+          ],
+          "skillBonus": [],
+          "difficulty": "easy",
+          "outcomes": {
+            "fail": {
+              "text": "어깨만 욱신거린다.",
+              "result": [
+                "hp:-3"
+              ]
+            },
+            "partial": {
+              "text": "틈이 조금 벌어졌지만 손이 닿지 않는다.",
+              "result": []
+            },
+            "success": {
+              "text": "벌어진 틈으로 손을 넣어 꾸러미 하나를 끌어냈다.",
+              "result": [
+                "item:random:consumable"
+              ]
+            }
+          }
+        },
+        {
+          "id": "pick_lock",
+          "order": 3,
+          "text": "쇠사슬 자물쇠를 딴다",
+          "verb": "stealth",
+          "condition": [
+            "agi:5"
+          ],
+          "skillBonus": [],
+          "difficulty": "normal",
+          "outcomes": {
+            "fail": {
+              "text": "철컥, 소리에 사냥꾼이 몸을 뒤척인다. 급히 물러났다.",
+              "result": []
+            },
+            "partial": {
+              "text": "자물쇠는 열렸지만 문이 삐걱거려 오래 머물 수 없었다.",
+              "result": [
+                "gold:4"
+              ]
+            },
+            "success": {
+              "text": "소리 없이 자물쇠가 풀렸다. 창고 안을 차분히 뒤졌다.",
+              "result": [
+                "item:random:consumable",
+                "gold:8"
+              ]
+            }
+          }
+        },
+        {
+          "id": "roof_gap",
+          "order": 4,
+          "text": "지붕 틈으로 숨어든다",
+          "verb": "stealth",
+          "condition": [
+            "agi:8"
+          ],
+          "skillBonus": [],
+          "difficulty": "easy",
+          "outcomes": {
+            "fail": {
+              "text": "썩은 판자가 꺼져 바닥에 떨어졌다.",
+              "result": [
+                "hp:-5"
+              ]
+            },
+            "partial": {
+              "text": "안으로 들어갔지만 어두워서 손에 잡히는 것만 챙겼다.",
+              "result": [
+                "gold:5"
+              ]
+            },
+            "success": {
+              "text": "지붕 틈으로 미끄러져 들어가 필요한 것만 골라 나왔다. 사냥꾼은 끝까지 모른다.",
+              "result": [
+                "item:random:consumable",
+                "gold:8"
+              ]
+            }
+          }
+        },
+        {
+          "id": "read_marks",
+          "order": 5,
+          "text": "문에 새겨진 사냥꾼 표식을 읽는다",
+          "verb": "insight",
+          "condition": [
+            "wis:2"
+          ],
+          "skillBonus": [],
+          "difficulty": "normal",
+          "outcomes": {
+            "fail": {
+              "text": "아무 뜻 없는 낙서였다.",
+              "result": []
+            },
+            "partial": {
+              "text": "근처 나무에 같은 표식이 있다. 뿌리 밑에서 동전 몇 닢을 찾았다.",
+              "result": [
+                "gold:3"
+              ]
+            },
+            "success": {
+              "text": "표식이 가리키는 바위 밑에 사냥꾼의 비상 꾸러미가 숨겨져 있었다.",
+              "result": [
+                "item:con_bandage",
+                "gold:5"
+              ]
+            }
+          }
+        },
+        {
+          "id": "burn_chain",
+          "order": 6,
+          "text": "불씨로 쇠사슬 고리를 달군다",
+          "verb": "use",
+          "condition": [
+            "skill:skl_ember"
+          ],
+          "skillBonus": [
+            {
+              "skillId": "skl_ember",
+              "bonus": 5
+            }
+          ],
+          "difficulty": "easy",
+          "outcomes": {
+            "fail": {
+              "text": "불꽃이 튀어 손등을 데었다.",
+              "result": [
+                "hp:-4"
+              ]
+            },
+            "partial": {
+              "text": "고리가 물러졌지만 끊어지지는 않았다.",
+              "result": [
+                "gold:2"
+              ]
+            },
+            "success": {
+              "text": "달궈진 고리가 툭 끊어졌다. 문이 소리 없이 열린다.",
+              "result": [
+                "item:random:consumable",
+                "gold:6"
+              ]
+            }
+          }
+        },
+        {
+          "id": "whetstone_lock",
+          "order": 7,
+          "text": "숫돌로 자물쇠를 갈아 낸다",
+          "verb": "use",
+          "condition": [
+            "item:con_whetstone"
+          ],
+          "skillBonus": [],
+          "difficulty": "none",
+          "outcomes": {
+            "success": {
+              "text": "숫돌이 닳아 없어질 즈음 자물쇠가 떨어졌다.",
+              "result": [
+                "item:-con_whetstone",
+                "item:random:consumable",
+                "gold:6"
+              ]
+            }
+          }
+        },
+        {
+          "id": "talk_hunter",
+          "order": 8,
+          "text": "사냥꾼을 깨워 사정을 이야기한다",
+          "verb": "persuade",
+          "condition": [],
+          "skillBonus": [],
+          "difficulty": "normal",
+          "outcomes": {
+            "fail": {
+              "text": "사냥꾼이 귀찮다는 듯 손을 휘저어 쫓아낸다.",
+              "result": []
+            },
+            "partial": {
+              "text": "사냥꾼이 하품을 하며 동전 몇 닢을 던져 준다.",
+              "result": [
+                "gold:3"
+              ]
+            },
+            "success": {
+              "text": "사냥꾼이 껄껄 웃으며 창고에서 회복약을 꺼내 건넨다.",
+              "result": [
+                "item:con_potion",
+                "flag:hunterFriend"
+              ]
+            }
+          }
+        },
+        {
+          "id": "threaten_hunter",
+          "order": 9,
+          "text": "활을 걷어차고 창고를 열라고 한다",
+          "verb": "threaten",
+          "condition": [],
+          "skillBonus": [],
+          "difficulty": "hard",
+          "outcomes": {
+            "fail": {
+              "text": "사냥꾼이 순식간에 화살을 쏘고 숲으로 사라졌다.",
+              "result": [
+                "hp:-10"
+              ]
+            },
+            "partial": {
+              "text": "사냥꾼이 투덜거리며 동전 주머니만 던지고 달아났다.",
+              "result": [
+                "gold:4"
+              ]
+            },
+            "success": {
+              "text": "사냥꾼이 질린 얼굴로 창고 열쇠를 내밀었다.",
+              "result": [
+                "gold:10",
+                "item:random:consumable"
+              ]
+            }
+          }
+        },
+        {
+          "id": "sneak_past",
+          "order": 10,
+          "text": "깨우지 않고 조용히 지나간다",
+          "verb": "pass",
+          "condition": [],
+          "skillBonus": [],
+          "difficulty": "none",
+          "outcomes": {
+            "success": {
+              "text": "사냥꾼의 코 고는 소리를 뒤로하고 길을 떠났다.",
               "result": []
             }
           }
