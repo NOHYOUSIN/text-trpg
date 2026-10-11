@@ -1,0 +1,157 @@
+/* 모바일 배치: 폭 900px 이하에서 상단 요약 바, 하단 버튼, 아래에서 올라오는 상태·기록 시트 */
+
+.mobile-bar,
+.mobile-dock,
+.mobile-sheet-head,
+.mobile-backdrop {
+  display: none;
+}
+
+@media (max-width: 900px) {
+  .page-shell {
+    padding: 0 12px calc(76px + env(safe-area-inset-bottom));
+  }
+
+  /* 제목은 작게 */
+  .game-header {
+    margin: 0;
+    padding: 10px 2px 6px;
+  }
+
+  .game-header .eyebrow {
+    display: none;
+  }
+
+  .game-header h1 {
+    font-size: 18px;
+  }
+
+  /* 상단 요약 바: HP · 골드 · 라운드 */
+  .mobile-bar {
+    position: sticky;
+    top: 0;
+    z-index: 6;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 14px;
+    margin: 0 -12px 10px;
+    padding: 8px 14px;
+    border-bottom: 1px solid var(--border);
+    background: rgba(20, 22, 27, 0.96);
+    font-size: 14px;
+    font-weight: 700;
+  }
+
+  .mobile-bar-item.is-low {
+    color: var(--danger);
+  }
+
+  .scene-panel {
+    padding: 18px 16px;
+    overflow: visible;
+  }
+
+  /* 상태·기록 패널은 평소 숨기고, 버튼을 누르면 아래에서 올라온다 */
+  .game-side {
+    position: fixed;
+    right: 0;
+    /* 하단 버튼 줄 바로 위까지 올라온다 */
+    bottom: calc(63px + env(safe-area-inset-bottom));
+    left: 0;
+    z-index: 8;
+    max-height: calc(100dvh - 130px);
+    padding: 0 16px 16px;
+    overflow-y: auto;
+    border-radius: 20px 20px 0 0;
+    transform: translateY(calc(100% + 80px));
+    visibility: hidden;
+    transition: transform 0.2s ease, visibility 0.2s;
+  }
+
+  body[data-mobile-panel] .game-side {
+    transform: translateY(0);
+    visibility: visible;
+  }
+
+  body[data-mobile-panel="status"] #journey,
+  body[data-mobile-panel="journey"] #status,
+  body[data-mobile-panel="journey"] .mobile-sheet-tools {
+    display: none;
+  }
+
+  .mobile-sheet-head {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 0 -16px 12px;
+    padding: 14px 16px 10px;
+    border-bottom: 1px solid var(--border);
+    background: var(--panel-soft);
+  }
+
+  .mobile-sheet-title {
+    flex: 1;
+    margin: 0;
+    font-size: 17px;
+  }
+
+  .mobile-sheet-tools .combat-button,
+  .mobile-sheet-head .combat-button {
+    padding: 8px 12px;
+    font-size: 13px;
+  }
+
+  .mobile-backdrop:not([hidden]) {
+    position: fixed;
+    inset: 0;
+    z-index: 7;
+    display: block;
+    background: rgba(0, 0, 0, 0.5);
+  }
+
+  /* 하단 버튼: 상태 / 소지품 / 기록 */
+  .mobile-dock {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 9;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    padding: 8px 12px calc(8px + env(safe-area-inset-bottom));
+    border-top: 1px solid var(--border);
+    background: rgba(20, 22, 27, 0.97);
+  }
+
+  .mobile-dock-button {
+    min-height: 46px;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    color: var(--text);
+    background: var(--panel-soft);
+    font: inherit;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+  }
+
+  .mobile-dock-button[aria-expanded="true"] {
+    border-color: var(--accent-strong);
+    color: var(--accent-strong);
+  }
+
+  .mobile-dock-button:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+  }
+}
+
+@media (max-width: 900px) and (prefers-reduced-motion: reduce) {
+  .game-side {
+    transition: none;
+  }
+}

@@ -6,9 +6,10 @@
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'">
   <meta name="referrer" content="no-referrer">
   <title>Text TRPG</title>
-  <link rel="stylesheet" href="./css/style.css?v=20261010-022808">
-  <link rel="stylesheet" href="./css/combat.css?v=20261010-022808">
-  <link rel="stylesheet" href="./css/game.css?v=20261010-022808">
+  <link rel="stylesheet" href="./css/style.css?v=20261012-003937">
+  <link rel="stylesheet" href="./css/combat.css?v=20261012-003937">
+  <link rel="stylesheet" href="./css/game.css?v=20261012-003937">
+  <link rel="stylesheet" href="./css/mobile.css?v=20261012-003937">
 </head>
 <body>
   <div class="page-shell">
@@ -20,20 +21,29 @@
       <button type="button" id="text-effect-toggle" class="combat-button" aria-pressed="true">글자 효과 켜짐</button>
     </header>
 
+    <div id="mobile-bar" class="mobile-bar" aria-live="polite"></div>
+
     <main class="game-grid">
       <section class="card scene-panel">
         <div id="scene" class="scene-root"></div>
       </section>
 
-      <aside class="card side-panel game-side">
+      <aside id="side-panel" class="card side-panel game-side">
+        <div class="mobile-sheet-head">
+          <h2 id="mobile-sheet-title" class="mobile-sheet-title">상태</h2>
+          <div id="mobile-sheet-tools" class="mobile-sheet-tools"></div>
+          <button type="button" id="mobile-sheet-close" class="combat-button">닫기</button>
+        </div>
         <div id="status" class="status-root"></div>
         <div id="journey" class="journey-root"></div>
       </aside>
     </main>
   </div>
 
+  <nav id="mobile-dock" class="mobile-dock" aria-label="모바일 메뉴"></nav>
+  <div id="mobile-backdrop" class="mobile-backdrop" hidden></div>
   <div id="overlay" class="overlay" hidden></div>
 
-  <script type="module" src="./js/main.js?v=20261010-022808"></script>
+  <script type="module" src="./js/main.js?v=20261012-003937"></script>
 </body>
 </html>
