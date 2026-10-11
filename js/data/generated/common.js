@@ -1301,7 +1301,8 @@ export const commonData = {
       "amount": 20,
       "maxStack": 3,
       "price": 10,
-      "description": "HP를 20 회복한다."
+      "description": "HP를 20 회복한다.",
+      "starter": false
     },
     {
       "id": "con_bandage",
@@ -1310,7 +1311,8 @@ export const commonData = {
       "amount": 10,
       "maxStack": 3,
       "price": 5,
-      "description": "HP를 10 회복한다."
+      "description": "HP를 10 회복한다.",
+      "starter": false
     },
     {
       "id": "con_antidote",
@@ -1319,7 +1321,8 @@ export const commonData = {
       "amount": null,
       "maxStack": 3,
       "price": 6,
-      "description": "독을 해제한다."
+      "description": "독을 해제한다.",
+      "starter": false
     },
     {
       "id": "con_whetstone",
@@ -1328,7 +1331,18 @@ export const commonData = {
       "amount": null,
       "maxStack": 3,
       "price": 8,
-      "description": "이번 전투 동안 기본공격 피해 +3."
+      "description": "이번 전투 동안 기본공격 피해 +3.",
+      "starter": false
+    },
+    {
+      "id": "con_mana_scroll",
+      "name": "마력 두루마리",
+      "effect": "damage",
+      "amount": 25,
+      "maxStack": 3,
+      "price": null,
+      "description": "마력이 담긴 두루마리. 펼치면 적에게 피해를 25 준다.",
+      "starter": true
     }
   ],
   "classes": [
@@ -1391,6 +1405,10 @@ export const commonData = {
       "startItems": [
         {
           "id": "con_potion",
+          "count": 2
+        },
+        {
+          "id": "con_mana_scroll",
           "count": 2
         }
       ],

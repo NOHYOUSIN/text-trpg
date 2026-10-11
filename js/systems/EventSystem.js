@@ -1,8 +1,8 @@
-import { DICE, EVENT_CHOICES, EXPLORE_DIFFICULTIES } from "../data/rules.js?v=20261012-030821";
-import { catalog } from "../data/catalog.js?v=20261012-030821";
-import { parseToken } from "./EffectParser.js?v=20261012-030821";
-import { clamp, formatNumber as fmt } from "./NumberRules.js?v=20261012-030821";
-import { getProfile } from "./TraitSystem.js?v=20261012-030821";
+import { DICE, EVENT_CHOICES, EXPLORE_DIFFICULTIES } from "../data/rules.js?v=20261012-031843";
+import { catalog } from "../data/catalog.js?v=20261012-031843";
+import { parseToken } from "./EffectParser.js?v=20261012-031843";
+import { clamp, formatNumber as fmt } from "./NumberRules.js?v=20261012-031843";
+import { getProfile } from "./TraitSystem.js?v=20261012-031843";
 
 const STAT_LABELS = { str: "힘", agi: "민첩", wis: "지혜" };
 

@@ -1,5 +1,5 @@
-import { catalog } from "../data/catalog.js?v=20261012-030821";
-import { BOSS_REWARD_CANDIDATES, BOSS_REWARD_GRADE, EVENT_SKILL_CHOICE, GRADE_WEIGHTS_BY_ZONE, LOOT, SKILL_POOL } from "../data/rules.js?v=20261012-030821";
+import { catalog } from "../data/catalog.js?v=20261012-031843";
+import { BOSS_REWARD_CANDIDATES, BOSS_REWARD_GRADE, EVENT_SKILL_CHOICE, GRADE_WEIGHTS_BY_ZONE, LOOT, SKILL_POOL } from "../data/rules.js?v=20261012-031843";
 
 const GRADE_ORDER = ["common", "uncommon", "rare", "unique"];
 
@@ -75,8 +75,9 @@ export function pickSkillChoices({ run, adventurer, dice }) {
   return ids;
 }
 
+// 시작 지급 전용(starter) 소모품은 보상·상점에 나오지 않는다.
 export function pickConsumable({ dice, excludeIds = [] }) {
-  return dice.pick([...catalog.consumables.values()].filter((item) => !excludeIds.includes(item.id)));
+  return dice.pick([...catalog.consumables.values()].filter((item) => !item.starter && !excludeIds.includes(item.id)));
 }
 
 // 획득 표기({ kind, id } 또는 { kind, random })를 실제 ID로 정한다.

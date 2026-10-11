@@ -1,5 +1,5 @@
-import { formatNumber as fmt } from "../systems/NumberRules.js?v=20261012-030821";
-import { getProfile } from "../systems/TraitSystem.js?v=20261012-030821";
+import { formatNumber as fmt } from "../systems/NumberRules.js?v=20261012-031843";
+import { getProfile } from "../systems/TraitSystem.js?v=20261012-031843";
 
 // 폭이 좁은 화면(모바일)에서만 쓰는 상단 요약 바와 하단 버튼.
 // 상태·기록 패널은 새로 그리지 않고, 오른쪽 패널을 아래에서 올라오는 시트로 보여 준다.

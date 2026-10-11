@@ -1,7 +1,7 @@
-import { catalog } from "../data/catalog.js?v=20261012-030821";
-import { parseAbility } from "../systems/AbilitySystem.js?v=20261012-030821";
-import { parseToken } from "../systems/EffectParser.js?v=20261012-030821";
-import { formatNumber as fmt } from "../systems/NumberRules.js?v=20261012-030821";
+import { catalog } from "../data/catalog.js?v=20261012-031843";
+import { parseAbility } from "../systems/AbilitySystem.js?v=20261012-031843";
+import { parseToken } from "../systems/EffectParser.js?v=20261012-031843";
+import { formatNumber as fmt } from "../systems/NumberRules.js?v=20261012-031843";
 
 // 장비·스킬·소모품의 수치를 한 줄 설명으로 만든다. (선택 판단용)
 // "능력치 배율" = 1 + 연결 능력치 × 5%
@@ -156,6 +156,8 @@ export function describeConsumable(item) {
 
   if (key === "heal") {
     effect = `HP ${fmt(item.amount)} 회복`;
+  } else if (key === "damage") {
+    effect = `적에게 피해 ${fmt(item.amount)} (전투 중)`;
   } else if (key === "cure") {
     effect = `${args[0] === "poison" ? "독" : args[0]} 해제 (전투 중)`;
   } else if (key === "buff") {

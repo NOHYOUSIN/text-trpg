@@ -1,11 +1,11 @@
-import { catalog } from "../data/catalog.js?v=20261012-030821";
-import { COMBAT, DICE } from "../data/rules.js?v=20261012-030821";
-import { Enemy } from "../models/Enemy.js?v=20261012-030821";
-import { capEvade, capLifesteal, critMinFrom, lowHpBonus, runAbilities } from "./AbilitySystem.js?v=20261012-030821";
-import { applyReduction, computeEffect, describeCalculation, describeRoll, rollTier } from "./DamageSystem.js?v=20261012-030821";
-import { parseEffects, parseToken, STATUS_LABELS, toStatusSpec } from "./EffectParser.js?v=20261012-030821";
-import { josa } from "./Josa.js?v=20261012-030821";
-import { clamp, formatNumber as fmt, roundValue } from "./NumberRules.js?v=20261012-030821";
+import { catalog } from "../data/catalog.js?v=20261012-031843";
+import { COMBAT, DICE } from "../data/rules.js?v=20261012-031843";
+import { Enemy } from "../models/Enemy.js?v=20261012-031843";
+import { capEvade, capLifesteal, critMinFrom, lowHpBonus, runAbilities } from "./AbilitySystem.js?v=20261012-031843";
+import { applyReduction, computeEffect, describeCalculation, describeRoll, rollTier } from "./DamageSystem.js?v=20261012-031843";
+import { parseEffects, parseToken, STATUS_LABELS, toStatusSpec } from "./EffectParser.js?v=20261012-031843";
+import { josa } from "./Josa.js?v=20261012-031843";
+import { clamp, formatNumber as fmt, roundValue } from "./NumberRules.js?v=20261012-031843";
 import {
   applyStatus,
   beginAction,
@@ -16,8 +16,8 @@ import {
   getGuardAmount,
   getTakenMultiplier,
   removeStatus,
-} from "./StatusSystem.js?v=20261012-030821";
-import { getClassTrait, getProfile } from "./TraitSystem.js?v=20261012-030821";
+} from "./StatusSystem.js?v=20261012-031843";
+import { getClassTrait, getProfile } from "./TraitSystem.js?v=20261012-031843";
 
 const SELF_EFFECTS = new Set(["guard", "empower", "cleanse"]);
 // 효과량을 자신에게 거는 스킬: 방어(받는 피해 감소), 강화(주는 피해 증가)
@@ -471,6 +471,8 @@ export class Combat {
 
     if (key === "heal") {
       this.heal(this.player, item.amount, item.name);
+    } else if (key === "damage") {
+      this.dealItemDamage(this.enemy, item);
     } else if (key === "cure") {
       removeStatus(this.player, args[0]);
       this.log("status", `${josa(STATUS_LABELS[args[0]] ?? args[0], "이/가")} 사라졌다.`);
@@ -545,6 +547,21 @@ export class Combat {
     if (defender.kind === "player" && !this.result) {
       runAbilities(this, "onHurt");
     }
+  }
+
+  // 공격 소모품(마력 두루마리 등): 주사위·특성 배율 없이 정해진 피해, 적의 피해 감소는 적용한다.
+  dealItemDamage(target, item) {
+    const reduction = this.reductionOf(target);
+    const final = Math.max(COMBAT.minDamage, roundValue(item.amount - reduction));
+    const before = target.ref.hp;
+    target.ref.hp = Math.max(0, roundValue(target.ref.hp - final));
+    this.log(
+      "damage",
+      `→ ${target.name}에게 ${fmt(final)} 피해 (${item.name})`,
+      `${fmt(item.amount)} − 피해 감소 ${fmt(reduction)} → ${fmt(final)}`,
+      { target: target.kind, type: "damage", tier: "high", amount: final },
+    );
+    this.afterDamage(target, before);
   }
 
   // 판정 없이 정해진 피해(출혈·반사 등). 피해 감소를 무시한다.
