@@ -1,4 +1,4 @@
-import { isTextEffectEnabled, typeElements } from "./TextEffect.js?v=20261012-004719";
+import { isTextEffectEnabled, typeElements } from "./TextEffect.js?v=20261012-005505";
 
 const DICE_ROLL_MS = 800;
 const DICE_TICK_MS = 60;

@@ -1,6 +1,6 @@
-import { GameManager } from "./core/GameManager.js?v=20261012-004719";
-import { MobileUI } from "./ui/MobileUI.js?v=20261012-004719";
-import { isTextEffectEnabled, setTextEffectEnabled } from "./ui/TextEffect.js?v=20261012-004719";
+import { GameManager } from "./core/GameManager.js?v=20261012-005505";
+import { MobileUI } from "./ui/MobileUI.js?v=20261012-005505";
+import { isTextEffectEnabled, setTextEffectEnabled } from "./ui/TextEffect.js?v=20261012-005505";
 
 const sceneRoot = document.querySelector("#scene");
 const toggle = document.querySelector("#text-effect-toggle");
@@ -28,11 +28,11 @@ const gameManager = new GameManager({
 });
 gameManager.start();
 
-// 글자 효과 켜기·끄기
+// 연출 효과(글자 출력·전투 연출) 켜기·끄기
 
 function renderToggle() {
   const on = isTextEffectEnabled();
-  toggle.textContent = on ? "글자 효과 켜짐" : "글자 효과 꺼짐";
+  toggle.textContent = on ? "연출 효과 켜짐" : "연출 효과 꺼짐";
   toggle.setAttribute("aria-pressed", String(on));
 }
 

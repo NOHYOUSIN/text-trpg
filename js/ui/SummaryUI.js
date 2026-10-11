@@ -1,6 +1,6 @@
-import { catalog } from "../data/catalog.js?v=20261012-004719";
-import { GRADES } from "../data/rules.js?v=20261012-004719";
-import { renderScene } from "./SceneUI.js?v=20261012-004719";
+import { catalog } from "../data/catalog.js?v=20261012-005505";
+import { GRADES } from "../data/rules.js?v=20261012-005505";
+import { renderScene } from "./SceneUI.js?v=20261012-005505";
 
 const SLOT_LABELS = { weapon: "무기", armor: "방어구", ring: "반지", necklace: "목걸이" };
 

@@ -1,6 +1,6 @@
-import { STATUS } from "../data/rules.js?v=20261012-004719";
-import { STATUS_LABELS } from "./EffectParser.js?v=20261012-004719";
-import { formatNumber as fmt } from "./NumberRules.js?v=20261012-004719";
+import { STATUS } from "../data/rules.js?v=20261012-005505";
+import { STATUS_LABELS } from "./EffectParser.js?v=20261012-005505";
+import { formatNumber as fmt } from "./NumberRules.js?v=20261012-005505";
 
 // 상태이상과 지속 효과. 지속시간은 효과를 받은 쪽의 행동 횟수로 센다.
 // combatant: { statuses: [], stunImmunity: 0, immune: Set }

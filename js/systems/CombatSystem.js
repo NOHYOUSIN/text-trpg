@@ -1,10 +1,10 @@
-import { catalog } from "../data/catalog.js?v=20261012-004719";
-import { COMBAT, DICE } from "../data/rules.js?v=20261012-004719";
-import { Enemy } from "../models/Enemy.js?v=20261012-004719";
-import { applyReduction, computeEffect, describeCalculation, describeRoll, rollTier } from "./DamageSystem.js?v=20261012-004719";
-import { parseEffects, parseToken, STATUS_LABELS, toStatusSpec } from "./EffectParser.js?v=20261012-004719";
-import { josa } from "./Josa.js?v=20261012-004719";
-import { clamp, formatNumber as fmt, roundValue } from "./NumberRules.js?v=20261012-004719";
+import { catalog } from "../data/catalog.js?v=20261012-005505";
+import { COMBAT, DICE } from "../data/rules.js?v=20261012-005505";
+import { Enemy } from "../models/Enemy.js?v=20261012-005505";
+import { applyReduction, computeEffect, describeCalculation, describeRoll, rollTier } from "./DamageSystem.js?v=20261012-005505";
+import { parseEffects, parseToken, STATUS_LABELS, toStatusSpec } from "./EffectParser.js?v=20261012-005505";
+import { josa } from "./Josa.js?v=20261012-005505";
+import { clamp, formatNumber as fmt, roundValue } from "./NumberRules.js?v=20261012-005505";
 import {
   applyStatus,
   beginAction,
@@ -15,8 +15,8 @@ import {
   getGuardAmount,
   getTakenMultiplier,
   removeStatus,
-} from "./StatusSystem.js?v=20261012-004719";
-import { getClassTrait, getProfile } from "./TraitSystem.js?v=20261012-004719";
+} from "./StatusSystem.js?v=20261012-005505";
+import { getClassTrait, getProfile } from "./TraitSystem.js?v=20261012-005505";
 
 const SELF_EFFECTS = new Set(["guard", "empower", "cleanse"]);
 // 효과량을 자신에게 거는 스킬: 방어(받는 피해 감소), 강화(주는 피해 증가)
@@ -206,7 +206,12 @@ export class Combat {
     if (poisonDamage > 0) {
       const before = side.ref.hp;
       side.ref.hp = Math.max(0, roundValue(side.ref.hp - poisonDamage));
-      this.log("status", `독이 퍼진다. ${josa(side.name, "이/가")} ${fmt(poisonDamage)} 피해를 입었다.`);
+      this.log("status", `독이 퍼진다. ${josa(side.name, "이/가")} ${fmt(poisonDamage)} 피해를 입었다.`, "", {
+        target: side.kind,
+        type: "damage",
+        tier: "low",
+        amount: poisonDamage,
+      });
       this.afterDamage(side, before);
     }
 
@@ -503,6 +508,9 @@ export class Combat {
         ? `→ ${defender.name}에게 ${fmt(final)} 피해${hitTag(roll, tier)}`
         : `→ 빗나갔다!${hitTag(roll, tier)}`,
       describeCalculation({ base, stat, tier, multipliers: all, raw, reduction, final }),
+      final > 0
+        ? { target: defender.kind, type: "damage", tier: tier.id, amount: final }
+        : { target: defender.kind, type: "miss", tier: tier.id },
     );
     this.afterDamage(defender, before);
     return final;
@@ -540,7 +548,8 @@ export class Combat {
     const maxHp = side.kind === "player" ? side.profile.maxHp : side.ref.maxHp;
     const before = side.ref.hp;
     side.ref.hp = Math.min(maxHp, roundValue(side.ref.hp + amount));
-    this.log("heal", `→ ${side.name} HP ${fmt(roundValue(side.ref.hp - before))} 회복 (${source})`);
+    const healed = roundValue(side.ref.hp - before);
+    this.log("heal", `→ ${side.name} HP ${fmt(healed)} 회복 (${source})`, "", { target: side.kind, type: "heal", amount: healed });
   }
 
   inflict(target, spec, source) {
@@ -553,7 +562,11 @@ export class Combat {
     }
 
     const value = spec.amount ? ` ${fmt(spec.amount)}` : spec.multiplier ? ` ×${spec.multiplier}` : "";
-    this.log("status", `→ ${target.name}: ${label}${value} ${spec.duration}턴${outcome.refreshed ? " (갱신)" : ""}`);
+    this.log("status", `→ ${target.name}: ${label}${value} ${spec.duration}턴${outcome.refreshed ? " (갱신)" : ""}`, "", {
+      target: target.kind,
+      type: "status",
+      label,
+    });
   }
 
   finish(result) {
@@ -614,11 +627,13 @@ export class Combat {
   }
 
   // 출력 줄: 그 시점의 HP와 행동 중인 쪽을 함께 기록해 화면이 순서대로 재생할 수 있게 한다.
-  log(kind, text, detail = "") {
+  // fx: 화면 연출용 정보 { target: "player"|"enemy", type: "damage"|"miss"|"heal"|"status", tier, amount, label }
+  log(kind, text, detail = "", fx = null) {
     this.events.push({
       kind,
       text,
       detail,
+      fx,
       actor: this.actor,
       hp: { player: this.player.ref.hp, enemy: this.enemy.ref.hp },
     });

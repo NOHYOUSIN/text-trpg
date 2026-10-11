@@ -1,8 +1,9 @@
-import { GRADES } from "../data/rules.js?v=20261012-004719";
-import { formatNumber as fmt } from "../systems/NumberRules.js?v=20261012-004719";
-import { statusChip } from "./StatusTooltip.js?v=20261012-004719";
-import { describeConsumable, describeSkill, STAT_LABELS } from "./ItemText.js?v=20261012-004719";
-import { isTextEffectEnabled } from "./TextEffect.js?v=20261012-004719";
+import { GRADES } from "../data/rules.js?v=20261012-005505";
+import { formatNumber as fmt } from "../systems/NumberRules.js?v=20261012-005505";
+import { playCombatFx } from "./CombatFx.js?v=20261012-005505";
+import { statusChip } from "./StatusTooltip.js?v=20261012-005505";
+import { describeConsumable, describeSkill, STAT_LABELS } from "./ItemText.js?v=20261012-005505";
+import { isTextEffectEnabled } from "./TextEffect.js?v=20261012-005505";
 
 const SKILL_TYPE_LABELS = {
   attack: "공격",
@@ -13,7 +14,7 @@ const SKILL_TYPE_LABELS = {
   passive: "패시브",
 };
 
-// 출력 줄 종류별로 다음 줄까지 기다리는 시간(ms). 글자 효과를 끄면 절반으로 줄인다.
+// 출력 줄 종류별로 다음 줄까지 기다리는 시간(ms). 연출 효과를 끄면 절반으로 줄인다.
 const DELAYS = {
   turn: 450,
   player: 650,
@@ -114,10 +115,13 @@ export class CombatUI {
     }
 
     window.clearTimeout(this.timerId);
+    this.skipping = true;
 
     while (this.queue.length) {
       this.showEvent(this.queue.shift());
     }
+
+    this.skipping = false;
 
     this.finishPlayback();
   }
@@ -141,6 +145,11 @@ export class CombatUI {
       this.updateHp(this.enemyEl, event.hp.enemy, this.combat.enemy.ref.maxHp);
       this.updateHp(this.playerEl, event.hp.player, this.combat.player.profile.maxHp);
     }
+
+    // 출력을 건너뛸 때는 연출을 생략한다.
+    if (!this.skipping) {
+      playCombatFx(event.fx?.target === "enemy" ? this.enemyEl : this.playerEl, event.fx);
+    }
   }
 
   setActor(actor) {
@@ -156,16 +165,9 @@ export class CombatUI {
       return;
     }
 
-    const previous = Number(fill.dataset.hp ?? hp);
     fill.dataset.hp = hp;
     fill.style.width = `${Math.max(0, Math.min(1, hp / maxHp)) * 100}%`;
     text.textContent = `HP ${fmt(hp)} / ${fmt(maxHp)}`;
-
-    if (hp < previous) {
-      sideEl.classList.remove("is-hit");
-      // 애니메이션을 다시 시작하기 위해 한 프레임 뒤에 붙인다.
-      window.requestAnimationFrame(() => sideEl.classList.add("is-hit"));
-    }
   }
 
   render(combat) {
@@ -287,6 +289,7 @@ export class CombatUI {
   appendLog(event) {
     const item = document.createElement("li");
     item.className = `combat-log-item kind-${event.kind}`;
+    item.classList.toggle("is-critical", event.fx?.type === "damage" && event.fx.tier === "critical");
 
     if (event.text) {
       item.append(textNode("p", "", event.text));
