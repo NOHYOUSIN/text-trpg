@@ -242,8 +242,28 @@
   cursor: pointer;
 }
 
+/* 턴 묶음: 가장 최근 묶음이 맨 위. 막 시작한 턴 바로 아래에 직전 턴 결과가 보이도록 두 묶음까지는 또렷하게 둔다. */
+.combat-turn {
+  padding-bottom: 6px;
+}
+
+.combat-turn + .combat-turn {
+  padding-top: 6px;
+  border-top: 1px solid var(--border);
+}
+
+.combat-turn:nth-child(n + 3) {
+  opacity: 0.6;
+}
+
+.combat-turn-lines {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
 .combat-log-item.kind-turn {
-  margin-top: 10px;
+  margin-top: 6px;
   padding: 4px 10px;
   border-left: 0;
   border-top: 1px solid var(--border);
@@ -306,4 +326,9 @@
 .status-chip:focus::after {
   opacity: 1;
   visibility: visible;
+}
+
+.combat-turn-lines > .combat-log-item.kind-turn:first-child {
+  margin-top: 0;
+  border-top: 0;
 }

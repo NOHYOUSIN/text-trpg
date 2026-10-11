@@ -1,8 +1,8 @@
-import { GRADES } from "../data/rules.js?v=20261012-003937";
-import { formatNumber as fmt } from "../systems/NumberRules.js?v=20261012-003937";
-import { statusChip } from "./StatusTooltip.js?v=20261012-003937";
-import { describeConsumable, describeSkill, STAT_LABELS } from "./ItemText.js?v=20261012-003937";
-import { isTextEffectEnabled } from "./TextEffect.js?v=20261012-003937";
+import { GRADES } from "../data/rules.js?v=20261012-004719";
+import { formatNumber as fmt } from "../systems/NumberRules.js?v=20261012-004719";
+import { statusChip } from "./StatusTooltip.js?v=20261012-004719";
+import { describeConsumable, describeSkill, STAT_LABELS } from "./ItemText.js?v=20261012-004719";
+import { isTextEffectEnabled } from "./TextEffect.js?v=20261012-004719";
 
 const SKILL_TYPE_LABELS = {
   attack: "공격",
@@ -57,6 +57,7 @@ export class CombatUI {
     this.playerEl = this.root.querySelector('[data-side="player"]');
     this.actionsEl = this.root.querySelector(".combat-actions");
     this.logEl = this.root.querySelector(".combat-log");
+    this.turnLines = null;
 
     const calcToggle = this.root.querySelector(".combat-calc-toggle input");
     calcToggle.checked = readCalcSetting();
@@ -295,8 +296,25 @@ export class CombatUI {
       item.append(textNode("p", "combat-log-detail", event.detail));
     }
 
-    this.logEl.append(item);
-    this.logEl.scrollTop = this.logEl.scrollHeight;
+    this.currentTurnLines(event).append(item);
+    this.logEl.scrollTop = 0;
+  }
+
+  // 출력 줄을 턴 단위로 묶는다. 내 차례가 시작될 때 새 묶음을 만들어 맨 위에 두고,
+  // 묶음 안에서는 시간 순서대로 쌓는다. 그래서 가장 최근 턴이 늘 맨 위에 보인다.
+  currentTurnLines(event) {
+    const startsTurn = event.kind === "turn" && event.actor === "player";
+
+    if (!this.turnLines || startsTurn) {
+      const group = document.createElement("li");
+      group.className = "combat-turn";
+      this.turnLines = document.createElement("ol");
+      this.turnLines.className = "combat-turn-lines";
+      group.append(this.turnLines);
+      this.logEl.prepend(group);
+    }
+
+    return this.turnLines;
   }
 
   // 새 전투를 같은 화면에서 시작할 때: 재생 중이던 출력과 정보 칸을 비운다.
@@ -306,6 +324,7 @@ export class CombatUI {
     this.playing = false;
     this.onPlayed = null;
     this.logEl.replaceChildren();
+    this.turnLines = null;
     this.enemyEl.replaceChildren();
     this.playerEl.replaceChildren();
   }

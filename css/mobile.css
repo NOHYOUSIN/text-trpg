@@ -46,9 +46,116 @@
     color: var(--danger);
   }
 
+  /* 장면: 위아래 여백을 줄여 한 화면에 더 많이 들어오게 */
   .scene-panel {
-    padding: 18px 16px;
+    padding: 14px 12px;
+    border-radius: 16px;
     overflow: visible;
+  }
+
+  .scene {
+    gap: 10px;
+  }
+
+  .scene-eyebrow {
+    font-size: 12px;
+  }
+
+  .scene-title {
+    font-size: 20px;
+  }
+
+  .scene-text {
+    line-height: 1.6;
+  }
+
+  .scene-details {
+    padding: 8px 12px 8px 28px;
+    line-height: 1.6;
+  }
+
+  .scene-buttons,
+  .scene-cards {
+    gap: 8px;
+  }
+
+  .scene-button {
+    gap: 4px;
+    padding: 10px 12px;
+    border-radius: 12px;
+  }
+
+  /* 전투: 적·나를 나란히, 버튼과 로그를 낮게 */
+  .combat {
+    gap: 8px;
+  }
+
+  .combat-sides {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 6px;
+  }
+
+  .combat-side {
+    padding: 8px;
+    border-radius: 10px;
+  }
+
+  .combat-side-head {
+    margin-bottom: 4px;
+  }
+
+  .combat-side-head h3 {
+    font-size: 14px;
+  }
+
+  .combat-side .hp-bar {
+    height: 18px;
+  }
+
+  .combat-side-sub,
+  .combat-side-line,
+  .combat-statuses,
+  .combat-side-summary,
+  .combat-side-more {
+    margin-top: 3px;
+    font-size: 11px;
+  }
+
+  .combat-actions {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 6px;
+  }
+
+  .combat-actions .combat-button {
+    padding: 7px 6px;
+    font-size: 13px;
+  }
+
+  .combat-actions .combat-button.is-primary {
+    grid-column: 1 / -1;
+    padding: 10px;
+  }
+
+  .combat-button-sub {
+    font-size: 10px;
+  }
+
+  .combat-log {
+    min-height: 110px;
+    max-height: 210px;
+  }
+
+  .combat-log-item {
+    padding: 3px 8px;
+    font-size: 13px;
+    line-height: 1.45;
+  }
+
+  .combat-log-item.kind-damage,
+  .combat-log-item.kind-heal,
+  .combat-log-item.kind-status {
+    padding-left: 16px;
   }
 
   /* 상태·기록 패널은 평소 숨기고, 버튼을 누르면 아래에서 올라온다 */

@@ -1,6 +1,6 @@
-import { GameManager } from "./core/GameManager.js?v=20261012-003937";
-import { MobileUI } from "./ui/MobileUI.js?v=20261012-003937";
-import { isTextEffectEnabled, setTextEffectEnabled } from "./ui/TextEffect.js?v=20261012-003937";
+import { GameManager } from "./core/GameManager.js?v=20261012-004719";
+import { MobileUI } from "./ui/MobileUI.js?v=20261012-004719";
+import { isTextEffectEnabled, setTextEffectEnabled } from "./ui/TextEffect.js?v=20261012-004719";
 
 const sceneRoot = document.querySelector("#scene");
 const toggle = document.querySelector("#text-effect-toggle");

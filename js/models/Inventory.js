@@ -1,4 +1,4 @@
-import { INVENTORY } from "../data/rules.js?v=20261012-003937";
+import { INVENTORY } from "../data/rules.js?v=20261012-004719";
 
 // 인벤토리 6칸. 칸: { id, count }
 // 장비는 1칸 1개, 장비 외 아이템은 같은 아이템을 maxStack까지 겹친다. 넘치면 새 칸을 쓴다.
