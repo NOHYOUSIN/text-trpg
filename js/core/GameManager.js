@@ -1,11 +1,12 @@
-import { catalog } from "../data/catalog.js?v=20261012-012659";
-import { EARLY_SKILL, EVENT_CHOICES, RECOVERY, ROUTE } from "../data/rules.js?v=20261012-012659";
-import { Adventurer } from "../models/Adventurer.js?v=20261012-012659";
-import { RunState } from "../models/RunState.js?v=20261012-012659";
-import { SaveManager } from "../save/SaveManager.js?v=20261012-012659";
-import { Combat } from "../systems/CombatSystem.js?v=20261012-012659";
-import { DiceSystem } from "../systems/DiceSystem.js?v=20261012-012659";
-import { getSkillBonus, OUTCOME_LABELS, pickShownChoices, resolveChoice } from "../systems/EventSystem.js?v=20261012-012659";
+import { catalog } from "../data/catalog.js?v=20261012-030143";
+import { BOSS_RANKS, EARLY_SKILL, EVENT_CHOICES, RECOVERY, ROUTE } from "../data/rules.js?v=20261012-030143";
+import { Adventurer } from "../models/Adventurer.js?v=20261012-030143";
+import { RunState } from "../models/RunState.js?v=20261012-030143";
+import { SaveManager } from "../save/SaveManager.js?v=20261012-030143";
+import { Combat } from "../systems/CombatSystem.js?v=20261012-030143";
+import { DiceSystem } from "../systems/DiceSystem.js?v=20261012-030143";
+import { rollEnemyVariant } from "../systems/EnemyVariantSystem.js?v=20261012-030143";
+import { getSkillBonus, OUTCOME_LABELS, pickShownChoices, resolveChoice } from "../systems/EventSystem.js?v=20261012-030143";
 import {
   addItem,
   discardSlot,
@@ -16,17 +17,17 @@ import {
   tryAutoAcquire,
   unequip,
   useConsumableOutsideCombat,
-} from "../systems/InventorySystem.js?v=20261012-012659";
-import { josa } from "../systems/Josa.js?v=20261012-012659";
+} from "../systems/InventorySystem.js?v=20261012-030143";
+import { josa } from "../systems/Josa.js?v=20261012-030143";
 import {
   createBossRewardCandidates,
   markUniqueSeen,
   resolveAcquisition,
   rollCombatLoot,
   rollTreasure,
-} from "../systems/LootSystem.js?v=20261012-012659";
-import { formatNumber as fmt, roundValue } from "../systems/NumberRules.js?v=20261012-012659";
-import { applyOutcome } from "../systems/OutcomeSystem.js?v=20261012-012659";
+} from "../systems/LootSystem.js?v=20261012-030143";
+import { formatNumber as fmt, roundValue } from "../systems/NumberRules.js?v=20261012-030143";
+import { applyOutcome } from "../systems/OutcomeSystem.js?v=20261012-030143";
 import {
   CONTENT_LABELS,
   createRouteCandidates,
@@ -35,27 +36,38 @@ import {
   pickEnemy,
   pickEvent,
   rollPlaceContent,
-} from "../systems/RouteSystem.js?v=20261012-012659";
-import { createShopStock } from "../systems/ShopSystem.js?v=20261012-012659";
-import { getMaxHp, getProfile } from "../systems/TraitSystem.js?v=20261012-012659";
-import { renderBossReward, renderEquipChoice, renderInventoryFull, renderSkillChoice, renderSkillOffer } from "../ui/AcquireUI.js?v=20261012-012659";
-import { renderClassSelect } from "../ui/ClassSelectUI.js?v=20261012-012659";
-import { CombatUI } from "../ui/CombatUI.js?v=20261012-012659";
-import { renderEvent } from "../ui/EventUI.js?v=20261012-012659";
-import { InventoryUI } from "../ui/InventoryUI.js?v=20261012-012659";
-import { LogUI } from "../ui/LogUI.js?v=20261012-012659";
-import { renderRoute } from "../ui/RouteUI.js?v=20261012-012659";
-import { renderScene } from "../ui/SceneUI.js?v=20261012-012659";
-import { renderShop } from "../ui/ShopUI.js?v=20261012-012659";
-import { renderStatus } from "../ui/StatusUI.js?v=20261012-012659";
-import { renderSummary } from "../ui/SummaryUI.js?v=20261012-012659";
+} from "../systems/RouteSystem.js?v=20261012-030143";
+import { createShopStock } from "../systems/ShopSystem.js?v=20261012-030143";
+import { getMaxHp, getProfile } from "../systems/TraitSystem.js?v=20261012-030143";
+import { renderBossReward, renderEquipChoice, renderInventoryFull, renderSkillChoice, renderSkillOffer } from "../ui/AcquireUI.js?v=20261012-030143";
+import { renderClassSelect } from "../ui/ClassSelectUI.js?v=20261012-030143";
+import { CombatUI } from "../ui/CombatUI.js?v=20261012-030143";
+import { renderBossIntro } from "../ui/BossIntroUI.js?v=20261012-030143";
+import {
+  describeSave,
+  renderDungeonCard,
+  renderDungeonSelect,
+  renderLobby,
+  renderOverwriteConfirm,
+  renderSettings,
+} from "../ui/LobbyUI.js?v=20261012-030143";
+import { readCalcSetting, writeCalcSetting } from "../ui/Settings.js?v=20261012-030143";
+import { isTextEffectEnabled, setTextEffectEnabled } from "../ui/TextEffect.js?v=20261012-030143";
+import { renderEvent } from "../ui/EventUI.js?v=20261012-030143";
+import { InventoryUI } from "../ui/InventoryUI.js?v=20261012-030143";
+import { LogUI } from "../ui/LogUI.js?v=20261012-030143";
+import { renderRoute } from "../ui/RouteUI.js?v=20261012-030143";
+import { renderScene } from "../ui/SceneUI.js?v=20261012-030143";
+import { renderShop } from "../ui/ShopUI.js?v=20261012-030143";
+import { renderStatus } from "../ui/StatusUI.js?v=20261012-030143";
+import { renderSummary } from "../ui/SummaryUI.js?v=20261012-030143";
 
-const DUNGEON_ID = "forest";
 
 // 탐험 전체 흐름: 직업 선택 → 라운드(갈림길 → 장소 내용) → 보스 → 요약
 export class GameManager {
-  constructor({ sceneRoot, statusRoot, logRoot, overlayRoot, onStatusChange = () => {} }) {
+  constructor({ sceneRoot, statusRoot, logRoot, overlayRoot, onStatusChange = () => {}, onSettingsChange = () => {} }) {
     this.onStatusChange = onStatusChange;
+    this.onSettingsChange = onSettingsChange;
     this.sceneRoot = sceneRoot;
     this.statusRoot = statusRoot;
     this.logUI = new LogUI(logRoot);
@@ -68,7 +80,8 @@ export class GameManager {
     });
     this.saveManager = new SaveManager();
     this.dice = new DiceSystem();
-    this.dungeon = catalog.dungeons.get(DUNGEON_ID);
+    // 로비에서 고른 던전(이어하기는 저장된 던전)
+    this.dungeon = null;
     this.adventurer = null;
     this.run = null;
     this.inCombat = false;
@@ -77,13 +90,7 @@ export class GameManager {
   }
 
   start() {
-    const saved = this.saveManager.load();
-
-    if (saved) {
-      this.showResume(saved);
-    } else {
-      this.showClassSelect();
-    }
+    this.showLobby();
   }
 
   // ---------- 장면 표시 ----------
@@ -96,37 +103,86 @@ export class GameManager {
 
   // ---------- 탐험 시작·구역 ----------
 
-  // ---------- 저장·이어하기 ----------
+  // ---------- 로비·던전 선택·설정 ----------
 
-  showResume(saved) {
-    const zone = getZone(this.dungeon, saved.run.zone);
-    const savedAt = new Date(saved.savedAt).toLocaleString("ko-KR");
+  showLobby() {
+    this.adventurer = null;
+    this.run = null;
+    this.logUI.clear();
+    const saved = this.saveManager.load();
 
-    this.show(() => renderScene(this.sceneRoot, {
-      eyebrow: this.dungeon.name,
-      title: "진행 중인 탐험",
-      paragraphs: ["이어서 진행할 탐험이 있다."],
-      details: [
-        `직업: ${saved.adventurer.name}`,
-        `위치: ${zone?.name ?? "?"} ${saved.run.round} / ${zone?.rounds ?? "?"} 라운드 시작`,
-        `HP: ${fmt(saved.adventurer.hp)} · 골드: ${saved.adventurer.gold}`,
-        `저장: ${savedAt}`,
-      ],
-      buttons: [
-        { label: "이어하기", primary: true, onClick: () => this.resume(saved) },
-        {
-          label: "기록을 버리고 새 탐험 시작",
-          sub: "진행 중인 탐험은 사라진다.",
-          onClick: () => {
-            this.saveManager.clear();
-            this.showClassSelect();
-          },
-        },
-      ],
+    this.show(() => renderLobby(this.sceneRoot, {
+      saveSummary: saved ? this.describeSave(saved) : null,
+      onNew: () => this.showDungeonSelect(),
+      onContinue: () => this.resume(saved),
+      onSettings: () => this.showSettings(),
     }));
   }
 
+  describeSave(saved) {
+    const dungeon = catalog.dungeons.get(saved.run.dungeonId);
+    return describeSave(saved, dungeon, dungeon ? getZone(dungeon, saved.run.zone) : null);
+  }
+
+  showDungeonSelect() {
+    this.show(() => renderDungeonSelect(this.sceneRoot, {
+      dungeons: [...catalog.dungeons.values()],
+      onPick: (dungeon) => this.showDungeonCard(dungeon),
+      onBack: () => this.showLobby(),
+    }));
+  }
+
+  // 던전 설명은 자유롭게 볼 수 있고, 출발할 때 진행 중인 탐험이 있으면 확인한다.
+  showDungeonCard(dungeon) {
+    const depart = () => {
+      this.dungeon = dungeon;
+      this.showClassSelect();
+    };
+
+    this.show(() => renderDungeonCard(this.sceneRoot, {
+      dungeon,
+      onBack: () => this.showDungeonSelect(),
+      onDepart: () => {
+        const saved = this.saveManager.load();
+
+        if (!saved) {
+          depart();
+          return;
+        }
+
+        this.show(() => renderOverwriteConfirm(this.sceneRoot, {
+          saveSummary: this.describeSave(saved),
+          onConfirm: () => {
+            this.saveManager.clear();
+            depart();
+          },
+          onCancel: () => this.showDungeonCard(dungeon),
+        }));
+      },
+    }));
+  }
+
+  showSettings() {
+    this.show(() => renderSettings(this.sceneRoot, {
+      textEffect: isTextEffectEnabled(),
+      showCalc: readCalcSetting(),
+      onToggleTextEffect: () => {
+        setTextEffectEnabled(!isTextEffectEnabled());
+        this.onSettingsChange();
+        this.showSettings();
+      },
+      onToggleCalc: () => {
+        writeCalcSetting(!readCalcSetting());
+        this.showSettings();
+      },
+      onBack: () => this.showLobby(),
+    }));
+  }
+
+  // ---------- 저장·이어하기 ----------
+
   resume(saved) {
+    this.dungeon = catalog.dungeons.get(saved.run.dungeonId) ?? [...catalog.dungeons.values()][0];
     this.adventurer = new Adventurer(saved.adventurer);
     this.run = new RunState(saved.run);
     this.logUI.clear();
@@ -191,13 +247,13 @@ export class GameManager {
 
     if (boss) {
       const enemy = this.dungeon.enemiesById.get(boss.enemyId);
+      const text = enemy.intros.length ? this.dice.pick(enemy.intros) : enemy.description;
       this.logUI.add(`${this.run.round}라운드: ${enemy.name} 등장`, "boss");
-      this.show(() => renderScene(this.sceneRoot, {
+      this.show(() => renderBossIntro(this.sceneRoot, {
         eyebrow: this.roundLabel,
-        title: boss.rank === "boss" ? "구역 보스" : "중간보스",
-        paragraphs: [enemy.description],
-        notes: ["전투 전에 소지품을 정리할 수 있다."],
-        buttons: [{ label: "맞선다", primary: true, onClick: () => this.startCombat(enemy, null) }],
+        enemy,
+        text,
+        onFight: () => this.startCombat(enemy, null),
       }));
       return;
     }
@@ -229,7 +285,11 @@ export class GameManager {
 
     switch (content) {
       case "combat": {
-        const enemy = pickEnemy(this.dungeon, place, this.run, this.dice);
+        const enemy = rollEnemyVariant(this.dungeon, pickEnemy(this.dungeon, place, this.run, this.dice), {
+          place,
+          run: this.run,
+          dice: this.dice,
+        });
         const surprise = this.dice.chance(place.surpriseChance) ? "enemy" : null;
         this.startCombat(enemy, surprise);
         break;
@@ -363,9 +423,7 @@ export class GameManager {
       const outcome = tryAutoAcquire(this.adventurer, resolved);
 
       if (outcome.pending) {
-        const reason = resolved.kind === "skill"
-          ? "스킬 슬롯 가득 참"
-          : catalog.equipment.has(resolved.id) ? "장착 여부 선택" : "인벤토리 가득 참";
+        const reason = resolved.kind === "skill" || catalog.equipment.has(resolved.id) ? "장착 여부 선택" : "인벤토리 가득 참";
         lines.push(`획득 대기: ${entryName(resolved.kind, resolved.id)} (${reason})`);
         pending.push(resolved);
       } else {
@@ -473,10 +531,16 @@ export class GameManager {
     this.refreshScene = () => this.resolvePending(pending, done);
   }
 
+  // 빈 슬롯이면 장착, 아니면 교체
   replaceSkill(slot, skillId) {
     const previous = this.adventurer.skills[slot];
     this.adventurer.skills[slot] = skillId;
-    this.logUI.add(`스킬 교체: ${entryName("skill", previous)} → ${entryName("skill", skillId)}`, "success");
+    this.logUI.add(
+      previous
+        ? `스킬 교체: ${entryName("skill", previous)} → ${entryName("skill", skillId)}`
+        : `스킬 장착: ${entryName("skill", skillId)} (슬롯 ${slot + 1})`,
+      "success",
+    );
   }
 
   // ---------- 상점 ----------
@@ -510,17 +574,8 @@ export class GameManager {
       markUniqueSeen(this.run, entry.id);
     };
 
+    // 스킬: 장착할 슬롯을 고른 뒤 값을 치른다(빈 슬롯이 있어도 묻는다).
     if (entry.kind === "skill") {
-      const outcome = tryAutoAcquire(this.adventurer, { kind: "skill", id: entry.id });
-
-      if (!outcome.pending) {
-        pay();
-        this.logUI.add(`구매: ${outcome.line}`, "success");
-        this.showShop(place, stock, `${josa(entryName("skill", entry.id), "을/를")} 익혔다.`);
-        return;
-      }
-
-      // 슬롯이 가득 차면 교체할 슬롯을 고른 뒤 값을 치른다.
       this.show(() => renderSkillChoice(this.sceneRoot, {
         adventurer: this.adventurer,
         skillId: entry.id,
@@ -528,27 +583,47 @@ export class GameManager {
         onReplace: (slot) => {
           pay();
           this.replaceSkill(slot, entry.id);
-          this.showShop(place, stock, "스킬을 교체했다.");
+          this.showShop(place, stock, `${josa(entryName("skill", entry.id), "을/를")} 익혔다.`);
         },
         onGiveUp: () => this.showShop(place, stock, "구매를 취소했다."),
       }));
       return;
     }
 
-    // 장비 슬롯이 비어 있으면 바로 장착, 아니면 가방으로
-    const equipment = catalog.equipment.get(entry.id);
-    const equipNow = equipment && !this.adventurer.equipment[equipment.slot];
+    // 장비: 장착할지 가방에 넣을지 고른 뒤 값을 치른다.
+    if (catalog.equipment.has(entry.id)) {
+      this.show(() => renderEquipChoice(this.sceneRoot, {
+        adventurer: this.adventurer,
+        itemId: entry.id,
+        giveUpLabel: "구매를 취소한다",
+        onEquip: () => {
+          pay();
+          this.logUI.add(`구매: ${equipNew(this.adventurer, entry.id)} (-${entry.price} 골드)`, "success");
+          this.showShop(place, stock, `${entryName("item", entry.id)} 구매 · 장착`);
+        },
+        onStore: () => {
+          if (!addItem(this.adventurer, entry.id)) {
+            this.showShop(place, stock, "인벤토리에 자리가 없다.");
+            return;
+          }
 
-    if (equipNow) {
-      this.adventurer.equipment[equipment.slot] = equipment.id;
-    } else if (!addItem(this.adventurer, entry.id)) {
+          pay();
+          this.logUI.add(`구매: ${entryName("item", entry.id)} (-${entry.price} 골드)`, "success");
+          this.showShop(place, stock, `${entryName("item", entry.id)} 구매 · 가방`);
+        },
+        onGiveUp: () => this.showShop(place, stock, "구매를 취소했다."),
+      }));
+      return;
+    }
+
+    if (!addItem(this.adventurer, entry.id)) {
       this.showShop(place, stock, "인벤토리에 자리가 없다.");
       return;
     }
 
     pay();
-    this.logUI.add(`구매: ${entryName("item", entry.id)} (-${entry.price} 골드)${equipNow ? " 장착" : ""}`, "success");
-    this.showShop(place, stock, `${entryName("item", entry.id)} 구매${equipNow ? " · 바로 장착" : ""}`);
+    this.logUI.add(`구매: ${entryName("item", entry.id)} (-${entry.price} 골드)`, "success");
+    this.showShop(place, stock, `${entryName("item", entry.id)} 구매`);
   }
 
   // ---------- 소지품 ----------
@@ -614,16 +689,21 @@ export class GameManager {
     this.adventurer.gold += gold;
     this.logUI.add(`${josa(enemy.name, "을/를")} 쓰러뜨렸다. 골드 +${gold}`, "success");
 
-    const isBoss = enemy.rank !== "normal";
-    const granted = isBoss ? { lines: [], pending: [] } : this.grant(rollCombatLoot({ run: this.run, dice: this.dice }));
-    const isFinalBoss = enemy.rank === "boss" && !getZone(this.dungeon, this.run.zone + 1)?.bossId;
+    const isBoss = BOSS_RANKS.includes(enemy.rank);
+    const isElite = enemy.rank === "elite";
+    // 보스와 엘리트는 일반 전리품 대신 보상을 고른다.
+    const granted = isBoss || isElite ? { lines: [], pending: [] } : this.grant(rollCombatLoot({ run: this.run, dice: this.dice }));
+    const endsZone = enemy.rank === "boss" || enemy.rank === "final";
+    const isFinalBoss = enemy.rank === "final" || (endsZone && !getZone(this.dungeon, this.run.zone + 1)?.bossId);
     let afterVictory = () => this.resolvePending(granted.pending, () => this.finishRound());
 
     if (isBoss) {
       this.run.defeatedBosses.push(enemy.name);
-      const proceed = enemy.rank === "boss" ? () => this.clearZone() : () => this.finishRound();
+      const proceed = endsZone ? () => this.clearZone() : () => this.finishRound();
       // 최종 보스(또는 다음 구역이 없는 경우)는 보상 없이 끝난다.
       afterVictory = isFinalBoss ? proceed : () => this.chooseBossReward(enemy, proceed);
+    } else if (isElite) {
+      afterVictory = () => this.chooseBossReward(enemy, () => this.finishRound());
     }
 
     this.show(() => renderScene(this.sceneRoot, {
@@ -631,7 +711,7 @@ export class GameManager {
       title: "승리",
       paragraphs: [`${josa(enemy.name, "을/를")} 쓰러뜨렸다.`],
       details: [`골드 +${gold}`, ...granted.lines],
-      buttons: [{ label: isBoss && !isFinalBoss ? "보상을 고른다" : "계속", primary: true, onClick: afterVictory }],
+      buttons: [{ label: (isBoss && !isFinalBoss) || isElite ? "보상을 고른다" : "계속", primary: true, onClick: afterVictory }],
     }));
   }
 
@@ -694,6 +774,7 @@ export class GameManager {
       run: this.run,
       adventurer: this.adventurer,
       onRestart: () => this.showClassSelect(),
+      onLobby: () => this.showLobby(),
     }));
   }
 

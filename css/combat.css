@@ -395,11 +395,12 @@
   list-style: none;
 }
 
+/* 새 줄이 위에 쌓이므로 차례 제목은 그 차례 줄들의 맨 아래에 온다. 구분선도 아래쪽에 둔다. */
 .combat-log-item.kind-turn {
-  margin-top: 6px;
+  margin-bottom: 6px;
   padding: 4px 10px;
   border-left: 0;
-  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
   color: var(--accent);
   font-size: 12px;
   letter-spacing: 0.04em;
@@ -461,7 +462,7 @@
   visibility: visible;
 }
 
-.combat-turn-lines > .combat-log-item.kind-turn:first-child {
-  margin-top: 0;
-  border-top: 0;
+.combat-turn-lines > .combat-log-item.kind-turn:last-child {
+  margin-bottom: 0;
+  border-bottom: 0;
 }

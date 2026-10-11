@@ -1,9 +1,11 @@
-import { GRADES } from "../data/rules.js?v=20261012-012659";
-import { formatNumber as fmt } from "../systems/NumberRules.js?v=20261012-012659";
-import { playCombatFx } from "./CombatFx.js?v=20261012-012659";
-import { statusChip } from "./StatusTooltip.js?v=20261012-012659";
-import { describeConsumable, describeSkill, STAT_LABELS } from "./ItemText.js?v=20261012-012659";
-import { isTextEffectEnabled } from "./TextEffect.js?v=20261012-012659";
+import { GRADES } from "../data/rules.js?v=20261012-030143";
+import { formatNumber as fmt } from "../systems/NumberRules.js?v=20261012-030143";
+import { rankNameClasses } from "./BossIntroUI.js?v=20261012-030143";
+import { playCombatFx } from "./CombatFx.js?v=20261012-030143";
+import { readCalcSetting, writeCalcSetting } from "./Settings.js?v=20261012-030143";
+import { statusChip } from "./StatusTooltip.js?v=20261012-030143";
+import { describeConsumable, describeSkill, STAT_LABELS } from "./ItemText.js?v=20261012-030143";
+import { isTextEffectEnabled } from "./TextEffect.js?v=20261012-030143";
 
 const SKILL_TYPE_LABELS = {
   attack: "공격",
@@ -25,7 +27,6 @@ const DELAYS = {
   system: 550,
   result: 700,
 };
-const CALC_STORAGE_KEY = "trpg-webgame-show-calc";
 
 // 전투 화면. 전투 엔진이 만든 출력 줄을 한 줄씩 재생해 차례가 넘어가는 흐름을 보여 준다.
 export class CombatUI {
@@ -179,7 +180,8 @@ export class CombatUI {
   renderSides(combat) {
     this.renderSide(this.enemyEl, "enemy", {
       title: combat.enemy.name,
-      subtitle: rankLabel(combat.enemy.ref.rank),
+      rank: combat.enemy.ref.rank,
+      subtitle: "",
       hp: combat.enemy.ref.hp,
       maxHp: combat.enemy.ref.maxHp,
       summary: describeReadySkill(combat),
@@ -202,12 +204,19 @@ export class CombatUI {
     });
   }
 
-  renderSide(element, key, { title, subtitle, hp, maxHp, summary, details, statuses }) {
+  renderSide(element, key, { title, rank, subtitle, hp, maxHp, summary, details, statuses }) {
     element.replaceChildren();
 
     const head = document.createElement("header");
     head.className = "combat-side-head";
-    head.append(textNode("h3", "", title), textNode("span", "combat-side-sub", subtitle));
+    // 적 등급은 글자 대신 이름 색으로 보여 준다.
+    const name = textNode("h3", "", title);
+
+    if (key === "enemy") {
+      name.classList.add(...rankNameClasses(rank));
+    }
+
+    head.append(name, textNode("span", "combat-side-sub", subtitle));
 
     const bar = document.createElement("div");
     bar.className = "hp-bar";
@@ -299,12 +308,12 @@ export class CombatUI {
       item.append(textNode("p", "combat-log-detail", event.detail));
     }
 
-    this.currentTurnLines(event).append(item);
+    this.currentTurnLines(event).prepend(item);
     this.logEl.scrollTop = 0;
   }
 
   // 출력 줄을 턴 단위로 묶는다. 내 차례가 시작될 때 새 묶음을 만들어 맨 위에 두고,
-  // 묶음 안에서는 시간 순서대로 쌓는다. 그래서 가장 최근 턴이 늘 맨 위에 보인다.
+  // 묶음 안에서도 새 줄을 맨 위에 쌓는다. 그래서 가장 최근 줄이 늘 맨 위에 보인다.
   currentTurnLines(event) {
     const startsTurn = event.kind === "turn" && event.actor === "player";
 
@@ -358,22 +367,6 @@ function renderStatuses(statuses) {
   });
 
   return line;
-}
-
-function readCalcSetting() {
-  try {
-    return localStorage.getItem(CALC_STORAGE_KEY) === "on";
-  } catch {
-    return false;
-  }
-}
-
-function writeCalcSetting(value) {
-  try {
-    localStorage.setItem(CALC_STORAGE_KEY, value ? "on" : "off");
-  } catch {
-    // 저장소를 쓸 수 없으면 이번 화면에서만 적용한다.
-  }
 }
 
 function appendSub(button, text) {
@@ -432,8 +425,4 @@ function textNode(tag, className, text) {
 
   element.textContent = text;
   return element;
-}
-
-function rankLabel(rank) {
-  return { normal: "일반", midboss: "중간보스", boss: "구역 보스" }[rank] ?? "";
 }

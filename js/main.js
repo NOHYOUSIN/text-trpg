@@ -1,6 +1,6 @@
-import { GameManager } from "./core/GameManager.js?v=20261012-012659";
-import { MobileUI } from "./ui/MobileUI.js?v=20261012-012659";
-import { isTextEffectEnabled, setTextEffectEnabled } from "./ui/TextEffect.js?v=20261012-012659";
+import { GameManager } from "./core/GameManager.js?v=20261012-030143";
+import { MobileUI } from "./ui/MobileUI.js?v=20261012-030143";
+import { isTextEffectEnabled, setTextEffectEnabled } from "./ui/TextEffect.js?v=20261012-030143";
 
 const sceneRoot = document.querySelector("#scene");
 const toggle = document.querySelector("#text-effect-toggle");
@@ -25,6 +25,7 @@ const gameManager = new GameManager({
   logRoot: document.querySelector("#journey"),
   overlayRoot: document.querySelector("#overlay"),
   onStatusChange: (state) => mobileUI.update(state),
+  onSettingsChange: () => renderToggle(),
 });
 gameManager.start();
 

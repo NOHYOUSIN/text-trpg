@@ -1,4 +1,4 @@
-// 전투 중인 적의 상태. 적은 능력치 덧셈과 장비가 없다.
+// 전투 중인 적의 상태. 적은 능력치 덧셈과 장비가 없고, 고정 특수 능력만 가진다.
 export class Enemy {
   constructor(data) {
     this.id = data.id;
@@ -14,6 +14,9 @@ export class Enemy {
     this.goldMin = data.goldMin;
     this.goldMax = data.goldMax;
     this.description = data.description;
+    // 특수 능력(crit·evade·reflect·lifesteal)과 등장 메시지
+    this.effects = [...(data.effects ?? [])];
+    this.intros = [...(data.intros ?? [])];
   }
 
   isAlive() {

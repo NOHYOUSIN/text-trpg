@@ -1,11 +1,11 @@
-import { catalog } from "../data/catalog.js?v=20261012-012659";
-import { GRADES } from "../data/rules.js?v=20261012-012659";
-import { renderScene } from "./SceneUI.js?v=20261012-012659";
+import { catalog } from "../data/catalog.js?v=20261012-030143";
+import { GRADES } from "../data/rules.js?v=20261012-030143";
+import { renderScene } from "./SceneUI.js?v=20261012-030143";
 
 const SLOT_LABELS = { weapon: "무기", armor: "방어구", ring: "반지", necklace: "목걸이" };
 
 // 탐험 요약. 저장하지 않는다.
-export function renderSummary(root, { result, dungeon, zone, run, adventurer, onRestart }) {
+export function renderSummary(root, { result, dungeon, zone, run, adventurer, onRestart, onLobby }) {
   const titles = {
     victory: "탐험 성공",
     prototypeEnd: "1구역 돌파 — 프로토타입 종료",
@@ -39,6 +39,9 @@ export function renderSummary(root, { result, dungeon, zone, run, adventurer, on
       ...skills,
     ],
     notes: ["이 기록은 저장되지 않는다. 다음 탐험은 새로운 모험가로 시작한다."],
-    buttons: [{ label: "새 탐험 시작", primary: true, onClick: onRestart }],
+    buttons: [
+      { label: "같은 던전 다시", primary: true, onClick: onRestart },
+      { label: "로비로", onClick: onLobby },
+    ],
   });
 }

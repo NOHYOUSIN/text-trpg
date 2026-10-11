@@ -1,11 +1,11 @@
-import { catalog } from "../data/catalog.js?v=20261012-012659";
-import { COMBAT, DICE } from "../data/rules.js?v=20261012-012659";
-import { Enemy } from "../models/Enemy.js?v=20261012-012659";
-import { lowHpBonus, runAbilities } from "./AbilitySystem.js?v=20261012-012659";
-import { applyReduction, computeEffect, describeCalculation, describeRoll, rollTier } from "./DamageSystem.js?v=20261012-012659";
-import { parseEffects, parseToken, STATUS_LABELS, toStatusSpec } from "./EffectParser.js?v=20261012-012659";
-import { josa } from "./Josa.js?v=20261012-012659";
-import { clamp, formatNumber as fmt, roundValue } from "./NumberRules.js?v=20261012-012659";
+import { catalog } from "../data/catalog.js?v=20261012-030143";
+import { COMBAT, DICE } from "../data/rules.js?v=20261012-030143";
+import { Enemy } from "../models/Enemy.js?v=20261012-030143";
+import { capEvade, capLifesteal, critMinFrom, lowHpBonus, runAbilities } from "./AbilitySystem.js?v=20261012-030143";
+import { applyReduction, computeEffect, describeCalculation, describeRoll, rollTier } from "./DamageSystem.js?v=20261012-030143";
+import { parseEffects, parseToken, STATUS_LABELS, toStatusSpec } from "./EffectParser.js?v=20261012-030143";
+import { josa } from "./Josa.js?v=20261012-030143";
+import { clamp, formatNumber as fmt, roundValue } from "./NumberRules.js?v=20261012-030143";
 import {
   applyStatus,
   beginAction,
@@ -16,8 +16,8 @@ import {
   getGuardAmount,
   getTakenMultiplier,
   removeStatus,
-} from "./StatusSystem.js?v=20261012-012659";
-import { getClassTrait, getProfile } from "./TraitSystem.js?v=20261012-012659";
+} from "./StatusSystem.js?v=20261012-030143";
+import { getClassTrait, getProfile } from "./TraitSystem.js?v=20261012-030143";
 
 const SELF_EFFECTS = new Set(["guard", "empower", "cleanse"]);
 // 효과량을 자신에게 거는 스킬: 방어(받는 피해 감소), 강화(주는 피해 증가)
@@ -76,6 +76,7 @@ export class Combat {
       kind: "enemy",
       name: enemy.name,
       ref: enemy,
+      mods: enemyMods(enemy.effects),
       statuses: [],
       stunImmunity: 0,
       immune: new Set(),
@@ -88,7 +89,10 @@ export class Combat {
   // ---------- 진행 ----------
 
   begin() {
-    this.log("system", `${this.enemy.ref.description}`);
+    // 엘리트는 등장 메시지 중 하나로 전투를 연다.
+    const enemyRef = this.enemy.ref;
+    const opening = enemyRef.rank === "elite" && enemyRef.intros.length ? this.dice.pick(enemyRef.intros) : enemyRef.description;
+    this.log("system", opening);
     runAbilities(this, "onBattleStart");
     this.resolveSurprise();
 
@@ -332,7 +336,7 @@ export class Combat {
     const bonus = profile.modifiers.basicAttackBonus
       + this.player.buffs.basicAttackBonus
       + lowHpBonus(this.player, "basicAttackBonus");
-    const base = roundValue((weapon ? weapon.damage : COMBAT.unarmedDamage) + bonus);
+    const base = weapon ? weapon.damage : COMBAT.unarmedDamage;
     const stat = weapon ? profile.stats[weapon.stat] : 0;
     const multipliers = [];
 
@@ -343,6 +347,7 @@ export class Combat {
     const hit = this.basicAttack(this.player, this.enemy, {
       base,
       stat,
+      flat: bonus,
       multipliers,
       label: isSurprise ? "기습 공격" : weapon ? `${josa(weapon.name, "으로/로")} 공격` : "맨손 공격",
     });
@@ -352,10 +357,10 @@ export class Combat {
     }
   }
 
-  basicAttack(attacker, defender, { base, stat = 0, multipliers = [], label }) {
+  basicAttack(attacker, defender, { base, stat = 0, flat = 0, multipliers = [], label }) {
     const roll = rollTier(this.dice, { critMin: this.critMinOf(attacker), missBonus: this.evadeOf(defender) });
     this.log(attacker.kind, `${attacker.name} — ${label}`, describeRoll(roll));
-    const damage = this.dealDamage(attacker, defender, { base, stat, tier: roll.tier, multipliers, roll: roll.roll });
+    const damage = this.dealDamage(attacker, defender, { base, stat, flat, tier: roll.tier, multipliers, roll: roll.roll });
     return { tier: roll.tier, damage };
   }
 
@@ -453,9 +458,8 @@ export class Combat {
       multipliers.push({ value: this.trait.firstStrikeMultiplier, label: "선공" });
     }
 
-    const bonus = isPlayer ? user.profile.modifiers.skillDamageBonus + lowHpBonus(user, "skillDamageBonus") : 0;
-    const total = roundValue(base + bonus);
-    this.dealDamage(user, target, { base: total, stat, tier, multipliers, roll });
+    const flat = isPlayer ? user.profile.modifiers.skillDamageBonus + lowHpBonus(user, "skillDamageBonus") : 0;
+    this.dealDamage(user, target, { base, stat, flat, tier, multipliers, roll });
   }
 
   useItem(itemId) {
@@ -479,7 +483,7 @@ export class Combat {
   // ---------- 피해·회복·상태 ----------
 
   // roll: 굴린 주사위 값(보정 전). 결과 줄에 표시한다.
-  dealDamage(attacker, defender, { base, stat = 0, tier, multipliers = [], roll }) {
+  dealDamage(attacker, defender, { base, stat = 0, flat = 0, tier, multipliers = [], roll }) {
     const all = [...multipliers];
     const dealt = getDealtMultiplier(attacker);
     const taken = getTakenMultiplier(defender);
@@ -492,9 +496,9 @@ export class Combat {
       all.push({ value: taken, label: "취약" });
     }
 
-    // 강화 상태면 효과량만큼 기본값에 더한다.
-    base = roundValue(base + getEmpowerAmount(attacker));
-    const raw = computeEffect({ base, stat, tier, multipliers: all });
+    // 강화 상태면 효과량만큼 고정 보너스에 더한다(능력치 배율은 받지 않는다).
+    flat = roundValue(flat + getEmpowerAmount(attacker));
+    const raw = computeEffect({ base, stat, flat, tier, multipliers: all });
     const reduction = this.reductionOf(defender);
     const final = applyReduction(raw, reduction, tier);
     const before = defender.ref.hp;
@@ -505,7 +509,7 @@ export class Combat {
       final > 0
         ? `→ ${defender.name}에게 ${fmt(final)} 피해${hitTag(roll, tier)}`
         : `→ 빗나갔다!${hitTag(roll, tier)}`,
-      describeCalculation({ base, stat, tier, multipliers: all, raw, reduction, final }),
+      describeCalculation({ base, stat, flat, tier, multipliers: all, raw, reduction, final }),
       final > 0
         ? { target: defender.kind, type: "damage", tier: tier.id, amount: final }
         : { target: defender.kind, type: "miss", tier: tier.id },
@@ -519,29 +523,26 @@ export class Combat {
     return final;
   }
 
-  // 피해를 준 뒤의 장비 능력: 흡혈·치명타 시 발동(공격자가 플레이어), 반사·피격 시 발동(맞은 쪽이 플레이어)
+  // 피해를 준 뒤의 능력: 공격자의 흡혈, 맞은 쪽의 반사(플레이어·적 공통),
+  // 플레이어의 치명타 시·피격 시 발동 능력
   afterHit(attacker, defender, { final, tier }) {
-    if (attacker.kind === "player") {
-      const lifesteal = roundValue(final * attacker.profile.modifiers.lifesteal / 100);
+    const lifesteal = roundValue(final * this.modsOf(attacker).lifesteal / 100);
 
-      if (lifesteal > 0) {
-        this.heal(attacker, lifesteal, "흡혈", { quiet: true });
-      }
-
-      if (tier.id === "critical") {
-        runAbilities(this, "onCrit");
-      }
-
-      return;
+    if (lifesteal > 0) {
+      this.heal(attacker, lifesteal, "흡혈", { quiet: true });
     }
 
-    const reflect = defender.profile.modifiers.reflect;
+    if (attacker.kind === "player" && tier.id === "critical" && !this.result) {
+      runAbilities(this, "onCrit");
+    }
 
-    if (reflect > 0) {
+    const reflect = this.modsOf(defender).reflect;
+
+    if (reflect > 0 && !this.result) {
       this.dealFixedDamage(attacker, reflect, "반사");
     }
 
-    if (!this.result) {
+    if (defender.kind === "player" && !this.result) {
       runAbilities(this, "onHurt");
     }
   }
@@ -647,12 +648,17 @@ export class Combat {
     return this.player.profile.stats.agi;
   }
 
+  // 고정 특수 능력: 플레이어는 장비·패시브, 적은 시트의 effects
+  modsOf(side) {
+    return side.kind === "player" ? side.profile.modifiers : side.mods;
+  }
+
   critMinOf(side) {
-    return side.kind === "player" ? side.profile.modifiers.critMin : undefined;
+    return this.modsOf(side).critMin;
   }
 
   evadeOf(side) {
-    return side.kind === "player" ? side.profile.modifiers.evade : 0;
+    return this.modsOf(side).evade;
   }
 
   reductionOf(side) {
@@ -711,4 +717,22 @@ export class Combat {
     this.events = [];
     return events;
   }
+}
+
+// 적의 고정 특수 능력(crit·evade·reflect·lifesteal)을 합치고 상한을 적용한다.
+function enemyMods(effects) {
+  const sums = { crit: 0, evade: 0, reflect: 0, lifesteal: 0 };
+
+  for (const { key, args } of parseEffects(effects)) {
+    if (key in sums) {
+      sums[key] += Number(args[0]);
+    }
+  }
+
+  return {
+    critMin: critMinFrom(sums.crit),
+    evade: capEvade(sums.evade),
+    reflect: sums.reflect,
+    lifesteal: capLifesteal(sums.lifesteal),
+  };
 }

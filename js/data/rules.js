@@ -75,7 +75,9 @@ export const GRADE_WEIGHTS_BY_ZONE = Object.freeze({
 });
 
 // 보스 보상 후보의 확정 등급
+// 엘리트는 중간보스보다 한 단계 낮다. 최종 보스는 보상 없이 탐험이 끝난다.
 export const BOSS_REWARD_GRADE = Object.freeze({
+  elite: { 1: "common", 2: "uncommon", 3: "uncommon" },
   midboss: { 1: "uncommon", 2: "rare", 3: "rare" },
   boss: { 1: "rare", 2: "unique" },
 });
@@ -135,3 +137,19 @@ export const EVENT_CHOICES = Object.freeze({
   // 같은 group의 사건은 최근 이 횟수의 사건 안에 다시 나오지 않는다.
   recentGroupExclusion: 3,
 });
+
+// 적 등급 (2026-10-12). veteran(정예)은 시트에 없고, 일반 적을 강화해 만든다.
+export const ENEMY_RANKS = Object.freeze(["normal", "veteran", "elite", "midboss", "boss", "final"]);
+export const BOSS_RANKS = Object.freeze(["midboss", "boss", "final"]);
+
+// 일반 전투가 정예·엘리트로 바뀌는 확률(%) = base + perRound × (라운드 - 1) + 장소 eliteBonus(엘리트만)
+export const ENEMY_VARIANT = Object.freeze({
+  veteran: { base: 10, perRound: 0.5 },
+  elite: { base: 3, perRound: 0.25 },
+});
+
+// 정예: 일반 적 수치·골드 배율
+export const VETERAN = Object.freeze({ statMultiplier: 1.3, goldMultiplier: 1.5, namePrefix: "정예" });
+
+// 능력치 배율 (2026-10-12): 효과량 = 기본값 × (1 + 연결 능력치 × perPoint)
+export const STAT_SCALE = Object.freeze({ perPoint: 0.05 });

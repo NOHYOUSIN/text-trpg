@@ -1,8 +1,9 @@
-import { catalog } from "../data/catalog.js?v=20261012-012659";
-import { CLASS_TRAITS } from "../data/rules.js?v=20261012-012659";
-import { capEvade, capLifesteal, critMinFrom, parseAbility } from "./AbilitySystem.js?v=20261012-012659";
-import { parseToken } from "./EffectParser.js?v=20261012-012659";
-import { roundValue } from "./NumberRules.js?v=20261012-012659";
+import { catalog } from "../data/catalog.js?v=20261012-030143";
+import { CLASS_TRAITS } from "../data/rules.js?v=20261012-030143";
+import { capEvade, capLifesteal, critMinFrom, parseAbility } from "./AbilitySystem.js?v=20261012-030143";
+import { statMultiplier } from "./DamageSystem.js?v=20261012-030143";
+import { parseToken } from "./EffectParser.js?v=20261012-030143";
+import { roundValue } from "./NumberRules.js?v=20261012-030143";
 
 const STAT_KEYS = ["str", "agi", "wis"];
 
@@ -50,7 +51,7 @@ export function collectModifiers(adventurer) {
     const skill = skillId ? catalog.skills.get(skillId) : null;
 
     if (skill?.type === "passive") {
-      sources.push({ effects: skill.effects, stat: skill.stat, name: skill.name });
+      sources.push({ effects: skill.effects, stat: skill.stat, name: skill.name, baseEffect: skill.baseEffect });
     }
   }
 
@@ -61,7 +62,7 @@ export function collectModifiers(adventurer) {
       if (ability) {
         modifiers.abilities.push(ability);
       } else {
-        applyEffect(modifiers, parseToken(token), source.stat);
+        applyEffect(modifiers, parseToken(token), source);
       }
     }
   }
@@ -72,7 +73,7 @@ export function collectModifiers(adventurer) {
   return modifiers;
 }
 
-function applyEffect(modifiers, { key, args }, sourceStat) {
+function applyEffect(modifiers, { key, args }, source) {
   const value = Number(args[0]);
 
   if (STAT_KEYS.includes(key)) {
@@ -106,8 +107,8 @@ function applyEffect(modifiers, { key, args }, sourceStat) {
       modifiers.immune.add(args[0]);
       break;
     case "damageReduction":
-      // damageReduction:stat:0.4 → 연결 능력치 × 0.4
-      modifiers.reductionByStat.push({ stat: sourceStat, ratio: Number(args[1]) });
+      // damageReduction:base → 패시브의 기본 효과량 × 연결 능력치 배율 (강철 피부: 3 × 힘 배율)
+      modifiers.reductionByStat.push({ stat: source.stat, base: source.baseEffect });
       break;
     default:
       break;
@@ -130,7 +131,7 @@ export function getMaxHp(adventurer, modifiers = collectModifiers(adventurer)) {
 
 export function getDamageReduction(adventurer, modifiers, stats) {
   const fromStats = modifiers.reductionByStat.reduce(
-    (sum, entry) => sum + stats[entry.stat] * entry.ratio,
+    (sum, entry) => sum + roundValue(entry.base * statMultiplier(stats[entry.stat])),
     0,
   );
   return roundValue(modifiers.damageReduction + fromStats);

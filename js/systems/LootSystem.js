@@ -1,5 +1,5 @@
-import { catalog } from "../data/catalog.js?v=20261012-012659";
-import { BOSS_REWARD_CANDIDATES, BOSS_REWARD_GRADE, EVENT_SKILL_CHOICE, GRADE_WEIGHTS_BY_ZONE, LOOT, SKILL_POOL } from "../data/rules.js?v=20261012-012659";
+import { catalog } from "../data/catalog.js?v=20261012-030143";
+import { BOSS_REWARD_CANDIDATES, BOSS_REWARD_GRADE, EVENT_SKILL_CHOICE, GRADE_WEIGHTS_BY_ZONE, LOOT, SKILL_POOL } from "../data/rules.js?v=20261012-030143";
 
 const GRADE_ORDER = ["common", "uncommon", "rare", "unique"];
 
@@ -131,15 +131,24 @@ export function createBossRewardCandidates({ rank, run, adventurer, dice }) {
   const candidates = [];
   const usedIds = [];
 
+  // 엘리트 보상은 장비·스킬·소모품 중에서, 보스 보상은 장비·스킬 중에서 고른다.
+  const kinds = rank === "elite" ? ["skill", "equipment", "consumable"] : ["skill", "equipment"];
+
   for (let i = 0; i < count; i += 1) {
-    const wantSkill = dice.chance(50);
-    const entry = wantSkill
-      ? pickSkill({ run, adventurer, dice, grade, excludeIds: usedIds })
-      : pickByGrade(availableEquipment(run, usedIds), grade, dice);
+    const kind = dice.pick(kinds);
+    let entry = null;
+
+    if (kind === "skill") {
+      entry = pickSkill({ run, adventurer, dice, grade, excludeIds: usedIds });
+    } else if (kind === "equipment") {
+      entry = pickByGrade(availableEquipment(run, usedIds), grade, dice);
+    } else {
+      entry = pickConsumable({ dice, excludeIds: usedIds });
+    }
 
     if (entry) {
       usedIds.push(entry.id);
-      candidates.push({ kind: wantSkill ? "skill" : "item", id: entry.id });
+      candidates.push({ kind: kind === "skill" ? "skill" : "item", id: entry.id });
     }
   }
 

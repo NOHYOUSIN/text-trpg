@@ -44,7 +44,7 @@ export const commonData = {
       "class": null,
       "type": "heal",
       "stat": "main",
-      "baseEffect": 8,
+      "baseEffect": 10,
       "cooldown": 3,
       "effects": [],
       "description": "상처를 동여매 피를 멎게 한다."
@@ -56,10 +56,10 @@ export const commonData = {
       "class": null,
       "type": "defense",
       "stat": "main",
-      "baseEffect": 8,
+      "baseEffect": 10,
       "cooldown": 3,
       "effects": [
-        "strike:12",
+        "strike:14",
         "guard:2"
       ],
       "description": "방패를 앞세워 들이받고 자세를 굳힌다. 피해를 주고 2턴 동안 효과량만큼 받는 피해가 줄어든다."
@@ -99,7 +99,7 @@ export const commonData = {
       "class": "mage",
       "type": "attack",
       "stat": "wis",
-      "baseEffect": 24,
+      "baseEffect": 23,
       "cooldown": 3,
       "effects": [
         "weaken:0.7:2"
@@ -127,7 +127,7 @@ export const commonData = {
       "class": "warrior",
       "type": "attack",
       "stat": "str",
-      "baseEffect": 30,
+      "baseEffect": 28,
       "cooldown": 2,
       "effects": [
         "vulnerable:1.3:2"
@@ -141,7 +141,7 @@ export const commonData = {
       "class": "rogue",
       "type": "attack",
       "stat": "agi",
-      "baseEffect": 28,
+      "baseEffect": 26,
       "cooldown": 2,
       "effects": [
         "poison:4:3"
@@ -155,7 +155,7 @@ export const commonData = {
       "class": null,
       "type": "heal",
       "stat": "main",
-      "baseEffect": 14,
+      "baseEffect": 15,
       "cooldown": 2,
       "effects": [
         "cleanse"
@@ -169,12 +169,12 @@ export const commonData = {
       "class": "warrior",
       "type": "passive",
       "stat": "str",
-      "baseEffect": null,
+      "baseEffect": 3,
       "cooldown": null,
       "effects": [
-        "damageReduction:stat:0.8"
+        "damageReduction:base"
       ],
-      "description": "단련된 몸이 충격을 흘려 낸다. 힘 × 0.8만큼 받는 피해가 줄어든다."
+      "description": "단련된 몸이 충격을 흘려 낸다. 받는 피해가 3 × 힘 배율만큼 줄어든다(힘 5일 때 4)."
     },
     {
       "id": "skl_mana_flow",
@@ -209,10 +209,10 @@ export const commonData = {
       "class": "warrior",
       "type": "buff",
       "stat": "str",
-      "baseEffect": 3,
+      "baseEffect": 6,
       "cooldown": 3,
       "effects": [
-        "strike:12",
+        "strike:14",
         "empower:2"
       ],
       "description": "함성과 함께 몰아친다. 피해를 주고 2턴 동안 효과량만큼 주는 피해가 늘어난다."
@@ -224,7 +224,7 @@ export const commonData = {
       "class": "warrior",
       "type": "attack",
       "stat": "str",
-      "baseEffect": 24,
+      "baseEffect": 23,
       "cooldown": 3,
       "effects": [
         "vulnerable:1.3:2"
@@ -250,7 +250,7 @@ export const commonData = {
       "class": "rogue",
       "type": "attack",
       "stat": "agi",
-      "baseEffect": 12,
+      "baseEffect": 14,
       "cooldown": 3,
       "effects": [
         "weaken:0.7:2"
@@ -278,7 +278,7 @@ export const commonData = {
       "class": "rogue",
       "type": "attack",
       "stat": "agi",
-      "baseEffect": 14,
+      "baseEffect": 15,
       "cooldown": 3,
       "effects": [
         "vulnerable:1.3:3"
@@ -318,10 +318,10 @@ export const commonData = {
       "class": "mage",
       "type": "defense",
       "stat": "wis",
-      "baseEffect": 6,
+      "baseEffect": 9,
       "cooldown": 3,
       "effects": [
-        "strike:12",
+        "strike:14",
         "guard:2"
       ],
       "description": "마력의 파편을 날리며 장벽을 두른다. 피해를 주고 2턴 동안 효과량만큼 받는 피해가 줄어든다."
@@ -333,7 +333,7 @@ export const commonData = {
       "class": "mage",
       "type": "attack",
       "stat": "wis",
-      "baseEffect": 25,
+      "baseEffect": 24,
       "cooldown": 3,
       "effects": [
         "vulnerable:1.3:2"
@@ -347,7 +347,7 @@ export const commonData = {
       "class": "mage",
       "type": "attack",
       "stat": "wis",
-      "baseEffect": 14,
+      "baseEffect": 15,
       "cooldown": 3,
       "effects": [
         "weaken:0.7:3"
@@ -361,7 +361,7 @@ export const commonData = {
       "class": "mage",
       "type": "attack",
       "stat": "wis",
-      "baseEffect": 31,
+      "baseEffect": 29,
       "cooldown": 2,
       "effects": [
         "stun:1"
@@ -375,7 +375,7 @@ export const commonData = {
       "class": null,
       "type": "heal",
       "stat": "main",
-      "baseEffect": 7,
+      "baseEffect": 10,
       "cooldown": 3,
       "effects": [],
       "description": "호흡을 가다듬어 기운을 되찾는다."
@@ -387,10 +387,10 @@ export const commonData = {
       "class": null,
       "type": "buff",
       "stat": "main",
-      "baseEffect": 4,
+      "baseEffect": 7,
       "cooldown": 3,
       "effects": [
-        "strike:14",
+        "strike:15",
         "empower:2"
       ],
       "description": "이를 악물고 내지른 일격으로 기세를 올린다. 피해를 주고 2턴 동안 효과량만큼 주는 피해가 늘어난다."
@@ -402,10 +402,10 @@ export const commonData = {
       "class": null,
       "type": "defense",
       "stat": "main",
-      "baseEffect": 8,
+      "baseEffect": 10,
       "cooldown": 3,
       "effects": [
-        "strike:14",
+        "strike:15",
         "guard:2"
       ],
       "description": "공격을 흘려 내며 반격한다. 피해를 주고 2턴 동안 효과량만큼 받는 피해가 줄어든다."
@@ -417,7 +417,7 @@ export const commonData = {
       "class": null,
       "type": "heal",
       "stat": "main",
-      "baseEffect": 10,
+      "baseEffect": 12,
       "cooldown": 3,
       "effects": [
         "cleanse"
@@ -431,7 +431,7 @@ export const commonData = {
       "class": null,
       "type": "attack",
       "stat": "main",
-      "baseEffect": 30,
+      "baseEffect": 28,
       "cooldown": 2,
       "effects": [
         "vulnerable:1.3:2"
@@ -446,7 +446,7 @@ export const commonData = {
       "slot": "weapon",
       "grade": "common",
       "stat": "str",
-      "damage": 9,
+      "damage": 11,
       "damageReduction": 0,
       "maxHp": 0,
       "statBonus": {},
@@ -462,7 +462,7 @@ export const commonData = {
       "slot": "weapon",
       "grade": "common",
       "stat": "agi",
-      "damage": 8,
+      "damage": 10,
       "damageReduction": 0,
       "maxHp": 0,
       "statBonus": {},
@@ -478,7 +478,7 @@ export const commonData = {
       "slot": "weapon",
       "grade": "common",
       "stat": "wis",
-      "damage": 8,
+      "damage": 10,
       "damageReduction": 0,
       "maxHp": 0,
       "statBonus": {},
@@ -494,7 +494,7 @@ export const commonData = {
       "slot": "weapon",
       "grade": "common",
       "stat": "str",
-      "damage": 8,
+      "damage": 10,
       "damageReduction": 0,
       "maxHp": 0,
       "statBonus": {},
@@ -510,7 +510,7 @@ export const commonData = {
       "slot": "weapon",
       "grade": "common",
       "stat": "agi",
-      "damage": 7,
+      "damage": 10,
       "damageReduction": 0,
       "maxHp": 0,
       "statBonus": {},
@@ -528,7 +528,7 @@ export const commonData = {
       "slot": "weapon",
       "grade": "common",
       "stat": "wis",
-      "damage": 7,
+      "damage": 10,
       "damageReduction": 0,
       "maxHp": 0,
       "statBonus": {},
@@ -544,7 +544,7 @@ export const commonData = {
       "slot": "weapon",
       "grade": "uncommon",
       "stat": "str",
-      "damage": 11,
+      "damage": 13,
       "damageReduction": 0,
       "maxHp": 0,
       "statBonus": {
@@ -564,7 +564,7 @@ export const commonData = {
       "slot": "weapon",
       "grade": "uncommon",
       "stat": "agi",
-      "damage": 10,
+      "damage": 12,
       "damageReduction": 0,
       "maxHp": 0,
       "statBonus": {},
@@ -582,7 +582,7 @@ export const commonData = {
       "slot": "weapon",
       "grade": "uncommon",
       "stat": "wis",
-      "damage": 10,
+      "damage": 12,
       "damageReduction": 0,
       "maxHp": 0,
       "statBonus": {
@@ -602,7 +602,7 @@ export const commonData = {
       "slot": "weapon",
       "grade": "rare",
       "stat": "str",
-      "damage": 14,
+      "damage": 15,
       "damageReduction": 1,
       "maxHp": 0,
       "statBonus": {
@@ -623,7 +623,7 @@ export const commonData = {
       "slot": "weapon",
       "grade": "rare",
       "stat": "agi",
-      "damage": 14,
+      "damage": 15,
       "damageReduction": 0,
       "maxHp": 0,
       "statBonus": {
@@ -644,7 +644,7 @@ export const commonData = {
       "slot": "weapon",
       "grade": "rare",
       "stat": "wis",
-      "damage": 14,
+      "damage": 15,
       "damageReduction": 0,
       "maxHp": 0,
       "statBonus": {
@@ -883,7 +883,7 @@ export const commonData = {
       "slot": "weapon",
       "grade": "common",
       "stat": "str",
-      "damage": 7,
+      "damage": 10,
       "damageReduction": 0,
       "maxHp": 0,
       "statBonus": {},
@@ -899,7 +899,7 @@ export const commonData = {
       "slot": "weapon",
       "grade": "uncommon",
       "stat": "str",
-      "damage": 12,
+      "damage": 14,
       "damageReduction": 0,
       "maxHp": 10,
       "statBonus": {},
@@ -917,7 +917,7 @@ export const commonData = {
       "slot": "weapon",
       "grade": "rare",
       "stat": "str",
-      "damage": 15,
+      "damage": 16,
       "damageReduction": 0,
       "maxHp": 10,
       "statBonus": {
@@ -937,7 +937,7 @@ export const commonData = {
       "slot": "weapon",
       "grade": "common",
       "stat": "agi",
-      "damage": 7,
+      "damage": 10,
       "damageReduction": 0,
       "maxHp": 0,
       "statBonus": {},
@@ -953,7 +953,7 @@ export const commonData = {
       "slot": "weapon",
       "grade": "uncommon",
       "stat": "agi",
-      "damage": 10,
+      "damage": 12,
       "damageReduction": 0,
       "maxHp": 0,
       "statBonus": {
@@ -973,7 +973,7 @@ export const commonData = {
       "slot": "weapon",
       "grade": "rare",
       "stat": "agi",
-      "damage": 13,
+      "damage": 14,
       "damageReduction": 0,
       "maxHp": 0,
       "statBonus": {
@@ -993,7 +993,7 @@ export const commonData = {
       "slot": "weapon",
       "grade": "common",
       "stat": "wis",
-      "damage": 7,
+      "damage": 10,
       "damageReduction": 0,
       "maxHp": 0,
       "statBonus": {},
@@ -1009,7 +1009,7 @@ export const commonData = {
       "slot": "weapon",
       "grade": "uncommon",
       "stat": "wis",
-      "damage": 10,
+      "damage": 12,
       "damageReduction": 0,
       "maxHp": 0,
       "statBonus": {},
@@ -1027,7 +1027,7 @@ export const commonData = {
       "slot": "weapon",
       "grade": "rare",
       "stat": "wis",
-      "damage": 14,
+      "damage": 15,
       "damageReduction": 0,
       "maxHp": 0,
       "statBonus": {
@@ -1258,7 +1258,7 @@ export const commonData = {
       "slot": "weapon",
       "grade": "unique",
       "stat": "agi",
-      "damage": 17,
+      "damage": 18,
       "damageReduction": 0,
       "maxHp": 0,
       "statBonus": {

@@ -1,8 +1,8 @@
-import { catalog, getItem, isEquipment } from "../data/catalog.js?v=20261012-012659";
-import { GRADES, INVENTORY } from "../data/rules.js?v=20261012-012659";
-import { parseToken } from "./EffectParser.js?v=20261012-012659";
-import { formatNumber as fmt, roundValue } from "./NumberRules.js?v=20261012-012659";
-import { getMaxHp } from "./TraitSystem.js?v=20261012-012659";
+import { catalog, getItem, isEquipment } from "../data/catalog.js?v=20261012-030143";
+import { GRADES, INVENTORY } from "../data/rules.js?v=20261012-030143";
+import { parseToken } from "./EffectParser.js?v=20261012-030143";
+import { formatNumber as fmt, roundValue } from "./NumberRules.js?v=20261012-030143";
+import { getMaxHp } from "./TraitSystem.js?v=20261012-030143";
 
 export function maxStackOf(id) {
   return isEquipment(id) ? INVENTORY.equipmentStack : catalog.consumables.get(id)?.maxStack ?? INVENTORY.defaultMaxStack;
@@ -18,30 +18,11 @@ export function entryName(kind, id) {
   return entry.grade ? `[${GRADES[entry.grade].label}] ${entry.name}` : entry.name;
 }
 
-// 자리가 있으면 바로 넣는다. 스킬은 빈 슬롯이 있으면 바로 장착한다.
+// 소모품은 자리가 있으면 바로 넣는다. 스킬과 장비는 빈 슬롯이 있어도 장착할지 묻는다(2026-10-12).
 // 결정이 필요하면 { pending: true }를 돌려준다.
 export function tryAutoAcquire(adventurer, acquisition) {
-  if (acquisition.kind === "skill") {
-    const empty = adventurer.skills.indexOf(null);
-
-    if (empty === -1) {
-      return { pending: true };
-    }
-
-    adventurer.skills[empty] = acquisition.id;
-    return { pending: false, line: `스킬 획득: ${entryName("skill", acquisition.id)} (슬롯 ${empty + 1})` };
-  }
-
-  // 장비: 해당 슬롯이 비어 있으면 바로 장착, 아니면 장착 여부를 묻는다.
-  const equipment = catalog.equipment.get(acquisition.id);
-
-  if (equipment) {
-    if (adventurer.equipment[equipment.slot]) {
-      return { pending: true };
-    }
-
-    adventurer.equipment[equipment.slot] = equipment.id;
-    return { pending: false, line: `장착: ${entryName("item", equipment.id)}` };
+  if (acquisition.kind === "skill" || catalog.equipment.has(acquisition.id)) {
+    return { pending: true };
   }
 
   const maxStack = maxStackOf(acquisition.id);

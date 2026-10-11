@@ -1,6 +1,6 @@
 // 생성 데이터를 ID로 찾기 쉽게 정리한다.
-import { commonData } from "./generated/common.js?v=20261012-012659";
-import { dungeonForestData } from "./generated/dungeon_forest.js?v=20261012-012659";
+import { commonData } from "./generated/common.js?v=20261012-030143";
+import { dungeonDataList } from "./generated/dungeons.js?v=20261012-030143";
 
 const byId = (rows) => new Map(rows.map((row) => [row.id, row]));
 
@@ -19,7 +19,8 @@ export const catalog = Object.freeze({
   skills: byId(commonData.skills),
   equipment: byId(commonData.equipment),
   consumables: byId(commonData.consumables),
-  dungeons: new Map([[dungeonForestData.id, prepareDungeon(dungeonForestData)]]),
+  // 시트 순서대로 정렬된 던전 목록(로비에 이 순서로 나온다)
+  dungeons: new Map(dungeonDataList.map((data) => [data.id, prepareDungeon(data)])),
 });
 
 export function getItem(id) {

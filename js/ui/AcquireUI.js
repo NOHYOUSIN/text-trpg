@@ -1,19 +1,26 @@
-import { catalog, getItem } from "../data/catalog.js?v=20261012-012659";
-import { GRADES } from "../data/rules.js?v=20261012-012659";
-import { canUseOutsideCombat, entryName } from "../systems/InventorySystem.js?v=20261012-012659";
-import { josa } from "../systems/Josa.js?v=20261012-012659";
-import { describeFull, describeStats } from "./ItemText.js?v=20261012-012659";
-import { renderScene } from "./SceneUI.js?v=20261012-012659";
+import { catalog, getItem } from "../data/catalog.js?v=20261012-030143";
+import { GRADES } from "../data/rules.js?v=20261012-030143";
+import { canUseOutsideCombat, entryName } from "../systems/InventorySystem.js?v=20261012-030143";
+import { josa } from "../systems/Josa.js?v=20261012-030143";
+import { describeFull, describeStats } from "./ItemText.js?v=20261012-030143";
+import { renderScene } from "./SceneUI.js?v=20261012-030143";
 
 function entryOf(kind, id) {
   return kind === "skill" ? catalog.skills.get(id) : getItem(id);
 }
 
 // 새 장비를 얻었는데 같은 슬롯에 장비가 있을 때: 바로 장착 / 가방에 넣기 / 포기
-export function renderEquipChoice(root, { adventurer, itemId, onEquip, onStore, onGiveUp }) {
+export function renderEquipChoice(root, { adventurer, itemId, onEquip, onStore, onGiveUp, giveUpLabel = "새 장비를 포기한다" }) {
   const item = catalog.equipment.get(itemId);
   const currentId = adventurer.equipment[item.slot];
   const bagFull = adventurer.inventory.isFull();
+  let equipSub = "빈 칸에 장착한다.";
+
+  if (currentId) {
+    equipSub = bagFull
+      ? `가방이 가득 차 ${josa(entryName("item", currentId), "은/는")} 버린다.`
+      : `${josa(entryName("item", currentId), "은/는")} 가방에 넣는다.`;
+  }
 
   renderScene(root, {
     eyebrow: "새 장비",
@@ -21,23 +28,16 @@ export function renderEquipChoice(root, { adventurer, itemId, onEquip, onStore, 
     paragraphs: [item.description],
     details: [
       `새 장비: ${describeStats("item", itemId)}`,
-      `현재 장착: ${entryName("item", currentId)} — ${describeStats("item", currentId)}`,
+      currentId ? `현재 장착: ${entryName("item", currentId)} — ${describeStats("item", currentId)}` : "현재 장착: 없음",
     ],
     buttons: [
-      {
-        label: "바로 장착한다",
-        sub: bagFull
-          ? `가방이 가득 차 ${josa(entryName("item", currentId), "은/는")} 버린다.`
-          : `${josa(entryName("item", currentId), "은/는")} 가방에 넣는다.`,
-        primary: true,
-        onClick: onEquip,
-      },
+      { label: "장착한다", sub: equipSub, primary: true, onClick: onEquip },
       {
         label: "가방에 넣는다",
         sub: bagFull ? "가방이 가득 찼다. 칸을 비울지 고른다." : "",
         onClick: onStore,
       },
-      { label: "새 장비를 포기한다", onClick: onGiveUp },
+      { label: giveUpLabel, onClick: onGiveUp },
     ],
   });
 }
@@ -72,20 +72,23 @@ export function renderInventoryFull(root, { adventurer, itemId, onDiscard, onGiv
 }
 
 // 스킬 슬롯이 가득 찼을 때: 교체 또는 포기
+// 새 스킬: 빈 슬롯에 장착하거나 기존 스킬과 교체하거나 포기한다. 빈 슬롯이 있어도 묻는다.
 export function renderSkillChoice(root, { adventurer, skillId, onReplace, onGiveUp, giveUpLabel = "새 스킬을 포기한다" }) {
   const skill = catalog.skills.get(skillId);
+  const hasEmpty = adventurer.skills.includes(null);
 
   renderScene(root, {
     eyebrow: "새 스킬",
     title: entryName("skill", skillId),
-    paragraphs: [skill.description, "스킬 슬롯이 가득 찼다. 교체한 스킬은 사라진다."],
+    paragraphs: [
+      skill.description,
+      hasEmpty ? "빈 슬롯에 장착하거나 기존 스킬과 교체할 수 있다. 교체한 스킬은 사라진다." : "스킬 슬롯이 가득 찼다. 교체한 스킬은 사라진다.",
+    ],
     details: [describeStats("skill", skillId)],
     buttons: [
-      ...adventurer.skills.map((id, slot) => ({
-        label: `교체: 슬롯 ${slot + 1} ${entryName("skill", id)}`,
-        sub: describeStats("skill", id),
-        onClick: () => onReplace(slot),
-      })),
+      ...adventurer.skills.map((id, slot) => (id
+        ? { label: `교체: 슬롯 ${slot + 1} ${entryName("skill", id)}`, sub: describeStats("skill", id), onClick: () => onReplace(slot) }
+        : { label: `장착: 슬롯 ${slot + 1} (비어 있음)`, primary: true, onClick: () => onReplace(slot) })),
       { label: giveUpLabel, onClick: onGiveUp },
     ],
   });
@@ -120,7 +123,7 @@ export function renderBossReward(root, { enemyName, candidates, onChoose }) {
     buttonLayout: "cards",
     buttons: candidates.map((candidate) => {
       const entry = entryOf(candidate.kind, candidate.id);
-      const kindLabel = candidate.kind === "skill" ? "스킬" : "장비";
+      const kindLabel = candidate.kind === "skill" ? "스킬" : catalog.consumables.has(candidate.id) ? "소모품" : "장비";
       return {
         label: `${kindLabel} · ${entryName(candidate.kind, candidate.id)}`,
         sub: describeFull(candidate.kind, candidate.id),

@@ -1,9 +1,10 @@
-import { catalog } from "../data/catalog.js?v=20261012-012659";
-import { parseAbility } from "../systems/AbilitySystem.js?v=20261012-012659";
-import { parseToken } from "../systems/EffectParser.js?v=20261012-012659";
-import { formatNumber as fmt } from "../systems/NumberRules.js?v=20261012-012659";
+import { catalog } from "../data/catalog.js?v=20261012-030143";
+import { parseAbility } from "../systems/AbilitySystem.js?v=20261012-030143";
+import { parseToken } from "../systems/EffectParser.js?v=20261012-030143";
+import { formatNumber as fmt } from "../systems/NumberRules.js?v=20261012-030143";
 
 // 장비·스킬·소모품의 수치를 한 줄 설명으로 만든다. (선택 판단용)
+// "능력치 배율" = 1 + 연결 능력치 × 5%
 const STAT_LABELS = { str: "힘", agi: "민첩", wis: "지혜", main: "주 능력치" };
 const SLOT_LABELS = { weapon: "무기", armor: "방어구", ring: "반지", necklace: "목걸이" };
 const SKILL_TYPE_LABELS = {
@@ -74,7 +75,7 @@ export function describeEffectToken(token) {
     case "guard":
       return `효과량만큼 받는 피해 감소 ${a}턴`;
     case "strike":
-      return `피해 ${a} + 연결 능력치`;
+      return `피해 ${a} × 능력치 배율`;
     case "empower":
       return `효과량만큼 주는 피해 증가 ${a}턴`;
     case "cleanse":
@@ -84,7 +85,7 @@ export function describeEffectToken(token) {
     case "skillDamageBonus":
       return `스킬 피해 +${fmt(Number(a))}`;
     case "damageReduction":
-      return `연결 능력치 × ${b} 피해 감소`;
+      return "받는 피해 감소(기본 효과량 × 능력치 배율)";
     case "cooldownReduction":
       return `모든 스킬 대기 -${a}`;
     case "immune":
@@ -112,7 +113,7 @@ export function describeEquipment(item) {
   const parts = [SLOT_LABELS[item.slot]];
 
   if (item.slot === "weapon") {
-    parts.push(`피해 ${fmt(item.damage)} + ${STAT_LABELS[item.stat]}`);
+    parts.push(`피해 ${fmt(item.damage)} × ${STAT_LABELS[item.stat]} 배율`);
   }
 
   if (item.damageReduction) {
@@ -137,13 +138,15 @@ export function describeSkill(skill) {
 
   if (skill.type !== "passive") {
     if (skill.baseEffect > 0) {
-      parts.push(`효과량 ${fmt(skill.baseEffect)} + ${STAT_LABELS[skill.stat]}`);
+      parts.push(`효과량 ${fmt(skill.baseEffect)} × ${STAT_LABELS[skill.stat]} 배율`);
     }
 
     parts.push(`대기 ${skill.cooldown}`);
   }
 
-  parts.push(...skill.effects.map(describeEffectToken));
+  parts.push(...skill.effects.map((token) => (token === "damageReduction:base"
+    ? `받는 피해 감소 ${fmt(skill.baseEffect)} × ${STAT_LABELS[skill.stat]} 배율`
+    : describeEffectToken(token))));
   return parts.join(" · ");
 }
 

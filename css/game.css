@@ -349,3 +349,51 @@
     grid-template-columns: 1fr;
   }
 }
+
+/* 적 등급 이름 색: 정예 < 엘리트 < 중간보스 < 구역 보스 < 최종 보스 */
+.rank-veteran { color: #c9cdd3; }
+.rank-elite { color: #f2d45c; }
+.rank-midboss { color: #f0954a; }
+.rank-boss { color: #ec5b4f; }
+
+.rank-final {
+  color: #a3242e;
+  font-weight: 800;
+  text-shadow: 0 0 10px rgba(163, 36, 46, 0.45);
+}
+
+/* 보스 등장 화면 */
+.boss-intro .scene-title {
+  font-size: 30px;
+  letter-spacing: 0.02em;
+}
+
+.boss-intro .scene-text {
+  font-size: 17px;
+}
+
+.boss-intro-dim {
+  position: fixed;
+  inset: 0;
+  z-index: 15;
+  pointer-events: none;
+  background: #000;
+  animation: boss-intro-dim 1.1s ease-out forwards;
+}
+
+@keyframes boss-intro-dim {
+  0% { opacity: 0; }
+  25% { opacity: 0.85; }
+  100% { opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .boss-intro-dim {
+    display: none;
+  }
+}
+
+/* 강조 버튼(밝은 배경) 위의 보조 문구는 어두운 색으로 */
+.scene-button.is-primary .scene-button-sub {
+  color: #4a3f26;
+}
