@@ -1,13 +1,14 @@
-import { catalog } from "../data/catalog.js?v=20261013-032945";
-import { COMBAT, DICE } from "../data/rules.js?v=20261013-032945";
-import { Enemy } from "../models/Enemy.js?v=20261013-032945";
-import { capEvade, capLifesteal, critMinFrom, lowHpBonus, runAbilities } from "./AbilitySystem.js?v=20261013-032945";
-import { applyReduction, computeEffect, describeCalculation, describeRoll, rollTier } from "./DamageSystem.js?v=20261013-032945";
-import { chooseEnemySkillId } from "./EnemyAI.js?v=20261013-032945";
-import { attackSkillBase, basicAttackBase, supportAmount } from "./FormulaSystem.js?v=20261013-032945";
-import { parseEffects, parseToken, STATUS_LABELS, toStatusSpec } from "./EffectParser.js?v=20261013-032945";
-import { josa } from "./Josa.js?v=20261013-032945";
-import { clamp, formatNumber as fmt, roundValue } from "./NumberRules.js?v=20261013-032945";
+import { catalog } from "../data/catalog.js?v=20261013-042652";
+import { COMBAT, DICE } from "../data/rules.js?v=20261013-042652";
+import { Enemy } from "../models/Enemy.js?v=20261013-042652";
+import { capEvade, capLifesteal, critMinFrom, lowHpBonus, runAbilities } from "./AbilitySystem.js?v=20261013-042652";
+import { applyReduction, computeEffect, describeCalculation, describeRoll, rollTier } from "./DamageSystem.js?v=20261013-042652";
+import { consumableEffects, isElixir } from "./ConsumableEffects.js?v=20261013-042652";
+import { chooseEnemySkillId } from "./EnemyAI.js?v=20261013-042652";
+import { attackSkillBase, basicAttackBase, supportAmount } from "./FormulaSystem.js?v=20261013-042652";
+import { parseEffects, STATUS_LABELS, toStatusSpec } from "./EffectParser.js?v=20261013-042652";
+import { josa } from "./Josa.js?v=20261013-042652";
+import { clamp, formatNumber as fmt, roundValue } from "./NumberRules.js?v=20261013-042652";
 import {
   absorbWithShield,
   applyStatus,
@@ -18,10 +19,11 @@ import {
   getEmpowerAmount,
   getGuardAmount,
   getTakenMultiplier,
+  hasStatus,
   removeStatus,
   statusValueText,
-} from "./StatusSystem.js?v=20261013-032945";
-import { getClassTrait, getProfile } from "./TraitSystem.js?v=20261013-032945";
+} from "./StatusSystem.js?v=20261013-042652";
+import { getClassTrait, getProfile } from "./TraitSystem.js?v=20261013-042652";
 
 const SELF_EFFECTS = new Set(["guard", "shield", "empower", "cleanse"]);
 // 효과량을 자신에게 거는 스킬: 방어(보호막), 강화(주는 피해 증가). 효과량 = 기본값 + 능력치 × 계수, 주사위 없음
@@ -190,6 +192,7 @@ export class Combat {
     } else if (action.type === "chant") {
       this.player.chanted = true;
       this.log("player", `${this.player.name} — 영창`, `다음 기본공격·스킬 효과 ×${this.trait.chantMultiplier}`);
+      this.applyChantShield();
     } else if (skill) {
       this.useSkill(this.player, this.enemy, skill);
       runAbilities(this, "onSkill", { skillId: skill.id });
@@ -242,6 +245,10 @@ export class Combat {
 
       if (!item || this.player.ref.inventory.count(action.itemId) <= 0) {
         return { ok: false, reason: "사용할 수 있는 아이템이 없다." };
+      }
+
+      if (isElixir(item)) {
+        return { ok: false, reason: "영약은 전투 밖에서만 마실 수 있다." };
       }
 
       return { ok: true };
@@ -508,23 +515,48 @@ export class Combat {
     this.dealDamage(user, target, { base, flat, tier, multipliers, roll, momentum: isPlayer });
   }
 
+  // 소모품 효과를 차례로 적용한다(붕대: 회복 → 출혈 해제).
   useItem(itemId) {
     const item = catalog.consumables.get(itemId);
-    const { key, args } = parseToken(item.effect);
+    const effects = consumableEffects(item);
 
     this.player.ref.inventory.remove(itemId, 1);
     this.log("player", `${this.player.name} — ${item.name} 사용`);
 
-    if (key === "heal") {
-      this.heal(this.player, item.amount, item.name);
-    } else if (key === "damage") {
-      this.dealItemDamage(this.enemy, item);
-    } else if (key === "cure") {
-      removeStatus(this.player, args[0]);
-      this.log("status", `${josa(STATUS_LABELS[args[0]] ?? args[0], "이/가")} 사라졌다.`);
-    } else if (key === "buff") {
-      this.player.buffs[args[0]] = (this.player.buffs[args[0]] ?? 0) + Number(args[1]);
-      this.log("status", `이번 전투 동안 ${item.description}`);
+    for (const { key, args } of effects) {
+      if (key === "heal") {
+        this.heal(this.player, item.amount, item.name);
+      } else if (key === "damage") {
+        this.dealItemDamage(this.enemy, item);
+      } else if (key === "cure") {
+        const label = STATUS_LABELS[args[0]] ?? args[0];
+
+        if (hasStatus(this.player, args[0])) {
+          removeStatus(this.player, args[0]);
+          this.log("status", `${josa(label, "이/가")} 사라졌다.`);
+        } else if (effects.length === 1) {
+          this.log("status", `${label} 상태가 아니었다.`);
+        }
+      } else if (key === "buff") {
+        this.player.buffs[args[0]] = (this.player.buffs[args[0]] ?? 0) + Number(args[1]);
+        this.log("status", `이번 전투 동안 ${item.description}`);
+      }
+    }
+  }
+
+  // 마법사 영창 보호막: [영창] 행동 때 (2 + 지혜 × 0.3), 1턴. 주사위 없음.
+  applyChantShield() {
+    const shield = this.trait.chantShield;
+
+    if (!shield) {
+      return;
+    }
+
+    const { stats, mainStat } = this.player.profile;
+    const amount = supportAmount(shield.base, shield.scaling, stats, mainStat);
+
+    if (amount > 0) {
+      this.inflict(this.player, { type: "shield", amount, duration: shield.duration }, this.player);
     }
   }
 
@@ -760,7 +792,8 @@ export class Combat {
     for (const slot of this.player.ref.inventory.slots) {
       const item = catalog.consumables.get(slot.id);
 
-      if (item && !seen.has(item.id)) {
+      // 영약은 전투 중에 마실 수 없다.
+      if (item && !isElixir(item) && !seen.has(item.id)) {
         seen.add(item.id);
         items.push({ item, count: this.player.ref.inventory.count(item.id) });
       }

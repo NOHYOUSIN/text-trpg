@@ -2,7 +2,7 @@
 export const dungeonForestData = {
   "id": "forest",
   "name": "속삭이는 숲",
-  "description": "낮은 속삭임이 끊이지 않는 오래된 숲. 가장 깊은 곳에 속삭임의 근원이 있다고 한다.",
+  "description": "스치는 잎새들이 사방에서 옥죄어 오고, 귓가를 맴도는 속삭임이 감각을 무디게 하는 오래된 숲입니다.\n심장부에 다가갈수록 속삭임은 거친 메아리가 되어 숲을 뒤흔들며 침입자를 밀어냅니다.\n결코 환영받지 못할 걸음이라는 것을 알면서도, 한번 발을 들인 자에게는 돌아설 길이 보이지 않습니다.\n밀어내는 목소리의 근원을 향해, 낡은 무기를 쥐고 가장 깊은 곳으로 나아가십시오.",
   "zones": [
     {
       "zone": 1,
@@ -43,7 +43,7 @@ export const dungeonForestData = {
     },
     {
       "zone": 3,
-      "name": "어두운 숲",
+      "name": "뿌리에 잠긴 폐허",
       "rounds": 22,
       "midBosses": [],
       "bossRound": 22,
@@ -56,7 +56,7 @@ export const dungeonForestData = {
     },
     {
       "zone": 4,
-      "name": "속삭임의 근원",
+      "name": "태고의 성역",
       "rounds": 22,
       "midBosses": [],
       "bossRound": 22,
@@ -65,7 +65,7 @@ export const dungeonForestData = {
         10,
         21
       ],
-      "entryText": "(4구역 콘텐츠는 이후 작성. 구역 이름은 임시)"
+      "entryText": "(4구역 콘텐츠는 이후 작성)"
     }
   ],
   "places": [
@@ -599,6 +599,131 @@ export const dungeonForestData = {
         "evt_strange_shrine",
         "evt_whisper_answer",
         "evt_shrine_trial"
+      ]
+    },
+    {
+      "id": "plc_sunlit_glade",
+      "zone": 1,
+      "name": "햇살 드는 공터",
+      "descriptions": [
+        "나무 사이로 햇살이 쏟아지는 둥근 공터다. 새소리가 들린다.",
+        "부드러운 풀밭 위에 누군가 앉았다 간 자국이 남아 있다.",
+        "숲에서 드물게 밝은 곳이다. 이상하리만치 조용하다."
+      ],
+      "contentWeights": {
+        "combat": 15,
+        "event": 35,
+        "rest": 45,
+        "treasure": 5,
+        "shop": 0
+      },
+      "surpriseChance": 0,
+      "eliteBonus": 0,
+      "enemyPool": [
+        "ene_young_boar",
+        "ene_starving_wolf"
+      ],
+      "eventPool": [
+        "evt_sunlit_nap",
+        "evt_lost_child",
+        "evt_wandering_merchant",
+        "evt_forest_ascetic",
+        "evt_storm_shelter",
+        "evt_mushroom_ring"
+      ]
+    },
+    {
+      "id": "plc_lumber_camp",
+      "zone": 1,
+      "name": "나무꾼의 벌목장",
+      "descriptions": [
+        "베어 낸 그루터기가 줄지어 있고 장작더미가 높이 쌓여 있다.",
+        "멀리서 도끼질 소리가 규칙적으로 울린다.",
+        "작업 천막 옆에 손질된 도구들이 가지런히 걸려 있다."
+      ],
+      "contentWeights": {
+        "combat": 25,
+        "event": 45,
+        "rest": 10,
+        "treasure": 0,
+        "shop": 20
+      },
+      "surpriseChance": 10,
+      "eliteBonus": 0,
+      "enemyPool": [
+        "ene_forest_bandit",
+        "ene_young_boar"
+      ],
+      "eventPool": [
+        "evt_lumberjack_request",
+        "evt_glowing_stump",
+        "evt_grateful_parent",
+        "evt_wandering_swordsman",
+        "evt_abandoned_cart",
+        "evt_merchant_quarrel",
+        "evt_fallen_tree"
+      ]
+    },
+    {
+      "id": "plc_mossy_graves",
+      "zone": 1,
+      "name": "이끼 낀 무덤가",
+      "descriptions": [
+        "이름이 지워진 비석들이 이끼 속에 비스듬히 박혀 있다.",
+        "무덤 하나가 파헤쳐져 있다. 흙이 아직 축축하다.",
+        "녹슨 투구가 비석 위에 얹혀 있다. 누군가 남긴 표시 같다."
+      ],
+      "contentWeights": {
+        "combat": 25,
+        "event": 50,
+        "rest": 0,
+        "treasure": 25,
+        "shop": 0
+      },
+      "surpriseChance": 15,
+      "eliteBonus": 0,
+      "enemyPool": [
+        "ene_creeping_vine",
+        "ene_venom_spider"
+      ],
+      "eventPool": [
+        "evt_open_grave",
+        "evt_fallen_knight",
+        "evt_knight_spirit",
+        "evt_crow_flock",
+        "evt_whispering_voice",
+        "evt_carved_stones"
+      ]
+    },
+    {
+      "id": "plc_vine_tunnel",
+      "zone": 1,
+      "name": "덩굴 터널",
+      "descriptions": [
+        "덩굴이 머리 위로 엉켜 길게 이어지는 터널을 이루었다.",
+        "터널 안쪽에서 덩굴이 천천히 오므라드는 소리가 난다.",
+        "덩굴 사이로 들어오는 빛이 붉게 물들어 있다."
+      ],
+      "contentWeights": {
+        "combat": 60,
+        "event": 35,
+        "rest": 0,
+        "treasure": 5,
+        "shop": 0
+      },
+      "surpriseChance": 35,
+      "eliteBonus": 5,
+      "enemyPool": [
+        "ene_creeping_vine",
+        "ene_venom_spider"
+      ],
+      "eventPool": [
+        "evt_vine_snared",
+        "evt_spider_nest",
+        "evt_poison_flowers",
+        "evt_hollow_log",
+        "evt_glowing_moss",
+        "evt_snare_trap"
       ]
     }
   ],
@@ -2126,9 +2251,10 @@ export const dungeonForestData = {
               ]
             },
             "success": {
-              "text": "온몸에 생기가 돈다.",
+              "text": "온몸에 생기가 돌고 힘이 솟는다.",
               "result": [
-                "hp:15"
+                "hp:10",
+                "item:random:elixir"
               ]
             }
           }
@@ -2498,10 +2624,10 @@ export const dungeonForestData = {
               ]
             },
             "success": {
-              "text": "바닥에 가라앉은 물건들을 건졌다.",
+              "text": "바닥에 가라앉은 물건들 사이에서 봉인된 약병을 건졌다.",
               "result": [
                 "gold:6",
-                "item:random:consumable"
+                "item:random:elixir"
               ]
             }
           }
@@ -3669,11 +3795,11 @@ export const dungeonForestData = {
           "difficulty": "none",
           "outcomes": {
             "success": {
-              "text": "피가 홈을 타고 스며들자 속삭임이 또렷한 이름 하나를 남긴다. 바위 틈에서 무언가 굴러 나왔다.",
+              "text": "피가 홈을 타고 스며들자 속삭임이 또렷한 이름 하나를 남긴다. 바위 틈에서 작은 약병이 굴러 나왔다.",
               "result": [
                 "hp:-6",
                 "flag:heardStoneWhisper",
-                "item:random:consumable"
+                "item:random:elixir"
               ]
             }
           }
@@ -4739,9 +4865,10 @@ export const dungeonForestData = {
               "result": []
             },
             "success": {
-              "text": "몸속 깊은 곳까지 생기가 퍼진다.",
+              "text": "몸속 깊은 곳까지 생기가 퍼지며 감각이 또렷해진다.",
               "result": [
-                "hp:20"
+                "hp:10",
+                "item:random:elixir"
               ]
             }
           }
@@ -5799,10 +5926,10 @@ export const dungeonForestData = {
               ]
             },
             "success": {
-              "text": "연못 바닥에서 무언가가 떠올랐다.",
+              "text": "연못 바닥에서 은빛 병 하나가 떠올랐다.",
               "result": [
                 "gold:-2",
-                "item:random:consumable"
+                "item:random:elixir"
               ]
             }
           }
@@ -9332,6 +9459,838 @@ export const dungeonForestData = {
           "outcomes": {
             "success": {
               "text": "으르렁거리는 소리를 뒤로하고 물러났다.",
+              "result": []
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "evt_sunlit_nap",
+      "zone": 1,
+      "title": "따스한 햇볕",
+      "description": "공터 한가운데 햇볕이 고여 있다. 풀이 폭신하고, 눈꺼풀이 저절로 무거워진다.",
+      "repeatable": false,
+      "requiresFlags": [],
+      "forbiddenFlags": [],
+      "group": "",
+      "choices": [
+        {
+          "id": "nap",
+          "order": 1,
+          "text": "풀밭에 누워 잠깐 눈을 붙인다",
+          "verb": "",
+          "condition": [],
+          "skillBonus": [],
+          "difficulty": "normal",
+          "outcomes": {
+            "fail": {
+              "text": "눈을 떠 보니 늑대가 코앞에 있다!",
+              "result": [
+                "fight:ene_starving_wolf:ambushed"
+              ]
+            },
+            "partial": {
+              "text": "선잠을 잤다. 그래도 몸이 조금 가볍다.",
+              "result": [
+                "hp:8"
+              ]
+            },
+            "success": {
+              "text": "깊이 자고 일어나니 상처가 아물어 있다.",
+              "result": [
+                "hp:20"
+              ]
+            }
+          }
+        },
+        {
+          "id": "watch_rest",
+          "order": 2,
+          "text": "나무에 등을 기대고 경계하며 쉰다",
+          "verb": "insight",
+          "condition": [
+            "wis:2"
+          ],
+          "skillBonus": [],
+          "difficulty": "easy",
+          "outcomes": {
+            "fail": {
+              "text": "주변 소리에 신경 쓰느라 쉬지 못했다.",
+              "result": []
+            },
+            "partial": {
+              "text": "잠깐 숨을 돌렸다.",
+              "result": [
+                "hp:5"
+              ]
+            },
+            "success": {
+              "text": "바람 소리까지 가려 들으며 편히 쉬었다.",
+              "result": [
+                "hp:10"
+              ]
+            }
+          }
+        },
+        {
+          "id": "gather_herbs",
+          "order": 3,
+          "text": "햇볕 잘 드는 곳에서 약초를 찾는다",
+          "verb": "insight",
+          "condition": [
+            "wis:8"
+          ],
+          "skillBonus": [],
+          "difficulty": "easy",
+          "outcomes": {
+            "fail": {
+              "text": "비슷한 잡초뿐이다.",
+              "result": []
+            },
+            "partial": {
+              "text": "약초 몇 줄기를 찾았다.",
+              "result": [
+                "item:con_bandage"
+              ]
+            },
+            "success": {
+              "text": "귀한 약초 군락을 찾았다.",
+              "result": [
+                "item:con_potion",
+                "item:con_antidote"
+              ]
+            }
+          }
+        },
+        {
+          "id": "climb_rest",
+          "order": 4,
+          "text": "높은 가지 위에 올라 쉰다",
+          "verb": "stealth",
+          "condition": [
+            "agi:5"
+          ],
+          "skillBonus": [],
+          "difficulty": "normal",
+          "outcomes": {
+            "fail": {
+              "text": "가지가 부러져 떨어졌다.",
+              "result": [
+                "hp:-5"
+              ]
+            },
+            "partial": {
+              "text": "가지가 불편해 오래 쉬지 못했다.",
+              "result": [
+                "hp:6"
+              ]
+            },
+            "success": {
+              "text": "나무 위에서 숲을 내려다보며 쉬었다. 멀리 반짝이는 것이 보여 챙겨 왔다.",
+              "result": [
+                "hp:12",
+                "gold:4"
+              ]
+            }
+          }
+        },
+        {
+          "id": "warm_meal",
+          "order": 5,
+          "text": "불을 피우고 따뜻한 식사를 한다 (골드 3)",
+          "verb": "",
+          "condition": [
+            "gold:3"
+          ],
+          "skillBonus": [],
+          "difficulty": "none",
+          "outcomes": {
+            "success": {
+              "text": "가져온 식량을 데워 먹었다. 배 속부터 기운이 돈다.",
+              "result": [
+                "gold:-3",
+                "hp:15"
+              ]
+            }
+          }
+        },
+        {
+          "id": "move_on",
+          "order": 6,
+          "text": "졸음을 떨치고 길을 재촉한다",
+          "verb": "pass",
+          "condition": [],
+          "skillBonus": [],
+          "difficulty": "none",
+          "outcomes": {
+            "success": {
+              "text": "기지개를 한 번 켜고 다시 걷는다.",
+              "result": []
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "evt_lumberjack_request",
+      "zone": 1,
+      "title": "나무꾼의 부탁",
+      "description": "땀에 젖은 나무꾼이 도끼를 내려놓는다. \"통나무 나르는 것 좀 거들어 주겠소? 품삯은 쳐 드리리다.\"",
+      "repeatable": false,
+      "requiresFlags": [],
+      "forbiddenFlags": [],
+      "group": "",
+      "choices": [
+        {
+          "id": "carry_log",
+          "order": 1,
+          "text": "통나무를 어깨에 메고 나른다",
+          "verb": "force",
+          "condition": [
+            "str:2"
+          ],
+          "skillBonus": [],
+          "difficulty": "easy",
+          "outcomes": {
+            "fail": {
+              "text": "통나무에 발을 찧었다.",
+              "result": [
+                "hp:-4"
+              ]
+            },
+            "partial": {
+              "text": "몇 개 나르고 동전을 받았다.",
+              "result": [
+                "gold:3"
+              ]
+            },
+            "success": {
+              "text": "부지런히 날라 품삯을 두둑이 받았다.",
+              "result": [
+                "gold:6"
+              ]
+            }
+          }
+        },
+        {
+          "id": "carry_two",
+          "order": 2,
+          "text": "통나무 두 개를 한꺼번에 나른다",
+          "verb": "force",
+          "condition": [
+            "str:8"
+          ],
+          "skillBonus": [
+            {
+              "skillId": "skl_bash",
+              "bonus": 2
+            },
+            {
+              "skillId": "skl_heavy_swing",
+              "bonus": 2
+            }
+          ],
+          "difficulty": "easy",
+          "outcomes": {
+            "fail": {
+              "text": "허리가 삐끗했다.",
+              "result": [
+                "hp:-6"
+              ]
+            },
+            "partial": {
+              "text": "힘자랑에 나무꾼이 웃으며 품삯을 더 쳐 준다.",
+              "result": [
+                "gold:6"
+              ]
+            },
+            "success": {
+              "text": "나무꾼이 혀를 내두르며 아껴 두던 물건을 건넨다.",
+              "result": [
+                "gold:6",
+                "item:random:equipment"
+              ]
+            }
+          }
+        },
+        {
+          "id": "split_wood",
+          "order": 3,
+          "text": "도끼를 빌려 장작을 팬다 (HP 5 소모)",
+          "verb": "",
+          "condition": [],
+          "skillBonus": [],
+          "difficulty": "none",
+          "outcomes": {
+            "success": {
+              "text": "손바닥이 쓰라리지만 장작더미를 다 팼다.",
+              "result": [
+                "hp:-5",
+                "gold:8"
+              ]
+            }
+          }
+        },
+        {
+          "id": "haggle_wage",
+          "order": 4,
+          "text": "일을 거들기 전에 품삯부터 흥정한다",
+          "verb": "persuade",
+          "condition": [],
+          "skillBonus": [],
+          "difficulty": "normal",
+          "outcomes": {
+            "fail": {
+              "text": "나무꾼이 기분이 상해 다른 사람을 찾겠다고 한다.",
+              "result": []
+            },
+            "partial": {
+              "text": "조금 올려 받았다.",
+              "result": [
+                "gold:5"
+              ]
+            },
+            "success": {
+              "text": "말이 잘 통했다. 일을 끝내자 품삯에 회복약까지 얹어 준다.",
+              "result": [
+                "gold:5",
+                "item:con_potion"
+              ]
+            }
+          }
+        },
+        {
+          "id": "pocket_tools",
+          "order": 5,
+          "text": "일하는 척하며 쓸 만한 도구를 챙긴다",
+          "verb": "stealth",
+          "condition": [
+            "agi:5"
+          ],
+          "skillBonus": [],
+          "difficulty": "normal",
+          "outcomes": {
+            "fail": {
+              "text": "나무꾼에게 들켜 주먹이 날아왔다.",
+              "result": [
+                "hp:-6"
+              ]
+            },
+            "partial": {
+              "text": "숫돌 하나를 슬쩍했다.",
+              "result": [
+                "item:con_whetstone"
+              ]
+            },
+            "success": {
+              "text": "아무도 모르게 쓸 만한 물건을 챙겼다.",
+              "result": [
+                "item:random:equipment"
+              ]
+            }
+          }
+        },
+        {
+          "id": "decline",
+          "order": 6,
+          "text": "바쁘다며 사양하고 지나간다",
+          "verb": "pass",
+          "condition": [],
+          "skillBonus": [],
+          "difficulty": "none",
+          "outcomes": {
+            "success": {
+              "text": "\"그럼 조심히 가시오.\" 나무꾼이 다시 도끼를 든다.",
+              "result": []
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "evt_open_grave",
+      "zone": 1,
+      "title": "파헤쳐진 무덤",
+      "description": "무덤 하나가 파헤쳐져 관 뚜껑이 드러나 있다. 젖은 흙 위로 삽 자국과 발자국이 숲 쪽으로 이어진다.",
+      "repeatable": false,
+      "requiresFlags": [],
+      "forbiddenFlags": [],
+      "group": "",
+      "choices": [
+        {
+          "id": "track_robber",
+          "order": 1,
+          "text": "발자국을 따라 도굴꾼을 쫓는다",
+          "verb": "stealth",
+          "condition": [
+            "agi:5"
+          ],
+          "skillBonus": [],
+          "difficulty": "normal",
+          "outcomes": {
+            "fail": {
+              "text": "발자국을 놓쳤다. 덤불을 헤매다 긁혔다.",
+              "result": [
+                "hp:-4"
+              ]
+            },
+            "partial": {
+              "text": "도굴꾼이 흘린 동전 몇 닢만 주웠다.",
+              "result": [
+                "gold:4"
+              ]
+            },
+            "success": {
+              "text": "자루를 멘 도굴꾼을 찾았다. 뒤에서 덮친다!",
+              "result": [
+                "gold:6",
+                "fight:ene_forest_bandit:surprise"
+              ]
+            }
+          }
+        },
+        {
+          "id": "read_epitaph",
+          "order": 2,
+          "text": "비석의 지워진 글씨를 읽어 낸다",
+          "verb": "insight",
+          "condition": [
+            "wis:5"
+          ],
+          "skillBonus": [],
+          "difficulty": "normal",
+          "outcomes": {
+            "fail": {
+              "text": "글씨는 끝내 읽히지 않는다.",
+              "result": []
+            },
+            "partial": {
+              "text": "숲을 지키던 기사의 무덤이다. 비석 밑에 동전이 놓여 있다.",
+              "result": [
+                "gold:3"
+              ]
+            },
+            "success": {
+              "text": "비석 뒷면에 숨겨 둔 공물 칸을 찾았다.",
+              "result": [
+                "item:random:equipment"
+              ]
+            }
+          }
+        },
+        {
+          "id": "take_goods",
+          "order": 3,
+          "text": "관 속에 남은 물건을 챙긴다",
+          "verb": "",
+          "condition": [],
+          "skillBonus": [],
+          "difficulty": "hard",
+          "outcomes": {
+            "fail": {
+              "text": "관 속에서 덩굴이 튀어나와 팔을 감는다!",
+              "result": [
+                "fight:ene_creeping_vine:ambushed"
+              ]
+            },
+            "partial": {
+              "text": "녹슨 장신구 몇 개를 챙겼다.",
+              "result": [
+                "gold:6"
+              ]
+            },
+            "success": {
+              "text": "도굴꾼이 놓친 물건이 남아 있었다.",
+              "result": [
+                "gold:4",
+                "item:random:equipment"
+              ]
+            }
+          }
+        },
+        {
+          "id": "dig_deeper",
+          "order": 4,
+          "text": "관 아래를 더 깊이 파 본다",
+          "verb": "force",
+          "condition": [
+            "str:8"
+          ],
+          "skillBonus": [],
+          "difficulty": "easy",
+          "outcomes": {
+            "fail": {
+              "text": "무너진 흙에 파묻힐 뻔했다.",
+              "result": [
+                "hp:-6"
+              ]
+            },
+            "partial": {
+              "text": "흙 속에서 동전 주머니를 찾았다.",
+              "result": [
+                "gold:5"
+              ]
+            },
+            "success": {
+              "text": "관 아래 묻어 둔 상자가 나왔다.",
+              "result": [
+                "gold:5",
+                "item:random:equipment"
+              ]
+            }
+          }
+        },
+        {
+          "id": "rebury",
+          "order": 5,
+          "text": "흙을 다시 덮고 무덤을 정돈한다",
+          "verb": "",
+          "condition": [],
+          "skillBonus": [],
+          "difficulty": "none",
+          "outcomes": {
+            "success": {
+              "text": "흙을 덮고 나니 서늘한 바람이 한 번 스쳐 간다. 마음이 가벼워졌다.",
+              "result": [
+                "hp:6"
+              ]
+            }
+          }
+        },
+        {
+          "id": "bow_pass",
+          "order": 6,
+          "text": "고개를 숙이고 지나간다",
+          "verb": "pass",
+          "condition": [],
+          "skillBonus": [],
+          "difficulty": "none",
+          "outcomes": {
+            "success": {
+              "text": "무덤가를 조용히 벗어났다.",
+              "result": []
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "evt_vine_snared",
+      "zone": 1,
+      "title": "덩굴에 갇힌 사내",
+      "description": "덩굴 터널 한쪽에서 신음이 들린다. 행상 차림의 사내가 덩굴에 칭칭 감겨 매달려 있다.",
+      "repeatable": false,
+      "requiresFlags": [],
+      "forbiddenFlags": [],
+      "group": "wounded_person",
+      "choices": [
+        {
+          "id": "tear_vines",
+          "order": 1,
+          "text": "덩굴을 힘으로 뜯어낸다",
+          "verb": "force",
+          "condition": [
+            "str:5"
+          ],
+          "skillBonus": [
+            {
+              "skillId": "skl_bash",
+              "bonus": 2
+            },
+            {
+              "skillId": "skl_heavy_swing",
+              "bonus": 2
+            }
+          ],
+          "difficulty": "normal",
+          "outcomes": {
+            "fail": {
+              "text": "덩굴이 오히려 내 팔까지 감아 온다!",
+              "result": [
+                "fight:ene_creeping_vine:ambushed"
+              ]
+            },
+            "partial": {
+              "text": "사내를 끌어냈지만 덩굴에 긁혔다. 사내가 고맙다며 동전을 건넨다.",
+              "result": [
+                "hp:-3",
+                "gold:4"
+              ]
+            },
+            "success": {
+              "text": "덩굴을 끊고 사내를 구했다. 사내가 짐 속 물건을 내민다.",
+              "result": [
+                "gold:4",
+                "item:random:consumable"
+              ]
+            }
+          }
+        },
+        {
+          "id": "find_root",
+          "order": 2,
+          "text": "덩굴 줄기를 따라가 뿌리를 찾는다",
+          "verb": "insight",
+          "condition": [
+            "wis:8"
+          ],
+          "skillBonus": [],
+          "difficulty": "easy",
+          "outcomes": {
+            "fail": {
+              "text": "줄기가 너무 많아 뿌리를 찾지 못했다.",
+              "result": []
+            },
+            "partial": {
+              "text": "뿌리를 찾아 끊자 덩굴이 느슨해졌다. 사내가 동전을 건넨다.",
+              "result": [
+                "gold:4"
+              ]
+            },
+            "success": {
+              "text": "뿌리를 끊자 덩굴이 맥없이 풀린다. 사내가 아끼던 물건을 사례로 준다.",
+              "result": [
+                "item:random:equipment"
+              ]
+            }
+          }
+        },
+        {
+          "id": "burn_vines",
+          "order": 3,
+          "text": "불씨로 덩굴을 그슬린다",
+          "verb": "use",
+          "condition": [
+            "skill:skl_ember"
+          ],
+          "skillBonus": [
+            {
+              "skillId": "skl_ember",
+              "bonus": 5
+            }
+          ],
+          "difficulty": "easy",
+          "outcomes": {
+            "fail": {
+              "text": "불꽃에 사내가 비명을 지른다. 겨우 꺼냈지만 사례는 없다.",
+              "result": []
+            },
+            "partial": {
+              "text": "덩굴이 움츠러들어 사내가 빠져나왔다.",
+              "result": [
+                "gold:4"
+              ]
+            },
+            "success": {
+              "text": "덩굴이 쉭쉭대며 물러난다. 사내가 연신 고개를 숙인다.",
+              "result": [
+                "gold:5",
+                "item:random:consumable"
+              ]
+            }
+          }
+        },
+        {
+          "id": "cut_strands",
+          "order": 4,
+          "text": "칼끝으로 덩굴을 한 가닥씩 끊는다",
+          "verb": "",
+          "condition": [],
+          "skillBonus": [],
+          "difficulty": "normal",
+          "outcomes": {
+            "fail": {
+              "text": "칼이 미끄러져 내 손을 베었다.",
+              "result": [
+                "hp:-4"
+              ]
+            },
+            "partial": {
+              "text": "시간은 걸렸지만 사내를 구했다.",
+              "result": [
+                "gold:3"
+              ]
+            },
+            "success": {
+              "text": "덩굴을 하나도 건드리지 않고 사내를 풀어 주었다. 사내가 회복약을 건넨다.",
+              "result": [
+                "item:con_potion"
+              ]
+            }
+          }
+        },
+        {
+          "id": "loot_pack",
+          "order": 5,
+          "text": "사내는 두고 떨어진 짐만 챙긴다",
+          "verb": "",
+          "condition": [],
+          "skillBonus": [],
+          "difficulty": "none",
+          "outcomes": {
+            "success": {
+              "text": "사내의 원망 섞인 신음을 뒤로하고 짐을 뒤졌다.",
+              "result": [
+                "gold:7"
+              ]
+            }
+          }
+        },
+        {
+          "id": "back_off",
+          "order": 6,
+          "text": "덩굴이 내게 뻗기 전에 물러난다",
+          "verb": "pass",
+          "condition": [],
+          "skillBonus": [],
+          "difficulty": "none",
+          "outcomes": {
+            "success": {
+              "text": "사내의 신음이 등 뒤로 멀어진다.",
+              "result": []
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "evt_glowing_stump",
+      "zone": 1,
+      "title": "빛나는 그루터기",
+      "description": "갓 베어 낸 그루터기의 나이테가 희미하게 빛난다. 나이테 사이로 수액이 맺혀 흐른다.",
+      "repeatable": false,
+      "requiresFlags": [],
+      "forbiddenFlags": [],
+      "group": "glow",
+      "choices": [
+        {
+          "id": "count_rings",
+          "order": 1,
+          "text": "나이테를 하나하나 센다",
+          "verb": "insight",
+          "condition": [
+            "wis:2"
+          ],
+          "skillBonus": [],
+          "difficulty": "easy",
+          "outcomes": {
+            "fail": {
+              "text": "세다가 눈이 아파 그만두었다.",
+              "result": []
+            },
+            "partial": {
+              "text": "수백 년 묵은 나무였다. 나이테 틈에 박힌 동전을 찾았다.",
+              "result": [
+                "gold:3"
+              ]
+            },
+            "success": {
+              "text": "나이테 하나가 유난히 밝다. 그 자리를 누르자 작은 홈이 열린다.",
+              "result": [
+                "gold:3",
+                "item:random:consumable"
+              ]
+            }
+          }
+        },
+        {
+          "id": "touch_rings",
+          "order": 2,
+          "text": "빛나는 나이테에 손바닥을 얹는다",
+          "verb": "",
+          "condition": [],
+          "skillBonus": [],
+          "difficulty": "hard",
+          "outcomes": {
+            "fail": {
+              "text": "빛이 손바닥을 태우듯 뜨겁다.",
+              "result": [
+                "hp:-7"
+              ]
+            },
+            "partial": {
+              "text": "머릿속에 낯선 움직임이 스쳤다가 사라진다. 몸이 조금 가볍다.",
+              "result": [
+                "hp:5"
+              ]
+            },
+            "success": {
+              "text": "나무가 기억하던 기술이 손끝으로 흘러든다.",
+              "result": [
+                "skill:choice"
+              ]
+            }
+          }
+        },
+        {
+          "id": "drink_sap",
+          "order": 3,
+          "text": "맺힌 수액을 받아 마신다",
+          "verb": "",
+          "condition": [],
+          "skillBonus": [],
+          "difficulty": "none",
+          "outcomes": {
+            "success": {
+              "text": "달큰한 수액이 목을 적신다. 기운이 돈다.",
+              "result": [
+                "hp:10"
+              ]
+            }
+          }
+        },
+        {
+          "id": "split_stump",
+          "order": 4,
+          "text": "그루터기를 쪼개 속을 본다",
+          "verb": "force",
+          "condition": [
+            "str:5"
+          ],
+          "skillBonus": [
+            {
+              "skillId": "skl_bash",
+              "bonus": 2
+            },
+            {
+              "skillId": "skl_heavy_swing",
+              "bonus": 2
+            }
+          ],
+          "difficulty": "normal",
+          "outcomes": {
+            "fail": {
+              "text": "도끼가 튕겨 나왔다. 빛이 사그라든다.",
+              "result": [
+                "hp:-4"
+              ]
+            },
+            "partial": {
+              "text": "속에서 빛나는 나뭇조각을 얻었다. 비싸게 팔릴 것 같다.",
+              "result": [
+                "gold:6"
+              ]
+            },
+            "success": {
+              "text": "그루터기 한가운데 무언가 박혀 있다.",
+              "result": [
+                "item:random:equipment"
+              ]
+            }
+          }
+        },
+        {
+          "id": "turn_away",
+          "order": 5,
+          "text": "빛을 등지고 지나간다",
+          "verb": "pass",
+          "condition": [],
+          "skillBonus": [],
+          "difficulty": "none",
+          "outcomes": {
+            "success": {
+              "text": "빛이 등 뒤에서 천천히 사그라든다.",
               "result": []
             }
           }

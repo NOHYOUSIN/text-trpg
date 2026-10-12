@@ -1,5 +1,7 @@
-import { catalog } from "../data/catalog.js?v=20261013-032945";
-import { BOSS_REWARD_CANDIDATES, BOSS_REWARD_GRADE, EVENT_SKILL_CHOICE, GRADE_WEIGHTS_BY_ZONE, LOOT, SKILL_POOL } from "../data/rules.js?v=20261013-032945";
+import { catalog } from "../data/catalog.js?v=20261013-042652";
+import { BOSS_REWARD_CANDIDATES, BOSS_REWARD_GRADE, EVENT_SKILL_CHOICE, GRADE_WEIGHTS_BY_ZONE, LOOT, SKILL_POOL } from "../data/rules.js?v=20261013-042652";
+import { isElixir } from "./ConsumableEffects.js?v=20261013-042652";
+import { pickBossElixir, pickRandomElixir } from "./ElixirSystem.js?v=20261013-042652";
 
 const GRADE_ORDER = ["common", "uncommon", "rare", "unique"];
 
@@ -75,9 +77,9 @@ export function pickSkillChoices({ run, adventurer, dice }) {
   return ids;
 }
 
-// 시작 지급 전용(starter) 소모품은 보상·상점에 나오지 않는다.
+// 시작 지급 전용(starter) 소모품과 영약은 일반 소모품 뽑기(전투 보상·상점·item:random:consumable)에 나오지 않는다.
 export function pickConsumable({ dice, excludeIds = [] }) {
-  return dice.pick([...catalog.consumables.values()].filter((item) => !item.starter && !excludeIds.includes(item.id)));
+  return dice.pick([...catalog.consumables.values()].filter((item) => !item.starter && !isElixir(item) && !excludeIds.includes(item.id)));
 }
 
 // 획득 표기({ kind, id } 또는 { kind, random })를 실제 ID로 정한다.
@@ -99,21 +101,28 @@ export function resolveAcquisition(acquisition, { run, adventurer, dice }) {
     return { kind: "item", id: acquisition.id };
   }
 
-  const item = acquisition.random === "equipment"
-    ? pickEquipment({ run, dice })
-    : pickConsumable({ dice });
+  let item = null;
+
+  if (acquisition.random === "equipment") {
+    item = pickEquipment({ run, dice });
+  } else if (acquisition.random === "elixir") {
+    item = pickRandomElixir({ adventurer, dice });
+  } else {
+    item = pickConsumable({ dice });
+  }
+
   return item ? { kind: "item", id: item.id } : null;
 }
 
-// 일반 전투 보상(골드 외): 소모품 20%, 장비 10%
-export function rollCombatLoot({ run, dice }) {
+// 일반 전투 보상(골드 외): 소모품 20%, 장비 20%(정예 30%)
+export function rollCombatLoot({ run, dice, veteran = false }) {
   const loot = [];
 
   if (dice.chance(LOOT.combatConsumableChance)) {
     loot.push({ kind: "item", random: "consumable" });
   }
 
-  if (dice.chance(LOOT.combatEquipmentChance)) {
+  if (dice.chance(veteran ? LOOT.veteranEquipmentChance : LOOT.combatEquipmentChance)) {
     loot.push({ kind: "item", random: "equipment" });
   }
 
@@ -125,17 +134,20 @@ export function rollTreasure({ dice }) {
   return kind === "skill" ? { kind: "skill", random: true } : { kind: "item", random: kind };
 }
 
-// 보스 보상 후보 2~3개: 확정 등급의 스킬 또는 장비
+// 보스 보상 후보 2~3개: 확정 등급의 스킬 또는 장비.
+// 중간보스·구역 보스는 후보 하나가 주 능력치의 진한 영약이다. 엘리트 보상은 영약도 후보로 나온다. (2026-10-13)
 export function createBossRewardCandidates({ rank, run, adventurer, dice }) {
   const grade = BOSS_REWARD_GRADE[rank]?.[run.zone] ?? "rare";
   const count = dice.int(BOSS_REWARD_CANDIDATES.min, BOSS_REWARD_CANDIDATES.max);
   const candidates = [];
   const usedIds = [];
+  const isElite = rank === "elite";
+  const bossElixir = isElite ? null : pickBossElixir({ adventurer, dice });
 
-  // 엘리트 보상은 장비·스킬·소모품 중에서, 보스 보상은 장비·스킬 중에서 고른다.
-  const kinds = rank === "elite" ? ["skill", "equipment", "consumable"] : ["skill", "equipment"];
+  // 엘리트 보상은 장비·스킬·소모품·영약 중에서, 보스 보상은 장비·스킬 중에서 고른다.
+  const kinds = isElite ? ["skill", "equipment", "consumable", "elixir"] : ["skill", "equipment"];
 
-  for (let i = 0; i < count; i += 1) {
+  for (let i = 0; i < count - (bossElixir ? 1 : 0); i += 1) {
     const kind = dice.pick(kinds);
     let entry = null;
 
@@ -143,6 +155,9 @@ export function createBossRewardCandidates({ rank, run, adventurer, dice }) {
       entry = pickSkill({ run, adventurer, dice, grade, excludeIds: usedIds });
     } else if (kind === "equipment") {
       entry = pickByGrade(availableEquipment(run, usedIds), grade, dice);
+    } else if (kind === "elixir") {
+      entry = pickRandomElixir({ adventurer, dice });
+      entry = entry && !usedIds.includes(entry.id) ? entry : null;
     } else {
       entry = pickConsumable({ dice, excludeIds: usedIds });
     }
@@ -151,6 +166,10 @@ export function createBossRewardCandidates({ rank, run, adventurer, dice }) {
       usedIds.push(entry.id);
       candidates.push({ kind: kind === "skill" ? "skill" : "item", id: entry.id });
     }
+  }
+
+  if (bossElixir) {
+    candidates.push({ kind: "item", id: bossElixir.id });
   }
 
   return candidates;

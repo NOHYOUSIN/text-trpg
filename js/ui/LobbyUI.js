@@ -1,10 +1,10 @@
-import { formatNumber as fmt } from "../systems/NumberRules.js?v=20261013-032945";
-import { renderScene } from "./SceneUI.js?v=20261013-032945";
+import { formatNumber as fmt } from "../systems/NumberRules.js?v=20261013-042652";
+import { renderScene } from "./SceneUI.js?v=20261013-042652";
 
 const GAME_TITLE = "Text TRPG";
 
-// 로비: 게임 제목, 새로하기, 이어하기(진행 중인 탐험이 있을 때만), 설정
-export function renderLobby(root, { saveSummary, onNew, onContinue, onSettings }) {
+// 로비: 게임 제목, 새로하기, 이어하기(진행 중인 탐험이 있을 때만), 설정, 도움말
+export function renderLobby(root, { saveSummary, onNew, onContinue, onSettings, onHelp }) {
   const scene = renderScene(root, {
     eyebrow: "TEXT TRPG ADVENTURE",
     title: GAME_TITLE,
@@ -17,7 +17,8 @@ export function renderLobby(root, { saveSummary, onNew, onContinue, onSettings }
         disabled: !saveSummary,
         onClick: onContinue,
       },
-      { label: "설정", onClick: onSettings },
+      { label: "설정", onClick: onSettings, repeatable: true },
+      { label: "도움말", onClick: onHelp, repeatable: true },
     ],
   });
   scene.classList.add("lobby");
@@ -49,16 +50,12 @@ export function renderDungeonSelect(root, { dungeons, onPick, onBack }) {
   });
 }
 
-// 던전 카드: 대략적인 설명을 보고 출발한다.
+// 던전 카드: 테마 설명을 보고 출발한다. 설명의 줄바꿈은 문단으로 나눈다. (2026-10-13 구역 목록·진행 설명 삭제)
 export function renderDungeonCard(root, { dungeon, onDepart, onBack }) {
   renderScene(root, {
     eyebrow: "던전",
     title: dungeon.name,
-    paragraphs: [dungeon.description],
-    details: [
-      `구역 ${dungeon.zones.length}개: ${dungeon.zones.map((zone) => zone.name).join(" → ")}`,
-      "구역마다 갈림길을 지나며 라운드를 나아가고, 정해진 라운드에 중간보스와 구역 보스가 나온다.",
-    ],
+    paragraphs: dungeon.description.split("\n").map((line) => line.trim()).filter(Boolean),
     buttons: [
       { label: "이 던전으로 출발", primary: true, onClick: onDepart },
       { label: "던전 목록으로", onClick: onBack },

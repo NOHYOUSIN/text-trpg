@@ -1,7 +1,7 @@
-import { STATUS_LABELS } from "../systems/EffectParser.js?v=20261013-032945";
-import { josa } from "../systems/Josa.js?v=20261013-032945";
-import { formatNumber as fmt } from "../systems/NumberRules.js?v=20261013-032945";
-import { statusValueText } from "../systems/StatusSystem.js?v=20261013-032945";
+import { STATUS_LABELS } from "../systems/EffectParser.js?v=20261013-042652";
+import { josa } from "../systems/Josa.js?v=20261013-042652";
+import { formatNumber as fmt } from "../systems/NumberRules.js?v=20261013-042652";
+import { statusValueText } from "../systems/StatusSystem.js?v=20261013-042652";
 
 // 상태이상 이름 옆에 보여 줄 짧은 표시와, 마우스를 올렸을 때 보여 줄 설명.
 function effectText(status) {

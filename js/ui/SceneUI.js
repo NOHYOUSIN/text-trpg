@@ -1,4 +1,4 @@
-import { isTextEffectEnabled, typeElements } from "./TextEffect.js?v=20261013-032945";
+import { isTextEffectEnabled, typeElements } from "./TextEffect.js?v=20261013-042652";
 
 const DICE_ROLL_MS = 800;
 const DICE_TICK_MS = 60;
@@ -148,7 +148,8 @@ function createButtonGroup(options, layout) {
 }
 
 // aside: 버튼 오른쪽에 따로 보이는 짧은 문구(가격 등)
-function createChoiceButton({ label, sub, aside, onClick, disabled = false, primary = false, color }) {
+// repeatable: 창을 여는 버튼처럼 장면이 바뀌지 않아 여러 번 누를 수 있는 버튼. 그 밖의 버튼은 한 번만 반응한다(두 번 누르기 방지).
+function createChoiceButton({ label, sub, aside, onClick, disabled = false, primary = false, color, repeatable = false }) {
   const button = document.createElement("button");
   button.type = "button";
   button.className = `scene-button${primary ? " is-primary" : ""}`;
@@ -169,7 +170,7 @@ function createChoiceButton({ label, sub, aside, onClick, disabled = false, prim
   }
 
   if (onClick) {
-    button.addEventListener("click", onClick, { once: true });
+    button.addEventListener("click", onClick, { once: !repeatable });
   }
 
   return button;

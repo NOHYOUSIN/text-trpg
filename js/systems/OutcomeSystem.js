@@ -1,8 +1,8 @@
-import { catalog, getItem } from "../data/catalog.js?v=20261013-032945";
-import { parseToken } from "./EffectParser.js?v=20261013-032945";
-import { josa } from "./Josa.js?v=20261013-032945";
-import { formatNumber as fmt, roundValue } from "./NumberRules.js?v=20261013-032945";
-import { getMaxHp } from "./TraitSystem.js?v=20261013-032945";
+import { catalog, getItem } from "../data/catalog.js?v=20261013-042652";
+import { parseToken } from "./EffectParser.js?v=20261013-042652";
+import { josa } from "./Josa.js?v=20261013-042652";
+import { formatNumber as fmt, roundValue } from "./NumberRules.js?v=20261013-042652";
+import { getMaxHp } from "./TraitSystem.js?v=20261013-042652";
 
 // 사건 결과 표기(hp:-0.5;gold:3;item:...;fight:...)를 적용한다.
 // 아이템·스킬 획득은 인벤토리·획득 화면이 처리하도록 acquisitions로 돌려준다.
@@ -74,7 +74,7 @@ export function describeAcquisition(acquisition) {
   }
 
   if (acquisition.random) {
-    return acquisition.random === "equipment" ? "무작위 장비" : "무작위 소모품";
+    return { equipment: "무작위 장비", elixir: "무작위 영약" }[acquisition.random] ?? "무작위 소모품";
   }
 
   return getItem(acquisition.id)?.name ?? acquisition.id;

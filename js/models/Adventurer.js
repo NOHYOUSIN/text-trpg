@@ -1,5 +1,5 @@
-import { SKILL_SLOTS, INVENTORY } from "../data/rules.js?v=20261013-032945";
-import { Inventory } from "./Inventory.js?v=20261013-032945";
+import { SKILL_SLOTS, INVENTORY } from "../data/rules.js?v=20261013-042652";
+import { Inventory } from "./Inventory.js?v=20261013-042652";
 
 // 모험가 상태. 장비·패시브를 반영한 최종 수치는 TraitSystem이 계산한다.
 export class Adventurer {

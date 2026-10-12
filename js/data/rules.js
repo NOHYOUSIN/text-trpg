@@ -36,7 +36,8 @@ export const CLASS_TRAITS = Object.freeze({
   warrior: { momentumMax: 5 },
   rogue: { firstStrikeMultiplier: 1.5, surpriseModifier: 3 },
   // 영창: 기본공격 대신 영창하고, 다음 기본공격·스킬 효과 ×1.75 (2026-10-13)
-  mage: { chantMultiplier: 1.75 },
+  // 영창 보호막: [영창] 행동 때 보호막 (2 + 지혜 × 0.3), 1턴, 주사위 없음. 전투 시작 때는 주지 않는다. (2026-10-13)
+  mage: { chantMultiplier: 1.75, chantShield: { base: 2, scaling: [{ stat: "wis", coef: 0.3 }], duration: 1 } },
 });
 
 export const STATUS = Object.freeze({
@@ -88,16 +89,25 @@ export const BOSS_REWARD_GRADE = Object.freeze({
 
 export const BOSS_REWARD_CANDIDATES = Object.freeze({ min: 2, max: 3 });
 
+// 성장 부족 대응 (2026-10-13): 일반 전투 장비 10 → 20%, 정예 30%, 보물·정비 탐색에 영약 20%
 export const LOOT = Object.freeze({
   combatConsumableChance: 20,
-  combatEquipmentChance: 10,
-  treasureWeights: { equipment: 50, consumable: 25, skill: 25 },
+  combatEquipmentChance: 20,
+  veteranEquipmentChance: 30,
+  treasureWeights: { equipment: 40, consumable: 15, skill: 25, elixir: 20 },
+});
+
+// 능력치 영약 (2026-10-13): 무작위 영약은 주 능력치 60% / 나머지 각 20%(주 능력치 2개면 각 40% / 20%), 진한 영약(+2) 10%
+export const ELIXIR = Object.freeze({
+  mainStatWeight: { 1: 60, 2: 40 },
+  otherStatWeight: 20,
+  strongChance: 10,
 });
 
 // 1구역 앞부분 사건 보너스: 판정이 있는 선택지의 결과가 실패가 아니고 빈 스킬 슬롯이 있으면 확률로 무작위 스킬 추가 (2026-10-09)
 export const EARLY_SKILL = Object.freeze({
   zone: 1,
-  maxRound: 6,
+  maxRound: 9, // 2026-10-13: 6 → 9(첫 정비 라운드 전까지)
   chance: 50,
 });
 

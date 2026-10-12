@@ -1,5 +1,5 @@
-import { readSetting, writeSetting } from "./Settings.js?v=20261013-032945";
-import { isTextEffectEnabled, setTextEffectEnabled } from "./TextEffect.js?v=20261013-032945";
+import { readSetting, writeSetting } from "./Settings.js?v=20261013-042652";
+import { isTextEffectEnabled, setTextEffectEnabled } from "./TextEffect.js?v=20261013-042652";
 
 // 설정 창(로비·탐험 중 어디서나 연다). 각 설정을 따로 켜고 끈다.
 const ITEMS = [
@@ -30,10 +30,12 @@ const ITEMS = [
 ];
 
 export class SettingsUI {
-  constructor(root, { onChange = () => {}, onClose = () => {} } = {}) {
+  // onHelp: 맨 아래 [도움말 보기] (탐험 중에도 도움말을 볼 수 있게)
+  constructor(root, { onChange = () => {}, onClose = () => {}, onHelp = null } = {}) {
     this.root = root;
     this.onChange = onChange;
     this.onClose = onClose;
+    this.onHelp = onHelp;
   }
 
   open() {
@@ -80,6 +82,13 @@ export class SettingsUI {
     }
 
     dialog.append(list);
+
+    if (this.onHelp) {
+      const help = button("도움말 보기", () => this.onHelp());
+      help.classList.add("settings-help");
+      dialog.append(help);
+    }
+
     this.root.replaceChildren(dialog);
   }
 }

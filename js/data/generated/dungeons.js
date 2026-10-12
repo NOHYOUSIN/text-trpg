@@ -1,4 +1,4 @@
 // 자동 생성 파일. 직접 고치지 말고 scripts/convert-sheets.py를 실행한다.
-import { dungeonForestData } from "./dungeon_forest.js?v=20261013-032945";
+import { dungeonForestData } from "./dungeon_forest.js?v=20261013-042652";
 
 export const dungeonDataList = Object.freeze([dungeonForestData]);

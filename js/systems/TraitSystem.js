@@ -1,14 +1,20 @@
-import { catalog } from "../data/catalog.js?v=20261013-032945";
-import { CLASS_TRAITS } from "../data/rules.js?v=20261013-032945";
-import { capEvade, capLifesteal, critMinFrom, parseAbility } from "./AbilitySystem.js?v=20261013-032945";
-import { parseToken } from "./EffectParser.js?v=20261013-032945";
-import { maxHpFrom, supportAmount } from "./FormulaSystem.js?v=20261013-032945";
-import { roundValue } from "./NumberRules.js?v=20261013-032945";
+import { catalog } from "../data/catalog.js?v=20261013-042652";
+import { CLASS_TRAITS } from "../data/rules.js?v=20261013-042652";
+import { capEvade, capLifesteal, critMinFrom, parseAbility } from "./AbilitySystem.js?v=20261013-042652";
+import { parseToken } from "./EffectParser.js?v=20261013-042652";
+import { maxHpFrom, supportAmount } from "./FormulaSystem.js?v=20261013-042652";
+import { roundValue } from "./NumberRules.js?v=20261013-042652";
 
-const STAT_KEYS = ["str", "agi", "wis"];
+export const STAT_KEYS = ["str", "agi", "wis"];
 
 export function mainStatOf(adventurer) {
   return catalog.classes.get(adventurer.classId)?.mainStat ?? "str";
+}
+
+// 주 능력치 목록(지금은 직업마다 1개. 주 능력치가 2개인 직업을 위해 목록으로 다룬다)
+export function mainStatsOf(adventurer) {
+  const main = catalog.classes.get(adventurer.classId)?.mainStat ?? "str";
+  return Array.isArray(main) ? main : [main];
 }
 
 // 장비 능력치 보너스 합계(부가 효과와 달리 누구나 받는다)

@@ -1625,11 +1625,11 @@ export const commonData = {
     {
       "id": "con_bandage",
       "name": "붕대",
-      "effect": "heal",
+      "effect": "heal;cure:bleed",
       "amount": 10,
       "maxStack": 3,
       "price": 5,
-      "description": "HP를 10 회복한다.",
+      "description": "HP를 10 회복하고 출혈을 멎게 한다.",
       "starter": false
     },
     {
@@ -1661,6 +1661,66 @@ export const commonData = {
       "price": null,
       "description": "마력이 담긴 두루마리. 펼치면 적에게 피해를 25 준다.",
       "starter": true
+    },
+    {
+      "id": "con_elixir_str",
+      "name": "힘의 영약",
+      "effect": "statUp:str",
+      "amount": 1,
+      "maxStack": 3,
+      "price": null,
+      "description": "마시면 힘이 영구히 1 오른다.",
+      "starter": false
+    },
+    {
+      "id": "con_elixir_agi",
+      "name": "민첩의 영약",
+      "effect": "statUp:agi",
+      "amount": 1,
+      "maxStack": 3,
+      "price": null,
+      "description": "마시면 민첩이 영구히 1 오른다.",
+      "starter": false
+    },
+    {
+      "id": "con_elixir_wis",
+      "name": "지혜의 영약",
+      "effect": "statUp:wis",
+      "amount": 1,
+      "maxStack": 3,
+      "price": null,
+      "description": "마시면 지혜가 영구히 1 오른다.",
+      "starter": false
+    },
+    {
+      "id": "con_elixir_str2",
+      "name": "진한 힘의 영약",
+      "effect": "statUp:str",
+      "amount": 2,
+      "maxStack": 3,
+      "price": null,
+      "description": "마시면 힘이 영구히 2 오른다.",
+      "starter": false
+    },
+    {
+      "id": "con_elixir_agi2",
+      "name": "진한 민첩의 영약",
+      "effect": "statUp:agi",
+      "amount": 2,
+      "maxStack": 3,
+      "price": null,
+      "description": "마시면 민첩이 영구히 2 오른다.",
+      "starter": false
+    },
+    {
+      "id": "con_elixir_wis2",
+      "name": "진한 지혜의 영약",
+      "effect": "statUp:wis",
+      "amount": 2,
+      "maxStack": 3,
+      "price": null,
+      "description": "마시면 지혜가 영구히 2 오른다.",
+      "starter": false
     }
   ],
   "classes": [
@@ -1732,7 +1792,7 @@ export const commonData = {
       ],
       "startGold": 5,
       "traitName": "영창",
-      "traitDesc": "기본공격 대신 영창한다. 영창한 다음 행동의 기본공격·스킬 효과 ×1.75(피해·회복·방어·강화). 영창하지 않은 상태에서는 피해를 주는 행동을 할 수 없고, 회복·방어·강화·약화 스킬과 소모품은 바로 쓸 수 있다. 기절하면 영창이 풀린다."
+      "traitDesc": "기본공격 대신 영창한다. 영창하는 동안 보호막을 두른다. 영창한 다음 행동의 기본공격·스킬 효과 ×1.75(피해·회복·방어·강화). 영창하지 않은 상태에서는 피해를 주는 행동을 할 수 없고, 회복·방어·강화·약화 스킬과 소모품은 바로 쓸 수 있다. 기절하면 영창이 풀린다."
     }
   ]
 };

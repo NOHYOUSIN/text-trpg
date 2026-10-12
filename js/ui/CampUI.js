@@ -1,4 +1,4 @@
-import { renderScene } from "./SceneUI.js?v=20261013-032945";
+import { renderScene } from "./SceneUI.js?v=20261013-042652";
 
 // 정비 라운드: 갈림길 대신 고정 선택지 두 개 (2026-10-13)
 export function renderCamp(root, { eyebrow, restPercent, onRest, onExplore }) {

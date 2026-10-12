@@ -552,6 +552,27 @@ body.menu-mode .scene-button {
   color: var(--accent-strong);
 }
 
+/* 설정 창 맨 아래 [도움말 보기] */
+.settings-help {
+  align-self: stretch;
+}
+
+/* 도움말 창: 항목 제목 + 본문, 맨 아래 [시작하기] */
+.help-dialog .status-title {
+  margin: 8px 0 0;
+}
+
+.help-text {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+.help-close {
+  align-self: stretch;
+  margin-top: 8px;
+}
+
 /* 요구 능력치를 채우지 못한 장비 표시 */
 .status-inactive {
   color: var(--danger);

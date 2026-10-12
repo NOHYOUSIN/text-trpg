@@ -1,8 +1,9 @@
-import { catalog, getItem, isEquipment } from "../data/catalog.js?v=20261013-032945";
-import { GRADES, INVENTORY } from "../data/rules.js?v=20261013-032945";
-import { parseToken } from "./EffectParser.js?v=20261013-032945";
-import { formatNumber as fmt, roundValue } from "./NumberRules.js?v=20261013-032945";
-import { getMaxHp } from "./TraitSystem.js?v=20261013-032945";
+import { catalog, getItem, isEquipment } from "../data/catalog.js?v=20261013-042652";
+import { GRADES, INVENTORY } from "../data/rules.js?v=20261013-042652";
+import { hasConsumableEffect, isElixir } from "./ConsumableEffects.js?v=20261013-042652";
+import { drinkElixir } from "./ElixirSystem.js?v=20261013-042652";
+import { formatNumber as fmt, roundValue } from "./NumberRules.js?v=20261013-042652";
+import { getMaxHp } from "./TraitSystem.js?v=20261013-042652";
 
 export function maxStackOf(id) {
   return isEquipment(id) ? INVENTORY.equipmentStack : catalog.consumables.get(id)?.maxStack ?? INVENTORY.defaultMaxStack;
@@ -39,13 +40,13 @@ export function addItem(adventurer, id) {
   return adventurer.inventory.add(id, 1, maxStackOf(id)) === 0;
 }
 
-// 전투 밖에서 쓸 수 있는 소모품인지
+// 전투 밖에서 쓸 수 있는 소모품인지(회복과 영약)
 export function canUseOutsideCombat(itemId) {
   const item = catalog.consumables.get(itemId);
-  return Boolean(item) && parseToken(item.effect).key === "heal";
+  return Boolean(item) && (hasConsumableEffect(item, "heal") || isElixir(item));
 }
 
-// 전투 밖 소모품 사용(회복만 의미가 있다)
+// 전투 밖 소모품 사용: 회복, 영약(능력치 영구 상승)
 export function useConsumableOutsideCombat(adventurer, itemId, { fromInventory = true } = {}) {
   const item = catalog.consumables.get(itemId);
 
@@ -55,6 +56,12 @@ export function useConsumableOutsideCombat(adventurer, itemId, { fromInventory =
 
   if (fromInventory) {
     adventurer.inventory.remove(itemId, 1);
+  }
+
+  if (isElixir(item)) {
+    const line = drinkElixir(adventurer, item);
+    clampHp(adventurer);
+    return line;
   }
 
   const maxHp = getMaxHp(adventurer);

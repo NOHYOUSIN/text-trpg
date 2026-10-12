@@ -1,9 +1,10 @@
-import { catalog } from "../data/catalog.js?v=20261013-032945";
-import { parseAbility } from "../systems/AbilitySystem.js?v=20261013-032945";
-import { parseToken } from "../systems/EffectParser.js?v=20261013-032945";
-import { attackSkillBase, basicAttackBase, supportAmount } from "../systems/FormulaSystem.js?v=20261013-032945";
-import { formatNumber as fmt, roundValue } from "../systems/NumberRules.js?v=20261013-032945";
-import { getProfile, isEquipmentEffectActive } from "../systems/TraitSystem.js?v=20261013-032945";
+import { catalog } from "../data/catalog.js?v=20261013-042652";
+import { parseAbility } from "../systems/AbilitySystem.js?v=20261013-042652";
+import { consumableEffects } from "../systems/ConsumableEffects.js?v=20261013-042652";
+import { parseToken, STATUS_LABELS } from "../systems/EffectParser.js?v=20261013-042652";
+import { attackSkillBase, basicAttackBase, supportAmount } from "../systems/FormulaSystem.js?v=20261013-042652";
+import { formatNumber as fmt, roundValue } from "../systems/NumberRules.js?v=20261013-042652";
+import { getProfile, isEquipmentEffectActive } from "../systems/TraitSystem.js?v=20261013-042652";
 
 // 장비·스킬·소모품 설명(선택 판단용). 2026-10-13 전투 공식 3차 개편에 맞춘 표기:
 // 1줄 = 종류, 2줄 = 결과 수치(계산식은 괄호), 3줄 = 부가 효과.
@@ -282,21 +283,27 @@ export function describeSkill(skill, adventurer = null) {
   return lines.join("\n");
 }
 
-export function describeConsumable(item) {
-  const { key, args } = parseToken(item.effect);
-  let effect = item.description;
-
-  if (key === "heal") {
-    effect = `HP ${fmt(item.amount)} 회복`;
-  } else if (key === "damage") {
-    effect = `적에게 피해 ${fmt(item.amount)} (전투 중)`;
-  } else if (key === "cure") {
-    effect = `${args[0] === "poison" ? "독" : args[0]} 해제 (전투 중)`;
-  } else if (key === "buff") {
-    effect = `이번 전투 동안 ${describeEffectToken(`${args[0]}:${args[1]}`)}`;
+// 소모품 효과 한 개의 설명
+function consumableEffectText(item, { key, args }) {
+  switch (key) {
+    case "heal":
+      return `HP ${fmt(item.amount)} 회복`;
+    case "damage":
+      return `적에게 피해 ${fmt(item.amount)} (전투 중)`;
+    case "cure":
+      return `${STATUS_LABELS[args[0]] ?? args[0]} 해제 (전투 중)`;
+    case "buff":
+      return `이번 전투 동안 ${describeEffectToken(`${args[0]}:${args[1]}`)}`;
+    case "statUp":
+      return `${STAT_LABELS[args[0]]} 영구 +${fmt(item.amount)} (전투 밖에서 사용)`;
+    default:
+      return item.description;
   }
+}
 
-  return `소모품 · ${effect} · 한 칸에 ${item.maxStack}개`;
+export function describeConsumable(item) {
+  const effects = consumableEffects(item).map((effect) => consumableEffectText(item, effect));
+  return `소모품 · ${effects.join(" · ")} · 한 칸에 ${item.maxStack}개`;
 }
 
 // kind: "skill" | "item". adventurer를 넘기면 지금 능력치로 계산한 값을 보여 준다.
