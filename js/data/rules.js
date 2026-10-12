@@ -46,6 +46,8 @@ export const STATUS = Object.freeze({
 export const RECOVERY = Object.freeze({
   restRatio: 0.5, // 2026-10-13: 40% → 50%
   zoneTransitionRatio: 0.3,
+  // 전투에서 이기면 최대 HP의 10% 회복 (2026-10-13)
+  victoryRatio: 0.1,
 });
 
 export const INVENTORY = Object.freeze({
@@ -114,6 +116,8 @@ export const SHOP = Object.freeze({
   skills: 1,
   // 스킬 가격 범위 (장비·소모품은 데이터의 price 사용)
   skillPrice: { common: 30, uncommon: 40, rare: 50 },
+  // 판매 가격 = 구매 가격 × 비율(내림). 가격이 없는 물건(시작 전용 소모품)은 팔 수 없다. (2026-10-13)
+  sellRatio: 0.5,
 });
 
 // 장비·패시브 추가 능력 (2026-10-12)

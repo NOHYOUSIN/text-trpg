@@ -267,7 +267,7 @@ export const commonData = {
       "effects": [
         "cooldownReduction:1"
       ],
-      "description": "마력이 막힘없이 흐른다. 모든 스킬 대기시간 -1(최소 1)."
+      "description": "마력이 막힘없이 흐른다. 모든 스킬 쿨타임 -1(최소 1)."
     },
     {
       "id": "skl_heavy_swing",

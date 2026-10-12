@@ -1,10 +1,11 @@
-import { GRADES } from "../data/rules.js?v=20261013-021756";
-import { formatNumber as fmt } from "../systems/NumberRules.js?v=20261013-021756";
-import { rankNameClasses } from "./BossIntroUI.js?v=20261013-021756";
-import { playCombatFx } from "./CombatFx.js?v=20261013-021756";
-import { isLogPlaybackEnabled, readCalcSetting, writeCalcSetting } from "./Settings.js?v=20261013-021756";
-import { statusChip } from "./StatusTooltip.js?v=20261013-021756";
-import { describeConsumable, describeSkill } from "./ItemText.js?v=20261013-021756";
+import { GRADES } from "../data/rules.js?v=20261013-030554";
+import { formatNumber as fmt } from "../systems/NumberRules.js?v=20261013-030554";
+import { rankNameClasses } from "./BossIntroUI.js?v=20261013-030554";
+import { playCombatFx } from "./CombatFx.js?v=20261013-030554";
+import { isLogPlaybackEnabled, readCalcSetting, writeCalcSetting } from "./Settings.js?v=20261013-030554";
+import { statusChip } from "./StatusTooltip.js?v=20261013-030554";
+import { attachLongPressInfo, showLongPressHintOnce } from "./InfoPopup.js?v=20261013-030554";
+import { describeConsumable, describeSkill } from "./ItemText.js?v=20261013-030554";
 
 const SKILL_TYPE_LABELS = {
   attack: "공격",
@@ -274,6 +275,10 @@ export class CombatUI {
     const { skills, items, chant } = combat.getActionOptions();
     const disabled = locked || !combat.awaitingInput;
 
+    if (!disabled) {
+      showLongPressHintOnce();
+    }
+
     // 마법사: 영창하지 않았으면 기본공격 자리에 영창 버튼을 둔다.
     if (chant && !chant.chanted) {
       const button = createButton("영창", () => this.onAction?.({ type: "chant" }), disabled);
@@ -297,22 +302,22 @@ export class CombatUI {
       }
 
       const { skill } = option;
-      const suffix = skill.type === "passive" ? " (패시브)" : option.remaining > 0 ? ` (대기 ${option.remaining})` : "";
+      const suffix = skill.type === "passive" ? " (패시브)" : option.remaining > 0 ? ` (쿨타임 ${option.remaining})` : "";
       const button = createButton(
         `${skill.name}${suffix}`,
         () => this.onAction?.({ type: "skill", slot: option.slot }),
         disabled || !option.usable,
       );
       button.style.borderColor = GRADES[skill.grade]?.color ?? "";
-      button.title = [`[${GRADES[skill.grade]?.label}] ${describeSkill(skill, combat.player.ref)}`, skill.description].join("\n");
+      attachLongPressInfo(button, `[${GRADES[skill.grade]?.label}] ${skill.name}`, [describeSkill(skill, combat.player.ref), skill.description].join("\n"));
       const tags = [SKILL_TYPE_LABELS[skill.type]];
 
       if (option.fast) {
-        tags.push("빠른");
+        tags.push("즉시 발동");
       }
 
       if (skill.type !== "passive") {
-        tags.push(`대기 ${skill.cooldown}`);
+        tags.push(`쿨타임 ${skill.cooldown}`);
       }
 
       if (option.needsChant) {
@@ -329,7 +334,7 @@ export class CombatUI {
         () => this.onAction?.({ type: "item", itemId: item.id }),
         disabled,
       );
-      button.title = describeConsumable(item);
+      attachLongPressInfo(button, item.name, [describeConsumable(item), item.description].filter(Boolean).join("\n"));
       appendSub(button, describeConsumable(item).replace("소모품 · ", "").split(" · 한 칸")[0]);
       button.classList.add("is-item");
       this.actionsEl.append(button);
@@ -427,7 +432,7 @@ function describeReadySkill(combat) {
   return ready.length ? `준비된 스킬: ${ready.join(", ")}` : "준비된 스킬 없음";
 }
 
-// 적의 보유 스킬과 남은 대기시간
+// 적의 보유 스킬과 남은 쿨타임
 function describeEnemySkills(combat) {
   const ids = combat.enemy.ref.skills;
 
@@ -438,7 +443,7 @@ function describeEnemySkills(combat) {
   const parts = ids.map((id) => {
     const skill = combat.dungeon.enemySkillsById.get(id);
     const remaining = combat.enemy.cooldowns.get(id) ?? 0;
-    return `${skill.name} (${remaining > 0 ? `대기 ${remaining}` : "준비"})`;
+    return `${skill.name} (${remaining > 0 ? `쿨타임 ${remaining}` : "준비"})`;
   });
   return `스킬: ${parts.join(" · ")}`;
 }

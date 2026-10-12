@@ -1,6 +1,6 @@
-import { ABILITY } from "../data/rules.js?v=20261013-021756";
-import { parseToken, toStatusSpec } from "./EffectParser.js?v=20261013-021756";
-import { clamp } from "./NumberRules.js?v=20261013-021756";
+import { ABILITY } from "../data/rules.js?v=20261013-030554";
+import { parseToken, toStatusSpec } from "./EffectParser.js?v=20261013-030554";
+import { clamp } from "./NumberRules.js?v=20261013-030554";
 
 // 장비·패시브 스킬의 "조건 > 효과" 능력.
 // 표기: "onHit>bleed:1", "onSkill@30>cooldown:-1" (@ 뒤는 발동 확률 %)
@@ -104,7 +104,7 @@ function applyAbilityEffect(combat, { effect, source }, ctx) {
 
     if (next < current) {
       player.cooldowns.set(ctx.skillId, next);
-      combat.log("status", `→ ${source}: 대기시간 ${current - next} 감소`);
+      combat.log("status", `→ ${source}: 쿨타임 ${current - next} 감소`);
     }
 
     return;

@@ -1,4 +1,4 @@
-import { isTextEffectEnabled, typeElements } from "./TextEffect.js?v=20261013-021756";
+import { isTextEffectEnabled, typeElements } from "./TextEffect.js?v=20261013-030554";
 
 const DICE_ROLL_MS = 800;
 const DICE_TICK_MS = 60;
@@ -48,15 +48,19 @@ export function renderScene(root, view) {
     scene.append(createText("p", "scene-note", note));
   }
 
-  if (view.buttons?.length) {
-    const buttons = document.createElement("div");
-    buttons.className = view.buttonLayout === "cards" ? "scene-cards" : "scene-buttons";
+  // sections: 제목이 붙은 버튼 묶음(상점의 사기·팔기 등). 비어 있으면 empty 문구를 보여 준다.
+  for (const section of view.sections ?? []) {
+    scene.append(createText("h3", "scene-section-title", section.heading));
 
-    for (const option of view.buttons) {
-      buttons.append(createChoiceButton(option));
+    if (section.buttons.length) {
+      scene.append(createButtonGroup(section.buttons, section.layout));
+    } else if (section.empty) {
+      scene.append(createText("p", "scene-note", section.empty));
     }
+  }
 
-    scene.append(buttons);
+  if (view.buttons?.length) {
+    scene.append(createButtonGroup(view.buttons, view.buttonLayout));
   }
 
   root.append(scene);
@@ -131,7 +135,20 @@ function revealAfterDice(scene, dice, result) {
   }, DICE_ROLL_MS));
 }
 
-function createChoiceButton({ label, sub, onClick, disabled = false, primary = false, color }) {
+// layout: "cards"(격자) | "rows"(한 줄에 하나, 오른쪽에 aside) | 그 밖(세로 버튼)
+function createButtonGroup(options, layout) {
+  const group = document.createElement("div");
+  group.className = layout === "cards" ? "scene-cards" : layout === "rows" ? "scene-buttons scene-rows" : "scene-buttons";
+
+  for (const option of options) {
+    group.append(createChoiceButton(option));
+  }
+
+  return group;
+}
+
+// aside: 버튼 오른쪽에 따로 보이는 짧은 문구(가격 등)
+function createChoiceButton({ label, sub, aside, onClick, disabled = false, primary = false, color }) {
   const button = document.createElement("button");
   button.type = "button";
   button.className = `scene-button${primary ? " is-primary" : ""}`;
@@ -145,6 +162,10 @@ function createChoiceButton({ label, sub, onClick, disabled = false, primary = f
 
   if (sub) {
     button.append(createText("span", "scene-button-sub", sub));
+  }
+
+  if (aside) {
+    button.append(createText("span", "scene-button-aside", aside));
   }
 
   if (onClick) {

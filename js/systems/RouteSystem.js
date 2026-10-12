@@ -1,5 +1,5 @@
-import { ROUTE } from "../data/rules.js?v=20261013-021756";
-import { isEventAvailable } from "./EventSystem.js?v=20261013-021756";
+import { ROUTE } from "../data/rules.js?v=20261013-030554";
+import { isEventAvailable } from "./EventSystem.js?v=20261013-030554";
 
 export const CONTENT_LABELS = Object.freeze({
   combat: "전투",
@@ -27,6 +27,11 @@ export function getBossForRound(zone, round, dice) {
   }
 
   return null;
+}
+
+// 정비 라운드인지: 갈림길 대신 휴식/탐색 고정 선택지 (2026-10-13)
+export function isCampRound(zone, round) {
+  return Boolean(zone?.campRounds?.includes(round));
 }
 
 // 구역 보스가 정해져 있는지(없으면 콘텐츠가 없는 구역)

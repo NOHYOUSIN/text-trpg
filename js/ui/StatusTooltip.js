@@ -1,5 +1,5 @@
-import { STATUS_LABELS } from "../systems/EffectParser.js?v=20261013-021756";
-import { formatNumber as fmt } from "../systems/NumberRules.js?v=20261013-021756";
+import { STATUS_LABELS } from "../systems/EffectParser.js?v=20261013-030554";
+import { formatNumber as fmt } from "../systems/NumberRules.js?v=20261013-030554";
 
 // 상태이상 이름 옆에 보여 줄 짧은 표시와, 마우스를 올렸을 때 보여 줄 설명.
 function effectText(status) {

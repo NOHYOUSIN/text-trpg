@@ -1,5 +1,5 @@
-import { renderScene } from "./SceneUI.js?v=20261013-021756";
-import { isScreenFxEnabled } from "./Settings.js?v=20261013-021756";
+import { renderScene } from "./SceneUI.js?v=20261013-030554";
+import { isScreenFxEnabled } from "./Settings.js?v=20261013-030554";
 
 // 중간보스 이상 등장 화면: 등급 색 이름, 등장 메시지, 화면이 잠깐 어두워졌다 밝아지는 연출
 export function renderBossIntro(root, { eyebrow, enemy, text, onFight }) {

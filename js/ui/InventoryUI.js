@@ -1,8 +1,8 @@
-import { catalog, getItem } from "../data/catalog.js?v=20261013-021756";
-import { GRADES, INVENTORY } from "../data/rules.js?v=20261013-021756";
-import { canUseOutsideCombat } from "../systems/InventorySystem.js?v=20261013-021756";
-import { describeRequirementShort, describeStats } from "./ItemText.js?v=20261013-021756";
-import { isEquipmentEffectActive } from "../systems/TraitSystem.js?v=20261013-021756";
+import { catalog, getItem } from "../data/catalog.js?v=20261013-030554";
+import { GRADES, INVENTORY } from "../data/rules.js?v=20261013-030554";
+import { canUseOutsideCombat } from "../systems/InventorySystem.js?v=20261013-030554";
+import { describeRequirementShort, describeStats } from "./ItemText.js?v=20261013-030554";
+import { isEquipmentEffectActive } from "../systems/TraitSystem.js?v=20261013-030554";
 
 const SLOT_LABELS = { weapon: "무기", armor: "방어구", ring: "반지", necklace: "목걸이" };
 

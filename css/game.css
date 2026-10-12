@@ -403,6 +403,86 @@
   }
 }
 
+/* 설명 창(모바일에서 툴팁 대신): 상태 패널 이름은 누르기, 전투 버튼은 길게 누르기 */
+.info-popup {
+  position: fixed;
+  inset: 0;
+  z-index: 40;
+  display: grid;
+  place-items: center;
+  padding: 16px;
+  background: rgba(0, 0, 0, 0.55);
+}
+
+.info-popup-dialog {
+  width: min(420px, 100%);
+  max-height: 80dvh;
+  padding: 18px 20px;
+  overflow-y: auto;
+}
+
+.info-popup-title {
+  margin: 0 0 8px;
+  color: var(--accent-strong);
+  font-size: 16px;
+}
+
+.info-popup-text {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.7;
+  white-space: pre-line;
+}
+
+.info-popup-close {
+  margin: 12px 0 0;
+  color: var(--muted);
+  font-size: 12px;
+  text-align: right;
+}
+
+.has-info {
+  cursor: pointer;
+  text-decoration: underline dotted;
+  text-underline-offset: 3px;
+}
+
+.has-long-press {
+  -webkit-touch-callout: none;
+  user-select: none;
+}
+
+/* 묶음 제목(상점의 사기·팔기 등) */
+.scene-section-title {
+  margin: 8px 0 0;
+  color: var(--accent);
+  font-size: 15px;
+}
+
+/* 한 줄 목록: 왼쪽에 이름·설명, 오른쪽에 가격 같은 짧은 문구 */
+.scene-rows .scene-button {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  column-gap: 16px;
+  row-gap: 4px;
+  align-items: start;
+}
+
+.scene-rows .scene-button-label,
+.scene-rows .scene-button-sub {
+  grid-column: 1;
+}
+
+.scene-button-aside {
+  grid-column: 2;
+  grid-row: 1 / span 2;
+  align-self: center;
+  color: var(--accent-strong);
+  font-weight: 700;
+  text-align: right;
+  white-space: pre-line;
+}
+
 /* 강조 버튼(밝은 배경) 위의 보조 문구는 어두운 색으로 */
 .scene-button.is-primary .scene-button-sub {
   color: #4a3f26;

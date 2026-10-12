@@ -7,48 +7,64 @@ export const dungeonForestData = {
     {
       "zone": 1,
       "name": "숲 초입",
-      "rounds": 20,
+      "rounds": 22,
       "midBosses": [
         {
-          "round": 10,
+          "round": 11,
           "enemyIds": [
             "ene_tusk",
             "ene_bandit_chief"
           ]
         }
       ],
-      "bossRound": 20,
+      "bossRound": 22,
       "bossIds": [
         "ene_whisper_warden",
         "ene_silver_mane"
+      ],
+      "campRounds": [
+        10,
+        21
       ],
       "entryText": "햇빛이 잎 사이로 드문드문 내려온다. 어디선가 낮은 속삭임이 바람에 섞여 들린다."
     },
     {
       "zone": 2,
       "name": "깊은 숲",
-      "rounds": 20,
+      "rounds": 22,
       "midBosses": [],
-      "bossRound": 20,
+      "bossRound": 22,
       "bossIds": [],
+      "campRounds": [
+        10,
+        21
+      ],
       "entryText": "(2구역 콘텐츠는 이후 작성)"
     },
     {
       "zone": 3,
       "name": "어두운 숲",
-      "rounds": 20,
+      "rounds": 22,
       "midBosses": [],
-      "bossRound": 20,
+      "bossRound": 22,
       "bossIds": [],
+      "campRounds": [
+        10,
+        21
+      ],
       "entryText": "(3구역 콘텐츠는 이후 작성)"
     },
     {
       "zone": 4,
       "name": "속삭임의 근원",
-      "rounds": 20,
+      "rounds": 22,
       "midBosses": [],
-      "bossRound": 20,
+      "bossRound": 22,
       "bossIds": [],
+      "campRounds": [
+        10,
+        21
+      ],
       "entryText": "(4구역 콘텐츠는 이후 작성. 구역 이름은 임시)"
     }
   ],
@@ -659,23 +675,8 @@ export const dungeonForestData = {
           }
         },
         {
-          "id": "leave_chest",
-          "order": 3,
-          "text": "그냥 지나친다",
-          "verb": "pass",
-          "condition": [],
-          "skillBonus": [],
-          "difficulty": "none",
-          "outcomes": {
-            "success": {
-              "text": "상자를 두고 길을 재촉한다.",
-              "result": []
-            }
-          }
-        },
-        {
           "id": "pry_chest",
-          "order": 4,
+          "order": 3,
           "text": "뚜껑을 통째로 뜯어낸다",
           "verb": "force",
           "condition": [
@@ -712,14 +713,14 @@ export const dungeonForestData = {
         },
         {
           "id": "spot_trap",
-          "order": 5,
-          "text": "뚜껑 틈의 장치를 읽어 낸다",
-          "verb": "insight",
+          "order": 4,
+          "text": "바늘 장치를 피해 손끝으로 걸쇠만 푼다",
+          "verb": "stealth",
           "condition": [
-            "wis:5"
+            "agi:2"
           ],
           "skillBonus": [],
-          "difficulty": "easy",
+          "difficulty": "normal",
           "outcomes": {
             "fail": {
               "text": "장치의 원리를 알 수 없다.",
@@ -737,6 +738,21 @@ export const dungeonForestData = {
                 "gold:6",
                 "item:random:equipment"
               ]
+            }
+          }
+        },
+        {
+          "id": "leave_chest",
+          "order": 5,
+          "text": "그냥 지나친다",
+          "verb": "pass",
+          "condition": [],
+          "skillBonus": [],
+          "difficulty": "none",
+          "outcomes": {
+            "success": {
+              "text": "상자를 두고 길을 재촉한다.",
+              "result": []
             }
           }
         }
@@ -802,8 +818,66 @@ export const dungeonForestData = {
           }
         },
         {
-          "id": "search_belongings",
+          "id": "splint_traveler",
           "order": 3,
+          "text": "능숙하게 부목을 대 준다",
+          "verb": "insight",
+          "condition": [
+            "wis:2"
+          ],
+          "skillBonus": [],
+          "difficulty": "normal",
+          "outcomes": {
+            "fail": {
+              "text": "서툰 손길에 나그네가 신음한다.",
+              "result": []
+            },
+            "partial": {
+              "text": "나그네가 고맙다며 동전을 건넨다.",
+              "result": [
+                "gold:4"
+              ]
+            },
+            "success": {
+              "text": "나그네가 쪽지를 건넨다. 숲속 사냥꾼의 은신처를 적어 둔 것이다.",
+              "result": [
+                "gold:4",
+                "flag:readHunterNote"
+              ]
+            }
+          }
+        },
+        {
+          "id": "ask_traveler",
+          "order": 4,
+          "text": "숲 깊은 곳 이야기를 묻는다",
+          "verb": "persuade",
+          "condition": [],
+          "skillBonus": [],
+          "difficulty": "normal",
+          "outcomes": {
+            "fail": {
+              "text": "나그네가 입을 다문다.",
+              "result": []
+            },
+            "partial": {
+              "text": "위험한 곳 몇 군데를 알려 준다.",
+              "result": [
+                "hp:3"
+              ]
+            },
+            "success": {
+              "text": "나그네가 아끼던 약을 나눠 준다.",
+              "result": [
+                "item:con_bandage",
+                "gold:3"
+              ]
+            }
+          }
+        },
+        {
+          "id": "search_belongings",
+          "order": 5,
           "text": "짐을 뒤진다",
           "verb": "",
           "condition": [],
@@ -832,60 +906,17 @@ export const dungeonForestData = {
           }
         },
         {
-          "id": "splint_traveler",
-          "order": 4,
-          "text": "능숙하게 부목을 대 준다",
-          "verb": "insight",
-          "condition": [
-            "wis:5"
-          ],
-          "skillBonus": [],
-          "difficulty": "easy",
-          "outcomes": {
-            "fail": {
-              "text": "서툰 손길에 나그네가 신음한다.",
-              "result": []
-            },
-            "partial": {
-              "text": "나그네가 고맙다며 동전을 건넨다.",
-              "result": [
-                "gold:4"
-              ]
-            },
-            "success": {
-              "text": "나그네가 쪽지를 건넨다. 숲속 사냥꾼의 은신처를 적어 둔 것이다.",
-              "result": [
-                "gold:4",
-                "flag:readHunterNote"
-              ]
-            }
-          }
-        },
-        {
-          "id": "ask_traveler",
-          "order": 5,
-          "text": "숲 깊은 곳 이야기를 묻는다",
-          "verb": "persuade",
+          "id": "pass_traveler",
+          "order": 6,
+          "text": "갈 길이 바빠 지나친다",
+          "verb": "pass",
           "condition": [],
           "skillBonus": [],
-          "difficulty": "normal",
+          "difficulty": "none",
           "outcomes": {
-            "fail": {
-              "text": "나그네가 입을 다문다.",
-              "result": []
-            },
-            "partial": {
-              "text": "위험한 곳 몇 군데를 알려 준다.",
-              "result": [
-                "hp:3"
-              ]
-            },
             "success": {
-              "text": "나그네가 아끼던 약을 나눠 준다.",
-              "result": [
-                "item:con_bandage",
-                "gold:3"
-              ]
+              "text": "\"…조심하시오.\" 등 뒤로 힘없는 목소리가 들린다.",
+              "result": []
             }
           }
         }
@@ -958,23 +989,8 @@ export const dungeonForestData = {
           }
         },
         {
-          "id": "cover_ears",
-          "order": 3,
-          "text": "귀를 막고 지나간다",
-          "verb": "pass",
-          "condition": [],
-          "skillBonus": [],
-          "difficulty": "none",
-          "outcomes": {
-            "success": {
-              "text": "속삭임을 등지고 걸음을 옮긴다.",
-              "result": []
-            }
-          }
-        },
-        {
           "id": "answer_voice",
-          "order": 4,
+          "order": 3,
           "text": "목소리에 차분히 대답한다",
           "verb": "insight",
           "condition": [
@@ -1000,6 +1016,85 @@ export const dungeonForestData = {
               "result": [
                 "skill:choice"
               ]
+            }
+          }
+        },
+        {
+          "id": "coin_voice",
+          "order": 4,
+          "text": "샘물에 동전을 던지고 목소리의 이름을 묻는다 (골드 3)",
+          "verb": "",
+          "condition": [
+            "gold:3"
+          ],
+          "skillBonus": [],
+          "difficulty": "normal",
+          "outcomes": {
+            "fail": {
+              "text": "동전이 가라앉고 목소리가 뚝 끊겼다.",
+              "result": [
+                "gold:-3"
+              ]
+            },
+            "partial": {
+              "text": "물 위로 따뜻한 김이 오른다.",
+              "result": [
+                "gold:-3",
+                "hp:8"
+              ]
+            },
+            "success": {
+              "text": "목소리가 이름 하나를 속삭인다. 어디선가 다시 들을 것 같은 이름이다.",
+              "result": [
+                "gold:-3",
+                "flag:heardStoneWhisper"
+              ]
+            }
+          }
+        },
+        {
+          "id": "reach_spring",
+          "order": 5,
+          "text": "목소리가 나는 샘 바닥에 손을 깊이 넣는다",
+          "verb": "stealth",
+          "condition": [
+            "agi:5"
+          ],
+          "skillBonus": [],
+          "difficulty": "normal",
+          "outcomes": {
+            "fail": {
+              "text": "얼음장 같은 물에 손이 곱았다.",
+              "result": [
+                "hp:-5"
+              ]
+            },
+            "partial": {
+              "text": "바닥에서 동전 몇 닢을 건졌다.",
+              "result": [
+                "gold:3"
+              ]
+            },
+            "success": {
+              "text": "바닥의 돌 틈에 걸린 꾸러미를 건져 올렸다.",
+              "result": [
+                "item:random:consumable"
+              ]
+            }
+          }
+        },
+        {
+          "id": "cover_ears",
+          "order": 6,
+          "text": "귀를 막고 지나간다",
+          "verb": "pass",
+          "condition": [],
+          "skillBonus": [],
+          "difficulty": "none",
+          "outcomes": {
+            "success": {
+              "text": "속삭임을 등지고 걸음을 옮긴다.",
+              "result": []
             }
           }
         }
@@ -1035,8 +1130,27 @@ export const dungeonForestData = {
           }
         },
         {
-          "id": "fight_bandit",
+          "id": "give_potion_toll",
           "order": 2,
+          "text": "통행료 대신 회복약을 건넨다",
+          "verb": "use",
+          "condition": [
+            "item:con_potion"
+          ],
+          "skillBonus": [],
+          "difficulty": "none",
+          "outcomes": {
+            "success": {
+              "text": "도적이 병을 흔들어 보더니 씩 웃으며 길을 비킨다.",
+              "result": [
+                "item:-con_potion"
+              ]
+            }
+          }
+        },
+        {
+          "id": "fight_bandit",
+          "order": 3,
           "text": "맞서 싸운다",
           "verb": "",
           "condition": [],
@@ -1053,7 +1167,7 @@ export const dungeonForestData = {
         },
         {
           "id": "sneak_around",
-          "order": 3,
+          "order": 4,
           "text": "덤불 속으로 몰래 돌아간다",
           "verb": "",
           "condition": [],
@@ -1080,7 +1194,7 @@ export const dungeonForestData = {
         },
         {
           "id": "intimidate_bandit",
-          "order": 4,
+          "order": 5,
           "text": "도적을 노려보며 위협한다",
           "verb": "threaten",
           "condition": [],
@@ -1106,15 +1220,42 @@ export const dungeonForestData = {
           }
         },
         {
+          "id": "slam_blade",
+          "order": 6,
+          "text": "칼을 바위에 내리꽂으며 으름장을 놓는다",
+          "verb": "threaten",
+          "condition": [],
+          "skillBonus": [],
+          "difficulty": "normal",
+          "outcomes": {
+            "fail": {
+              "text": "도적이 코웃음을 치며 칼을 뽑는다.",
+              "result": [
+                "fight:ene_forest_bandit"
+              ]
+            },
+            "partial": {
+              "text": "도적이 슬금슬금 물러난다.",
+              "result": []
+            },
+            "success": {
+              "text": "도적이 질린 얼굴로 동전 주머니까지 던지고 달아난다.",
+              "result": [
+                "gold:5"
+              ]
+            }
+          }
+        },
+        {
           "id": "outrun_bandit",
-          "order": 5,
+          "order": 7,
           "text": "샛길로 재빨리 빠져나간다",
           "verb": "stealth",
           "condition": [
-            "agi:5"
+            "agi:2"
           ],
           "skillBonus": [],
-          "difficulty": "easy",
+          "difficulty": "normal",
           "outcomes": {
             "fail": {
               "text": "발이 걸려 붙잡혔다.",
@@ -1238,46 +1379,15 @@ export const dungeonForestData = {
           }
         },
         {
-          "id": "decipher_altar",
-          "order": 4,
-          "text": "제단의 문양을 해독한다",
-          "verb": "insight",
-          "condition": [
-            "wis:5"
-          ],
-          "skillBonus": [],
-          "difficulty": "normal",
-          "outcomes": {
-            "fail": {
-              "text": "문양을 잘못 읽어 머리가 지끈거린다.",
-              "result": [
-                "hp:-4"
-              ]
-            },
-            "partial": {
-              "text": "문양 아래 동전을 찾았다.",
-              "result": [
-                "gold:3"
-              ]
-            },
-            "success": {
-              "text": "문양이 가리키는 칸에서 장비를 찾았다.",
-              "result": [
-                "item:random:equipment"
-              ]
-            }
-          }
-        },
-        {
           "id": "lift_altar",
-          "order": 5,
+          "order": 4,
           "text": "제단석을 들어 아래를 살핀다",
           "verb": "force",
           "condition": [
-            "str:5"
+            "str:8"
           ],
           "skillBonus": [],
-          "difficulty": "hard",
+          "difficulty": "normal",
           "outcomes": {
             "fail": {
               "text": "제단석이 미끄러져 손을 찧었다.",
@@ -1297,6 +1407,52 @@ export const dungeonForestData = {
                 "gold:8",
                 "item:random:consumable"
               ]
+            }
+          }
+        },
+        {
+          "id": "reach_gap",
+          "order": 5,
+          "text": "제단 뒤 틈에 손을 넣어 더듬는다",
+          "verb": "stealth",
+          "condition": [
+            "agi:2"
+          ],
+          "skillBonus": [],
+          "difficulty": "normal",
+          "outcomes": {
+            "fail": {
+              "text": "무언가에 손가락을 물렸다.",
+              "result": [
+                "hp:-4"
+              ]
+            },
+            "partial": {
+              "text": "동전 몇 닢이 손에 잡혔다.",
+              "result": [
+                "gold:3"
+              ]
+            },
+            "success": {
+              "text": "틈 깊숙이 숨겨 둔 공물을 꺼냈다.",
+              "result": [
+                "item:random:consumable"
+              ]
+            }
+          }
+        },
+        {
+          "id": "leave_altar",
+          "order": 6,
+          "text": "제단을 그대로 두고 지나간다",
+          "verb": "pass",
+          "condition": [],
+          "skillBonus": [],
+          "difficulty": "none",
+          "outcomes": {
+            "success": {
+              "text": "녹슨 동전이 제단 위에서 희미하게 빛난다.",
+              "result": []
             }
           }
         }
@@ -1425,6 +1581,35 @@ export const dungeonForestData = {
               ]
             }
           }
+        },
+        {
+          "id": "call_help",
+          "order": 5,
+          "text": "소리쳐 도움을 청한다",
+          "verb": "",
+          "condition": [],
+          "skillBonus": [],
+          "difficulty": "normal",
+          "outcomes": {
+            "fail": {
+              "text": "대답 대신 도적이 다가왔다!",
+              "result": [
+                "fight:ene_forest_bandit:ambushed"
+              ]
+            },
+            "partial": {
+              "text": "아무도 오지 않아 결국 혼자 풀었다.",
+              "result": [
+                "hp:-2"
+              ]
+            },
+            "success": {
+              "text": "지나가던 사냥꾼이 올가미를 풀어 주고 붕대까지 건넨다.",
+              "result": [
+                "item:con_bandage"
+              ]
+            }
+          }
         }
       ]
     },
@@ -1469,25 +1654,8 @@ export const dungeonForestData = {
           }
         },
         {
-          "id": "read_note",
-          "order": 2,
-          "text": "쪽지만 읽고 지나간다",
-          "verb": "",
-          "condition": [],
-          "skillBonus": [],
-          "difficulty": "none",
-          "outcomes": {
-            "success": {
-              "text": "\"짐승 굴 근처는 피할 것.\" 서툰 글씨로 적혀 있다.",
-              "result": [
-                "flag:readHunterNote"
-              ]
-            }
-          }
-        },
-        {
           "id": "check_traps",
-          "order": 3,
+          "order": 2,
           "text": "꾸러미 주변의 함정부터 살핀다",
           "verb": "insight",
           "condition": [
@@ -1519,7 +1687,7 @@ export const dungeonForestData = {
         },
         {
           "id": "lift_log_cache",
-          "order": 4,
+          "order": 3,
           "text": "통나무를 들어 아래를 더 판다",
           "verb": "force",
           "condition": [
@@ -1546,6 +1714,56 @@ export const dungeonForestData = {
                 "gold:6",
                 "item:con_whetstone"
               ]
+            }
+          }
+        },
+        {
+          "id": "read_note",
+          "order": 4,
+          "text": "쪽지만 읽고 지나간다",
+          "verb": "",
+          "condition": [],
+          "skillBonus": [],
+          "difficulty": "none",
+          "outcomes": {
+            "success": {
+              "text": "\"짐승 굴 근처는 피할 것.\" 서툰 글씨로 적혀 있다.",
+              "result": [
+                "flag:readHunterNote"
+              ]
+            }
+          }
+        },
+        {
+          "id": "leave_thanks",
+          "order": 5,
+          "text": "꾸러미는 두고 쪽지 아래 고맙다는 말을 남긴다",
+          "verb": "",
+          "condition": [],
+          "skillBonus": [],
+          "difficulty": "none",
+          "outcomes": {
+            "success": {
+              "text": "쪽지 아래 서툰 글씨로 인사를 남겼다. 누군가 이 길을 다시 지날 것 같다.",
+              "result": [
+                "flag:readHunterNote",
+                "flag:hunterFriend"
+              ]
+            }
+          }
+        },
+        {
+          "id": "leave_cache",
+          "order": 6,
+          "text": "남의 물건이니 그냥 지나간다",
+          "verb": "pass",
+          "condition": [],
+          "skillBonus": [],
+          "difficulty": "none",
+          "outcomes": {
+            "success": {
+              "text": "꾸러미를 그대로 두고 길을 떠났다.",
+              "result": []
             }
           }
         }
@@ -1621,52 +1839,8 @@ export const dungeonForestData = {
           }
         },
         {
-          "id": "leave_knight",
-          "order": 3,
-          "text": "그대로 지나친다",
-          "verb": "pass",
-          "condition": [],
-          "skillBonus": [],
-          "difficulty": "none",
-          "outcomes": {
-            "success": {
-              "text": "기사의 명복을 빌며 걸음을 옮긴다.",
-              "result": []
-            }
-          }
-        },
-        {
-          "id": "read_crest",
-          "order": 4,
-          "text": "갑옷의 문장을 살핀다",
-          "verb": "insight",
-          "condition": [
-            "wis:5"
-          ],
-          "skillBonus": [],
-          "difficulty": "easy",
-          "outcomes": {
-            "fail": {
-              "text": "낯선 문장이다.",
-              "result": []
-            },
-            "partial": {
-              "text": "문장 아래 동전 주머니를 찾았다.",
-              "result": [
-                "gold:3"
-              ]
-            },
-            "success": {
-              "text": "문장 안쪽에 숨긴 주머니가 있었다.",
-              "result": [
-                "gold:8"
-              ]
-            }
-          }
-        },
-        {
           "id": "carry_knight",
-          "order": 5,
+          "order": 3,
           "text": "기사를 들어 양지바른 곳에 눕힌다",
           "verb": "force",
           "condition": [
@@ -1695,6 +1869,67 @@ export const dungeonForestData = {
                 "item:random:equipment",
                 "flag:buriedFallenKnight"
               ]
+            }
+          }
+        },
+        {
+          "id": "read_crest",
+          "order": 4,
+          "text": "갑옷의 문장을 살핀다",
+          "verb": "insight",
+          "condition": [
+            "wis:2"
+          ],
+          "skillBonus": [],
+          "difficulty": "easy",
+          "outcomes": {
+            "fail": {
+              "text": "낯선 문장이다.",
+              "result": []
+            },
+            "partial": {
+              "text": "문장 아래 동전 주머니를 찾았다.",
+              "result": [
+                "gold:3"
+              ]
+            },
+            "success": {
+              "text": "문장 안쪽에 숨긴 주머니가 있었다.",
+              "result": [
+                "gold:8"
+              ]
+            }
+          }
+        },
+        {
+          "id": "rest_shield",
+          "order": 5,
+          "text": "기사의 방패를 깔고 잠시 쉬어 간다",
+          "verb": "",
+          "condition": [],
+          "skillBonus": [],
+          "difficulty": "none",
+          "outcomes": {
+            "success": {
+              "text": "기사 곁에서 숨을 돌렸다. 이상하게 든든하다.",
+              "result": [
+                "hp:6"
+              ]
+            }
+          }
+        },
+        {
+          "id": "leave_knight",
+          "order": 6,
+          "text": "그대로 지나친다",
+          "verb": "pass",
+          "condition": [],
+          "skillBonus": [],
+          "difficulty": "none",
+          "outcomes": {
+            "success": {
+              "text": "기사의 명복을 빌며 걸음을 옮긴다.",
+              "result": []
             }
           }
         }
@@ -1741,44 +1976,12 @@ export const dungeonForestData = {
           }
         },
         {
-          "id": "take_snare",
-          "order": 2,
-          "text": "올가미 줄만 챙긴다",
-          "verb": "",
-          "condition": [],
-          "skillBonus": [],
-          "difficulty": "none",
-          "outcomes": {
-            "success": {
-              "text": "줄을 끊어 챙기자 새끼가 절뚝이며 숲으로 사라졌다.",
-              "result": [
-                "gold:2"
-              ]
-            }
-          }
-        },
-        {
-          "id": "ignore_cub",
-          "order": 3,
-          "text": "못 본 척 지나간다",
-          "verb": "pass",
-          "condition": [],
-          "skillBonus": [],
-          "difficulty": "none",
-          "outcomes": {
-            "success": {
-              "text": "등 뒤로 어미 늑대의 울음이 오래 이어진다.",
-              "result": []
-            }
-          }
-        },
-        {
           "id": "gentle_free",
-          "order": 4,
+          "order": 2,
           "text": "새끼가 놀라지 않게 조심스럽게 푼다",
           "verb": "stealth",
           "condition": [
-            "agi:5"
+            "agi:8"
           ],
           "skillBonus": [],
           "difficulty": "easy",
@@ -1806,7 +2009,7 @@ export const dungeonForestData = {
         },
         {
           "id": "pull_stake",
-          "order": 5,
+          "order": 3,
           "text": "올가미 말뚝째 뽑아 버린다",
           "verb": "force",
           "condition": [
@@ -1833,6 +2036,59 @@ export const dungeonForestData = {
                 "gold:2",
                 "flag:savedWolfCub"
               ]
+            }
+          }
+        },
+        {
+          "id": "bandage_cub",
+          "order": 4,
+          "text": "붕대로 다친 다리를 감싸 준다",
+          "verb": "use",
+          "condition": [
+            "item:con_bandage"
+          ],
+          "skillBonus": [],
+          "difficulty": "none",
+          "outcomes": {
+            "success": {
+              "text": "새끼가 붕대 감긴 다리로 껑충껑충 어미에게 달려간다. 어미가 오래 이쪽을 바라본다.",
+              "result": [
+                "item:-con_bandage",
+                "flag:savedWolfCub",
+                "hp:4"
+              ]
+            }
+          }
+        },
+        {
+          "id": "take_snare",
+          "order": 5,
+          "text": "올가미 줄만 챙긴다",
+          "verb": "",
+          "condition": [],
+          "skillBonus": [],
+          "difficulty": "none",
+          "outcomes": {
+            "success": {
+              "text": "줄을 끊어 챙기자 새끼가 절뚝이며 숲으로 사라졌다.",
+              "result": [
+                "gold:2"
+              ]
+            }
+          }
+        },
+        {
+          "id": "ignore_cub",
+          "order": 6,
+          "text": "못 본 척 지나간다",
+          "verb": "pass",
+          "condition": [],
+          "skillBonus": [],
+          "difficulty": "none",
+          "outcomes": {
+            "success": {
+              "text": "등 뒤로 어미 늑대의 울음이 오래 이어진다.",
+              "result": []
             }
           }
         }
@@ -1905,27 +2161,12 @@ export const dungeonForestData = {
           }
         },
         {
-          "id": "avoid_ring",
-          "order": 3,
-          "text": "원 밖으로 돌아간다",
-          "verb": "pass",
-          "condition": [],
-          "skillBonus": [],
-          "difficulty": "none",
-          "outcomes": {
-            "success": {
-              "text": "괜히 발을 들였다가는 무슨 일이 생길지 모른다.",
-              "result": []
-            }
-          }
-        },
-        {
           "id": "identify_mushroom",
-          "order": 4,
+          "order": 3,
           "text": "약이 되는 버섯을 골라낸다",
           "verb": "insight",
           "condition": [
-            "wis:5"
+            "wis:8"
           ],
           "skillBonus": [],
           "difficulty": "easy",
@@ -1946,6 +2187,79 @@ export const dungeonForestData = {
                 "hp:8",
                 "item:con_antidote"
               ]
+            }
+          }
+        },
+        {
+          "id": "pick_brightest",
+          "order": 4,
+          "text": "원 안의 가장 밝은 버섯만 조심스럽게 딴다",
+          "verb": "stealth",
+          "condition": [
+            "agi:5"
+          ],
+          "skillBonus": [],
+          "difficulty": "normal",
+          "outcomes": {
+            "fail": {
+              "text": "포자가 터져 기침이 멎지 않는다.",
+              "result": [
+                "hp:-4"
+              ]
+            },
+            "partial": {
+              "text": "쓸 만한 버섯 몇 개를 챙겼다.",
+              "result": [
+                "item:con_bandage"
+              ]
+            },
+            "success": {
+              "text": "약효가 뛰어난 버섯을 고스란히 땄다.",
+              "result": [
+                "item:con_potion"
+              ]
+            }
+          }
+        },
+        {
+          "id": "nap_ring",
+          "order": 5,
+          "text": "원 안에 들어가 잠시 눕는다",
+          "verb": "",
+          "condition": [],
+          "skillBonus": [],
+          "difficulty": "hard",
+          "outcomes": {
+            "fail": {
+              "text": "알록달록한 환각에 시달렸다.",
+              "result": [
+                "hp:-6"
+              ]
+            },
+            "partial": {
+              "text": "이상한 꿈을 꾸다 깼다.",
+              "result": []
+            },
+            "success": {
+              "text": "깨어나니 몸이 깃털처럼 가볍다.",
+              "result": [
+                "hp:15"
+              ]
+            }
+          }
+        },
+        {
+          "id": "avoid_ring",
+          "order": 6,
+          "text": "원 밖으로 돌아간다",
+          "verb": "pass",
+          "condition": [],
+          "skillBonus": [],
+          "difficulty": "none",
+          "outcomes": {
+            "success": {
+              "text": "괜히 발을 들였다가는 무슨 일이 생길지 모른다.",
+              "result": []
             }
           }
         }
@@ -2013,23 +2327,8 @@ export const dungeonForestData = {
           }
         },
         {
-          "id": "ask_way",
-          "order": 3,
-          "text": "길만 묻고 지나간다",
-          "verb": "pass",
-          "condition": [],
-          "skillBonus": [],
-          "difficulty": "none",
-          "outcomes": {
-            "success": {
-              "text": "\"이 숲의 속삭임에 너무 귀 기울이지 말게.\"",
-              "result": []
-            }
-          }
-        },
-        {
           "id": "bargain",
-          "order": 4,
+          "order": 3,
           "text": "말솜씨로 값을 깎는다 (골드 5)",
           "verb": "persuade",
           "condition": [
@@ -2045,7 +2344,7 @@ export const dungeonForestData = {
             "partial": {
               "text": "조금 깎아 줬다.",
               "result": [
-                "gold:-6",
+                "gold:-5",
                 "item:con_potion"
               ]
             },
@@ -2061,11 +2360,11 @@ export const dungeonForestData = {
         },
         {
           "id": "appraise_goods",
-          "order": 5,
+          "order": 4,
           "text": "짐 속 물건을 감정해 준다",
           "verb": "insight",
           "condition": [
-            "wis:5"
+            "wis:2"
           ],
           "skillBonus": [],
           "difficulty": "easy",
@@ -2085,6 +2384,21 @@ export const dungeonForestData = {
               "result": [
                 "item:con_potion"
               ]
+            }
+          }
+        },
+        {
+          "id": "ask_way",
+          "order": 5,
+          "text": "길만 묻고 지나간다",
+          "verb": "pass",
+          "condition": [],
+          "skillBonus": [],
+          "difficulty": "none",
+          "outcomes": {
+            "success": {
+              "text": "\"이 숲의 속삭임에 너무 귀 기울이지 말게.\"",
+              "result": []
             }
           }
         }
@@ -2161,23 +2475,8 @@ export const dungeonForestData = {
           }
         },
         {
-          "id": "leave_well",
-          "order": 3,
-          "text": "우물을 지나친다",
-          "verb": "pass",
-          "condition": [],
-          "skillBonus": [],
-          "difficulty": "none",
-          "outcomes": {
-            "success": {
-              "text": "등 뒤에서 누군가 이름을 부르는 것 같다.",
-              "result": []
-            }
-          }
-        },
-        {
           "id": "climb_well",
-          "order": 4,
+          "order": 3,
           "text": "두레박 줄을 타고 내려간다",
           "verb": "stealth",
           "condition": [
@@ -2208,15 +2507,45 @@ export const dungeonForestData = {
           }
         },
         {
-          "id": "read_echo",
-          "order": 5,
-          "text": "메아리의 말을 받아 적는다",
-          "verb": "insight",
+          "id": "haul_bucket",
+          "order": 4,
+          "text": "두레박을 끝까지 끌어올린다",
+          "verb": "force",
           "condition": [
-            "wis:8"
+            "str:5"
           ],
           "skillBonus": [],
           "difficulty": "easy",
+          "outcomes": {
+            "fail": {
+              "text": "줄이 끊어져 손바닥이 쓸렸다.",
+              "result": [
+                "hp:-3"
+              ]
+            },
+            "partial": {
+              "text": "두레박에 동전 몇 닢이 걸려 올라왔다.",
+              "result": [
+                "gold:3"
+              ]
+            },
+            "success": {
+              "text": "두레박 안에 오래된 꾸러미가 들어 있었다.",
+              "result": [
+                "gold:3",
+                "item:random:consumable"
+              ]
+            }
+          }
+        },
+        {
+          "id": "read_echo",
+          "order": 5,
+          "text": "메아리에 대고 질문을 던진다",
+          "verb": "",
+          "condition": [],
+          "skillBonus": [],
+          "difficulty": "hard",
           "outcomes": {
             "fail": {
               "text": "메아리가 뒤엉켜 머리가 아프다.",
@@ -2235,6 +2564,21 @@ export const dungeonForestData = {
               "result": [
                 "skill:random"
               ]
+            }
+          }
+        },
+        {
+          "id": "leave_well",
+          "order": 6,
+          "text": "우물을 지나친다",
+          "verb": "pass",
+          "condition": [],
+          "skillBonus": [],
+          "difficulty": "none",
+          "outcomes": {
+            "success": {
+              "text": "등 뒤에서 누군가 이름을 부르는 것 같다.",
+              "result": []
             }
           }
         }
@@ -2310,23 +2654,8 @@ export const dungeonForestData = {
           }
         },
         {
-          "id": "avoid_nest",
-          "order": 3,
-          "text": "멀찍이 돌아간다",
-          "verb": "pass",
-          "condition": [],
-          "skillBonus": [],
-          "difficulty": "none",
-          "outcomes": {
-            "success": {
-              "text": "거미줄 너머에서 무언가 움직이는 기척이 느껴진다.",
-              "result": []
-            }
-          }
-        },
-        {
           "id": "rip_web",
-          "order": 4,
+          "order": 3,
           "text": "거미줄을 한 번에 뜯어낸다",
           "verb": "force",
           "condition": [
@@ -2358,7 +2687,7 @@ export const dungeonForestData = {
         },
         {
           "id": "ember_web",
-          "order": 5,
+          "order": 4,
           "text": "불씨로 거미줄을 태운다",
           "verb": "use",
           "condition": [
@@ -2390,6 +2719,52 @@ export const dungeonForestData = {
                 "gold:5",
                 "item:random:consumable"
               ]
+            }
+          }
+        },
+        {
+          "id": "wriggle_web",
+          "order": 5,
+          "text": "거미줄 틈으로 몸을 비틀어 들어간다",
+          "verb": "stealth",
+          "condition": [
+            "agi:8"
+          ],
+          "skillBonus": [],
+          "difficulty": "easy",
+          "outcomes": {
+            "fail": {
+              "text": "거미줄에 걸려 버둥거리는 사이 거미가 달려들었다!",
+              "result": [
+                "fight:ene_venom_spider:ambushed"
+              ]
+            },
+            "partial": {
+              "text": "반짝이던 것은 동전이었다.",
+              "result": [
+                "gold:3"
+              ]
+            },
+            "success": {
+              "text": "거미줄을 하나도 건드리지 않고 둥지 깊은 곳의 장비를 꺼냈다.",
+              "result": [
+                "item:random:equipment"
+              ]
+            }
+          }
+        },
+        {
+          "id": "avoid_nest",
+          "order": 6,
+          "text": "멀찍이 돌아간다",
+          "verb": "pass",
+          "condition": [],
+          "skillBonus": [],
+          "difficulty": "none",
+          "outcomes": {
+            "success": {
+              "text": "거미줄 너머에서 무언가 움직이는 기척이 느껴진다.",
+              "result": []
             }
           }
         }
@@ -2453,23 +2828,8 @@ export const dungeonForestData = {
           }
         },
         {
-          "id": "ignore_child",
-          "order": 3,
-          "text": "모른 척 지나간다",
-          "verb": "pass",
-          "condition": [],
-          "skillBonus": [],
-          "difficulty": "none",
-          "outcomes": {
-            "success": {
-              "text": "등 뒤로 아이의 울음소리가 점점 멀어진다.",
-              "result": []
-            }
-          }
-        },
-        {
           "id": "comfort_child",
-          "order": 4,
+          "order": 3,
           "text": "아이를 달래 함께 길을 찾는다",
           "verb": "persuade",
           "condition": [],
@@ -2497,7 +2857,7 @@ export const dungeonForestData = {
         },
         {
           "id": "track_way",
-          "order": 5,
+          "order": 4,
           "text": "발자국으로 마을 길을 찾아 준다",
           "verb": "insight",
           "condition": [
@@ -2522,6 +2882,53 @@ export const dungeonForestData = {
                 "gold:5",
                 "flag:guidedLostChild"
               ]
+            }
+          }
+        },
+        {
+          "id": "shoulder_ride",
+          "order": 5,
+          "text": "아이를 목말 태우고 숲 어귀까지 달린다",
+          "verb": "force",
+          "condition": [
+            "str:2"
+          ],
+          "skillBonus": [],
+          "difficulty": "easy",
+          "outcomes": {
+            "fail": {
+              "text": "돌부리에 걸려 함께 넘어졌다.",
+              "result": [
+                "hp:-3"
+              ]
+            },
+            "partial": {
+              "text": "아이가 내려 달라며 웃는다.",
+              "result": [
+                "flag:guidedLostChild"
+              ]
+            },
+            "success": {
+              "text": "아이가 깔깔 웃는다. 숲 어귀에서 손을 흔들며 달려간다.",
+              "result": [
+                "hp:4",
+                "flag:guidedLostChild"
+              ]
+            }
+          }
+        },
+        {
+          "id": "ignore_child",
+          "order": 6,
+          "text": "모른 척 지나간다",
+          "verb": "pass",
+          "condition": [],
+          "skillBonus": [],
+          "difficulty": "none",
+          "outcomes": {
+            "success": {
+              "text": "등 뒤로 아이의 울음소리가 점점 멀어진다.",
+              "result": []
             }
           }
         }
@@ -2577,7 +2984,7 @@ export const dungeonForestData = {
           "id": "threaten_goblins",
           "order": 3,
           "text": "크게 소리쳐 위협한다",
-          "verb": "",
+          "verb": "threaten",
           "condition": [],
           "skillBonus": [],
           "difficulty": "hard",
@@ -2601,13 +3008,40 @@ export const dungeonForestData = {
           }
         },
         {
-          "id": "trick_goblins",
+          "id": "hurl_goblin",
           "order": 4,
-          "text": "반짝이는 돌을 던져 시선을 돌린다",
-          "verb": "insight",
+          "text": "가장 큰 놈을 번쩍 들어 던져 버린다",
+          "verb": "force",
           "condition": [
-            "wis:5"
+            "str:8"
           ],
+          "skillBonus": [],
+          "difficulty": "normal",
+          "outcomes": {
+            "fail": {
+              "text": "고블린이 팔을 물어뜯고 나머지가 덤벼든다!",
+              "result": [
+                "fight:ene_moss_goblin:ambushed"
+              ]
+            },
+            "partial": {
+              "text": "고블린들이 비명을 지르며 흩어졌다.",
+              "result": []
+            },
+            "success": {
+              "text": "고블린들이 흩어지며 떨군 주머니를 챙겼다.",
+              "result": [
+                "gold:5"
+              ]
+            }
+          }
+        },
+        {
+          "id": "trick_goblins",
+          "order": 5,
+          "text": "반짝이는 돌을 던져 시선을 돌린다",
+          "verb": "",
+          "condition": [],
           "skillBonus": [],
           "difficulty": "normal",
           "outcomes": {
@@ -2631,11 +3065,11 @@ export const dungeonForestData = {
         },
         {
           "id": "sprint_past",
-          "order": 5,
+          "order": 6,
           "text": "고블린들 사이를 재빨리 빠져나간다",
           "verb": "stealth",
           "condition": [
-            "agi:5"
+            "agi:2"
           ],
           "skillBonus": [],
           "difficulty": "easy",
@@ -2654,6 +3088,21 @@ export const dungeonForestData = {
             },
             "success": {
               "text": "고블린들이 멍하니 바라본다.",
+              "result": []
+            }
+          }
+        },
+        {
+          "id": "detour_goblins",
+          "order": 7,
+          "text": "다른 길로 돌아간다",
+          "verb": "pass",
+          "condition": [],
+          "skillBonus": [],
+          "difficulty": "none",
+          "outcomes": {
+            "success": {
+              "text": "고블린들의 킥킥거림을 뒤로하고 먼 길을 돌았다.",
               "result": []
             }
           }
@@ -2703,23 +3152,8 @@ export const dungeonForestData = {
           }
         },
         {
-          "id": "ignore_tracks",
-          "order": 2,
-          "text": "발자국을 무시한다",
-          "verb": "pass",
-          "condition": [],
-          "skillBonus": [],
-          "difficulty": "none",
-          "outcomes": {
-            "success": {
-              "text": "괜한 길로 빠지지 않기로 한다.",
-              "result": []
-            }
-          }
-        },
-        {
           "id": "read_marks_tracks",
-          "order": 3,
+          "order": 2,
           "text": "긁힌 표식을 자세히 읽는다",
           "verb": "insight",
           "condition": [
@@ -2749,11 +3183,11 @@ export const dungeonForestData = {
         },
         {
           "id": "follow_fast",
-          "order": 4,
+          "order": 3,
           "text": "발소리를 죽이고 빠르게 뒤쫓는다",
           "verb": "stealth",
           "condition": [
-            "agi:5"
+            "agi:8"
           ],
           "skillBonus": [],
           "difficulty": "easy",
@@ -2773,9 +3207,54 @@ export const dungeonForestData = {
             "success": {
               "text": "발자국 주인이 남긴 표식을 찾았다.",
               "result": [
-                "gold:4",
+                "gold:5",
                 "flag:foundTrailClue"
               ]
+            }
+          }
+        },
+        {
+          "id": "call_out",
+          "order": 4,
+          "text": "발자국 주인을 큰 소리로 부른다",
+          "verb": "",
+          "condition": [],
+          "skillBonus": [],
+          "difficulty": "normal",
+          "outcomes": {
+            "fail": {
+              "text": "대답 대신 도적이 덤불에서 튀어나왔다!",
+              "result": [
+                "fight:ene_forest_bandit:ambushed"
+              ]
+            },
+            "partial": {
+              "text": "메아리만 돌아온다. 발밑에 떨어진 동전을 주웠다.",
+              "result": [
+                "gold:2"
+              ]
+            },
+            "success": {
+              "text": "길 잃은 나무꾼이 대답하며 다가와 표식의 뜻을 알려 준다.",
+              "result": [
+                "gold:3",
+                "flag:foundTrailClue"
+              ]
+            }
+          }
+        },
+        {
+          "id": "ignore_tracks",
+          "order": 5,
+          "text": "발자국을 무시한다",
+          "verb": "pass",
+          "condition": [],
+          "skillBonus": [],
+          "difficulty": "none",
+          "outcomes": {
+            "success": {
+              "text": "괜한 길로 빠지지 않기로 한다.",
+              "result": []
             }
           }
         }
@@ -2812,25 +3291,8 @@ export const dungeonForestData = {
           }
         },
         {
-          "id": "erase_marker",
-          "order": 2,
-          "text": "표식을 지우고 떠난다",
-          "verb": "",
-          "condition": [],
-          "skillBonus": [],
-          "difficulty": "none",
-          "outcomes": {
-            "success": {
-              "text": "다른 누군가가 이 길을 따라오지 못하게 했다.",
-              "result": [
-                "gold:2"
-              ]
-            }
-          }
-        },
-        {
           "id": "dig_deep",
-          "order": 3,
+          "order": 2,
           "text": "뿌리째 뽑아 깊이 판다",
           "verb": "force",
           "condition": [
@@ -2862,14 +3324,14 @@ export const dungeonForestData = {
         },
         {
           "id": "decode_marker",
-          "order": 4,
+          "order": 3,
           "text": "표식의 남은 뜻을 해독한다",
           "verb": "insight",
           "condition": [
-            "wis:5"
+            "wis:2"
           ],
           "skillBonus": [],
-          "difficulty": "easy",
+          "difficulty": "normal",
           "outcomes": {
             "fail": {
               "text": "더 읽을 것이 없다.",
@@ -2887,6 +3349,38 @@ export const dungeonForestData = {
                 "gold:4",
                 "item:con_potion"
               ]
+            }
+          }
+        },
+        {
+          "id": "erase_marker",
+          "order": 4,
+          "text": "표식을 지우고 떠난다",
+          "verb": "",
+          "condition": [],
+          "skillBonus": [],
+          "difficulty": "none",
+          "outcomes": {
+            "success": {
+              "text": "다른 누군가가 이 길을 따라오지 못하게 했다.",
+              "result": [
+                "gold:2"
+              ]
+            }
+          }
+        },
+        {
+          "id": "remember_marker",
+          "order": 5,
+          "text": "표식만 기억해 두고 지나간다",
+          "verb": "pass",
+          "condition": [],
+          "skillBonus": [],
+          "difficulty": "none",
+          "outcomes": {
+            "success": {
+              "text": "나무 밑동의 표식을 눈에 새기고 걸음을 옮긴다.",
+              "result": []
             }
           }
         }
@@ -2983,7 +3477,7 @@ export const dungeonForestData = {
           "text": "구름을 읽고 비가 그칠 때를 가늠한다",
           "verb": "insight",
           "condition": [
-            "wis:5"
+            "wis:2"
           ],
           "skillBonus": [],
           "difficulty": "easy",
@@ -3003,6 +3497,35 @@ export const dungeonForestData = {
               "result": [
                 "hp:6",
                 "gold:4"
+              ]
+            }
+          }
+        },
+        {
+          "id": "follow_mud",
+          "order": 5,
+          "text": "진흙에 새로 난 발자국을 따라간다",
+          "verb": "",
+          "condition": [],
+          "skillBonus": [],
+          "difficulty": "normal",
+          "outcomes": {
+            "fail": {
+              "text": "진흙탕에 발이 빠져 넘어졌다.",
+              "result": [
+                "hp:-4"
+              ]
+            },
+            "partial": {
+              "text": "비를 피하던 누군가가 흘린 동전을 주웠다.",
+              "result": [
+                "gold:2"
+              ]
+            },
+            "success": {
+              "text": "비를 피하던 사냥꾼의 은신처를 찾았다. 비어 있다.",
+              "result": [
+                "item:random:consumable"
               ]
             }
           }
@@ -3074,23 +3597,8 @@ export const dungeonForestData = {
           }
         },
         {
-          "id": "leave_stone",
-          "order": 3,
-          "text": "바위에서 떨어진다",
-          "verb": "pass",
-          "condition": [],
-          "skillBonus": [],
-          "difficulty": "none",
-          "outcomes": {
-            "success": {
-              "text": "속삭임이 아쉬운 듯 길게 늘어진다.",
-              "result": []
-            }
-          }
-        },
-        {
           "id": "push_stone",
-          "order": 4,
+          "order": 3,
           "text": "바위를 밀어 뒤쪽을 살핀다",
           "verb": "force",
           "condition": [
@@ -3121,7 +3629,7 @@ export const dungeonForestData = {
         },
         {
           "id": "mimic_whisper",
-          "order": 5,
+          "order": 4,
           "text": "속삭임을 따라 읊는다",
           "verb": "insight",
           "condition": [
@@ -3148,6 +3656,40 @@ export const dungeonForestData = {
                 "skill:random",
                 "flag:heardStoneWhisper"
               ]
+            }
+          }
+        },
+        {
+          "id": "blood_stone",
+          "order": 5,
+          "text": "손바닥을 베어 피를 홈에 떨군다 (HP 6 소모)",
+          "verb": "",
+          "condition": [],
+          "skillBonus": [],
+          "difficulty": "none",
+          "outcomes": {
+            "success": {
+              "text": "피가 홈을 타고 스며들자 속삭임이 또렷한 이름 하나를 남긴다. 바위 틈에서 무언가 굴러 나왔다.",
+              "result": [
+                "hp:-6",
+                "flag:heardStoneWhisper",
+                "item:random:consumable"
+              ]
+            }
+          }
+        },
+        {
+          "id": "leave_stone",
+          "order": 6,
+          "text": "바위에서 떨어진다",
+          "verb": "pass",
+          "condition": [],
+          "skillBonus": [],
+          "difficulty": "none",
+          "outcomes": {
+            "success": {
+              "text": "속삭임이 아쉬운 듯 길게 늘어진다.",
+              "result": []
             }
           }
         }
@@ -3194,70 +3736,8 @@ export const dungeonForestData = {
           }
         },
         {
-          "id": "warm_up",
-          "order": 2,
-          "text": "남은 불씨로 몸을 녹인다",
-          "verb": "",
-          "condition": [],
-          "skillBonus": [],
-          "difficulty": "none",
-          "outcomes": {
-            "success": {
-              "text": "몸이 데워지자 굳었던 근육이 풀린다.",
-              "result": [
-                "hp:5"
-              ]
-            }
-          }
-        },
-        {
-          "id": "leave_camp",
-          "order": 3,
-          "text": "서둘러 자리를 뜬다",
-          "verb": "pass",
-          "condition": [],
-          "skillBonus": [],
-          "difficulty": "none",
-          "outcomes": {
-            "success": {
-              "text": "도적들이 돌아오기 전에 떠나는 편이 낫다.",
-              "result": []
-            }
-          }
-        },
-        {
-          "id": "read_camp",
-          "order": 4,
-          "text": "남은 흔적으로 도적들의 습관을 읽는다",
-          "verb": "insight",
-          "condition": [
-            "wis:2"
-          ],
-          "skillBonus": [],
-          "difficulty": "easy",
-          "outcomes": {
-            "fail": {
-              "text": "알아낼 것이 없다.",
-              "result": []
-            },
-            "partial": {
-              "text": "도적들이 동전을 숨기던 자리를 찾았다.",
-              "result": [
-                "gold:2"
-              ]
-            },
-            "success": {
-              "text": "숨겨 둔 숫돌과 동전을 찾았다.",
-              "result": [
-                "gold:5",
-                "item:con_whetstone"
-              ]
-            }
-          }
-        },
-        {
           "id": "dig_firepit",
-          "order": 5,
+          "order": 2,
           "text": "모닥불 밑 흙을 파헤친다",
           "verb": "force",
           "condition": [
@@ -3283,6 +3763,100 @@ export const dungeonForestData = {
               "result": [
                 "gold:9"
               ]
+            }
+          }
+        },
+        {
+          "id": "track_bandits",
+          "order": 3,
+          "text": "서둘러 떠난 발자국을 따라 떨어진 짐을 줍는다",
+          "verb": "stealth",
+          "condition": [
+            "agi:2"
+          ],
+          "skillBonus": [],
+          "difficulty": "easy",
+          "outcomes": {
+            "fail": {
+              "text": "덤불에 긁혔다.",
+              "result": [
+                "hp:-3"
+              ]
+            },
+            "partial": {
+              "text": "떨어진 동전 몇 닢을 주웠다.",
+              "result": [
+                "gold:3"
+              ]
+            },
+            "success": {
+              "text": "도적들이 흘린 짐 꾸러미를 찾았다.",
+              "result": [
+                "gold:4",
+                "item:con_bandage"
+              ]
+            }
+          }
+        },
+        {
+          "id": "ambush_wait",
+          "order": 4,
+          "text": "돌아오는 도적을 숨어서 기다린다",
+          "verb": "",
+          "condition": [],
+          "skillBonus": [],
+          "difficulty": "normal",
+          "outcomes": {
+            "fail": {
+              "text": "도적 둘이 함께 돌아와 먼저 이쪽을 발견했다!",
+              "result": [
+                "fight:ene_forest_bandit:ambushed"
+              ]
+            },
+            "partial": {
+              "text": "아무도 오지 않았다. 덕분에 푹 쉬었다.",
+              "result": [
+                "hp:5"
+              ]
+            },
+            "success": {
+              "text": "혼자 돌아온 도적을 덮쳤다.",
+              "result": [
+                "gold:5",
+                "fight:ene_forest_bandit:surprise"
+              ]
+            }
+          }
+        },
+        {
+          "id": "warm_up",
+          "order": 5,
+          "text": "남은 불씨로 몸을 녹인다",
+          "verb": "",
+          "condition": [],
+          "skillBonus": [],
+          "difficulty": "none",
+          "outcomes": {
+            "success": {
+              "text": "몸이 데워지자 굳었던 근육이 풀린다.",
+              "result": [
+                "hp:5"
+              ]
+            }
+          }
+        },
+        {
+          "id": "leave_camp",
+          "order": 6,
+          "text": "서둘러 자리를 뜬다",
+          "verb": "pass",
+          "condition": [],
+          "skillBonus": [],
+          "difficulty": "none",
+          "outcomes": {
+            "success": {
+              "text": "도적들이 돌아오기 전에 떠나는 편이 낫다.",
+              "result": []
             }
           }
         }
@@ -3318,25 +3892,8 @@ export const dungeonForestData = {
           }
         },
         {
-          "id": "pass_quietly",
-          "order": 2,
-          "text": "조용히 지나간다",
-          "verb": "pass",
-          "condition": [],
-          "skillBonus": [],
-          "difficulty": "none",
-          "outcomes": {
-            "success": {
-              "text": "늑대들은 끝까지 길을 비켜 주었다.",
-              "result": [
-                "hp:5"
-              ]
-            }
-          }
-        },
-        {
           "id": "offer_hand",
-          "order": 3,
+          "order": 2,
           "text": "손을 내밀어 냄새를 맡게 한다",
           "verb": "persuade",
           "condition": [],
@@ -3358,6 +3915,72 @@ export const dungeonForestData = {
               "result": [
                 "gold:5",
                 "item:random:consumable"
+              ]
+            }
+          }
+        },
+        {
+          "id": "follow_mother",
+          "order": 3,
+          "text": "어미의 뒤를 조용히 따라간다",
+          "verb": "stealth",
+          "condition": [
+            "agi:5"
+          ],
+          "skillBonus": [],
+          "difficulty": "normal",
+          "outcomes": {
+            "fail": {
+              "text": "길을 잃고 가시덤불을 헤맸다.",
+              "result": [
+                "hp:-4"
+              ]
+            },
+            "partial": {
+              "text": "어미가 멈춘 곳에서 동전 몇 닢을 주웠다.",
+              "result": [
+                "gold:4"
+              ]
+            },
+            "success": {
+              "text": "어미가 이끈 굴 앞에 오래전 사냥꾼의 유품이 남아 있었다.",
+              "result": [
+                "gold:3",
+                "item:random:equipment"
+              ]
+            }
+          }
+        },
+        {
+          "id": "play_cub",
+          "order": 4,
+          "text": "새끼 늑대와 잠시 놀아 준다",
+          "verb": "",
+          "condition": [],
+          "skillBonus": [],
+          "difficulty": "none",
+          "outcomes": {
+            "success": {
+              "text": "새끼가 뒹굴며 장난을 친다. 긴장이 풀리며 몸이 가벼워진다.",
+              "result": [
+                "hp:8"
+              ]
+            }
+          }
+        },
+        {
+          "id": "pass_quietly",
+          "order": 5,
+          "text": "조용히 지나간다",
+          "verb": "pass",
+          "condition": [],
+          "skillBonus": [],
+          "difficulty": "none",
+          "outcomes": {
+            "success": {
+              "text": "늑대들은 끝까지 길을 비켜 주었다.",
+              "result": [
+                "hp:5"
               ]
             }
           }
@@ -3479,6 +4102,21 @@ export const dungeonForestData = {
               ]
             }
           }
+        },
+        {
+          "id": "bow_spirit",
+          "order": 5,
+          "text": "고개 숙여 인사하고 떠난다",
+          "verb": "pass",
+          "condition": [],
+          "skillBonus": [],
+          "difficulty": "none",
+          "outcomes": {
+            "success": {
+              "text": "빛이 고개를 끄덕이며 천천히 흩어진다.",
+              "result": []
+            }
+          }
         }
       ]
     },
@@ -3560,6 +4198,49 @@ export const dungeonForestData = {
               ]
             }
           }
+        },
+        {
+          "id": "chat_parent",
+          "order": 4,
+          "text": "숲 이야기를 나눈다",
+          "verb": "persuade",
+          "condition": [],
+          "skillBonus": [],
+          "difficulty": "easy",
+          "outcomes": {
+            "fail": {
+              "text": "사내가 바쁘다며 자리를 뜬다.",
+              "result": []
+            },
+            "partial": {
+              "text": "사내가 지친 얼굴을 보고 빵을 나눠 준다.",
+              "result": [
+                "hp:5"
+              ]
+            },
+            "success": {
+              "text": "\"벌목장 쪽 길이 그나마 안전하오.\" 사내가 붕대와 동전을 쥐여 준다.",
+              "result": [
+                "gold:3",
+                "item:con_bandage"
+              ]
+            }
+          }
+        },
+        {
+          "id": "nod_pass",
+          "order": 5,
+          "text": "고개만 끄덕이고 지나간다",
+          "verb": "pass",
+          "condition": [],
+          "skillBonus": [],
+          "difficulty": "none",
+          "outcomes": {
+            "success": {
+              "text": "사내가 몇 번이고 고개를 숙인다.",
+              "result": []
+            }
+          }
         }
       ]
     },
@@ -3605,23 +4286,8 @@ export const dungeonForestData = {
           }
         },
         {
-          "id": "cover_ears_again",
-          "order": 2,
-          "text": "귀를 막는다",
-          "verb": "pass",
-          "condition": [],
-          "skillBonus": [],
-          "difficulty": "none",
-          "outcomes": {
-            "success": {
-              "text": "속삭임이 아쉬운 듯 멀어진다.",
-              "result": []
-            }
-          }
-        },
-        {
           "id": "whisper_true",
-          "order": 3,
+          "order": 2,
           "text": "이름의 뜻을 헤아려 조용히 대답한다",
           "verb": "insight",
           "condition": [
@@ -3647,6 +4313,69 @@ export const dungeonForestData = {
               "result": [
                 "skill:choice"
               ]
+            }
+          }
+        },
+        {
+          "id": "silent_answer",
+          "order": 3,
+          "text": "이름을 부르지 않고 침묵으로 답한다",
+          "verb": "",
+          "condition": [],
+          "skillBonus": [],
+          "difficulty": "none",
+          "outcomes": {
+            "success": {
+              "text": "바람이 한참 머뭇거리다 잦아든다. 이상하게 마음이 편안하다.",
+              "result": [
+                "hp:10"
+              ]
+            }
+          }
+        },
+        {
+          "id": "walk_wind",
+          "order": 4,
+          "text": "바람을 거슬러 이름이 들려온 쪽으로 걷는다",
+          "verb": "force",
+          "condition": [
+            "str:5"
+          ],
+          "skillBonus": [],
+          "difficulty": "normal",
+          "outcomes": {
+            "fail": {
+              "text": "바람에 밀려 넘어지고 나뭇가지에 긁혔다.",
+              "result": [
+                "hp:-8"
+              ]
+            },
+            "partial": {
+              "text": "바람이 그친 자리에 무언가 떨어져 있다.",
+              "result": [
+                "item:random:consumable"
+              ]
+            },
+            "success": {
+              "text": "바람의 근원에 오래된 공물이 쌓여 있었다.",
+              "result": [
+                "item:random:equipment"
+              ]
+            }
+          }
+        },
+        {
+          "id": "cover_ears_again",
+          "order": 5,
+          "text": "귀를 막는다",
+          "verb": "pass",
+          "condition": [],
+          "skillBonus": [],
+          "difficulty": "none",
+          "outcomes": {
+            "success": {
+              "text": "속삭임이 아쉬운 듯 멀어진다.",
+              "result": []
             }
           }
         }
@@ -3716,7 +4445,7 @@ export const dungeonForestData = {
           "text": "발소리를 맞춰 함께 짐승을 쫓는다",
           "verb": "stealth",
           "condition": [
-            "agi:5"
+            "agi:2"
           ],
           "skillBonus": [],
           "difficulty": "easy",
@@ -3766,6 +4495,21 @@ export const dungeonForestData = {
                 "gold:3",
                 "item:con_potion"
               ]
+            }
+          }
+        },
+        {
+          "id": "part_ways",
+          "order": 5,
+          "text": "인사만 나누고 헤어진다",
+          "verb": "pass",
+          "condition": [],
+          "skillBonus": [],
+          "difficulty": "none",
+          "outcomes": {
+            "success": {
+              "text": "\"몸조심하게.\" 사냥꾼이 활을 고쳐 메고 숲으로 사라진다.",
+              "result": []
             }
           }
         }
@@ -3833,7 +4577,7 @@ export const dungeonForestData = {
           "text": "썩은 판자를 피해 성큼성큼 뛰어 건넌다",
           "verb": "stealth",
           "condition": [
-            "agi:5"
+            "agi:8"
           ],
           "skillBonus": [],
           "difficulty": "easy",
@@ -3853,7 +4597,7 @@ export const dungeonForestData = {
             "success": {
               "text": "다리 끝에서 누가 흘린 동전을 주웠다.",
               "result": [
-                "gold:3"
+                "gold:4"
               ]
             }
           }
@@ -3864,7 +4608,7 @@ export const dungeonForestData = {
           "text": "무너지는 판자를 받치며 건넌다",
           "verb": "force",
           "condition": [
-            "str:5"
+            "str:2"
           ],
           "skillBonus": [],
           "difficulty": "easy",
@@ -3918,6 +4662,21 @@ export const dungeonForestData = {
               "result": [
                 "gold:4"
               ]
+            }
+          }
+        },
+        {
+          "id": "go_upstream",
+          "order": 6,
+          "text": "다리를 포기하고 상류로 돌아간다",
+          "verb": "pass",
+          "condition": [],
+          "skillBonus": [],
+          "difficulty": "none",
+          "outcomes": {
+            "success": {
+              "text": "한참을 돌아 얕은 여울을 건넜다.",
+              "result": []
             }
           }
         }
@@ -4016,6 +4775,80 @@ export const dungeonForestData = {
               ]
             }
           }
+        },
+        {
+          "id": "peel_bark",
+          "order": 4,
+          "text": "이끼를 고목 껍질째 뜯어낸다",
+          "verb": "force",
+          "condition": [
+            "str:5"
+          ],
+          "skillBonus": [],
+          "difficulty": "easy",
+          "outcomes": {
+            "fail": {
+              "text": "껍질에 손이 긁혔다.",
+              "result": [
+                "hp:-3"
+              ]
+            },
+            "partial": {
+              "text": "이끼 한 덩이를 챙겼다.",
+              "result": [
+                "item:con_bandage"
+              ]
+            },
+            "success": {
+              "text": "껍질 밑의 약효 좋은 이끼까지 챙겼다.",
+              "result": [
+                "item:con_bandage",
+                "item:con_antidote"
+              ]
+            }
+          }
+        },
+        {
+          "id": "moss_lantern",
+          "order": 5,
+          "text": "이끼를 등불 삼아 고목 속을 비춘다",
+          "verb": "",
+          "condition": [],
+          "skillBonus": [],
+          "difficulty": "normal",
+          "outcomes": {
+            "fail": {
+              "text": "안쪽엔 아무것도 없었다.",
+              "result": []
+            },
+            "partial": {
+              "text": "구석에서 동전 몇 닢을 찾았다.",
+              "result": [
+                "gold:3"
+              ]
+            },
+            "success": {
+              "text": "고목 속에 숨겨진 꾸러미를 찾았다.",
+              "result": [
+                "item:random:consumable"
+              ]
+            }
+          }
+        },
+        {
+          "id": "leave_moss",
+          "order": 6,
+          "text": "이끼를 두고 지나간다",
+          "verb": "pass",
+          "condition": [],
+          "skillBonus": [],
+          "difficulty": "none",
+          "outcomes": {
+            "success": {
+              "text": "푸른 빛이 등 뒤에서 희미해진다.",
+              "result": []
+            }
+          }
         }
       ]
     },
@@ -4057,27 +4890,12 @@ export const dungeonForestData = {
           }
         },
         {
-          "id": "watch_crows",
-          "order": 2,
-          "text": "멀리서 지켜본다",
-          "verb": "pass",
-          "condition": [],
-          "skillBonus": [],
-          "difficulty": "none",
-          "outcomes": {
-            "success": {
-              "text": "까마귀들이 무언가를 물고 날아가 버렸다.",
-              "result": []
-            }
-          }
-        },
-        {
           "id": "throw_stone",
-          "order": 3,
+          "order": 2,
           "text": "돌을 던져 까마귀를 흩어 놓는다",
           "verb": "stealth",
           "condition": [
-            "agi:5"
+            "agi:2"
           ],
           "skillBonus": [],
           "difficulty": "easy",
@@ -4103,15 +4921,45 @@ export const dungeonForestData = {
           }
         },
         {
-          "id": "mimic_crow",
-          "order": 4,
-          "text": "까마귀 울음을 흉내 내 무리를 속인다",
-          "verb": "insight",
+          "id": "shake_tree",
+          "order": 3,
+          "text": "나무를 흔들어 까마귀를 떨어뜨린다",
+          "verb": "force",
           "condition": [
-            "wis:5"
+            "str:5"
           ],
           "skillBonus": [],
           "difficulty": "normal",
+          "outcomes": {
+            "fail": {
+              "text": "성난 까마귀들이 머리를 쪼아 댔다.",
+              "result": [
+                "hp:-4"
+              ]
+            },
+            "partial": {
+              "text": "떨어진 둥지에서 동전을 주웠다.",
+              "result": [
+                "gold:3"
+              ]
+            },
+            "success": {
+              "text": "둥지째 떨어지며 까마귀가 모은 것들이 쏟아졌다.",
+              "result": [
+                "gold:5",
+                "item:random:consumable"
+              ]
+            }
+          }
+        },
+        {
+          "id": "mimic_crow",
+          "order": 4,
+          "text": "까마귀 울음을 흉내 내 무리를 속인다",
+          "verb": "",
+          "condition": [],
+          "skillBonus": [],
+          "difficulty": "hard",
           "outcomes": {
             "fail": {
               "text": "까마귀들이 화가 나 쪼아 댔다.",
@@ -4131,6 +4979,21 @@ export const dungeonForestData = {
                 "gold:5",
                 "item:random:consumable"
               ]
+            }
+          }
+        },
+        {
+          "id": "watch_crows",
+          "order": 5,
+          "text": "멀리서 지켜본다",
+          "verb": "pass",
+          "condition": [],
+          "skillBonus": [],
+          "difficulty": "none",
+          "outcomes": {
+            "success": {
+              "text": "까마귀들이 무언가를 물고 날아가 버렸다.",
+              "result": []
             }
           }
         }
@@ -4225,10 +5088,10 @@ export const dungeonForestData = {
         {
           "id": "listen_log",
           "order": 4,
-          "text": "바스락 소리를 가만히 들어 본다",
-          "verb": "insight",
+          "text": "숨죽여 다가가 안을 들여다본다",
+          "verb": "stealth",
           "condition": [
-            "wis:2"
+            "agi:2"
           ],
           "skillBonus": [],
           "difficulty": "easy",
@@ -4246,6 +5109,21 @@ export const dungeonForestData = {
               "result": [
                 "gold:4"
               ]
+            }
+          }
+        },
+        {
+          "id": "leave_log",
+          "order": 5,
+          "text": "통나무를 두고 지나간다",
+          "verb": "pass",
+          "condition": [],
+          "skillBonus": [],
+          "difficulty": "none",
+          "outcomes": {
+            "success": {
+              "text": "바스락거리는 소리가 등 뒤에서 멎었다.",
+              "result": []
             }
           }
         }
@@ -4291,50 +5169,8 @@ export const dungeonForestData = {
           }
         },
         {
-          "id": "wake_threaten",
-          "order": 2,
-          "text": "깨워서 겁을 준다",
-          "verb": "",
-          "condition": [],
-          "skillBonus": [],
-          "difficulty": "normal",
-          "outcomes": {
-            "fail": {
-              "text": "도적이 비틀거리며 칼을 뽑는다.",
-              "result": [
-                "fight:ene_forest_bandit"
-              ]
-            },
-            "partial": {
-              "text": "도적이 허둥지둥 달아났다.",
-              "result": []
-            },
-            "success": {
-              "text": "도적이 지갑을 던지고 달아났다.",
-              "result": [
-                "gold:5"
-              ]
-            }
-          }
-        },
-        {
-          "id": "leave_drunk",
-          "order": 3,
-          "text": "그냥 내버려 둔다",
-          "verb": "pass",
-          "condition": [],
-          "skillBonus": [],
-          "difficulty": "none",
-          "outcomes": {
-            "success": {
-              "text": "괜히 깨워 봐야 좋을 게 없다.",
-              "result": []
-            }
-          }
-        },
-        {
           "id": "pick_pocket",
-          "order": 4,
+          "order": 2,
           "text": "숨소리에 맞춰 지갑끈을 끊는다",
           "verb": "stealth",
           "condition": [
@@ -4365,7 +5201,7 @@ export const dungeonForestData = {
         },
         {
           "id": "tie_bandit",
-          "order": 5,
+          "order": 3,
           "text": "자는 틈에 묶어 버린다",
           "verb": "force",
           "condition": [
@@ -4392,6 +5228,77 @@ export const dungeonForestData = {
                 "gold:8",
                 "item:con_whetstone"
               ]
+            }
+          }
+        },
+        {
+          "id": "wake_threaten",
+          "order": 4,
+          "text": "깨워서 겁을 준다",
+          "verb": "threaten",
+          "condition": [],
+          "skillBonus": [],
+          "difficulty": "normal",
+          "outcomes": {
+            "fail": {
+              "text": "도적이 비틀거리며 칼을 뽑는다.",
+              "result": [
+                "fight:ene_forest_bandit"
+              ]
+            },
+            "partial": {
+              "text": "도적이 허둥지둥 달아났다.",
+              "result": []
+            },
+            "success": {
+              "text": "도적이 지갑을 던지고 달아났다.",
+              "result": [
+                "gold:5"
+              ]
+            }
+          }
+        },
+        {
+          "id": "drink_bottle",
+          "order": 5,
+          "text": "굴러다니는 술병의 남은 술을 마셔 본다",
+          "verb": "",
+          "condition": [],
+          "skillBonus": [],
+          "difficulty": "normal",
+          "outcomes": {
+            "fail": {
+              "text": "속이 뒤집혀 한참을 웩웩거렸다.",
+              "result": [
+                "hp:-4"
+              ]
+            },
+            "partial": {
+              "text": "목이 화끈하고 몸이 데워진다.",
+              "result": [
+                "hp:4"
+              ]
+            },
+            "success": {
+              "text": "독한 술기운에 상처 통증이 싹 가셨다.",
+              "result": [
+                "hp:10"
+              ]
+            }
+          }
+        },
+        {
+          "id": "leave_drunk",
+          "order": 6,
+          "text": "그냥 내버려 둔다",
+          "verb": "pass",
+          "condition": [],
+          "skillBonus": [],
+          "difficulty": "none",
+          "outcomes": {
+            "success": {
+              "text": "괜히 깨워 봐야 좋을 게 없다.",
+              "result": []
             }
           }
         }
@@ -4475,10 +5382,10 @@ export const dungeonForestData = {
           "text": "약초 다듬는 일을 돕는다",
           "verb": "insight",
           "condition": [
-            "wis:5"
+            "wis:2"
           ],
           "skillBonus": [],
-          "difficulty": "easy",
+          "difficulty": "normal",
           "outcomes": {
             "fail": {
               "text": "약초를 망쳤다.",
@@ -4530,6 +5437,21 @@ export const dungeonForestData = {
               ]
             }
           }
+        },
+        {
+          "id": "decline_tea",
+          "order": 6,
+          "text": "정중히 사양하고 길을 떠난다",
+          "verb": "pass",
+          "condition": [],
+          "skillBonus": [],
+          "difficulty": "none",
+          "outcomes": {
+            "success": {
+              "text": "\"조심해서 가게나.\" 노파가 문을 닫는다.",
+              "result": []
+            }
+          }
         }
       ]
     },
@@ -4561,27 +5483,12 @@ export const dungeonForestData = {
           }
         },
         {
-          "id": "avoid_tracks",
-          "order": 2,
-          "text": "발자국을 피해 돌아간다",
-          "verb": "pass",
-          "condition": [],
-          "skillBonus": [],
-          "difficulty": "none",
-          "outcomes": {
-            "success": {
-              "text": "괜한 싸움은 피하는 게 낫다.",
-              "result": []
-            }
-          }
-        },
-        {
           "id": "read_wolf_tracks",
-          "order": 3,
+          "order": 2,
           "text": "발자국으로 늑대의 상태를 읽는다",
           "verb": "insight",
           "condition": [
-            "wis:5"
+            "wis:2"
           ],
           "skillBonus": [],
           "difficulty": "easy",
@@ -4600,6 +5507,81 @@ export const dungeonForestData = {
                 "gold:3",
                 "item:con_bandage"
               ]
+            }
+          }
+        },
+        {
+          "id": "sneak_den",
+          "order": 3,
+          "text": "발자국을 따라 굴까지 숨어든다",
+          "verb": "stealth",
+          "condition": [
+            "agi:5"
+          ],
+          "skillBonus": [],
+          "difficulty": "normal",
+          "outcomes": {
+            "fail": {
+              "text": "굴 앞에서 늑대와 눈이 마주쳤다!",
+              "result": [
+                "fight:ene_starving_wolf:ambushed"
+              ]
+            },
+            "partial": {
+              "text": "굴 앞에 흩어진 동전을 주웠다.",
+              "result": [
+                "gold:3"
+              ]
+            },
+            "success": {
+              "text": "늑대가 숨겨 둔 사냥감 사이에서 사냥꾼의 꾸러미를 찾았다.",
+              "result": [
+                "gold:4",
+                "item:random:consumable"
+              ]
+            }
+          }
+        },
+        {
+          "id": "set_snare",
+          "order": 4,
+          "text": "발자국 길목에 덫을 놓고 기다린다",
+          "verb": "",
+          "condition": [],
+          "skillBonus": [],
+          "difficulty": "normal",
+          "outcomes": {
+            "fail": {
+              "text": "한참을 기다렸지만 아무것도 걸리지 않았다.",
+              "result": []
+            },
+            "partial": {
+              "text": "토끼 한 마리가 걸렸다. 구워 먹고 기운을 차렸다.",
+              "result": [
+                "hp:6"
+              ]
+            },
+            "success": {
+              "text": "늑대가 덫에 걸려 버둥거린다. 손쉽게 처치하고 가진 것을 챙겼다.",
+              "result": [
+                "gold:5",
+                "item:random:consumable"
+              ]
+            }
+          }
+        },
+        {
+          "id": "avoid_tracks",
+          "order": 5,
+          "text": "발자국을 피해 돌아간다",
+          "verb": "pass",
+          "condition": [],
+          "skillBonus": [],
+          "difficulty": "none",
+          "outcomes": {
+            "success": {
+              "text": "괜한 싸움은 피하는 게 낫다.",
+              "result": []
             }
           }
         }
@@ -4708,7 +5690,7 @@ export const dungeonForestData = {
           "text": "짐표를 읽어 값진 짐을 찾는다",
           "verb": "insight",
           "condition": [
-            "wis:5"
+            "wis:8"
           ],
           "skillBonus": [],
           "difficulty": "easy",
@@ -4728,6 +5710,38 @@ export const dungeonForestData = {
               "result": [
                 "item:random:equipment"
               ]
+            }
+          }
+        },
+        {
+          "id": "salvage_cart",
+          "order": 5,
+          "text": "수레를 부숴 쓸 만한 쇠붙이를 챙긴다",
+          "verb": "",
+          "condition": [],
+          "skillBonus": [],
+          "difficulty": "none",
+          "outcomes": {
+            "success": {
+              "text": "바퀴 테와 못을 뜯어 챙겼다. 주인이 돌아오면 속상하겠다.",
+              "result": [
+                "gold:4"
+              ]
+            }
+          }
+        },
+        {
+          "id": "leave_cart",
+          "order": 6,
+          "text": "수레를 그대로 두고 지나간다",
+          "verb": "pass",
+          "condition": [],
+          "skillBonus": [],
+          "difficulty": "none",
+          "outcomes": {
+            "success": {
+              "text": "기울어진 수레가 바람에 삐걱거린다.",
+              "result": []
             }
           }
         }
@@ -4852,6 +5866,21 @@ export const dungeonForestData = {
               ]
             }
           }
+        },
+        {
+          "id": "leave_pond",
+          "order": 5,
+          "text": "은빛을 뒤로하고 지나간다",
+          "verb": "pass",
+          "condition": [],
+          "skillBonus": [],
+          "difficulty": "none",
+          "outcomes": {
+            "success": {
+              "text": "물결 위의 은빛이 오래 눈에 남는다.",
+              "result": []
+            }
+          }
         }
       ]
     },
@@ -4950,6 +5979,50 @@ export const dungeonForestData = {
               ]
             }
           }
+        },
+        {
+          "id": "trample_flowers",
+          "order": 4,
+          "text": "꽃밭을 짓밟아 길을 낸다",
+          "verb": "force",
+          "condition": [
+            "str:2"
+          ],
+          "skillBonus": [],
+          "difficulty": "easy",
+          "outcomes": {
+            "fail": {
+              "text": "꽃가루가 확 피어올랐다.",
+              "result": [
+                "hp:-5"
+              ]
+            },
+            "partial": {
+              "text": "꽃밭을 지나왔다.",
+              "result": []
+            },
+            "success": {
+              "text": "꽃밭 밑에 누군가 떨어뜨린 주머니가 있었다.",
+              "result": [
+                "gold:3"
+              ]
+            }
+          }
+        },
+        {
+          "id": "avoid_flowers",
+          "order": 5,
+          "text": "꽃밭을 피해 돌아간다",
+          "verb": "pass",
+          "condition": [],
+          "skillBonus": [],
+          "difficulty": "none",
+          "outcomes": {
+            "success": {
+              "text": "달콤한 향이 한참 따라온다.",
+              "result": []
+            }
+          }
         }
       ]
     },
@@ -5009,23 +6082,8 @@ export const dungeonForestData = {
           }
         },
         {
-          "id": "back_away",
-          "order": 3,
-          "text": "물러난다",
-          "verb": "pass",
-          "condition": [],
-          "skillBonus": [],
-          "difficulty": "none",
-          "outcomes": {
-            "success": {
-              "text": "주문 소리가 등 뒤에서 오래 이어졌다.",
-              "result": []
-            }
-          }
-        },
-        {
           "id": "steal_totem",
-          "order": 4,
+          "order": 3,
           "text": "주술 도구를 몰래 훔친다",
           "verb": "stealth",
           "condition": [
@@ -5057,14 +6115,14 @@ export const dungeonForestData = {
         },
         {
           "id": "counter_chant",
-          "order": 5,
+          "order": 4,
           "text": "주문을 거꾸로 읊어 주술을 끊는다",
           "verb": "insight",
           "condition": [
-            "wis:5"
+            "wis:8"
           ],
           "skillBonus": [],
-          "difficulty": "normal",
+          "difficulty": "easy",
           "outcomes": {
             "fail": {
               "text": "주술이 되튀었다.",
@@ -5084,6 +6142,48 @@ export const dungeonForestData = {
                 "gold:5",
                 "item:random:equipment"
               ]
+            }
+          }
+        },
+        {
+          "id": "mimic_chant",
+          "order": 5,
+          "text": "주문을 몰래 따라 외워 본다",
+          "verb": "",
+          "condition": [],
+          "skillBonus": [],
+          "difficulty": "hard",
+          "outcomes": {
+            "fail": {
+              "text": "주술이 몸을 파고든다. 온몸이 저릿하다.",
+              "result": [
+                "hp:-6"
+              ]
+            },
+            "partial": {
+              "text": "머리가 핑 돌 뿐 아무 일도 없었다.",
+              "result": []
+            },
+            "success": {
+              "text": "낯선 주문의 힘이 손끝에 남았다.",
+              "result": [
+                "skill:choice"
+              ]
+            }
+          }
+        },
+        {
+          "id": "back_away",
+          "order": 6,
+          "text": "물러난다",
+          "verb": "pass",
+          "condition": [],
+          "skillBonus": [],
+          "difficulty": "none",
+          "outcomes": {
+            "success": {
+              "text": "주문 소리가 등 뒤에서 오래 이어졌다.",
+              "result": []
             }
           }
         }
@@ -5154,38 +6254,8 @@ export const dungeonForestData = {
           }
         },
         {
-          "id": "read_pattern",
-          "order": 3,
-          "text": "문양의 규칙을 읽어 낸다",
-          "verb": "insight",
-          "condition": [
-            "wis:5"
-          ],
-          "skillBonus": [],
-          "difficulty": "easy",
-          "outcomes": {
-            "fail": {
-              "text": "규칙을 찾지 못했다.",
-              "result": []
-            },
-            "partial": {
-              "text": "문양을 따라 걸으니 마음이 가라앉는다.",
-              "result": [
-                "hp:6"
-              ]
-            },
-            "success": {
-              "text": "문양이 가리키는 돌 밑에서 꾸러미를 찾았다.",
-              "result": [
-                "gold:4",
-                "item:random:consumable"
-              ]
-            }
-          }
-        },
-        {
           "id": "heft_stone",
-          "order": 4,
+          "order": 3,
           "text": "가장 큰 돌을 들어 밑을 본다",
           "verb": "force",
           "condition": [
@@ -5211,6 +6281,53 @@ export const dungeonForestData = {
               "result": [
                 "gold:7"
               ]
+            }
+          }
+        },
+        {
+          "id": "pull_bottom",
+          "order": 4,
+          "text": "무너뜨리지 않고 맨 아래 돌만 빼낸다",
+          "verb": "stealth",
+          "condition": [
+            "agi:8"
+          ],
+          "skillBonus": [],
+          "difficulty": "easy",
+          "outcomes": {
+            "fail": {
+              "text": "돌무더기가 와르르 무너져 내렸다.",
+              "result": [
+                "hp:-5"
+              ]
+            },
+            "partial": {
+              "text": "빼낸 돌 밑에 동전이 있었다.",
+              "result": [
+                "gold:3"
+              ]
+            },
+            "success": {
+              "text": "맨 아래 돌 밑에 꾸러미가 숨겨져 있었다.",
+              "result": [
+                "gold:5",
+                "item:random:consumable"
+              ]
+            }
+          }
+        },
+        {
+          "id": "leave_stones",
+          "order": 5,
+          "text": "돌무더기를 건드리지 않고 지나간다",
+          "verb": "pass",
+          "condition": [],
+          "skillBonus": [],
+          "difficulty": "none",
+          "outcomes": {
+            "success": {
+              "text": "돌무더기의 문양이 자꾸 눈에 밟힌다.",
+              "result": []
             }
           }
         }
@@ -5275,30 +6392,33 @@ export const dungeonForestData = {
           }
         },
         {
-          "id": "rob_soldier",
+          "id": "carry_soldier",
           "order": 3,
-          "text": "장비를 빼앗는다",
-          "verb": "",
-          "condition": [],
+          "text": "병사를 부축해 길목까지 옮긴다",
+          "verb": "force",
+          "condition": [
+            "str:5"
+          ],
           "skillBonus": [],
           "difficulty": "normal",
           "outcomes": {
             "fail": {
-              "text": "병사가 마지막 힘을 짜내 칼을 휘둘렀다.",
+              "text": "함께 넘어졌다.",
               "result": [
-                "hp:-8"
+                "hp:-5"
               ]
             },
             "partial": {
-              "text": "동전 주머니만 빼앗았다.",
+              "text": "병사가 동전을 건넨다.",
               "result": [
                 "gold:5"
               ]
             },
             "success": {
-              "text": "병사의 장비를 빼앗았다. 뒷맛이 쓰다.",
+              "text": "병사가 회복약과 동전을 건넨다.",
               "result": [
-                "item:random:equipment"
+                "gold:6",
+                "item:con_potion"
               ]
             }
           }
@@ -5334,34 +6454,73 @@ export const dungeonForestData = {
           }
         },
         {
-          "id": "carry_soldier",
+          "id": "ask_news",
           "order": 5,
-          "text": "병사를 부축해 길목까지 옮긴다",
-          "verb": "force",
-          "condition": [
-            "str:5"
-          ],
+          "text": "병사에게 숲 깊은 곳의 소식을 묻는다",
+          "verb": "persuade",
+          "condition": [],
           "skillBonus": [],
           "difficulty": "normal",
           "outcomes": {
             "fail": {
-              "text": "함께 넘어졌다.",
+              "text": "병사의 의식이 흐려진다.",
+              "result": []
+            },
+            "partial": {
+              "text": "병사가 위험한 길목 몇 군데를 일러 준다.",
               "result": [
-                "hp:-5"
+                "hp:3"
+              ]
+            },
+            "success": {
+              "text": "\"붉은 두건의 도적 두목을 조심하시오.\" 병사가 숨겨 둔 비상금을 털어 준다.",
+              "result": [
+                "gold:6"
+              ]
+            }
+          }
+        },
+        {
+          "id": "rob_soldier",
+          "order": 6,
+          "text": "장비를 빼앗는다",
+          "verb": "",
+          "condition": [],
+          "skillBonus": [],
+          "difficulty": "normal",
+          "outcomes": {
+            "fail": {
+              "text": "병사가 마지막 힘을 짜내 칼을 휘둘렀다.",
+              "result": [
+                "hp:-8"
               ]
             },
             "partial": {
-              "text": "병사가 동전을 건넨다.",
+              "text": "동전 주머니만 빼앗았다.",
               "result": [
                 "gold:5"
               ]
             },
             "success": {
-              "text": "병사가 회복약과 동전을 건넨다.",
+              "text": "병사의 장비를 빼앗았다. 뒷맛이 쓰다.",
               "result": [
-                "gold:6",
-                "item:con_potion"
+                "item:random:equipment"
               ]
+            }
+          }
+        },
+        {
+          "id": "pass_soldier",
+          "order": 7,
+          "text": "못 본 척 지나간다",
+          "verb": "pass",
+          "condition": [],
+          "skillBonus": [],
+          "difficulty": "none",
+          "outcomes": {
+            "success": {
+              "text": "신음 소리가 숲속에 묻힌다.",
+              "result": []
             }
           }
         }
@@ -5425,30 +6584,15 @@ export const dungeonForestData = {
           }
         },
         {
-          "id": "leave_shrine",
-          "order": 3,
-          "text": "그냥 지나간다",
-          "verb": "pass",
-          "condition": [],
-          "skillBonus": [],
-          "difficulty": "none",
-          "outcomes": {
-            "success": {
-              "text": "성소의 얼굴이 뒤를 따라 고개를 돌리는 것 같다.",
-              "result": []
-            }
-          }
-        },
-        {
           "id": "decipher_face",
-          "order": 4,
+          "order": 3,
           "text": "신의 얼굴 아래 글귀를 해독한다",
           "verb": "insight",
           "condition": [
-            "wis:5"
+            "wis:8"
           ],
           "skillBonus": [],
-          "difficulty": "normal",
+          "difficulty": "easy",
           "outcomes": {
             "fail": {
               "text": "글귀를 읽자 눈이 따끔거린다.",
@@ -5472,7 +6616,7 @@ export const dungeonForestData = {
         },
         {
           "id": "clear_vines",
-          "order": 5,
+          "order": 4,
           "text": "성소를 감은 덩굴을 걷어 낸다",
           "verb": "force",
           "condition": [
@@ -5499,6 +6643,50 @@ export const dungeonForestData = {
                 "hp:10",
                 "gold:3"
               ]
+            }
+          }
+        },
+        {
+          "id": "deface_shrine",
+          "order": 5,
+          "text": "낯선 신의 얼굴을 깎아 낸다",
+          "verb": "",
+          "condition": [],
+          "skillBonus": [],
+          "difficulty": "normal",
+          "outcomes": {
+            "fail": {
+              "text": "돌가루가 눈에 들어갔다. 차가운 저주가 몸을 감싼다.",
+              "result": [
+                "hp:-8"
+              ]
+            },
+            "partial": {
+              "text": "얼굴이 뭉개졌다. 아무 일도 없었다.",
+              "result": [
+                "gold:2"
+              ]
+            },
+            "success": {
+              "text": "깎아 낸 얼굴 뒤에 박혀 있던 보석을 빼냈다.",
+              "result": [
+                "gold:8"
+              ]
+            }
+          }
+        },
+        {
+          "id": "leave_shrine",
+          "order": 6,
+          "text": "그냥 지나간다",
+          "verb": "pass",
+          "condition": [],
+          "skillBonus": [],
+          "difficulty": "none",
+          "outcomes": {
+            "success": {
+              "text": "성소의 얼굴이 뒤를 따라 고개를 돌리는 것 같다.",
+              "result": []
             }
           }
         }
@@ -5559,8 +6747,66 @@ export const dungeonForestData = {
           }
         },
         {
-          "id": "wind_path_fog",
+          "id": "quick_steps",
           "order": 3,
+          "text": "발소리를 죽이고 빠르게 빠져나간다",
+          "verb": "stealth",
+          "condition": [
+            "agi:2"
+          ],
+          "skillBonus": [],
+          "difficulty": "normal",
+          "outcomes": {
+            "fail": {
+              "text": "나무에 부딪혔다.",
+              "result": [
+                "hp:-4"
+              ]
+            },
+            "partial": {
+              "text": "안개를 빠져나왔다.",
+              "result": []
+            },
+            "success": {
+              "text": "안개 밖에서 동전을 주웠다.",
+              "result": [
+                "gold:3"
+              ]
+            }
+          }
+        },
+        {
+          "id": "climb_fog",
+          "order": 4,
+          "text": "나무를 타고 올라 안개 위로 머리를 내민다",
+          "verb": "stealth",
+          "condition": [
+            "agi:8"
+          ],
+          "skillBonus": [],
+          "difficulty": "easy",
+          "outcomes": {
+            "fail": {
+              "text": "젖은 가지에서 미끄러져 떨어졌다.",
+              "result": [
+                "hp:-4"
+              ]
+            },
+            "partial": {
+              "text": "방향을 잡고 안개를 빠져나왔다.",
+              "result": []
+            },
+            "success": {
+              "text": "안개 위로 길이 훤히 보인다. 내려오는 길에 반짝이는 것도 주웠다.",
+              "result": [
+                "gold:5"
+              ]
+            }
+          }
+        },
+        {
+          "id": "wind_path_fog",
+          "order": 5,
           "text": "바람이 흐르는 쪽을 따라간다",
           "verb": "insight",
           "condition": [
@@ -5588,30 +6834,29 @@ export const dungeonForestData = {
           }
         },
         {
-          "id": "quick_steps",
-          "order": 4,
-          "text": "발소리를 죽이고 빠르게 빠져나간다",
-          "verb": "stealth",
-          "condition": [
-            "agi:5"
-          ],
+          "id": "shout_fog",
+          "order": 6,
+          "text": "큰 소리로 외쳐 메아리로 방향을 잡는다",
+          "verb": "",
+          "condition": [],
           "skillBonus": [],
-          "difficulty": "easy",
+          "difficulty": "normal",
           "outcomes": {
             "fail": {
-              "text": "나무에 부딪혔다.",
+              "text": "소리를 듣고 늑대가 다가왔다!",
               "result": [
-                "hp:-4"
+                "fight:ene_starving_wolf:ambushed"
               ]
             },
             "partial": {
-              "text": "안개를 빠져나왔다.",
+              "text": "메아리로 방향을 잡아 빠져나왔다.",
               "result": []
             },
             "success": {
-              "text": "안개 밖에서 동전을 주웠다.",
+              "text": "근처의 나그네가 대답하며 길을 안내하고 약초를 나눠 준다.",
               "result": [
-                "gold:3"
+                "hp:5",
+                "item:con_bandage"
               ]
             }
           }
@@ -5678,23 +6923,8 @@ export const dungeonForestData = {
           }
         },
         {
-          "id": "decline_spar",
-          "order": 3,
-          "text": "정중히 사양한다",
-          "verb": "pass",
-          "condition": [],
-          "skillBonus": [],
-          "difficulty": "none",
-          "outcomes": {
-            "success": {
-              "text": "검객이 어깨를 으쓱하고 다시 칼을 닦는다.",
-              "result": []
-            }
-          }
-        },
-        {
           "id": "test_strength",
-          "order": 4,
+          "order": 3,
           "text": "힘으로 맞서 칼을 받아 낸다",
           "verb": "force",
           "condition": [
@@ -5725,7 +6955,7 @@ export const dungeonForestData = {
         },
         {
           "id": "feint_swordsman",
-          "order": 5,
+          "order": 4,
           "text": "빈틈을 노려 검객의 허리띠를 건드린다",
           "verb": "stealth",
           "condition": [
@@ -5751,6 +6981,49 @@ export const dungeonForestData = {
               "result": [
                 "skill:choice"
               ]
+            }
+          }
+        },
+        {
+          "id": "hear_stories",
+          "order": 5,
+          "text": "검객의 무용담을 들어 준다",
+          "verb": "persuade",
+          "condition": [],
+          "skillBonus": [],
+          "difficulty": "easy",
+          "outcomes": {
+            "fail": {
+              "text": "검객이 시큰둥하게 칼만 닦는다.",
+              "result": []
+            },
+            "partial": {
+              "text": "이야기를 듣는 동안 푹 쉬었다.",
+              "result": [
+                "hp:5"
+              ]
+            },
+            "success": {
+              "text": "\"좋은 청중이군.\" 검객이 숫돌을 건넨다.",
+              "result": [
+                "hp:5",
+                "item:con_whetstone"
+              ]
+            }
+          }
+        },
+        {
+          "id": "decline_spar",
+          "order": 6,
+          "text": "정중히 사양한다",
+          "verb": "pass",
+          "condition": [],
+          "skillBonus": [],
+          "difficulty": "none",
+          "outcomes": {
+            "success": {
+              "text": "검객이 어깨를 으쓱하고 다시 칼을 닦는다.",
+              "result": []
             }
           }
         }
@@ -5794,25 +7067,8 @@ export const dungeonForestData = {
           }
         },
         {
-          "id": "sell_tome",
-          "order": 2,
-          "text": "책을 챙겨 둔다",
-          "verb": "",
-          "condition": [],
-          "skillBonus": [],
-          "difficulty": "none",
-          "outcomes": {
-            "success": {
-              "text": "값나가 보이는 표지 장식만 뜯어 챙겼다.",
-              "result": [
-                "gold:5"
-              ]
-            }
-          }
-        },
-        {
           "id": "decipher_tome",
-          "order": 3,
+          "order": 2,
           "text": "옛 글자를 해독하며 차분히 읽는다",
           "verb": "insight",
           "condition": [
@@ -5836,6 +7092,65 @@ export const dungeonForestData = {
               "result": [
                 "skill:choice"
               ]
+            }
+          }
+        },
+        {
+          "id": "sell_tome",
+          "order": 3,
+          "text": "책을 챙겨 둔다",
+          "verb": "",
+          "condition": [],
+          "skillBonus": [],
+          "difficulty": "none",
+          "outcomes": {
+            "success": {
+              "text": "값나가 보이는 표지 장식만 뜯어 챙겼다.",
+              "result": [
+                "gold:5"
+              ]
+            }
+          }
+        },
+        {
+          "id": "check_note",
+          "order": 4,
+          "text": "책장 사이에 끼워진 쪽지를 살핀다",
+          "verb": "",
+          "condition": [],
+          "skillBonus": [],
+          "difficulty": "easy",
+          "outcomes": {
+            "fail": {
+              "text": "빛바랜 낙서뿐이다.",
+              "result": []
+            },
+            "partial": {
+              "text": "쪽지에 적힌 곳에서 동전을 찾았다.",
+              "result": [
+                "gold:2"
+              ]
+            },
+            "success": {
+              "text": "쪽지가 가리킨 서가 밑에서 꾸러미를 꺼냈다.",
+              "result": [
+                "item:random:consumable"
+              ]
+            }
+          }
+        },
+        {
+          "id": "leave_tome",
+          "order": 5,
+          "text": "책을 덮고 지나간다",
+          "verb": "pass",
+          "condition": [],
+          "skillBonus": [],
+          "difficulty": "none",
+          "outcomes": {
+            "success": {
+              "text": "낯선 기술의 이름이 머릿속에 맴돈다.",
+              "result": []
             }
           }
         }
@@ -5932,10 +7247,10 @@ export const dungeonForestData = {
           "text": "호흡을 따라 하며 명상한다",
           "verb": "insight",
           "condition": [
-            "wis:5"
+            "wis:2"
           ],
           "skillBonus": [],
-          "difficulty": "easy",
+          "difficulty": "normal",
           "outcomes": {
             "fail": {
               "text": "잡념만 늘었다.",
@@ -5952,6 +7267,21 @@ export const dungeonForestData = {
               "result": [
                 "skill:random"
               ]
+            }
+          }
+        },
+        {
+          "id": "leave_ascetic",
+          "order": 5,
+          "text": "수련을 방해하지 않고 지나간다",
+          "verb": "pass",
+          "condition": [],
+          "skillBonus": [],
+          "difficulty": "none",
+          "outcomes": {
+            "success": {
+              "text": "수련자의 숨소리가 바람처럼 멀어진다.",
+              "result": []
             }
           }
         }
@@ -5995,23 +7325,8 @@ export const dungeonForestData = {
           }
         },
         {
-          "id": "leave_beast",
-          "order": 2,
-          "text": "조용히 물러난다",
-          "verb": "pass",
-          "condition": [],
-          "skillBonus": [],
-          "difficulty": "none",
-          "outcomes": {
-            "success": {
-              "text": "괜히 늑대의 눈에 띄지 않는 편이 낫다.",
-              "result": []
-            }
-          }
-        },
-        {
           "id": "mimic_beast",
-          "order": 3,
+          "order": 2,
           "text": "늑대의 몸놀림을 따라 움직여 본다",
           "verb": "stealth",
           "condition": [
@@ -6035,6 +7350,96 @@ export const dungeonForestData = {
               "result": [
                 "skill:choice"
               ]
+            }
+          }
+        },
+        {
+          "id": "stalk_close",
+          "order": 3,
+          "text": "바람을 등지고 늑대 바로 곁까지 다가간다",
+          "verb": "stealth",
+          "condition": [
+            "agi:8"
+          ],
+          "skillBonus": [],
+          "difficulty": "easy",
+          "outcomes": {
+            "fail": {
+              "text": "늑대가 고개를 홱 돌렸다!",
+              "result": [
+                "fight:ene_starving_wolf:ambushed"
+              ]
+            },
+            "partial": {
+              "text": "가까이서 본 움직임이 몸에 조금 남았다.",
+              "result": [
+                "hp:5"
+              ]
+            },
+            "success": {
+              "text": "숨결이 닿을 거리에서 늑대의 움직임을 고스란히 익혔다.",
+              "result": [
+                "skill:choice"
+              ]
+            }
+          }
+        },
+        {
+          "id": "face_beast",
+          "order": 4,
+          "text": "덤불을 헤치고 정면으로 맞선다",
+          "verb": "force",
+          "condition": [],
+          "skillBonus": [],
+          "difficulty": "none",
+          "outcomes": {
+            "success": {
+              "text": "사냥을 방해받은 늑대가 이빨을 드러내며 달려든다.",
+              "result": [
+                "fight:ene_starving_wolf"
+              ]
+            }
+          }
+        },
+        {
+          "id": "throw_stone",
+          "order": 5,
+          "text": "돌을 던져 사냥감을 가로챈다",
+          "verb": "",
+          "condition": [],
+          "skillBonus": [],
+          "difficulty": "normal",
+          "outcomes": {
+            "fail": {
+              "text": "돌이 빗나가 늑대가 이쪽을 노린다.",
+              "result": [
+                "fight:ene_starving_wolf:ambushed"
+              ]
+            },
+            "partial": {
+              "text": "늑대가 놀라 달아났지만 사냥감도 도망쳤다.",
+              "result": []
+            },
+            "success": {
+              "text": "늑대가 놀라 버리고 간 사냥감 곁에서 쓸 만한 것을 챙겼다.",
+              "result": [
+                "item:random:consumable"
+              ]
+            }
+          }
+        },
+        {
+          "id": "leave_beast",
+          "order": 6,
+          "text": "조용히 물러난다",
+          "verb": "pass",
+          "condition": [],
+          "skillBonus": [],
+          "difficulty": "none",
+          "outcomes": {
+            "success": {
+              "text": "괜히 늑대의 눈에 띄지 않는 편이 낫다.",
+              "result": []
             }
           }
         }
@@ -6080,23 +7485,8 @@ export const dungeonForestData = {
           }
         },
         {
-          "id": "read_only",
-          "order": 2,
-          "text": "글귀만 읽고 지나간다",
-          "verb": "pass",
-          "condition": [],
-          "skillBonus": [],
-          "difficulty": "none",
-          "outcomes": {
-            "success": {
-              "text": "시험은 다음 기회로 미뤄 둔다.",
-              "result": []
-            }
-          }
-        },
-        {
           "id": "endure_trial",
-          "order": 3,
+          "order": 2,
           "text": "몸으로 빛을 버텨 낸다",
           "verb": "force",
           "condition": [
@@ -6127,14 +7517,14 @@ export const dungeonForestData = {
         },
         {
           "id": "read_trial",
-          "order": 4,
+          "order": 3,
           "text": "글귀의 숨은 뜻을 풀어 시험을 피해 간다",
           "verb": "insight",
           "condition": [
-            "wis:5"
+            "wis:8"
           ],
           "skillBonus": [],
-          "difficulty": "normal",
+          "difficulty": "easy",
           "outcomes": {
             "fail": {
               "text": "뜻을 잘못 풀어 빛에 맞았다.",
@@ -6151,6 +7541,39 @@ export const dungeonForestData = {
               "result": [
                 "skill:choice"
               ]
+            }
+          }
+        },
+        {
+          "id": "blood_trial",
+          "order": 4,
+          "text": "석판에 피를 바쳐 시험을 대신한다 (HP 10 소모)",
+          "verb": "",
+          "condition": [],
+          "skillBonus": [],
+          "difficulty": "none",
+          "outcomes": {
+            "success": {
+              "text": "피가 글귀를 따라 번지자 석판이 조용히 기술을 보여 준다.",
+              "result": [
+                "hp:-10",
+                "skill:choice"
+              ]
+            }
+          }
+        },
+        {
+          "id": "read_only",
+          "order": 5,
+          "text": "글귀만 읽고 지나간다",
+          "verb": "pass",
+          "condition": [],
+          "skillBonus": [],
+          "difficulty": "none",
+          "outcomes": {
+            "success": {
+              "text": "시험은 다음 기회로 미뤄 둔다.",
+              "result": []
             }
           }
         }
@@ -6214,27 +7637,12 @@ export const dungeonForestData = {
           }
         },
         {
-          "id": "leave_mage",
-          "order": 3,
-          "text": "지나친다",
-          "verb": "pass",
-          "condition": [],
-          "skillBonus": [],
-          "difficulty": "none",
-          "outcomes": {
-            "success": {
-              "text": "등 뒤에서 지팡이의 빛이 가물거린다.",
-              "result": []
-            }
-          }
-        },
-        {
           "id": "read_staff",
-          "order": 4,
+          "order": 3,
           "text": "지팡이의 주문을 읽어 마력을 안정시킨다",
           "verb": "insight",
           "condition": [
-            "wis:5"
+            "wis:8"
           ],
           "skillBonus": [],
           "difficulty": "easy",
@@ -6261,7 +7669,7 @@ export const dungeonForestData = {
         },
         {
           "id": "carry_mage",
-          "order": 5,
+          "order": 4,
           "text": "마법사를 업고 샘터까지 데려간다",
           "verb": "force",
           "condition": [
@@ -6287,6 +7695,50 @@ export const dungeonForestData = {
               "result": [
                 "skill:random"
               ]
+            }
+          }
+        },
+        {
+          "id": "take_staff",
+          "order": 5,
+          "text": "지팡이를 빼앗는다",
+          "verb": "",
+          "condition": [],
+          "skillBonus": [],
+          "difficulty": "normal",
+          "outcomes": {
+            "fail": {
+              "text": "마법사가 마지막 힘으로 주문을 터뜨렸다.",
+              "result": [
+                "hp:-8"
+              ]
+            },
+            "partial": {
+              "text": "지팡이 끝의 보석만 떼어 냈다.",
+              "result": [
+                "gold:4"
+              ]
+            },
+            "success": {
+              "text": "마법사의 지팡이를 손에 넣었다. 뒷맛이 쓰다.",
+              "result": [
+                "item:random:equipment"
+              ]
+            }
+          }
+        },
+        {
+          "id": "leave_mage",
+          "order": 6,
+          "text": "지나친다",
+          "verb": "pass",
+          "condition": [],
+          "skillBonus": [],
+          "difficulty": "none",
+          "outcomes": {
+            "success": {
+              "text": "등 뒤에서 지팡이의 빛이 가물거린다.",
+              "result": []
             }
           }
         }
@@ -6435,96 +7887,8 @@ export const dungeonForestData = {
           }
         },
         {
-          "id": "read_marks",
-          "order": 5,
-          "text": "문에 새겨진 사냥꾼 표식을 읽는다",
-          "verb": "insight",
-          "condition": [
-            "wis:2"
-          ],
-          "skillBonus": [],
-          "difficulty": "normal",
-          "outcomes": {
-            "fail": {
-              "text": "아무 뜻 없는 낙서였다.",
-              "result": []
-            },
-            "partial": {
-              "text": "근처 나무에 같은 표식이 있다. 뿌리 밑에서 동전 몇 닢을 찾았다.",
-              "result": [
-                "gold:3"
-              ]
-            },
-            "success": {
-              "text": "표식이 가리키는 바위 밑에 사냥꾼의 비상 꾸러미가 숨겨져 있었다.",
-              "result": [
-                "item:con_bandage",
-                "gold:5"
-              ]
-            }
-          }
-        },
-        {
-          "id": "burn_chain",
-          "order": 6,
-          "text": "불씨로 쇠사슬 고리를 달군다",
-          "verb": "use",
-          "condition": [
-            "skill:skl_ember"
-          ],
-          "skillBonus": [
-            {
-              "skillId": "skl_ember",
-              "bonus": 5
-            }
-          ],
-          "difficulty": "easy",
-          "outcomes": {
-            "fail": {
-              "text": "불꽃이 튀어 손등을 데었다.",
-              "result": [
-                "hp:-4"
-              ]
-            },
-            "partial": {
-              "text": "고리가 물러졌지만 끊어지지는 않았다.",
-              "result": [
-                "gold:2"
-              ]
-            },
-            "success": {
-              "text": "달궈진 고리가 툭 끊어졌다. 문이 소리 없이 열린다.",
-              "result": [
-                "item:random:consumable",
-                "gold:6"
-              ]
-            }
-          }
-        },
-        {
-          "id": "whetstone_lock",
-          "order": 7,
-          "text": "숫돌로 자물쇠를 갈아 낸다",
-          "verb": "use",
-          "condition": [
-            "item:con_whetstone"
-          ],
-          "skillBonus": [],
-          "difficulty": "none",
-          "outcomes": {
-            "success": {
-              "text": "숫돌이 닳아 없어질 즈음 자물쇠가 떨어졌다.",
-              "result": [
-                "item:-con_whetstone",
-                "item:random:consumable",
-                "gold:6"
-              ]
-            }
-          }
-        },
-        {
           "id": "talk_hunter",
-          "order": 8,
+          "order": 5,
           "text": "사냥꾼을 깨워 사정을 이야기한다",
           "verb": "persuade",
           "condition": [],
@@ -6551,38 +7915,27 @@ export const dungeonForestData = {
           }
         },
         {
-          "id": "threaten_hunter",
-          "order": 9,
-          "text": "활을 걷어차고 창고를 열라고 한다",
-          "verb": "threaten",
+          "id": "help_hunter",
+          "order": 6,
+          "text": "사냥꾼이 깰 때까지 기다렸다가 장작 패는 일을 거든다 (HP 4 소모)",
+          "verb": "",
           "condition": [],
           "skillBonus": [],
-          "difficulty": "hard",
+          "difficulty": "none",
           "outcomes": {
-            "fail": {
-              "text": "사냥꾼이 순식간에 화살을 쏘고 숲으로 사라졌다.",
-              "result": [
-                "hp:-10"
-              ]
-            },
-            "partial": {
-              "text": "사냥꾼이 투덜거리며 동전 주머니만 던지고 달아났다.",
-              "result": [
-                "gold:4"
-              ]
-            },
             "success": {
-              "text": "사냥꾼이 질린 얼굴로 창고 열쇠를 내밀었다.",
+              "text": "땀을 흘리며 장작을 다 팼다. 사냥꾼이 창고 문을 열어 품삯을 쳐 준다.",
               "result": [
-                "gold:10",
-                "item:random:consumable"
+                "hp:-4",
+                "gold:6",
+                "flag:hunterFriend"
               ]
             }
           }
         },
         {
           "id": "sneak_past",
-          "order": 10,
+          "order": 7,
           "text": "깨우지 않고 조용히 지나간다",
           "verb": "pass",
           "condition": [],
@@ -6738,68 +8091,8 @@ export const dungeonForestData = {
           }
         },
         {
-          "id": "find_detour",
-          "order": 5,
-          "text": "주변을 살펴 돌아가는 길을 찾는다",
-          "verb": "insight",
-          "condition": [
-            "wis:2"
-          ],
-          "skillBonus": [],
-          "difficulty": "easy",
-          "outcomes": {
-            "fail": {
-              "text": "빙빙 돌다 시간만 버렸다.",
-              "result": [
-                "hp:-2"
-              ]
-            },
-            "partial": {
-              "text": "돌아가는 길을 찾았다.",
-              "result": []
-            },
-            "success": {
-              "text": "우회로에서 약초 군락을 발견했다.",
-              "result": [
-                "item:con_bandage"
-              ]
-            }
-          }
-        },
-        {
-          "id": "read_rot",
-          "order": 6,
-          "text": "썩은 부분을 찾아 쉽게 쪼갠다",
-          "verb": "insight",
-          "condition": [
-            "wis:5"
-          ],
-          "skillBonus": [],
-          "difficulty": "normal",
-          "outcomes": {
-            "fail": {
-              "text": "엉뚱한 곳을 건드려 가지가 떨어졌다.",
-              "result": [
-                "hp:-5"
-              ]
-            },
-            "partial": {
-              "text": "썩은 부분을 찾아 쉽게 지나갔다.",
-              "result": [
-                "gold:2"
-              ]
-            },
-            "success": {
-              "text": "썩은 줄기 속 벌집에서 꿀을 얻었다.",
-              "result": [
-                "hp:12"
-              ]
-            }
-          }
-        },
-        {
           "id": "burn_tree",
-          "order": 7,
+          "order": 5,
           "text": "불씨로 가지를 태워 길을 낸다",
           "verb": "use",
           "condition": [
@@ -6833,28 +8126,8 @@ export const dungeonForestData = {
           }
         },
         {
-          "id": "chop_whetstone",
-          "order": 8,
-          "text": "숫돌로 날을 세워 가지를 쳐 낸다",
-          "verb": "use",
-          "condition": [
-            "item:con_whetstone"
-          ],
-          "skillBonus": [],
-          "difficulty": "none",
-          "outcomes": {
-            "success": {
-              "text": "가지를 쳐 내자 사이에 걸린 짐이 드러났다.",
-              "result": [
-                "item:-con_whetstone",
-                "item:random:equipment"
-              ]
-            }
-          }
-        },
-        {
           "id": "turn_back",
-          "order": 9,
+          "order": 6,
           "text": "다른 길로 돌아간다",
           "verb": "pass",
           "condition": [],
@@ -6914,9 +8187,7 @@ export const dungeonForestData = {
           "order": 2,
           "text": "창을 빼앗아 부러뜨리며 으르렁댄다",
           "verb": "threaten",
-          "condition": [
-            "str:5"
-          ],
+          "condition": [],
           "skillBonus": [],
           "difficulty": "normal",
           "outcomes": {
@@ -7039,7 +8310,7 @@ export const dungeonForestData = {
           "id": "pounce_sentry",
           "order": 6,
           "text": "졸던 고블린을 덮친다",
-          "verb": "force",
+          "verb": "",
           "condition": [],
           "skillBonus": [],
           "difficulty": "none",
@@ -7053,75 +8324,8 @@ export const dungeonForestData = {
           }
         },
         {
-          "id": "distract_sentry",
-          "order": 7,
-          "text": "멀리 돌을 던져 주의를 돌린다",
-          "verb": "insight",
-          "condition": [
-            "wis:5"
-          ],
-          "skillBonus": [],
-          "difficulty": "normal",
-          "outcomes": {
-            "fail": {
-              "text": "돌이 고블린 발치에 떨어졌다.",
-              "result": [
-                "fight:ene_moss_goblin:ambushed"
-              ]
-            },
-            "partial": {
-              "text": "고블린이 소리 쪽으로 가 버렸다.",
-              "result": []
-            },
-            "success": {
-              "text": "고블린이 자리를 비운 사이 자루를 뒤졌다.",
-              "result": [
-                "gold:6",
-                "item:random:consumable"
-              ]
-            }
-          }
-        },
-        {
-          "id": "dart_sentry",
-          "order": 8,
-          "text": "독침으로 고블린을 잠재운다",
-          "verb": "use",
-          "condition": [
-            "skill:skl_poison_dart"
-          ],
-          "skillBonus": [
-            {
-              "skillId": "skl_poison_dart",
-              "bonus": 4
-            }
-          ],
-          "difficulty": "easy",
-          "outcomes": {
-            "fail": {
-              "text": "독침이 빗나갔다.",
-              "result": [
-                "fight:ene_moss_goblin"
-              ]
-            },
-            "partial": {
-              "text": "고블린이 비틀거리며 도망쳤다.",
-              "result": [
-                "gold:4"
-              ]
-            },
-            "success": {
-              "text": "고블린이 그대로 잠들었다.",
-              "result": [
-                "gold:7",
-                "item:random:consumable"
-              ]
-            }
-          }
-        },
-        {
           "id": "avoid_sentry",
-          "order": 9,
+          "order": 7,
           "text": "멀찍이 돌아간다",
           "verb": "pass",
           "condition": [],
@@ -7240,38 +8444,8 @@ export const dungeonForestData = {
           }
         },
         {
-          "id": "find_hinge",
-          "order": 4,
-          "text": "덩굴이 없는 경첩 쪽을 찾는다",
-          "verb": "insight",
-          "condition": [
-            "wis:5"
-          ],
-          "skillBonus": [],
-          "difficulty": "normal",
-          "outcomes": {
-            "fail": {
-              "text": "경첩도 덩굴에 감겨 있었다.",
-              "result": []
-            },
-            "partial": {
-              "text": "경첩 하나를 빼 틈을 냈다.",
-              "result": [
-                "gold:3"
-              ]
-            },
-            "success": {
-              "text": "경첩을 빼 뒤판을 통째로 열었다.",
-              "result": [
-                "gold:6",
-                "item:random:equipment"
-              ]
-            }
-          }
-        },
-        {
           "id": "burn_vines",
-          "order": 5,
+          "order": 4,
           "text": "불씨로 덩굴을 태운다",
           "verb": "use",
           "condition": [
@@ -7307,43 +8481,8 @@ export const dungeonForestData = {
           }
         },
         {
-          "id": "frost_lock",
-          "order": 6,
-          "text": "서리 화살로 자물쇠를 얼려 깨뜨린다",
-          "verb": "use",
-          "condition": [
-            "skill:skl_frost_arrow"
-          ],
-          "skillBonus": [
-            {
-              "skillId": "skl_frost_arrow",
-              "bonus": 5
-            }
-          ],
-          "difficulty": "easy",
-          "outcomes": {
-            "fail": {
-              "text": "자물쇠가 얼지 않았다.",
-              "result": []
-            },
-            "partial": {
-              "text": "자물쇠에 금이 갔다.",
-              "result": [
-                "gold:3"
-              ]
-            },
-            "success": {
-              "text": "얼어붙은 자물쇠가 산산이 깨졌다.",
-              "result": [
-                "gold:5",
-                "item:random:consumable"
-              ]
-            }
-          }
-        },
-        {
           "id": "grind_lock",
-          "order": 7,
+          "order": 5,
           "text": "숫돌로 자물쇠를 갈아 낸다",
           "verb": "use",
           "condition": [
@@ -7364,7 +8503,7 @@ export const dungeonForestData = {
         },
         {
           "id": "leave_thorn_chest",
-          "order": 8,
+          "order": 6,
           "text": "가시덩굴을 피해 지나간다",
           "verb": "pass",
           "condition": [],
@@ -7450,40 +8589,8 @@ export const dungeonForestData = {
           }
         },
         {
-          "id": "hop_stones",
-          "order": 3,
-          "text": "젖은 돌을 딛고 건너간다",
-          "verb": "stealth",
-          "condition": [
-            "agi:5"
-          ],
-          "skillBonus": [],
-          "difficulty": "easy",
-          "outcomes": {
-            "fail": {
-              "text": "미끄러져 물에 빠졌다.",
-              "result": [
-                "hp:-5"
-              ]
-            },
-            "partial": {
-              "text": "주머니 하나만 챙겼다.",
-              "result": [
-                "gold:3"
-              ]
-            },
-            "success": {
-              "text": "꾸러미를 들고 무사히 돌아왔다.",
-              "result": [
-                "gold:4",
-                "item:random:consumable"
-              ]
-            }
-          }
-        },
-        {
           "id": "read_current",
-          "order": 4,
+          "order": 3,
           "text": "물살을 읽고 떠내려올 곳에서 기다린다",
           "verb": "insight",
           "condition": [
@@ -7512,44 +8619,8 @@ export const dungeonForestData = {
           }
         },
         {
-          "id": "freeze_stream",
-          "order": 5,
-          "text": "서리 화살로 물길을 얼린다",
-          "verb": "use",
-          "condition": [
-            "skill:skl_frost_arrow"
-          ],
-          "skillBonus": [
-            {
-              "skillId": "skl_frost_arrow",
-              "bonus": 5
-            }
-          ],
-          "difficulty": "easy",
-          "outcomes": {
-            "fail": {
-              "text": "얼음이 금방 깨졌다.",
-              "result": [
-                "hp:-3"
-              ]
-            },
-            "partial": {
-              "text": "얼음 위를 건너 주머니를 챙겼다.",
-              "result": [
-                "gold:3"
-              ]
-            },
-            "success": {
-              "text": "얼어붙은 개울을 걸어가 꾸러미를 가져왔다.",
-              "result": [
-                "item:random:equipment"
-              ]
-            }
-          }
-        },
-        {
           "id": "ask_fisher",
-          "order": 6,
+          "order": 4,
           "text": "근처 낚시꾼에게 도움을 청한다",
           "verb": "persuade",
           "condition": [],
@@ -7577,7 +8648,7 @@ export const dungeonForestData = {
         },
         {
           "id": "let_go",
-          "order": 7,
+          "order": 5,
           "text": "꾸러미를 포기한다",
           "verb": "pass",
           "condition": [],
@@ -7603,40 +8674,8 @@ export const dungeonForestData = {
       "group": "hazard",
       "choices": [
         {
-          "id": "wind_path",
-          "order": 1,
-          "text": "바람이 흐르는 길을 찾아 건넌다",
-          "verb": "insight",
-          "condition": [
-            "wis:5"
-          ],
-          "skillBonus": [],
-          "difficulty": "easy",
-          "outcomes": {
-            "fail": {
-              "text": "안개 속을 헤맸다.",
-              "result": [
-                "hp:-6"
-              ]
-            },
-            "partial": {
-              "text": "겨우 빠져나왔다.",
-              "result": [
-                "hp:-2"
-              ]
-            },
-            "success": {
-              "text": "바람길을 따라 배낭까지 무사히 닿았다.",
-              "result": [
-                "gold:4",
-                "item:random:consumable"
-              ]
-            }
-          }
-        },
-        {
           "id": "herb_lore",
-          "order": 2,
+          "order": 1,
           "text": "안개를 막는 풀을 찾아 코에 댄다",
           "verb": "insight",
           "condition": [
@@ -7668,7 +8707,7 @@ export const dungeonForestData = {
         },
         {
           "id": "dash_mist",
-          "order": 3,
+          "order": 2,
           "text": "숨을 참고 단숨에 달려 건넌다",
           "verb": "stealth",
           "condition": [
@@ -7700,13 +8739,32 @@ export const dungeonForestData = {
           }
         },
         {
+          "id": "chew_antidote",
+          "order": 3,
+          "text": "해독초를 씹으며 건넌다",
+          "verb": "use",
+          "condition": [
+            "item:con_antidote"
+          ],
+          "skillBonus": [],
+          "difficulty": "none",
+          "outcomes": {
+            "success": {
+              "text": "해독초 덕분에 멀쩡히 배낭을 챙겼다.",
+              "result": [
+                "item:-con_antidote",
+                "gold:5",
+                "item:random:equipment"
+              ]
+            }
+          }
+        },
+        {
           "id": "endure_mist",
           "order": 4,
           "text": "독기를 버티며 걸어서 건넌다",
-          "verb": "force",
-          "condition": [
-            "str:5"
-          ],
+          "verb": "",
+          "condition": [],
           "skillBonus": [],
           "difficulty": "hard",
           "outcomes": {
@@ -7734,29 +8792,8 @@ export const dungeonForestData = {
           }
         },
         {
-          "id": "chew_antidote",
-          "order": 5,
-          "text": "해독초를 씹으며 건넌다",
-          "verb": "use",
-          "condition": [
-            "item:con_antidote"
-          ],
-          "skillBonus": [],
-          "difficulty": "none",
-          "outcomes": {
-            "success": {
-              "text": "해독초 덕분에 멀쩡히 배낭을 챙겼다.",
-              "result": [
-                "item:-con_antidote",
-                "gold:5",
-                "item:random:equipment"
-              ]
-            }
-          }
-        },
-        {
           "id": "go_around",
-          "order": 6,
+          "order": 5,
           "text": "늪을 크게 돌아간다",
           "verb": "pass",
           "condition": [],
@@ -7816,9 +8853,7 @@ export const dungeonForestData = {
           "order": 2,
           "text": "그럴듯한 말로 도적을 구슬린다",
           "verb": "persuade",
-          "condition": [
-            "wis:5"
-          ],
+          "condition": [],
           "skillBonus": [],
           "difficulty": "easy",
           "outcomes": {
@@ -7872,25 +8907,8 @@ export const dungeonForestData = {
           }
         },
         {
-          "id": "step_in",
-          "order": 4,
-          "text": "도적 앞을 막아선다",
-          "verb": "force",
-          "condition": [],
-          "skillBonus": [],
-          "difficulty": "none",
-          "outcomes": {
-            "success": {
-              "text": "도적이 칼을 고쳐 잡는다.",
-              "result": [
-                "fight:ene_forest_bandit"
-              ]
-            }
-          }
-        },
-        {
           "id": "snatch_goods",
-          "order": 5,
+          "order": 4,
           "text": "다투는 틈에 짐을 슬쩍한다",
           "verb": "stealth",
           "condition": [
@@ -7921,8 +8939,45 @@ export const dungeonForestData = {
           }
         },
         {
-          "id": "leave_quarrel",
+          "id": "step_in",
+          "order": 5,
+          "text": "도적 앞을 막아선다",
+          "verb": "",
+          "condition": [],
+          "skillBonus": [],
+          "difficulty": "none",
+          "outcomes": {
+            "success": {
+              "text": "도적이 칼을 고쳐 잡는다.",
+              "result": [
+                "fight:ene_forest_bandit"
+              ]
+            }
+          }
+        },
+        {
+          "id": "pay_off",
           "order": 6,
+          "text": "도적에게 행상 몫을 대신 내준다 (골드 5)",
+          "verb": "",
+          "condition": [
+            "gold:5"
+          ],
+          "skillBonus": [],
+          "difficulty": "none",
+          "outcomes": {
+            "success": {
+              "text": "도적이 동전을 챙겨 떠나자, 행상이 짐을 풀어 마음에 드는 것을 고르게 해 준다.",
+              "result": [
+                "gold:-5",
+                "item:random:equipment"
+              ]
+            }
+          }
+        },
+        {
+          "id": "leave_quarrel",
+          "order": 7,
           "text": "남의 일에 끼어들지 않는다",
           "verb": "pass",
           "condition": [],
@@ -8008,38 +9063,8 @@ export const dungeonForestData = {
           }
         },
         {
-          "id": "read_inscription",
-          "order": 3,
-          "text": "받침대의 글귀를 읽는다",
-          "verb": "insight",
-          "condition": [
-            "wis:5"
-          ],
-          "skillBonus": [],
-          "difficulty": "easy",
-          "outcomes": {
-            "fail": {
-              "text": "글자가 닳아 읽을 수 없다.",
-              "result": []
-            },
-            "partial": {
-              "text": "글귀를 읽으니 마음이 가라앉는다.",
-              "result": [
-                "hp:6"
-              ]
-            },
-            "success": {
-              "text": "글귀가 가리키는 벽돌 뒤에서 보관함을 찾았다.",
-              "result": [
-                "gold:5",
-                "item:random:consumable"
-              ]
-            }
-          }
-        },
-        {
           "id": "read_old_tongue",
-          "order": 4,
+          "order": 3,
           "text": "옛 수비대의 암호를 풀어 본다",
           "verb": "insight",
           "condition": [
@@ -8070,7 +9095,7 @@ export const dungeonForestData = {
         },
         {
           "id": "snatch_base",
-          "order": 5,
+          "order": 4,
           "text": "받침대 틈의 물건을 재빨리 낚아챈다",
           "verb": "stealth",
           "condition": [
@@ -8096,6 +9121,35 @@ export const dungeonForestData = {
               "result": [
                 "gold:6",
                 "item:random:consumable"
+              ]
+            }
+          }
+        },
+        {
+          "id": "topple_statue",
+          "order": 5,
+          "text": "석상을 일부러 쓰러뜨린다",
+          "verb": "",
+          "condition": [],
+          "skillBonus": [],
+          "difficulty": "normal",
+          "outcomes": {
+            "fail": {
+              "text": "튀어 오른 파편에 맞았다.",
+              "result": [
+                "hp:-6"
+              ]
+            },
+            "partial": {
+              "text": "받침대가 부서지며 동전이 쏟아졌다.",
+              "result": [
+                "gold:4"
+              ]
+            },
+            "success": {
+              "text": "쓰러진 석상 속 빈 공간에서 무언가 나왔다.",
+              "result": [
+                "item:random:equipment"
               ]
             }
           }
@@ -8221,74 +9275,8 @@ export const dungeonForestData = {
           }
         },
         {
-          "id": "watch_wolves",
-          "order": 4,
-          "text": "숨어서 늑대들의 싸움을 지켜본다",
-          "verb": "insight",
-          "condition": [
-            "wis:5"
-          ],
-          "skillBonus": [],
-          "difficulty": "normal",
-          "outcomes": {
-            "fail": {
-              "text": "늑대가 냄새를 맡았다.",
-              "result": [
-                "fight:ene_starving_wolf:ambushed"
-              ]
-            },
-            "partial": {
-              "text": "싸움이 끝나고 늑대들이 떠났다.",
-              "result": []
-            },
-            "success": {
-              "text": "싸움의 흐름을 지켜보며 새 싸움법을 깨달았다.",
-              "result": [
-                "skill:choice"
-              ]
-            }
-          }
-        },
-        {
-          "id": "dart_wolves",
-          "order": 5,
-          "text": "독침으로 늑대들을 쫓는다",
-          "verb": "use",
-          "condition": [
-            "skill:skl_poison_dart"
-          ],
-          "skillBonus": [
-            {
-              "skillId": "skl_poison_dart",
-              "bonus": 4
-            }
-          ],
-          "difficulty": "easy",
-          "outcomes": {
-            "fail": {
-              "text": "독침이 빗나갔다.",
-              "result": [
-                "fight:ene_starving_wolf"
-              ]
-            },
-            "partial": {
-              "text": "한 마리가 비틀거리며 달아났다.",
-              "result": [
-                "gold:3"
-              ]
-            },
-            "success": {
-              "text": "늑대들이 쓰러진 틈에 화살통을 챙겼다.",
-              "result": [
-                "gold:4",
-                "item:random:equipment"
-              ]
-            }
-          }
-        },
-        {
           "id": "join_fight",
-          "order": 6,
+          "order": 4,
           "text": "사슴을 차지하려 뛰어든다",
           "verb": "force",
           "condition": [],
@@ -8304,8 +9292,38 @@ export const dungeonForestData = {
           }
         },
         {
+          "id": "wait_out",
+          "order": 5,
+          "text": "늑대들이 서로 지칠 때까지 기다린다",
+          "verb": "",
+          "condition": [],
+          "skillBonus": [],
+          "difficulty": "normal",
+          "outcomes": {
+            "fail": {
+              "text": "기다리다 들켰다. 두 늑대가 함께 이쪽을 노려본다.",
+              "result": [
+                "fight:ene_starving_wolf:ambushed"
+              ]
+            },
+            "partial": {
+              "text": "지친 늑대 하나가 남아 덤벼든다.",
+              "result": [
+                "fight:ene_starving_wolf:surprise"
+              ]
+            },
+            "success": {
+              "text": "늑대들이 피투성이로 떠났다. 사슴과 화살통이 그대로 남았다.",
+              "result": [
+                "gold:4",
+                "item:random:equipment"
+              ]
+            }
+          }
+        },
+        {
           "id": "leave_prey",
-          "order": 7,
+          "order": 6,
           "text": "늑대들을 피해 물러난다",
           "verb": "pass",
           "condition": [],

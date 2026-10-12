@@ -1,8 +1,9 @@
-import { catalog, getItem } from "../data/catalog.js?v=20261013-021756";
-import { GRADES, INVENTORY } from "../data/rules.js?v=20261013-021756";
-import { formatNumber as fmt } from "../systems/NumberRules.js?v=20261013-021756";
-import { getProfile } from "../systems/TraitSystem.js?v=20261013-021756";
-import { describeRequirementShort, describeStats } from "./ItemText.js?v=20261013-021756";
+import { catalog, getItem } from "../data/catalog.js?v=20261013-030554";
+import { GRADES, INVENTORY } from "../data/rules.js?v=20261013-030554";
+import { formatNumber as fmt } from "../systems/NumberRules.js?v=20261013-030554";
+import { getProfile } from "../systems/TraitSystem.js?v=20261013-030554";
+import { attachTapInfo } from "./InfoPopup.js?v=20261013-030554";
+import { describeRequirementShort, describeStats } from "./ItemText.js?v=20261013-030554";
 
 const SLOT_LABELS = { weapon: "무기", armor: "방어구", ring: "반지", necklace: "목걸이" };
 
@@ -31,6 +32,7 @@ export function renderStatus(root, { dungeon, zone, run, adventurer, onOpenInven
     section(`${dungeon.name} · ${zone.name}`, [
       line(`라운드 ${run.round} / ${zone.rounds}`),
       line(`중간보스 ${zone.midBosses.map((entry) => entry.round).join("·") || "없음"}라운드 · 구역 보스 ${zone.bossRound}라운드`),
+      ...(zone.campRounds?.length ? [line(`정비 ${zone.campRounds.join("·")}라운드`)] : []),
     ]),
     section(adventurer.name, [
       hpBar,
@@ -103,7 +105,7 @@ function gradeLine(label, entry, adventurer = null) {
   if (entry?.grade) {
     name.style.color = GRADES[entry.grade].color;
     const kind = catalog.skills.has(entry.id) ? "skill" : "item";
-    name.title = `[${GRADES[entry.grade].label}] ${describeStats(kind, entry.id, adventurer)}\n${entry.description ?? ""}`;
+    attachTapInfo(name, `[${GRADES[entry.grade].label}] ${entry.name}`, [describeStats(kind, entry.id, adventurer), entry.description].filter(Boolean).join("\n"));
   }
 
   element.append(name);

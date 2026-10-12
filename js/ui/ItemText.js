@@ -1,9 +1,9 @@
-import { catalog } from "../data/catalog.js?v=20261013-021756";
-import { parseAbility } from "../systems/AbilitySystem.js?v=20261013-021756";
-import { parseToken } from "../systems/EffectParser.js?v=20261013-021756";
-import { attackSkillBase, basicAttackBase, supportAmount } from "../systems/FormulaSystem.js?v=20261013-021756";
-import { formatNumber as fmt, roundValue } from "../systems/NumberRules.js?v=20261013-021756";
-import { getProfile, isEquipmentEffectActive } from "../systems/TraitSystem.js?v=20261013-021756";
+import { catalog } from "../data/catalog.js?v=20261013-030554";
+import { parseAbility } from "../systems/AbilitySystem.js?v=20261013-030554";
+import { parseToken } from "../systems/EffectParser.js?v=20261013-030554";
+import { attackSkillBase, basicAttackBase, supportAmount } from "../systems/FormulaSystem.js?v=20261013-030554";
+import { formatNumber as fmt, roundValue } from "../systems/NumberRules.js?v=20261013-030554";
+import { getProfile, isEquipmentEffectActive } from "../systems/TraitSystem.js?v=20261013-030554";
 
 // 장비·스킬·소모품 설명(선택 판단용). 2026-10-13 전투 공식 3차 개편에 맞춘 표기:
 // 1줄 = 종류, 2줄 = 결과 수치(계산식은 괄호), 3줄 = 부가 효과.
@@ -46,7 +46,7 @@ function describeAbility({ trigger, chance, effect }) {
     empower: () => `강화 ${fmt(Number(a))} (${b}턴)`,
     heal: () => `HP ${fmt(Number(a))} 회복`,
     damage: () => `추가 피해 ${fmt(Number(a))}`,
-    cooldown: () => `그 스킬 대기 ${a}`,
+    cooldown: () => `그 스킬 쿨타임 ${a}`,
     basicAttackBonus: () => `기본공격 피해 +${fmt(Number(a))}`,
     skillDamageBonus: () => `스킬 피해 +${fmt(Number(a))}`,
   }[key];
@@ -83,7 +83,7 @@ export function describeEffectToken(token) {
     case "shield":
       return `보호막 ${a}턴`;
     case "fast":
-      return "빠른 스킬(행동을 쓰지 않음)";
+      return "즉시 발동(행동을 쓰지 않음)";
     case "empower":
       return `${a}턴 동안`;
     case "cleanse":
@@ -95,7 +95,7 @@ export function describeEffectToken(token) {
     case "damageReduction":
       return "받는 피해 감소";
     case "cooldownReduction":
-      return `모든 스킬 대기 -${a}`;
+      return `모든 스킬 쿨타임 -${a}`;
     case "immune":
       return a === "poison" ? "독 면역" : `${a} 면역`;
     case "maxHp":
@@ -232,11 +232,11 @@ export function describeSkill(skill, adventurer = null) {
   const head = [owner, SKILL_TYPE_LABELS[skill.type]];
 
   if (fast) {
-    head.push("빠른 스킬");
+    head.push("즉시 발동");
   }
 
   if (skill.type !== "passive") {
-    head.push(`대기 ${skill.cooldown}`);
+    head.push(`쿨타임 ${skill.cooldown}`);
   }
 
   const profile = adventurer ? getProfile(adventurer) : null;

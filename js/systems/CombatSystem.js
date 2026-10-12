@@ -1,13 +1,13 @@
-import { catalog } from "../data/catalog.js?v=20261013-021756";
-import { COMBAT, DICE } from "../data/rules.js?v=20261013-021756";
-import { Enemy } from "../models/Enemy.js?v=20261013-021756";
-import { capEvade, capLifesteal, critMinFrom, lowHpBonus, runAbilities } from "./AbilitySystem.js?v=20261013-021756";
-import { applyReduction, computeEffect, describeCalculation, describeRoll, rollTier } from "./DamageSystem.js?v=20261013-021756";
-import { chooseEnemySkillId } from "./EnemyAI.js?v=20261013-021756";
-import { attackSkillBase, basicAttackBase, supportAmount } from "./FormulaSystem.js?v=20261013-021756";
-import { parseEffects, parseToken, STATUS_LABELS, toStatusSpec } from "./EffectParser.js?v=20261013-021756";
-import { josa } from "./Josa.js?v=20261013-021756";
-import { clamp, formatNumber as fmt, roundValue } from "./NumberRules.js?v=20261013-021756";
+import { catalog } from "../data/catalog.js?v=20261013-030554";
+import { COMBAT, DICE } from "../data/rules.js?v=20261013-030554";
+import { Enemy } from "../models/Enemy.js?v=20261013-030554";
+import { capEvade, capLifesteal, critMinFrom, lowHpBonus, runAbilities } from "./AbilitySystem.js?v=20261013-030554";
+import { applyReduction, computeEffect, describeCalculation, describeRoll, rollTier } from "./DamageSystem.js?v=20261013-030554";
+import { chooseEnemySkillId } from "./EnemyAI.js?v=20261013-030554";
+import { attackSkillBase, basicAttackBase, supportAmount } from "./FormulaSystem.js?v=20261013-030554";
+import { parseEffects, parseToken, STATUS_LABELS, toStatusSpec } from "./EffectParser.js?v=20261013-030554";
+import { josa } from "./Josa.js?v=20261013-030554";
+import { clamp, formatNumber as fmt, roundValue } from "./NumberRules.js?v=20261013-030554";
 import {
   absorbWithShield,
   applyStatus,
@@ -19,14 +19,14 @@ import {
   getGuardAmount,
   getTakenMultiplier,
   removeStatus,
-} from "./StatusSystem.js?v=20261013-021756";
-import { getClassTrait, getProfile } from "./TraitSystem.js?v=20261013-021756";
+} from "./StatusSystem.js?v=20261013-030554";
+import { getClassTrait, getProfile } from "./TraitSystem.js?v=20261013-030554";
 
 const SELF_EFFECTS = new Set(["guard", "shield", "empower", "cleanse"]);
 // 효과량을 자신에게 거는 스킬: 방어(보호막), 강화(주는 피해 증가). 효과량 = 기본값 + 능력치 × 계수, 주사위 없음
 const SELF_AMOUNT_STATUS = { defense: "shield", buff: "empower" };
 
-// 빠른 스킬: 행동을 쓰지 않는다(쓴 뒤 같은 턴에 다른 행동을 할 수 있다).
+// 즉시 발동 스킬(fast): 행동을 쓰지 않는다(쓴 뒤 같은 턴에 다른 행동을 할 수 있다).
 export function isFastSkill(skill) {
   return Boolean(skill?.effects.includes("fast"));
 }
@@ -77,7 +77,7 @@ export class Combat {
       stunImmunity: 0,
       immune: profile.modifiers.immune,
       cooldowns: new Map(),
-      // 이번 행동에 쓴 스킬(빠른 스킬을 포함해 대기시간을 이번 행동에 줄이지 않는다)
+      // 이번 행동에 쓴 스킬(즉시 발동 스킬을 포함해 쿨타임을 이번 행동에 줄이지 않는다)
       usedSkills: new Set(),
       buffs: { basicAttackBonus: 0 },
       // 전사 기세(전투가 끝나면 사라진다)
@@ -172,7 +172,7 @@ export class Combat {
 
     const skill = action.type === "skill" ? catalog.skills.get(this.player.ref.skills[action.slot]) : null;
 
-    // 빠른 스킬은 행동을 쓰지 않는다: 쓰고 나서 다시 입력을 기다린다.
+    // 즉시 발동 스킬은 행동을 쓰지 않는다: 쓰고 나서 다시 입력을 기다린다.
     if (skill && isFastSkill(skill)) {
       this.useSkill(this.player, this.enemy, skill);
       runAbilities(this, "onSkill", { skillId: skill.id });
@@ -224,7 +224,7 @@ export class Combat {
       }
 
       if ((this.player.cooldowns.get(skill.id) ?? 0) > 0) {
-        return { ok: false, reason: `${josa(skill.name, "은/는")} 아직 대기 중이다.` };
+        return { ok: false, reason: `${josa(skill.name, "은/는")} 아직 쿨타임이 남아 있다.` };
       }
 
       if (isMage && !this.player.chanted && isDamageSkill(skill)) {
@@ -425,7 +425,7 @@ export class Combat {
     }
 
     // 회복·방어·강화·약화: 주사위 없음. 효과량 = 기본값 + 능력치 × 계수 (적은 기본값)
-    this.log(user.kind, `${user.name} — 「${skill.name}」${isFastSkill(skill) ? " (빠른 스킬)" : ""}`);
+    this.log(user.kind, `${user.name} — 「${skill.name}」${isFastSkill(skill) ? " (즉시 발동)" : ""}`);
     const amountBase = isPlayer ? supportAmount(skill.baseEffect, skill.scaling, user.profile.stats, user.mainStat) : skill.baseEffect;
     const amount = roundValue(chant.reduce((acc, item) => acc * item.value, amountBase));
 
