@@ -1,6 +1,6 @@
-import { ABILITY } from "../data/rules.js?v=20261012-031843";
-import { parseToken, toStatusSpec } from "./EffectParser.js?v=20261012-031843";
-import { clamp } from "./NumberRules.js?v=20261012-031843";
+import { ABILITY } from "../data/rules.js?v=20261013-021756";
+import { parseToken, toStatusSpec } from "./EffectParser.js?v=20261013-021756";
+import { clamp } from "./NumberRules.js?v=20261013-021756";
 
 // 장비·패시브 스킬의 "조건 > 효과" 능력.
 // 표기: "onHit>bleed:1", "onSkill@30>cooldown:-1" (@ 뒤는 발동 확률 %)
@@ -15,7 +15,7 @@ export const TRIGGERS = Object.freeze([
   "lowHp", // HP가 절반 이하인 동안 (수치 보너스만)
 ]);
 
-const SELF_STATUSES = new Set(["guard", "empower"]);
+const SELF_STATUSES = new Set(["guard", "shield", "empower"]);
 const BASE_CRIT_MIN = 19;
 
 // 조건이 붙은 표기면 { trigger, chance, effect, source }, 아니면 null.

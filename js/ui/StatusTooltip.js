@@ -1,5 +1,5 @@
-import { STATUS_LABELS } from "../systems/EffectParser.js?v=20261012-031843";
-import { formatNumber as fmt } from "../systems/NumberRules.js?v=20261012-031843";
+import { STATUS_LABELS } from "../systems/EffectParser.js?v=20261013-021756";
+import { formatNumber as fmt } from "../systems/NumberRules.js?v=20261013-021756";
 
 // 상태이상 이름 옆에 보여 줄 짧은 표시와, 마우스를 올렸을 때 보여 줄 설명.
 function effectText(status) {
@@ -14,6 +14,8 @@ function effectText(status) {
       return `주는 피해가 ×${status.multiplier}로 줄어든다.`;
     case "vulnerable":
       return `받는 피해가 ×${status.multiplier}로 늘어난다.`;
+    case "shield":
+      return `공격 피해를 합계 ${fmt(status.amount)}까지 막는다. 다 막으면 사라진다. 독·출혈·반사는 막지 못한다.`;
     case "guard":
       return `받는 피해가 ${fmt(status.amount)} 줄어든다.`;
     case "empower":

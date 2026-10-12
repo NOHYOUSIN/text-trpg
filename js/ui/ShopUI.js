@@ -1,7 +1,7 @@
-import { catalog } from "../data/catalog.js?v=20261012-031843";
-import { entryName, maxStackOf } from "../systems/InventorySystem.js?v=20261012-031843";
-import { describeFull } from "./ItemText.js?v=20261012-031843";
-import { renderScene } from "./SceneUI.js?v=20261012-031843";
+import { catalog } from "../data/catalog.js?v=20261013-021756";
+import { entryName, maxStackOf } from "../systems/InventorySystem.js?v=20261013-021756";
+import { describeFull } from "./ItemText.js?v=20261013-021756";
+import { renderScene } from "./SceneUI.js?v=20261013-021756";
 
 // 상점: 품목마다 1개(회복약만 여러 개). 새로고침·판매 없음.
 export function renderShop(root, { place, stock, adventurer, message, onBuy, onLeave }) {
@@ -29,7 +29,7 @@ export function renderShop(root, { place, stock, adventurer, message, onBuy, onL
 
         return {
           label: `${entry.kind === "skill" ? "스킬" : "물건"} · ${entryName(entry.kind, entry.id)}`,
-          sub: `${describeFull(entry.kind, entry.id)}\n${state}`,
+          sub: `${describeFull(entry.kind, entry.id, adventurer)}\n${state}`,
           disabled: entry.sold || adventurer.gold < entry.price || noSpace,
           onClick: () => onBuy(index),
         };

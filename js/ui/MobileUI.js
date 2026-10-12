@@ -1,5 +1,5 @@
-import { formatNumber as fmt } from "../systems/NumberRules.js?v=20261012-031843";
-import { getProfile } from "../systems/TraitSystem.js?v=20261012-031843";
+import { formatNumber as fmt } from "../systems/NumberRules.js?v=20261013-021756";
+import { getProfile } from "../systems/TraitSystem.js?v=20261013-021756";
 
 // 폭이 좁은 화면(모바일)에서만 쓰는 상단 요약 바와 하단 버튼.
 // 상태·기록 패널은 새로 그리지 않고, 오른쪽 패널을 아래에서 올라오는 시트로 보여 준다.
@@ -101,7 +101,7 @@ export class MobileUI {
     }
   }
 
-  // 모바일에서는 연출 효과 버튼을 상태 시트 안으로 옮기고, 넓은 화면으로 돌아오면 제자리로 돌린다.
+  // 모바일에서는 설정 버튼을 상태 시트 안으로 옮기고, 넓은 화면으로 돌아오면 제자리로 돌린다.
   applyLayout() {
     if (this.media.matches) {
       this.sheetTools.append(this.toggle);

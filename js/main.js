@@ -1,9 +1,8 @@
-import { GameManager } from "./core/GameManager.js?v=20261012-031843";
-import { MobileUI } from "./ui/MobileUI.js?v=20261012-031843";
-import { isTextEffectEnabled, setTextEffectEnabled } from "./ui/TextEffect.js?v=20261012-031843";
+import { GameManager } from "./core/GameManager.js?v=20261013-021756";
+import { MobileUI } from "./ui/MobileUI.js?v=20261013-021756";
 
 const sceneRoot = document.querySelector("#scene");
-const toggle = document.querySelector("#text-effect-toggle");
+const settingsButton = document.querySelector("#settings-button");
 
 // 모바일 상단 요약 바·하단 버튼
 const mobileUI = new MobileUI({
@@ -15,7 +14,7 @@ const mobileUI = new MobileUI({
   sheetTools: document.querySelector("#mobile-sheet-tools"),
   backdrop: document.querySelector("#mobile-backdrop"),
   sceneRoot,
-  toggle,
+  toggle: settingsButton,
   onOpenInventory: () => gameManager.openInventory(),
 });
 
@@ -25,20 +24,8 @@ const gameManager = new GameManager({
   logRoot: document.querySelector("#journey"),
   overlayRoot: document.querySelector("#overlay"),
   onStatusChange: (state) => mobileUI.update(state),
-  onSettingsChange: () => renderToggle(),
 });
 gameManager.start();
 
-// 연출 효과(글자 출력·전투 연출) 켜기·끄기
-
-function renderToggle() {
-  const on = isTextEffectEnabled();
-  toggle.textContent = on ? "연출 효과 켜짐" : "연출 효과 꺼짐";
-  toggle.setAttribute("aria-pressed", String(on));
-}
-
-toggle.addEventListener("click", () => {
-  setTextEffectEnabled(!isTextEffectEnabled());
-  renderToggle();
-});
-renderToggle();
+// 상단 설정 버튼: 탐험 중에도 설정 창을 연다.
+settingsButton.addEventListener("click", () => gameManager.showSettings());

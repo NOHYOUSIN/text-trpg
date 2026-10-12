@@ -11,11 +11,17 @@ export const dungeonForestData = {
       "midBosses": [
         {
           "round": 10,
-          "enemyId": "ene_tusk"
+          "enemyIds": [
+            "ene_tusk",
+            "ene_bandit_chief"
+          ]
         }
       ],
       "bossRound": 20,
-      "bossId": "ene_whisper_warden",
+      "bossIds": [
+        "ene_whisper_warden",
+        "ene_silver_mane"
+      ],
       "entryText": "햇빛이 잎 사이로 드문드문 내려온다. 어디선가 낮은 속삭임이 바람에 섞여 들린다."
     },
     {
@@ -24,7 +30,7 @@ export const dungeonForestData = {
       "rounds": 20,
       "midBosses": [],
       "bossRound": 20,
-      "bossId": null,
+      "bossIds": [],
       "entryText": "(2구역 콘텐츠는 이후 작성)"
     },
     {
@@ -33,7 +39,7 @@ export const dungeonForestData = {
       "rounds": 20,
       "midBosses": [],
       "bossRound": 20,
-      "bossId": null,
+      "bossIds": [],
       "entryText": "(3구역 콘텐츠는 이후 작성)"
     },
     {
@@ -42,7 +48,7 @@ export const dungeonForestData = {
       "rounds": 20,
       "midBosses": [],
       "bossRound": 20,
-      "bossId": null,
+      "bossIds": [],
       "entryText": "(4구역 콘텐츠는 이후 작성. 구역 이름은 임시)"
     }
   ],
@@ -51,7 +57,11 @@ export const dungeonForestData = {
       "id": "plc_mossy_path",
       "zone": 1,
       "name": "이끼 낀 오솔길",
-      "description": "발밑이 푹신하다. 길 양옆으로 낮은 덤불이 이어진다.",
+      "descriptions": [
+        "발밑이 푹신하다. 길 양옆으로 낮은 덤불이 이어진다.",
+        "이끼가 발소리를 삼킨다. 길이 어디로 이어지는지 알 수 없다.",
+        "오솔길 위로 나뭇가지가 낮게 드리워 터널처럼 어둡다."
+      ],
       "contentWeights": {
         "combat": 40,
         "event": 40,
@@ -85,10 +95,14 @@ export const dungeonForestData = {
       "id": "plc_rustling_bush",
       "zone": 1,
       "name": "수상한 덤불",
-      "description": "바람도 없는데 덤불이 흔들린다.",
+      "descriptions": [
+        "바람도 없는데 덤불이 흔들린다.",
+        "덤불 속에서 낮게 그르렁거리는 소리가 들린다.",
+        "가지 몇 개가 부러져 있다. 무언가 방금 이곳을 지나갔다."
+      ],
       "contentWeights": {
-        "combat": 70,
-        "event": 30,
+        "combat": 60,
+        "event": 40,
         "rest": 0,
         "treasure": 0,
         "shop": 0
@@ -97,7 +111,8 @@ export const dungeonForestData = {
       "eliteBonus": 0,
       "enemyPool": [
         "ene_starving_wolf",
-        "ene_venom_spider"
+        "ene_venom_spider",
+        "ene_young_boar"
       ],
       "eventPool": [
         "evt_snare_trap",
@@ -116,7 +131,11 @@ export const dungeonForestData = {
       "id": "plc_collapsed_hut",
       "zone": 1,
       "name": "무너진 오두막",
-      "description": "지붕이 반쯤 내려앉은 오두막에서 희미한 연기가 오른다.",
+      "descriptions": [
+        "지붕이 반쯤 내려앉은 오두막에서 희미한 연기가 오른다.",
+        "덩굴이 무너진 벽을 타고 올라 창문을 막았다.",
+        "문짝이 떨어져 나간 오두막 안에서 삐걱거리는 소리가 난다."
+      ],
       "contentWeights": {
         "combat": 30,
         "event": 60,
@@ -127,7 +146,8 @@ export const dungeonForestData = {
       "surpriseChance": 10,
       "eliteBonus": 0,
       "enemyPool": [
-        "ene_forest_bandit"
+        "ene_forest_bandit",
+        "ene_creeping_vine"
       ],
       "eventPool": [
         "evt_injured_traveler",
@@ -149,7 +169,11 @@ export const dungeonForestData = {
       "id": "plc_clear_spring",
       "zone": 1,
       "name": "맑은 샘터",
-      "description": "물소리가 들린다. 바닥이 훤히 비치는 샘이다.",
+      "descriptions": [
+        "물소리가 들린다. 바닥이 훤히 비치는 샘이다.",
+        "샘가의 젖은 흙에 크고 작은 발자국이 겹쳐 있다.",
+        "햇빛이 수면에 부서진다. 잠시 쉬어 가도 좋을 것 같다."
+      ],
       "contentWeights": {
         "combat": 10,
         "event": 30,
@@ -160,7 +184,8 @@ export const dungeonForestData = {
       "surpriseChance": 0,
       "eliteBonus": 0,
       "enemyPool": [
-        "ene_moss_goblin"
+        "ene_moss_goblin",
+        "ene_young_boar"
       ],
       "eventPool": [
         "evt_whispering_voice",
@@ -181,7 +206,11 @@ export const dungeonForestData = {
       "id": "plc_mossy_altar",
       "zone": 1,
       "name": "이끼 덮인 제단",
-      "description": "이끼에 뒤덮인 돌 제단에 오래된 문양이 남아 있다.",
+      "descriptions": [
+        "이끼에 뒤덮인 돌 제단에 오래된 문양이 남아 있다.",
+        "제단 앞에 시든 꽃다발이 놓여 있다. 누군가 아직 이곳을 찾는다.",
+        "제단 돌 틈에서 서늘한 바람이 새어 나온다."
+      ],
       "contentWeights": {
         "combat": 20,
         "event": 60,
@@ -212,7 +241,11 @@ export const dungeonForestData = {
       "id": "plc_hollow_oak",
       "zone": 1,
       "name": "속이 빈 고목",
-      "description": "거대한 고목의 밑동이 동굴처럼 뚫려 있다.",
+      "descriptions": [
+        "거대한 고목의 밑동이 동굴처럼 뚫려 있다.",
+        "고목 구멍 안쪽이 거미줄로 하얗게 덮여 있다.",
+        "텅 빈 고목에 대고 숨을 쉬면 낮은 울림이 되돌아온다."
+      ],
       "contentWeights": {
         "combat": 40,
         "event": 40,
@@ -223,7 +256,8 @@ export const dungeonForestData = {
       "surpriseChance": 20,
       "eliteBonus": 0,
       "enemyPool": [
-        "ene_venom_spider"
+        "ene_venom_spider",
+        "ene_creeping_vine"
       ],
       "eventPool": [
         "evt_mossy_chest",
@@ -240,7 +274,11 @@ export const dungeonForestData = {
       "id": "plc_dying_campfire",
       "zone": 1,
       "name": "꺼져 가는 모닥불",
-      "description": "누군가 막 떠난 듯한 모닥불 옆에 짐 보따리가 놓여 있다.",
+      "descriptions": [
+        "누군가 막 떠난 듯한 모닥불 옆에 짐 보따리가 놓여 있다.",
+        "잿더미에 아직 온기가 남아 있다. 근처에 발자국이 어지럽다.",
+        "모닥불 위 꼬챙이에 반쯤 탄 고기가 걸려 있다."
+      ],
       "contentWeights": {
         "combat": 10,
         "event": 20,
@@ -251,7 +289,8 @@ export const dungeonForestData = {
       "surpriseChance": 0,
       "eliteBonus": 0,
       "enemyPool": [
-        "ene_forest_bandit"
+        "ene_forest_bandit",
+        "ene_moss_goblin"
       ],
       "eventPool": [
         "evt_toll_bandits",
@@ -269,10 +308,14 @@ export const dungeonForestData = {
       "id": "plc_beast_den",
       "zone": 1,
       "name": "짐승 굴 입구",
-      "description": "비릿한 냄새가 풍긴다. 바닥에 짐승의 발자국이 어지럽다.",
+      "descriptions": [
+        "비릿한 냄새가 풍긴다. 바닥에 짐승의 발자국이 어지럽다.",
+        "굴 입구에 뼛조각이 흩어져 있다.",
+        "굴 안쪽 어둠에서 두 개의 눈이 번뜩였다가 사라진다."
+      ],
       "contentWeights": {
-        "combat": 80,
-        "event": 20,
+        "combat": 60,
+        "event": 40,
         "rest": 0,
         "treasure": 0,
         "shop": 0
@@ -280,7 +323,8 @@ export const dungeonForestData = {
       "surpriseChance": 30,
       "eliteBonus": 0,
       "enemyPool": [
-        "ene_starving_wolf"
+        "ene_starving_wolf",
+        "ene_young_boar"
       ],
       "eventPool": [
         "evt_snare_trap",
@@ -299,7 +343,11 @@ export const dungeonForestData = {
       "id": "plc_ruined_watchtower",
       "zone": 1,
       "name": "무너진 감시탑",
-      "description": "기울어진 돌탑 위로 까마귀가 맴돈다.",
+      "descriptions": [
+        "기울어진 돌탑 위로 까마귀가 맴돈다.",
+        "무너진 돌계단이 탑 꼭대기까지 이어질 듯 말 듯하다.",
+        "탑 벽에 오래된 화살 자국이 박혀 있다."
+      ],
       "contentWeights": {
         "combat": 35,
         "event": 45,
@@ -327,7 +375,11 @@ export const dungeonForestData = {
       "id": "plc_misty_marsh",
       "zone": 1,
       "name": "안개 낀 늪지",
-      "description": "발을 디딜 때마다 질척한 소리가 난다.",
+      "descriptions": [
+        "발을 디딜 때마다 질척한 소리가 난다.",
+        "늪 위로 거품이 올라와 툭툭 터진다.",
+        "안개 너머로 무언가 첨벙거리는 소리가 들린다."
+      ],
       "contentWeights": {
         "combat": 45,
         "event": 40,
@@ -353,7 +405,11 @@ export const dungeonForestData = {
       "id": "plc_stepping_stones",
       "zone": 1,
       "name": "개울가 징검다리",
-      "description": "맑은 물소리 사이로 미끄러운 돌이 이어진다.",
+      "descriptions": [
+        "맑은 물소리 사이로 미끄러운 돌이 이어진다.",
+        "징검돌 몇 개가 물에 잠겨 보일 듯 말 듯하다.",
+        "개울 건너편 진흙에 짐승이 물을 마신 자국이 있다."
+      ],
       "contentWeights": {
         "combat": 30,
         "event": 45,
@@ -364,7 +420,8 @@ export const dungeonForestData = {
       "surpriseChance": 10,
       "eliteBonus": 0,
       "enemyPool": [
-        "ene_starving_wolf"
+        "ene_starving_wolf",
+        "ene_young_boar"
       ],
       "eventPool": [
         "evt_drifting_pack",
@@ -379,7 +436,11 @@ export const dungeonForestData = {
       "id": "plc_goblin_marker",
       "zone": 1,
       "name": "고블린 표식 바위",
-      "description": "바위에 서툰 그림과 핏자국이 칠해져 있다.",
+      "descriptions": [
+        "바위에 서툰 그림과 핏자국이 칠해져 있다.",
+        "바위 아래 뼈와 깨진 냄비 조각이 쌓여 있다.",
+        "바위의 그림이 아직 마르지 않았다. 표식을 남긴 지 오래되지 않았다."
+      ],
       "contentWeights": {
         "combat": 55,
         "event": 35,
@@ -390,7 +451,8 @@ export const dungeonForestData = {
       "surpriseChance": 30,
       "eliteBonus": 0,
       "enemyPool": [
-        "ene_moss_goblin"
+        "ene_moss_goblin",
+        "ene_forest_bandit"
       ],
       "eventPool": [
         "evt_goblin_sentry",
@@ -403,7 +465,11 @@ export const dungeonForestData = {
       "id": "plc_glowcap_cave",
       "zone": 1,
       "name": "버섯이 빛나는 동굴",
-      "description": "천장에 매달린 버섯이 푸르스름한 빛을 흘린다.",
+      "descriptions": [
+        "천장에 매달린 버섯이 푸르스름한 빛을 흘린다.",
+        "동굴 바닥의 버섯을 밟을 때마다 빛 가루가 피어오른다.",
+        "동굴 깊은 곳에서 물방울 떨어지는 소리가 규칙적으로 울린다."
+      ],
       "contentWeights": {
         "combat": 30,
         "event": 55,
@@ -414,7 +480,8 @@ export const dungeonForestData = {
       "surpriseChance": 20,
       "eliteBonus": 0,
       "enemyPool": [
-        "ene_venom_spider"
+        "ene_venom_spider",
+        "ene_creeping_vine"
       ],
       "eventPool": [
         "evt_thorn_chest",
@@ -428,7 +495,11 @@ export const dungeonForestData = {
       "id": "plc_hunting_lodge",
       "zone": 1,
       "name": "버려진 사냥 오두막",
-      "description": "녹슨 덫과 마른 가죽이 벽에 걸린 오두막이다.",
+      "descriptions": [
+        "녹슨 덫과 마른 가죽이 벽에 걸린 오두막이다.",
+        "오두막 문에 '들어오지 마시오'라고 긁어 쓴 글씨가 있다.",
+        "오두막 뒤편에 손질하다 만 가죽이 널려 있다."
+      ],
       "contentWeights": {
         "combat": 20,
         "event": 40,
@@ -455,10 +526,14 @@ export const dungeonForestData = {
       "id": "plc_howling_hill",
       "zone": 1,
       "name": "늑대 울음 언덕",
-      "description": "언덕 너머에서 길게 늘어지는 울음소리가 들린다.",
+      "descriptions": [
+        "언덕 너머에서 길게 늘어지는 울음소리가 들린다.",
+        "언덕 위 바위에 짐승 털이 잔뜩 걸려 있다.",
+        "울음소리가 그친 뒤의 정적이 더 불길하다."
+      ],
       "contentWeights": {
-        "combat": 65,
-        "event": 30,
+        "combat": 60,
+        "event": 35,
         "rest": 0,
         "treasure": 5,
         "shop": 0
@@ -466,7 +541,8 @@ export const dungeonForestData = {
       "surpriseChance": 45,
       "eliteBonus": 0,
       "enemyPool": [
-        "ene_starving_wolf"
+        "ene_starving_wolf",
+        "ene_young_boar"
       ],
       "eventPool": [
         "evt_prey_dispute",
@@ -481,7 +557,11 @@ export const dungeonForestData = {
       "id": "plc_twisted_grove",
       "zone": 1,
       "name": "뒤틀린 고목 숲",
-      "description": "나무줄기가 사람 얼굴처럼 비틀려 자라 있다.",
+      "descriptions": [
+        "나무줄기가 사람 얼굴처럼 비틀려 자라 있다.",
+        "나뭇가지가 바람 없이 삐걱이며 방향을 바꾼다.",
+        "뒤틀린 줄기 사이에서 누군가 속삭이는 소리가 들린다."
+      ],
       "contentWeights": {
         "combat": 35,
         "event": 55,
@@ -493,7 +573,8 @@ export const dungeonForestData = {
       "eliteBonus": 0,
       "enemyPool": [
         "ene_moss_goblin",
-        "ene_venom_spider"
+        "ene_venom_spider",
+        "ene_creeping_vine"
       ],
       "eventPool": [
         "evt_fallen_tree",
@@ -514,7 +595,7 @@ export const dungeonForestData = {
       "repeatable": false,
       "requiresFlags": [],
       "forbiddenFlags": [],
-      "group": "",
+      "group": "chest",
       "choices": [
         {
           "id": "force_lid",
@@ -669,7 +750,7 @@ export const dungeonForestData = {
       "repeatable": false,
       "requiresFlags": [],
       "forbiddenFlags": [],
-      "group": "",
+      "group": "wounded_person",
       "choices": [
         {
           "id": "tend_wound",
@@ -818,7 +899,7 @@ export const dungeonForestData = {
       "repeatable": false,
       "requiresFlags": [],
       "forbiddenFlags": [],
-      "group": "",
+      "group": "whisper",
       "choices": [
         {
           "id": "listen_voice",
@@ -932,7 +1013,7 @@ export const dungeonForestData = {
       "repeatable": false,
       "requiresFlags": [],
       "forbiddenFlags": [],
-      "group": "",
+      "group": "bandit",
       "choices": [
         {
           "id": "pay_toll",
@@ -1063,7 +1144,7 @@ export const dungeonForestData = {
       "repeatable": false,
       "requiresFlags": [],
       "forbiddenFlags": [],
-      "group": "",
+      "group": "shrine",
       "choices": [
         {
           "id": "pray_altar",
@@ -1229,7 +1310,7 @@ export const dungeonForestData = {
       "repeatable": true,
       "requiresFlags": [],
       "forbiddenFlags": [],
-      "group": "",
+      "group": "hunter",
       "choices": [
         {
           "id": "wriggle_free",
@@ -1355,7 +1436,7 @@ export const dungeonForestData = {
       "repeatable": false,
       "requiresFlags": [],
       "forbiddenFlags": [],
-      "group": "",
+      "group": "hunter",
       "choices": [
         {
           "id": "search_bundle",
@@ -1478,7 +1559,7 @@ export const dungeonForestData = {
       "repeatable": false,
       "requiresFlags": [],
       "forbiddenFlags": [],
-      "group": "",
+      "group": "wounded_person",
       "choices": [
         {
           "id": "strip_armor",
@@ -1627,7 +1708,7 @@ export const dungeonForestData = {
       "repeatable": false,
       "requiresFlags": [],
       "forbiddenFlags": [],
-      "group": "",
+      "group": "wolf",
       "choices": [
         {
           "id": "free_cub",
@@ -1765,7 +1846,7 @@ export const dungeonForestData = {
       "repeatable": false,
       "requiresFlags": [],
       "forbiddenFlags": [],
-      "group": "",
+      "group": "glow",
       "choices": [
         {
           "id": "eat_mushroom",
@@ -2017,7 +2098,7 @@ export const dungeonForestData = {
       "repeatable": false,
       "requiresFlags": [],
       "forbiddenFlags": [],
-      "group": "",
+      "group": "whisper",
       "choices": [
         {
           "id": "toss_coin",
@@ -2454,7 +2535,7 @@ export const dungeonForestData = {
       "repeatable": false,
       "requiresFlags": [],
       "forbiddenFlags": [],
-      "group": "",
+      "group": "goblin",
       "choices": [
         {
           "id": "throw_food",
@@ -2589,7 +2670,7 @@ export const dungeonForestData = {
       "forbiddenFlags": [
         "foundTrailClue"
       ],
-      "group": "",
+      "group": "tracks",
       "choices": [
         {
           "id": "follow_tracks",
@@ -2936,7 +3017,7 @@ export const dungeonForestData = {
       "repeatable": false,
       "requiresFlags": [],
       "forbiddenFlags": [],
-      "group": "",
+      "group": "whisper",
       "choices": [
         {
           "id": "touch_stone",
@@ -3080,7 +3161,7 @@ export const dungeonForestData = {
       "repeatable": false,
       "requiresFlags": [],
       "forbiddenFlags": [],
-      "group": "",
+      "group": "bandit",
       "choices": [
         {
           "id": "search_camp",
@@ -3698,7 +3779,7 @@ export const dungeonForestData = {
       "repeatable": false,
       "requiresFlags": [],
       "forbiddenFlags": [],
-      "group": "",
+      "group": "river",
       "choices": [
         {
           "id": "cross_bridge",
@@ -3850,7 +3931,7 @@ export const dungeonForestData = {
       "repeatable": false,
       "requiresFlags": [],
       "forbiddenFlags": [],
-      "group": "",
+      "group": "glow",
       "choices": [
         {
           "id": "scrape_moss",
@@ -4063,7 +4144,7 @@ export const dungeonForestData = {
       "repeatable": false,
       "requiresFlags": [],
       "forbiddenFlags": [],
-      "group": "",
+      "group": "fallen_tree",
       "choices": [
         {
           "id": "reach_inside",
@@ -4178,7 +4259,7 @@ export const dungeonForestData = {
       "repeatable": false,
       "requiresFlags": [],
       "forbiddenFlags": [],
-      "group": "",
+      "group": "bandit",
       "choices": [
         {
           "id": "steal_purse",
@@ -4460,7 +4541,7 @@ export const dungeonForestData = {
       "repeatable": false,
       "requiresFlags": [],
       "forbiddenFlags": [],
-      "group": "",
+      "group": "tracks",
       "choices": [
         {
           "id": "hunt_wolf",
@@ -4782,7 +4863,7 @@ export const dungeonForestData = {
       "repeatable": false,
       "requiresFlags": [],
       "forbiddenFlags": [],
-      "group": "",
+      "group": "hazard",
       "choices": [
         {
           "id": "pick_flowers",
@@ -4880,7 +4961,7 @@ export const dungeonForestData = {
       "repeatable": false,
       "requiresFlags": [],
       "forbiddenFlags": [],
-      "group": "",
+      "group": "goblin",
       "choices": [
         {
           "id": "disrupt_ritual",
@@ -5016,7 +5097,7 @@ export const dungeonForestData = {
       "repeatable": false,
       "requiresFlags": [],
       "forbiddenFlags": [],
-      "group": "",
+      "group": "ruins",
       "choices": [
         {
           "id": "stack_stone",
@@ -5143,7 +5224,7 @@ export const dungeonForestData = {
       "repeatable": false,
       "requiresFlags": [],
       "forbiddenFlags": [],
-      "group": "",
+      "group": "wounded_person",
       "choices": [
         {
           "id": "give_potion_soldier",
@@ -5294,7 +5375,7 @@ export const dungeonForestData = {
       "repeatable": false,
       "requiresFlags": [],
       "forbiddenFlags": [],
-      "group": "",
+      "group": "shrine",
       "choices": [
         {
           "id": "pray_strange",
@@ -5431,7 +5512,7 @@ export const dungeonForestData = {
       "repeatable": false,
       "requiresFlags": [],
       "forbiddenFlags": [],
-      "group": "",
+      "group": "hazard",
       "choices": [
         {
           "id": "press_on_fog",
@@ -5545,7 +5626,7 @@ export const dungeonForestData = {
       "repeatable": false,
       "requiresFlags": [],
       "forbiddenFlags": [],
-      "group": "",
+      "group": "mentor",
       "choices": [
         {
           "id": "spar_swordsman",
@@ -5768,7 +5849,7 @@ export const dungeonForestData = {
       "repeatable": false,
       "requiresFlags": [],
       "forbiddenFlags": [],
-      "group": "",
+      "group": "mentor",
       "choices": [
         {
           "id": "train_together",
@@ -5884,7 +5965,7 @@ export const dungeonForestData = {
       "repeatable": false,
       "requiresFlags": [],
       "forbiddenFlags": [],
-      "group": "",
+      "group": "wolf",
       "choices": [
         {
           "id": "observe_beast",
@@ -5967,7 +6048,7 @@ export const dungeonForestData = {
       "repeatable": false,
       "requiresFlags": [],
       "forbiddenFlags": [],
-      "group": "",
+      "group": "shrine",
       "choices": [
         {
           "id": "take_trial",
@@ -6083,7 +6164,7 @@ export const dungeonForestData = {
       "repeatable": false,
       "requiresFlags": [],
       "forbiddenFlags": [],
-      "group": "",
+      "group": "wounded_person",
       "choices": [
         {
           "id": "give_potion_mage",
@@ -6219,7 +6300,7 @@ export const dungeonForestData = {
       "repeatable": false,
       "requiresFlags": [],
       "forbiddenFlags": [],
-      "group": "locked_storage",
+      "group": "hunter",
       "choices": [
         {
           "id": "break_chain",
@@ -6524,7 +6605,7 @@ export const dungeonForestData = {
       "repeatable": false,
       "requiresFlags": [],
       "forbiddenFlags": [],
-      "group": "blocked_path",
+      "group": "fallen_tree",
       "choices": [
         {
           "id": "push_tree",
@@ -6796,7 +6877,7 @@ export const dungeonForestData = {
       "repeatable": false,
       "requiresFlags": [],
       "forbiddenFlags": [],
-      "group": "sentry",
+      "group": "goblin",
       "choices": [
         {
           "id": "scare_sentry",
@@ -7063,7 +7144,7 @@ export const dungeonForestData = {
       "repeatable": false,
       "requiresFlags": [],
       "forbiddenFlags": [],
-      "group": "locked_storage",
+      "group": "chest",
       "choices": [
         {
           "id": "tear_vines",
@@ -7698,7 +7779,7 @@ export const dungeonForestData = {
       "repeatable": false,
       "requiresFlags": [],
       "forbiddenFlags": [],
-      "group": "quarrel",
+      "group": "bandit",
       "choices": [
         {
           "id": "mediate",
@@ -8044,7 +8125,7 @@ export const dungeonForestData = {
       "repeatable": false,
       "requiresFlags": [],
       "forbiddenFlags": [],
-      "group": "beast",
+      "group": "wolf",
       "choices": [
         {
           "id": "shout_wolves",
@@ -8247,7 +8328,7 @@ export const dungeonForestData = {
       "name": "굶주린 늑대",
       "rank": "normal",
       "hp": 35,
-      "damage": 5,
+      "damage": 6,
       "agi": 6,
       "damageReduction": 0,
       "skills": [],
@@ -8260,12 +8341,32 @@ export const dungeonForestData = {
       "intros": []
     },
     {
+      "id": "ene_venom_spider",
+      "zone": 1,
+      "name": "독거미",
+      "rank": "normal",
+      "hp": 38,
+      "damage": 3,
+      "agi": 4,
+      "damageReduction": 0,
+      "skills": [
+        "eskl_venom_bite"
+      ],
+      "pattern": "default",
+      "goldMin": 3,
+      "goldMax": 5,
+      "description": "손바닥만 한 거미가 나뭇가지에서 실을 타고 내려온다.",
+      "base": "",
+      "effects": [],
+      "intros": []
+    },
+    {
       "id": "ene_moss_goblin",
       "zone": 1,
       "name": "이끼 고블린",
       "rank": "normal",
       "hp": 40,
-      "damage": 5,
+      "damage": 4,
       "agi": 3,
       "damageReduction": 0,
       "skills": [
@@ -8280,21 +8381,21 @@ export const dungeonForestData = {
       "intros": []
     },
     {
-      "id": "ene_venom_spider",
+      "id": "ene_creeping_vine",
       "zone": 1,
-      "name": "독거미",
+      "name": "휘감는 덩굴",
       "rank": "normal",
-      "hp": 40,
-      "damage": 5,
-      "agi": 4,
+      "hp": 42,
+      "damage": 3,
+      "agi": 1,
       "damageReduction": 0,
       "skills": [
-        "eskl_venom_bite"
+        "eskl_entangle"
       ],
       "pattern": "default",
       "goldMin": 3,
       "goldMax": 5,
-      "description": "손바닥만 한 거미가 나뭇가지에서 실을 타고 내려온다.",
+      "description": "땅을 기던 덩굴이 뱀처럼 고개를 든다.",
       "base": "",
       "effects": [],
       "intros": []
@@ -8318,66 +8419,36 @@ export const dungeonForestData = {
       "intros": []
     },
     {
-      "id": "ene_tusk",
+      "id": "ene_young_boar",
       "zone": 1,
-      "name": "엄니",
-      "rank": "midboss",
-      "hp": 80,
-      "damage": 5,
+      "name": "어린 멧돼지",
+      "rank": "normal",
+      "hp": 50,
+      "damage": 4,
       "agi": 2,
-      "damageReduction": 0,
-      "skills": [
-        "eskl_charge",
-        "eskl_roar"
-      ],
-      "pattern": "default",
-      "goldMin": 8,
-      "goldMax": 10,
-      "description": "부러진 엄니를 단 늙은 멧돼지. 숲 초입의 골칫거리다.",
-      "base": "",
-      "effects": [],
-      "intros": [
-        "땅이 낮게 울린다. 덤불이 한꺼번에 쓰러지고, 부러진 엄니를 치켜든 늙은 멧돼지가 콧김을 뿜으며 길을 막아선다.",
-        "썩은 나무가 쪼개지는 소리와 함께, 엄니가 흙먼지를 일으키며 돌진해 온다.",
-        "거친 숨소리가 가까워진다. 상처투성이 멧돼지가 앞발로 땅을 긁으며 이쪽을 노려본다."
-      ]
-    },
-    {
-      "id": "ene_whisper_warden",
-      "zone": 1,
-      "name": "속삭이는 수호목",
-      "rank": "boss",
-      "hp": 120,
-      "damage": 6,
-      "agi": 0,
       "damageReduction": 1,
       "skills": [
-        "eskl_root_bind",
-        "eskl_branch_slam"
+        "eskl_boar_charge"
       ],
-      "pattern": "hpBelowHalf:eskl_branch_slam",
-      "goldMin": 12,
-      "goldMax": 15,
-      "description": "속삭임의 근원. 뒤틀린 고목이 뿌리를 끌며 일어선다.",
+      "pattern": "default",
+      "goldMin": 4,
+      "goldMax": 6,
+      "description": "털이 덜 자란 멧돼지가 앞발로 흙을 파며 콧김을 뿜는다.",
       "base": "",
       "effects": [],
-      "intros": [
-        "숲의 속삭임이 한순간 멎는다. 발밑의 뿌리가 꿈틀거리더니, 뒤틀린 고목이 흙을 털어 내며 천천히 몸을 일으킨다. \"…돌아가라…\"",
-        "수많은 목소리가 한꺼번에 이름을 부른다. 가지들이 하늘을 가리며 거대한 고목이 길을 막아선다.",
-        "바람이 멈추고 나뭇잎이 떨어지지 않는다. 숲 전체가 숨을 죽인 가운데, 고목의 갈라진 틈에서 빛이 새어 나온다."
-      ]
+      "intros": []
     },
     {
       "id": "ene_one_eyed_wolf",
       "zone": 1,
       "name": "외눈 늑대",
       "rank": "elite",
-      "hp": 60,
-      "damage": 7,
+      "hp": 70,
+      "damage": 5,
       "agi": 8,
       "damageReduction": 0,
       "skills": [
-        "eskl_charge"
+        "eskl_elite_charge"
       ],
       "pattern": "default",
       "goldMin": 8,
@@ -8398,8 +8469,8 @@ export const dungeonForestData = {
       "zone": 1,
       "name": "고블린 투척대장",
       "rank": "elite",
-      "hp": 65,
-      "damage": 6,
+      "hp": 70,
+      "damage": 5,
       "agi": 4,
       "damageReduction": 0,
       "skills": [
@@ -8423,8 +8494,8 @@ export const dungeonForestData = {
       "zone": 1,
       "name": "독주머니 거미",
       "rank": "elite",
-      "hp": 60,
-      "damage": 6,
+      "hp": 70,
+      "damage": 5,
       "agi": 5,
       "damageReduction": 0,
       "skills": [
@@ -8449,7 +8520,7 @@ export const dungeonForestData = {
       "name": "칼잡이 도적",
       "rank": "elite",
       "hp": 70,
-      "damage": 7,
+      "damage": 5,
       "agi": 5,
       "damageReduction": 1,
       "skills": [
@@ -8467,6 +8538,163 @@ export const dungeonForestData = {
         "\"운이 나쁘군.\" 양손에 칼을 든 도적이 칼날을 맞부딪치며 다가온다.",
         "숲 도적들 사이에서 이름난 칼잡이다. 칼날마다 피가 굳어 붙어 있다.",
         "도적이 혀로 칼날을 핥는다. 상처를 낼수록 기운이 오르는 자다."
+      ]
+    },
+    {
+      "id": "ene_raging_boar",
+      "zone": 1,
+      "name": "성난 멧돼지",
+      "rank": "elite",
+      "hp": 70,
+      "damage": 5,
+      "agi": 3,
+      "damageReduction": 1,
+      "skills": [
+        "eskl_elite_charge"
+      ],
+      "pattern": "default",
+      "goldMin": 9,
+      "goldMax": 12,
+      "description": "등에 부러진 화살이 박힌 멧돼지가 눈이 벌게져 있다.",
+      "base": "ene_young_boar",
+      "effects": [
+        "crit:1"
+      ],
+      "intros": [
+        "덤불이 통째로 뒤집힌다. 등에 화살이 박힌 멧돼지가 씩씩거리며 튀어나온다.",
+        "사냥꾼의 화살을 맞고도 살아남은 멧돼지다. 상처가 분노를 키웠다.",
+        "땅이 울린다. 성난 멧돼지가 고개를 낮추고 곧장 달려든다."
+      ]
+    },
+    {
+      "id": "ene_blood_vine",
+      "zone": 1,
+      "name": "피를 빠는 덩굴",
+      "rank": "elite",
+      "hp": 70,
+      "damage": 5,
+      "agi": 1,
+      "damageReduction": 0,
+      "skills": [
+        "eskl_entangle"
+      ],
+      "pattern": "default",
+      "goldMin": 8,
+      "goldMax": 11,
+      "description": "붉은 수액이 맺힌 덩굴이 맥박처럼 꿈틀댄다.",
+      "base": "ene_creeping_vine",
+      "effects": [
+        "lifesteal:20"
+      ],
+      "intros": [
+        "발목에 차가운 것이 감긴다. 붉은 수액을 머금은 덩굴이 천천히 조여 온다.",
+        "덩굴 끝마다 핏빛 꽃봉오리가 달려 있다. 꽃봉오리가 일제히 이쪽을 향한다."
+      ]
+    },
+    {
+      "id": "ene_tusk",
+      "zone": 1,
+      "name": "엄니",
+      "rank": "midboss",
+      "hp": 100,
+      "damage": 5,
+      "agi": 2,
+      "damageReduction": 0,
+      "skills": [
+        "eskl_tusk_charge",
+        "eskl_roar"
+      ],
+      "pattern": "default",
+      "goldMin": 8,
+      "goldMax": 10,
+      "description": "부러진 엄니를 단 늙은 멧돼지. 숲 초입의 골칫거리다.",
+      "base": "",
+      "effects": [],
+      "intros": [
+        "땅이 낮게 울린다. 덤불이 한꺼번에 쓰러지고, 부러진 엄니를 치켜든 늙은 멧돼지가 콧김을 뿜으며 길을 막아선다.",
+        "썩은 나무가 쪼개지는 소리와 함께, 엄니가 흙먼지를 일으키며 돌진해 온다.",
+        "거친 숨소리가 가까워진다. 상처투성이 멧돼지가 앞발로 땅을 긁으며 이쪽을 노려본다."
+      ]
+    },
+    {
+      "id": "ene_whisper_warden",
+      "zone": 1,
+      "name": "속삭이는 수호목",
+      "rank": "boss",
+      "hp": 170,
+      "damage": 5,
+      "agi": 0,
+      "damageReduction": 1,
+      "skills": [
+        "eskl_root_bind",
+        "eskl_branch_slam",
+        "eskl_bark_armor"
+      ],
+      "pattern": "hpBelowHalfOnce:eskl_bark_armor;hpBelowHalf:eskl_branch_slam",
+      "goldMin": 12,
+      "goldMax": 15,
+      "description": "속삭임의 근원. 뒤틀린 고목이 뿌리를 끌며 일어선다.",
+      "base": "",
+      "effects": [],
+      "intros": [
+        "숲의 속삭임이 한순간 멎는다. 발밑의 뿌리가 꿈틀거리더니, 뒤틀린 고목이 흙을 털어 내며 천천히 몸을 일으킨다. \"…돌아가라…\"",
+        "수많은 목소리가 한꺼번에 이름을 부른다. 가지들이 하늘을 가리며 거대한 고목이 길을 막아선다.",
+        "바람이 멈추고 나뭇잎이 떨어지지 않는다. 숲 전체가 숨을 죽인 가운데, 고목의 갈라진 틈에서 빛이 새어 나온다."
+      ]
+    },
+    {
+      "id": "ene_bandit_chief",
+      "zone": 1,
+      "name": "도적 두목",
+      "rank": "midboss",
+      "hp": 85,
+      "damage": 6,
+      "agi": 7,
+      "damageReduction": 0,
+      "skills": [
+        "eskl_vital_cut",
+        "eskl_smoke_screen"
+      ],
+      "pattern": "hpBelowHalfOnce:eskl_smoke_screen",
+      "goldMin": 8,
+      "goldMax": 10,
+      "description": "숲길을 주름잡는 도적들의 두목. 몸놀림이 빠르고 칼끝이 교활하다.",
+      "base": "",
+      "effects": [
+        "evade:1"
+      ],
+      "intros": [
+        "\"내 부하들이 신세를 많이 졌다지?\" 나무 위에서 가볍게 뛰어내린 사내가 쌍칼을 뽑아 든다.",
+        "덤불 사방에서 휘파람 소리가 울린다. 붉은 두건을 쓴 사내가 느긋하게 걸어 나온다. \"통행료는 목숨으로 받지.\"",
+        "버려진 야영지의 주인이 돌아왔다. 두목이 칼날을 손가락으로 튕기며 웃는다."
+      ]
+    },
+    {
+      "id": "ene_silver_mane",
+      "zone": 1,
+      "name": "은빛 갈기",
+      "rank": "boss",
+      "hp": 140,
+      "damage": 6,
+      "agi": 8,
+      "damageReduction": 0,
+      "skills": [
+        "eskl_lunge_bite",
+        "eskl_hamstring_bite",
+        "eskl_pack_howl"
+      ],
+      "pattern": "hpBelowHalfOnce:eskl_pack_howl;hpBelowHalf:eskl_lunge_bite",
+      "goldMin": 12,
+      "goldMax": 15,
+      "description": "숲 초입 늑대 무리의 우두머리. 은빛 갈기가 달빛처럼 번뜩인다.",
+      "base": "",
+      "effects": [
+        "crit:1"
+      ],
+      "intros": [
+        "늑대 울음이 사방에서 한꺼번에 그친다. 정적 속에서 은빛 갈기를 세운 거대한 늑대가 바위 위에 모습을 드러낸다.",
+        "덫에서 구해 준 새끼들, 사냥감을 두고 다투던 늑대들. 그 모든 무리의 주인이 낮게 으르렁거리며 다가온다.",
+        "달도 없는데 은빛이 번뜩인다. 우두머리 늑대가 고개를 젖히고 길게 울부짖는다."
       ]
     }
   ],
@@ -8492,13 +8720,42 @@ export const dungeonForestData = {
       "description": "독니가 살갗을 파고든다."
     },
     {
-      "id": "eskl_charge",
+      "id": "eskl_entangle",
+      "name": "휘감기",
+      "type": "attack",
+      "baseEffect": 4,
+      "cooldown": 3,
+      "effects": [
+        "weaken:0.7:1"
+      ],
+      "description": "덩굴이 팔을 휘감아 힘을 빼앗는다."
+    },
+    {
+      "id": "eskl_boar_charge",
       "name": "돌진",
       "type": "attack",
-      "baseEffect": 10,
+      "baseEffect": 8,
       "cooldown": 3,
       "effects": [],
       "description": "몸을 낮추고 들이받는다."
+    },
+    {
+      "id": "eskl_elite_charge",
+      "name": "돌진",
+      "type": "attack",
+      "baseEffect": 13,
+      "cooldown": 4,
+      "effects": [],
+      "description": "온몸을 실어 들이받는다."
+    },
+    {
+      "id": "eskl_tusk_charge",
+      "name": "돌진",
+      "type": "attack",
+      "baseEffect": 11,
+      "cooldown": 3,
+      "effects": [],
+      "description": "부러진 엄니를 앞세워 돌진한다."
     },
     {
       "id": "eskl_roar",
@@ -8526,10 +8783,74 @@ export const dungeonForestData = {
       "id": "eskl_branch_slam",
       "name": "가지 내려치기",
       "type": "attack",
-      "baseEffect": 14,
+      "baseEffect": 12,
       "cooldown": 3,
       "effects": [],
       "description": "굵은 가지가 머리 위로 떨어진다."
+    },
+    {
+      "id": "eskl_bark_armor",
+      "name": "나무껍질 갑주",
+      "type": "defense",
+      "baseEffect": 10,
+      "cooldown": 6,
+      "effects": [
+        "shield:2"
+      ],
+      "description": "갈라진 껍질이 겹겹이 굳으며 몸을 감싼다."
+    },
+    {
+      "id": "eskl_vital_cut",
+      "name": "급소 베기",
+      "type": "attack",
+      "baseEffect": 10,
+      "cooldown": 3,
+      "effects": [
+        "vulnerable:1.3:2"
+      ],
+      "description": "칼끝이 갑옷 틈을 정확히 파고든다."
+    },
+    {
+      "id": "eskl_smoke_screen",
+      "name": "연막탄",
+      "type": "debuff",
+      "baseEffect": 0,
+      "cooldown": 4,
+      "effects": [
+        "weaken:0.7:2"
+      ],
+      "description": "연기가 터지며 눈앞이 뿌옇게 흐려진다."
+    },
+    {
+      "id": "eskl_lunge_bite",
+      "name": "달려들어 물기",
+      "type": "attack",
+      "baseEffect": 11,
+      "cooldown": 3,
+      "effects": [],
+      "description": "순식간에 거리를 좁혀 목덜미를 노린다."
+    },
+    {
+      "id": "eskl_hamstring_bite",
+      "name": "다리 물기",
+      "type": "attack",
+      "baseEffect": 5,
+      "cooldown": 3,
+      "effects": [
+        "weaken:0.7:1"
+      ],
+      "description": "다리를 물어 뜯어 발을 무겁게 한다."
+    },
+    {
+      "id": "eskl_pack_howl",
+      "name": "무리의 울부짖음",
+      "type": "buff",
+      "baseEffect": 3,
+      "cooldown": 6,
+      "effects": [
+        "empower:2"
+      ],
+      "description": "울부짖음에 숲 곳곳의 늑대들이 화답한다. 우두머리의 눈빛이 사나워진다."
     }
   ]
 };

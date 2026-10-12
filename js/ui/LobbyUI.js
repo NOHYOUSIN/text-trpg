@@ -1,5 +1,5 @@
-import { formatNumber as fmt } from "../systems/NumberRules.js?v=20261012-031843";
-import { renderScene } from "./SceneUI.js?v=20261012-031843";
+import { formatNumber as fmt } from "../systems/NumberRules.js?v=20261013-021756";
+import { renderScene } from "./SceneUI.js?v=20261013-021756";
 
 const GAME_TITLE = "Text TRPG";
 
@@ -76,28 +76,6 @@ export function renderOverwriteConfirm(root, { saveSummary, onConfirm, onCancel 
     buttons: [
       { label: "기록을 지우고 새로 시작", primary: true, onClick: onConfirm },
       { label: "취소", onClick: onCancel },
-    ],
-  });
-}
-
-// 설정: 연출 효과, 전투 계산 보기
-export function renderSettings(root, { textEffect, showCalc, onToggleTextEffect, onToggleCalc, onBack }) {
-  renderScene(root, {
-    eyebrow: "설정",
-    title: "설정",
-    paragraphs: ["이 브라우저에만 저장된다."],
-    buttons: [
-      {
-        label: `연출 효과: ${textEffect ? "켜짐" : "꺼짐"}`,
-        sub: "글자가 한 글자씩 나오는 효과와 전투 연출(흔들림, 떠오르는 숫자 등)",
-        onClick: onToggleTextEffect,
-      },
-      {
-        label: `계산 보기: ${showCalc ? "켜짐" : "꺼짐"}`,
-        sub: "전투 로그에 피해 계산 과정을 함께 보여 준다.",
-        onClick: onToggleCalc,
-      },
-      { label: "로비로", primary: true, onClick: onBack },
     ],
   });
 }

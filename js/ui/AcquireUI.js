@@ -1,9 +1,9 @@
-import { catalog, getItem } from "../data/catalog.js?v=20261012-031843";
-import { GRADES } from "../data/rules.js?v=20261012-031843";
-import { canUseOutsideCombat, entryName } from "../systems/InventorySystem.js?v=20261012-031843";
-import { josa } from "../systems/Josa.js?v=20261012-031843";
-import { describeFull, describeStats } from "./ItemText.js?v=20261012-031843";
-import { renderScene } from "./SceneUI.js?v=20261012-031843";
+import { catalog, getItem } from "../data/catalog.js?v=20261013-021756";
+import { GRADES } from "../data/rules.js?v=20261013-021756";
+import { canUseOutsideCombat, entryName } from "../systems/InventorySystem.js?v=20261013-021756";
+import { josa } from "../systems/Josa.js?v=20261013-021756";
+import { describeFull, describeStats, describeWeaponChange } from "./ItemText.js?v=20261013-021756";
+import { renderScene } from "./SceneUI.js?v=20261013-021756";
 
 function entryOf(kind, id) {
   return kind === "skill" ? catalog.skills.get(id) : getItem(id);
@@ -27,8 +27,9 @@ export function renderEquipChoice(root, { adventurer, itemId, onEquip, onStore, 
     title: entryName("item", itemId),
     paragraphs: [item.description],
     details: [
-      `새 장비: ${describeStats("item", itemId)}`,
-      currentId ? `현재 장착: ${entryName("item", currentId)} — ${describeStats("item", currentId)}` : "현재 장착: 없음",
+      `새 장비: ${entryName("item", itemId)}\n${describeStats("item", itemId, adventurer)}`,
+      currentId ? `현재 장착: ${entryName("item", currentId)}\n${describeStats("item", currentId, adventurer)}` : "현재 장착: 없음",
+      describeWeaponChange(adventurer, itemId),
     ],
     buttons: [
       { label: "장착한다", sub: equipSub, primary: true, onClick: onEquip },
@@ -47,14 +48,14 @@ export function renderInventoryFull(root, { adventurer, itemId, onDiscard, onGiv
   const isConsumable = catalog.consumables.has(itemId);
   const buttons = adventurer.inventory.slots.map((slot, index) => ({
     label: `버리기: ${entryName("item", slot.id)}${slot.count > 1 ? ` ×${slot.count}` : ""}`,
-    sub: describeStats("item", slot.id),
+    sub: describeStats("item", slot.id, adventurer),
     onClick: () => onDiscard(index),
   }));
 
   if (isConsumable) {
     buttons.push({
       label: "바로 사용한다",
-      sub: canUseOutsideCombat(itemId) ? describeStats("item", itemId) : "전투 밖에서는 효과가 없다.",
+      sub: canUseOutsideCombat(itemId) ? describeStats("item", itemId, adventurer) : "전투 밖에서는 효과가 없다.",
       disabled: !canUseOutsideCombat(itemId),
       onClick: onUseNow,
     });
@@ -66,7 +67,7 @@ export function renderInventoryFull(root, { adventurer, itemId, onDiscard, onGiv
     eyebrow: "인벤토리가 가득 찼다",
     title: entryName("item", itemId),
     paragraphs: [entryOf("item", itemId)?.description ?? ""],
-    details: [describeStats("item", itemId)],
+    details: [describeStats("item", itemId, adventurer)],
     buttons,
   });
 }
@@ -84,10 +85,10 @@ export function renderSkillChoice(root, { adventurer, skillId, onReplace, onGive
       skill.description,
       hasEmpty ? "빈 슬롯에 장착하거나 기존 스킬과 교체할 수 있다. 교체한 스킬은 사라진다." : "스킬 슬롯이 가득 찼다. 교체한 스킬은 사라진다.",
     ],
-    details: [describeStats("skill", skillId)],
+    details: [describeStats("skill", skillId, adventurer)],
     buttons: [
       ...adventurer.skills.map((id, slot) => (id
-        ? { label: `교체: 슬롯 ${slot + 1} ${entryName("skill", id)}`, sub: describeStats("skill", id), onClick: () => onReplace(slot) }
+        ? { label: `교체: 슬롯 ${slot + 1} ${entryName("skill", id)}`, sub: describeStats("skill", id, adventurer), onClick: () => onReplace(slot) }
         : { label: `장착: 슬롯 ${slot + 1} (비어 있음)`, primary: true, onClick: () => onReplace(slot) })),
       { label: giveUpLabel, onClick: onGiveUp },
     ],
@@ -95,7 +96,7 @@ export function renderSkillChoice(root, { adventurer, skillId, onReplace, onGive
 }
 
 // 사건의 스킬 선택: 후보 중 하나를 배운다(또는 배우지 않는다).
-export function renderSkillOffer(root, { options, onChoose, onSkip }) {
+export function renderSkillOffer(root, { options, adventurer = null, onChoose, onSkip }) {
   renderScene(root, {
     eyebrow: "새 기술",
     title: "배울 기술을 하나 고른다",
@@ -105,7 +106,7 @@ export function renderSkillOffer(root, { options, onChoose, onSkip }) {
         const skill = catalog.skills.get(id);
         return {
           label: `스킬 · ${entryName("skill", id)}`,
-          sub: describeFull("skill", id),
+          sub: describeFull("skill", id, adventurer),
           onClick: () => onChoose(id),
           color: GRADES[skill.grade]?.color,
         };
@@ -116,7 +117,7 @@ export function renderSkillOffer(root, { options, onChoose, onSkip }) {
 }
 
 // 보스 보상: 후보 중 하나를 고른다.
-export function renderBossReward(root, { enemyName, candidates, onChoose }) {
+export function renderBossReward(root, { enemyName, candidates, adventurer = null, onChoose }) {
   renderScene(root, {
     eyebrow: `${enemyName} 처치 보상`,
     title: "보상을 하나 고른다",
@@ -126,7 +127,7 @@ export function renderBossReward(root, { enemyName, candidates, onChoose }) {
       const kindLabel = candidate.kind === "skill" ? "스킬" : catalog.consumables.has(candidate.id) ? "소모품" : "장비";
       return {
         label: `${kindLabel} · ${entryName(candidate.kind, candidate.id)}`,
-        sub: describeFull(candidate.kind, candidate.id),
+        sub: describeFull(candidate.kind, candidate.id, adventurer),
         onClick: () => onChoose(candidate),
         color: GRADES[entry.grade]?.color,
       };

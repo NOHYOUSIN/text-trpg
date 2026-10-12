@@ -1,5 +1,5 @@
-import { ROUTE } from "../data/rules.js?v=20261012-031843";
-import { isEventAvailable } from "./EventSystem.js?v=20261012-031843";
+import { ROUTE } from "../data/rules.js?v=20261013-021756";
+import { isEventAvailable } from "./EventSystem.js?v=20261013-021756";
 
 export const CONTENT_LABELS = Object.freeze({
   combat: "전투",
@@ -13,19 +13,25 @@ export function getZone(dungeon, zoneNumber) {
   return dungeon.zones.find((zone) => zone.zone === zoneNumber) ?? null;
 }
 
-// 이 라운드가 보스 라운드면 { rank, enemyId }
-export function getBossForRound(zone, round) {
-  if (round === zone.bossRound && zone.bossId) {
-    return { rank: "boss", enemyId: zone.bossId };
+// 이 라운드가 보스 라운드면 { rank, enemyId }.
+// 후보가 여럿이면(시트의 "|") 라운드 주사위로 하나를 고른다. 라운드 시작 시드라 이어하기 때도 같은 보스가 나온다.
+export function getBossForRound(zone, round, dice) {
+  if (round === zone.bossRound && hasZoneBoss(zone)) {
+    return { rank: "boss", enemyId: dice.pick(zone.bossIds) };
   }
 
   const midBoss = zone.midBosses.find((entry) => entry.round === round);
 
   if (midBoss) {
-    return { rank: "midboss", enemyId: midBoss.enemyId };
+    return { rank: "midboss", enemyId: dice.pick(midBoss.enemyIds) };
   }
 
   return null;
+}
+
+// 구역 보스가 정해져 있는지(없으면 콘텐츠가 없는 구역)
+export function hasZoneBoss(zone) {
+  return Boolean(zone?.bossIds?.length);
 }
 
 // 갈림길 후보: 2~3개, 한 갈림길 안에서 중복 없음.

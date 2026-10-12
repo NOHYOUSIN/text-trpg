@@ -1,12 +1,15 @@
-import { catalog } from "../data/catalog.js?v=20261012-031843";
-import { COMBAT, DICE } from "../data/rules.js?v=20261012-031843";
-import { Enemy } from "../models/Enemy.js?v=20261012-031843";
-import { capEvade, capLifesteal, critMinFrom, lowHpBonus, runAbilities } from "./AbilitySystem.js?v=20261012-031843";
-import { applyReduction, computeEffect, describeCalculation, describeRoll, rollTier } from "./DamageSystem.js?v=20261012-031843";
-import { parseEffects, parseToken, STATUS_LABELS, toStatusSpec } from "./EffectParser.js?v=20261012-031843";
-import { josa } from "./Josa.js?v=20261012-031843";
-import { clamp, formatNumber as fmt, roundValue } from "./NumberRules.js?v=20261012-031843";
+import { catalog } from "../data/catalog.js?v=20261013-021756";
+import { COMBAT, DICE } from "../data/rules.js?v=20261013-021756";
+import { Enemy } from "../models/Enemy.js?v=20261013-021756";
+import { capEvade, capLifesteal, critMinFrom, lowHpBonus, runAbilities } from "./AbilitySystem.js?v=20261013-021756";
+import { applyReduction, computeEffect, describeCalculation, describeRoll, rollTier } from "./DamageSystem.js?v=20261013-021756";
+import { chooseEnemySkillId } from "./EnemyAI.js?v=20261013-021756";
+import { attackSkillBase, basicAttackBase, supportAmount } from "./FormulaSystem.js?v=20261013-021756";
+import { parseEffects, parseToken, STATUS_LABELS, toStatusSpec } from "./EffectParser.js?v=20261013-021756";
+import { josa } from "./Josa.js?v=20261013-021756";
+import { clamp, formatNumber as fmt, roundValue } from "./NumberRules.js?v=20261013-021756";
 import {
+  absorbWithShield,
   applyStatus,
   beginAction,
   clearStatuses,
@@ -16,12 +19,22 @@ import {
   getGuardAmount,
   getTakenMultiplier,
   removeStatus,
-} from "./StatusSystem.js?v=20261012-031843";
-import { getClassTrait, getProfile } from "./TraitSystem.js?v=20261012-031843";
+} from "./StatusSystem.js?v=20261013-021756";
+import { getClassTrait, getProfile } from "./TraitSystem.js?v=20261013-021756";
 
-const SELF_EFFECTS = new Set(["guard", "empower", "cleanse"]);
-// 효과량을 자신에게 거는 스킬: 방어(받는 피해 감소), 강화(주는 피해 증가)
-const SELF_AMOUNT_STATUS = { defense: "guard", buff: "empower" };
+const SELF_EFFECTS = new Set(["guard", "shield", "empower", "cleanse"]);
+// 효과량을 자신에게 거는 스킬: 방어(보호막), 강화(주는 피해 증가). 효과량 = 기본값 + 능력치 × 계수, 주사위 없음
+const SELF_AMOUNT_STATUS = { defense: "shield", buff: "empower" };
+
+// 빠른 스킬: 행동을 쓰지 않는다(쓴 뒤 같은 턴에 다른 행동을 할 수 있다).
+export function isFastSkill(skill) {
+  return Boolean(skill?.effects.includes("fast"));
+}
+
+// 피해를 주는 스킬(마법사는 영창해야 쓸 수 있다)
+export function isDamageSkill(skill) {
+  return skill?.type === "attack";
+}
 // 피해 줄에 붙는 판정 표시: (🎲굴린 값 · 판정 이름)
 const HIT_LABELS = { low: "스침", normal: "명중", high: "강타", critical: "치명타!" };
 
@@ -64,11 +77,15 @@ export class Combat {
       stunImmunity: 0,
       immune: profile.modifiers.immune,
       cooldowns: new Map(),
-      usedSkill: null,
+      // 이번 행동에 쓴 스킬(빠른 스킬을 포함해 대기시간을 이번 행동에 줄이지 않는다)
+      usedSkills: new Set(),
       buffs: { basicAttackBonus: 0 },
-      traitUsed: false,
+      // 전사 기세(전투가 끝나면 사라진다)
+      momentum: 0,
       firstStrikePending: false,
       actions: 0,
+      // 마법사 영창: 전투는 영창된 상태로 시작한다.
+      chanted: Boolean(this.trait.chantMultiplier),
     };
 
     const enemy = new Enemy(enemyData);
@@ -81,7 +98,9 @@ export class Combat {
       stunImmunity: 0,
       immune: new Set(),
       cooldowns: new Map(),
-      usedSkill: null,
+      usedSkills: new Set(),
+      // hpBelowHalfOnce 패턴으로 이미 쓴 스킬
+      onceUsed: new Set(),
       actions: 0,
     };
   }
@@ -138,7 +157,7 @@ export class Combat {
     }
   }
 
-  // action: { type: "attack" } | { type: "skill", slot } | { type: "item", itemId }
+  // action: { type: "attack" } | { type: "chant" } | { type: "skill", slot } | { type: "item", itemId }
   act(action) {
     if (!this.awaitingInput || this.result) {
       return [];
@@ -151,13 +170,24 @@ export class Combat {
       return this.takeEvents();
     }
 
+    const skill = action.type === "skill" ? catalog.skills.get(this.player.ref.skills[action.slot]) : null;
+
+    // 빠른 스킬은 행동을 쓰지 않는다: 쓰고 나서 다시 입력을 기다린다.
+    if (skill && isFastSkill(skill)) {
+      this.useSkill(this.player, this.enemy, skill);
+      runAbilities(this, "onSkill", { skillId: skill.id });
+      return this.takeEvents();
+    }
+
     this.awaitingInput = false;
     this.player.actions += 1;
 
     if (action.type === "attack") {
       this.playerBasicAttack();
-    } else if (action.type === "skill") {
-      const skill = catalog.skills.get(this.player.ref.skills[action.slot]);
+    } else if (action.type === "chant") {
+      this.player.chanted = true;
+      this.log("player", `${this.player.name} — 영창`, `다음 기본공격·스킬 효과 ×${this.trait.chantMultiplier}`);
+    } else if (skill) {
       this.useSkill(this.player, this.enemy, skill);
       runAbilities(this, "onSkill", { skillId: skill.id });
     } else if (action.type === "item") {
@@ -176,8 +206,14 @@ export class Combat {
   }
 
   canAct(action) {
+    const isMage = Boolean(this.trait.chantMultiplier);
+
     if (action.type === "attack") {
-      return { ok: true };
+      return isMage && !this.player.chanted ? { ok: false, reason: "영창해야 공격할 수 있다." } : { ok: true };
+    }
+
+    if (action.type === "chant") {
+      return isMage && !this.player.chanted ? { ok: true } : { ok: false, reason: "지금은 영창할 수 없다." };
     }
 
     if (action.type === "skill") {
@@ -189,6 +225,10 @@ export class Combat {
 
       if ((this.player.cooldowns.get(skill.id) ?? 0) > 0) {
         return { ok: false, reason: `${josa(skill.name, "은/는")} 아직 대기 중이다.` };
+      }
+
+      if (isMage && !this.player.chanted && isDamageSkill(skill)) {
+        return { ok: false, reason: "영창해야 공격 스킬을 쓸 수 있다." };
       }
 
       return { ok: true };
@@ -205,6 +245,16 @@ export class Combat {
     }
 
     return { ok: false, reason: "알 수 없는 행동" };
+  }
+
+  // 마법사: 영창된 상태면 ×1.75 배율을 돌려주고 영창을 푼다. 아니면 배율 없음.
+  consumeChant(user) {
+    if (user.kind !== "player" || !user.chanted || !this.trait.chantMultiplier) {
+      return [];
+    }
+
+    user.chanted = false;
+    return [{ value: this.trait.chantMultiplier, label: "영창" }];
   }
 
   startTurn(side) {
@@ -232,6 +282,11 @@ export class Combat {
 
     if (!this.result && stunned) {
       this.log("status", `${josa(side.name, "은/는")} 기절해 움직이지 못한다.`);
+
+      if (side.chanted) {
+        side.chanted = false;
+        this.log("status", "→ 기절해 영창이 풀렸다.");
+      }
     }
 
     return { stunned };
@@ -239,12 +294,12 @@ export class Combat {
 
   finishTurn(side) {
     for (const [skillId, remaining] of side.cooldowns) {
-      if (skillId !== side.usedSkill && remaining > 0) {
+      if (!side.usedSkills.has(skillId) && remaining > 0) {
         side.cooldowns.set(skillId, remaining - 1);
       }
     }
 
-    side.usedSkill = null;
+    side.usedSkills.clear();
     endAction(side);
   }
 
@@ -273,18 +328,8 @@ export class Combat {
   }
 
   chooseEnemySkill() {
-    const enemy = this.enemy.ref;
-    const ready = enemy.skills.filter((id) => (this.enemy.cooldowns.get(id) ?? 0) === 0);
-
-    if (enemy.pattern.startsWith("hpBelowHalf:")) {
-      const priority = enemy.pattern.split(":")[1];
-
-      if (enemy.hp <= enemy.maxHp / 2 && ready.includes(priority)) {
-        return this.dungeon.enemySkillsById.get(priority);
-      }
-    }
-
-    return ready.length ? this.dungeon.enemySkillsById.get(ready[0]) : null;
+    const id = chooseEnemySkillId(this.enemy);
+    return id ? this.dungeon.enemySkillsById.get(id) : null;
   }
 
   // ---------- 기습·전투 시작 ----------
@@ -336,9 +381,9 @@ export class Combat {
     const bonus = profile.modifiers.basicAttackBonus
       + this.player.buffs.basicAttackBonus
       + lowHpBonus(this.player, "basicAttackBonus");
-    const base = weapon ? weapon.damage : COMBAT.unarmedDamage;
-    const stat = weapon ? profile.stats[weapon.stat] : 0;
-    const multipliers = [];
+    // 기본공격 = 무기 피해 × 2/3 + 무기 연결 능력치 (반올림) × 단계 배율 (2026-10-13)
+    const base = basicAttackBase(weapon, profile.stats);
+    const multipliers = isSurprise ? [] : this.consumeChant(this.player);
 
     if (!isSurprise && this.player.firstStrikePending) {
       multipliers.push({ value: this.trait.firstStrikeMultiplier, label: "선공" });
@@ -346,8 +391,8 @@ export class Combat {
 
     const hit = this.basicAttack(this.player, this.enemy, {
       base,
-      stat,
       flat: bonus,
+      momentum: true,
       multipliers,
       label: isSurprise ? "기습 공격" : weapon ? `${josa(weapon.name, "으로/로")} 공격` : "맨손 공격",
     });
@@ -357,75 +402,69 @@ export class Combat {
     }
   }
 
-  basicAttack(attacker, defender, { base, stat = 0, flat = 0, multipliers = [], label }) {
+  basicAttack(attacker, defender, { base, flat = 0, multipliers = [], label, momentum = false }) {
     const roll = rollTier(this.dice, { critMin: this.critMinOf(attacker), missBonus: this.evadeOf(defender) });
     this.log(attacker.kind, `${attacker.name} — ${label}`, describeRoll(roll));
-    const damage = this.dealDamage(attacker, defender, { base, stat, flat, tier: roll.tier, multipliers, roll: roll.roll });
+    const damage = this.dealDamage(attacker, defender, { base, flat, tier: roll.tier, multipliers, roll: roll.roll, momentum });
     return { tier: roll.tier, damage };
   }
 
   useSkill(user, target, skill) {
     const isPlayer = user.kind === "player";
-    const statKey = skill.stat === "main" ? user.mainStat : skill.stat;
-    const stat = isPlayer ? user.profile.stats[statKey] : 0;
-    const roll = rollTier(this.dice, { critMin: this.critMinOf(user), missBonus: this.evadeOf(target) });
     const cooldown = Math.max(1, skill.cooldown - (isPlayer ? user.profile.modifiers.cooldownReduction : 0));
+    const effects = parseEffects(skill.effects);
 
     user.cooldowns.set(skill.id, cooldown);
-    user.usedSkill = skill.id;
+    user.usedSkills.add(skill.id);
+    // 마법사 영창: 영창된 상태에서 쓰면 ×1.75(피해·회복·보호막·강화) 후 영창이 풀린다.
+    const chant = this.consumeChant(user);
+
+    if (isDamageSkill(skill)) {
+      this.useAttackSkill(user, target, skill, effects, chant);
+      return;
+    }
+
+    // 회복·방어·강화·약화: 주사위 없음. 효과량 = 기본값 + 능력치 × 계수 (적은 기본값)
+    this.log(user.kind, `${user.name} — 「${skill.name}」${isFastSkill(skill) ? " (빠른 스킬)" : ""}`);
+    const amountBase = isPlayer ? supportAmount(skill.baseEffect, skill.scaling, user.profile.stats, user.mainStat) : skill.baseEffect;
+    const amount = roundValue(chant.reduce((acc, item) => acc * item.value, amountBase));
+
+    if (chant.length) {
+      this.log("calc", "", `${fmt(amountBase)} × ${chant[0].value}(영창) = ${fmt(amount)}`);
+    }
+
+    if (skill.type === "heal") {
+      this.heal(user, amount, skill.name);
+    } else if (SELF_AMOUNT_STATUS[skill.type] && amount > 0) {
+      const statusType = SELF_AMOUNT_STATUS[skill.type];
+      const token = effects.find((effect) => effect.key === statusType || (statusType === "shield" && effect.key === "guard"));
+      this.inflict(user, { type: statusType, amount, duration: token ? Number(token.args[0]) : 1 }, user);
+    }
+
+    this.applySkillEffects(user, target, effects, null);
+  }
+
+  // 공격 스킬 = (무기 피해 + 능력치 × 계수) × 단계 배율 (적은 기본값 × 단계 배율)
+  useAttackSkill(user, target, skill, effects, chant) {
+    const isPlayer = user.kind === "player";
+    const roll = rollTier(this.dice, { critMin: this.critMinOf(user), missBonus: this.evadeOf(target) });
     this.log(user.kind, `${user.name} — 「${skill.name}」`, describeRoll(roll));
 
-    const tier = roll.tier;
-    const skillMultipliers = [];
+    const weapon = isPlayer && user.ref.equipment.weapon ? catalog.equipment.get(user.ref.equipment.weapon) : null;
+    const base = isPlayer ? attackSkillBase(skill, weapon, user.profile.stats, user.mainStat) : skill.baseEffect;
+    this.dealSkillDamage(user, target, { base, tier: roll.tier, roll: roll.roll, skillMultipliers: chant });
 
-    if (isPlayer && this.trait.skillDamageMultiplier) {
-      skillMultipliers.push({ value: this.trait.skillDamageMultiplier, label: "집중" });
-    }
-
-    // 방어·강화 스킬의 strike:N은 보조 효과와 함께 주는 피해의 기본값이다.
-    const strike = parseEffects(skill.effects).find((effect) => effect.key === "strike");
-
-    if (skill.type === "attack" || (skill.type === "debuff" && skill.baseEffect > 0)) {
-      this.dealSkillDamage(user, target, { base: skill.baseEffect, stat, tier, roll: roll.roll, skillMultipliers });
-    } else if (strike) {
-      this.dealSkillDamage(user, target, { base: Number(strike.args[0]), stat, tier, roll: roll.roll, skillMultipliers });
-    }
-
-    if (this.result) {
+    if (this.result || roll.tier.multiplier === 0) {
       return;
     }
 
-    if (skill.type === "attack" || skill.type === "debuff") {
-      // 피해는 위에서 처리했다.
-    } else if (skill.type === "heal") {
-      const amount = computeEffect({ base: skill.baseEffect, stat, tier });
-      this.log("calc", "", describeCalculation({ base: skill.baseEffect, stat, tier, raw: amount }));
-      this.heal(user, amount, skill.name);
-    } else if (SELF_AMOUNT_STATUS[skill.type]) {
-      const statusType = SELF_AMOUNT_STATUS[skill.type];
-      const amount = computeEffect({ base: skill.baseEffect, stat, tier });
-      this.log("calc", "", describeCalculation({ base: skill.baseEffect, stat, tier, raw: amount }));
+    this.applySkillEffects(user, target, effects, { tier: roll.tier, multipliers: chant });
+  }
 
-      if (amount > 0) {
-        const token = parseEffects(skill.effects).find((effect) => effect.key === statusType);
-        this.inflict(user, { type: statusType, amount, duration: token ? Number(token.args[0]) : 1 }, user);
-      }
-    }
-
-    if (tier.multiplier === 0) {
-      // 피해를 준 스킬은 이미 "빗나갔다"가 출력됐다.
-      if (skill.type !== "attack" && !strike && !(skill.type === "debuff" && skill.baseEffect > 0)) {
-        this.log("result", "→ 효과가 없었다.");
-      }
-      return;
-    }
-
-    if (this.result) {
-      return;
-    }
-
-    for (const effect of parseEffects(skill.effects)) {
-      if (effect.key === "guard" || effect.key === "empower" || effect.key === "strike") {
+  // 스킬의 부가 효과(상태이상·정화). 공격 스킬의 독은 단계 배율·영창 배율을 반영한다.
+  applySkillEffects(user, target, effects, scaling) {
+    for (const effect of effects) {
+      if (["guard", "shield", "empower", "strike", "fast"].includes(effect.key)) {
         continue;
       }
 
@@ -441,16 +480,20 @@ export class Combat {
         continue;
       }
 
-      if (spec.type === "poison") {
-        const product = skillMultipliers.reduce((acc, item) => acc * item.value, 1);
-        spec.amount = roundValue(spec.amount * tier.multiplier * product);
+      if (spec.type === "poison" && scaling) {
+        const product = scaling.multipliers.reduce((acc, item) => acc * item.value, 1);
+        spec.amount = roundValue(spec.amount * scaling.tier.multiplier * product);
       }
 
       this.inflict(SELF_EFFECTS.has(effect.key) ? user : target, spec, user);
+
+      if (this.result) {
+        return;
+      }
     }
   }
 
-  dealSkillDamage(user, target, { base, stat, tier, roll, skillMultipliers }) {
+  dealSkillDamage(user, target, { base, tier, roll, skillMultipliers }) {
     const isPlayer = user.kind === "player";
     const multipliers = [...skillMultipliers];
 
@@ -459,7 +502,7 @@ export class Combat {
     }
 
     const flat = isPlayer ? user.profile.modifiers.skillDamageBonus + lowHpBonus(user, "skillDamageBonus") : 0;
-    this.dealDamage(user, target, { base, stat, flat, tier, multipliers, roll });
+    this.dealDamage(user, target, { base, flat, tier, multipliers, roll, momentum: isPlayer });
   }
 
   useItem(itemId) {
@@ -485,7 +528,8 @@ export class Combat {
   // ---------- 피해·회복·상태 ----------
 
   // roll: 굴린 주사위 값(보정 전). 결과 줄에 표시한다.
-  dealDamage(attacker, defender, { base, stat = 0, flat = 0, tier, multipliers = [], roll }) {
+  // momentum: 전사 기세를 더하는 공격(플레이어의 기본공격·공격 스킬)
+  dealDamage(attacker, defender, { base, flat = 0, tier, multipliers = [], roll, momentum = false }) {
     const all = [...multipliers];
     const dealt = getDealtMultiplier(attacker);
     const taken = getTakenMultiplier(defender);
@@ -500,22 +544,37 @@ export class Combat {
 
     // 강화 상태면 효과량만큼 고정 보너스에 더한다(능력치 배율은 받지 않는다).
     flat = roundValue(flat + getEmpowerAmount(attacker));
-    const raw = computeEffect({ base, stat, flat, tier, multipliers: all });
+    const computed = computeEffect({ base, flat, tier, multipliers: all });
+    // 전사 기세: 단계·그 밖의 배율 없이 더한다. 빗나감(효과 없음)이면 더하지 않는다.
+    const momentumBonus = momentum && tier.multiplier > 0 ? attacker.momentum ?? 0 : 0;
+    const raw = computed + momentumBonus;
     const reduction = this.reductionOf(defender);
-    const final = applyReduction(raw, reduction, tier);
+    const afterReduction = applyReduction(raw, reduction, tier);
+    // 보호막이 공격 피해를 먼저 막는다(독·출혈·반사는 막지 못한다).
+    const absorbed = absorbWithShield(defender, afterReduction);
+    const final = afterReduction - absorbed;
     const before = defender.ref.hp;
+    const shieldNote = absorbed > 0 ? ` (보호막이 ${fmt(absorbed)} 막음)` : "";
 
     defender.ref.hp = Math.max(0, roundValue(defender.ref.hp - final));
-    this.log(
-      "damage",
-      final > 0
-        ? `→ ${defender.name}에게 ${fmt(final)} 피해${hitTag(roll, tier)}`
-        : `→ 빗나갔다!${hitTag(roll, tier)}`,
-      describeCalculation({ base, stat, flat, tier, multipliers: all, raw, reduction, final }),
-      final > 0
-        ? { target: defender.kind, type: "damage", tier: tier.id, amount: final }
-        : { target: defender.kind, type: "miss", tier: tier.id },
-    );
+    let text = `→ 빗나갔다!${hitTag(roll, tier)}`;
+    let fx = { target: defender.kind, type: "miss", tier: tier.id };
+
+    if (final > 0) {
+      text = `→ ${defender.name}에게 ${fmt(final)} 피해${hitTag(roll, tier)}${shieldNote}`;
+      fx = { target: defender.kind, type: "damage", tier: tier.id, amount: final };
+    } else if (absorbed > 0) {
+      text = `→ 보호막이 ${fmt(absorbed)} 피해를 모두 막았다.${hitTag(roll, tier)}`;
+      fx = { target: defender.kind, type: "status", label: "보호막" };
+    }
+
+    const calc = describeCalculation({ base, flat, tier, multipliers: all, raw: computed, reduction, final: afterReduction });
+    this.log("damage", text, momentumBonus ? `${calc} (기세 +${fmt(momentumBonus)} 포함)` : calc, fx);
+
+    // 공격으로 피해를 받으면 전사 기세가 쌓인다(독·출혈·반사는 이 경로를 지나지 않는다).
+    if (final > 0 && defender.kind === "player") {
+      this.gainMomentum(defender);
+    }
     this.afterDamage(defender, before);
 
     if (final > 0 && !this.result) {
@@ -552,12 +611,14 @@ export class Combat {
   // 공격 소모품(마력 두루마리 등): 주사위·특성 배율 없이 정해진 피해, 적의 피해 감소는 적용한다.
   dealItemDamage(target, item) {
     const reduction = this.reductionOf(target);
-    const final = Math.max(COMBAT.minDamage, roundValue(item.amount - reduction));
+    const afterReduction = Math.max(COMBAT.minDamage, roundValue(item.amount - reduction));
+    const absorbed = absorbWithShield(target, afterReduction);
+    const final = afterReduction - absorbed;
     const before = target.ref.hp;
     target.ref.hp = Math.max(0, roundValue(target.ref.hp - final));
     this.log(
       "damage",
-      `→ ${target.name}에게 ${fmt(final)} 피해 (${item.name})`,
+      `→ ${target.name}에게 ${fmt(final)} 피해 (${item.name})${absorbed > 0 ? ` (보호막이 ${fmt(absorbed)} 막음)` : ""}`,
       `${fmt(item.amount)} − 피해 감소 ${fmt(reduction)} → ${fmt(final)}`,
       { target: target.kind, type: "damage", tier: "high", amount: final },
     );
@@ -582,10 +643,6 @@ export class Combat {
   }
 
   afterDamage(side, hpBefore) {
-    if (side.kind === "player") {
-      this.checkWarriorTrait(hpBefore);
-    }
-
     if (this.player.ref.hp <= 0) {
       this.finish("defeat");
     } else if (this.enemy.ref.hp <= 0) {
@@ -594,20 +651,16 @@ export class Combat {
     }
   }
 
-  checkWarriorTrait(hpBefore) {
-    const trait = this.trait;
-    const player = this.player;
+  // 전사 기세: 최대치까지 1씩 쌓는다.
+  gainMomentum(side) {
+    const max = this.trait.momentumMax;
 
-    if (!trait.healRatio || player.traitUsed || player.ref.hp <= 0) {
+    if (!max || side.ref.hp <= 0 || side.momentum >= max) {
       return;
     }
 
-    const threshold = player.profile.maxHp * trait.triggerRatio;
-
-    if (hpBefore > threshold && player.ref.hp <= threshold) {
-      player.traitUsed = true;
-      this.heal(player, roundValue(player.profile.maxHp * trait.healRatio), "투지");
-    }
+    side.momentum += 1;
+    this.log("status", `→ 기세 +1 (${side.momentum} / ${max})`, "", { target: side.kind, type: "status", label: `기세 ${side.momentum}` });
   }
 
   // quiet: 장비 능력처럼 자동으로 일어나는 회복은 HP가 가득 차 있으면 출력하지 않는다.
@@ -635,7 +688,7 @@ export class Combat {
 
     const value = spec.amount ? ` ${fmt(spec.amount)}` : spec.multiplier ? ` ×${spec.multiplier}` : "";
     const text = outcome.stacked !== undefined
-      ? `→ ${target.name}: ${label} +${fmt(spec.amount)} (쌓인 출혈 ${fmt(outcome.stacked)})`
+      ? `→ ${target.name}: ${label} +${fmt(spec.amount)} (남은 ${label} ${fmt(outcome.stacked)})`
       : `→ ${target.name}: ${label}${value} ${spec.duration}턴${outcome.refreshed ? " (갱신)" : ""}`;
     this.log("status", text, "", {
       target: target.kind,
@@ -687,11 +740,14 @@ export class Combat {
     const skills = this.player.ref.skills.map((skillId, slot) => {
       const skill = skillId ? catalog.skills.get(skillId) : null;
       const remaining = skill ? this.player.cooldowns.get(skill.id) ?? 0 : 0;
+      const needsChant = Boolean(this.trait.chantMultiplier) && !this.player.chanted && isDamageSkill(skill);
       return {
         slot,
         skill,
         remaining,
-        usable: Boolean(skill) && skill.type !== "passive" && remaining === 0,
+        fast: isFastSkill(skill),
+        needsChant,
+        usable: Boolean(skill) && skill.type !== "passive" && remaining === 0 && !needsChant,
       };
     });
 
@@ -707,7 +763,11 @@ export class Combat {
       }
     }
 
-    return { skills, items };
+    // 마법사: 영창 상태와 기본공격 자리(영창 / 공격)
+    const chant = this.trait.chantMultiplier
+      ? { chanted: this.player.chanted, multiplier: this.trait.chantMultiplier }
+      : null;
+    return { skills, items, chant };
   }
 
   // 출력 줄: 그 시점의 HP와 행동 중인 쪽을 함께 기록해 화면이 순서대로 재생할 수 있게 한다.

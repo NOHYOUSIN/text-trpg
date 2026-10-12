@@ -1,8 +1,8 @@
-import { catalog, getItem } from "../data/catalog.js?v=20261012-031843";
-import { GRADES, INVENTORY } from "../data/rules.js?v=20261012-031843";
-import { formatNumber as fmt } from "../systems/NumberRules.js?v=20261012-031843";
-import { getProfile } from "../systems/TraitSystem.js?v=20261012-031843";
-import { describeStats } from "./ItemText.js?v=20261012-031843";
+import { catalog, getItem } from "../data/catalog.js?v=20261013-021756";
+import { GRADES, INVENTORY } from "../data/rules.js?v=20261013-021756";
+import { formatNumber as fmt } from "../systems/NumberRules.js?v=20261013-021756";
+import { getProfile } from "../systems/TraitSystem.js?v=20261013-021756";
+import { describeRequirementShort, describeStats } from "./ItemText.js?v=20261013-021756";
 
 const SLOT_LABELS = { weapon: "무기", armor: "방어구", ring: "반지", necklace: "목걸이" };
 
@@ -41,19 +41,26 @@ export function renderStatus(root, { dungeon, zone, run, adventurer, onOpenInven
       "장비",
       Object.entries(adventurer.equipment).map(([slot, id]) => {
         const item = id ? catalog.equipment.get(id) : null;
-        return gradeLine(SLOT_LABELS[slot], item);
+        const element = gradeLine(SLOT_LABELS[slot], item, adventurer);
+
+        // 요구 능력치를 채우지 못해 부가 효과가 꺼진 장비
+        if (item && profile.modifiers.inactiveEquipment.includes(item.id)) {
+          element.append(textElement("span", "status-inactive", ` ${describeRequirementShort(item)}`));
+        }
+
+        return element;
       }),
     ),
     section(
       "스킬",
-      adventurer.skills.map((id, i) => gradeLine(`${i + 1}`, id ? catalog.skills.get(id) : null)),
+      adventurer.skills.map((id, i) => gradeLine(`${i + 1}`, id ? catalog.skills.get(id) : null, adventurer)),
     ),
     section(
       `인벤토리 ${adventurer.inventory.slots.length} / ${INVENTORY.slots}`,
       adventurer.inventory.slots.length
         ? adventurer.inventory.slots.map((slot) => {
           const item = getItem(slot.id);
-          const element = gradeLine("", item);
+          const element = gradeLine("", item, adventurer);
           element.lastChild.textContent += slot.count > 1 ? ` ×${slot.count}` : "";
           return element;
         })
@@ -83,7 +90,7 @@ function line(text) {
   return textElement("p", "status-line", text);
 }
 
-function gradeLine(label, entry) {
+function gradeLine(label, entry, adventurer = null) {
   const element = document.createElement("p");
   element.className = "status-line";
 
@@ -96,7 +103,7 @@ function gradeLine(label, entry) {
   if (entry?.grade) {
     name.style.color = GRADES[entry.grade].color;
     const kind = catalog.skills.has(entry.id) ? "skill" : "item";
-    name.title = `[${GRADES[entry.grade].label}] ${describeStats(kind, entry.id)}\n${entry.description ?? ""}`;
+    name.title = `[${GRADES[entry.grade].label}] ${describeStats(kind, entry.id, adventurer)}\n${entry.description ?? ""}`;
   }
 
   element.append(name);

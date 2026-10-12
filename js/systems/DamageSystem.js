@@ -1,5 +1,5 @@
-import { COMBAT, DICE, EFFECT_TIERS, STAT_SCALE } from "../data/rules.js?v=20261012-031843";
-import { clamp, formatNumber as fmt, roundValue } from "./NumberRules.js?v=20261012-031843";
+import { COMBAT, DICE, EFFECT_TIERS } from "../data/rules.js?v=20261013-021756";
+import { clamp, formatNumber as fmt, roundValue } from "./NumberRules.js?v=20261013-021756";
 
 const CRITICAL = EFFECT_TIERS.find((tier) => tier.id === "critical");
 const NONE = EFFECT_TIERS.find((tier) => tier.id === "none");
@@ -25,16 +25,11 @@ export function getTierByValue(value) {
   return EFFECT_TIERS.find((tier) => value >= tier.min && value <= tier.max);
 }
 
-// 능력치 배율: 1 + 연결 능력치 × 5%
-export function statMultiplier(stat = 0) {
-  return 1 + stat * STAT_SCALE.perPoint;
-}
-
-// (기본 × 능력치 배율 + 고정 보너스) × 단계 배율 × 그 밖의 배율. 마지막에 한 번 반올림.
-// flat: 장비·패시브·강화 같은 고정 수치. 능력치 배율을 받지 않는다.
-export function computeEffect({ base, stat = 0, flat = 0, tier, multipliers = [] }) {
+// (기본값 + 고정 보너스) × 단계 배율 × 그 밖의 배율. 마지막에 한 번 반올림.
+// base에는 능력치 × 계수가 이미 들어 있다(FormulaSystem). flat: 장비·패시브·강화 같은 고정 수치.
+export function computeEffect({ base, flat = 0, tier, multipliers = [] }) {
   const product = multipliers.reduce((acc, item) => acc * item.value, 1);
-  return roundValue((base * statMultiplier(stat) + flat) * tier.multiplier * product);
+  return roundValue((base + flat) * tier.multiplier * product);
 }
 
 // 피해 감소를 빼고 최소 피해를 적용한다. 효과 없음이면 0.
@@ -47,8 +42,8 @@ export function applyReduction(amount, reduction, tier) {
 }
 
 // 계산 과정을 사람이 읽을 수 있는 문장으로 만든다.
-export function describeCalculation({ base, stat = 0, flat = 0, tier, multipliers = [], raw, reduction, final }) {
-  let head = stat ? `${fmt(base)} × ${roundTo2(statMultiplier(stat))}(능력치 ${fmt(stat)})` : `${fmt(base)}`;
+export function describeCalculation({ base, flat = 0, tier, multipliers = [], raw, reduction, final }) {
+  let head = `${fmt(roundTo2(base))}`;
 
   if (flat) {
     head = `(${head} + ${fmt(flat)})`;

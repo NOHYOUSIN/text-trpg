@@ -32,9 +32,11 @@ export const EXPLORE_DIFFICULTIES = Object.freeze({
 });
 
 export const CLASS_TRAITS = Object.freeze({
-  warrior: { healRatio: 0.25, triggerRatio: 0.5, usesPerCombat: 1 },
+  // 기세: 공격으로 피해를 받을 때마다 1 쌓인다(최대 5). 기본공격·공격 스킬 피해에 단계 배율 없이 더한다. (2026-10-13, 투지 대체)
+  warrior: { momentumMax: 5 },
   rogue: { firstStrikeMultiplier: 1.5, surpriseModifier: 3 },
-  mage: { skillDamageMultiplier: 1.25 },
+  // 영창: 기본공격 대신 영창하고, 다음 기본공격·스킬 효과 ×1.75 (2026-10-13)
+  mage: { chantMultiplier: 1.75 },
 });
 
 export const STATUS = Object.freeze({
@@ -42,7 +44,7 @@ export const STATUS = Object.freeze({
 });
 
 export const RECOVERY = Object.freeze({
-  restRatio: 0.4,
+  restRatio: 0.5, // 2026-10-13: 40% → 50%
   zoneTransitionRatio: 0.3,
 });
 
@@ -120,7 +122,7 @@ export const ABILITY = Object.freeze({
   maxChance: 50, // 발동 확률(%)
   maxCrit: 3, // 치명타 범위 증가량 (기본 19~20 → 최대 16~20)
   maxEvade: 3, // 상대 빗나감 구간 증가량 (기본 1~2 → 최대 1~5)
-  maxLifesteal: 20, // 준 피해 중 회복 비율(%)
+  maxLifesteal: 10, // 준 피해 중 회복 비율(%) — 2026-10-12 플레이 테스트 후 20 → 10
   // 출혈: 새로 쌓일 때마다 지속시간을 이 값으로 되돌린다.
   bleedDuration: 2,
   // HP가 최대 HP의 이 비율 이하이면 lowHp 조건이 켜진다.
@@ -151,5 +153,8 @@ export const ENEMY_VARIANT = Object.freeze({
 // 정예: 일반 적 수치·골드 배율
 export const VETERAN = Object.freeze({ statMultiplier: 1.3, goldMultiplier: 1.5, namePrefix: "정예" });
 
-// 능력치 배율 (2026-10-12): 효과량 = 기본값 × (1 + 연결 능력치 × perPoint)
-export const STAT_SCALE = Object.freeze({ perPoint: 0.05 });
+// 전투 공식 3차 개편 (2026-10-13): 능력치 배율 폐지, 고정 기본값 + 능력치 × 계수
+// 기본공격 = 무기 피해 × weaponRatio + 무기 연결 능력치 × statRatio (반올림) × 단계 배율
+export const BASIC_ATTACK = Object.freeze({ weaponRatio: 2 / 3, statRatio: 1 });
+// 최대 HP = 직업 기본 HP + 힘 × 2 + 민첩 × 1 + 지혜 × 1 + 장비 최대 HP
+export const MAX_HP_PER_STAT = Object.freeze({ str: 2, agi: 1, wis: 1 });

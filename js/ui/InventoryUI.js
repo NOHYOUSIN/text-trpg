@@ -1,7 +1,8 @@
-import { catalog, getItem } from "../data/catalog.js?v=20261012-031843";
-import { GRADES, INVENTORY } from "../data/rules.js?v=20261012-031843";
-import { canUseOutsideCombat } from "../systems/InventorySystem.js?v=20261012-031843";
-import { describeStats } from "./ItemText.js?v=20261012-031843";
+import { catalog, getItem } from "../data/catalog.js?v=20261013-021756";
+import { GRADES, INVENTORY } from "../data/rules.js?v=20261013-021756";
+import { canUseOutsideCombat } from "../systems/InventorySystem.js?v=20261013-021756";
+import { describeRequirementShort, describeStats } from "./ItemText.js?v=20261013-021756";
+import { isEquipmentEffectActive } from "../systems/TraitSystem.js?v=20261013-021756";
 
 const SLOT_LABELS = { weapon: "무기", armor: "방어구", ring: "반지", necklace: "목걸이" };
 
@@ -44,7 +45,11 @@ export class InventoryUI {
 
     for (const [slot, id] of Object.entries(adventurer.equipment)) {
       const item = id ? catalog.equipment.get(id) : null;
-      const row = listRow(`${SLOT_LABELS[slot]}`, item);
+      const row = listRow(`${SLOT_LABELS[slot]}`, item, adventurer);
+
+      if (item && item.effects.length && !isEquipmentEffectActive(adventurer, item)) {
+        row.querySelector(".overlay-name")?.append(` ${describeRequirementShort(item)}`);
+      }
 
       if (item) {
         row.append(button("해제", () => this.handlers.onUnequip(slot), adventurer.inventory.isFull()));
@@ -61,7 +66,7 @@ export class InventoryUI {
 
     adventurer.inventory.slots.forEach((slot, index) => {
       const item = getItem(slot.id);
-      const row = listRow(slot.count > 1 ? `×${slot.count}` : "", item);
+      const row = listRow(slot.count > 1 ? `×${slot.count}` : "", item, adventurer);
 
       if (catalog.equipment.has(slot.id)) {
         row.append(button("장착", () => this.handlers.onEquip(index)));
@@ -83,7 +88,7 @@ export class InventoryUI {
   }
 }
 
-function listRow(label, item) {
+function listRow(label, item, adventurer) {
   const row = document.createElement("li");
   row.className = "overlay-row";
   const name = text("span", "overlay-name", item ? `${label ? `${label} ` : ""}${item.name}` : `${label} —`);
@@ -96,8 +101,8 @@ function listRow(label, item) {
   row.append(name);
 
   if (item) {
-    const stats = describeStats("item", item.id);
-    row.append(text("span", "overlay-desc", [stats, item.description].filter(Boolean).join(" — ")));
+    const stats = describeStats("item", item.id, adventurer);
+    row.append(text("span", "overlay-desc", [stats, item.description].filter(Boolean).join("\n")));
   }
 
   return row;

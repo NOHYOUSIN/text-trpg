@@ -1,6 +1,7 @@
-import { catalog, getItem } from "../data/catalog.js?v=20261012-031843";
-import { formatNumber as fmt } from "../systems/NumberRules.js?v=20261012-031843";
-import { renderScene } from "./SceneUI.js?v=20261012-031843";
+import { catalog, getItem } from "../data/catalog.js?v=20261013-021756";
+import { maxHpFrom } from "../systems/FormulaSystem.js?v=20261013-021756";
+import { formatNumber as fmt } from "../systems/NumberRules.js?v=20261013-021756";
+import { renderScene } from "./SceneUI.js?v=20261013-021756";
 
 const STAT_LABELS = { str: "힘", agi: "민첩", wis: "지혜" };
 
@@ -12,14 +13,14 @@ export function renderClassSelect(root, { dungeon, onSelect }) {
     details: [
       "갈림길에서 장소를 고르며 구역마다 20라운드를 나아간다. 10라운드에 중간보스, 20라운드에 구역 보스가 나온다.",
       "스킬과 장비는 사건·보물·상점·보스 보상에서 얻는다. 장비는 어떤 직업이든 쓸 수 있고, 스킬은 공용 스킬과 내 직업의 전용 스킬이 나온다.",
-      "능력치(힘·민첩·지혜)는 연결된 무기·스킬의 효과량에 더해진다. 민첩이 높으면 먼저 행동한다.",
+      "능력치(힘·민첩·지혜)는 무기·스킬의 효과량과 최대 HP를 키운다. 민첩이 높으면 먼저 행동한다.",
       "모든 판정은 1d20이다. 능력치는 주사위에 더해지지 않고, 장비·패시브 효과만 보정을 준다.",
     ],
     buttonLayout: "cards",
     buttons: [...catalog.classes.values()].map((classData) => ({
       label: `${classData.name} — ${STAT_LABELS[classData.mainStat]}`,
       sub: [
-        `HP ${fmt(classData.maxHp)} · 힘 ${fmt(classData.stats.str)} · 민첩 ${fmt(classData.stats.agi)} · 지혜 ${fmt(classData.stats.wis)}`,
+        `HP ${fmt(startMaxHp(classData))} · 힘 ${fmt(classData.stats.str)} · 민첩 ${fmt(classData.stats.agi)} · 지혜 ${fmt(classData.stats.wis)}`,
         `시작 장비: ${[classData.startWeapon, classData.startArmor]
           .filter(Boolean)
           .map((id) => catalog.equipment.get(id).name)
@@ -30,4 +31,10 @@ export function renderClassSelect(root, { dungeon, onSelect }) {
       onClick: () => onSelect(classData.id),
     })),
   });
+}
+
+// 시작 최대 HP = 직업 기본 HP + 능력치에 따른 체력 + 시작 방어구의 최대 HP
+function startMaxHp(classData) {
+  const armor = classData.startArmor ? catalog.equipment.get(classData.startArmor) : null;
+  return maxHpFrom(classData.maxHp, classData.stats, armor?.maxHp ?? 0);
 }

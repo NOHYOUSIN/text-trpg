@@ -1,5 +1,5 @@
-import { renderScene } from "./SceneUI.js?v=20261012-031843";
-import { isTextEffectEnabled } from "./TextEffect.js?v=20261012-031843";
+import { renderScene } from "./SceneUI.js?v=20261013-021756";
+import { isScreenFxEnabled } from "./Settings.js?v=20261013-021756";
 
 // 중간보스 이상 등장 화면: 등급 색 이름, 등장 메시지, 화면이 잠깐 어두워졌다 밝아지는 연출
 export function renderBossIntro(root, { eyebrow, enemy, text, onFight }) {
@@ -14,7 +14,7 @@ export function renderBossIntro(root, { eyebrow, enemy, text, onFight }) {
   scene.classList.add("boss-intro");
   scene.querySelector(".scene-title")?.classList.add(...rankNameClasses(enemy.rank));
 
-  if (isTextEffectEnabled()) {
+  if (isScreenFxEnabled()) {
     const dim = document.createElement("div");
     dim.className = "boss-intro-dim";
     dim.setAttribute("aria-hidden", "true");

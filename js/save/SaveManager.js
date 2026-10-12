@@ -1,7 +1,8 @@
 // 진행 중인 탐험 자동 저장 1개. 탐험이 끝나면 지운다. 수동 저장·불러오기는 없다.
 const STORAGE_KEY = "trpg-webgame-run";
 // 2: 수치 정수 전환(10배). 이전 버전 저장은 규모가 달라 불러오지 않는다.
-const SAVE_VERSION = 2;
+// 3: 전투 공식 3차 개편(2026-10-13) — 직업 기본 HP가 바뀌어 이전 저장은 이어 하지 않는다.
+const SAVE_VERSION = 3;
 
 export class SaveManager {
   constructor(storage = globalThis.localStorage) {

@@ -1,11 +1,10 @@
-import { GRADES } from "../data/rules.js?v=20261012-031843";
-import { formatNumber as fmt } from "../systems/NumberRules.js?v=20261012-031843";
-import { rankNameClasses } from "./BossIntroUI.js?v=20261012-031843";
-import { playCombatFx } from "./CombatFx.js?v=20261012-031843";
-import { readCalcSetting, writeCalcSetting } from "./Settings.js?v=20261012-031843";
-import { statusChip } from "./StatusTooltip.js?v=20261012-031843";
-import { describeConsumable, describeSkill, STAT_LABELS } from "./ItemText.js?v=20261012-031843";
-import { isTextEffectEnabled } from "./TextEffect.js?v=20261012-031843";
+import { GRADES } from "../data/rules.js?v=20261013-021756";
+import { formatNumber as fmt } from "../systems/NumberRules.js?v=20261013-021756";
+import { rankNameClasses } from "./BossIntroUI.js?v=20261013-021756";
+import { playCombatFx } from "./CombatFx.js?v=20261013-021756";
+import { isLogPlaybackEnabled, readCalcSetting, writeCalcSetting } from "./Settings.js?v=20261013-021756";
+import { statusChip } from "./StatusTooltip.js?v=20261013-021756";
+import { describeConsumable, describeSkill } from "./ItemText.js?v=20261013-021756";
 
 const SKILL_TYPE_LABELS = {
   attack: "공격",
@@ -16,7 +15,7 @@ const SKILL_TYPE_LABELS = {
   passive: "패시브",
 };
 
-// 출력 줄 종류별로 다음 줄까지 기다리는 시간(ms). 연출 효과를 끄면 절반으로 줄인다.
+// 출력 줄 종류별로 다음 줄까지 기다리는 시간(ms). "전투 로그 순서대로 재생"을 끄면 기다리지 않는다.
 const DELAYS = {
   turn: 450,
   player: 650,
@@ -93,8 +92,22 @@ export class CombatUI {
       }
 
       this.renderActions(combat, { locked: true });
-      this.next();
+
+      if (isLogPlaybackEnabled()) {
+        this.next();
+      } else {
+        this.showAllNow();
+      }
     }
+  }
+
+  // 순서대로 재생을 끈 경우: 기다리지 않고 한 번에 보여 준다(화면 연출은 그대로 나온다).
+  showAllNow() {
+    while (this.queue.length) {
+      this.showEvent(this.queue.shift());
+    }
+
+    this.finishPlayback();
   }
 
   next() {
@@ -107,7 +120,7 @@ export class CombatUI {
 
     this.showEvent(event);
     const delay = DELAYS[event.kind] ?? 500;
-    this.timerId = window.setTimeout(() => this.next(), isTextEffectEnabled() ? delay : delay / 2);
+    this.timerId = window.setTimeout(() => this.next(), delay);
   }
 
   skip() {
@@ -195,12 +208,12 @@ export class CombatUI {
     const { stats, maxHp, damageReduction } = combat.player.profile;
     this.renderSide(this.playerEl, "player", {
       title: combat.player.name,
-      subtitle: "",
       hp: combat.player.ref.hp,
       maxHp,
       summary: "",
       details: [`힘 ${fmt(stats.str)} · 민첩 ${fmt(stats.agi)} · 지혜 ${fmt(stats.wis)} · 피해 감소 ${fmt(damageReduction)}`],
       statuses: combat.player.statuses,
+      subtitle: [combat.player.chanted ? "영창됨" : "", combat.player.momentum ? `기세 ${combat.player.momentum}` : ""].filter(Boolean).join(" · "),
     });
   }
 
@@ -258,10 +271,24 @@ export class CombatUI {
       return;
     }
 
-    const { skills, items } = combat.getActionOptions();
+    const { skills, items, chant } = combat.getActionOptions();
     const disabled = locked || !combat.awaitingInput;
 
-    this.actionsEl.append(createButton("기본공격", () => this.onAction?.({ type: "attack" }), disabled));
+    // 마법사: 영창하지 않았으면 기본공격 자리에 영창 버튼을 둔다.
+    if (chant && !chant.chanted) {
+      const button = createButton("영창", () => this.onAction?.({ type: "chant" }), disabled);
+      appendSub(button, `다음 공격·스킬 ×${chant.multiplier}`);
+      button.classList.add("is-chant");
+      this.actionsEl.append(button);
+    } else {
+      const button = createButton("기본공격", () => this.onAction?.({ type: "attack" }), disabled);
+
+      if (chant) {
+        appendSub(button, `영창됨 · ×${chant.multiplier}`);
+      }
+
+      this.actionsEl.append(button);
+    }
 
     for (const option of skills) {
       if (!option.skill) {
@@ -277,8 +304,22 @@ export class CombatUI {
         disabled || !option.usable,
       );
       button.style.borderColor = GRADES[skill.grade]?.color ?? "";
-      button.title = [`[${GRADES[skill.grade]?.label}] ${describeSkill(skill)}`, skill.description].join("\n");
-      appendSub(button, `${SKILL_TYPE_LABELS[skill.type]} · ${STAT_LABELS[skill.stat]}${skill.type === "passive" ? "" : ` · 대기 ${skill.cooldown}`}`);
+      button.title = [`[${GRADES[skill.grade]?.label}] ${describeSkill(skill, combat.player.ref)}`, skill.description].join("\n");
+      const tags = [SKILL_TYPE_LABELS[skill.type]];
+
+      if (option.fast) {
+        tags.push("빠른");
+      }
+
+      if (skill.type !== "passive") {
+        tags.push(`대기 ${skill.cooldown}`);
+      }
+
+      if (option.needsChant) {
+        tags.push("영창 필요");
+      }
+
+      appendSub(button, tags.join(" · "));
       this.actionsEl.append(button);
     }
 

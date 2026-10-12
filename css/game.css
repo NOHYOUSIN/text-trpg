@@ -85,6 +85,15 @@
   line-height: 1.8;
 }
 
+/* 장비·스킬 설명은 여러 줄(종류 / 수치 / 부가 효과)로 쓴다 */
+.scene-details li {
+  white-space: pre-line;
+}
+
+.scene-details li + li {
+  margin-top: 6px;
+}
+
 .scene-note {
   color: var(--muted);
   font-size: 13px;
@@ -331,6 +340,7 @@
   order: 3;
   color: var(--muted);
   font-size: 13px;
+  white-space: pre-line;
 }
 
 @media (max-width: 900px) {
@@ -438,4 +448,32 @@ body.menu-mode .scene-button {
 .lobby .scene-buttons {
   align-self: stretch;
   margin-top: 12px;
+}
+
+/* 설정 창: 항목마다 켜짐/꺼짐 버튼 */
+.settings-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.settings-row .overlay-desc {
+  display: block;
+}
+
+.settings-toggle {
+  flex: none;
+  min-width: 72px;
+}
+
+.settings-toggle[aria-pressed="true"] {
+  border-color: var(--accent);
+  color: var(--accent-strong);
+}
+
+/* 요구 능력치를 채우지 못한 장비 표시 */
+.status-inactive {
+  color: var(--danger);
+  font-size: 12px;
 }

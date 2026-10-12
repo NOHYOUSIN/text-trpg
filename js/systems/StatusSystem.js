@@ -1,6 +1,6 @@
-import { STATUS } from "../data/rules.js?v=20261012-031843";
-import { STATUS_LABELS } from "./EffectParser.js?v=20261012-031843";
-import { formatNumber as fmt } from "./NumberRules.js?v=20261012-031843";
+import { STATUS } from "../data/rules.js?v=20261013-021756";
+import { STATUS_LABELS } from "./EffectParser.js?v=20261013-021756";
+import { formatNumber as fmt } from "./NumberRules.js?v=20261013-021756";
 
 // 상태이상과 지속 효과. 지속시간은 효과를 받은 쪽의 행동 횟수로 센다.
 // combatant: { statuses: [], stunImmunity: 0, immune: Set }
@@ -15,6 +15,14 @@ export function applyStatus(target, spec, { appliedBySelf = false } = {}) {
   }
 
   const existing = target.statuses.find((status) => status.type === spec.type);
+
+  // 보호막은 남은 양에 더하고 지속시간은 긴 쪽으로 갱신한다(연계로 커지는 것을 허용, 2026-10-13).
+  if (existing && spec.type === "shield") {
+    existing.amount += spec.amount;
+    existing.duration = Math.max(existing.duration, spec.duration);
+    existing.appliedThisAction = existing.appliedThisAction || appliedBySelf;
+    return { applied: true, refreshed: true, stacked: existing.amount };
+  }
 
   // 출혈은 쌓인다: 수치를 더하고 지속시간을 처음으로 되돌린다.
   if (existing && spec.type === "bleed") {
@@ -57,6 +65,24 @@ export function getDealtMultiplier(target) {
 // 받는 피해 배율 (취약)
 export function getTakenMultiplier(target) {
   return getStatus(target, "vulnerable")?.multiplier ?? 1;
+}
+
+// 보호막: 공격 피해를 남은 양만큼 막는다. 다 쓰면 사라진다. 막은 양을 돌려준다.
+export function absorbWithShield(target, damage) {
+  const shield = getStatus(target, "shield");
+
+  if (!shield || damage <= 0) {
+    return 0;
+  }
+
+  const absorbed = Math.min(shield.amount, damage);
+  shield.amount -= absorbed;
+
+  if (shield.amount <= 0) {
+    removeStatus(target, "shield");
+  }
+
+  return absorbed;
 }
 
 export function getGuardAmount(target) {

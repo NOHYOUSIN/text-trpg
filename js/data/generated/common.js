@@ -8,10 +8,16 @@ export const commonData = {
       "class": "warrior",
       "type": "attack",
       "stat": "str",
-      "baseEffect": 20,
+      "baseEffect": 0,
+      "scaling": [
+        {
+          "stat": "str",
+          "coef": 2.0
+        }
+      ],
       "cooldown": 3,
       "effects": [],
-      "description": "온 힘을 실어 내려친다."
+      "description": "온 힘을 실어 내려친다. 무기 피해 + 힘 × 2.0."
     },
     {
       "id": "skl_vital_stab",
@@ -20,10 +26,16 @@ export const commonData = {
       "class": "rogue",
       "type": "attack",
       "stat": "agi",
-      "baseEffect": 18,
+      "baseEffect": 0,
+      "scaling": [
+        {
+          "stat": "agi",
+          "coef": 1.8
+        }
+      ],
       "cooldown": 3,
       "effects": [],
-      "description": "갑옷 틈을 노려 날을 찔러 넣는다."
+      "description": "갑옷 틈을 노려 날을 찔러 넣는다. 무기 피해 + 민첩 × 1.8."
     },
     {
       "id": "skl_ember",
@@ -32,10 +44,16 @@ export const commonData = {
       "class": "mage",
       "type": "attack",
       "stat": "wis",
-      "baseEffect": 20,
+      "baseEffect": 0,
+      "scaling": [
+        {
+          "stat": "wis",
+          "coef": 2.0
+        }
+      ],
       "cooldown": 3,
       "effects": [],
-      "description": "손끝에서 작은 불꽃을 튕겨 낸다."
+      "description": "손끝에서 작은 불꽃을 튕겨 낸다. 무기 피해 + 지혜 × 2.0."
     },
     {
       "id": "skl_first_aid",
@@ -44,10 +62,16 @@ export const commonData = {
       "class": null,
       "type": "heal",
       "stat": "main",
-      "baseEffect": 10,
+      "baseEffect": 4,
+      "scaling": [
+        {
+          "stat": "main",
+          "coef": 0.8
+        }
+      ],
       "cooldown": 3,
       "effects": [],
-      "description": "상처를 동여매 피를 멎게 한다."
+      "description": "상처를 동여매 피를 멎게 한다. 4 + 주 능력치 × 0.8 회복."
     },
     {
       "id": "skl_guard_stance",
@@ -56,13 +80,19 @@ export const commonData = {
       "class": null,
       "type": "defense",
       "stat": "main",
-      "baseEffect": 10,
-      "cooldown": 3,
-      "effects": [
-        "strike:14",
-        "guard:2"
+      "baseEffect": 2,
+      "scaling": [
+        {
+          "stat": "main",
+          "coef": 0.3
+        }
       ],
-      "description": "방패를 앞세워 들이받고 자세를 굳힌다. 피해를 주고 2턴 동안 효과량만큼 받는 피해가 줄어든다."
+      "cooldown": 4,
+      "effects": [
+        "shield:2",
+        "fast"
+      ],
+      "description": "방패를 앞세워 자세를 굳힌다. 2턴 동안 받는 피해를 합계 (2 + 주 능력치 × 0.3)까지 막는다. 행동을 쓰지 않는다."
     },
     {
       "id": "skl_poison_dart",
@@ -71,12 +101,18 @@ export const commonData = {
       "class": "rogue",
       "type": "attack",
       "stat": "agi",
-      "baseEffect": 22,
+      "baseEffect": 0,
+      "scaling": [
+        {
+          "stat": "agi",
+          "coef": 2.0
+        }
+      ],
       "cooldown": 3,
       "effects": [
         "poison:3:3"
       ],
-      "description": "독을 바른 침을 날린다."
+      "description": "독을 바른 침을 날린다. 무기 피해 + 민첩 × 2.0, 독 3 × 3턴."
     },
     {
       "id": "skl_shield_bash",
@@ -85,12 +121,18 @@ export const commonData = {
       "class": "warrior",
       "type": "attack",
       "stat": "str",
-      "baseEffect": 22,
+      "baseEffect": 0,
+      "scaling": [
+        {
+          "stat": "str",
+          "coef": 2.0
+        }
+      ],
       "cooldown": 3,
       "effects": [
         "stun:1"
       ],
-      "description": "묵직하게 들이받아 상대를 휘청이게 한다."
+      "description": "묵직하게 들이받아 상대를 휘청이게 한다. 무기 피해 + 힘 × 2.0, 기절 1턴."
     },
     {
       "id": "skl_frost_arrow",
@@ -99,12 +141,18 @@ export const commonData = {
       "class": "mage",
       "type": "attack",
       "stat": "wis",
-      "baseEffect": 23,
+      "baseEffect": 0,
+      "scaling": [
+        {
+          "stat": "wis",
+          "coef": 2.1
+        }
+      ],
       "cooldown": 3,
       "effects": [
         "weaken:0.7:2"
       ],
-      "description": "차가운 화살이 상대의 움직임을 무디게 한다."
+      "description": "차가운 화살이 상대의 움직임을 무디게 한다. 무기 피해 + 지혜 × 2.1, 약화 2턴."
     },
     {
       "id": "skl_battle_rhythm",
@@ -113,12 +161,18 @@ export const commonData = {
       "class": "warrior",
       "type": "passive",
       "stat": "str",
-      "baseEffect": null,
+      "baseEffect": 1,
+      "scaling": [
+        {
+          "stat": "str",
+          "coef": 0.2
+        }
+      ],
       "cooldown": null,
       "effects": [
-        "basicAttackBonus:2"
+        "basicAttackBonus:base"
       ],
-      "description": "싸움의 흐름을 몸이 기억한다. 기본공격 피해 +2."
+      "description": "싸움의 흐름을 몸이 기억한다. 기본공격 피해 +(1 + 힘 × 0.2)."
     },
     {
       "id": "skl_ground_cleave",
@@ -127,12 +181,18 @@ export const commonData = {
       "class": "warrior",
       "type": "attack",
       "stat": "str",
-      "baseEffect": 28,
+      "baseEffect": 0,
+      "scaling": [
+        {
+          "stat": "str",
+          "coef": 2.6
+        }
+      ],
       "cooldown": 2,
       "effects": [
         "vulnerable:1.3:2"
       ],
-      "description": "땅을 가를 듯한 일격이 상대의 자세를 무너뜨린다."
+      "description": "땅을 가를 듯한 일격. 무기 피해 + 힘 × 2.6, 취약 2턴."
     },
     {
       "id": "skl_shadow_raid",
@@ -141,12 +201,18 @@ export const commonData = {
       "class": "rogue",
       "type": "attack",
       "stat": "agi",
-      "baseEffect": 26,
+      "baseEffect": 0,
+      "scaling": [
+        {
+          "stat": "agi",
+          "coef": 2.4
+        }
+      ],
       "cooldown": 2,
       "effects": [
         "poison:4:3"
       ],
-      "description": "그림자처럼 파고들어 독 묻은 칼날을 꽂는다."
+      "description": "그림자처럼 파고들어 독 묻은 칼날을 꽂는다. 무기 피해 + 민첩 × 2.4, 독 4 × 3턴."
     },
     {
       "id": "skl_life_bloom",
@@ -155,12 +221,18 @@ export const commonData = {
       "class": null,
       "type": "heal",
       "stat": "main",
-      "baseEffect": 15,
+      "baseEffect": 6,
+      "scaling": [
+        {
+          "stat": "main",
+          "coef": 1.0
+        }
+      ],
       "cooldown": 2,
       "effects": [
         "cleanse"
       ],
-      "description": "상처 위로 꽃이 피어나며 상태이상을 씻어 낸다."
+      "description": "상처 위로 꽃이 피어나며 상태이상을 씻어 낸다. 6 + 주 능력치 × 1.0 회복, 상태이상 해제."
     },
     {
       "id": "skl_iron_skin",
@@ -169,12 +241,18 @@ export const commonData = {
       "class": "warrior",
       "type": "passive",
       "stat": "str",
-      "baseEffect": 3,
+      "baseEffect": 1,
+      "scaling": [
+        {
+          "stat": "str",
+          "coef": 0.1
+        }
+      ],
       "cooldown": null,
       "effects": [
         "damageReduction:base"
       ],
-      "description": "단련된 몸이 충격을 흘려 낸다. 받는 피해가 3 × 힘 배율만큼 줄어든다(힘 5일 때 4)."
+      "description": "단련된 몸이 충격을 흘려 낸다. 받는 피해 −(1 + 힘 × 0.1)."
     },
     {
       "id": "skl_mana_flow",
@@ -183,7 +261,8 @@ export const commonData = {
       "class": "mage",
       "type": "passive",
       "stat": "wis",
-      "baseEffect": null,
+      "baseEffect": 0,
+      "scaling": [],
       "cooldown": null,
       "effects": [
         "cooldownReduction:1"
@@ -197,10 +276,16 @@ export const commonData = {
       "class": "warrior",
       "type": "attack",
       "stat": "str",
-      "baseEffect": 22,
+      "baseEffect": 0,
+      "scaling": [
+        {
+          "stat": "str",
+          "coef": 2.2
+        }
+      ],
       "cooldown": 3,
       "effects": [],
-      "description": "무기를 높이 들어 힘껏 내리찍는다."
+      "description": "무기를 높이 들어 힘껏 내리찍는다. 무기 피해 + 힘 × 2.2."
     },
     {
       "id": "skl_war_cry",
@@ -209,13 +294,19 @@ export const commonData = {
       "class": "warrior",
       "type": "buff",
       "stat": "str",
-      "baseEffect": 6,
-      "cooldown": 3,
-      "effects": [
-        "strike:14",
-        "empower:2"
+      "baseEffect": 1,
+      "scaling": [
+        {
+          "stat": "str",
+          "coef": 0.3
+        }
       ],
-      "description": "함성과 함께 몰아친다. 피해를 주고 2턴 동안 효과량만큼 주는 피해가 늘어난다."
+      "cooldown": 4,
+      "effects": [
+        "empower:2",
+        "fast"
+      ],
+      "description": "함성으로 기세를 끌어올린다. 2턴 동안 주는 피해 +(1 + 힘 × 0.3). 행동을 쓰지 않는다."
     },
     {
       "id": "skl_rending_strike",
@@ -224,12 +315,18 @@ export const commonData = {
       "class": "warrior",
       "type": "attack",
       "stat": "str",
-      "baseEffect": 23,
+      "baseEffect": 0,
+      "scaling": [
+        {
+          "stat": "str",
+          "coef": 2.1
+        }
+      ],
       "cooldown": 3,
       "effects": [
         "vulnerable:1.3:2"
       ],
-      "description": "갑옷째 찢어 상대를 무방비로 만든다."
+      "description": "갑옷째 찢어 상대를 무방비로 만든다. 무기 피해 + 힘 × 2.1, 취약 2턴."
     },
     {
       "id": "skl_quick_slash",
@@ -238,24 +335,32 @@ export const commonData = {
       "class": "rogue",
       "type": "attack",
       "stat": "agi",
-      "baseEffect": 20,
+      "baseEffect": 0,
+      "scaling": [
+        {
+          "stat": "agi",
+          "coef": 2.0
+        }
+      ],
       "cooldown": 3,
       "effects": [],
-      "description": "눈에 보이지 않을 만큼 빠르게 벤다."
+      "description": "눈에 보이지 않을 만큼 빠르게 벤다. 무기 피해 + 민첩 × 2.0."
     },
     {
       "id": "skl_smoke_bomb",
       "name": "연막",
       "grade": "common",
       "class": "rogue",
-      "type": "attack",
+      "type": "debuff",
       "stat": "agi",
-      "baseEffect": 14,
-      "cooldown": 3,
+      "baseEffect": 0,
+      "scaling": [],
+      "cooldown": 4,
       "effects": [
-        "weaken:0.7:2"
+        "weaken:0.7:2",
+        "fast"
       ],
-      "description": "연막 속에서 기습해 상대의 힘을 빼앗는다."
+      "description": "연막을 터뜨려 상대의 힘을 빼앗는다. 2턴 동안 상대가 주는 피해 ×0.7. 행동을 쓰지 않는다."
     },
     {
       "id": "skl_crippling_cut",
@@ -264,26 +369,34 @@ export const commonData = {
       "class": "rogue",
       "type": "attack",
       "stat": "agi",
-      "baseEffect": 22,
+      "baseEffect": 0,
+      "scaling": [
+        {
+          "stat": "agi",
+          "coef": 2.0
+        }
+      ],
       "cooldown": 3,
       "effects": [
         "weaken:0.7:2"
       ],
-      "description": "힘줄을 노려 상대의 힘을 빼앗는다."
+      "description": "힘줄을 노려 상대의 힘을 빼앗는다. 무기 피해 + 민첩 × 2.0, 약화 2턴."
     },
     {
       "id": "skl_mark_weakness",
       "name": "급소 표시",
       "grade": "uncommon",
       "class": "rogue",
-      "type": "attack",
+      "type": "debuff",
       "stat": "agi",
-      "baseEffect": 15,
-      "cooldown": 3,
+      "baseEffect": 0,
+      "scaling": [],
+      "cooldown": 4,
       "effects": [
-        "vulnerable:1.3:3"
+        "vulnerable:1.3:3",
+        "fast"
       ],
-      "description": "약점을 찔러 표시를 남긴다. 이후의 공격이 더 아프게 들어간다."
+      "description": "약점을 짚어 표시를 남긴다. 3턴 동안 상대가 받는 피해 ×1.3. 행동을 쓰지 않는다."
     },
     {
       "id": "skl_killer_instinct",
@@ -292,7 +405,8 @@ export const commonData = {
       "class": "rogue",
       "type": "passive",
       "stat": "agi",
-      "baseEffect": null,
+      "baseEffect": 0,
+      "scaling": [],
       "cooldown": null,
       "effects": [
         "crit:3"
@@ -306,10 +420,16 @@ export const commonData = {
       "class": "mage",
       "type": "attack",
       "stat": "wis",
-      "baseEffect": 20,
+      "baseEffect": 0,
+      "scaling": [
+        {
+          "stat": "wis",
+          "coef": 2.0
+        }
+      ],
       "cooldown": 3,
       "effects": [],
-      "description": "응축한 마력을 화살처럼 쏘아 보낸다."
+      "description": "응축한 마력을 화살처럼 쏘아 보낸다. 무기 피해 + 지혜 × 2.0."
     },
     {
       "id": "skl_mana_ward",
@@ -318,13 +438,19 @@ export const commonData = {
       "class": "mage",
       "type": "defense",
       "stat": "wis",
-      "baseEffect": 9,
-      "cooldown": 3,
-      "effects": [
-        "strike:14",
-        "guard:2"
+      "baseEffect": 2,
+      "scaling": [
+        {
+          "stat": "wis",
+          "coef": 0.3
+        }
       ],
-      "description": "마력의 파편을 날리며 장벽을 두른다. 피해를 주고 2턴 동안 효과량만큼 받는 피해가 줄어든다."
+      "cooldown": 4,
+      "effects": [
+        "shield:2",
+        "fast"
+      ],
+      "description": "마력의 장벽을 두른다. 2턴 동안 받는 피해를 합계 (2 + 지혜 × 0.3)까지 막는다. 행동을 쓰지 않는다."
     },
     {
       "id": "skl_flame_burst",
@@ -333,26 +459,34 @@ export const commonData = {
       "class": "mage",
       "type": "attack",
       "stat": "wis",
-      "baseEffect": 24,
+      "baseEffect": 0,
+      "scaling": [
+        {
+          "stat": "wis",
+          "coef": 2.2
+        }
+      ],
       "cooldown": 3,
       "effects": [
         "vulnerable:1.3:2"
       ],
-      "description": "불꽃이 터지며 상대의 방어를 무너뜨린다."
+      "description": "불꽃이 터지며 상대의 방어를 무너뜨린다. 무기 피해 + 지혜 × 2.2, 취약 2턴."
     },
     {
       "id": "skl_hex",
       "name": "저주",
       "grade": "uncommon",
       "class": "mage",
-      "type": "attack",
+      "type": "debuff",
       "stat": "wis",
-      "baseEffect": 15,
-      "cooldown": 3,
+      "baseEffect": 0,
+      "scaling": [],
+      "cooldown": 4,
       "effects": [
-        "weaken:0.7:3"
+        "weaken:0.7:3",
+        "fast"
       ],
-      "description": "저주를 실은 마력이 상대를 할퀴고 힘을 갉아먹는다."
+      "description": "저주를 걸어 상대의 힘을 갉아먹는다. 3턴 동안 상대가 주는 피해 ×0.7. 행동을 쓰지 않는다."
     },
     {
       "id": "skl_thunderbolt",
@@ -361,12 +495,18 @@ export const commonData = {
       "class": "mage",
       "type": "attack",
       "stat": "wis",
-      "baseEffect": 29,
+      "baseEffect": 0,
+      "scaling": [
+        {
+          "stat": "wis",
+          "coef": 2.6
+        }
+      ],
       "cooldown": 2,
       "effects": [
         "stun:1"
       ],
-      "description": "하늘을 가르는 번개가 상대를 꿰뚫는다."
+      "description": "하늘을 가르는 번개가 상대를 꿰뚫는다. 무기 피해 + 지혜 × 2.6, 기절 1턴."
     },
     {
       "id": "skl_second_wind",
@@ -375,10 +515,16 @@ export const commonData = {
       "class": null,
       "type": "heal",
       "stat": "main",
-      "baseEffect": 10,
+      "baseEffect": 4,
+      "scaling": [
+        {
+          "stat": "main",
+          "coef": 0.8
+        }
+      ],
       "cooldown": 3,
       "effects": [],
-      "description": "호흡을 가다듬어 기운을 되찾는다."
+      "description": "호흡을 가다듬어 기운을 되찾는다. 4 + 주 능력치 × 0.8 회복."
     },
     {
       "id": "skl_resolve",
@@ -387,13 +533,19 @@ export const commonData = {
       "class": null,
       "type": "buff",
       "stat": "main",
-      "baseEffect": 7,
-      "cooldown": 3,
-      "effects": [
-        "strike:15",
-        "empower:2"
+      "baseEffect": 2,
+      "scaling": [
+        {
+          "stat": "main",
+          "coef": 0.3
+        }
       ],
-      "description": "이를 악물고 내지른 일격으로 기세를 올린다. 피해를 주고 2턴 동안 효과량만큼 주는 피해가 늘어난다."
+      "cooldown": 4,
+      "effects": [
+        "empower:2",
+        "fast"
+      ],
+      "description": "이를 악물고 기세를 올린다. 2턴 동안 주는 피해 +(2 + 주 능력치 × 0.3). 행동을 쓰지 않는다."
     },
     {
       "id": "skl_sidestep",
@@ -402,13 +554,23 @@ export const commonData = {
       "class": null,
       "type": "defense",
       "stat": "main",
-      "baseEffect": 10,
-      "cooldown": 3,
-      "effects": [
-        "strike:15",
-        "guard:2"
+      "baseEffect": 2,
+      "scaling": [
+        {
+          "stat": "main",
+          "coef": 0.3
+        },
+        {
+          "stat": "agi",
+          "coef": 0.1
+        }
       ],
-      "description": "공격을 흘려 내며 반격한다. 피해를 주고 2턴 동안 효과량만큼 받는 피해가 줄어든다."
+      "cooldown": 4,
+      "effects": [
+        "shield:2",
+        "fast"
+      ],
+      "description": "공격의 흐름을 읽고 흘려 낸다. 2턴 동안 받는 피해를 합계 (2 + 주 능력치 × 0.3 + 민첩 × 0.1)까지 막는다. 행동을 쓰지 않는다."
     },
     {
       "id": "skl_wrap_wounds",
@@ -417,12 +579,18 @@ export const commonData = {
       "class": null,
       "type": "heal",
       "stat": "main",
-      "baseEffect": 12,
+      "baseEffect": 5,
+      "scaling": [
+        {
+          "stat": "main",
+          "coef": 0.8
+        }
+      ],
       "cooldown": 3,
       "effects": [
         "cleanse"
       ],
-      "description": "상처를 단단히 동여매고 독기를 짜낸다."
+      "description": "상처를 단단히 동여매고 독기를 짜낸다. 5 + 주 능력치 × 0.8 회복, 상태이상 해제."
     },
     {
       "id": "skl_desperate_blow",
@@ -431,12 +599,18 @@ export const commonData = {
       "class": null,
       "type": "attack",
       "stat": "main",
-      "baseEffect": 28,
+      "baseEffect": 0,
+      "scaling": [
+        {
+          "stat": "main",
+          "coef": 2.6
+        }
+      ],
       "cooldown": 2,
       "effects": [
         "vulnerable:1.3:2"
       ],
-      "description": "모든 것을 건 일격이 상대의 빈틈을 연다."
+      "description": "모든 것을 건 일격. 무기 피해 + 주 능력치 × 2.6, 취약 2턴."
     }
   ],
   "equipment": [
@@ -446,11 +620,12 @@ export const commonData = {
       "slot": "weapon",
       "grade": "common",
       "stat": "str",
-      "damage": 11,
+      "damage": 5,
       "damageReduction": 0,
       "maxHp": 0,
       "statBonus": {},
       "effects": [],
+      "requirement": null,
       "unique": false,
       "starter": true,
       "price": 20,
@@ -462,11 +637,12 @@ export const commonData = {
       "slot": "weapon",
       "grade": "common",
       "stat": "agi",
-      "damage": 10,
+      "damage": 4,
       "damageReduction": 0,
       "maxHp": 0,
       "statBonus": {},
       "effects": [],
+      "requirement": null,
       "unique": false,
       "starter": true,
       "price": 20,
@@ -478,11 +654,12 @@ export const commonData = {
       "slot": "weapon",
       "grade": "common",
       "stat": "wis",
-      "damage": 10,
+      "damage": 5,
       "damageReduction": 0,
       "maxHp": 0,
       "statBonus": {},
       "effects": [],
+      "requirement": null,
       "unique": false,
       "starter": true,
       "price": 20,
@@ -494,11 +671,12 @@ export const commonData = {
       "slot": "weapon",
       "grade": "common",
       "stat": "str",
-      "damage": 10,
+      "damage": 7,
       "damageReduction": 0,
       "maxHp": 0,
       "statBonus": {},
       "effects": [],
+      "requirement": null,
       "unique": false,
       "starter": false,
       "price": 20,
@@ -510,13 +688,17 @@ export const commonData = {
       "slot": "weapon",
       "grade": "common",
       "stat": "agi",
-      "damage": 10,
+      "damage": 3,
       "damageReduction": 0,
       "maxHp": 0,
       "statBonus": {},
       "effects": [
         "onHit@20>bleed:1"
       ],
+      "requirement": {
+        "stat": "agi",
+        "value": 2
+      },
       "unique": false,
       "starter": false,
       "price": 20,
@@ -528,11 +710,14 @@ export const commonData = {
       "slot": "weapon",
       "grade": "common",
       "stat": "wis",
-      "damage": 10,
+      "damage": 3,
       "damageReduction": 0,
       "maxHp": 0,
-      "statBonus": {},
+      "statBonus": {
+        "wis": 1
+      },
       "effects": [],
+      "requirement": null,
       "unique": false,
       "starter": false,
       "price": 20,
@@ -544,7 +729,7 @@ export const commonData = {
       "slot": "weapon",
       "grade": "uncommon",
       "stat": "str",
-      "damage": 13,
+      "damage": 7,
       "damageReduction": 0,
       "maxHp": 0,
       "statBonus": {
@@ -553,6 +738,10 @@ export const commonData = {
       "effects": [
         "lifesteal:10"
       ],
+      "requirement": {
+        "stat": "str",
+        "value": 5
+      },
       "unique": false,
       "starter": false,
       "price": 30,
@@ -564,13 +753,17 @@ export const commonData = {
       "slot": "weapon",
       "grade": "uncommon",
       "stat": "agi",
-      "damage": 12,
+      "damage": 6,
       "damageReduction": 0,
       "maxHp": 0,
       "statBonus": {},
       "effects": [
         "onHit@20>poison:2:2"
       ],
+      "requirement": {
+        "stat": "agi",
+        "value": 5
+      },
       "unique": false,
       "starter": false,
       "price": 30,
@@ -582,7 +775,7 @@ export const commonData = {
       "slot": "weapon",
       "grade": "uncommon",
       "stat": "wis",
-      "damage": 12,
+      "damage": 6,
       "damageReduction": 0,
       "maxHp": 0,
       "statBonus": {
@@ -591,6 +784,10 @@ export const commonData = {
       "effects": [
         "onSkill@30>cooldown:-1"
       ],
+      "requirement": {
+        "stat": "wis",
+        "value": 5
+      },
       "unique": false,
       "starter": false,
       "price": 30,
@@ -602,16 +799,20 @@ export const commonData = {
       "slot": "weapon",
       "grade": "rare",
       "stat": "str",
-      "damage": 15,
+      "damage": 8,
       "damageReduction": 1,
       "maxHp": 0,
       "statBonus": {
         "str": 2
       },
       "effects": [
-        "onHit>guard:2:1",
+        "onHit>shield:2:1",
         "reflect:1"
       ],
+      "requirement": {
+        "stat": "str",
+        "value": 8
+      },
       "unique": false,
       "starter": false,
       "price": 40,
@@ -623,7 +824,7 @@ export const commonData = {
       "slot": "weapon",
       "grade": "rare",
       "stat": "agi",
-      "damage": 15,
+      "damage": 8,
       "damageReduction": 0,
       "maxHp": 0,
       "statBonus": {
@@ -633,6 +834,10 @@ export const commonData = {
         "onHit@25>poison:3:2",
         "onCrit>bleed:2"
       ],
+      "requirement": {
+        "stat": "agi",
+        "value": 8
+      },
       "unique": false,
       "starter": false,
       "price": 40,
@@ -644,7 +849,7 @@ export const commonData = {
       "slot": "weapon",
       "grade": "rare",
       "stat": "wis",
-      "damage": 15,
+      "damage": 8,
       "damageReduction": 0,
       "maxHp": 0,
       "statBonus": {
@@ -654,6 +859,10 @@ export const commonData = {
         "skillDamageBonus:2",
         "onSkill@25>weaken:0.7:1"
       ],
+      "requirement": {
+        "stat": "wis",
+        "value": 8
+      },
       "unique": false,
       "starter": false,
       "price": 40,
@@ -664,12 +873,13 @@ export const commonData = {
       "name": "가죽 갑옷",
       "slot": "armor",
       "grade": "common",
-      "stat": null,
+      "stat": "str",
       "damage": null,
       "damageReduction": 1,
       "maxHp": 0,
       "statBonus": {},
       "effects": [],
+      "requirement": null,
       "unique": false,
       "starter": true,
       "price": 20,
@@ -680,12 +890,13 @@ export const commonData = {
       "name": "누빈 외투",
       "slot": "armor",
       "grade": "common",
-      "stat": null,
+      "stat": "str",
       "damage": null,
       "damageReduction": 0,
-      "maxHp": 10,
+      "maxHp": 5,
       "statBonus": {},
       "effects": [],
+      "requirement": null,
       "unique": false,
       "starter": false,
       "price": 20,
@@ -696,14 +907,18 @@ export const commonData = {
       "name": "사슬 셔츠",
       "slot": "armor",
       "grade": "uncommon",
-      "stat": null,
+      "stat": "str",
       "damage": null,
       "damageReduction": 2,
-      "maxHp": 10,
+      "maxHp": 5,
       "statBonus": {},
       "effects": [
-        "onHurt@25>guard:3:1"
+        "onHurt@25>shield:3:1"
       ],
+      "requirement": {
+        "stat": "str",
+        "value": 5
+      },
       "unique": false,
       "starter": false,
       "price": 30,
@@ -714,15 +929,19 @@ export const commonData = {
       "name": "나무껍질 갑옷",
       "slot": "armor",
       "grade": "rare",
-      "stat": null,
+      "stat": "str",
       "damage": null,
       "damageReduction": 2,
-      "maxHp": 20,
+      "maxHp": 10,
       "statBonus": {},
       "effects": [
         "immune:poison",
         "onTurnStart>heal:2"
       ],
+      "requirement": {
+        "stat": "str",
+        "value": 8
+      },
       "unique": false,
       "starter": false,
       "price": 40,
@@ -733,7 +952,7 @@ export const commonData = {
       "name": "힘의 반지",
       "slot": "ring",
       "grade": "common",
-      "stat": null,
+      "stat": "str",
       "damage": null,
       "damageReduction": 0,
       "maxHp": 0,
@@ -741,6 +960,7 @@ export const commonData = {
         "str": 2
       },
       "effects": [],
+      "requirement": null,
       "unique": false,
       "starter": false,
       "price": 20,
@@ -751,7 +971,7 @@ export const commonData = {
       "name": "날쌘 반지",
       "slot": "ring",
       "grade": "common",
-      "stat": null,
+      "stat": "agi",
       "damage": null,
       "damageReduction": 0,
       "maxHp": 0,
@@ -759,6 +979,7 @@ export const commonData = {
         "agi": 2
       },
       "effects": [],
+      "requirement": null,
       "unique": false,
       "starter": false,
       "price": 20,
@@ -769,7 +990,7 @@ export const commonData = {
       "name": "지혜의 반지",
       "slot": "ring",
       "grade": "common",
-      "stat": null,
+      "stat": "wis",
       "damage": null,
       "damageReduction": 0,
       "maxHp": 0,
@@ -777,6 +998,7 @@ export const commonData = {
         "wis": 2
       },
       "effects": [],
+      "requirement": null,
       "unique": false,
       "starter": false,
       "price": 20,
@@ -787,7 +1009,7 @@ export const commonData = {
       "name": "사냥꾼의 반지",
       "slot": "ring",
       "grade": "uncommon",
-      "stat": null,
+      "stat": "agi",
       "damage": null,
       "damageReduction": 0,
       "maxHp": 0,
@@ -797,6 +1019,10 @@ export const commonData = {
       "effects": [
         "evade:1"
       ],
+      "requirement": {
+        "stat": "agi",
+        "value": 5
+      },
       "unique": false,
       "starter": false,
       "price": 30,
@@ -807,16 +1033,20 @@ export const commonData = {
       "name": "참나무 심장 반지",
       "slot": "ring",
       "grade": "rare",
-      "stat": null,
+      "stat": "str",
       "damage": null,
       "damageReduction": 0,
-      "maxHp": 10,
+      "maxHp": 5,
       "statBonus": {
         "str": 4
       },
       "effects": [
         "lifesteal:10"
       ],
+      "requirement": {
+        "stat": "str",
+        "value": 8
+      },
       "unique": false,
       "starter": false,
       "price": 40,
@@ -827,7 +1057,7 @@ export const commonData = {
       "name": "행운 부적",
       "slot": "necklace",
       "grade": "common",
-      "stat": null,
+      "stat": "wis",
       "damage": null,
       "damageReduction": 0,
       "maxHp": 0,
@@ -835,6 +1065,10 @@ export const commonData = {
       "effects": [
         "exploreBonus:1"
       ],
+      "requirement": {
+        "stat": "wis",
+        "value": 2
+      },
       "unique": false,
       "starter": false,
       "price": 20,
@@ -845,7 +1079,7 @@ export const commonData = {
       "name": "활력의 목걸이",
       "slot": "necklace",
       "grade": "uncommon",
-      "stat": null,
+      "stat": "str",
       "damage": null,
       "damageReduction": 0,
       "maxHp": 0,
@@ -853,6 +1087,10 @@ export const commonData = {
       "effects": [
         "onBattleStart>heal:3"
       ],
+      "requirement": {
+        "stat": "str",
+        "value": 5
+      },
       "unique": false,
       "starter": false,
       "price": 30,
@@ -863,7 +1101,7 @@ export const commonData = {
       "name": "늑대 이빨 목걸이",
       "slot": "necklace",
       "grade": "rare",
-      "stat": null,
+      "stat": "agi",
       "damage": null,
       "damageReduction": 0,
       "maxHp": 0,
@@ -872,6 +1110,10 @@ export const commonData = {
         "crit:1",
         "onCrit>bleed:2"
       ],
+      "requirement": {
+        "stat": "agi",
+        "value": 8
+      },
       "unique": false,
       "starter": false,
       "price": 40,
@@ -883,11 +1125,12 @@ export const commonData = {
       "slot": "weapon",
       "grade": "common",
       "stat": "str",
-      "damage": 10,
+      "damage": 6,
       "damageReduction": 0,
       "maxHp": 0,
       "statBonus": {},
       "effects": [],
+      "requirement": null,
       "unique": false,
       "starter": false,
       "price": 20,
@@ -899,13 +1142,17 @@ export const commonData = {
       "slot": "weapon",
       "grade": "uncommon",
       "stat": "str",
-      "damage": 14,
+      "damage": 8,
       "damageReduction": 0,
-      "maxHp": 10,
+      "maxHp": 5,
       "statBonus": {},
       "effects": [
-        "lowHp>basicAttackBonus:3"
+        "lowHp>basicAttackBonus:2"
       ],
+      "requirement": {
+        "stat": "str",
+        "value": 5
+      },
       "unique": false,
       "starter": false,
       "price": 30,
@@ -917,15 +1164,19 @@ export const commonData = {
       "slot": "weapon",
       "grade": "rare",
       "stat": "str",
-      "damage": 16,
+      "damage": 9,
       "damageReduction": 0,
-      "maxHp": 10,
+      "maxHp": 5,
       "statBonus": {
         "str": 2
       },
       "effects": [
         "onCrit>stun:1"
       ],
+      "requirement": {
+        "stat": "str",
+        "value": 8
+      },
       "unique": false,
       "starter": false,
       "price": 40,
@@ -937,11 +1188,12 @@ export const commonData = {
       "slot": "weapon",
       "grade": "common",
       "stat": "agi",
-      "damage": 10,
+      "damage": 6,
       "damageReduction": 0,
       "maxHp": 0,
       "statBonus": {},
       "effects": [],
+      "requirement": null,
       "unique": false,
       "starter": false,
       "price": 20,
@@ -953,7 +1205,7 @@ export const commonData = {
       "slot": "weapon",
       "grade": "uncommon",
       "stat": "agi",
-      "damage": 12,
+      "damage": 5,
       "damageReduction": 0,
       "maxHp": 0,
       "statBonus": {
@@ -962,6 +1214,10 @@ export const commonData = {
       "effects": [
         "onHit>bleed:1"
       ],
+      "requirement": {
+        "stat": "agi",
+        "value": 5
+      },
       "unique": false,
       "starter": false,
       "price": 30,
@@ -973,7 +1229,7 @@ export const commonData = {
       "slot": "weapon",
       "grade": "rare",
       "stat": "agi",
-      "damage": 14,
+      "damage": 7,
       "damageReduction": 0,
       "maxHp": 0,
       "statBonus": {
@@ -982,6 +1238,10 @@ export const commonData = {
       "effects": [
         "onHit@30>poison:3:2"
       ],
+      "requirement": {
+        "stat": "agi",
+        "value": 8
+      },
       "unique": false,
       "starter": false,
       "price": 40,
@@ -993,11 +1253,12 @@ export const commonData = {
       "slot": "weapon",
       "grade": "common",
       "stat": "wis",
-      "damage": 10,
+      "damage": 6,
       "damageReduction": 0,
       "maxHp": 0,
       "statBonus": {},
       "effects": [],
+      "requirement": null,
       "unique": false,
       "starter": false,
       "price": 20,
@@ -1009,13 +1270,17 @@ export const commonData = {
       "slot": "weapon",
       "grade": "uncommon",
       "stat": "wis",
-      "damage": 12,
+      "damage": 7,
       "damageReduction": 0,
       "maxHp": 0,
       "statBonus": {},
       "effects": [
         "skillDamageBonus:2"
       ],
+      "requirement": {
+        "stat": "wis",
+        "value": 5
+      },
       "unique": false,
       "starter": false,
       "price": 30,
@@ -1027,7 +1292,7 @@ export const commonData = {
       "slot": "weapon",
       "grade": "rare",
       "stat": "wis",
-      "damage": 15,
+      "damage": 7,
       "damageReduction": 0,
       "maxHp": 0,
       "statBonus": {
@@ -1037,6 +1302,10 @@ export const commonData = {
         "onBattleStart>heal:5",
         "onSkill>heal:2"
       ],
+      "requirement": {
+        "stat": "wis",
+        "value": 8
+      },
       "unique": false,
       "starter": false,
       "price": 40,
@@ -1047,12 +1316,13 @@ export const commonData = {
       "name": "짐승 가죽 조끼",
       "slot": "armor",
       "grade": "common",
-      "stat": null,
+      "stat": "agi",
       "damage": null,
       "damageReduction": 1,
       "maxHp": 0,
       "statBonus": {},
       "effects": [],
+      "requirement": null,
       "unique": false,
       "starter": false,
       "price": 20,
@@ -1063,14 +1333,18 @@ export const commonData = {
       "name": "비늘 갑옷",
       "slot": "armor",
       "grade": "uncommon",
-      "stat": null,
+      "stat": "str",
       "damage": null,
       "damageReduction": 2,
-      "maxHp": 10,
+      "maxHp": 5,
       "statBonus": {},
       "effects": [
-        "onBattleStart>guard:3:1"
+        "onBattleStart>shield:3:1"
       ],
+      "requirement": {
+        "stat": "str",
+        "value": 5
+      },
       "unique": false,
       "starter": false,
       "price": 30,
@@ -1081,14 +1355,18 @@ export const commonData = {
       "name": "가시 조끼",
       "slot": "armor",
       "grade": "uncommon",
-      "stat": null,
+      "stat": "agi",
       "damage": null,
       "damageReduction": 0,
-      "maxHp": 10,
+      "maxHp": 5,
       "statBonus": {},
       "effects": [
         "reflect:2"
       ],
+      "requirement": {
+        "stat": "agi",
+        "value": 5
+      },
       "unique": false,
       "starter": false,
       "price": 30,
@@ -1099,10 +1377,10 @@ export const commonData = {
       "name": "달빛 로브",
       "slot": "armor",
       "grade": "rare",
-      "stat": null,
+      "stat": "wis",
       "damage": null,
       "damageReduction": 0,
-      "maxHp": 20,
+      "maxHp": 10,
       "statBonus": {
         "wis": 2
       },
@@ -1110,6 +1388,10 @@ export const commonData = {
         "onBattleStart>heal:3",
         "evade:1"
       ],
+      "requirement": {
+        "stat": "wis",
+        "value": 8
+      },
       "unique": false,
       "starter": false,
       "price": 40,
@@ -1120,16 +1402,20 @@ export const commonData = {
       "name": "전사의 반지",
       "slot": "ring",
       "grade": "uncommon",
-      "stat": null,
+      "stat": "str",
       "damage": null,
       "damageReduction": 0,
-      "maxHp": 10,
+      "maxHp": 5,
       "statBonus": {
         "str": 3
       },
       "effects": [
         "reflect:1"
       ],
+      "requirement": {
+        "stat": "str",
+        "value": 5
+      },
       "unique": false,
       "starter": false,
       "price": 30,
@@ -1140,7 +1426,7 @@ export const commonData = {
       "name": "현자의 반지",
       "slot": "ring",
       "grade": "uncommon",
-      "stat": null,
+      "stat": "wis",
       "damage": null,
       "damageReduction": 0,
       "maxHp": 0,
@@ -1150,6 +1436,10 @@ export const commonData = {
       "effects": [
         "skillDamageBonus:1"
       ],
+      "requirement": {
+        "stat": "wis",
+        "value": 5
+      },
       "unique": false,
       "starter": false,
       "price": 30,
@@ -1160,7 +1450,7 @@ export const commonData = {
       "name": "그림자 반지",
       "slot": "ring",
       "grade": "rare",
-      "stat": null,
+      "stat": "agi",
       "damage": null,
       "damageReduction": 0,
       "maxHp": 0,
@@ -1169,8 +1459,12 @@ export const commonData = {
       },
       "effects": [
         "crit:1",
-        "onCrit>empower:3:1"
+        "onCrit>empower:2:1"
       ],
+      "requirement": {
+        "stat": "agi",
+        "value": 8
+      },
       "unique": false,
       "starter": false,
       "price": 40,
@@ -1181,14 +1475,18 @@ export const commonData = {
       "name": "뼈 부적",
       "slot": "necklace",
       "grade": "common",
-      "stat": null,
+      "stat": "str",
       "damage": null,
       "damageReduction": 0,
       "maxHp": 0,
       "statBonus": {},
       "effects": [
-        "basicAttackBonus:2"
+        "basicAttackBonus:1"
       ],
+      "requirement": {
+        "stat": "str",
+        "value": 2
+      },
       "unique": false,
       "starter": false,
       "price": 20,
@@ -1199,7 +1497,7 @@ export const commonData = {
       "name": "해독 펜던트",
       "slot": "necklace",
       "grade": "uncommon",
-      "stat": null,
+      "stat": "wis",
       "damage": null,
       "damageReduction": 0,
       "maxHp": 0,
@@ -1207,6 +1505,10 @@ export const commonData = {
       "effects": [
         "immune:poison"
       ],
+      "requirement": {
+        "stat": "wis",
+        "value": 5
+      },
       "unique": false,
       "starter": false,
       "price": 30,
@@ -1217,7 +1519,7 @@ export const commonData = {
       "name": "부엉이 눈 목걸이",
       "slot": "necklace",
       "grade": "rare",
-      "stat": null,
+      "stat": "wis",
       "damage": null,
       "damageReduction": 0,
       "maxHp": 0,
@@ -1226,6 +1528,10 @@ export const commonData = {
         "exploreBonus:2",
         "evade:1"
       ],
+      "requirement": {
+        "stat": "wis",
+        "value": 8
+      },
       "unique": false,
       "starter": false,
       "price": 40,
@@ -1237,7 +1543,7 @@ export const commonData = {
       "slot": "weapon",
       "grade": "unique",
       "stat": "wis",
-      "damage": 18,
+      "damage": 9,
       "damageReduction": 0,
       "maxHp": 0,
       "statBonus": {
@@ -1247,6 +1553,10 @@ export const commonData = {
         "cooldownReduction:1",
         "onSkill@30>vulnerable:1.3:1"
       ],
+      "requirement": {
+        "stat": "wis",
+        "value": 8
+      },
       "unique": true,
       "starter": false,
       "price": 40,
@@ -1258,7 +1568,7 @@ export const commonData = {
       "slot": "weapon",
       "grade": "unique",
       "stat": "agi",
-      "damage": 18,
+      "damage": 9,
       "damageReduction": 0,
       "maxHp": 0,
       "statBonus": {
@@ -1268,6 +1578,10 @@ export const commonData = {
         "onHit>bleed:2",
         "onKill>heal:10"
       ],
+      "requirement": {
+        "stat": "agi",
+        "value": 8
+      },
       "unique": true,
       "starter": false,
       "price": 40,
@@ -1278,15 +1592,19 @@ export const commonData = {
       "name": "고목의 수호",
       "slot": "armor",
       "grade": "unique",
-      "stat": null,
+      "stat": "str",
       "damage": null,
       "damageReduction": 3,
-      "maxHp": 30,
+      "maxHp": 15,
       "statBonus": {},
       "effects": [
         "immune:poison",
         "reflect:3"
       ],
+      "requirement": {
+        "stat": "str",
+        "value": 8
+      },
       "unique": true,
       "starter": false,
       "price": 40,
@@ -1350,7 +1668,7 @@ export const commonData = {
       "id": "warrior",
       "name": "전사",
       "mainStat": "str",
-      "maxHp": 100,
+      "maxHp": 70,
       "stats": {
         "str": 5,
         "agi": 2,
@@ -1365,21 +1683,21 @@ export const commonData = {
         }
       ],
       "startGold": 5,
-      "traitName": "투지",
-      "traitDesc": "전투 중 피해를 받아 HP가 최대 HP의 절반 이하가 되면 최대 HP의 1/4을 회복한다. 전투당 1회."
+      "traitName": "기세",
+      "traitDesc": "공격으로 피해를 받을 때마다 기세가 1 쌓인다(최대 5). 기본공격과 공격 스킬의 피해가 기세만큼 늘어난다(주사위 배율을 받지 않는 고정값). 전투가 끝나면 사라진다."
     },
     {
       "id": "rogue",
       "name": "도적",
       "mainStat": "agi",
-      "maxHp": 90,
+      "maxHp": 65,
       "stats": {
         "str": 2,
         "agi": 5,
         "wis": 0
       },
       "startWeapon": "wpn_dagger_basic",
-      "startArmor": null,
+      "startArmor": "arm_hide_vest",
       "startItems": [
         {
           "id": "con_potion",
@@ -1394,7 +1712,7 @@ export const commonData = {
       "id": "mage",
       "name": "마법사",
       "mainStat": "wis",
-      "maxHp": 90,
+      "maxHp": 65,
       "stats": {
         "str": 0,
         "agi": 2,
@@ -1413,8 +1731,8 @@ export const commonData = {
         }
       ],
       "startGold": 5,
-      "traitName": "집중",
-      "traitDesc": "피해를 주는 스킬의 피해량 ×1.25."
+      "traitName": "영창",
+      "traitDesc": "기본공격 대신 영창한다. 영창한 다음 행동의 기본공격·스킬 효과 ×1.75(피해·회복·방어·강화). 영창하지 않은 상태에서는 피해를 주는 행동을 할 수 없고, 회복·방어·강화 스킬과 소모품만 바로 쓸 수 있다. 기절하면 영창이 풀린다."
     }
   ]
 };

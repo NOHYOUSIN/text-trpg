@@ -1,12 +1,12 @@
-import { formatNumber as fmt } from "../systems/NumberRules.js?v=20261012-031843";
-import { isTextEffectEnabled } from "./TextEffect.js?v=20261012-031843";
+import { formatNumber as fmt } from "../systems/NumberRules.js?v=20261013-021756";
+import { isScreenFxEnabled } from "./Settings.js?v=20261013-021756";
 
 // 전투 연출: 판정 결과에 따라 정보 칸을 흔들고, 피해·회복 숫자와 상태 이름을 띄운다.
-// 연출 효과를 끄면 아무것도 하지 않는다. 흔들림은 CSS에서 동작 줄이기 설정을 따른다.
+// 화면 연출 설정을 끄면 아무것도 하지 않는다. 흔들림은 CSS에서 동작 줄이기 설정을 따른다.
 const HIT_CLASSES = ["fx-miss", "fx-low", "fx-normal", "fx-high", "fx-critical", "fx-heal"];
 
 export function playCombatFx(sideEl, fx) {
-  if (!fx || !sideEl || !isTextEffectEnabled()) {
+  if (!fx || !sideEl || !isScreenFxEnabled()) {
     return;
   }
 

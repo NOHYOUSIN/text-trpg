@@ -1,4 +1,4 @@
-import { ABILITY } from "../data/rules.js?v=20261012-031843";
+import { ABILITY } from "../data/rules.js?v=20261013-021756";
 
 // 시트 표기("poison:0.3:3" 등)를 해석한다.
 
@@ -26,6 +26,8 @@ export function toStatusSpec({ key, args }) {
       return { type: "vulnerable", multiplier: Number(args[0]), duration: Number(args[1]) };
     case "guard":
       return { type: "guard", duration: Number(args[0]) };
+    case "shield":
+      return { type: "shield", duration: Number(args[0]) };
     case "empower":
       return { type: "empower", duration: Number(args[0]) };
     default:
@@ -40,5 +42,6 @@ export const STATUS_LABELS = Object.freeze({
   weaken: "약화",
   vulnerable: "취약",
   guard: "방어",
+  shield: "보호막",
   empower: "강화",
 });
