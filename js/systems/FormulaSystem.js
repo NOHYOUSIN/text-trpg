@@ -1,5 +1,5 @@
-import { BASIC_ATTACK, COMBAT, MAX_HP_PER_STAT } from "../data/rules.js?v=20261013-030554";
-import { roundValue } from "./NumberRules.js?v=20261013-030554";
+import { BASIC_ATTACK, COMBAT, MAX_HP_PER_STAT } from "../data/rules.js?v=20261013-032945";
+import { roundValue } from "./NumberRules.js?v=20261013-032945";
 
 // 전투 공식 3차 개편 (2026-10-13): 고정 기본값 + 능력치 × 계수.
 // scaling: [{ stat: "str" | "agi" | "wis" | "main", coef }] — main은 그 직업의 주 능력치

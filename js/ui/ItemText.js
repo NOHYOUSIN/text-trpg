@@ -1,9 +1,9 @@
-import { catalog } from "../data/catalog.js?v=20261013-030554";
-import { parseAbility } from "../systems/AbilitySystem.js?v=20261013-030554";
-import { parseToken } from "../systems/EffectParser.js?v=20261013-030554";
-import { attackSkillBase, basicAttackBase, supportAmount } from "../systems/FormulaSystem.js?v=20261013-030554";
-import { formatNumber as fmt, roundValue } from "../systems/NumberRules.js?v=20261013-030554";
-import { getProfile, isEquipmentEffectActive } from "../systems/TraitSystem.js?v=20261013-030554";
+import { catalog } from "../data/catalog.js?v=20261013-032945";
+import { parseAbility } from "../systems/AbilitySystem.js?v=20261013-032945";
+import { parseToken } from "../systems/EffectParser.js?v=20261013-032945";
+import { attackSkillBase, basicAttackBase, supportAmount } from "../systems/FormulaSystem.js?v=20261013-032945";
+import { formatNumber as fmt, roundValue } from "../systems/NumberRules.js?v=20261013-032945";
+import { getProfile, isEquipmentEffectActive } from "../systems/TraitSystem.js?v=20261013-032945";
 
 // 장비·스킬·소모품 설명(선택 판단용). 2026-10-13 전투 공식 3차 개편에 맞춘 표기:
 // 1줄 = 종류, 2줄 = 결과 수치(계산식은 괄호), 3줄 = 부가 효과.
@@ -37,7 +37,7 @@ function describeAbility({ trigger, chance, effect }) {
   const head = `${TRIGGER_LABELS[trigger] ?? trigger}${chance < 100 ? ` ${chance}% 확률로` : ""}`;
   const body = {
     poison: () => `독 ${fmt(Number(a))} (${b}턴)`,
-    bleed: () => `출혈 ${fmt(Number(a))} 쌓기`,
+    bleed: () => `출혈 +${fmt(Number(a))}`,
     stun: () => "기절",
     weaken: () => `약화(주는 피해 ×${a}) ${b}턴`,
     vulnerable: () => `취약(받는 피해 ×${a}) ${b}턴`,
@@ -111,7 +111,7 @@ export function describeEffectToken(token) {
     case "lifesteal":
       return `준 피해의 ${a}% 회복`;
     case "bleed":
-      return `출혈 ${fmt(Number(a))} 쌓기`;
+      return `출혈 +${fmt(Number(a))}`;
     default:
       return token;
   }
@@ -226,6 +226,15 @@ function durationOf(skill, key) {
 
 const SUPPORT_LABELS = { heal: "회복", defense: "보호막", buff: "주는 피해 +" };
 
+// "회복 8", "주는 피해 +3": "+"로 끝나는 이름은 수치를 붙여 쓴다. 식이면 괄호로 묶는다("주는 피해 +(1 + 힘 × 0.3)").
+function labeled(label, value) {
+  if (!label.endsWith("+")) {
+    return `${label} ${value}`;
+  }
+
+  return String(value).includes(" ") ? `${label}(${value})` : `${label}${value}`;
+}
+
 export function describeSkill(skill, adventurer = null) {
   const owner = skill.class ? `${catalog.classes.get(skill.class)?.name ?? skill.class} 전용` : "공용";
   const fast = skill.effects.includes("fast");
@@ -252,7 +261,7 @@ export function describeSkill(skill, adventurer = null) {
       : `피해 = (${expr}) × 주사위`);
   } else if (SUPPORT_LABELS[skill.type]) {
     const label = SUPPORT_LABELS[skill.type];
-    const amount = profile ? `${label} ${fmt(valueOf())} (${formula(skill.baseEffect, skill.scaling, profile)})` : `${label} ${formula(skill.baseEffect, skill.scaling, null)}`;
+    const amount = profile ? `${labeled(label, fmt(valueOf()))} (${formula(skill.baseEffect, skill.scaling, profile)})` : labeled(label, formula(skill.baseEffect, skill.scaling, null));
     const durationKey = skill.type === "defense" ? "shield" : skill.type === "buff" ? "empower" : null;
     lines.push(durationKey ? `${amount}, ${durationOf(skill, durationKey)}턴` : amount);
   }
@@ -260,7 +269,7 @@ export function describeSkill(skill, adventurer = null) {
   const extras = skill.effects.filter((token) => !["fast", "shield:2", "empower:2"].includes(token) && !/^(shield|empower):/.test(token)).map((token) => {
     if (token === "damageReduction:base" || token === "basicAttackBonus:base") {
       const label = token.startsWith("damage") ? "받는 피해 감소" : "기본공격 피해 +";
-      return profile ? `${label} ${fmt(valueOf())} (${formula(skill.baseEffect, skill.scaling, profile)})` : `${label} ${formula(skill.baseEffect, skill.scaling, null)}`;
+      return profile ? `${labeled(label, fmt(valueOf()))} (${formula(skill.baseEffect, skill.scaling, profile)})` : labeled(label, formula(skill.baseEffect, skill.scaling, null));
     }
 
     return describeEffectToken(token);
@@ -284,7 +293,7 @@ export function describeConsumable(item) {
   } else if (key === "cure") {
     effect = `${args[0] === "poison" ? "독" : args[0]} 해제 (전투 중)`;
   } else if (key === "buff") {
-    effect = `이번 전투 동안 ${describeEffectToken(`${args[0]}:${args[1]}`)} (전투 중)`;
+    effect = `이번 전투 동안 ${describeEffectToken(`${args[0]}:${args[1]}`)}`;
   }
 
   return `소모품 · ${effect} · 한 칸에 ${item.maxStack}개`;

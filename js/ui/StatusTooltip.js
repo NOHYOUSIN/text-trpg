@@ -1,5 +1,7 @@
-import { STATUS_LABELS } from "../systems/EffectParser.js?v=20261013-030554";
-import { formatNumber as fmt } from "../systems/NumberRules.js?v=20261013-030554";
+import { STATUS_LABELS } from "../systems/EffectParser.js?v=20261013-032945";
+import { josa } from "../systems/Josa.js?v=20261013-032945";
+import { formatNumber as fmt } from "../systems/NumberRules.js?v=20261013-032945";
+import { statusValueText } from "../systems/StatusSystem.js?v=20261013-032945";
 
 // 상태이상 이름 옆에 보여 줄 짧은 표시와, 마우스를 올렸을 때 보여 줄 설명.
 function effectText(status) {
@@ -11,9 +13,9 @@ function effectText(status) {
     case "stun":
       return "다음 행동을 건너뛴다. 풀린 직후 1회는 다시 기절하지 않는다.";
     case "weaken":
-      return `주는 피해가 ×${status.multiplier}로 줄어든다.`;
+      return `주는 피해가 ${josa(`×${status.multiplier}`, "으로/로")} 줄어든다.`;
     case "vulnerable":
-      return `받는 피해가 ×${status.multiplier}로 늘어난다.`;
+      return `받는 피해가 ${josa(`×${status.multiplier}`, "으로/로")} 늘어난다.`;
     case "shield":
       return `공격 피해를 합계 ${fmt(status.amount)}까지 막는다. 다 막으면 사라진다. 독·출혈·반사는 막지 못한다.`;
     case "guard":
@@ -27,9 +29,8 @@ function effectText(status) {
 
 export function statusChip(status) {
   const label = STATUS_LABELS[status.type] ?? status.type;
-  const value = status.amount ? ` ${fmt(status.amount)}` : status.multiplier ? ` ×${status.multiplier}` : "";
   return {
-    text: `${label}${value} (${status.duration}턴)`,
+    text: `${label}${statusValueText(status)} (${status.duration}턴)`,
     tip: `${effectText(status)} 남은 시간: 이 대상이 ${status.duration}번 행동하면 사라진다.`,
   };
 }

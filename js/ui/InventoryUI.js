@@ -1,8 +1,8 @@
-import { catalog, getItem } from "../data/catalog.js?v=20261013-030554";
-import { GRADES, INVENTORY } from "../data/rules.js?v=20261013-030554";
-import { canUseOutsideCombat } from "../systems/InventorySystem.js?v=20261013-030554";
-import { describeRequirementShort, describeStats } from "./ItemText.js?v=20261013-030554";
-import { isEquipmentEffectActive } from "../systems/TraitSystem.js?v=20261013-030554";
+import { catalog, getItem } from "../data/catalog.js?v=20261013-032945";
+import { GRADES, INVENTORY } from "../data/rules.js?v=20261013-032945";
+import { canUseOutsideCombat } from "../systems/InventorySystem.js?v=20261013-032945";
+import { describeRequirementShort, describeStats } from "./ItemText.js?v=20261013-032945";
+import { isEquipmentEffectActive } from "../systems/TraitSystem.js?v=20261013-032945";
 
 const SLOT_LABELS = { weapon: "무기", armor: "방어구", ring: "반지", necklace: "목걸이" };
 
@@ -66,7 +66,7 @@ export class InventoryUI {
 
     adventurer.inventory.slots.forEach((slot, index) => {
       const item = getItem(slot.id);
-      const row = listRow(slot.count > 1 ? `×${slot.count}` : "", item, adventurer);
+      const row = listRow("", item, adventurer, slot.count > 1 ? ` ×${slot.count}` : "");
 
       if (catalog.equipment.has(slot.id)) {
         row.append(button("장착", () => this.handlers.onEquip(index)));
@@ -88,14 +88,15 @@ export class InventoryUI {
   }
 }
 
-function listRow(label, item, adventurer) {
+// label: 이름 앞(장비 칸 이름), suffix: 이름 뒤(개수 " ×2")
+function listRow(label, item, adventurer, suffix = "") {
   const row = document.createElement("li");
   row.className = "overlay-row";
-  const name = text("span", "overlay-name", item ? `${label ? `${label} ` : ""}${item.name}` : `${label} —`);
+  const name = text("span", "overlay-name", item ? `${label ? `${label} ` : ""}${item.name}${suffix}` : `${label} —`);
 
   if (item?.grade) {
     name.style.color = GRADES[item.grade].color;
-    name.textContent = `${label ? `${label} ` : ""}[${GRADES[item.grade].label}] ${item.name}`;
+    name.textContent = `${label ? `${label} ` : ""}[${GRADES[item.grade].label}] ${item.name}${suffix}`;
   }
 
   row.append(name);

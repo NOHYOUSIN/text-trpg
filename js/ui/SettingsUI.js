@@ -1,5 +1,5 @@
-import { readSetting, writeSetting } from "./Settings.js?v=20261013-030554";
-import { isTextEffectEnabled, setTextEffectEnabled } from "./TextEffect.js?v=20261013-030554";
+import { readSetting, writeSetting } from "./Settings.js?v=20261013-032945";
+import { isTextEffectEnabled, setTextEffectEnabled } from "./TextEffect.js?v=20261013-032945";
 
 // 설정 창(로비·탐험 중 어디서나 연다). 각 설정을 따로 켜고 끈다.
 const ITEMS = [

@@ -7,8 +7,15 @@ const PAIRS = {
   "으로/로": ["으로", "로"],
 };
 
+// 숫자로 끝나면 읽는 소리의 받침: 영(ㅇ) 일(ㄹ) 이 삼(ㅁ) 사 오 육(ㄱ) 칠(ㄹ) 팔(ㄹ) 구
+const DIGIT_FINALS = [21, 8, 0, 16, 0, 0, 1, 8, 8, 0];
+
 function finalConsonant(word) {
   const code = word.charCodeAt(word.length - 1);
+
+  if (code >= 48 && code <= 57) {
+    return DIGIT_FINALS[code - 48];
+  }
 
   if (code < 0xac00 || code > 0xd7a3) {
     return null;

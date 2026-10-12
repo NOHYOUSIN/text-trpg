@@ -17,7 +17,7 @@ export const commonData = {
       ],
       "cooldown": 3,
       "effects": [],
-      "description": "온 힘을 실어 내려친다. 무기 피해 + 힘 × 2.0."
+      "description": "온 힘을 실어 내려친다."
     },
     {
       "id": "skl_vital_stab",
@@ -35,7 +35,7 @@ export const commonData = {
       ],
       "cooldown": 3,
       "effects": [],
-      "description": "갑옷 틈을 노려 날을 찔러 넣는다. 무기 피해 + 민첩 × 1.8."
+      "description": "갑옷 틈을 노려 날을 찔러 넣는다."
     },
     {
       "id": "skl_ember",
@@ -53,7 +53,7 @@ export const commonData = {
       ],
       "cooldown": 3,
       "effects": [],
-      "description": "손끝에서 작은 불꽃을 튕겨 낸다. 무기 피해 + 지혜 × 2.0."
+      "description": "손끝에서 작은 불꽃을 튕겨 낸다."
     },
     {
       "id": "skl_first_aid",
@@ -71,7 +71,7 @@ export const commonData = {
       ],
       "cooldown": 3,
       "effects": [],
-      "description": "상처를 동여매 피를 멎게 한다. 4 + 주 능력치 × 0.8 회복."
+      "description": "상처를 동여매 피를 멎게 하고 HP를 회복한다."
     },
     {
       "id": "skl_guard_stance",
@@ -92,7 +92,7 @@ export const commonData = {
         "shield:2",
         "fast"
       ],
-      "description": "방패를 앞세워 자세를 굳힌다. 2턴 동안 받는 피해를 합계 (2 + 주 능력치 × 0.3)까지 막는다. 행동을 쓰지 않는다."
+      "description": "방패를 앞세워 자세를 굳힌다. 2턴 동안 받는 피해를 보호막으로 막는다. 행동을 쓰지 않는다."
     },
     {
       "id": "skl_poison_dart",
@@ -112,7 +112,7 @@ export const commonData = {
       "effects": [
         "poison:3:3"
       ],
-      "description": "독을 바른 침을 날린다. 무기 피해 + 민첩 × 2.0, 독 3 × 3턴."
+      "description": "독을 바른 침을 날린다. 독 3 × 3턴."
     },
     {
       "id": "skl_shield_bash",
@@ -132,7 +132,7 @@ export const commonData = {
       "effects": [
         "stun:1"
       ],
-      "description": "묵직하게 들이받아 상대를 휘청이게 한다. 무기 피해 + 힘 × 2.0, 기절 1턴."
+      "description": "묵직하게 들이받아 상대를 휘청이게 한다. 기절 1턴."
     },
     {
       "id": "skl_frost_arrow",
@@ -152,7 +152,7 @@ export const commonData = {
       "effects": [
         "weaken:0.7:2"
       ],
-      "description": "차가운 화살이 상대의 움직임을 무디게 한다. 무기 피해 + 지혜 × 2.1, 약화 2턴."
+      "description": "차가운 화살이 상대의 움직임을 무디게 한다. 약화 2턴."
     },
     {
       "id": "skl_battle_rhythm",
@@ -172,7 +172,7 @@ export const commonData = {
       "effects": [
         "basicAttackBonus:base"
       ],
-      "description": "싸움의 흐름을 몸이 기억한다. 기본공격 피해 +(1 + 힘 × 0.2)."
+      "description": "싸움의 흐름을 몸이 기억한다. 기본공격 피해가 늘어난다."
     },
     {
       "id": "skl_ground_cleave",
@@ -192,7 +192,7 @@ export const commonData = {
       "effects": [
         "vulnerable:1.3:2"
       ],
-      "description": "땅을 가를 듯한 일격. 무기 피해 + 힘 × 2.6, 취약 2턴."
+      "description": "땅을 가를 듯한 일격이 상대의 자세를 무너뜨린다. 취약 2턴."
     },
     {
       "id": "skl_shadow_raid",
@@ -212,7 +212,7 @@ export const commonData = {
       "effects": [
         "poison:4:3"
       ],
-      "description": "그림자처럼 파고들어 독 묻은 칼날을 꽂는다. 무기 피해 + 민첩 × 2.4, 독 4 × 3턴."
+      "description": "그림자처럼 파고들어 독 묻은 칼날을 꽂는다. 독 4 × 3턴."
     },
     {
       "id": "skl_life_bloom",
@@ -232,7 +232,7 @@ export const commonData = {
       "effects": [
         "cleanse"
       ],
-      "description": "상처 위로 꽃이 피어나며 상태이상을 씻어 낸다. 6 + 주 능력치 × 1.0 회복, 상태이상 해제."
+      "description": "상처 위로 꽃이 피어나며 HP를 회복하고 상태이상을 씻어 낸다."
     },
     {
       "id": "skl_iron_skin",
@@ -252,7 +252,7 @@ export const commonData = {
       "effects": [
         "damageReduction:base"
       ],
-      "description": "단련된 몸이 충격을 흘려 낸다. 받는 피해 −(1 + 힘 × 0.1)."
+      "description": "단련된 몸이 충격을 흘려 낸다. 받는 피해가 줄어든다."
     },
     {
       "id": "skl_mana_flow",
@@ -285,7 +285,7 @@ export const commonData = {
       ],
       "cooldown": 3,
       "effects": [],
-      "description": "무기를 높이 들어 힘껏 내리찍는다. 무기 피해 + 힘 × 2.2."
+      "description": "무기를 높이 들어 힘껏 내리찍는다."
     },
     {
       "id": "skl_war_cry",
@@ -306,7 +306,7 @@ export const commonData = {
         "empower:2",
         "fast"
       ],
-      "description": "함성으로 기세를 끌어올린다. 2턴 동안 주는 피해 +(1 + 힘 × 0.3). 행동을 쓰지 않는다."
+      "description": "함성으로 기세를 끌어올린다. 2턴 동안 주는 피해가 늘어난다. 행동을 쓰지 않는다."
     },
     {
       "id": "skl_rending_strike",
@@ -326,11 +326,11 @@ export const commonData = {
       "effects": [
         "vulnerable:1.3:2"
       ],
-      "description": "갑옷째 찢어 상대를 무방비로 만든다. 무기 피해 + 힘 × 2.1, 취약 2턴."
+      "description": "갑옷째 찢어 상대를 무방비로 만든다. 취약 2턴."
     },
     {
       "id": "skl_quick_slash",
-      "name": "빠른 베기",
+      "name": "고속 베기",
       "grade": "common",
       "class": "rogue",
       "type": "attack",
@@ -344,7 +344,7 @@ export const commonData = {
       ],
       "cooldown": 3,
       "effects": [],
-      "description": "눈에 보이지 않을 만큼 빠르게 벤다. 무기 피해 + 민첩 × 2.0."
+      "description": "눈에 보이지 않을 만큼 빠르게 벤다."
     },
     {
       "id": "skl_smoke_bomb",
@@ -380,7 +380,7 @@ export const commonData = {
       "effects": [
         "weaken:0.7:2"
       ],
-      "description": "힘줄을 노려 상대의 힘을 빼앗는다. 무기 피해 + 민첩 × 2.0, 약화 2턴."
+      "description": "힘줄을 노려 상대의 힘을 빼앗는다. 약화 2턴."
     },
     {
       "id": "skl_mark_weakness",
@@ -429,7 +429,7 @@ export const commonData = {
       ],
       "cooldown": 3,
       "effects": [],
-      "description": "응축한 마력을 화살처럼 쏘아 보낸다. 무기 피해 + 지혜 × 2.0."
+      "description": "응축한 마력을 화살처럼 쏘아 보낸다."
     },
     {
       "id": "skl_mana_ward",
@@ -450,7 +450,7 @@ export const commonData = {
         "shield:2",
         "fast"
       ],
-      "description": "마력의 장벽을 두른다. 2턴 동안 받는 피해를 합계 (2 + 지혜 × 0.3)까지 막는다. 행동을 쓰지 않는다."
+      "description": "마력의 장벽을 두른다. 2턴 동안 받는 피해를 보호막으로 막는다. 행동을 쓰지 않는다."
     },
     {
       "id": "skl_flame_burst",
@@ -470,7 +470,7 @@ export const commonData = {
       "effects": [
         "vulnerable:1.3:2"
       ],
-      "description": "불꽃이 터지며 상대의 방어를 무너뜨린다. 무기 피해 + 지혜 × 2.2, 취약 2턴."
+      "description": "불꽃이 터지며 상대의 방어를 무너뜨린다. 취약 2턴."
     },
     {
       "id": "skl_hex",
@@ -506,7 +506,7 @@ export const commonData = {
       "effects": [
         "stun:1"
       ],
-      "description": "하늘을 가르는 번개가 상대를 꿰뚫는다. 무기 피해 + 지혜 × 2.6, 기절 1턴."
+      "description": "하늘을 가르는 번개가 상대를 꿰뚫는다. 기절 1턴."
     },
     {
       "id": "skl_second_wind",
@@ -524,7 +524,7 @@ export const commonData = {
       ],
       "cooldown": 3,
       "effects": [],
-      "description": "호흡을 가다듬어 기운을 되찾는다. 4 + 주 능력치 × 0.8 회복."
+      "description": "호흡을 가다듬어 기운을 되찾는다. HP를 회복한다."
     },
     {
       "id": "skl_resolve",
@@ -545,7 +545,7 @@ export const commonData = {
         "empower:2",
         "fast"
       ],
-      "description": "이를 악물고 기세를 올린다. 2턴 동안 주는 피해 +(2 + 주 능력치 × 0.3). 행동을 쓰지 않는다."
+      "description": "이를 악물고 기세를 올린다. 2턴 동안 주는 피해가 늘어난다. 행동을 쓰지 않는다."
     },
     {
       "id": "skl_sidestep",
@@ -570,7 +570,7 @@ export const commonData = {
         "shield:2",
         "fast"
       ],
-      "description": "공격의 흐름을 읽고 흘려 낸다. 2턴 동안 받는 피해를 합계 (2 + 주 능력치 × 0.3 + 민첩 × 0.1)까지 막는다. 행동을 쓰지 않는다."
+      "description": "공격의 흐름을 읽고 흘려 낸다. 2턴 동안 받는 피해를 보호막으로 막는다. 행동을 쓰지 않는다."
     },
     {
       "id": "skl_wrap_wounds",
@@ -590,7 +590,7 @@ export const commonData = {
       "effects": [
         "cleanse"
       ],
-      "description": "상처를 단단히 동여매고 독기를 짜낸다. 5 + 주 능력치 × 0.8 회복, 상태이상 해제."
+      "description": "상처를 단단히 동여매고 독기를 짜낸다. HP를 회복하고 상태이상을 해제한다."
     },
     {
       "id": "skl_desperate_blow",
@@ -610,7 +610,7 @@ export const commonData = {
       "effects": [
         "vulnerable:1.3:2"
       ],
-      "description": "모든 것을 건 일격. 무기 피해 + 주 능력치 × 2.6, 취약 2턴."
+      "description": "모든 것을 건 일격이 상대의 빈틈을 연다. 취약 2턴."
     }
   ],
   "equipment": [
@@ -1732,7 +1732,7 @@ export const commonData = {
       ],
       "startGold": 5,
       "traitName": "영창",
-      "traitDesc": "기본공격 대신 영창한다. 영창한 다음 행동의 기본공격·스킬 효과 ×1.75(피해·회복·방어·강화). 영창하지 않은 상태에서는 피해를 주는 행동을 할 수 없고, 회복·방어·강화 스킬과 소모품만 바로 쓸 수 있다. 기절하면 영창이 풀린다."
+      "traitDesc": "기본공격 대신 영창한다. 영창한 다음 행동의 기본공격·스킬 효과 ×1.75(피해·회복·방어·강화). 영창하지 않은 상태에서는 피해를 주는 행동을 할 수 없고, 회복·방어·강화·약화 스킬과 소모품은 바로 쓸 수 있다. 기절하면 영창이 풀린다."
     }
   ]
 };

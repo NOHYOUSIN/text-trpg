@@ -1,13 +1,13 @@
-import { catalog } from "../data/catalog.js?v=20261013-030554";
-import { COMBAT, DICE } from "../data/rules.js?v=20261013-030554";
-import { Enemy } from "../models/Enemy.js?v=20261013-030554";
-import { capEvade, capLifesteal, critMinFrom, lowHpBonus, runAbilities } from "./AbilitySystem.js?v=20261013-030554";
-import { applyReduction, computeEffect, describeCalculation, describeRoll, rollTier } from "./DamageSystem.js?v=20261013-030554";
-import { chooseEnemySkillId } from "./EnemyAI.js?v=20261013-030554";
-import { attackSkillBase, basicAttackBase, supportAmount } from "./FormulaSystem.js?v=20261013-030554";
-import { parseEffects, parseToken, STATUS_LABELS, toStatusSpec } from "./EffectParser.js?v=20261013-030554";
-import { josa } from "./Josa.js?v=20261013-030554";
-import { clamp, formatNumber as fmt, roundValue } from "./NumberRules.js?v=20261013-030554";
+import { catalog } from "../data/catalog.js?v=20261013-032945";
+import { COMBAT, DICE } from "../data/rules.js?v=20261013-032945";
+import { Enemy } from "../models/Enemy.js?v=20261013-032945";
+import { capEvade, capLifesteal, critMinFrom, lowHpBonus, runAbilities } from "./AbilitySystem.js?v=20261013-032945";
+import { applyReduction, computeEffect, describeCalculation, describeRoll, rollTier } from "./DamageSystem.js?v=20261013-032945";
+import { chooseEnemySkillId } from "./EnemyAI.js?v=20261013-032945";
+import { attackSkillBase, basicAttackBase, supportAmount } from "./FormulaSystem.js?v=20261013-032945";
+import { parseEffects, parseToken, STATUS_LABELS, toStatusSpec } from "./EffectParser.js?v=20261013-032945";
+import { josa } from "./Josa.js?v=20261013-032945";
+import { clamp, formatNumber as fmt, roundValue } from "./NumberRules.js?v=20261013-032945";
 import {
   absorbWithShield,
   applyStatus,
@@ -19,8 +19,9 @@ import {
   getGuardAmount,
   getTakenMultiplier,
   removeStatus,
-} from "./StatusSystem.js?v=20261013-030554";
-import { getClassTrait, getProfile } from "./TraitSystem.js?v=20261013-030554";
+  statusValueText,
+} from "./StatusSystem.js?v=20261013-032945";
+import { getClassTrait, getProfile } from "./TraitSystem.js?v=20261013-032945";
 
 const SELF_EFFECTS = new Set(["guard", "shield", "empower", "cleanse"]);
 // 효과량을 자신에게 거는 스킬: 방어(보호막), 강화(주는 피해 증가). 효과량 = 기본값 + 능력치 × 계수, 주사위 없음
@@ -38,13 +39,15 @@ export function isDamageSkill(skill) {
 // 피해 줄에 붙는 판정 표시: (🎲굴린 값 · 판정 이름)
 const HIT_LABELS = { low: "스침", normal: "명중", high: "강타", critical: "치명타!" };
 
-function hitTag(roll, tier) {
-  if (roll === undefined) {
-    return "";
+// 결과 괄호: " (🎲15 · 강타 · 보호막 7 막음)". extra는 괄호 안 끝에 덧붙인다.
+function hitTag(roll, tier, extra = "") {
+  const parts = roll === undefined ? [] : [`🎲${roll}`, HIT_LABELS[tier.id]].filter(Boolean);
+
+  if (extra) {
+    parts.push(extra);
   }
 
-  const label = HIT_LABELS[tier.id];
-  return label ? ` (🎲${roll} · ${label})` : ` (🎲${roll})`;
+  return parts.length ? ` (${parts.join(" · ")})` : "";
 }
 const NEGATIVE_STATUSES = ["poison", "bleed", "stun", "weaken", "vulnerable"];
 
@@ -554,17 +557,17 @@ export class Combat {
     const absorbed = absorbWithShield(defender, afterReduction);
     const final = afterReduction - absorbed;
     const before = defender.ref.hp;
-    const shieldNote = absorbed > 0 ? ` (보호막이 ${fmt(absorbed)} 막음)` : "";
+    const shieldNote = absorbed > 0 ? `보호막 ${fmt(absorbed)} 막음` : "";
 
     defender.ref.hp = Math.max(0, roundValue(defender.ref.hp - final));
     let text = `→ 빗나갔다!${hitTag(roll, tier)}`;
     let fx = { target: defender.kind, type: "miss", tier: tier.id };
 
     if (final > 0) {
-      text = `→ ${defender.name}에게 ${fmt(final)} 피해${hitTag(roll, tier)}${shieldNote}`;
+      text = `→ ${defender.name}에게 ${fmt(final)} 피해${hitTag(roll, tier, shieldNote)}`;
       fx = { target: defender.kind, type: "damage", tier: tier.id, amount: final };
     } else if (absorbed > 0) {
-      text = `→ 보호막이 ${fmt(absorbed)} 피해를 모두 막았다.${hitTag(roll, tier)}`;
+      text = `→ 보호막이 ${fmt(absorbed)} 피해를 모두 막았다${hitTag(roll, tier)}`;
       fx = { target: defender.kind, type: "status", label: "보호막" };
     }
 
@@ -618,7 +621,7 @@ export class Combat {
     target.ref.hp = Math.max(0, roundValue(target.ref.hp - final));
     this.log(
       "damage",
-      `→ ${target.name}에게 ${fmt(final)} 피해 (${item.name})${absorbed > 0 ? ` (보호막이 ${fmt(absorbed)} 막음)` : ""}`,
+      `→ ${target.name}에게 ${fmt(final)} 피해 (${[item.name, absorbed > 0 ? `보호막 ${fmt(absorbed)} 막음` : ""].filter(Boolean).join(" · ")})`,
       `${fmt(item.amount)} − 피해 감소 ${fmt(reduction)} → ${fmt(final)}`,
       { target: target.kind, type: "damage", tier: "high", amount: final },
     );
@@ -674,7 +677,8 @@ export class Combat {
       return;
     }
 
-    this.log("heal", `→ ${side.name} HP ${fmt(healed)} 회복 (${source})`, "", { target: side.kind, type: "heal", amount: healed });
+    const text = healed > 0 ? `→ ${side.name} HP ${fmt(healed)} 회복 (${source})` : `→ ${side.name}의 HP가 이미 가득하다 (${source})`;
+    this.log("heal", text, "", { target: side.kind, type: "heal", amount: healed });
   }
 
   inflict(target, spec, source) {
@@ -686,10 +690,9 @@ export class Combat {
       return;
     }
 
-    const value = spec.amount ? ` ${fmt(spec.amount)}` : spec.multiplier ? ` ×${spec.multiplier}` : "";
     const text = outcome.stacked !== undefined
       ? `→ ${target.name}: ${label} +${fmt(spec.amount)} (남은 ${label} ${fmt(outcome.stacked)})`
-      : `→ ${target.name}: ${label}${value} ${spec.duration}턴${outcome.refreshed ? " (갱신)" : ""}`;
+      : `→ ${target.name}: ${label}${statusValueText(spec)} (${spec.duration}턴${outcome.refreshed ? ", 갱신" : ""})`;
     this.log("status", text, "", {
       target: target.kind,
       type: "status",

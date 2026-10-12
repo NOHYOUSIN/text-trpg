@@ -1,9 +1,8 @@
-import { catalog, getItem } from "../data/catalog.js?v=20261013-030554";
-import { GRADES } from "../data/rules.js?v=20261013-030554";
-import { canUseOutsideCombat, entryName } from "../systems/InventorySystem.js?v=20261013-030554";
-import { josa } from "../systems/Josa.js?v=20261013-030554";
-import { describeFull, describeStats, describeWeaponChange } from "./ItemText.js?v=20261013-030554";
-import { renderScene } from "./SceneUI.js?v=20261013-030554";
+import { catalog, getItem } from "../data/catalog.js?v=20261013-032945";
+import { GRADES } from "../data/rules.js?v=20261013-032945";
+import { canUseOutsideCombat, entryName } from "../systems/InventorySystem.js?v=20261013-032945";
+import { describeFull, describeStats, describeWeaponChange } from "./ItemText.js?v=20261013-032945";
+import { renderScene } from "./SceneUI.js?v=20261013-032945";
 
 function entryOf(kind, id) {
   return kind === "skill" ? catalog.skills.get(id) : getItem(id);
@@ -18,8 +17,8 @@ export function renderEquipChoice(root, { adventurer, itemId, onEquip, onStore, 
 
   if (currentId) {
     equipSub = bagFull
-      ? `가방이 가득 차 ${josa(entryName("item", currentId), "은/는")} 버린다.`
-      : `${josa(entryName("item", currentId), "은/는")} 가방에 넣는다.`;
+      ? `가방이 가득 차 지금 장비를 버린다: ${entryName("item", currentId)}`
+      : `지금 장비는 가방에 넣는다: ${entryName("item", currentId)}`;
   }
 
   renderScene(root, {

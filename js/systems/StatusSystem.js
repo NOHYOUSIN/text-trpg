@@ -1,6 +1,6 @@
-import { STATUS } from "../data/rules.js?v=20261013-030554";
-import { STATUS_LABELS } from "./EffectParser.js?v=20261013-030554";
-import { formatNumber as fmt } from "./NumberRules.js?v=20261013-030554";
+import { STATUS } from "../data/rules.js?v=20261013-032945";
+import { STATUS_LABELS } from "./EffectParser.js?v=20261013-032945";
+import { formatNumber as fmt } from "./NumberRules.js?v=20261013-032945";
 
 // 상태이상과 지속 효과. 지속시간은 효과를 받은 쪽의 행동 횟수로 센다.
 // combatant: { statuses: [], stunImmunity: 0, immune: Set }
@@ -145,10 +145,18 @@ export function clearStatuses(target) {
   target.stunImmunity = 0;
 }
 
+// 상태이상 이름 뒤에 붙는 수치 (예: " +3", " ×0.7", " 4")
+export function statusValueText({ type, amount, multiplier }) {
+  if (amount) {
+    return type === "empower" ? ` +${fmt(amount)}` : ` ${fmt(amount)}`;
+  }
+
+  return multiplier ? ` ×${multiplier}` : "";
+}
+
 export function describeStatuses(target) {
   return target.statuses.map((status) => {
     const label = STATUS_LABELS[status.type] ?? status.type;
-    const value = status.amount ? ` ${fmt(status.amount)}` : status.multiplier ? ` ×${status.multiplier}` : "";
-    return `${label}${value} (${status.duration}턴)`;
+    return `${label}${statusValueText(status)} (${status.duration}턴)`;
   });
 }
