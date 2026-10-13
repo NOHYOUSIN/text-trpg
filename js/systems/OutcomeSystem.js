@@ -1,8 +1,9 @@
-import { catalog, getItem } from "../data/catalog.js?v=20261013-042652";
-import { parseToken } from "./EffectParser.js?v=20261013-042652";
-import { josa } from "./Josa.js?v=20261013-042652";
-import { formatNumber as fmt, roundValue } from "./NumberRules.js?v=20261013-042652";
-import { getMaxHp } from "./TraitSystem.js?v=20261013-042652";
+import { catalog, getItem } from "../data/catalog.js?v=20261014-041746";
+import { REWARD_CHOICE } from "../data/rules.js?v=20261014-041746";
+import { parseToken } from "./EffectParser.js?v=20261014-041746";
+import { josa } from "./Josa.js?v=20261014-041746";
+import { formatNumber as fmt, roundValue } from "./NumberRules.js?v=20261014-041746";
+import { getMaxHp } from "./TraitSystem.js?v=20261014-041746";
 
 // 사건 결과 표기(hp:-0.5;gold:3;item:...;fight:...)를 적용한다.
 // 아이템·스킬 획득은 인벤토리·획득 화면이 처리하도록 acquisitions로 돌려준다.
@@ -38,7 +39,10 @@ export function applyOutcome(tokens, { adventurer, run }) {
           adventurer.inventory.remove(id, 1);
           lines.push(`${josa(getItem(id)?.name ?? id, "을/를")} 잃었다.`);
         } else if (args[0] === "random") {
-          acquisitions.push({ kind: "item", random: args[1] });
+          // 고르는 보상(2026-10-14): 무작위 장비는 후보 2개 중 고른다.
+          acquisitions.push(args[1] === "equipment"
+            ? { kind: "item", random: "equipment", choice: REWARD_CHOICE.equipment }
+            : { kind: "item", random: args[1] });
         } else {
           acquisitions.push({ kind: "item", id: args[0] });
         }
@@ -47,7 +51,8 @@ export function applyOutcome(tokens, { adventurer, run }) {
         if (args[0] === "choice") {
           acquisitions.push({ kind: "skill", choice: true });
         } else {
-          acquisitions.push(args[0] === "random" ? { kind: "skill", random: true } : { kind: "skill", id: args[0] });
+          // skill:random도 skill:choice처럼 후보 2~3개 중 고른다(2026-10-14).
+          acquisitions.push(args[0] === "random" ? { kind: "skill", choice: true } : { kind: "skill", id: args[0] });
         }
         break;
       case "flag":

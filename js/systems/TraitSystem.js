@@ -1,9 +1,9 @@
-import { catalog } from "../data/catalog.js?v=20261013-042652";
-import { CLASS_TRAITS } from "../data/rules.js?v=20261013-042652";
-import { capEvade, capLifesteal, critMinFrom, parseAbility } from "./AbilitySystem.js?v=20261013-042652";
-import { parseToken } from "./EffectParser.js?v=20261013-042652";
-import { maxHpFrom, supportAmount } from "./FormulaSystem.js?v=20261013-042652";
-import { roundValue } from "./NumberRules.js?v=20261013-042652";
+import { catalog } from "../data/catalog.js?v=20261014-041746";
+import { CLASS_TRAITS } from "../data/rules.js?v=20261014-041746";
+import { capEvade, capLifesteal, critMinFrom, parseAbility } from "./AbilitySystem.js?v=20261014-041746";
+import { parseToken } from "./EffectParser.js?v=20261014-041746";
+import { maxHpFrom, supportAmount } from "./FormulaSystem.js?v=20261014-041746";
+import { roundValue } from "./NumberRules.js?v=20261014-041746";
 
 export const STAT_KEYS = ["str", "agi", "wis"];
 
@@ -45,7 +45,8 @@ export function isEquipmentEffectActive(adventurer, item, bonus = equipmentStatB
 }
 
 // 장착 장비와 패시브 스킬의 효과를 모은다.
-export function collectModifiers(adventurer) {
+// extraSources: 이번 전투에만 붙는 효과(정비 특별 선택지 등) [{ effects, name }]
+export function collectModifiers(adventurer, extraSources = []) {
   const modifiers = {
     statBonus: equipmentStatBonus(adventurer),
     maxHp: 0,
@@ -96,6 +97,10 @@ export function collectModifiers(adventurer) {
     if (skill?.type === "passive") {
       sources.push({ effects: skill.effects, name: skill.name, baseEffect: skill.baseEffect, scaling: skill.scaling });
     }
+  }
+
+  for (const extra of extraSources) {
+    sources.push({ effects: extra.effects, name: extra.name, baseEffect: 0, scaling: [] });
   }
 
   for (const source of sources) {
@@ -183,8 +188,8 @@ function sumScaled(sources, stats, mainStat) {
 }
 
 // 모험가의 현재 전투 수치를 한 번에 계산한다.
-export function getProfile(adventurer) {
-  const modifiers = collectModifiers(adventurer);
+export function getProfile(adventurer, { extraSources = [] } = {}) {
+  const modifiers = collectModifiers(adventurer, extraSources);
   const stats = getStats(adventurer, modifiers);
   const mainStat = mainStatOf(adventurer);
   modifiers.basicAttackBonus = roundValue(modifiers.basicAttackBonus + sumScaled(modifiers.scaledBasicAttack, stats, mainStat));

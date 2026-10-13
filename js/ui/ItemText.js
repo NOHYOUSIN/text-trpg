@@ -1,10 +1,10 @@
-import { catalog } from "../data/catalog.js?v=20261013-042652";
-import { parseAbility } from "../systems/AbilitySystem.js?v=20261013-042652";
-import { consumableEffects } from "../systems/ConsumableEffects.js?v=20261013-042652";
-import { parseToken, STATUS_LABELS } from "../systems/EffectParser.js?v=20261013-042652";
-import { attackSkillBase, basicAttackBase, supportAmount } from "../systems/FormulaSystem.js?v=20261013-042652";
-import { formatNumber as fmt, roundValue } from "../systems/NumberRules.js?v=20261013-042652";
-import { getProfile, isEquipmentEffectActive } from "../systems/TraitSystem.js?v=20261013-042652";
+import { catalog } from "../data/catalog.js?v=20261014-041746";
+import { parseAbility } from "../systems/AbilitySystem.js?v=20261014-041746";
+import { consumableEffects } from "../systems/ConsumableEffects.js?v=20261014-041746";
+import { parseToken, STATUS_LABELS } from "../systems/EffectParser.js?v=20261014-041746";
+import { attackSkillBase, basicAttackBase, supportAmount } from "../systems/FormulaSystem.js?v=20261014-041746";
+import { formatNumber as fmt, roundValue } from "../systems/NumberRules.js?v=20261014-041746";
+import { getProfile, isEquipmentEffectActive } from "../systems/TraitSystem.js?v=20261014-041746";
 
 // 장비·스킬·소모품 설명(선택 판단용). 2026-10-13 전투 공식 3차 개편에 맞춘 표기:
 // 1줄 = 종류, 2줄 = 결과 수치(계산식은 괄호), 3줄 = 부가 효과.

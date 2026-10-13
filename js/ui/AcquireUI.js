@@ -1,8 +1,8 @@
-import { catalog, getItem } from "../data/catalog.js?v=20261013-042652";
-import { GRADES } from "../data/rules.js?v=20261013-042652";
-import { canUseOutsideCombat, entryName } from "../systems/InventorySystem.js?v=20261013-042652";
-import { describeFull, describeStats, describeWeaponChange } from "./ItemText.js?v=20261013-042652";
-import { renderScene } from "./SceneUI.js?v=20261013-042652";
+import { catalog, getItem } from "../data/catalog.js?v=20261014-041746";
+import { GRADES } from "../data/rules.js?v=20261014-041746";
+import { canUseOutsideCombat, entryName } from "../systems/InventorySystem.js?v=20261014-041746";
+import { describeFull, describeStats, describeWeaponChange } from "./ItemText.js?v=20261014-041746";
+import { renderScene } from "./SceneUI.js?v=20261014-041746";
 
 function entryOf(kind, id) {
   return kind === "skill" ? catalog.skills.get(id) : getItem(id);
@@ -111,6 +111,27 @@ export function renderSkillOffer(root, { options, adventurer = null, onChoose, o
         };
       }),
       { label: "배우지 않는다", onClick: onSkip },
+    ],
+  });
+}
+
+// 고르는 보상(보물·정비 탐색·사건): 장비 후보 중 하나를 고른다(또는 고르지 않는다). 고른 뒤 장착할지 묻는다.
+export function renderEquipmentOffer(root, { options, adventurer = null, onChoose, onSkip }) {
+  renderScene(root, {
+    eyebrow: "새 장비",
+    title: "가져갈 장비를 하나 고른다",
+    buttonLayout: "cards",
+    buttons: [
+      ...options.map((id) => {
+        const item = catalog.equipment.get(id);
+        return {
+          label: `장비 · ${entryName("item", id)}`,
+          sub: [describeFull("item", id, adventurer), describeWeaponChange(adventurer, id)].filter(Boolean).join("\n"),
+          onClick: () => onChoose(id),
+          color: GRADES[item.grade]?.color,
+        };
+      }),
+      { label: "고르지 않는다", onClick: onSkip },
     ],
   });
 }

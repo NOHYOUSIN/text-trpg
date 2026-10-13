@@ -1,12 +1,12 @@
-import { catalog } from "../data/catalog.js?v=20261013-042652";
-import { BOSS_RANKS, EARLY_SKILL, EVENT_CHOICES, RECOVERY, ROUTE } from "../data/rules.js?v=20261013-042652";
-import { Adventurer } from "../models/Adventurer.js?v=20261013-042652";
-import { RunState } from "../models/RunState.js?v=20261013-042652";
-import { SaveManager } from "../save/SaveManager.js?v=20261013-042652";
-import { Combat } from "../systems/CombatSystem.js?v=20261013-042652";
-import { DiceSystem } from "../systems/DiceSystem.js?v=20261013-042652";
-import { rollEnemyVariant } from "../systems/EnemyVariantSystem.js?v=20261013-042652";
-import { getSkillBonus, OUTCOME_LABELS, pickShownChoices, resolveChoice } from "../systems/EventSystem.js?v=20261013-042652";
+import { catalog } from "../data/catalog.js?v=20261014-041746";
+import { BOSS_RANKS, EARLY_SKILL, EVENT_CHOICES, RECOVERY, SKILL_FLOOR } from "../data/rules.js?v=20261014-041746";
+import { Adventurer } from "../models/Adventurer.js?v=20261014-041746";
+import { RunState } from "../models/RunState.js?v=20261014-041746";
+import { SaveManager } from "../save/SaveManager.js?v=20261014-041746";
+import { Combat } from "../systems/CombatSystem.js?v=20261014-041746";
+import { DiceSystem } from "../systems/DiceSystem.js?v=20261014-041746";
+import { rollEnemyVariant } from "../systems/EnemyVariantSystem.js?v=20261014-041746";
+import { getSkillBonus, OUTCOME_LABELS, pickShownChoices, resolveChoice } from "../systems/EventSystem.js?v=20261014-041746";
 import {
   addItem,
   discardSlot,
@@ -17,52 +17,61 @@ import {
   tryAutoAcquire,
   unequip,
   useConsumableOutsideCombat,
-} from "../systems/InventorySystem.js?v=20261013-042652";
-import { josa } from "../systems/Josa.js?v=20261013-042652";
+} from "../systems/InventorySystem.js?v=20261014-041746";
+import { josa } from "../systems/Josa.js?v=20261014-041746";
 import {
   createBossRewardCandidates,
   markUniqueSeen,
   resolveAcquisition,
   rollCombatLoot,
   rollTreasure,
-} from "../systems/LootSystem.js?v=20261013-042652";
-import { formatNumber as fmt, roundValue } from "../systems/NumberRules.js?v=20261013-042652";
-import { applyOutcome } from "../systems/OutcomeSystem.js?v=20261013-042652";
+} from "../systems/LootSystem.js?v=20261014-041746";
+import { formatNumber as fmt, roundValue } from "../systems/NumberRules.js?v=20261014-041746";
+import { applyOutcome } from "../systems/OutcomeSystem.js?v=20261014-041746";
 import {
   CONTENT_LABELS,
   createRouteCandidates,
+  availableCampOptions,
   getBossForRound,
   hasZoneBoss,
+  pickZoneBosses,
   getZone,
   isCampRound,
   pickEnemy,
   pickEvent,
   rollPlaceContent,
-} from "../systems/RouteSystem.js?v=20261013-042652";
-import { createShopStock, sellFromSlot } from "../systems/ShopSystem.js?v=20261013-042652";
-import { getMaxHp, getProfile } from "../systems/TraitSystem.js?v=20261013-042652";
-import { renderBossReward, renderEquipChoice, renderInventoryFull, renderSkillChoice, renderSkillOffer } from "../ui/AcquireUI.js?v=20261013-042652";
-import { renderClassSelect } from "../ui/ClassSelectUI.js?v=20261013-042652";
-import { CombatUI } from "../ui/CombatUI.js?v=20261013-042652";
-import { renderBossIntro } from "../ui/BossIntroUI.js?v=20261013-042652";
-import { renderCamp } from "../ui/CampUI.js?v=20261013-042652";
+} from "../systems/RouteSystem.js?v=20261014-041746";
+import { createShopStock, sellFromSlot } from "../systems/ShopSystem.js?v=20261014-041746";
+import { getMaxHp, getProfile } from "../systems/TraitSystem.js?v=20261014-041746";
+import {
+  renderBossReward,
+  renderEquipChoice,
+  renderEquipmentOffer,
+  renderInventoryFull,
+  renderSkillChoice,
+  renderSkillOffer,
+} from "../ui/AcquireUI.js?v=20261014-041746";
+import { renderClassSelect } from "../ui/ClassSelectUI.js?v=20261014-041746";
+import { CombatUI } from "../ui/CombatUI.js?v=20261014-041746";
+import { renderBossIntro } from "../ui/BossIntroUI.js?v=20261014-041746";
+import { renderCamp } from "../ui/CampUI.js?v=20261014-041746";
 import {
   describeSave,
   renderDungeonCard,
   renderDungeonSelect,
   renderLobby,
   renderOverwriteConfirm,
-} from "../ui/LobbyUI.js?v=20261013-042652";
-import { HelpUI } from "../ui/HelpUI.js?v=20261013-042652";
-import { SettingsUI } from "../ui/SettingsUI.js?v=20261013-042652";
-import { renderEvent } from "../ui/EventUI.js?v=20261013-042652";
-import { InventoryUI } from "../ui/InventoryUI.js?v=20261013-042652";
-import { LogUI } from "../ui/LogUI.js?v=20261013-042652";
-import { renderRoute } from "../ui/RouteUI.js?v=20261013-042652";
-import { renderScene } from "../ui/SceneUI.js?v=20261013-042652";
-import { renderShop } from "../ui/ShopUI.js?v=20261013-042652";
-import { renderStatus } from "../ui/StatusUI.js?v=20261013-042652";
-import { renderSummary } from "../ui/SummaryUI.js?v=20261013-042652";
+} from "../ui/LobbyUI.js?v=20261014-041746";
+import { HelpUI } from "../ui/HelpUI.js?v=20261014-041746";
+import { SettingsUI } from "../ui/SettingsUI.js?v=20261014-041746";
+import { renderEvent } from "../ui/EventUI.js?v=20261014-041746";
+import { InventoryUI } from "../ui/InventoryUI.js?v=20261014-041746";
+import { LogUI } from "../ui/LogUI.js?v=20261014-041746";
+import { renderRoute } from "../ui/RouteUI.js?v=20261014-041746";
+import { renderScene } from "../ui/SceneUI.js?v=20261014-041746";
+import { renderShop } from "../ui/ShopUI.js?v=20261014-041746";
+import { renderStatus } from "../ui/StatusUI.js?v=20261014-041746";
+import { renderSummary } from "../ui/SummaryUI.js?v=20261014-041746";
 
 
 // 탐험 전체 흐름: 직업 선택 → 라운드(갈림길 → 장소 내용) → 보스 → 요약
@@ -233,6 +242,9 @@ export class GameManager {
   enterZone() {
     this.run.round = 1;
     this.run.recentPlaces = [];
+    this.run.placeShows = {};
+    this.run.bossPicks = pickZoneBosses(this.zone, this.dice);
+    this.run.campBoon = null;
     this.run.lastShownPlaces = [];
     this.logUI.add(`── ${this.zone.name} ──`, "system");
     this.show(() => renderScene(this.sceneRoot, {
@@ -247,7 +259,7 @@ export class GameManager {
 
   startRound({ resume = false } = {}) {
     this.beginRoundSave(resume);
-    const boss = getBossForRound(this.zone, this.run.round, this.dice);
+    const boss = getBossForRound(this.zone, this.run.round, this.dice, this.run.bossPicks);
 
     if (boss) {
       const enemy = this.dungeon.enemiesById.get(boss.enemyId);
@@ -257,7 +269,7 @@ export class GameManager {
         eyebrow: this.roundLabel,
         enemy,
         text,
-        onFight: () => this.startCombat(enemy, null),
+        onFight: () => this.startBossCombat(enemy),
       }));
       return;
     }
@@ -280,7 +292,7 @@ export class GameManager {
   }
 
   enterPlace(place) {
-    this.run.rememberPlace(place.id, ROUTE.recentPlaceExclusion);
+    this.run.rememberPlace(place.id);
     let content = rollPlaceContent(place, this.dice);
     let event = null;
 
@@ -362,20 +374,51 @@ export class GameManager {
     });
   }
 
-  // 정비 라운드: 휴식(휴식과 같음) 또는 탐색(보물과 같음)
+  // 정비 라운드: 휴식(휴식과 같음) 또는 탐색(보물과 같음).
+  // 성장의 바닥 보장(2026-10-14): 장착 스킬이 모자라면 탐색 결과를 스킬 후보 3개 중 선택으로 확정한다.
   showCamp() {
+    const skillFloor = this.needsSkillFloor();
     this.show(() => renderCamp(this.sceneRoot, {
       eyebrow: this.roundLabel,
       restPercent: Math.round(RECOVERY.restRatio * 100),
+      skillFloor: skillFloor ? SKILL_FLOOR.choices : 0,
+      specialOptions: availableCampOptions(this.dungeon, this.run),
+      onSpecial: (option) => this.chooseCampOption(option),
       onRest: () => {
         this.logUI.add(`${this.run.round}라운드: 정비 — 휴식`);
         this.rest();
       },
       onExplore: () => {
         this.logUI.add(`${this.run.round}라운드: 정비 — 탐색`);
-        this.openTreasure(null, "주변을 살피다 쓸 만한 것을 발견했다.", "주변 탐색");
+
+        if (!skillFloor) {
+          this.openTreasure(null, "주변을 살피다 쓸 만한 것을 발견했다.", "주변 탐색");
+          return;
+        }
+
+        const granted = this.grant([{ kind: "skill", choice: true, count: SKILL_FLOOR.choices }]);
+        this.showNotice({
+          title: "주변 탐색",
+          paragraphs: ["주변을 살피다 낡은 기록 몇 장을 발견했다. 익힐 만한 기술이 적혀 있다."],
+          details: granted.lines,
+          next: () => this.resolvePending(granted.pending, () => this.finishRound()),
+        });
       },
     }));
+  }
+
+  // 정비 특별 선택지: 휴식·탐색 대신 고르면 다가오는 보스전에만 효과가 붙는다.
+  chooseCampOption(option) {
+    this.run.campBoon = { bossId: option.bossId, name: option.text, effects: option.effects, surprise: option.surprise };
+    this.logUI.add(`${this.run.round}라운드: 정비 — ${option.text}`, "success");
+    this.showNotice({ title: "보스전 준비", paragraphs: [option.resultText], details: ["다가오는 보스전에 효과가 적용된다."] });
+  }
+
+  // 이 정비 라운드가 구역의 몇 번째 정비인지 보고, 장착 스킬 수가 기준 이하인지
+  needsSkillFloor() {
+    const index = this.zone.campRounds.indexOf(this.run.round);
+    const max = SKILL_FLOOR.maxSkillsByCamp[index];
+    return max !== undefined && this.adventurer.skills.filter(Boolean).length <= max;
   }
 
   resolveEventChoice(event, choice) {
@@ -446,9 +489,10 @@ export class GameManager {
         continue;
       }
 
-      // 스킬 선택은 결과 화면 뒤에 고르는 화면을 띄운다.
-      if (resolved.kind === "skillChoice") {
-        lines.push(`스킬 선택: 후보 ${resolved.options.length}개 중 하나를 고른다`);
+      // 스킬·장비 선택은 결과 화면 뒤에 고르는 화면을 띄운다.
+      if (resolved.kind === "skillChoice" || resolved.kind === "equipmentChoice") {
+        const label = resolved.kind === "skillChoice" ? "스킬" : "장비";
+        lines.push(`${label} 선택: 후보 ${resolved.options.length}개 중 하나를 고른다`);
         pending.push(resolved);
         continue;
       }
@@ -457,7 +501,7 @@ export class GameManager {
 
       if (outcome.pending) {
         const reason = resolved.kind === "skill" || catalog.equipment.has(resolved.id) ? "장착할지 고른다" : "가방이 가득 찼다";
-        lines.push(`발견: ${entryName(resolved.kind, resolved.id)} (${reason})`);
+        lines.push(`발견: ${resolved.label ?? entryName(resolved.kind, resolved.id)} (${reason})`);
         pending.push(resolved);
       } else {
         lines.push(outcome.line);
@@ -487,6 +531,22 @@ export class GameManager {
         onChoose: (skillId) => this.resolvePending([{ kind: "skill", id: skillId }, ...rest], done),
         onSkip: () => {
           this.logUI.add("스킬을 배우지 않았다.");
+          next();
+        },
+      }));
+      return;
+    }
+
+    if (current.kind === "equipmentChoice") {
+      this.show(() => renderEquipmentOffer(this.sceneRoot, {
+        options: current.options,
+        adventurer: this.adventurer,
+        onChoose: (itemId) => {
+          markUniqueSeen(this.run, itemId);
+          this.resolvePending([{ kind: "item", id: itemId }, ...rest], done);
+        },
+        onSkip: () => {
+          this.logUI.add("장비를 고르지 않았다.");
           next();
         },
       }));
@@ -700,7 +760,13 @@ export class GameManager {
 
   // ---------- 전투 ----------
 
-  startCombat(enemyData, surprise) {
+  // 보스전: 정비 특별 선택지로 얻은 효과가 이 보스에 맞으면 붙인다(기습은 surprise).
+  startBossCombat(enemy) {
+    const boon = this.run.campBoon?.bossId === enemy.id ? this.run.campBoon : null;
+    this.startCombat(enemy, boon?.surprise ? "player" : null, boon);
+  }
+
+  startCombat(enemyData, surprise, boon = null) {
     this.inCombat = true;
     this.refreshScene = null;
     const combat = new Combat({
@@ -709,6 +775,7 @@ export class GameManager {
       dungeon: this.dungeon,
       dice: this.dice,
       surprise,
+      boon,
     });
     // 출력이 모두 재생된 뒤에 상태 패널을 갱신해 결과가 미리 보이지 않게 한다.
     const ui = new CombatUI(this.sceneRoot, {
@@ -722,6 +789,11 @@ export class GameManager {
   finishCombat(combat, result) {
     this.inCombat = false;
     const enemy = combat.enemy.ref;
+
+    // 정비 특별 선택지 효과는 그 보스전 한 번으로 끝난다.
+    if (this.run.campBoon?.bossId === enemy.id) {
+      this.run.campBoon = null;
+    }
 
     if (result === "defeat") {
       this.logUI.add(`${enemy.name}에게 쓰러졌다.`, "danger");
@@ -744,7 +816,7 @@ export class GameManager {
     const isBoss = BOSS_RANKS.includes(enemy.rank);
     const isElite = enemy.rank === "elite";
     // 보스와 엘리트는 일반 전리품 대신 보상을 고른다.
-    const granted = isBoss || isElite ? { lines: [], pending: [] } : this.grant(rollCombatLoot({ run: this.run, dice: this.dice, veteran: enemy.rank === "veteran" }));
+    const granted = isBoss || isElite ? { lines: [], pending: [] } : this.grant(rollCombatLoot({ run: this.run, dice: this.dice, enemy }));
     const endsZone = enemy.rank === "boss" || enemy.rank === "final";
     const isFinalBoss = enemy.rank === "final" || (endsZone && !hasZoneBoss(getZone(this.dungeon, this.run.zone + 1)));
     let afterVictory = () => this.resolvePending(granted.pending, () => this.finishRound());

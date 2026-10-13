@@ -1,9 +1,9 @@
-import { catalog, getItem, isEquipment } from "../data/catalog.js?v=20261013-042652";
-import { GRADES, INVENTORY } from "../data/rules.js?v=20261013-042652";
-import { hasConsumableEffect, isElixir } from "./ConsumableEffects.js?v=20261013-042652";
-import { drinkElixir } from "./ElixirSystem.js?v=20261013-042652";
-import { formatNumber as fmt, roundValue } from "./NumberRules.js?v=20261013-042652";
-import { getMaxHp } from "./TraitSystem.js?v=20261013-042652";
+import { catalog, getItem, isEquipment } from "../data/catalog.js?v=20261014-041746";
+import { GRADES, INVENTORY } from "../data/rules.js?v=20261014-041746";
+import { hasConsumableEffect, isElixir } from "./ConsumableEffects.js?v=20261014-041746";
+import { drinkElixir } from "./ElixirSystem.js?v=20261014-041746";
+import { formatNumber as fmt, roundValue } from "./NumberRules.js?v=20261014-041746";
+import { getMaxHp } from "./TraitSystem.js?v=20261014-041746";
 
 export function maxStackOf(id) {
   return isEquipment(id) ? INVENTORY.equipmentStack : catalog.consumables.get(id)?.maxStack ?? INVENTORY.defaultMaxStack;
@@ -33,7 +33,8 @@ export function tryAutoAcquire(adventurer, acquisition) {
   }
 
   adventurer.inventory.add(acquisition.id, 1, maxStack);
-  return { pending: false, line: `획득: ${entryName("item", acquisition.id)}` };
+  // label: 전투 보상 정수처럼 화면에 따로 보여 줄 이름("굶주린 늑대의 내단 (힘 +1)")
+  return { pending: false, line: `획득: ${acquisition.label ?? entryName("item", acquisition.id)}` };
 }
 
 export function addItem(adventurer, id) {

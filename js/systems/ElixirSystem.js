@@ -1,13 +1,22 @@
-import { catalog } from "../data/catalog.js?v=20261013-042652";
-import { ELIXIR } from "../data/rules.js?v=20261013-042652";
-import { consumableEffects, isElixir } from "./ConsumableEffects.js?v=20261013-042652";
-import { mainStatsOf, STAT_KEYS } from "./TraitSystem.js?v=20261013-042652";
+import { catalog } from "../data/catalog.js?v=20261014-041746";
+import { ELIXIR, ESSENCE } from "../data/rules.js?v=20261014-041746";
+import { consumableEffects, isElixir } from "./ConsumableEffects.js?v=20261014-041746";
+import { mainStatsOf, STAT_KEYS } from "./TraitSystem.js?v=20261014-041746";
 
 const STAT_LABELS = { str: "힘", agi: "민첩", wis: "지혜" };
 
+// 전투 보상 정수(내단·정수·혼·비약)인지. 영약과 같은 효과지만 영약 뽑기에는 나오지 않는다.
+export function isEssence(item) {
+  return Boolean(item?.id?.startsWith(ESSENCE.idPrefix));
+}
+
+function statUpOf(item) {
+  return consumableEffects(item).find((e) => e.key === "statUp")?.args[0];
+}
+
 // 영약 데이터 찾기: 능력치와 진한 영약(+2) 여부
 function findElixir(stat, strong) {
-  const elixirs = [...catalog.consumables.values()].filter(isElixir);
+  const elixirs = [...catalog.consumables.values()].filter((item) => isElixir(item) && !isEssence(item));
   const matching = elixirs.filter((item) => consumableEffects(item).some((e) => e.key === "statUp" && e.args[0] === stat));
   const sorted = matching.sort((a, b) => a.amount - b.amount);
   return strong ? sorted[sorted.length - 1] : sorted[0];
@@ -29,6 +38,13 @@ function rollElixirStat(adventurer, dice) {
 export function pickRandomElixir({ adventurer, dice }) {
   const stat = rollElixirStat(adventurer, dice);
   return findElixir(stat, dice.chance(ELIXIR.strongChance));
+}
+
+// 전투 보상 정수: 무작위 영약과 같은 능력치 확률, 항상 +1. 이름은 "<적 이름>의 <표현>".
+export function pickEssence({ adventurer, dice, enemyName, word }) {
+  const stat = rollElixirStat(adventurer, dice);
+  const item = [...catalog.consumables.values()].find((entry) => isEssence(entry) && statUpOf(entry) === stat);
+  return item ? { id: item.id, label: `${enemyName}의 ${word || ESSENCE.defaultWord} (${STAT_LABELS[stat]} +${item.amount})` } : null;
 }
 
 // 중간보스·구역 보스 보상 후보: 항상 주 능력치의 진한 영약(주 능력치가 2개면 둘 중 무작위)

@@ -618,6 +618,7 @@ export const commonData = {
       "id": "wpn_sword_basic",
       "name": "낡은 검",
       "slot": "weapon",
+      "zone": 1,
       "grade": "common",
       "stat": "str",
       "damage": 5,
@@ -635,6 +636,7 @@ export const commonData = {
       "id": "wpn_dagger_basic",
       "name": "낡은 단검",
       "slot": "weapon",
+      "zone": 1,
       "grade": "common",
       "stat": "agi",
       "damage": 4,
@@ -652,6 +654,7 @@ export const commonData = {
       "id": "wpn_staff_basic",
       "name": "낡은 지팡이",
       "slot": "weapon",
+      "zone": 1,
       "grade": "common",
       "stat": "wis",
       "damage": 5,
@@ -669,6 +672,7 @@ export const commonData = {
       "id": "wpn_hand_axe",
       "name": "손도끼",
       "slot": "weapon",
+      "zone": 1,
       "grade": "common",
       "stat": "str",
       "damage": 7,
@@ -686,6 +690,7 @@ export const commonData = {
       "id": "wpn_hunting_knife",
       "name": "사냥칼",
       "slot": "weapon",
+      "zone": 1,
       "grade": "common",
       "stat": "agi",
       "damage": 3,
@@ -708,6 +713,7 @@ export const commonData = {
       "id": "wpn_oak_rod",
       "name": "참나무 막대",
       "slot": "weapon",
+      "zone": 1,
       "grade": "common",
       "stat": "wis",
       "damage": 3,
@@ -727,6 +733,7 @@ export const commonData = {
       "id": "wpn_iron_longsword",
       "name": "쇠 장검",
       "slot": "weapon",
+      "zone": 1,
       "grade": "uncommon",
       "stat": "str",
       "damage": 7,
@@ -751,6 +758,7 @@ export const commonData = {
       "id": "wpn_thorn_dagger",
       "name": "가시 단검",
       "slot": "weapon",
+      "zone": 1,
       "grade": "uncommon",
       "stat": "agi",
       "damage": 6,
@@ -773,6 +781,7 @@ export const commonData = {
       "id": "wpn_willow_staff",
       "name": "버드나무 지팡이",
       "slot": "weapon",
+      "zone": 1,
       "grade": "uncommon",
       "stat": "wis",
       "damage": 6,
@@ -797,6 +806,7 @@ export const commonData = {
       "id": "wpn_guardian_mace",
       "name": "수호자의 철퇴",
       "slot": "weapon",
+      "zone": 1,
       "grade": "rare",
       "stat": "str",
       "damage": 8,
@@ -822,6 +832,7 @@ export const commonData = {
       "id": "wpn_whisper_blade",
       "name": "속삭이는 칼날",
       "slot": "weapon",
+      "zone": 1,
       "grade": "rare",
       "stat": "agi",
       "damage": 8,
@@ -847,6 +858,7 @@ export const commonData = {
       "id": "wpn_moonlit_staff",
       "name": "달빛 지팡이",
       "slot": "weapon",
+      "zone": 1,
       "grade": "rare",
       "stat": "wis",
       "damage": 8,
@@ -872,6 +884,7 @@ export const commonData = {
       "id": "arm_leather_basic",
       "name": "가죽 갑옷",
       "slot": "armor",
+      "zone": 1,
       "grade": "common",
       "stat": "str",
       "damage": null,
@@ -889,6 +902,7 @@ export const commonData = {
       "id": "arm_padded_coat",
       "name": "누빈 외투",
       "slot": "armor",
+      "zone": 1,
       "grade": "common",
       "stat": "str",
       "damage": null,
@@ -906,6 +920,7 @@ export const commonData = {
       "id": "arm_chain_shirt",
       "name": "사슬 셔츠",
       "slot": "armor",
+      "zone": 1,
       "grade": "uncommon",
       "stat": "str",
       "damage": null,
@@ -928,6 +943,7 @@ export const commonData = {
       "id": "arm_bark_mail",
       "name": "나무껍질 갑옷",
       "slot": "armor",
+      "zone": 1,
       "grade": "rare",
       "stat": "str",
       "damage": null,
@@ -951,6 +967,7 @@ export const commonData = {
       "id": "rng_strength",
       "name": "힘의 반지",
       "slot": "ring",
+      "zone": 1,
       "grade": "common",
       "stat": "str",
       "damage": null,
@@ -970,6 +987,7 @@ export const commonData = {
       "id": "rng_agility",
       "name": "날쌘 반지",
       "slot": "ring",
+      "zone": 1,
       "grade": "common",
       "stat": "agi",
       "damage": null,
@@ -989,6 +1007,7 @@ export const commonData = {
       "id": "rng_wisdom",
       "name": "지혜의 반지",
       "slot": "ring",
+      "zone": 1,
       "grade": "common",
       "stat": "wis",
       "damage": null,
@@ -1008,6 +1027,7 @@ export const commonData = {
       "id": "rng_hunter",
       "name": "사냥꾼의 반지",
       "slot": "ring",
+      "zone": 1,
       "grade": "uncommon",
       "stat": "agi",
       "damage": null,
@@ -1032,6 +1052,7 @@ export const commonData = {
       "id": "rng_oak_heart",
       "name": "참나무 심장 반지",
       "slot": "ring",
+      "zone": 1,
       "grade": "rare",
       "stat": "str",
       "damage": null,
@@ -1056,6 +1077,7 @@ export const commonData = {
       "id": "nck_lucky_charm",
       "name": "행운 부적",
       "slot": "necklace",
+      "zone": 1,
       "grade": "common",
       "stat": "wis",
       "damage": null,
@@ -1078,6 +1100,7 @@ export const commonData = {
       "id": "nck_vigor",
       "name": "활력의 목걸이",
       "slot": "necklace",
+      "zone": 1,
       "grade": "uncommon",
       "stat": "str",
       "damage": null,
@@ -1100,6 +1123,7 @@ export const commonData = {
       "id": "nck_wolf_fang",
       "name": "늑대 이빨 목걸이",
       "slot": "necklace",
+      "zone": 1,
       "grade": "rare",
       "stat": "agi",
       "damage": null,
@@ -1123,6 +1147,7 @@ export const commonData = {
       "id": "wpn_wood_club",
       "name": "나무 몽둥이",
       "slot": "weapon",
+      "zone": 1,
       "grade": "common",
       "stat": "str",
       "damage": 6,
@@ -1140,6 +1165,7 @@ export const commonData = {
       "id": "wpn_war_axe",
       "name": "전투 도끼",
       "slot": "weapon",
+      "zone": 1,
       "grade": "uncommon",
       "stat": "str",
       "damage": 8,
@@ -1162,6 +1188,7 @@ export const commonData = {
       "id": "wpn_bear_hammer",
       "name": "곰 사냥 망치",
       "slot": "weapon",
+      "zone": 1,
       "grade": "rare",
       "stat": "str",
       "damage": 9,
@@ -1186,6 +1213,7 @@ export const commonData = {
       "id": "wpn_short_bow",
       "name": "짧은 활",
       "slot": "weapon",
+      "zone": 1,
       "grade": "common",
       "stat": "agi",
       "damage": 6,
@@ -1203,6 +1231,7 @@ export const commonData = {
       "id": "wpn_twin_daggers",
       "name": "쌍단검",
       "slot": "weapon",
+      "zone": 1,
       "grade": "uncommon",
       "stat": "agi",
       "damage": 5,
@@ -1227,6 +1256,7 @@ export const commonData = {
       "id": "wpn_viper_fang",
       "name": "독사 송곳니",
       "slot": "weapon",
+      "zone": 1,
       "grade": "rare",
       "stat": "agi",
       "damage": 7,
@@ -1251,6 +1281,7 @@ export const commonData = {
       "id": "wpn_bone_wand",
       "name": "뼈 지팡이",
       "slot": "weapon",
+      "zone": 1,
       "grade": "common",
       "stat": "wis",
       "damage": 6,
@@ -1268,6 +1299,7 @@ export const commonData = {
       "id": "wpn_ember_rod",
       "name": "불씨 막대",
       "slot": "weapon",
+      "zone": 1,
       "grade": "uncommon",
       "stat": "wis",
       "damage": 7,
@@ -1290,6 +1322,7 @@ export const commonData = {
       "id": "wpn_star_staff",
       "name": "별빛 홀",
       "slot": "weapon",
+      "zone": 1,
       "grade": "rare",
       "stat": "wis",
       "damage": 7,
@@ -1315,6 +1348,7 @@ export const commonData = {
       "id": "arm_hide_vest",
       "name": "짐승 가죽 조끼",
       "slot": "armor",
+      "zone": 1,
       "grade": "common",
       "stat": "agi",
       "damage": null,
@@ -1332,6 +1366,7 @@ export const commonData = {
       "id": "arm_scale_mail",
       "name": "비늘 갑옷",
       "slot": "armor",
+      "zone": 1,
       "grade": "uncommon",
       "stat": "str",
       "damage": null,
@@ -1354,6 +1389,7 @@ export const commonData = {
       "id": "arm_thorn_vest",
       "name": "가시 조끼",
       "slot": "armor",
+      "zone": 1,
       "grade": "uncommon",
       "stat": "agi",
       "damage": null,
@@ -1376,6 +1412,7 @@ export const commonData = {
       "id": "arm_moonweave_robe",
       "name": "달빛 로브",
       "slot": "armor",
+      "zone": 1,
       "grade": "rare",
       "stat": "wis",
       "damage": null,
@@ -1401,6 +1438,7 @@ export const commonData = {
       "id": "rng_warrior",
       "name": "전사의 반지",
       "slot": "ring",
+      "zone": 1,
       "grade": "uncommon",
       "stat": "str",
       "damage": null,
@@ -1425,6 +1463,7 @@ export const commonData = {
       "id": "rng_sage",
       "name": "현자의 반지",
       "slot": "ring",
+      "zone": 1,
       "grade": "uncommon",
       "stat": "wis",
       "damage": null,
@@ -1449,6 +1488,7 @@ export const commonData = {
       "id": "rng_shadow",
       "name": "그림자 반지",
       "slot": "ring",
+      "zone": 1,
       "grade": "rare",
       "stat": "agi",
       "damage": null,
@@ -1474,6 +1514,7 @@ export const commonData = {
       "id": "nck_bone_charm",
       "name": "뼈 부적",
       "slot": "necklace",
+      "zone": 1,
       "grade": "common",
       "stat": "str",
       "damage": null,
@@ -1496,6 +1537,7 @@ export const commonData = {
       "id": "nck_antidote_pendant",
       "name": "해독 펜던트",
       "slot": "necklace",
+      "zone": 1,
       "grade": "uncommon",
       "stat": "wis",
       "damage": null,
@@ -1518,6 +1560,7 @@ export const commonData = {
       "id": "nck_owl_eye",
       "name": "부엉이 눈 목걸이",
       "slot": "necklace",
+      "zone": 1,
       "grade": "rare",
       "stat": "wis",
       "damage": null,
@@ -1541,6 +1584,7 @@ export const commonData = {
       "id": "wpn_u_whisper_heart",
       "name": "속삭임의 심장",
       "slot": "weapon",
+      "zone": 1,
       "grade": "unique",
       "stat": "wis",
       "damage": 9,
@@ -1566,6 +1610,7 @@ export const commonData = {
       "id": "wpn_u_alpha_fang",
       "name": "우두머리의 송곳니",
       "slot": "weapon",
+      "zone": 1,
       "grade": "unique",
       "stat": "agi",
       "damage": 9,
@@ -1591,6 +1636,7 @@ export const commonData = {
       "id": "arm_u_ancient_bark",
       "name": "고목의 수호",
       "slot": "armor",
+      "zone": 1,
       "grade": "unique",
       "stat": "str",
       "damage": null,
@@ -1609,6 +1655,1064 @@ export const commonData = {
       "starter": false,
       "price": 40,
       "description": "천 년 묵은 고목의 껍질."
+    },
+    {
+      "id": "wpn2_warden_axe",
+      "name": "숲지기의 도끼",
+      "slot": "weapon",
+      "zone": 2,
+      "grade": "common",
+      "stat": "str",
+      "damage": 7,
+      "damageReduction": 0,
+      "maxHp": 0,
+      "statBonus": {
+        "str": 2
+      },
+      "effects": [],
+      "requirement": null,
+      "unique": false,
+      "starter": false,
+      "price": 35,
+      "description": "숲지기들이 길을 낼 때 쓰던 도끼."
+    },
+    {
+      "id": "wpn2_moss_maul",
+      "name": "이끼 망치",
+      "slot": "weapon",
+      "zone": 2,
+      "grade": "common",
+      "stat": "str",
+      "damage": 6,
+      "damageReduction": 0,
+      "maxHp": 0,
+      "statBonus": {
+        "str": 2
+      },
+      "effects": [],
+      "requirement": null,
+      "unique": false,
+      "starter": false,
+      "price": 35,
+      "description": "손잡이까지 이끼가 덮인 묵직한 망치."
+    },
+    {
+      "id": "wpn2_sentinel_hammer",
+      "name": "파수석 망치",
+      "slot": "weapon",
+      "zone": 2,
+      "grade": "uncommon",
+      "stat": "str",
+      "damage": 8,
+      "damageReduction": 0,
+      "maxHp": 0,
+      "statBonus": {
+        "str": 3
+      },
+      "effects": [
+        "onHit@20>weaken:0.7:1"
+      ],
+      "requirement": {
+        "stat": "str",
+        "value": 14
+      },
+      "unique": false,
+      "starter": false,
+      "price": 50,
+      "description": "파수석의 돌 조각을 박아 넣은 망치."
+    },
+    {
+      "id": "wpn2_warden_longsword",
+      "name": "숲지기 장검",
+      "slot": "weapon",
+      "zone": 2,
+      "grade": "uncommon",
+      "stat": "str",
+      "damage": 7,
+      "damageReduction": 0,
+      "maxHp": 0,
+      "statBonus": {
+        "str": 3
+      },
+      "effects": [
+        "onBattleStart>shield:4:2"
+      ],
+      "requirement": {
+        "stat": "str",
+        "value": 14
+      },
+      "unique": false,
+      "starter": false,
+      "price": 50,
+      "description": "숲지기 문장이 새겨진 장검."
+    },
+    {
+      "id": "wpn2_thorn_spear",
+      "name": "가시뿔 창",
+      "slot": "weapon",
+      "zone": 2,
+      "grade": "rare",
+      "stat": "str",
+      "damage": 9,
+      "damageReduction": 0,
+      "maxHp": 0,
+      "statBonus": {
+        "str": 4
+      },
+      "effects": [
+        "onHit>bleed:1",
+        "crit:1"
+      ],
+      "requirement": {
+        "stat": "str",
+        "value": 17
+      },
+      "unique": false,
+      "starter": false,
+      "price": 65,
+      "description": "가시뿔 사슴의 뿔을 깎아 만든 창."
+    },
+    {
+      "id": "wpn2_bear_greataxe",
+      "name": "곰 사냥꾼의 대도끼",
+      "slot": "weapon",
+      "zone": 2,
+      "grade": "rare",
+      "stat": "str",
+      "damage": 9,
+      "damageReduction": 0,
+      "maxHp": 5,
+      "statBonus": {
+        "str": 4
+      },
+      "effects": [
+        "lowHp>basicAttackBonus:4"
+      ],
+      "requirement": {
+        "stat": "str",
+        "value": 17
+      },
+      "unique": false,
+      "starter": false,
+      "price": 65,
+      "description": "곰 사냥꾼들이 대대로 물려 쓰던 도끼."
+    },
+    {
+      "id": "wpn2_hunter_shortbow",
+      "name": "사냥꾼 단궁",
+      "slot": "weapon",
+      "zone": 2,
+      "grade": "common",
+      "stat": "agi",
+      "damage": 6,
+      "damageReduction": 0,
+      "maxHp": 0,
+      "statBonus": {
+        "agi": 2
+      },
+      "effects": [],
+      "requirement": null,
+      "unique": false,
+      "starter": false,
+      "price": 35,
+      "description": "마을 사냥꾼들이 쓰던 작은 활."
+    },
+    {
+      "id": "wpn2_bat_fang_dagger",
+      "name": "박쥐 이빨 단검",
+      "slot": "weapon",
+      "zone": 2,
+      "grade": "common",
+      "stat": "agi",
+      "damage": 5,
+      "damageReduction": 0,
+      "maxHp": 0,
+      "statBonus": {
+        "agi": 2
+      },
+      "effects": [],
+      "requirement": null,
+      "unique": false,
+      "starter": false,
+      "price": 35,
+      "description": "박쥐 이빨로 날을 세운 단검."
+    },
+    {
+      "id": "wpn2_barbed_bow",
+      "name": "미늘 화살 활",
+      "slot": "weapon",
+      "zone": 2,
+      "grade": "uncommon",
+      "stat": "agi",
+      "damage": 7,
+      "damageReduction": 0,
+      "maxHp": 0,
+      "statBonus": {
+        "agi": 3
+      },
+      "effects": [
+        "onHit@25>bleed:1"
+      ],
+      "requirement": {
+        "stat": "agi",
+        "value": 14
+      },
+      "unique": false,
+      "starter": false,
+      "price": 50,
+      "description": "홀린 사냥꾼들이 쓰던 활. 화살촉에 미늘이 달렸다."
+    },
+    {
+      "id": "wpn2_shadow_wing",
+      "name": "그림자 날개 단검",
+      "slot": "weapon",
+      "zone": 2,
+      "grade": "uncommon",
+      "stat": "agi",
+      "damage": 6,
+      "damageReduction": 0,
+      "maxHp": 0,
+      "statBonus": {
+        "agi": 3
+      },
+      "effects": [
+        "evade:1"
+      ],
+      "requirement": {
+        "stat": "agi",
+        "value": 14
+      },
+      "unique": false,
+      "starter": false,
+      "price": 50,
+      "description": "박쥐 날개뼈로 만든 가벼운 단검."
+    },
+    {
+      "id": "wpn2_chief_longbow",
+      "name": "사냥꾼 우두머리의 장궁",
+      "slot": "weapon",
+      "zone": 2,
+      "grade": "rare",
+      "stat": "agi",
+      "damage": 8,
+      "damageReduction": 0,
+      "maxHp": 0,
+      "statBonus": {
+        "agi": 4
+      },
+      "effects": [
+        "crit:1",
+        "onCrit>bleed:2"
+      ],
+      "requirement": {
+        "stat": "agi",
+        "value": 17
+      },
+      "unique": false,
+      "starter": false,
+      "price": 65,
+      "description": "급소만 노리던 우두머리의 활."
+    },
+    {
+      "id": "wpn2_bat_lord_fang",
+      "name": "박쥐 군주의 송곳니",
+      "slot": "weapon",
+      "zone": 2,
+      "grade": "rare",
+      "stat": "agi",
+      "damage": 8,
+      "damageReduction": 0,
+      "maxHp": 0,
+      "statBonus": {
+        "agi": 4
+      },
+      "effects": [
+        "lifesteal:10"
+      ],
+      "requirement": {
+        "stat": "agi",
+        "value": 17
+      },
+      "unique": false,
+      "starter": false,
+      "price": 65,
+      "description": "박쥐 군주의 송곳니를 박은 단검."
+    },
+    {
+      "id": "wpn2_moss_staff",
+      "name": "이끼 지팡이",
+      "slot": "weapon",
+      "zone": 2,
+      "grade": "common",
+      "stat": "wis",
+      "damage": 6,
+      "damageReduction": 0,
+      "maxHp": 0,
+      "statBonus": {
+        "wis": 2
+      },
+      "effects": [],
+      "requirement": null,
+      "unique": false,
+      "starter": false,
+      "price": 35,
+      "description": "이끼가 마력을 머금은 지팡이."
+    },
+    {
+      "id": "wpn2_watch_staff",
+      "name": "망루 지팡이",
+      "slot": "weapon",
+      "zone": 2,
+      "grade": "common",
+      "stat": "wis",
+      "damage": 5,
+      "damageReduction": 0,
+      "maxHp": 0,
+      "statBonus": {
+        "wis": 2
+      },
+      "effects": [],
+      "requirement": null,
+      "unique": false,
+      "starter": false,
+      "price": 35,
+      "description": "망루 나무의 가지로 만든 지팡이."
+    },
+    {
+      "id": "wpn2_shade_lantern",
+      "name": "망령 등불 지팡이",
+      "slot": "weapon",
+      "zone": 2,
+      "grade": "uncommon",
+      "stat": "wis",
+      "damage": 7,
+      "damageReduction": 0,
+      "maxHp": 0,
+      "statBonus": {
+        "wis": 3
+      },
+      "effects": [
+        "onSkill@30>weaken:0.7:1"
+      ],
+      "requirement": {
+        "stat": "wis",
+        "value": 14
+      },
+      "unique": false,
+      "starter": false,
+      "price": 50,
+      "description": "끝에 푸른 등불이 매달린 지팡이."
+    },
+    {
+      "id": "wpn2_herbalist_staff",
+      "name": "약초꾼의 지팡이",
+      "slot": "weapon",
+      "zone": 2,
+      "grade": "uncommon",
+      "stat": "wis",
+      "damage": 6,
+      "damageReduction": 0,
+      "maxHp": 0,
+      "statBonus": {
+        "wis": 3
+      },
+      "effects": [
+        "onSkill>heal:3"
+      ],
+      "requirement": {
+        "stat": "wis",
+        "value": 14
+      },
+      "unique": false,
+      "starter": false,
+      "price": 50,
+      "description": "약초 향이 배어 있는 지팡이."
+    },
+    {
+      "id": "wpn2_whisper_crystal",
+      "name": "속삭임 수정 지팡이",
+      "slot": "weapon",
+      "zone": 2,
+      "grade": "rare",
+      "stat": "wis",
+      "damage": 8,
+      "damageReduction": 0,
+      "maxHp": 0,
+      "statBonus": {
+        "wis": 4
+      },
+      "effects": [
+        "skillDamageBonus:3",
+        "onSkill@30>cooldown:-1"
+      ],
+      "requirement": {
+        "stat": "wis",
+        "value": 17
+      },
+      "unique": false,
+      "starter": false,
+      "price": 65,
+      "description": "수정 속에서 희미한 목소리가 울린다."
+    },
+    {
+      "id": "wpn2_rite_scepter",
+      "name": "숲지기 의식 홀",
+      "slot": "weapon",
+      "zone": 2,
+      "grade": "rare",
+      "stat": "wis",
+      "damage": 9,
+      "damageReduction": 0,
+      "maxHp": 0,
+      "statBonus": {
+        "wis": 4
+      },
+      "effects": [
+        "onBattleStart>shield:6:2"
+      ],
+      "requirement": {
+        "stat": "wis",
+        "value": 17
+      },
+      "unique": false,
+      "starter": false,
+      "price": 65,
+      "description": "숲지기들이 의식 때 들던 홀."
+    },
+    {
+      "id": "wpn2_u_warden_oath",
+      "name": "녹슨 숲지기의 맹세",
+      "slot": "weapon",
+      "zone": 2,
+      "grade": "unique",
+      "stat": "str",
+      "damage": 10,
+      "damageReduction": 0,
+      "maxHp": 0,
+      "statBonus": {
+        "str": 5
+      },
+      "effects": [
+        "onBattleStart>shield:8:2",
+        "reflect:3"
+      ],
+      "requirement": {
+        "stat": "str",
+        "value": 17
+      },
+      "unique": true,
+      "starter": false,
+      "price": 80,
+      "description": "녹슨 숲지기가 끝까지 놓지 않았던 검."
+    },
+    {
+      "id": "wpn2_u_crown_horn",
+      "name": "가시왕관의 뿔",
+      "slot": "weapon",
+      "zone": 2,
+      "grade": "unique",
+      "stat": "agi",
+      "damage": 10,
+      "damageReduction": 0,
+      "maxHp": 0,
+      "statBonus": {
+        "agi": 5
+      },
+      "effects": [
+        "onHit>bleed:2",
+        "onKill>heal:12"
+      ],
+      "requirement": {
+        "stat": "agi",
+        "value": 17
+      },
+      "unique": true,
+      "starter": false,
+      "price": 80,
+      "description": "가시왕관의 뿔 끝을 날로 세웠다."
+    },
+    {
+      "id": "wpn2_u_shaman_staff",
+      "name": "이끼 무녀의 지팡이",
+      "slot": "weapon",
+      "zone": 2,
+      "grade": "unique",
+      "stat": "wis",
+      "damage": 10,
+      "damageReduction": 0,
+      "maxHp": 0,
+      "statBonus": {
+        "wis": 5
+      },
+      "effects": [
+        "cooldownReduction:1",
+        "onSkill@30>vulnerable:1.3:1"
+      ],
+      "requirement": {
+        "stat": "wis",
+        "value": 17
+      },
+      "unique": true,
+      "starter": false,
+      "price": 80,
+      "description": "수십 개의 목소리가 깃든 지팡이."
+    },
+    {
+      "id": "arm2_hunter_leather",
+      "name": "사냥꾼 가죽옷",
+      "slot": "armor",
+      "zone": 2,
+      "grade": "common",
+      "stat": "agi",
+      "damage": null,
+      "damageReduction": 1,
+      "maxHp": 5,
+      "statBonus": {},
+      "effects": [],
+      "requirement": null,
+      "unique": false,
+      "starter": false,
+      "price": 35,
+      "description": "사냥꾼 마을에서 쓰던 가죽옷."
+    },
+    {
+      "id": "arm2_warden_chain",
+      "name": "숲지기 사슬옷",
+      "slot": "armor",
+      "zone": 2,
+      "grade": "common",
+      "stat": "str",
+      "damage": null,
+      "damageReduction": 2,
+      "maxHp": 0,
+      "statBonus": {},
+      "effects": [],
+      "requirement": null,
+      "unique": false,
+      "starter": false,
+      "price": 35,
+      "description": "녹이 슬었지만 튼튼하다."
+    },
+    {
+      "id": "arm2_moss_plate",
+      "name": "이끼 덮인 판금",
+      "slot": "armor",
+      "zone": 2,
+      "grade": "uncommon",
+      "stat": "str",
+      "damage": null,
+      "damageReduction": 3,
+      "maxHp": 5,
+      "statBonus": {},
+      "effects": [
+        "onHurt@25>shield:4:1"
+      ],
+      "requirement": {
+        "stat": "str",
+        "value": 14
+      },
+      "unique": false,
+      "starter": false,
+      "price": 50,
+      "description": "이끼가 충격을 흡수한다."
+    },
+    {
+      "id": "arm2_bat_cloak",
+      "name": "박쥐 가죽 망토",
+      "slot": "armor",
+      "zone": 2,
+      "grade": "uncommon",
+      "stat": "agi",
+      "damage": null,
+      "damageReduction": 1,
+      "maxHp": 0,
+      "statBonus": {},
+      "effects": [
+        "evade:1"
+      ],
+      "requirement": {
+        "stat": "agi",
+        "value": 14
+      },
+      "unique": false,
+      "starter": false,
+      "price": 50,
+      "description": "움직임을 흐리게 만드는 망토."
+    },
+    {
+      "id": "arm2_shade_shroud",
+      "name": "망령의 수의",
+      "slot": "armor",
+      "zone": 2,
+      "grade": "uncommon",
+      "stat": "wis",
+      "damage": null,
+      "damageReduction": 0,
+      "maxHp": 10,
+      "statBonus": {
+        "wis": 1
+      },
+      "effects": [
+        "immune:weaken"
+      ],
+      "requirement": {
+        "stat": "wis",
+        "value": 14
+      },
+      "unique": false,
+      "starter": false,
+      "price": 50,
+      "description": "서늘한 기운이 마음을 붙든다."
+    },
+    {
+      "id": "arm2_sentinel_mail",
+      "name": "파수석 갑주",
+      "slot": "armor",
+      "zone": 2,
+      "grade": "rare",
+      "stat": "str",
+      "damage": null,
+      "damageReduction": 3,
+      "maxHp": 10,
+      "statBonus": {},
+      "effects": [
+        "reflect:3"
+      ],
+      "requirement": {
+        "stat": "str",
+        "value": 17
+      },
+      "unique": false,
+      "starter": false,
+      "price": 65,
+      "description": "파수석 조각을 엮은 갑옷."
+    },
+    {
+      "id": "arm2_herb_robe",
+      "name": "약초 향 로브",
+      "slot": "armor",
+      "zone": 2,
+      "grade": "rare",
+      "stat": "wis",
+      "damage": null,
+      "damageReduction": 0,
+      "maxHp": 10,
+      "statBonus": {
+        "wis": 2
+      },
+      "effects": [
+        "onTurnStart>heal:2"
+      ],
+      "requirement": {
+        "stat": "wis",
+        "value": 17
+      },
+      "unique": false,
+      "starter": false,
+      "price": 65,
+      "description": "약초꾼이 지은 로브."
+    },
+    {
+      "id": "arm2_u_bear_hide",
+      "name": "늙은 곰의 가죽",
+      "slot": "armor",
+      "zone": 2,
+      "grade": "unique",
+      "stat": "str",
+      "damage": null,
+      "damageReduction": 4,
+      "maxHp": 15,
+      "statBonus": {},
+      "effects": [
+        "immune:bleed",
+        "lowHp>basicAttackBonus:3"
+      ],
+      "requirement": {
+        "stat": "str",
+        "value": 17
+      },
+      "unique": true,
+      "starter": false,
+      "price": 80,
+      "description": "늙은 그루터기 곰의 두꺼운 가죽."
+    },
+    {
+      "id": "rng2_strength",
+      "name": "힘의 고리",
+      "slot": "ring",
+      "zone": 2,
+      "grade": "common",
+      "stat": "str",
+      "damage": null,
+      "damageReduction": 0,
+      "maxHp": 0,
+      "statBonus": {
+        "str": 5
+      },
+      "effects": [],
+      "requirement": null,
+      "unique": false,
+      "starter": false,
+      "price": 35,
+      "description": "단단한 쇠고리."
+    },
+    {
+      "id": "rng2_agility",
+      "name": "날쌘 고리",
+      "slot": "ring",
+      "zone": 2,
+      "grade": "common",
+      "stat": "agi",
+      "damage": null,
+      "damageReduction": 0,
+      "maxHp": 0,
+      "statBonus": {
+        "agi": 5
+      },
+      "effects": [],
+      "requirement": null,
+      "unique": false,
+      "starter": false,
+      "price": 35,
+      "description": "가벼운 은고리."
+    },
+    {
+      "id": "rng2_wisdom",
+      "name": "지혜의 고리",
+      "slot": "ring",
+      "zone": 2,
+      "grade": "common",
+      "stat": "wis",
+      "damage": null,
+      "damageReduction": 0,
+      "maxHp": 0,
+      "statBonus": {
+        "wis": 5
+      },
+      "effects": [],
+      "requirement": null,
+      "unique": false,
+      "starter": false,
+      "price": 35,
+      "description": "이끼빛 돌을 박은 고리."
+    },
+    {
+      "id": "rng2_warden_seal",
+      "name": "숲지기 인장 반지",
+      "slot": "ring",
+      "zone": 2,
+      "grade": "uncommon",
+      "stat": "str",
+      "damage": null,
+      "damageReduction": 0,
+      "maxHp": 0,
+      "statBonus": {
+        "str": 6
+      },
+      "effects": [
+        "reflect:2"
+      ],
+      "requirement": {
+        "stat": "str",
+        "value": 14
+      },
+      "unique": false,
+      "starter": false,
+      "price": 50,
+      "description": "숲지기 대장의 인장."
+    },
+    {
+      "id": "rng2_horn_ring",
+      "name": "사냥꾼의 뿔 반지",
+      "slot": "ring",
+      "zone": 2,
+      "grade": "uncommon",
+      "stat": "agi",
+      "damage": null,
+      "damageReduction": 0,
+      "maxHp": 0,
+      "statBonus": {
+        "agi": 6
+      },
+      "effects": [
+        "crit:1"
+      ],
+      "requirement": {
+        "stat": "agi",
+        "value": 14
+      },
+      "unique": false,
+      "starter": false,
+      "price": 50,
+      "description": "사슴뿔을 깎아 만든 반지."
+    },
+    {
+      "id": "rng2_moss_ring",
+      "name": "이끼 반지",
+      "slot": "ring",
+      "zone": 2,
+      "grade": "uncommon",
+      "stat": "wis",
+      "damage": null,
+      "damageReduction": 0,
+      "maxHp": 0,
+      "statBonus": {
+        "wis": 6
+      },
+      "effects": [
+        "skillDamageBonus:2"
+      ],
+      "requirement": {
+        "stat": "wis",
+        "value": 14
+      },
+      "unique": false,
+      "starter": false,
+      "price": 50,
+      "description": "이끼가 반지를 감싸 자란다."
+    },
+    {
+      "id": "rng2_thorn_ring",
+      "name": "가시 반지",
+      "slot": "ring",
+      "zone": 2,
+      "grade": "rare",
+      "stat": "str",
+      "damage": null,
+      "damageReduction": 0,
+      "maxHp": 0,
+      "statBonus": {
+        "str": 8
+      },
+      "effects": [
+        "lifesteal:10"
+      ],
+      "requirement": {
+        "stat": "str",
+        "value": 17
+      },
+      "unique": false,
+      "starter": false,
+      "price": 65,
+      "description": "가시가 손가락을 파고든다."
+    },
+    {
+      "id": "rng2_dusk_ring",
+      "name": "어스름 반지",
+      "slot": "ring",
+      "zone": 2,
+      "grade": "rare",
+      "stat": "agi",
+      "damage": null,
+      "damageReduction": 0,
+      "maxHp": 0,
+      "statBonus": {
+        "agi": 8
+      },
+      "effects": [
+        "evade:1",
+        "onCrit>empower:3:1"
+      ],
+      "requirement": {
+        "stat": "agi",
+        "value": 17
+      },
+      "unique": false,
+      "starter": false,
+      "price": 65,
+      "description": "빛을 삼키는 검은 반지."
+    },
+    {
+      "id": "rng2_shaman_ring",
+      "name": "무녀의 이끼 반지",
+      "slot": "ring",
+      "zone": 2,
+      "grade": "rare",
+      "stat": "wis",
+      "damage": null,
+      "damageReduction": 0,
+      "maxHp": 0,
+      "statBonus": {
+        "wis": 8
+      },
+      "effects": [
+        "onSkill>heal:3"
+      ],
+      "requirement": {
+        "stat": "wis",
+        "value": 17
+      },
+      "unique": false,
+      "starter": false,
+      "price": 65,
+      "description": "무녀가 끼던 반지. 속삭임이 들린다."
+    },
+    {
+      "id": "nck2_tooth_necklace",
+      "name": "사냥꾼의 이빨 목걸이",
+      "slot": "necklace",
+      "zone": 2,
+      "grade": "common",
+      "stat": "str",
+      "damage": null,
+      "damageReduction": 0,
+      "maxHp": 0,
+      "statBonus": {},
+      "effects": [
+        "basicAttackBonus:2"
+      ],
+      "requirement": {
+        "stat": "str",
+        "value": 11
+      },
+      "unique": false,
+      "starter": false,
+      "price": 35,
+      "description": "사냥감의 이빨을 꿴 목걸이."
+    },
+    {
+      "id": "nck2_dried_flower",
+      "name": "마른 꽃 부적",
+      "slot": "necklace",
+      "zone": 2,
+      "grade": "common",
+      "stat": "wis",
+      "damage": null,
+      "damageReduction": 0,
+      "maxHp": 0,
+      "statBonus": {},
+      "effects": [
+        "exploreBonus:2"
+      ],
+      "requirement": {
+        "stat": "wis",
+        "value": 11
+      },
+      "unique": false,
+      "starter": false,
+      "price": 35,
+      "description": "제사터에 놓였던 꽃을 말린 부적."
+    },
+    {
+      "id": "nck2_warden_badge",
+      "name": "숲지기 휘장",
+      "slot": "necklace",
+      "zone": 2,
+      "grade": "uncommon",
+      "stat": "str",
+      "damage": null,
+      "damageReduction": 0,
+      "maxHp": 0,
+      "statBonus": {},
+      "effects": [
+        "onBattleStart>shield:5:2"
+      ],
+      "requirement": {
+        "stat": "str",
+        "value": 14
+      },
+      "unique": false,
+      "starter": false,
+      "price": 50,
+      "description": "숲지기의 은빛 휘장."
+    },
+    {
+      "id": "nck2_bat_wing",
+      "name": "박쥐 날개 목걸이",
+      "slot": "necklace",
+      "zone": 2,
+      "grade": "uncommon",
+      "stat": "agi",
+      "damage": null,
+      "damageReduction": 0,
+      "maxHp": 0,
+      "statBonus": {},
+      "effects": [
+        "evade:1"
+      ],
+      "requirement": {
+        "stat": "agi",
+        "value": 14
+      },
+      "unique": false,
+      "starter": false,
+      "price": 50,
+      "description": "작은 박쥐 날개를 말려 꿴 목걸이."
+    },
+    {
+      "id": "nck2_clot_charm",
+      "name": "지혈 부적",
+      "slot": "necklace",
+      "zone": 2,
+      "grade": "uncommon",
+      "stat": "wis",
+      "damage": null,
+      "damageReduction": 0,
+      "maxHp": 0,
+      "statBonus": {},
+      "effects": [
+        "immune:bleed"
+      ],
+      "requirement": {
+        "stat": "wis",
+        "value": 14
+      },
+      "unique": false,
+      "starter": false,
+      "price": 50,
+      "description": "가시뿔 수액을 굳혀 만든 부적. 피가 멎는다."
+    },
+    {
+      "id": "nck2_warning_charm",
+      "name": "경고의 부적",
+      "slot": "necklace",
+      "zone": 2,
+      "grade": "rare",
+      "stat": "wis",
+      "damage": null,
+      "damageReduction": 0,
+      "maxHp": 0,
+      "statBonus": {
+        "wis": 2
+      },
+      "effects": [
+        "immune:weaken",
+        "immune:vulnerable"
+      ],
+      "requirement": {
+        "stat": "wis",
+        "value": 17
+      },
+      "unique": false,
+      "starter": false,
+      "price": 65,
+      "description": "\"돌아가라\"는 글귀가 새겨진 부적."
+    },
+    {
+      "id": "nck2_thornhorn",
+      "name": "가시뿔 목걸이",
+      "slot": "necklace",
+      "zone": 2,
+      "grade": "rare",
+      "stat": "agi",
+      "damage": null,
+      "damageReduction": 0,
+      "maxHp": 0,
+      "statBonus": {
+        "agi": 2
+      },
+      "effects": [
+        "crit:1",
+        "onCrit>bleed:2"
+      ],
+      "requirement": {
+        "stat": "agi",
+        "value": 17
+      },
+      "unique": false,
+      "starter": false,
+      "price": 65,
+      "description": "가시뿔 조각을 꿴 목걸이."
     }
   ],
   "consumables": [
@@ -1720,6 +2824,36 @@ export const commonData = {
       "maxStack": 3,
       "price": null,
       "description": "마시면 지혜가 영구히 2 오른다.",
+      "starter": false
+    },
+    {
+      "id": "con_essence_str",
+      "name": "정수(힘)",
+      "effect": "statUp:str",
+      "amount": 1,
+      "maxStack": 3,
+      "price": null,
+      "description": "쓰러뜨린 적에게서 얻은 힘의 결정. 마시면 힘이 영구히 1 오른다. 화면 이름은 \"<적 이름>의 <essence>\"로 바뀐다.",
+      "starter": false
+    },
+    {
+      "id": "con_essence_agi",
+      "name": "정수(민첩)",
+      "effect": "statUp:agi",
+      "amount": 1,
+      "maxStack": 3,
+      "price": null,
+      "description": "쓰러뜨린 적에게서 얻은 힘의 결정. 마시면 민첩이 영구히 1 오른다. 화면 이름은 \"<적 이름>의 <essence>\"로 바뀐다.",
+      "starter": false
+    },
+    {
+      "id": "con_essence_wis",
+      "name": "정수(지혜)",
+      "effect": "statUp:wis",
+      "amount": 1,
+      "maxStack": 3,
+      "price": null,
+      "description": "쓰러뜨린 적에게서 얻은 힘의 결정. 마시면 지혜가 영구히 1 오른다. 화면 이름은 \"<적 이름>의 <essence>\"로 바뀐다.",
       "starter": false
     }
   ],

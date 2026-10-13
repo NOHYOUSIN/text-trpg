@@ -1,7 +1,16 @@
-import { catalog } from "../data/catalog.js?v=20261013-042652";
-import { BOSS_REWARD_CANDIDATES, BOSS_REWARD_GRADE, EVENT_SKILL_CHOICE, GRADE_WEIGHTS_BY_ZONE, LOOT, SKILL_POOL } from "../data/rules.js?v=20261013-042652";
-import { isElixir } from "./ConsumableEffects.js?v=20261013-042652";
-import { pickBossElixir, pickRandomElixir } from "./ElixirSystem.js?v=20261013-042652";
+import { catalog } from "../data/catalog.js?v=20261014-041746";
+import {
+  BOSS_REWARD_CANDIDATES,
+  BOSS_REWARD_GRADE,
+  ESSENCE,
+  EVENT_SKILL_CHOICE,
+  GRADE_WEIGHTS_BY_ZONE,
+  LOOT,
+  REWARD_CHOICE,
+  SKILL_POOL,
+} from "../data/rules.js?v=20261014-041746";
+import { isElixir } from "./ConsumableEffects.js?v=20261014-041746";
+import { pickBossElixir, pickEssence, pickRandomElixir } from "./ElixirSystem.js?v=20261014-041746";
 
 const GRADE_ORDER = ["common", "uncommon", "rare", "unique"];
 
@@ -24,9 +33,12 @@ function pickByGrade(list, grade, dice) {
 }
 
 function availableEquipment(run, excludeIds = []) {
-  // 직업 시작 장비는 보상·상점에 나오지 않는다.
+  // 직업 시작 장비는 보상·상점에 나오지 않는다. 현재 구역의 장비만 나온다(2026-10-14).
   return [...catalog.equipment.values()].filter(
-    (item) => !item.starter && !(item.unique && run.seenUniques.has(item.id)) && !excludeIds.includes(item.id),
+    (item) => !item.starter
+      && (item.zone ?? 1) === run.zone
+      && !(item.unique && run.seenUniques.has(item.id))
+      && !excludeIds.includes(item.id),
   );
 }
 
@@ -61,9 +73,8 @@ export function pickSkill({ run, adventurer, dice, grade = rollGrade(run.zone, d
   return pickByGrade(first.length ? first : second, grade, dice);
 }
 
-// 서로 다른 스킬 후보 여러 개
-export function pickSkillChoices({ run, adventurer, dice }) {
-  const count = dice.int(EVENT_SKILL_CHOICE.min, EVENT_SKILL_CHOICE.max);
+// 서로 다른 스킬 후보 여러 개(count가 없으면 2~3개)
+export function pickSkillChoices({ run, adventurer, dice, count = dice.int(EVENT_SKILL_CHOICE.min, EVENT_SKILL_CHOICE.max) }) {
   const ids = [];
 
   for (let i = 0; i < count; i += 1) {
@@ -77,6 +88,21 @@ export function pickSkillChoices({ run, adventurer, dice }) {
   return ids;
 }
 
+// 서로 다른 장비 후보 여러 개(고르는 보상)
+function pickEquipmentChoices({ run, dice, count }) {
+  const ids = [];
+
+  for (let i = 0; i < count; i += 1) {
+    const item = pickByGrade(availableEquipment(run, ids), rollGrade(run.zone, dice), dice);
+
+    if (item) {
+      ids.push(item.id);
+    }
+  }
+
+  return ids;
+}
+
 // 시작 지급 전용(starter) 소모품과 영약은 일반 소모품 뽑기(전투 보상·상점·item:random:consumable)에 나오지 않는다.
 export function pickConsumable({ dice, excludeIds = [] }) {
   return dice.pick([...catalog.consumables.values()].filter((item) => !item.starter && !isElixir(item) && !excludeIds.includes(item.id)));
@@ -84,10 +110,22 @@ export function pickConsumable({ dice, excludeIds = [] }) {
 
 // 획득 표기({ kind, id } 또는 { kind, random })를 실제 ID로 정한다.
 export function resolveAcquisition(acquisition, { run, adventurer, dice }) {
-  // 사건의 skill:choice — 후보 2~3개를 정해 두고, 플레이어가 고른다.
+  // 스킬 선택(사건 skill:choice·skill:random, 보물·정비 탐색) — 후보 2~3개(바닥 보장은 count개) 중 플레이어가 고른다.
   if (acquisition.kind === "skill" && acquisition.choice) {
-    const options = pickSkillChoices({ run, adventurer, dice });
+    const options = pickSkillChoices({ run, adventurer, dice, count: acquisition.count });
     return options.length ? { kind: "skillChoice", options } : null;
+  }
+
+  // 장비 선택(보물·정비 탐색, 사건 item:random:equipment) — 후보 중 하나를 고른다. 유일 장비는 고를 때 등장 처리한다.
+  if (acquisition.random === "equipment" && acquisition.choice) {
+    const options = pickEquipmentChoices({ run, dice, count: acquisition.choice });
+    return options.length ? { kind: "equipmentChoice", options } : null;
+  }
+
+  // 전투 보상 정수: 화면 이름은 "<적 이름>의 <표현>"
+  if (acquisition.random === "essence") {
+    const essence = pickEssence({ adventurer, dice, enemyName: acquisition.enemyName, word: acquisition.word });
+    return essence ? { kind: "item", id: essence.id, label: essence.label } : null;
   }
 
   if (acquisition.kind === "skill") {
@@ -114,8 +152,9 @@ export function resolveAcquisition(acquisition, { run, adventurer, dice }) {
   return item ? { kind: "item", id: item.id } : null;
 }
 
-// 일반 전투 보상(골드 외): 소모품 20%, 장비 20%(정예 30%)
-export function rollCombatLoot({ run, dice, veteran = false }) {
+// 일반 전투 보상(골드 외): 소모품 20%, 장비 20%(정예 30%). 둘 다 없으면(골드만) 40%로 정수.
+export function rollCombatLoot({ run, dice, enemy }) {
+  const veteran = enemy?.rank === "veteran";
   const loot = [];
 
   if (dice.chance(LOOT.combatConsumableChance)) {
@@ -126,12 +165,22 @@ export function rollCombatLoot({ run, dice, veteran = false }) {
     loot.push({ kind: "item", random: "equipment" });
   }
 
+  if (!loot.length && enemy && dice.chance(ESSENCE.chance)) {
+    loot.push({ kind: "item", random: "essence", enemyName: enemy.name, word: enemy.essence });
+  }
+
   return loot;
 }
 
+// 보물·정비 탐색: 장비는 후보 2개, 스킬은 2~3개 중 고른다. 소모품·영약은 1개. (2026-10-14)
 export function rollTreasure({ dice }) {
   const kind = dice.pickWeighted(LOOT.treasureWeights);
-  return kind === "skill" ? { kind: "skill", random: true } : { kind: "item", random: kind };
+
+  if (kind === "skill") {
+    return { kind: "skill", choice: true };
+  }
+
+  return kind === "equipment" ? { kind: "item", random: "equipment", choice: REWARD_CHOICE.equipment } : { kind: "item", random: kind };
 }
 
 // 보스 보상 후보 2~3개: 확정 등급의 스킬 또는 장비.

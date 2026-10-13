@@ -1,14 +1,14 @@
-import { catalog } from "../data/catalog.js?v=20261013-042652";
-import { COMBAT, DICE } from "../data/rules.js?v=20261013-042652";
-import { Enemy } from "../models/Enemy.js?v=20261013-042652";
-import { capEvade, capLifesteal, critMinFrom, lowHpBonus, runAbilities } from "./AbilitySystem.js?v=20261013-042652";
-import { applyReduction, computeEffect, describeCalculation, describeRoll, rollTier } from "./DamageSystem.js?v=20261013-042652";
-import { consumableEffects, isElixir } from "./ConsumableEffects.js?v=20261013-042652";
-import { chooseEnemySkillId } from "./EnemyAI.js?v=20261013-042652";
-import { attackSkillBase, basicAttackBase, supportAmount } from "./FormulaSystem.js?v=20261013-042652";
-import { parseEffects, STATUS_LABELS, toStatusSpec } from "./EffectParser.js?v=20261013-042652";
-import { josa } from "./Josa.js?v=20261013-042652";
-import { clamp, formatNumber as fmt, roundValue } from "./NumberRules.js?v=20261013-042652";
+import { catalog } from "../data/catalog.js?v=20261014-041746";
+import { COMBAT, DICE } from "../data/rules.js?v=20261014-041746";
+import { Enemy } from "../models/Enemy.js?v=20261014-041746";
+import { capEvade, capLifesteal, critMinFrom, lowHpBonus, runAbilities } from "./AbilitySystem.js?v=20261014-041746";
+import { applyReduction, computeEffect, describeCalculation, describeRoll, rollTier } from "./DamageSystem.js?v=20261014-041746";
+import { consumableEffects, isElixir } from "./ConsumableEffects.js?v=20261014-041746";
+import { chooseEnemySkillId } from "./EnemyAI.js?v=20261014-041746";
+import { attackSkillBase, basicAttackBase, supportAmount } from "./FormulaSystem.js?v=20261014-041746";
+import { parseEffects, STATUS_LABELS, toStatusSpec } from "./EffectParser.js?v=20261014-041746";
+import { josa } from "./Josa.js?v=20261014-041746";
+import { clamp, formatNumber as fmt, roundValue } from "./NumberRules.js?v=20261014-041746";
 import {
   absorbWithShield,
   applyStatus,
@@ -21,9 +21,10 @@ import {
   getTakenMultiplier,
   hasStatus,
   removeStatus,
+  durationText,
   statusValueText,
-} from "./StatusSystem.js?v=20261013-042652";
-import { getClassTrait, getProfile } from "./TraitSystem.js?v=20261013-042652";
+} from "./StatusSystem.js?v=20261014-041746";
+import { getClassTrait, getProfile } from "./TraitSystem.js?v=20261014-041746";
 
 const SELF_EFFECTS = new Set(["guard", "shield", "empower", "cleanse"]);
 // 효과량을 자신에게 거는 스킬: 방어(보호막), 강화(주는 피해 증가). 효과량 = 기본값 + 능력치 × 계수, 주사위 없음
@@ -57,7 +58,8 @@ const NEGATIVE_STATUSES = ["poison", "bleed", "stun", "weaken", "vulnerable"];
 // 사용: const combat = new Combat({ adventurer, enemyData, dungeon, dice, surprise });
 //       combat.begin(); combat.act({ type: "attack" }); combat.takeEvents();
 export class Combat {
-  constructor({ adventurer, enemyData, dungeon, dice, surprise = null }) {
+  // boon: 이번 보스전에만 붙는 효과(정비 특별 선택지) { name, effects }
+  constructor({ adventurer, enemyData, dungeon, dice, surprise = null, boon = null }) {
     this.dice = dice;
     this.dungeon = dungeon;
     this.surprise = surprise; // "player" | "enemy" | null
@@ -69,7 +71,7 @@ export class Combat {
     // 출력 줄마다 기록할 "지금 행동 중인 쪽" (화면 강조용)
     this.actor = null;
 
-    const profile = getProfile(adventurer);
+    const profile = getProfile(adventurer, { extraSources: boon ? [boon] : [] });
     this.trait = getClassTrait(adventurer.classId);
     this.player = {
       kind: "player",
@@ -724,7 +726,7 @@ export class Combat {
 
     const text = outcome.stacked !== undefined
       ? `→ ${target.name}: ${label} +${fmt(spec.amount)} (남은 ${label} ${fmt(outcome.stacked)})`
-      : `→ ${target.name}: ${label}${statusValueText(spec)} (${spec.duration}턴${outcome.refreshed ? ", 갱신" : ""})`;
+      : `→ ${target.name}: ${label}${statusValueText(spec)} (${durationText(spec.duration)}${outcome.refreshed ? ", 갱신" : ""})`;
     this.log("status", text, "", {
       target: target.kind,
       type: "status",

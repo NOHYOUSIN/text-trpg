@@ -62,7 +62,6 @@ export const SKILL_SLOTS = 3;
 export const ROUTE = Object.freeze({
   minCandidates: 2,
   maxCandidates: 3,
-  recentPlaceExclusion: 3,
 });
 
 export const GRADES = Object.freeze({
@@ -96,6 +95,14 @@ export const LOOT = Object.freeze({
   veteranEquipmentChance: 30,
   treasureWeights: { equipment: 40, consumable: 15, skill: 25, elixir: 20 },
 });
+
+// 운과 실력 (2026-10-14, 기획 문서 1장)
+// 전투 보상 정수: 일반·정예 전투에서 골드만 받게 될 때 40%를 능력치 +1 아이템으로. 영약과 같은 규칙(+2 없음).
+export const ESSENCE = Object.freeze({ chance: 40, idPrefix: "con_essence_", defaultWord: "정수" });
+// 성장의 바닥 보장: 정비 라운드(구역의 첫째·둘째)에서 장착 스킬이 maxSkills 이하이면 탐색 결과를 스킬 후보 choices개 중 선택으로 확정
+export const SKILL_FLOOR = Object.freeze({ maxSkillsByCamp: [0, 1], choices: 3 });
+// 고르는 보상: 보물·정비 탐색·사건(item:random:equipment)의 장비 후보 수. 스킬은 skill:choice와 같은 2~3개.
+export const REWARD_CHOICE = Object.freeze({ equipment: 2 });
 
 // 능력치 영약 (2026-10-13): 무작위 영약은 주 능력치 60% / 나머지 각 20%(주 능력치 2개면 각 40% / 20%), 진한 영약(+2) 10%
 export const ELIXIR = Object.freeze({

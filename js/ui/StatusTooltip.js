@@ -1,7 +1,7 @@
-import { STATUS_LABELS } from "../systems/EffectParser.js?v=20261013-042652";
-import { josa } from "../systems/Josa.js?v=20261013-042652";
-import { formatNumber as fmt } from "../systems/NumberRules.js?v=20261013-042652";
-import { statusValueText } from "../systems/StatusSystem.js?v=20261013-042652";
+import { STATUS_LABELS } from "../systems/EffectParser.js?v=20261014-041746";
+import { josa } from "../systems/Josa.js?v=20261014-041746";
+import { formatNumber as fmt } from "../systems/NumberRules.js?v=20261014-041746";
+import { durationText, statusValueText, UNTIL_END_TURNS } from "../systems/StatusSystem.js?v=20261014-041746";
 
 // 상태이상 이름 옆에 보여 줄 짧은 표시와, 마우스를 올렸을 때 보여 줄 설명.
 function effectText(status) {
@@ -30,7 +30,7 @@ function effectText(status) {
 export function statusChip(status) {
   const label = STATUS_LABELS[status.type] ?? status.type;
   return {
-    text: `${label}${statusValueText(status)} (${status.duration}턴)`,
-    tip: `${effectText(status)} 남은 시간: 이 대상이 ${status.duration}번 행동하면 사라진다.`,
+    text: `${label}${statusValueText(status)} (${durationText(status.duration)})`,
+    tip: `${effectText(status)} ${status.duration >= UNTIL_END_TURNS ? "전투가 끝날 때까지 이어진다." : `남은 시간: 이 대상이 ${status.duration}번 행동하면 사라진다.`}`,
   };
 }
