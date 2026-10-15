@@ -1,4 +1,4 @@
-import { catalog } from "../data/catalog.js?v=20261014-041746";
+import { catalog } from "../data/catalog.js?v=20261016-040625";
 import {
   BOSS_REWARD_CANDIDATES,
   BOSS_REWARD_GRADE,
@@ -8,9 +8,10 @@ import {
   LOOT,
   REWARD_CHOICE,
   SKILL_POOL,
-} from "../data/rules.js?v=20261014-041746";
-import { isElixir } from "./ConsumableEffects.js?v=20261014-041746";
-import { pickBossElixir, pickEssence, pickRandomElixir } from "./ElixirSystem.js?v=20261014-041746";
+} from "../data/rules.js?v=20261016-040625";
+import { isElixir } from "./ConsumableEffects.js?v=20261016-040625";
+import { pickBossElixir, pickEssence, pickRandomElixir, rollElixirStat } from "./ElixirSystem.js?v=20261016-040625";
+import { mainStatsOf } from "./TraitSystem.js?v=20261016-040625";
 
 const GRADE_ORDER = ["common", "uncommon", "rare", "unique"];
 
@@ -51,8 +52,23 @@ function availableSkills(adventurer, excludeIds = []) {
   );
 }
 
-export function pickEquipment({ run, dice, grade = rollGrade(run.zone, dice), excludeIds = [] }) {
-  const item = pickByGrade(availableEquipment(run, excludeIds), grade, dice);
+// 연결 능력치를 먼저 굴린다(주 능력치 60% / 나머지 각 20%). 공용 장비(main)는 주 능력치 쪽에 든다.
+// 그 능력치 장비가 없으면 전체에서 고른다. 모험가가 없으면 능력치를 가리지 않는다. (2026-10-16)
+function pickStatEquipment({ run, adventurer, dice, grade, excludeIds = [] }) {
+  const list = availableEquipment(run, excludeIds);
+
+  if (!adventurer) {
+    return pickByGrade(list, grade, dice);
+  }
+
+  const stat = rollElixirStat(adventurer, dice);
+  const isMain = mainStatsOf(adventurer).includes(stat);
+  const matching = list.filter((item) => item.stat === stat || (isMain && item.stat === "main"));
+  return pickByGrade(matching.length ? matching : list, grade, dice);
+}
+
+export function pickEquipment({ run, adventurer = null, dice, grade = rollGrade(run.zone, dice), excludeIds = [] }) {
+  const item = pickStatEquipment({ run, adventurer, dice, grade, excludeIds });
 
   if (item?.unique) {
     run.seenUniques.add(item.id);
@@ -89,11 +105,11 @@ export function pickSkillChoices({ run, adventurer, dice, count = dice.int(EVENT
 }
 
 // 서로 다른 장비 후보 여러 개(고르는 보상)
-function pickEquipmentChoices({ run, dice, count }) {
+function pickEquipmentChoices({ run, adventurer, dice, count }) {
   const ids = [];
 
   for (let i = 0; i < count; i += 1) {
-    const item = pickByGrade(availableEquipment(run, ids), rollGrade(run.zone, dice), dice);
+    const item = pickStatEquipment({ run, adventurer, dice, grade: rollGrade(run.zone, dice), excludeIds: ids });
 
     if (item) {
       ids.push(item.id);
@@ -118,7 +134,7 @@ export function resolveAcquisition(acquisition, { run, adventurer, dice }) {
 
   // 장비 선택(보물·정비 탐색, 사건 item:random:equipment) — 후보 중 하나를 고른다. 유일 장비는 고를 때 등장 처리한다.
   if (acquisition.random === "equipment" && acquisition.choice) {
-    const options = pickEquipmentChoices({ run, dice, count: acquisition.choice });
+    const options = pickEquipmentChoices({ run, adventurer, dice, count: acquisition.choice });
     return options.length ? { kind: "equipmentChoice", options } : null;
   }
 
@@ -142,7 +158,7 @@ export function resolveAcquisition(acquisition, { run, adventurer, dice }) {
   let item = null;
 
   if (acquisition.random === "equipment") {
-    item = pickEquipment({ run, dice });
+    item = pickEquipment({ run, adventurer, dice });
   } else if (acquisition.random === "elixir") {
     item = pickRandomElixir({ adventurer, dice });
   } else {
@@ -203,7 +219,7 @@ export function createBossRewardCandidates({ rank, run, adventurer, dice }) {
     if (kind === "skill") {
       entry = pickSkill({ run, adventurer, dice, grade, excludeIds: usedIds });
     } else if (kind === "equipment") {
-      entry = pickByGrade(availableEquipment(run, usedIds), grade, dice);
+      entry = pickStatEquipment({ run, adventurer, dice, grade, excludeIds: usedIds });
     } else if (kind === "elixir") {
       entry = pickRandomElixir({ adventurer, dice });
       entry = entry && !usedIds.includes(entry.id) ? entry : null;

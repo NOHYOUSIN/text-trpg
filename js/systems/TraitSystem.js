@@ -1,9 +1,9 @@
-import { catalog } from "../data/catalog.js?v=20261014-041746";
-import { CLASS_TRAITS } from "../data/rules.js?v=20261014-041746";
-import { capEvade, capLifesteal, critMinFrom, parseAbility } from "./AbilitySystem.js?v=20261014-041746";
-import { parseToken } from "./EffectParser.js?v=20261014-041746";
-import { maxHpFrom, supportAmount } from "./FormulaSystem.js?v=20261014-041746";
-import { roundValue } from "./NumberRules.js?v=20261014-041746";
+import { catalog } from "../data/catalog.js?v=20261016-040625";
+import { CLASS_TRAITS } from "../data/rules.js?v=20261016-040625";
+import { capEvade, capLifesteal, critMinFrom, parseAbility } from "./AbilitySystem.js?v=20261016-040625";
+import { parseToken } from "./EffectParser.js?v=20261016-040625";
+import { maxHpFrom, supportAmount } from "./FormulaSystem.js?v=20261016-040625";
+import { roundValue } from "./NumberRules.js?v=20261016-040625";
 
 export const STAT_KEYS = ["str", "agi", "wis"];
 
@@ -40,7 +40,9 @@ export function isEquipmentEffectActive(adventurer, item, bonus = equipmentStatB
     return true;
   }
 
-  const total = adventurer.baseStats[req.stat] + bonus[req.stat] - (item.statBonus[req.stat] ?? 0);
+  // main: 착용자의 주 능력치로 센다(공용 장비, 2026-10-16)
+  const stat = req.stat === "main" ? mainStatOf(adventurer) : req.stat;
+  const total = adventurer.baseStats[stat] + bonus[stat] - (item.statBonus[stat] ?? 0);
   return total >= req.value;
 }
 
@@ -59,6 +61,16 @@ export function collectModifiers(adventurer, extraSources = []) {
     cooldownReduction: 0,
     immune: new Set(),
     exploreBonus: 0,
+    // 빌드 축 확장 수치(2026-10-16)
+    momentumMax: 0,
+    poisonBonus: 0,
+    chantBonus: 0,
+    debuffDuration: 0,
+    shieldBonus: 0,
+    chantShieldBonus: 0,
+    consumableBoost: 0,
+    freeItemUse: 0,
+    healBonus: 0,
     // 합친 뒤 상한을 적용하는 값
     crit: 0,
     evade: 0,
@@ -154,6 +166,15 @@ function applyEffect(modifiers, { key, args }, source) {
     case "evade":
     case "reflect":
     case "lifesteal":
+    case "momentumMax":
+    case "poisonBonus":
+    case "chantBonus":
+    case "debuffDuration":
+    case "shieldBonus":
+    case "chantShieldBonus":
+    case "consumableBoost":
+    case "freeItemUse":
+    case "healBonus":
       modifiers[key] += value;
       break;
     case "immune":

@@ -1,7 +1,7 @@
-import { catalog } from "../data/catalog.js?v=20261014-041746";
-import { ELIXIR, ESSENCE } from "../data/rules.js?v=20261014-041746";
-import { consumableEffects, isElixir } from "./ConsumableEffects.js?v=20261014-041746";
-import { mainStatsOf, STAT_KEYS } from "./TraitSystem.js?v=20261014-041746";
+import { catalog } from "../data/catalog.js?v=20261016-040625";
+import { ELIXIR, ESSENCE } from "../data/rules.js?v=20261016-040625";
+import { consumableEffects, isElixir } from "./ConsumableEffects.js?v=20261016-040625";
+import { mainStatsOf, STAT_KEYS } from "./TraitSystem.js?v=20261016-040625";
 
 const STAT_LABELS = { str: "힘", agi: "민첩", wis: "지혜" };
 
@@ -23,7 +23,8 @@ function findElixir(stat, strong) {
 }
 
 // 무작위 영약의 능력치: 주 능력치 1개면 60% / 나머지 각 20%, 2개면 각 40% / 나머지 20%
-function rollElixirStat(adventurer, dice) {
+// 장비 뽑기의 연결 능력치에도 같은 확률을 쓴다(2026-10-16).
+export function rollElixirStat(adventurer, dice) {
   const mains = mainStatsOf(adventurer);
   const weights = {};
 

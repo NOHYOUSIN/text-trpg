@@ -1,6 +1,6 @@
-import { STATUS } from "../data/rules.js?v=20261014-041746";
-import { STATUS_LABELS } from "./EffectParser.js?v=20261014-041746";
-import { formatNumber as fmt } from "./NumberRules.js?v=20261014-041746";
+import { STATUS } from "../data/rules.js?v=20261016-040625";
+import { STATUS_LABELS } from "./EffectParser.js?v=20261016-040625";
+import { formatNumber as fmt } from "./NumberRules.js?v=20261016-040625";
 
 // 상태이상과 지속 효과. 지속시간은 효과를 받은 쪽의 행동 횟수로 센다.
 // combatant: { statuses: [], stunImmunity: 0, immune: Set }
@@ -155,7 +155,7 @@ export function durationText(turns) {
 // 상태이상 이름 뒤에 붙는 수치 (예: " +3", " ×0.7", " 4")
 export function statusValueText({ type, amount, multiplier }) {
   if (amount) {
-    return type === "empower" ? ` +${fmt(amount)}` : ` ${fmt(amount)}`;
+    return ["empower", "critBoost", "regen"].includes(type) ? ` +${fmt(amount)}` : ` ${fmt(amount)}`;
   }
 
   return multiplier ? ` ×${multiplier}` : "";

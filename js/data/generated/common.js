@@ -611,6 +611,411 @@ export const commonData = {
         "vulnerable:1.3:2"
       ],
       "description": "모든 것을 건 일격이 상대의 빈틈을 연다. 취약 2턴."
+    },
+    {
+      "id": "skl_battle_roar",
+      "name": "투지의 포효",
+      "grade": "uncommon",
+      "class": "warrior",
+      "type": "buff",
+      "stat": "str",
+      "baseEffect": 0,
+      "scaling": [],
+      "cooldown": 4,
+      "effects": [
+        "momentum:2",
+        "fast"
+      ],
+      "description": "포효로 스스로를 몰아붙인다. 기세가 즉시 2 쌓인다. 행동을 쓰지 않는다."
+    },
+    {
+      "id": "skl_crushing_blow",
+      "name": "분쇄의 일격",
+      "grade": "rare",
+      "class": "warrior",
+      "type": "attack",
+      "stat": "str",
+      "baseEffect": 0,
+      "scaling": [
+        {
+          "stat": "str",
+          "coef": 1.6
+        }
+      ],
+      "cooldown": 3,
+      "effects": [
+        "consumeMomentum:3"
+      ],
+      "description": "쌓인 기세를 한꺼번에 실어 내려찍는다. 기세를 모두 쓰고, 쓴 기세 × 3만큼 피해가 더해진다."
+    },
+    {
+      "id": "skl_iron_wall",
+      "name": "철벽",
+      "grade": "uncommon",
+      "class": "warrior",
+      "type": "defense",
+      "stat": "str",
+      "baseEffect": 2,
+      "scaling": [
+        {
+          "stat": "str",
+          "coef": 0.3
+        }
+      ],
+      "cooldown": 4,
+      "effects": [
+        "shield:2",
+        "reflect:2:2",
+        "fast"
+      ],
+      "description": "방패를 단단히 세운다. 2턴 동안 보호막을 두르고, 그동안 맞으면 피해를 되돌려 준다. 행동을 쓰지 않는다."
+    },
+    {
+      "id": "skl_shield_return",
+      "name": "방패 되받아치기",
+      "grade": "uncommon",
+      "class": "warrior",
+      "type": "attack",
+      "stat": "str",
+      "baseEffect": 0,
+      "scaling": [
+        {
+          "stat": "str",
+          "coef": 1.4
+        }
+      ],
+      "cooldown": 3,
+      "effects": [
+        "consumeShield:1"
+      ],
+      "description": "막아 낸 힘을 그대로 되돌려 친다. 남은 보호막을 모두 쓰고, 그만큼 피해가 더해진다."
+    },
+    {
+      "id": "skl_berserk_oath",
+      "name": "광전사의 맹세",
+      "grade": "common",
+      "class": "warrior",
+      "type": "buff",
+      "stat": "str",
+      "baseEffect": 2,
+      "scaling": [
+        {
+          "stat": "str",
+          "coef": 0.5
+        }
+      ],
+      "cooldown": 4,
+      "effects": [
+        "hpCost:10",
+        "empower:2",
+        "fast"
+      ],
+      "description": "자신의 피를 대가로 힘을 끌어낸다. 최대 HP의 10%를 잃고, 2턴 동안 주는 피해가 늘어난다. 행동을 쓰지 않는다."
+    },
+    {
+      "id": "skl_blood_strike",
+      "name": "선혈의 일격",
+      "grade": "rare",
+      "class": "warrior",
+      "type": "attack",
+      "stat": "str",
+      "baseEffect": 0,
+      "scaling": [
+        {
+          "stat": "str",
+          "coef": 1.8
+        }
+      ],
+      "cooldown": 2,
+      "effects": [
+        "missingHp:0.2",
+        "lifesteal:10"
+      ],
+      "description": "흘린 피만큼 무거워진 일격. 잃은 HP가 많을수록 피해가 커지고, 준 피해 일부를 회복한다."
+    },
+    {
+      "id": "skl_hack",
+      "name": "난도질",
+      "grade": "common",
+      "class": "rogue",
+      "type": "attack",
+      "stat": "agi",
+      "baseEffect": 0,
+      "scaling": [
+        {
+          "stat": "agi",
+          "coef": 1.5
+        }
+      ],
+      "cooldown": 3,
+      "effects": [
+        "bleed:2"
+      ],
+      "description": "얕지만 여러 번 베어 피를 흘리게 한다. 출혈 2를 쌓는다."
+    },
+    {
+      "id": "skl_tear_wounds",
+      "name": "상처 찢기",
+      "grade": "rare",
+      "class": "rogue",
+      "type": "attack",
+      "stat": "agi",
+      "baseEffect": 0,
+      "scaling": [
+        {
+          "stat": "agi",
+          "coef": 1.6
+        }
+      ],
+      "cooldown": 3,
+      "effects": [
+        "consumeBleed:4"
+      ],
+      "description": "벌어진 상처를 한 번에 찢어발긴다. 대상의 출혈을 모두 터뜨려, 남은 출혈 × 4만큼 피해가 더해진다."
+    },
+    {
+      "id": "skl_mark_vitals",
+      "name": "급소 노리기",
+      "grade": "uncommon",
+      "class": "rogue",
+      "type": "buff",
+      "stat": "agi",
+      "baseEffect": 0,
+      "scaling": [],
+      "cooldown": 4,
+      "effects": [
+        "critBoost:2:2",
+        "fast"
+      ],
+      "description": "숨을 고르고 급소만 노린다. 2턴 동안 치명타 범위가 2 넓어진다. 행동을 쓰지 않는다."
+    },
+    {
+      "id": "skl_assassinate",
+      "name": "암살",
+      "grade": "rare",
+      "class": "rogue",
+      "type": "attack",
+      "stat": "agi",
+      "baseEffect": 0,
+      "scaling": [
+        {
+          "stat": "agi",
+          "coef": 2.0
+        }
+      ],
+      "cooldown": 3,
+      "effects": [
+        "executeCrit:50"
+      ],
+      "description": "숨이 가빠진 적의 급소를 정확히 꿰뚫는다. 대상의 HP가 절반 이하면 반드시 치명타가 된다."
+    },
+    {
+      "id": "skl_toxic_haze",
+      "name": "독무",
+      "grade": "common",
+      "class": "rogue",
+      "type": "debuff",
+      "stat": "agi",
+      "baseEffect": 0,
+      "scaling": [],
+      "cooldown": 4,
+      "effects": [
+        "poison:3:3",
+        "weaken:0.7:1",
+        "fast"
+      ],
+      "description": "독 섞인 연기를 흩뿌린다. 독 3 × 3턴과 약화 1턴을 건다. 행동을 쓰지 않는다."
+    },
+    {
+      "id": "skl_exploit",
+      "name": "약점 공략",
+      "grade": "uncommon",
+      "class": "rogue",
+      "type": "attack",
+      "stat": "agi",
+      "baseEffect": 0,
+      "scaling": [
+        {
+          "stat": "agi",
+          "coef": 1.6
+        }
+      ],
+      "cooldown": 3,
+      "effects": [
+        "perStatus:4"
+      ],
+      "description": "상대가 약해진 틈을 파고든다. 대상에게 걸린 상태이상(독·출혈·약화·취약·기절) 1개마다 피해가 4 더해진다."
+    },
+    {
+      "id": "skl_condense",
+      "name": "마력 응축",
+      "grade": "uncommon",
+      "class": "mage",
+      "type": "buff",
+      "stat": "wis",
+      "baseEffect": 0,
+      "scaling": [],
+      "cooldown": 4,
+      "effects": [
+        "chantBoost:0.5",
+        "fast"
+      ],
+      "description": "영창 중에 마력을 한 번 더 눌러 담는다. 이번 영창 배율이 0.5 높아진다(×1.75 → ×2.25). 영창한 상태에서만 쓸 수 있고, 영창을 풀지 않는다. 행동을 쓰지 않는다."
+    },
+    {
+      "id": "skl_meteor",
+      "name": "별똥별",
+      "grade": "rare",
+      "class": "mage",
+      "type": "attack",
+      "stat": "wis",
+      "baseEffect": 0,
+      "scaling": [
+        {
+          "stat": "wis",
+          "coef": 2.2
+        }
+      ],
+      "cooldown": 3,
+      "effects": [
+        "perChant:2"
+      ],
+      "description": "긴 영창 끝에 하늘에서 별을 떨어뜨린다. 이번 전투에서 영창한 횟수 × 2만큼 피해가 더해진다."
+    },
+    {
+      "id": "skl_binding_hex",
+      "name": "속박의 주문",
+      "grade": "common",
+      "class": "mage",
+      "type": "debuff",
+      "stat": "wis",
+      "baseEffect": 0,
+      "scaling": [],
+      "cooldown": 5,
+      "effects": [
+        "weaken:0.7:1",
+        "vulnerable:1.3:1",
+        "fast"
+      ],
+      "description": "보이지 않는 사슬로 상대를 옭아맨다. 약화와 취약을 1턴씩 건다. 행동을 쓰지 않는다."
+    },
+    {
+      "id": "skl_fracture",
+      "name": "균열 폭발",
+      "grade": "uncommon",
+      "class": "mage",
+      "type": "attack",
+      "stat": "wis",
+      "baseEffect": 0,
+      "scaling": [
+        {
+          "stat": "wis",
+          "coef": 1.6
+        }
+      ],
+      "cooldown": 3,
+      "effects": [
+        "perStatus:5"
+      ],
+      "description": "흔들리는 상대의 틈을 마력으로 찢는다. 대상에게 걸린 상태이상 1종마다 피해가 5 더해진다."
+    },
+    {
+      "id": "skl_crystal_ward",
+      "name": "수정 방벽",
+      "grade": "uncommon",
+      "class": "mage",
+      "type": "defense",
+      "stat": "wis",
+      "baseEffect": 3,
+      "scaling": [
+        {
+          "stat": "wis",
+          "coef": 0.4
+        }
+      ],
+      "cooldown": 4,
+      "effects": [
+        "shield:3",
+        "fast"
+      ],
+      "description": "수정 같은 장벽이 3턴 동안 몸을 감싼다. 행동을 쓰지 않는다."
+    },
+    {
+      "id": "skl_ward_burst",
+      "name": "장벽 파쇄",
+      "grade": "rare",
+      "class": "mage",
+      "type": "attack",
+      "stat": "wis",
+      "baseEffect": 0,
+      "scaling": [
+        {
+          "stat": "wis",
+          "coef": 1.8
+        }
+      ],
+      "cooldown": 3,
+      "effects": [
+        "consumeShield:1.5"
+      ],
+      "description": "두르고 있던 장벽을 깨뜨려 파편을 쏟아붓는다. 남은 보호막 × 1.5만큼 피해가 더해진다."
+    },
+    {
+      "id": "skl_preparedness",
+      "name": "준비성",
+      "grade": "uncommon",
+      "class": null,
+      "type": "passive",
+      "stat": "main",
+      "baseEffect": 0,
+      "scaling": [],
+      "cooldown": null,
+      "effects": [
+        "consumableBoost:30",
+        "freeItemUse:1"
+      ],
+      "description": "늘 쓸 것을 손 닿는 곳에 둔다. 소모품 효과가 30% 커지고, 전투마다 첫 소모품 사용은 행동을 쓰지 않는다."
+    },
+    {
+      "id": "skl_second_breath",
+      "name": "되살아나는 숨",
+      "grade": "uncommon",
+      "class": null,
+      "type": "heal",
+      "stat": "main",
+      "baseEffect": 2,
+      "scaling": [
+        {
+          "stat": "main",
+          "coef": 0.3
+        }
+      ],
+      "cooldown": 4,
+      "effects": [
+        "regen:3",
+        "fast"
+      ],
+      "description": "깊은 숨으로 몸을 다시 일으킨다. 3턴 동안 내 턴마다 HP를 회복한다. 행동을 쓰지 않는다."
+    },
+    {
+      "id": "skl_rally_strike",
+      "name": "회심의 반격",
+      "grade": "rare",
+      "class": null,
+      "type": "attack",
+      "stat": "main",
+      "baseEffect": 0,
+      "scaling": [
+        {
+          "stat": "main",
+          "coef": 1.8
+        }
+      ],
+      "cooldown": 3,
+      "effects": [
+        "perHealed:0.3"
+      ],
+      "description": "버티며 되찾은 기운을 한 번에 쏟아 낸다. 이번 전투에서 회복한 HP × 0.3만큼 피해가 더해진다."
     }
   ],
   "equipment": [
@@ -2713,6 +3118,2567 @@ export const commonData = {
       "starter": false,
       "price": 65,
       "description": "가시뿔 조각을 꿴 목걸이."
+    },
+    {
+      "id": "nck_fervor",
+      "name": "격전의 목걸이",
+      "slot": "necklace",
+      "zone": 1,
+      "grade": "uncommon",
+      "stat": "str",
+      "damage": null,
+      "damageReduction": 0,
+      "maxHp": 0,
+      "statBonus": {},
+      "effects": [
+        "onBattleStart>momentum:1"
+      ],
+      "requirement": {
+        "stat": "str",
+        "value": 5
+      },
+      "unique": false,
+      "starter": false,
+      "price": 30,
+      "description": "싸움이 시작되면 피가 끓는다."
+    },
+    {
+      "id": "rng_rage",
+      "name": "분노의 반지",
+      "slot": "ring",
+      "zone": 1,
+      "grade": "rare",
+      "stat": "str",
+      "damage": null,
+      "damageReduction": 0,
+      "maxHp": 0,
+      "statBonus": {
+        "str": 4
+      },
+      "effects": [
+        "momentumMax:2"
+      ],
+      "requirement": {
+        "stat": "str",
+        "value": 8
+      },
+      "unique": false,
+      "starter": false,
+      "price": 40,
+      "description": "분노가 끝없이 차오른다."
+    },
+    {
+      "id": "arm_riposte_chain",
+      "name": "반격의 사슬갑옷",
+      "slot": "armor",
+      "zone": 1,
+      "grade": "uncommon",
+      "stat": "str",
+      "damage": null,
+      "damageReduction": 2,
+      "maxHp": 5,
+      "statBonus": {},
+      "effects": [
+        "whileShield>reflect:2"
+      ],
+      "requirement": {
+        "stat": "str",
+        "value": 5
+      },
+      "unique": false,
+      "starter": false,
+      "price": 30,
+      "description": "보호막 너머로 칼날이 튀어나온다."
+    },
+    {
+      "id": "rng_guardian",
+      "name": "수호의 반지",
+      "slot": "ring",
+      "zone": 1,
+      "grade": "rare",
+      "stat": "str",
+      "damage": null,
+      "damageReduction": 0,
+      "maxHp": 0,
+      "statBonus": {
+        "str": 4
+      },
+      "effects": [
+        "onShieldBreak>damage:6"
+      ],
+      "requirement": {
+        "stat": "str",
+        "value": 8
+      },
+      "unique": false,
+      "starter": false,
+      "price": 40,
+      "description": "깨진 방패의 파편이 적에게 박힌다."
+    },
+    {
+      "id": "wpn_bloodied_axe",
+      "name": "피에 젖은 도끼",
+      "slot": "weapon",
+      "zone": 1,
+      "grade": "uncommon",
+      "stat": "str",
+      "damage": 7,
+      "damageReduction": 0,
+      "maxHp": 0,
+      "statBonus": {
+        "str": 2
+      },
+      "effects": [
+        "lowHp>basicAttackBonus:3",
+        "onKill>heal:6"
+      ],
+      "requirement": {
+        "stat": "str",
+        "value": 5
+      },
+      "unique": false,
+      "starter": false,
+      "price": 30,
+      "description": "마른 피가 날에 엉겨 붙은 도끼."
+    },
+    {
+      "id": "nck_survivor",
+      "name": "생존자의 목걸이",
+      "slot": "necklace",
+      "zone": 1,
+      "grade": "rare",
+      "stat": "str",
+      "damage": null,
+      "damageReduction": 0,
+      "maxHp": 0,
+      "statBonus": {},
+      "effects": [
+        "lowHp>damageReduction:2"
+      ],
+      "requirement": {
+        "stat": "str",
+        "value": 8
+      },
+      "unique": false,
+      "starter": false,
+      "price": 40,
+      "description": "죽음 앞에서 몇 번이고 살아 돌아온 자의 목걸이."
+    },
+    {
+      "id": "wpn2_momentum_blade",
+      "name": "기세의 대검",
+      "slot": "weapon",
+      "zone": 2,
+      "grade": "rare",
+      "stat": "str",
+      "damage": 9,
+      "damageReduction": 0,
+      "maxHp": 0,
+      "statBonus": {
+        "str": 4
+      },
+      "effects": [
+        "onHurt@50>momentum:1"
+      ],
+      "requirement": {
+        "stat": "str",
+        "value": 17
+      },
+      "unique": false,
+      "starter": false,
+      "price": 65,
+      "description": "맞을수록 손에 감기는 대검."
+    },
+    {
+      "id": "arm2_struggle_plate",
+      "name": "투쟁의 흉갑",
+      "slot": "armor",
+      "zone": 2,
+      "grade": "uncommon",
+      "stat": "str",
+      "damage": null,
+      "damageReduction": 2,
+      "maxHp": 10,
+      "statBonus": {},
+      "effects": [
+        "fullMomentum>damageReduction:2"
+      ],
+      "requirement": {
+        "stat": "str",
+        "value": 14
+      },
+      "unique": false,
+      "starter": false,
+      "price": 50,
+      "description": "기세가 오를수록 단단해지는 흉갑."
+    },
+    {
+      "id": "wpn2_shield_sword",
+      "name": "방패검",
+      "slot": "weapon",
+      "zone": 2,
+      "grade": "rare",
+      "stat": "str",
+      "damage": 8,
+      "damageReduction": 1,
+      "maxHp": 0,
+      "statBonus": {
+        "str": 4
+      },
+      "effects": [
+        "whileShield>basicAttackBonus:4"
+      ],
+      "requirement": {
+        "stat": "str",
+        "value": 17
+      },
+      "unique": false,
+      "starter": false,
+      "price": 65,
+      "description": "날 옆에 작은 방패가 붙은 검."
+    },
+    {
+      "id": "arm2_rebound_plate",
+      "name": "되받이 판금",
+      "slot": "armor",
+      "zone": 2,
+      "grade": "uncommon",
+      "stat": "str",
+      "damage": null,
+      "damageReduction": 3,
+      "maxHp": 0,
+      "statBonus": {},
+      "effects": [
+        "reflect:2",
+        "whileShield>reflect:3"
+      ],
+      "requirement": {
+        "stat": "str",
+        "value": 14
+      },
+      "unique": false,
+      "starter": false,
+      "price": 50,
+      "description": "충격을 그대로 되돌려 주는 판금."
+    },
+    {
+      "id": "rng2_berserker",
+      "name": "광전사의 고리",
+      "slot": "ring",
+      "zone": 2,
+      "grade": "rare",
+      "stat": "str",
+      "damage": null,
+      "damageReduction": 0,
+      "maxHp": 0,
+      "statBonus": {
+        "str": 8
+      },
+      "effects": [
+        "lowHp>skillDamageBonus:5"
+      ],
+      "requirement": {
+        "stat": "str",
+        "value": 17
+      },
+      "unique": false,
+      "starter": false,
+      "price": 65,
+      "description": "피를 흘릴수록 뜨거워지는 고리."
+    },
+    {
+      "id": "arm2_blood_mail",
+      "name": "피의 갑주",
+      "slot": "armor",
+      "zone": 2,
+      "grade": "uncommon",
+      "stat": "str",
+      "damage": null,
+      "damageReduction": 2,
+      "maxHp": 10,
+      "statBonus": {},
+      "effects": [
+        "onKill>heal:10"
+      ],
+      "requirement": {
+        "stat": "str",
+        "value": 14
+      },
+      "unique": false,
+      "starter": false,
+      "price": 50,
+      "description": "쓰러뜨린 적의 기운을 빨아들이는 갑옷."
+    },
+    {
+      "id": "rng_crimson",
+      "name": "선혈 반지",
+      "slot": "ring",
+      "zone": 1,
+      "grade": "uncommon",
+      "stat": "agi",
+      "damage": null,
+      "damageReduction": 0,
+      "maxHp": 0,
+      "statBonus": {
+        "agi": 3
+      },
+      "effects": [
+        "onHit@30>bleed:1"
+      ],
+      "requirement": {
+        "stat": "agi",
+        "value": 5
+      },
+      "unique": false,
+      "starter": false,
+      "price": 30,
+      "description": "끼고 휘두르면 상처가 잘 아물지 않는다."
+    },
+    {
+      "id": "nck_blood_hook",
+      "name": "피 갈고리 목걸이",
+      "slot": "necklace",
+      "zone": 1,
+      "grade": "rare",
+      "stat": "agi",
+      "damage": null,
+      "damageReduction": 0,
+      "maxHp": 0,
+      "statBonus": {},
+      "effects": [
+        "ifBleeding>basicAttackBonus:3"
+      ],
+      "requirement": {
+        "stat": "agi",
+        "value": 8
+      },
+      "unique": false,
+      "starter": false,
+      "price": 40,
+      "description": "피 냄새를 따라 칼끝이 이끌린다."
+    },
+    {
+      "id": "wpn_keen_dagger",
+      "name": "예리한 단검",
+      "slot": "weapon",
+      "zone": 1,
+      "grade": "uncommon",
+      "stat": "agi",
+      "damage": 6,
+      "damageReduction": 0,
+      "maxHp": 0,
+      "statBonus": {
+        "agi": 2
+      },
+      "effects": [
+        "crit:1"
+      ],
+      "requirement": {
+        "stat": "agi",
+        "value": 5
+      },
+      "unique": false,
+      "starter": false,
+      "price": 30,
+      "description": "머리카락도 갈라질 만큼 날이 서 있다."
+    },
+    {
+      "id": "nck_assassin_mark",
+      "name": "암살자의 표식",
+      "slot": "necklace",
+      "zone": 1,
+      "grade": "rare",
+      "stat": "agi",
+      "damage": null,
+      "damageReduction": 0,
+      "maxHp": 0,
+      "statBonus": {},
+      "effects": [
+        "onCrit>vulnerable:1.3:2"
+      ],
+      "requirement": {
+        "stat": "agi",
+        "value": 8
+      },
+      "unique": false,
+      "starter": false,
+      "price": 40,
+      "description": "급소를 찌를 때마다 표식이 새겨진다."
+    },
+    {
+      "id": "rng_viper",
+      "name": "독사의 반지",
+      "slot": "ring",
+      "zone": 1,
+      "grade": "uncommon",
+      "stat": "agi",
+      "damage": null,
+      "damageReduction": 0,
+      "maxHp": 0,
+      "statBonus": {
+        "agi": 3
+      },
+      "effects": [
+        "poisonBonus:1"
+      ],
+      "requirement": {
+        "stat": "agi",
+        "value": 5
+      },
+      "unique": false,
+      "starter": false,
+      "price": 30,
+      "description": "독사 비늘로 감싼 반지."
+    },
+    {
+      "id": "nck_disarray",
+      "name": "교란의 부적",
+      "slot": "necklace",
+      "zone": 1,
+      "grade": "rare",
+      "stat": "agi",
+      "damage": null,
+      "damageReduction": 0,
+      "maxHp": 0,
+      "statBonus": {},
+      "effects": [
+        "ifDebuffed>skillDamageBonus:3"
+      ],
+      "requirement": {
+        "stat": "agi",
+        "value": 8
+      },
+      "unique": false,
+      "starter": false,
+      "price": 40,
+      "description": "흔들리는 적을 놓치지 않는다."
+    },
+    {
+      "id": "wpn2_serrated_dagger",
+      "name": "톱니 단검",
+      "slot": "weapon",
+      "zone": 2,
+      "grade": "rare",
+      "stat": "agi",
+      "damage": 8,
+      "damageReduction": 0,
+      "maxHp": 0,
+      "statBonus": {
+        "agi": 4
+      },
+      "effects": [
+        "onHit>bleed:2"
+      ],
+      "requirement": {
+        "stat": "agi",
+        "value": 17
+      },
+      "unique": false,
+      "starter": false,
+      "price": 65,
+      "description": "톱니 날이 상처를 넓힌다."
+    },
+    {
+      "id": "arm2_blood_scent",
+      "name": "피 냄새 망토",
+      "slot": "armor",
+      "zone": 2,
+      "grade": "uncommon",
+      "stat": "agi",
+      "damage": null,
+      "damageReduction": 1,
+      "maxHp": 5,
+      "statBonus": {},
+      "effects": [
+        "ifBleeding>skillDamageBonus:4"
+      ],
+      "requirement": {
+        "stat": "agi",
+        "value": 14
+      },
+      "unique": false,
+      "starter": false,
+      "price": 50,
+      "description": "피 냄새가 사냥 본능을 깨운다."
+    },
+    {
+      "id": "rng2_first_blood",
+      "name": "선수의 반지",
+      "slot": "ring",
+      "zone": 2,
+      "grade": "rare",
+      "stat": "agi",
+      "damage": null,
+      "damageReduction": 0,
+      "maxHp": 0,
+      "statBonus": {
+        "agi": 8
+      },
+      "effects": [
+        "onFirstStrike>critBoost:2:2"
+      ],
+      "requirement": {
+        "stat": "agi",
+        "value": 17
+      },
+      "unique": false,
+      "starter": false,
+      "price": 65,
+      "description": "먼저 움직인 자가 급소를 가진다."
+    },
+    {
+      "id": "arm2_raider_leather",
+      "name": "급습자의 경갑",
+      "slot": "armor",
+      "zone": 2,
+      "grade": "uncommon",
+      "stat": "agi",
+      "damage": null,
+      "damageReduction": 1,
+      "maxHp": 5,
+      "statBonus": {},
+      "effects": [
+        "onCrit>heal:4"
+      ],
+      "requirement": {
+        "stat": "agi",
+        "value": 14
+      },
+      "unique": false,
+      "starter": false,
+      "price": 50,
+      "description": "급소를 찌를 때마다 숨이 트인다."
+    },
+    {
+      "id": "wpn2_venom_bow",
+      "name": "독침 단궁",
+      "slot": "weapon",
+      "zone": 2,
+      "grade": "rare",
+      "stat": "agi",
+      "damage": 8,
+      "damageReduction": 0,
+      "maxHp": 0,
+      "statBonus": {
+        "agi": 4
+      },
+      "effects": [
+        "onHit@40>poison:4:2"
+      ],
+      "requirement": {
+        "stat": "agi",
+        "value": 17
+      },
+      "unique": false,
+      "starter": false,
+      "price": 65,
+      "description": "화살촉마다 독이 발라져 있다."
+    },
+    {
+      "id": "arm2_smoke_cloak",
+      "name": "연막 망토",
+      "slot": "armor",
+      "zone": 2,
+      "grade": "uncommon",
+      "stat": "agi",
+      "damage": null,
+      "damageReduction": 1,
+      "maxHp": 0,
+      "statBonus": {},
+      "effects": [
+        "onBattleStart>weaken:0.7:2"
+      ],
+      "requirement": {
+        "stat": "agi",
+        "value": 14
+      },
+      "unique": false,
+      "starter": false,
+      "price": 50,
+      "description": "펼치는 순간 연기가 피어오른다."
+    },
+    {
+      "id": "rng_resonance",
+      "name": "공명 반지",
+      "slot": "ring",
+      "zone": 1,
+      "grade": "uncommon",
+      "stat": "wis",
+      "damage": null,
+      "damageReduction": 0,
+      "maxHp": 0,
+      "statBonus": {
+        "wis": 3
+      },
+      "effects": [
+        "chantBonus:0.15"
+      ],
+      "requirement": {
+        "stat": "wis",
+        "value": 5
+      },
+      "unique": false,
+      "starter": false,
+      "price": 30,
+      "description": "끼고 있으면 영창이 반지에 울린다."
+    },
+    {
+      "id": "nck_star_beads",
+      "name": "별빛 염주",
+      "slot": "necklace",
+      "zone": 1,
+      "grade": "rare",
+      "stat": "wis",
+      "damage": null,
+      "damageReduction": 0,
+      "maxHp": 0,
+      "statBonus": {},
+      "effects": [
+        "onChant>empower:3:1"
+      ],
+      "requirement": {
+        "stat": "wis",
+        "value": 8
+      },
+      "unique": false,
+      "starter": false,
+      "price": 40,
+      "description": "영창할 때마다 염주알이 하나씩 빛난다."
+    },
+    {
+      "id": "wpn_cursed_rod",
+      "name": "저주받은 홀",
+      "slot": "weapon",
+      "zone": 1,
+      "grade": "uncommon",
+      "stat": "wis",
+      "damage": 6,
+      "damageReduction": 0,
+      "maxHp": 0,
+      "statBonus": {
+        "wis": 2
+      },
+      "effects": [
+        "onSkill@50>vulnerable:1.3:1"
+      ],
+      "requirement": {
+        "stat": "wis",
+        "value": 5
+      },
+      "unique": false,
+      "starter": false,
+      "price": 30,
+      "description": "스치기만 해도 기운이 빠지는 홀."
+    },
+    {
+      "id": "nck_shackle",
+      "name": "족쇄 부적",
+      "slot": "necklace",
+      "zone": 1,
+      "grade": "rare",
+      "stat": "wis",
+      "damage": null,
+      "damageReduction": 0,
+      "maxHp": 0,
+      "statBonus": {},
+      "effects": [
+        "debuffDuration:1"
+      ],
+      "requirement": {
+        "stat": "wis",
+        "value": 8
+      },
+      "unique": false,
+      "starter": false,
+      "price": 40,
+      "description": "한 번 걸린 저주가 쉽게 풀리지 않는다."
+    },
+    {
+      "id": "rng_ward",
+      "name": "장벽 반지",
+      "slot": "ring",
+      "zone": 1,
+      "grade": "uncommon",
+      "stat": "wis",
+      "damage": null,
+      "damageReduction": 0,
+      "maxHp": 0,
+      "statBonus": {
+        "wis": 3
+      },
+      "effects": [
+        "shieldBonus:2"
+      ],
+      "requirement": {
+        "stat": "wis",
+        "value": 5
+      },
+      "unique": false,
+      "starter": false,
+      "price": 30,
+      "description": "장벽에 한 겹이 더 덧대어진다."
+    },
+    {
+      "id": "nck_crystal",
+      "name": "결정 목걸이",
+      "slot": "necklace",
+      "zone": 1,
+      "grade": "rare",
+      "stat": "wis",
+      "damage": null,
+      "damageReduction": 0,
+      "maxHp": 0,
+      "statBonus": {},
+      "effects": [
+        "whileShield>skillDamageBonus:3"
+      ],
+      "requirement": {
+        "stat": "wis",
+        "value": 8
+      },
+      "unique": false,
+      "starter": false,
+      "price": 40,
+      "description": "장벽이 빛날 때 마력이 날카로워진다."
+    },
+    {
+      "id": "wpn2_condense_staff",
+      "name": "응축의 홀",
+      "slot": "weapon",
+      "zone": 2,
+      "grade": "rare",
+      "stat": "wis",
+      "damage": 9,
+      "damageReduction": 0,
+      "maxHp": 0,
+      "statBonus": {
+        "wis": 4
+      },
+      "effects": [
+        "chantBonus:0.25"
+      ],
+      "requirement": {
+        "stat": "wis",
+        "value": 17
+      },
+      "unique": false,
+      "starter": false,
+      "price": 65,
+      "description": "마력을 끝까지 눌러 담는 홀."
+    },
+    {
+      "id": "arm2_chanter_robe",
+      "name": "영창자의 로브",
+      "slot": "armor",
+      "zone": 2,
+      "grade": "uncommon",
+      "stat": "wis",
+      "damage": null,
+      "damageReduction": 0,
+      "maxHp": 10,
+      "statBonus": {
+        "wis": 1
+      },
+      "effects": [
+        "onChant>cooldown:-1"
+      ],
+      "requirement": {
+        "stat": "wis",
+        "value": 14
+      },
+      "unique": false,
+      "starter": false,
+      "price": 50,
+      "description": "영창 소리에 맞춰 로브가 떨린다."
+    },
+    {
+      "id": "rng2_order",
+      "name": "질서의 반지",
+      "slot": "ring",
+      "zone": 2,
+      "grade": "rare",
+      "stat": "wis",
+      "damage": null,
+      "damageReduction": 0,
+      "maxHp": 0,
+      "statBonus": {
+        "wis": 8
+      },
+      "effects": [
+        "ifDebuffed>skillDamageBonus:5"
+      ],
+      "requirement": {
+        "stat": "wis",
+        "value": 17
+      },
+      "unique": false,
+      "starter": false,
+      "price": 65,
+      "description": "흐트러진 적을 바로잡듯 내리친다."
+    },
+    {
+      "id": "arm2_binder_cloak",
+      "name": "구속자의 망토",
+      "slot": "armor",
+      "zone": 2,
+      "grade": "uncommon",
+      "stat": "wis",
+      "damage": null,
+      "damageReduction": 0,
+      "maxHp": 10,
+      "statBonus": {},
+      "effects": [
+        "onHurt@25>weaken:0.7:1"
+      ],
+      "requirement": {
+        "stat": "wis",
+        "value": 14
+      },
+      "unique": false,
+      "starter": false,
+      "price": 50,
+      "description": "맞을 때마다 보이지 않는 사슬이 튀어나간다."
+    },
+    {
+      "id": "wpn2_crystal_staff",
+      "name": "수정 지팡이",
+      "slot": "weapon",
+      "zone": 2,
+      "grade": "rare",
+      "stat": "wis",
+      "damage": 8,
+      "damageReduction": 0,
+      "maxHp": 0,
+      "statBonus": {
+        "wis": 4
+      },
+      "effects": [
+        "onBattleStart>shield:8:2",
+        "whileShield>skillDamageBonus:3"
+      ],
+      "requirement": {
+        "stat": "wis",
+        "value": 17
+      },
+      "unique": false,
+      "starter": false,
+      "price": 65,
+      "description": "끝에 커다란 수정이 박힌 지팡이."
+    },
+    {
+      "id": "arm2_crystal_robe",
+      "name": "결정 로브",
+      "slot": "armor",
+      "zone": 2,
+      "grade": "uncommon",
+      "stat": "wis",
+      "damage": null,
+      "damageReduction": 0,
+      "maxHp": 10,
+      "statBonus": {},
+      "effects": [
+        "chantShieldBonus:3"
+      ],
+      "requirement": {
+        "stat": "wis",
+        "value": 14
+      },
+      "unique": false,
+      "starter": false,
+      "price": 50,
+      "description": "영창할 때 결정이 몸을 덮는다."
+    },
+    {
+      "id": "nck_herb_pouch",
+      "name": "약초꾼의 주머니",
+      "slot": "necklace",
+      "zone": 1,
+      "grade": "uncommon",
+      "stat": "main",
+      "damage": null,
+      "damageReduction": 0,
+      "maxHp": 0,
+      "statBonus": {},
+      "effects": [
+        "consumableBoost:20"
+      ],
+      "requirement": {
+        "stat": "main",
+        "value": 5
+      },
+      "unique": false,
+      "starter": false,
+      "price": 30,
+      "description": "쓸 만한 약초가 늘 손에 잡히는 주머니."
+    },
+    {
+      "id": "rng_mending",
+      "name": "회복의 고리",
+      "slot": "ring",
+      "zone": 1,
+      "grade": "rare",
+      "stat": "main",
+      "damage": null,
+      "damageReduction": 0,
+      "maxHp": 0,
+      "statBonus": {},
+      "effects": [
+        "onHeal>empower:2:1"
+      ],
+      "requirement": {
+        "stat": "main",
+        "value": 8
+      },
+      "unique": false,
+      "starter": false,
+      "price": 40,
+      "description": "상처가 아물 때마다 손에 힘이 들어간다."
+    },
+    {
+      "id": "arm2_renewal_robe",
+      "name": "재생의 로브",
+      "slot": "armor",
+      "zone": 2,
+      "grade": "uncommon",
+      "stat": "main",
+      "damage": null,
+      "damageReduction": 0,
+      "maxHp": 10,
+      "statBonus": {},
+      "effects": [
+        "onTurnStart>heal:2",
+        "healBonus:20"
+      ],
+      "requirement": {
+        "stat": "main",
+        "value": 14
+      },
+      "unique": false,
+      "starter": false,
+      "price": 50,
+      "description": "입고 있으면 상처가 조금씩 아문다."
+    },
+    {
+      "id": "nck2_field_kit",
+      "name": "응급 상자 목걸이",
+      "slot": "necklace",
+      "zone": 2,
+      "grade": "rare",
+      "stat": "main",
+      "damage": null,
+      "damageReduction": 0,
+      "maxHp": 0,
+      "statBonus": {},
+      "effects": [
+        "freeItemUse:1",
+        "consumableBoost:20"
+      ],
+      "requirement": {
+        "stat": "main",
+        "value": 17
+      },
+      "unique": false,
+      "starter": false,
+      "price": 65,
+      "description": "작은 상자 안에 필요한 것이 다 들어 있다."
+    },
+    {
+      "id": "wpn3_root_spear",
+      "name": "뿌리 병사의 창",
+      "slot": "weapon",
+      "zone": 3,
+      "grade": "common",
+      "stat": "str",
+      "damage": 7,
+      "damageReduction": 0,
+      "maxHp": 0,
+      "statBonus": {
+        "str": 4
+      },
+      "effects": [],
+      "requirement": {
+        "stat": "str",
+        "value": 20
+      },
+      "unique": false,
+      "starter": false,
+      "price": 50,
+      "description": "창대에 마른 뿌리가 감긴 왕국 병사의 창."
+    },
+    {
+      "id": "wpn3_bronze_mace",
+      "name": "청동 철퇴",
+      "slot": "weapon",
+      "zone": 3,
+      "grade": "common",
+      "stat": "str",
+      "damage": 6,
+      "damageReduction": 0,
+      "maxHp": 0,
+      "statBonus": {
+        "str": 4
+      },
+      "effects": [],
+      "requirement": {
+        "stat": "str",
+        "value": 20
+      },
+      "unique": false,
+      "starter": false,
+      "price": 50,
+      "description": "공방에서 찍어 낸 묵직한 철퇴."
+    },
+    {
+      "id": "wpn3_knight_sword",
+      "name": "기사단 장검",
+      "slot": "weapon",
+      "zone": 3,
+      "grade": "uncommon",
+      "stat": "str",
+      "damage": 8,
+      "damageReduction": 0,
+      "maxHp": 0,
+      "statBonus": {
+        "str": 5
+      },
+      "effects": [
+        "onBattleStart>shield:6:2"
+      ],
+      "requirement": {
+        "stat": "str",
+        "value": 23
+      },
+      "unique": false,
+      "starter": false,
+      "price": 65,
+      "description": "\"왕명이라면 경고도 베리라.\" 날에 맹세가 새겨져 있다."
+    },
+    {
+      "id": "wpn3_guardian_hammer",
+      "name": "파수기 망치",
+      "slot": "weapon",
+      "zone": 3,
+      "grade": "uncommon",
+      "stat": "str",
+      "damage": 8,
+      "damageReduction": 0,
+      "maxHp": 0,
+      "statBonus": {
+        "str": 5
+      },
+      "effects": [
+        "onHit@25>weaken:0.7:1"
+      ],
+      "requirement": {
+        "stat": "str",
+        "value": 23
+      },
+      "unique": false,
+      "starter": false,
+      "price": 65,
+      "description": "청동 파수기를 두드려 만들던 망치."
+    },
+    {
+      "id": "wpn3_royal_greatsword",
+      "name": "왕실 대검",
+      "slot": "weapon",
+      "zone": 3,
+      "grade": "rare",
+      "stat": "str",
+      "damage": 9,
+      "damageReduction": 0,
+      "maxHp": 0,
+      "statBonus": {
+        "str": 6
+      },
+      "effects": [
+        "crit:1",
+        "onCrit>empower:4:1"
+      ],
+      "requirement": {
+        "stat": "str",
+        "value": 26
+      },
+      "unique": false,
+      "starter": false,
+      "price": 80,
+      "description": "왕의 의장대가 들던 대검. 금박이 아직 남아 있다."
+    },
+    {
+      "id": "wpn3_root_cleaver",
+      "name": "뿌리 가르개",
+      "slot": "weapon",
+      "zone": 3,
+      "grade": "rare",
+      "stat": "str",
+      "damage": 9,
+      "damageReduction": 0,
+      "maxHp": 5,
+      "statBonus": {
+        "str": 6
+      },
+      "effects": [
+        "lowHp>basicAttackBonus:6"
+      ],
+      "requirement": {
+        "stat": "str",
+        "value": 26
+      },
+      "unique": false,
+      "starter": false,
+      "price": 80,
+      "description": "거대한 뿌리를 쪼개려고 벼린 도끼."
+    },
+    {
+      "id": "wpn3_robber_dagger",
+      "name": "도굴꾼 단검",
+      "slot": "weapon",
+      "zone": 3,
+      "grade": "common",
+      "stat": "agi",
+      "damage": 6,
+      "damageReduction": 0,
+      "maxHp": 0,
+      "statBonus": {
+        "agi": 4
+      },
+      "effects": [],
+      "requirement": {
+        "stat": "agi",
+        "value": 20
+      },
+      "unique": false,
+      "starter": false,
+      "price": 50,
+      "description": "석관 틈을 비집는 데도 쓰는 짧은 칼."
+    },
+    {
+      "id": "wpn3_aqueduct_crossbow",
+      "name": "수로 경비의 석궁",
+      "slot": "weapon",
+      "zone": 3,
+      "grade": "common",
+      "stat": "agi",
+      "damage": 7,
+      "damageReduction": 0,
+      "maxHp": 0,
+      "statBonus": {
+        "agi": 4
+      },
+      "effects": [],
+      "requirement": {
+        "stat": "agi",
+        "value": 20
+      },
+      "unique": false,
+      "starter": false,
+      "price": 50,
+      "description": "수로를 지키던 경비가 쓰던 작은 석궁."
+    },
+    {
+      "id": "wpn3_crow_knife",
+      "name": "까마귀 깃 단도",
+      "slot": "weapon",
+      "zone": 3,
+      "grade": "uncommon",
+      "stat": "agi",
+      "damage": 7,
+      "damageReduction": 0,
+      "maxHp": 0,
+      "statBonus": {
+        "agi": 5
+      },
+      "effects": [
+        "onHit@25>bleed:2"
+      ],
+      "requirement": {
+        "stat": "agi",
+        "value": 23
+      },
+      "unique": false,
+      "starter": false,
+      "price": 65,
+      "description": "손잡이에 까마귀 깃이 묶인 단도."
+    },
+    {
+      "id": "wpn3_spore_darts",
+      "name": "포자 투척침",
+      "slot": "weapon",
+      "zone": 3,
+      "grade": "uncommon",
+      "stat": "agi",
+      "damage": 7,
+      "damageReduction": 0,
+      "maxHp": 0,
+      "statBonus": {
+        "agi": 5
+      },
+      "effects": [
+        "onHit@25>poison:5:2"
+      ],
+      "requirement": {
+        "stat": "agi",
+        "value": 23
+      },
+      "unique": false,
+      "starter": false,
+      "price": 65,
+      "description": "균류 정원의 포자를 바른 투척침."
+    },
+    {
+      "id": "wpn3_royal_rapier",
+      "name": "근위대 세검",
+      "slot": "weapon",
+      "zone": 3,
+      "grade": "rare",
+      "stat": "agi",
+      "damage": 8,
+      "damageReduction": 0,
+      "maxHp": 0,
+      "statBonus": {
+        "agi": 6
+      },
+      "effects": [
+        "evade:1",
+        "crit:1"
+      ],
+      "requirement": {
+        "stat": "agi",
+        "value": 26
+      },
+      "unique": false,
+      "starter": false,
+      "price": 80,
+      "description": "교대 박자에 맞춰 휘두르던 가는 검."
+    },
+    {
+      "id": "wpn3_worm_fang",
+      "name": "뿌리 벌레 송곳니",
+      "slot": "weapon",
+      "zone": 3,
+      "grade": "rare",
+      "stat": "agi",
+      "damage": 9,
+      "damageReduction": 0,
+      "maxHp": 0,
+      "statBonus": {
+        "agi": 6
+      },
+      "effects": [
+        "lifesteal:10"
+      ],
+      "requirement": {
+        "stat": "agi",
+        "value": 26
+      },
+      "unique": false,
+      "starter": false,
+      "price": 80,
+      "description": "뿌리를 파먹던 벌레의 송곳니를 박은 단검."
+    },
+    {
+      "id": "wpn3_priest_staff",
+      "name": "사제의 지팡이",
+      "slot": "weapon",
+      "zone": 3,
+      "grade": "common",
+      "stat": "wis",
+      "damage": 6,
+      "damageReduction": 0,
+      "maxHp": 0,
+      "statBonus": {
+        "wis": 4
+      },
+      "effects": [],
+      "requirement": {
+        "stat": "wis",
+        "value": 20
+      },
+      "unique": false,
+      "starter": false,
+      "price": 50,
+      "description": "대신전 사제들이 짚던 지팡이."
+    },
+    {
+      "id": "wpn3_star_rod",
+      "name": "천문대 측량봉",
+      "slot": "weapon",
+      "zone": 3,
+      "grade": "common",
+      "stat": "wis",
+      "damage": 7,
+      "damageReduction": 0,
+      "maxHp": 0,
+      "statBonus": {
+        "wis": 4
+      },
+      "effects": [],
+      "requirement": {
+        "stat": "wis",
+        "value": 20
+      },
+      "unique": false,
+      "starter": false,
+      "price": 50,
+      "description": "별의 높이를 재던 청동 막대."
+    },
+    {
+      "id": "wpn3_spore_censer",
+      "name": "포자 향로",
+      "slot": "weapon",
+      "zone": 3,
+      "grade": "uncommon",
+      "stat": "wis",
+      "damage": 7,
+      "damageReduction": 0,
+      "maxHp": 0,
+      "statBonus": {
+        "wis": 5
+      },
+      "effects": [
+        "onSkill@30>weaken:0.7:1"
+      ],
+      "requirement": {
+        "stat": "wis",
+        "value": 23
+      },
+      "unique": false,
+      "starter": false,
+      "price": 65,
+      "description": "흔들 때마다 흐린 포자가 피어오르는 향로."
+    },
+    {
+      "id": "wpn3_drowned_tome",
+      "name": "물에 젖은 마법서",
+      "slot": "weapon",
+      "zone": 3,
+      "grade": "uncommon",
+      "stat": "wis",
+      "damage": 7,
+      "damageReduction": 0,
+      "maxHp": 0,
+      "statBonus": {
+        "wis": 5
+      },
+      "effects": [
+        "skillDamageBonus:3"
+      ],
+      "requirement": {
+        "stat": "wis",
+        "value": 23
+      },
+      "unique": false,
+      "starter": false,
+      "price": 65,
+      "description": "번진 글씨 사이로 아직 주문이 읽힌다."
+    },
+    {
+      "id": "wpn3_temple_scepter",
+      "name": "대신전 의식 홀",
+      "slot": "weapon",
+      "zone": 3,
+      "grade": "rare",
+      "stat": "wis",
+      "damage": 9,
+      "damageReduction": 0,
+      "maxHp": 0,
+      "statBonus": {
+        "wis": 6
+      },
+      "effects": [
+        "onBattleStart>shield:10:2",
+        "onSkill>heal:3"
+      ],
+      "requirement": {
+        "stat": "wis",
+        "value": 26
+      },
+      "unique": false,
+      "starter": false,
+      "price": 80,
+      "description": "제단 앞에서 왕을 축복하던 홀."
+    },
+    {
+      "id": "wpn3_dead_star",
+      "name": "꺼진 별의 수정",
+      "slot": "weapon",
+      "zone": 3,
+      "grade": "rare",
+      "stat": "wis",
+      "damage": 9,
+      "damageReduction": 0,
+      "maxHp": 0,
+      "statBonus": {
+        "wis": 6
+      },
+      "effects": [
+        "skillDamageBonus:4",
+        "onSkill@30>cooldown:-1"
+      ],
+      "requirement": {
+        "stat": "wis",
+        "value": 26
+      },
+      "unique": false,
+      "starter": false,
+      "price": 80,
+      "description": "\"성역의 별이 꺼졌다.\" 그날 떨어진 수정이라고 한다."
+    },
+    {
+      "id": "wpn3_u_commander_blade",
+      "name": "기사단장의 처형검",
+      "slot": "weapon",
+      "zone": 3,
+      "grade": "unique",
+      "stat": "str",
+      "damage": 10,
+      "damageReduction": 0,
+      "maxHp": 0,
+      "statBonus": {
+        "str": 7
+      },
+      "effects": [
+        "onBattleStart>shield:12:2",
+        "whileShield>basicAttackBonus:5"
+      ],
+      "requirement": {
+        "stat": "str",
+        "value": 26
+      },
+      "unique": true,
+      "starter": false,
+      "price": 95,
+      "description": "경고를 전하러 온 사절들의 목을 벤 검."
+    },
+    {
+      "id": "wpn3_u_crow_talon",
+      "name": "까마귀 손의 갈고리",
+      "slot": "weapon",
+      "zone": 3,
+      "grade": "unique",
+      "stat": "agi",
+      "damage": 10,
+      "damageReduction": 0,
+      "maxHp": 0,
+      "statBonus": {
+        "agi": 7
+      },
+      "effects": [
+        "crit:1",
+        "evade:1",
+        "onCrit>bleed:3"
+      ],
+      "requirement": {
+        "stat": "agi",
+        "value": 26
+      },
+      "unique": true,
+      "starter": false,
+      "price": 95,
+      "description": "까마귀 손이 왕관을 노리며 갈아 온 갈고리 칼."
+    },
+    {
+      "id": "wpn3_u_root_scepter",
+      "name": "뿌리 왕의 홀",
+      "slot": "weapon",
+      "zone": 3,
+      "grade": "unique",
+      "stat": "wis",
+      "damage": 10,
+      "damageReduction": 0,
+      "maxHp": 0,
+      "statBonus": {
+        "wis": 7
+      },
+      "effects": [
+        "cooldownReduction:1",
+        "onSkill@30>weaken:0.7:1",
+        "onKill>heal:16"
+      ],
+      "requirement": {
+        "stat": "wis",
+        "value": 26
+      },
+      "unique": true,
+      "starter": false,
+      "price": 95,
+      "description": "왕이 성역의 뿌리를 부르던 홀. 아직 맥박이 뛴다."
+    },
+    {
+      "id": "arm3_root_mail",
+      "name": "뿌리 엉킨 사슬옷",
+      "slot": "armor",
+      "zone": 3,
+      "grade": "common",
+      "stat": "str",
+      "damage": null,
+      "damageReduction": 2,
+      "maxHp": 10,
+      "statBonus": {},
+      "effects": [],
+      "requirement": {
+        "stat": "str",
+        "value": 20
+      },
+      "unique": false,
+      "starter": false,
+      "price": 50,
+      "description": "사슬 사이로 마른 뿌리가 엉켜 있다."
+    },
+    {
+      "id": "arm3_robber_leather",
+      "name": "도굴꾼 가죽옷",
+      "slot": "armor",
+      "zone": 3,
+      "grade": "common",
+      "stat": "agi",
+      "damage": null,
+      "damageReduction": 1,
+      "maxHp": 10,
+      "statBonus": {},
+      "effects": [],
+      "requirement": {
+        "stat": "agi",
+        "value": 20
+      },
+      "unique": false,
+      "starter": false,
+      "price": 50,
+      "description": "주머니가 잔뜩 달린 가죽옷."
+    },
+    {
+      "id": "arm3_bronze_plate",
+      "name": "청동 판갑",
+      "slot": "armor",
+      "zone": 3,
+      "grade": "uncommon",
+      "stat": "str",
+      "damage": null,
+      "damageReduction": 4,
+      "maxHp": 10,
+      "statBonus": {},
+      "effects": [
+        "onHurt@25>shield:6:1"
+      ],
+      "requirement": {
+        "stat": "str",
+        "value": 23
+      },
+      "unique": false,
+      "starter": false,
+      "price": 65,
+      "description": "파수기 외판을 두드려 편 판갑."
+    },
+    {
+      "id": "arm3_crow_cloak",
+      "name": "까마귀 깃 망토",
+      "slot": "armor",
+      "zone": 3,
+      "grade": "uncommon",
+      "stat": "agi",
+      "damage": null,
+      "damageReduction": 2,
+      "maxHp": 0,
+      "statBonus": {},
+      "effects": [
+        "evade:1"
+      ],
+      "requirement": {
+        "stat": "agi",
+        "value": 23
+      },
+      "unique": false,
+      "starter": false,
+      "price": 65,
+      "description": "깃털이 소리를 삼킨다."
+    },
+    {
+      "id": "arm3_noble_robe",
+      "name": "망령 귀족의 예복",
+      "slot": "armor",
+      "zone": 3,
+      "grade": "uncommon",
+      "stat": "wis",
+      "damage": null,
+      "damageReduction": 0,
+      "maxHp": 15,
+      "statBonus": {
+        "wis": 2
+      },
+      "effects": [
+        "immune:vulnerable"
+      ],
+      "requirement": {
+        "stat": "wis",
+        "value": 23
+      },
+      "unique": false,
+      "starter": false,
+      "price": 65,
+      "description": "연회장 의자에 걸려 있던 예복. 차갑다."
+    },
+    {
+      "id": "arm3_royal_guard_plate",
+      "name": "근위대 갑주",
+      "slot": "armor",
+      "zone": 3,
+      "grade": "rare",
+      "stat": "str",
+      "damage": null,
+      "damageReduction": 4,
+      "maxHp": 15,
+      "statBonus": {
+        "str": 1
+      },
+      "effects": [
+        "reflect:4"
+      ],
+      "requirement": {
+        "stat": "str",
+        "value": 26
+      },
+      "unique": false,
+      "starter": false,
+      "price": 80,
+      "description": "백 년째 교대를 서던 근위병의 갑주."
+    },
+    {
+      "id": "arm3_priest_vestment",
+      "name": "대사제의 제의",
+      "slot": "armor",
+      "zone": 3,
+      "grade": "rare",
+      "stat": "wis",
+      "damage": null,
+      "damageReduction": 0,
+      "maxHp": 15,
+      "statBonus": {
+        "wis": 3
+      },
+      "effects": [
+        "onTurnStart>heal:3"
+      ],
+      "requirement": {
+        "stat": "wis",
+        "value": 26
+      },
+      "unique": false,
+      "starter": false,
+      "price": 80,
+      "description": "고해실에 남아 있던 대사제의 옷."
+    },
+    {
+      "id": "arm3_u_devourer_bark",
+      "name": "왕궁을 삼킨 뿌리의 껍질",
+      "slot": "armor",
+      "zone": 3,
+      "grade": "unique",
+      "stat": "main",
+      "damage": null,
+      "damageReduction": 5,
+      "maxHp": 20,
+      "statBonus": {},
+      "effects": [
+        "immune:bleed",
+        "onTurnStart>heal:3"
+      ],
+      "requirement": {
+        "stat": "main",
+        "value": 26
+      },
+      "unique": true,
+      "starter": false,
+      "price": 95,
+      "description": "왕궁을 통째로 조이던 뿌리의 껍질. 어느 직업이든 걸칠 수 있다."
+    },
+    {
+      "id": "rng3_strength",
+      "name": "왕국 병사의 반지",
+      "slot": "ring",
+      "zone": 3,
+      "grade": "common",
+      "stat": "str",
+      "damage": null,
+      "damageReduction": 0,
+      "maxHp": 0,
+      "statBonus": {
+        "str": 8
+      },
+      "effects": [],
+      "requirement": {
+        "stat": "str",
+        "value": 20
+      },
+      "unique": false,
+      "starter": false,
+      "price": 50,
+      "description": "병사들이 입대할 때 받던 쇠반지."
+    },
+    {
+      "id": "rng3_agility",
+      "name": "수로 경비의 반지",
+      "slot": "ring",
+      "zone": 3,
+      "grade": "common",
+      "stat": "agi",
+      "damage": null,
+      "damageReduction": 0,
+      "maxHp": 0,
+      "statBonus": {
+        "agi": 8
+      },
+      "effects": [],
+      "requirement": {
+        "stat": "agi",
+        "value": 20
+      },
+      "unique": false,
+      "starter": false,
+      "price": 50,
+      "description": "물에 닳아 반들반들하다."
+    },
+    {
+      "id": "rng3_wisdom",
+      "name": "서기관의 반지",
+      "slot": "ring",
+      "zone": 3,
+      "grade": "common",
+      "stat": "wis",
+      "damage": null,
+      "damageReduction": 0,
+      "maxHp": 0,
+      "statBonus": {
+        "wis": 8
+      },
+      "effects": [],
+      "requirement": {
+        "stat": "wis",
+        "value": 20
+      },
+      "unique": false,
+      "starter": false,
+      "price": 50,
+      "description": "도서관 서기관들이 끼던 은반지."
+    },
+    {
+      "id": "rng3_knight_signet",
+      "name": "기사단 인장 반지",
+      "slot": "ring",
+      "zone": 3,
+      "grade": "uncommon",
+      "stat": "str",
+      "damage": null,
+      "damageReduction": 0,
+      "maxHp": 0,
+      "statBonus": {
+        "str": 9
+      },
+      "effects": [
+        "reflect:3"
+      ],
+      "requirement": {
+        "stat": "str",
+        "value": 23
+      },
+      "unique": false,
+      "starter": false,
+      "price": 65,
+      "description": "기사단 문장이 새겨진 인장 반지."
+    },
+    {
+      "id": "rng3_crow_ring",
+      "name": "까마귀 반지",
+      "slot": "ring",
+      "zone": 3,
+      "grade": "uncommon",
+      "stat": "agi",
+      "damage": null,
+      "damageReduction": 0,
+      "maxHp": 0,
+      "statBonus": {
+        "agi": 9
+      },
+      "effects": [
+        "crit:1"
+      ],
+      "requirement": {
+        "stat": "agi",
+        "value": 23
+      },
+      "unique": false,
+      "starter": false,
+      "price": 65,
+      "description": "도굴꾼끼리 알아보는 표식."
+    },
+    {
+      "id": "rng3_star_ring",
+      "name": "별빛 반지",
+      "slot": "ring",
+      "zone": 3,
+      "grade": "uncommon",
+      "stat": "wis",
+      "damage": null,
+      "damageReduction": 0,
+      "maxHp": 0,
+      "statBonus": {
+        "wis": 9
+      },
+      "effects": [
+        "skillDamageBonus:3"
+      ],
+      "requirement": {
+        "stat": "wis",
+        "value": 23
+      },
+      "unique": false,
+      "starter": false,
+      "price": 65,
+      "description": "어둠 속에서 희미하게 빛난다."
+    },
+    {
+      "id": "rng3_root_ring",
+      "name": "뿌리 고리",
+      "slot": "ring",
+      "zone": 3,
+      "grade": "rare",
+      "stat": "str",
+      "damage": null,
+      "damageReduction": 0,
+      "maxHp": 0,
+      "statBonus": {
+        "str": 11
+      },
+      "effects": [
+        "lifesteal:10"
+      ],
+      "requirement": {
+        "stat": "str",
+        "value": 26
+      },
+      "unique": false,
+      "starter": false,
+      "price": 80,
+      "description": "손가락을 감은 뿌리가 피를 마신다."
+    },
+    {
+      "id": "rng3_robber_king_ring",
+      "name": "도굴왕의 반지",
+      "slot": "ring",
+      "zone": 3,
+      "grade": "rare",
+      "stat": "agi",
+      "damage": null,
+      "damageReduction": 0,
+      "maxHp": 0,
+      "statBonus": {
+        "agi": 11
+      },
+      "effects": [
+        "evade:1",
+        "onCrit>empower:4:1"
+      ],
+      "requirement": {
+        "stat": "agi",
+        "value": 26
+      },
+      "unique": false,
+      "starter": false,
+      "price": 80,
+      "description": "석관에서 나온 반지. 원래 주인은 왕이었다."
+    },
+    {
+      "id": "rng3_royal_seal",
+      "name": "왕의 인장 반지",
+      "slot": "ring",
+      "zone": 3,
+      "grade": "rare",
+      "stat": "wis",
+      "damage": null,
+      "damageReduction": 0,
+      "maxHp": 0,
+      "statBonus": {
+        "wis": 11
+      },
+      "effects": [
+        "onSkill>heal:5"
+      ],
+      "requirement": {
+        "stat": "wis",
+        "value": 26
+      },
+      "unique": false,
+      "starter": false,
+      "price": 80,
+      "description": "\"무시하라.\" 그 서명에 찍힌 인장."
+    },
+    {
+      "id": "nck3_knight_medal",
+      "name": "기사단 훈장",
+      "slot": "necklace",
+      "zone": 3,
+      "grade": "common",
+      "stat": "str",
+      "damage": null,
+      "damageReduction": 0,
+      "maxHp": 0,
+      "statBonus": {},
+      "effects": [
+        "basicAttackBonus:3"
+      ],
+      "requirement": {
+        "stat": "str",
+        "value": 20
+      },
+      "unique": false,
+      "starter": false,
+      "price": 50,
+      "description": "무릎 꿇은 기사의 가슴에 달려 있던 훈장."
+    },
+    {
+      "id": "nck3_wish_charm",
+      "name": "소원 쪽지 부적",
+      "slot": "necklace",
+      "zone": 3,
+      "grade": "common",
+      "stat": "wis",
+      "damage": null,
+      "damageReduction": 0,
+      "maxHp": 0,
+      "statBonus": {},
+      "effects": [
+        "exploreBonus:3"
+      ],
+      "requirement": {
+        "stat": "wis",
+        "value": 20
+      },
+      "unique": false,
+      "starter": false,
+      "price": 50,
+      "description": "\"돌아가고 싶다.\" 쪽지를 접어 넣은 부적."
+    },
+    {
+      "id": "nck3_guardian_core",
+      "name": "파수기 핵 목걸이",
+      "slot": "necklace",
+      "zone": 3,
+      "grade": "uncommon",
+      "stat": "str",
+      "damage": null,
+      "damageReduction": 0,
+      "maxHp": 0,
+      "statBonus": {},
+      "effects": [
+        "onBattleStart>shield:8:2"
+      ],
+      "requirement": {
+        "stat": "str",
+        "value": 23
+      },
+      "unique": false,
+      "starter": false,
+      "price": 65,
+      "description": "식은 파수기 핵을 끈에 꿴 것. 아직 따뜻하다."
+    },
+    {
+      "id": "nck3_mask_pendant",
+      "name": "웃는 가면 펜던트",
+      "slot": "necklace",
+      "zone": 3,
+      "grade": "uncommon",
+      "stat": "agi",
+      "damage": null,
+      "damageReduction": 0,
+      "maxHp": 0,
+      "statBonus": {
+        "agi": 1
+      },
+      "effects": [
+        "evade:1"
+      ],
+      "requirement": {
+        "stat": "agi",
+        "value": 23
+      },
+      "unique": false,
+      "starter": false,
+      "price": 65,
+      "description": "행렬의 가면을 작게 깎은 펜던트."
+    },
+    {
+      "id": "nck3_purified_vial",
+      "name": "정화수 병 목걸이",
+      "slot": "necklace",
+      "zone": 3,
+      "grade": "uncommon",
+      "stat": "wis",
+      "damage": null,
+      "damageReduction": 0,
+      "maxHp": 0,
+      "statBonus": {},
+      "effects": [
+        "immune:poison"
+      ],
+      "requirement": {
+        "stat": "wis",
+        "value": 23
+      },
+      "unique": false,
+      "starter": false,
+      "price": 65,
+      "description": "되살린 샘물을 담은 작은 병."
+    },
+    {
+      "id": "nck3_warden_letter",
+      "name": "숲지기 편지 부적",
+      "slot": "necklace",
+      "zone": 3,
+      "grade": "rare",
+      "stat": "wis",
+      "damage": null,
+      "damageReduction": 0,
+      "maxHp": 0,
+      "statBonus": {
+        "wis": 2
+      },
+      "effects": [
+        "immune:stun",
+        "immune:weaken"
+      ],
+      "requirement": {
+        "stat": "wis",
+        "value": 26
+      },
+      "unique": false,
+      "starter": false,
+      "price": 80,
+      "description": "끝내 전해지지 못한 경고를 접어 넣은 부적."
+    },
+    {
+      "id": "nck3_crow_feather",
+      "name": "까마귀 깃털 목걸이",
+      "slot": "necklace",
+      "zone": 3,
+      "grade": "rare",
+      "stat": "agi",
+      "damage": null,
+      "damageReduction": 0,
+      "maxHp": 0,
+      "statBonus": {
+        "agi": 2
+      },
+      "effects": [
+        "crit:1",
+        "onCrit>bleed:3"
+      ],
+      "requirement": {
+        "stat": "agi",
+        "value": 26
+      },
+      "unique": false,
+      "starter": false,
+      "price": 80,
+      "description": "까마귀 손의 부하들이 목에 거는 깃털."
+    },
+    {
+      "id": "wpn3_rampage_axe",
+      "name": "폭주의 도끼",
+      "slot": "weapon",
+      "zone": 3,
+      "grade": "rare",
+      "stat": "str",
+      "damage": 9,
+      "damageReduction": 0,
+      "maxHp": 0,
+      "statBonus": {
+        "str": 6
+      },
+      "effects": [
+        "onHurt@50>momentum:1",
+        "crit:1"
+      ],
+      "requirement": {
+        "stat": "str",
+        "value": 26
+      },
+      "unique": false,
+      "starter": false,
+      "price": 80,
+      "description": "맞을수록 손에 붙는 왕국 병사의 도끼."
+    },
+    {
+      "id": "nck3_war_drum",
+      "name": "전쟁 북 목걸이",
+      "slot": "necklace",
+      "zone": 3,
+      "grade": "uncommon",
+      "stat": "str",
+      "damage": null,
+      "damageReduction": 0,
+      "maxHp": 0,
+      "statBonus": {},
+      "effects": [
+        "onBattleStart>momentum:2",
+        "fullMomentum>damageReduction:2"
+      ],
+      "requirement": {
+        "stat": "str",
+        "value": 23
+      },
+      "unique": false,
+      "starter": false,
+      "price": 65,
+      "description": "병영의 작은 북을 깎아 만든 목걸이. 두드리면 피가 끓는다."
+    },
+    {
+      "id": "arm3_bastion_plate",
+      "name": "성채 판금",
+      "slot": "armor",
+      "zone": 3,
+      "grade": "rare",
+      "stat": "str",
+      "damage": null,
+      "damageReduction": 4,
+      "maxHp": 15,
+      "statBonus": {},
+      "effects": [
+        "whileShield>reflect:5",
+        "onShieldBreak>damage:10"
+      ],
+      "requirement": {
+        "stat": "str",
+        "value": 26
+      },
+      "unique": false,
+      "starter": false,
+      "price": 80,
+      "description": "성벽 돌을 덧댄 판금. 깨질 때 파편이 튄다."
+    },
+    {
+      "id": "rng3_rampart_ring",
+      "name": "방벽 반지",
+      "slot": "ring",
+      "zone": 3,
+      "grade": "uncommon",
+      "stat": "str",
+      "damage": null,
+      "damageReduction": 0,
+      "maxHp": 0,
+      "statBonus": {
+        "str": 9
+      },
+      "effects": [
+        "whileShield>basicAttackBonus:5"
+      ],
+      "requirement": {
+        "stat": "str",
+        "value": 23
+      },
+      "unique": false,
+      "starter": false,
+      "price": 65,
+      "description": "성벽 수비대장이 끼던 반지."
+    },
+    {
+      "id": "wpn3_blood_greatsword",
+      "name": "선혈의 대검",
+      "slot": "weapon",
+      "zone": 3,
+      "grade": "uncommon",
+      "stat": "str",
+      "damage": 8,
+      "damageReduction": 0,
+      "maxHp": 0,
+      "statBonus": {
+        "str": 5
+      },
+      "effects": [
+        "lowHp>skillDamageBonus:6"
+      ],
+      "requirement": {
+        "stat": "str",
+        "value": 23
+      },
+      "unique": false,
+      "starter": false,
+      "price": 65,
+      "description": "피를 머금을수록 무거워지는 대검."
+    },
+    {
+      "id": "nck3_blood_oath",
+      "name": "피의 맹세 목걸이",
+      "slot": "necklace",
+      "zone": 3,
+      "grade": "rare",
+      "stat": "str",
+      "damage": null,
+      "damageReduction": 0,
+      "maxHp": 0,
+      "statBonus": {
+        "str": 2
+      },
+      "effects": [
+        "lowHp>damageReduction:3",
+        "onKill>heal:14"
+      ],
+      "requirement": {
+        "stat": "str",
+        "value": 26
+      },
+      "unique": false,
+      "starter": false,
+      "price": 80,
+      "description": "기사단장이 마지막 전투 전에 목에 걸었던 맹세."
+    },
+    {
+      "id": "wpn3_barbed_kris",
+      "name": "미늘 단검",
+      "slot": "weapon",
+      "zone": 3,
+      "grade": "uncommon",
+      "stat": "agi",
+      "damage": 7,
+      "damageReduction": 0,
+      "maxHp": 0,
+      "statBonus": {
+        "agi": 5
+      },
+      "effects": [
+        "onHit@40>bleed:2"
+      ],
+      "requirement": {
+        "stat": "agi",
+        "value": 23
+      },
+      "unique": false,
+      "starter": false,
+      "price": 65,
+      "description": "물결 모양 날에 미늘이 박혀 있다."
+    },
+    {
+      "id": "rng3_hemorrhage_ring",
+      "name": "출혈의 반지",
+      "slot": "ring",
+      "zone": 3,
+      "grade": "rare",
+      "stat": "agi",
+      "damage": null,
+      "damageReduction": 0,
+      "maxHp": 0,
+      "statBonus": {
+        "agi": 11
+      },
+      "effects": [
+        "ifBleeding>skillDamageBonus:6",
+        "ifBleeding>basicAttackBonus:3"
+      ],
+      "requirement": {
+        "stat": "agi",
+        "value": 26
+      },
+      "unique": false,
+      "starter": false,
+      "price": 80,
+      "description": "붉게 녹슨 반지. 피 냄새를 맡으면 뜨거워진다."
+    },
+    {
+      "id": "nck3_shadow_mark",
+      "name": "그림자 사냥꾼의 표식",
+      "slot": "necklace",
+      "zone": 3,
+      "grade": "rare",
+      "stat": "agi",
+      "damage": null,
+      "damageReduction": 0,
+      "maxHp": 0,
+      "statBonus": {
+        "agi": 2
+      },
+      "effects": [
+        "crit:1",
+        "onFirstStrike>critBoost:3:2"
+      ],
+      "requirement": {
+        "stat": "agi",
+        "value": 26
+      },
+      "unique": false,
+      "starter": false,
+      "price": 80,
+      "description": "까마귀 손의 부하들이 첫 칼을 맡은 자에게 주던 표식."
+    },
+    {
+      "id": "arm3_shadow_leather",
+      "name": "그림자 경갑",
+      "slot": "armor",
+      "zone": 3,
+      "grade": "uncommon",
+      "stat": "agi",
+      "damage": null,
+      "damageReduction": 2,
+      "maxHp": 10,
+      "statBonus": {},
+      "effects": [
+        "onCrit>heal:6"
+      ],
+      "requirement": {
+        "stat": "agi",
+        "value": 23
+      },
+      "unique": false,
+      "starter": false,
+      "price": 65,
+      "description": "도굴꾼들이 어둠 속 작업에 입던 경갑."
+    },
+    {
+      "id": "wpn3_spore_crossbow",
+      "name": "포자 석궁",
+      "slot": "weapon",
+      "zone": 3,
+      "grade": "rare",
+      "stat": "agi",
+      "damage": 9,
+      "damageReduction": 0,
+      "maxHp": 0,
+      "statBonus": {
+        "agi": 6
+      },
+      "effects": [
+        "onHit@40>poison:6:2",
+        "onCrit>vulnerable:1.3:1"
+      ],
+      "requirement": {
+        "stat": "agi",
+        "value": 26
+      },
+      "unique": false,
+      "starter": false,
+      "price": 80,
+      "description": "화살촉마다 균류 정원의 포자를 묻힌 석궁."
+    },
+    {
+      "id": "rng3_spore_venom_ring",
+      "name": "포자 독 반지",
+      "slot": "ring",
+      "zone": 3,
+      "grade": "uncommon",
+      "stat": "agi",
+      "damage": null,
+      "damageReduction": 0,
+      "maxHp": 0,
+      "statBonus": {
+        "agi": 9
+      },
+      "effects": [
+        "poisonBonus:2"
+      ],
+      "requirement": {
+        "stat": "agi",
+        "value": 23
+      },
+      "unique": false,
+      "starter": false,
+      "price": 65,
+      "description": "반지 홈에 포자 가루가 차 있다."
+    },
+    {
+      "id": "nck3_chant_bell",
+      "name": "영창의 종 목걸이",
+      "slot": "necklace",
+      "zone": 3,
+      "grade": "rare",
+      "stat": "wis",
+      "damage": null,
+      "damageReduction": 0,
+      "maxHp": 0,
+      "statBonus": {
+        "wis": 2
+      },
+      "effects": [
+        "chantBonus:0.25"
+      ],
+      "requirement": {
+        "stat": "wis",
+        "value": 26
+      },
+      "unique": false,
+      "starter": false,
+      "price": 80,
+      "description": "대신전 종을 녹여 만든 작은 종. 영창에 메아리가 실린다."
+    },
+    {
+      "id": "rng3_echo_ring",
+      "name": "메아리 반지",
+      "slot": "ring",
+      "zone": 3,
+      "grade": "uncommon",
+      "stat": "wis",
+      "damage": null,
+      "damageReduction": 0,
+      "maxHp": 0,
+      "statBonus": {
+        "wis": 9
+      },
+      "effects": [
+        "onChant>empower:4:1"
+      ],
+      "requirement": {
+        "stat": "wis",
+        "value": 23
+      },
+      "unique": false,
+      "starter": false,
+      "price": 65,
+      "description": "귀에 대면 왕국의 기도 소리가 들린다."
+    },
+    {
+      "id": "wpn3_binding_rod",
+      "name": "구속의 막대",
+      "slot": "weapon",
+      "zone": 3,
+      "grade": "rare",
+      "stat": "wis",
+      "damage": 9,
+      "damageReduction": 0,
+      "maxHp": 0,
+      "statBonus": {
+        "wis": 6
+      },
+      "effects": [
+        "onSkill@30>weaken:0.7:1",
+        "ifDebuffed>skillDamageBonus:4"
+      ],
+      "requirement": {
+        "stat": "wis",
+        "value": 26
+      },
+      "unique": false,
+      "starter": false,
+      "price": 80,
+      "description": "옛 감옥 간수장이 죄수를 다스리던 막대."
+    },
+    {
+      "id": "nck3_curse_locket",
+      "name": "저주 로켓",
+      "slot": "necklace",
+      "zone": 3,
+      "grade": "uncommon",
+      "stat": "wis",
+      "damage": null,
+      "damageReduction": 0,
+      "maxHp": 0,
+      "statBonus": {},
+      "effects": [
+        "debuffDuration:1",
+        "onSkill@25>vulnerable:1.3:1"
+      ],
+      "requirement": {
+        "stat": "wis",
+        "value": 23
+      },
+      "unique": false,
+      "starter": false,
+      "price": 65,
+      "description": "망령 귀족의 초상이 든 로켓. 열면 한기가 흐른다."
+    },
+    {
+      "id": "arm3_ward_robe",
+      "name": "결계 로브",
+      "slot": "armor",
+      "zone": 3,
+      "grade": "rare",
+      "stat": "wis",
+      "damage": null,
+      "damageReduction": 0,
+      "maxHp": 15,
+      "statBonus": {
+        "wis": 2
+      },
+      "effects": [
+        "chantShieldBonus:4",
+        "whileShield>skillDamageBonus:3"
+      ],
+      "requirement": {
+        "stat": "wis",
+        "value": 26
+      },
+      "unique": false,
+      "starter": false,
+      "price": 80,
+      "description": "숲지기 결계 문양을 수놓은 로브."
+    },
+    {
+      "id": "rng3_crystal_ring",
+      "name": "수정 결계 반지",
+      "slot": "ring",
+      "zone": 3,
+      "grade": "uncommon",
+      "stat": "wis",
+      "damage": null,
+      "damageReduction": 0,
+      "maxHp": 0,
+      "statBonus": {
+        "wis": 9
+      },
+      "effects": [
+        "onBattleStart>shield:10:2"
+      ],
+      "requirement": {
+        "stat": "wis",
+        "value": 23
+      },
+      "unique": false,
+      "starter": false,
+      "price": 65,
+      "description": "천문대 렌즈 조각을 박은 반지."
+    },
+    {
+      "id": "arm3_mender_coat",
+      "name": "치유사의 외투",
+      "slot": "armor",
+      "zone": 3,
+      "grade": "rare",
+      "stat": "main",
+      "damage": null,
+      "damageReduction": 2,
+      "maxHp": 20,
+      "statBonus": {},
+      "effects": [
+        "healBonus:30",
+        "onHeal>empower:3:1"
+      ],
+      "requirement": {
+        "stat": "main",
+        "value": 26
+      },
+      "unique": false,
+      "starter": false,
+      "price": 80,
+      "description": "피난처 사람들이 은인에게 지어 준 외투."
+    },
+    {
+      "id": "nck3_satchel_charm",
+      "name": "약초 주머니 부적",
+      "slot": "necklace",
+      "zone": 3,
+      "grade": "uncommon",
+      "stat": "main",
+      "damage": null,
+      "damageReduction": 0,
+      "maxHp": 0,
+      "statBonus": {},
+      "effects": [
+        "freeItemUse:1",
+        "consumableBoost:20"
+      ],
+      "requirement": {
+        "stat": "main",
+        "value": 23
+      },
+      "unique": false,
+      "starter": false,
+      "price": 65,
+      "description": "정원사가 버섯 사이에서 골라 준 약초를 담은 주머니."
     }
   ],
   "consumables": [

@@ -1,8 +1,8 @@
-import { catalog } from "../data/catalog.js?v=20261014-041746";
-import { entryName, maxStackOf } from "../systems/InventorySystem.js?v=20261014-041746";
-import { sellPriceOf } from "../systems/ShopSystem.js?v=20261014-041746";
-import { describeFull, describeStats } from "./ItemText.js?v=20261014-041746";
-import { renderScene } from "./SceneUI.js?v=20261014-041746";
+import { catalog } from "../data/catalog.js?v=20261016-040625";
+import { entryName, maxStackOf } from "../systems/InventorySystem.js?v=20261016-040625";
+import { sellPriceOf } from "../systems/ShopSystem.js?v=20261016-040625";
+import { describeFull, describeStats } from "./ItemText.js?v=20261016-040625";
+import { renderScene } from "./SceneUI.js?v=20261016-040625";
 
 // 상점: 위는 사기, 아래는 팔기. 한 줄에 한 품목.
 // 사기: 품목마다 1개(회복약만 여러 개). 팔기: 인벤토리 물건을 1개씩 구매 가격의 절반에 판다. (2026-10-13)

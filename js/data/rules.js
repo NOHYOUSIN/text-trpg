@@ -37,7 +37,8 @@ export const CLASS_TRAITS = Object.freeze({
   rogue: { firstStrikeMultiplier: 1.5, surpriseModifier: 3 },
   // 영창: 기본공격 대신 영창하고, 다음 기본공격·스킬 효과 ×1.75 (2026-10-13)
   // 영창 보호막: [영창] 행동 때 보호막 (2 + 지혜 × 0.3), 1턴, 주사위 없음. 전투 시작 때는 주지 않는다. (2026-10-13)
-  mage: { chantMultiplier: 1.75, chantShield: { base: 2, scaling: [{ stat: "wis", coef: 0.3 }], duration: 1 } },
+  // 영창 배율 상한 ×2.5(장비 chantBonus·마력 응축 chantBoost 포함, 2026-10-16)
+  mage: { chantMultiplier: 1.75, chantMultiplierMax: 2.5, chantShield: { base: 2, scaling: [{ stat: "wis", coef: 0.3 }], duration: 1 } },
 });
 
 export const STATUS = Object.freeze({
@@ -83,7 +84,7 @@ export const GRADE_WEIGHTS_BY_ZONE = Object.freeze({
 export const BOSS_REWARD_GRADE = Object.freeze({
   elite: { 1: "common", 2: "uncommon", 3: "uncommon" },
   midboss: { 1: "uncommon", 2: "rare", 3: "rare" },
-  boss: { 1: "rare", 2: "unique" },
+  boss: { 1: "rare", 2: "unique", 3: "unique" },
 });
 
 export const BOSS_REWARD_CANDIDATES = Object.freeze({ min: 2, max: 3 });

@@ -1,6 +1,6 @@
-import { ABILITY } from "../data/rules.js?v=20261014-041746";
-import { parseToken, toStatusSpec } from "./EffectParser.js?v=20261014-041746";
-import { clamp } from "./NumberRules.js?v=20261014-041746";
+import { ABILITY } from "../data/rules.js?v=20261016-040625";
+import { parseToken, toStatusSpec } from "./EffectParser.js?v=20261016-040625";
+import { clamp } from "./NumberRules.js?v=20261016-040625";
 
 // 장비·패시브 스킬의 "조건 > 효과" 능력.
 // 표기: "onHit>bleed:1", "onSkill@30>cooldown:-1" (@ 뒤는 발동 확률 %)
@@ -13,9 +13,18 @@ export const TRIGGERS = Object.freeze([
   "onTurnStart", // 내 턴 시작 시
   "onKill", // 적 처치 시
   "lowHp", // HP가 절반 이하인 동안 (수치 보너스만)
+  // 2026-10-16 빌드 축 확장
+  "whileShield", // 보호막이 있는 동안 (수치 보너스만)
+  "fullMomentum", // 기세가 최대일 때 (수치 보너스만)
+  "ifBleeding", // 대상이 출혈 상태면 (수치 보너스만)
+  "ifDebuffed", // 대상이 약화·취약 상태면 (수치 보너스만)
+  "onShieldBreak", // 내 보호막이 다 깨질 때
+  "onFirstStrike", // 선공한 전투의 시작
+  "onChant", // 영창할 때
+  "onHeal", // 회복할 때(흡혈 제외)
 ]);
 
-const SELF_STATUSES = new Set(["guard", "shield", "empower"]);
+const SELF_STATUSES = new Set(["guard", "shield", "empower", "critBoost"]);
 const BASE_CRIT_MIN = 19;
 
 // 조건이 붙은 표기면 { trigger, chance, effect, source }, 아니면 null.
@@ -46,19 +55,6 @@ export function capEvade(evade) {
 
 export function capLifesteal(percent) {
   return clamp(percent, 0, ABILITY.maxLifesteal);
-}
-
-// HP가 절반 이하일 때만 켜지는 수치 보너스(lowHp>basicAttackBonus:3 등)의 합
-export function lowHpBonus(side, key) {
-  const maxHp = side.profile.maxHp;
-
-  if (side.ref.hp > maxHp * ABILITY.lowHpRatio) {
-    return 0;
-  }
-
-  return side.profile.modifiers.abilities
-    .filter((ability) => ability.trigger === "lowHp" && ability.effect.key === key)
-    .reduce((sum, ability) => sum + Number(ability.effect.args[0]), 0);
 }
 
 // 조건에 맞는 플레이어 능력을 발동한다. ctx.skillId: onSkill에서 방금 쓴 스킬
@@ -98,15 +94,22 @@ function applyAbilityEffect(combat, { effect, source }, ctx) {
     return;
   }
 
-  if (key === "cooldown" && ctx.skillId) {
-    const current = player.cooldowns.get(ctx.skillId) ?? 0;
-    const next = Math.max(1, current + value);
+  // 쿨타임: 방금 쓴 스킬(onSkill), 그 밖의 조건이면 쿨타임이 가장 긴 스킬
+  if (key === "cooldown") {
+    const skillId = ctx.skillId ?? [...player.cooldowns.entries()].sort((a, b) => b[1] - a[1])[0]?.[0];
+    const current = skillId ? player.cooldowns.get(skillId) ?? 0 : 0;
+    const next = Math.max(ctx.skillId ? 1 : 0, current + value);
 
     if (next < current) {
-      player.cooldowns.set(ctx.skillId, next);
+      player.cooldowns.set(skillId, next);
       combat.log("status", `→ ${source}: 쿨타임 ${current - next} 감소`);
     }
 
+    return;
+  }
+
+  if (key === "momentum") {
+    combat.addMomentum(player, value, source);
     return;
   }
 

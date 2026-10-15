@@ -1,5 +1,5 @@
-import { ROUTE } from "../data/rules.js?v=20261014-041746";
-import { isEventAvailable } from "./EventSystem.js?v=20261014-041746";
+import { ROUTE } from "../data/rules.js?v=20261016-040625";
+import { isEventAvailable } from "./EventSystem.js?v=20261016-040625";
 
 export const CONTENT_LABELS = Object.freeze({
   combat: "전투",

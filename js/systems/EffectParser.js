@@ -1,4 +1,4 @@
-import { ABILITY } from "../data/rules.js?v=20261014-041746";
+import { ABILITY } from "../data/rules.js?v=20261016-040625";
 
 // 시트 표기("poison:0.3:3" 등)를 해석한다.
 
@@ -30,6 +30,11 @@ export function toStatusSpec({ key, args }) {
       return { type: "shield", duration: Number(args[0]) };
     case "empower":
       return { type: "empower", duration: Number(args[0]) };
+    // 스킬의 정해진 턴 동안 효과(2026-10-16): reflect:N:턴, critBoost:N:턴
+    case "reflect":
+      return args.length > 1 ? { type: "reflect", amount: Number(args[0]), duration: Number(args[1]) } : null;
+    case "critBoost":
+      return { type: "critBoost", amount: Number(args[0]), duration: Number(args[1]) };
     default:
       return null;
   }
@@ -44,4 +49,7 @@ export const STATUS_LABELS = Object.freeze({
   guard: "방어",
   shield: "보호막",
   empower: "강화",
+  reflect: "반사",
+  critBoost: "치명타 범위",
+  regen: "재생",
 });

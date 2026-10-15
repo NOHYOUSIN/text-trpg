@@ -1,5 +1,5 @@
-import { formatNumber as fmt } from "../systems/NumberRules.js?v=20261014-041746";
-import { renderScene } from "./SceneUI.js?v=20261014-041746";
+import { formatNumber as fmt } from "../systems/NumberRules.js?v=20261016-040625";
+import { renderScene } from "./SceneUI.js?v=20261016-040625";
 
 const GAME_TITLE = "Text TRPG";
 

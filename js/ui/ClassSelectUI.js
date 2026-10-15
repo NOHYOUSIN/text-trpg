@@ -1,7 +1,7 @@
-import { catalog, getItem } from "../data/catalog.js?v=20261014-041746";
-import { maxHpFrom } from "../systems/FormulaSystem.js?v=20261014-041746";
-import { formatNumber as fmt } from "../systems/NumberRules.js?v=20261014-041746";
-import { renderScene } from "./SceneUI.js?v=20261014-041746";
+import { catalog, getItem } from "../data/catalog.js?v=20261016-040625";
+import { maxHpFrom } from "../systems/FormulaSystem.js?v=20261016-040625";
+import { formatNumber as fmt } from "../systems/NumberRules.js?v=20261016-040625";
+import { renderScene } from "./SceneUI.js?v=20261016-040625";
 
 const STAT_LABELS = { str: "힘", agi: "민첩", wis: "지혜" };
 

@@ -1,7 +1,7 @@
-import { STATUS_LABELS } from "../systems/EffectParser.js?v=20261014-041746";
-import { josa } from "../systems/Josa.js?v=20261014-041746";
-import { formatNumber as fmt } from "../systems/NumberRules.js?v=20261014-041746";
-import { durationText, statusValueText, UNTIL_END_TURNS } from "../systems/StatusSystem.js?v=20261014-041746";
+import { STATUS_LABELS } from "../systems/EffectParser.js?v=20261016-040625";
+import { josa } from "../systems/Josa.js?v=20261016-040625";
+import { formatNumber as fmt } from "../systems/NumberRules.js?v=20261016-040625";
+import { durationText, statusValueText, UNTIL_END_TURNS } from "../systems/StatusSystem.js?v=20261016-040625";
 
 // 상태이상 이름 옆에 보여 줄 짧은 표시와, 마우스를 올렸을 때 보여 줄 설명.
 function effectText(status) {
@@ -22,6 +22,12 @@ function effectText(status) {
       return `받는 피해가 ${fmt(status.amount)} 줄어든다.`;
     case "empower":
       return `주는 피해가 ${fmt(status.amount)} 늘어난다.`;
+    case "reflect":
+      return `공격을 받으면 ${fmt(status.amount)} 피해를 되돌려 준다.`;
+    case "critBoost":
+      return `치명타 범위가 ${fmt(status.amount)} 넓어진다(상한 +3).`;
+    case "regen":
+      return `턴을 시작할 때마다 HP를 ${fmt(status.amount)} 회복한다.`;
     default:
       return "";
   }

@@ -1,8 +1,8 @@
-import { catalog, getItem } from "../data/catalog.js?v=20261014-041746";
-import { GRADES } from "../data/rules.js?v=20261014-041746";
-import { canUseOutsideCombat, entryName } from "../systems/InventorySystem.js?v=20261014-041746";
-import { describeFull, describeStats, describeWeaponChange } from "./ItemText.js?v=20261014-041746";
-import { renderScene } from "./SceneUI.js?v=20261014-041746";
+import { catalog, getItem } from "../data/catalog.js?v=20261016-040625";
+import { GRADES } from "../data/rules.js?v=20261016-040625";
+import { canUseOutsideCombat, entryName } from "../systems/InventorySystem.js?v=20261016-040625";
+import { describeFull, describeStats, describeWeaponChange } from "./ItemText.js?v=20261016-040625";
+import { renderScene } from "./SceneUI.js?v=20261016-040625";
 
 function entryOf(kind, id) {
   return kind === "skill" ? catalog.skills.get(id) : getItem(id);

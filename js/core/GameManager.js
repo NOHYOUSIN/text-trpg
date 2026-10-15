@@ -1,12 +1,12 @@
-import { catalog } from "../data/catalog.js?v=20261014-041746";
-import { BOSS_RANKS, EARLY_SKILL, EVENT_CHOICES, RECOVERY, SKILL_FLOOR } from "../data/rules.js?v=20261014-041746";
-import { Adventurer } from "../models/Adventurer.js?v=20261014-041746";
-import { RunState } from "../models/RunState.js?v=20261014-041746";
-import { SaveManager } from "../save/SaveManager.js?v=20261014-041746";
-import { Combat } from "../systems/CombatSystem.js?v=20261014-041746";
-import { DiceSystem } from "../systems/DiceSystem.js?v=20261014-041746";
-import { rollEnemyVariant } from "../systems/EnemyVariantSystem.js?v=20261014-041746";
-import { getSkillBonus, OUTCOME_LABELS, pickShownChoices, resolveChoice } from "../systems/EventSystem.js?v=20261014-041746";
+import { catalog } from "../data/catalog.js?v=20261016-040625";
+import { BOSS_RANKS, EARLY_SKILL, EVENT_CHOICES, RECOVERY, SKILL_FLOOR } from "../data/rules.js?v=20261016-040625";
+import { Adventurer } from "../models/Adventurer.js?v=20261016-040625";
+import { RunState } from "../models/RunState.js?v=20261016-040625";
+import { SaveManager } from "../save/SaveManager.js?v=20261016-040625";
+import { Combat } from "../systems/CombatSystem.js?v=20261016-040625";
+import { DiceSystem } from "../systems/DiceSystem.js?v=20261016-040625";
+import { rollEnemyVariant } from "../systems/EnemyVariantSystem.js?v=20261016-040625";
+import { getSkillBonus, OUTCOME_LABELS, pickShownChoices, resolveChoice } from "../systems/EventSystem.js?v=20261016-040625";
 import {
   addItem,
   discardSlot,
@@ -17,17 +17,17 @@ import {
   tryAutoAcquire,
   unequip,
   useConsumableOutsideCombat,
-} from "../systems/InventorySystem.js?v=20261014-041746";
-import { josa } from "../systems/Josa.js?v=20261014-041746";
+} from "../systems/InventorySystem.js?v=20261016-040625";
+import { josa } from "../systems/Josa.js?v=20261016-040625";
 import {
   createBossRewardCandidates,
   markUniqueSeen,
   resolveAcquisition,
   rollCombatLoot,
   rollTreasure,
-} from "../systems/LootSystem.js?v=20261014-041746";
-import { formatNumber as fmt, roundValue } from "../systems/NumberRules.js?v=20261014-041746";
-import { applyOutcome } from "../systems/OutcomeSystem.js?v=20261014-041746";
+} from "../systems/LootSystem.js?v=20261016-040625";
+import { formatNumber as fmt, roundValue } from "../systems/NumberRules.js?v=20261016-040625";
+import { applyOutcome } from "../systems/OutcomeSystem.js?v=20261016-040625";
 import {
   CONTENT_LABELS,
   createRouteCandidates,
@@ -40,9 +40,9 @@ import {
   pickEnemy,
   pickEvent,
   rollPlaceContent,
-} from "../systems/RouteSystem.js?v=20261014-041746";
-import { createShopStock, sellFromSlot } from "../systems/ShopSystem.js?v=20261014-041746";
-import { getMaxHp, getProfile } from "../systems/TraitSystem.js?v=20261014-041746";
+} from "../systems/RouteSystem.js?v=20261016-040625";
+import { createShopStock, sellFromSlot } from "../systems/ShopSystem.js?v=20261016-040625";
+import { getMaxHp, getProfile } from "../systems/TraitSystem.js?v=20261016-040625";
 import {
   renderBossReward,
   renderEquipChoice,
@@ -50,28 +50,28 @@ import {
   renderInventoryFull,
   renderSkillChoice,
   renderSkillOffer,
-} from "../ui/AcquireUI.js?v=20261014-041746";
-import { renderClassSelect } from "../ui/ClassSelectUI.js?v=20261014-041746";
-import { CombatUI } from "../ui/CombatUI.js?v=20261014-041746";
-import { renderBossIntro } from "../ui/BossIntroUI.js?v=20261014-041746";
-import { renderCamp } from "../ui/CampUI.js?v=20261014-041746";
+} from "../ui/AcquireUI.js?v=20261016-040625";
+import { renderClassSelect } from "../ui/ClassSelectUI.js?v=20261016-040625";
+import { CombatUI } from "../ui/CombatUI.js?v=20261016-040625";
+import { renderBossIntro } from "../ui/BossIntroUI.js?v=20261016-040625";
+import { renderCamp } from "../ui/CampUI.js?v=20261016-040625";
 import {
   describeSave,
   renderDungeonCard,
   renderDungeonSelect,
   renderLobby,
   renderOverwriteConfirm,
-} from "../ui/LobbyUI.js?v=20261014-041746";
-import { HelpUI } from "../ui/HelpUI.js?v=20261014-041746";
-import { SettingsUI } from "../ui/SettingsUI.js?v=20261014-041746";
-import { renderEvent } from "../ui/EventUI.js?v=20261014-041746";
-import { InventoryUI } from "../ui/InventoryUI.js?v=20261014-041746";
-import { LogUI } from "../ui/LogUI.js?v=20261014-041746";
-import { renderRoute } from "../ui/RouteUI.js?v=20261014-041746";
-import { renderScene } from "../ui/SceneUI.js?v=20261014-041746";
-import { renderShop } from "../ui/ShopUI.js?v=20261014-041746";
-import { renderStatus } from "../ui/StatusUI.js?v=20261014-041746";
-import { renderSummary } from "../ui/SummaryUI.js?v=20261014-041746";
+} from "../ui/LobbyUI.js?v=20261016-040625";
+import { HelpUI } from "../ui/HelpUI.js?v=20261016-040625";
+import { SettingsUI } from "../ui/SettingsUI.js?v=20261016-040625";
+import { renderEvent } from "../ui/EventUI.js?v=20261016-040625";
+import { InventoryUI } from "../ui/InventoryUI.js?v=20261016-040625";
+import { LogUI } from "../ui/LogUI.js?v=20261016-040625";
+import { renderRoute } from "../ui/RouteUI.js?v=20261016-040625";
+import { renderScene } from "../ui/SceneUI.js?v=20261016-040625";
+import { renderShop } from "../ui/ShopUI.js?v=20261016-040625";
+import { renderStatus } from "../ui/StatusUI.js?v=20261016-040625";
+import { renderSummary } from "../ui/SummaryUI.js?v=20261016-040625";
 
 
 // 탐험 전체 흐름: 직업 선택 → 라운드(갈림길 → 장소 내용) → 보스 → 요약

@@ -1,10 +1,10 @@
-import { catalog } from "../data/catalog.js?v=20261014-041746";
-import { parseAbility } from "../systems/AbilitySystem.js?v=20261014-041746";
-import { consumableEffects } from "../systems/ConsumableEffects.js?v=20261014-041746";
-import { parseToken, STATUS_LABELS } from "../systems/EffectParser.js?v=20261014-041746";
-import { attackSkillBase, basicAttackBase, supportAmount } from "../systems/FormulaSystem.js?v=20261014-041746";
-import { formatNumber as fmt, roundValue } from "../systems/NumberRules.js?v=20261014-041746";
-import { getProfile, isEquipmentEffectActive } from "../systems/TraitSystem.js?v=20261014-041746";
+import { catalog } from "../data/catalog.js?v=20261016-040625";
+import { parseAbility } from "../systems/AbilitySystem.js?v=20261016-040625";
+import { consumableEffects } from "../systems/ConsumableEffects.js?v=20261016-040625";
+import { parseToken, STATUS_LABELS } from "../systems/EffectParser.js?v=20261016-040625";
+import { attackSkillBase, basicAttackBase, supportAmount } from "../systems/FormulaSystem.js?v=20261016-040625";
+import { formatNumber as fmt, roundValue } from "../systems/NumberRules.js?v=20261016-040625";
+import { getProfile, isEquipmentEffectActive } from "../systems/TraitSystem.js?v=20261016-040625";
 
 // 장비·스킬·소모품 설명(선택 판단용). 2026-10-13 전투 공식 3차 개편에 맞춘 표기:
 // 1줄 = 종류, 2줄 = 결과 수치(계산식은 괄호), 3줄 = 부가 효과.
@@ -29,7 +29,19 @@ const TRIGGER_LABELS = {
   onTurnStart: "내 턴 시작 시",
   onKill: "적 처치 시",
   lowHp: "HP 절반 이하일 때",
+  whileShield: "보호막이 있는 동안",
+  fullMomentum: "기세가 최대일 때",
+  ifBleeding: "대상이 출혈 상태면",
+  ifDebuffed: "대상이 약화·취약 상태면",
+  onShieldBreak: "보호막이 다 깨질 때",
+  onFirstStrike: "선공한 전투 시작 시",
+  onChant: "영창할 때",
+  onHeal: "회복할 때마다",
 };
+
+// 기세 관련 효과는 전사만 쓴다(다른 직업은 효과 없음)
+const WARRIOR_ONLY = new Set(["momentum", "momentumMax"]);
+const WARRIOR_ONLY_TRIGGERS = new Set(["fullMomentum"]);
 
 // "조건 > 효과" 능력 한 줄 설명
 function describeAbility({ trigger, chance, effect }) {
@@ -47,11 +59,16 @@ function describeAbility({ trigger, chance, effect }) {
     empower: () => `강화 ${fmt(Number(a))} (${b}턴)`,
     heal: () => `HP ${fmt(Number(a))} 회복`,
     damage: () => `추가 피해 ${fmt(Number(a))}`,
-    cooldown: () => `그 스킬 쿨타임 ${a}`,
+    cooldown: () => (trigger === "onSkill" ? `그 스킬 쿨타임 ${a}` : `쿨타임이 가장 긴 스킬 ${a}`),
     basicAttackBonus: () => `기본공격 피해 +${fmt(Number(a))}`,
     skillDamageBonus: () => `스킬 피해 +${fmt(Number(a))}`,
+    momentum: () => `기세 +${a}`,
+    reflect: () => `반사 ${fmt(Number(a))}`,
+    damageReduction: () => `받는 피해 -${fmt(Number(a))}`,
+    critBoost: () => `${b}턴 동안 치명타 범위 +${a}`,
   }[key];
-  return `${head} ${body ? body() : key}`;
+  const warriorOnly = WARRIOR_ONLY.has(key) || WARRIOR_ONLY_TRIGGERS.has(trigger);
+  return `${head} ${body ? body() : key}${warriorOnly ? " (전사만)" : ""}`;
 }
 
 export function describeEffectToken(token) {
@@ -108,11 +125,56 @@ export function describeEffectToken(token) {
     case "evade":
       return `회피 +${a}`;
     case "reflect":
-      return `피격 시 반사 ${fmt(Number(a))}`;
+      return b ? `${b}턴 동안 반사 ${fmt(Number(a))}` : `피격 시 반사 ${fmt(Number(a))}`;
     case "lifesteal":
       return `준 피해의 ${a}% 회복`;
     case "bleed":
       return `출혈 +${fmt(Number(a))}`;
+    // 빌드 축 확장(2026-10-16)
+    case "momentum":
+      return `기세 +${a} (전사만)`;
+    case "momentumMax":
+      return `기세 최대치 +${a} (전사만)`;
+    case "consumeMomentum":
+      return `기세를 모두 써서 기세 × ${a} 추가 피해`;
+    case "consumeShield":
+      return `보호막을 모두 써서 보호막 × ${a} 추가 피해`;
+    case "consumeBleed":
+      return `대상 출혈을 모두 터뜨려 출혈 × ${a} 추가 피해`;
+    case "hpCost":
+      return `대가: 최대 HP의 ${a}% 소모`;
+    case "missingHp":
+      return `잃은 HP × ${a} 추가 피해`;
+    case "critBoost":
+      return `${b}턴 동안 치명타 범위 +${a}`;
+    case "executeCrit":
+      return `대상 HP ${a}% 이하면 치명타 확정`;
+    case "perStatus":
+      return `대상 상태이상 1종마다 피해 +${a}`;
+    case "poisonBonus":
+      return `내가 거는 독 피해 +${a}`;
+    case "chantBoost":
+      return `이번 영창 배율 +${a} (영창 유지, 상한 ×2.5)`;
+    case "chantBonus":
+      return `영창 배율 +${a} (상한 ×2.5)`;
+    case "perChant":
+      return `이번 전투 영창 횟수 × ${a} 추가 피해`;
+    case "debuffDuration":
+      return `내가 거는 약화·취약·독 지속시간 +${a}턴`;
+    case "shieldBonus":
+      return `내가 얻는 보호막 +${a}`;
+    case "chantShieldBonus":
+      return `영창 보호막 +${a}`;
+    case "consumableBoost":
+      return `소모품 효과 +${a}%`;
+    case "freeItemUse":
+      return `전투마다 첫 소모품 ${a}번은 행동을 쓰지 않음`;
+    case "regen":
+      return `${a}턴 동안 턴마다 회복`;
+    case "perHealed":
+      return `이번 전투 회복량 × ${a} 추가 피해`;
+    case "healBonus":
+      return `받는 회복 +${a}%`;
     default:
       return token;
   }
@@ -260,7 +322,8 @@ export function describeSkill(skill, adventurer = null) {
     lines.push(profile
       ? `피해 ${fmt(roundValue(attackSkillBase(skill, weapon, profile.stats, profile.mainStat)))} (${expr}) × 주사위`
       : `피해 = (${expr}) × 주사위`);
-  } else if (SUPPORT_LABELS[skill.type]) {
+  } else if (SUPPORT_LABELS[skill.type] && (skill.type !== "buff" || skill.effects.some((token) => token.startsWith("empower:")))) {
+    // 강화 스킬은 강화(empower)가 있을 때만 수치를 보인다(투지의 포효·마력 응축·급소 노리기는 강화가 없다).
     const label = SUPPORT_LABELS[skill.type];
     const amount = profile ? `${labeled(label, fmt(valueOf()))} (${formula(skill.baseEffect, skill.scaling, profile)})` : labeled(label, formula(skill.baseEffect, skill.scaling, null));
     const durationKey = skill.type === "defense" ? "shield" : skill.type === "buff" ? "empower" : null;
