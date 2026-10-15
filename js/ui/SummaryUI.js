@@ -1,6 +1,6 @@
-import { catalog } from "../data/catalog.js?v=20261016-040625";
-import { GRADES } from "../data/rules.js?v=20261016-040625";
-import { renderScene } from "./SceneUI.js?v=20261016-040625";
+import { catalog } from "../data/catalog.js?v=20261016-055455";
+import { GRADES } from "../data/rules.js?v=20261016-055455";
+import { renderScene } from "./SceneUI.js?v=20261016-055455";
 
 const SLOT_LABELS = { weapon: "무기", armor: "방어구", ring: "반지", necklace: "목걸이" };
 
@@ -8,7 +8,7 @@ const SLOT_LABELS = { weapon: "무기", armor: "방어구", ring: "반지", neck
 export function renderSummary(root, { result, dungeon, zone, run, adventurer, onRestart, onLobby }) {
   const titles = {
     victory: "탐험 성공",
-    prototypeEnd: "1구역 돌파 — 프로토타입 종료",
+    prototypeEnd: `${zone.name} 돌파 — 프로토타입 종료`,
     defeat: "탐험 실패",
   };
 
@@ -24,7 +24,9 @@ export function renderSummary(root, { result, dungeon, zone, run, adventurer, on
   renderScene(root, {
     eyebrow: dungeon.name,
     title: titles[result],
+    // 최종 보스를 이기면 던전의 엔딩 문구를 먼저 보여 준다(2026-10-16).
     paragraphs: [
+      ...(result === "victory" && dungeon.endingText ? dungeon.endingText.split("\n").filter(Boolean) : []),
       result === "defeat"
         ? `${zone.name} ${run.round}라운드에서 쓰러졌다.`
         : `${zone.name}의 끝까지 도달했다.`,

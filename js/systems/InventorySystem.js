@@ -1,9 +1,9 @@
-import { catalog, getItem, isEquipment } from "../data/catalog.js?v=20261016-040625";
-import { GRADES, INVENTORY } from "../data/rules.js?v=20261016-040625";
-import { hasConsumableEffect, isElixir } from "./ConsumableEffects.js?v=20261016-040625";
-import { drinkElixir } from "./ElixirSystem.js?v=20261016-040625";
-import { formatNumber as fmt, roundValue } from "./NumberRules.js?v=20261016-040625";
-import { getMaxHp } from "./TraitSystem.js?v=20261016-040625";
+import { catalog, getItem, isEquipment } from "../data/catalog.js?v=20261016-055455";
+import { GRADES, INVENTORY } from "../data/rules.js?v=20261016-055455";
+import { hasConsumableEffect, isElixir } from "./ConsumableEffects.js?v=20261016-055455";
+import { drinkElixir } from "./ElixirSystem.js?v=20261016-055455";
+import { formatNumber as fmt, roundValue } from "./NumberRules.js?v=20261016-055455";
+import { getMaxHp } from "./TraitSystem.js?v=20261016-055455";
 
 export function maxStackOf(id) {
   return isEquipment(id) ? INVENTORY.equipmentStack : catalog.consumables.get(id)?.maxStack ?? INVENTORY.defaultMaxStack;

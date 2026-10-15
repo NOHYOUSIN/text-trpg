@@ -1,4 +1,4 @@
-import { ABILITY } from "../data/rules.js?v=20261016-040625";
+import { ABILITY } from "../data/rules.js?v=20261016-055455";
 
 // 시트 표기("poison:0.3:3" 등)를 해석한다.
 

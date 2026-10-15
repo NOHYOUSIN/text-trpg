@@ -5679,6 +5679,1605 @@ export const commonData = {
       "starter": false,
       "price": 65,
       "description": "정원사가 버섯 사이에서 골라 준 약초를 담은 주머니."
+    },
+    {
+      "id": "wpn4_megalith_club",
+      "name": "거석 몽둥이",
+      "slot": "weapon",
+      "zone": 4,
+      "grade": "common",
+      "stat": "str",
+      "damage": 7,
+      "damageReduction": 0,
+      "maxHp": 0,
+      "statBonus": {
+        "str": 6
+      },
+      "effects": [],
+      "requirement": {
+        "stat": "str",
+        "value": 29
+      },
+      "unique": false,
+      "starter": false,
+      "price": 65,
+      "description": "거석 수호상의 팔을 깎아 만든 몽둥이."
+    },
+    {
+      "id": "wpn4_expedition_axe",
+      "name": "원정대 전투 도끼",
+      "slot": "weapon",
+      "zone": 4,
+      "grade": "common",
+      "stat": "str",
+      "damage": 6,
+      "damageReduction": 0,
+      "maxHp": 0,
+      "statBonus": {
+        "str": 6
+      },
+      "effects": [],
+      "requirement": {
+        "stat": "str",
+        "value": 29
+      },
+      "unique": false,
+      "starter": false,
+      "price": 65,
+      "description": "왕국 원정대가 성역의 나무를 베려고 가져온 도끼."
+    },
+    {
+      "id": "wpn4_first_oak_maul",
+      "name": "첫 나무 망치",
+      "slot": "weapon",
+      "zone": 4,
+      "grade": "uncommon",
+      "stat": "str",
+      "damage": 8,
+      "damageReduction": 0,
+      "maxHp": 0,
+      "statBonus": {
+        "str": 7
+      },
+      "effects": [
+        "onBattleStart>shield:8:2"
+      ],
+      "requirement": {
+        "stat": "str",
+        "value": 32
+      },
+      "unique": false,
+      "starter": false,
+      "price": 80,
+      "description": "첫 나무들이 스스로 떨어뜨린 가지로 만든 망치."
+    },
+    {
+      "id": "wpn4_crystal_greatsword",
+      "name": "수정 대검",
+      "slot": "weapon",
+      "zone": 4,
+      "grade": "uncommon",
+      "stat": "str",
+      "damage": 8,
+      "damageReduction": 0,
+      "maxHp": 0,
+      "statBonus": {
+        "str": 7
+      },
+      "effects": [
+        "onHit@25>weaken:0.7:1"
+      ],
+      "requirement": {
+        "stat": "str",
+        "value": 32
+      },
+      "unique": false,
+      "starter": false,
+      "price": 80,
+      "description": "날 전체가 수정으로 굳은 원정대 기사의 대검."
+    },
+    {
+      "id": "wpn4_ancient_cleaver",
+      "name": "태고의 가르개",
+      "slot": "weapon",
+      "zone": 4,
+      "grade": "rare",
+      "stat": "str",
+      "damage": 9,
+      "damageReduction": 0,
+      "maxHp": 0,
+      "statBonus": {
+        "str": 8
+      },
+      "effects": [
+        "crit:1",
+        "onCrit>empower:5:1"
+      ],
+      "requirement": {
+        "stat": "str",
+        "value": 35
+      },
+      "unique": false,
+      "starter": false,
+      "price": 95,
+      "description": "거인의 뼈를 갈아 만든 날."
+    },
+    {
+      "id": "wpn4_warden_glaive",
+      "name": "숲지기 언월도",
+      "slot": "weapon",
+      "zone": 4,
+      "grade": "rare",
+      "stat": "str",
+      "damage": 9,
+      "damageReduction": 0,
+      "maxHp": 8,
+      "statBonus": {
+        "str": 8
+      },
+      "effects": [
+        "lowHp>basicAttackBonus:8"
+      ],
+      "requirement": {
+        "stat": "str",
+        "value": 35
+      },
+      "unique": false,
+      "starter": false,
+      "price": 95,
+      "description": "봉인을 지키던 숲지기들의 긴 날."
+    },
+    {
+      "id": "wpn4_star_knife",
+      "name": "별빛 단도",
+      "slot": "weapon",
+      "zone": 4,
+      "grade": "common",
+      "stat": "agi",
+      "damage": 6,
+      "damageReduction": 0,
+      "maxHp": 0,
+      "statBonus": {
+        "agi": 6
+      },
+      "effects": [],
+      "requirement": {
+        "stat": "agi",
+        "value": 29
+      },
+      "unique": false,
+      "starter": false,
+      "price": 65,
+      "description": "나방 가루를 입혀 어둠 속에서 빛나는 단도."
+    },
+    {
+      "id": "wpn4_expedition_bow",
+      "name": "원정대 장궁",
+      "slot": "weapon",
+      "zone": 4,
+      "grade": "common",
+      "stat": "agi",
+      "damage": 7,
+      "damageReduction": 0,
+      "maxHp": 0,
+      "statBonus": {
+        "agi": 6
+      },
+      "effects": [],
+      "requirement": {
+        "stat": "agi",
+        "value": 29
+      },
+      "unique": false,
+      "starter": false,
+      "price": 65,
+      "description": "원정대 궁수들이 쓰던 긴 활."
+    },
+    {
+      "id": "wpn4_wolf_fang_blade",
+      "name": "태고의 늑대 이빨 칼",
+      "slot": "weapon",
+      "zone": 4,
+      "grade": "uncommon",
+      "stat": "agi",
+      "damage": 7,
+      "damageReduction": 0,
+      "maxHp": 0,
+      "statBonus": {
+        "agi": 7
+      },
+      "effects": [
+        "onHit@25>bleed:3"
+      ],
+      "requirement": {
+        "stat": "agi",
+        "value": 32
+      },
+      "unique": false,
+      "starter": false,
+      "price": 80,
+      "description": "늙은 늑대가 남긴 이빨을 박은 칼."
+    },
+    {
+      "id": "wpn4_moth_darts",
+      "name": "나방 가루 투척침",
+      "slot": "weapon",
+      "zone": 4,
+      "grade": "uncommon",
+      "stat": "agi",
+      "damage": 7,
+      "damageReduction": 0,
+      "maxHp": 0,
+      "statBonus": {
+        "agi": 7
+      },
+      "effects": [
+        "onHit@25>poison:7:2"
+      ],
+      "requirement": {
+        "stat": "agi",
+        "value": 32
+      },
+      "unique": false,
+      "starter": false,
+      "price": 80,
+      "description": "여왕의 가루를 묻힌 투척침."
+    },
+    {
+      "id": "wpn4_crystal_rapier",
+      "name": "수정 세검",
+      "slot": "weapon",
+      "zone": 4,
+      "grade": "rare",
+      "stat": "agi",
+      "damage": 8,
+      "damageReduction": 0,
+      "maxHp": 0,
+      "statBonus": {
+        "agi": 8
+      },
+      "effects": [
+        "evade:1",
+        "crit:1"
+      ],
+      "requirement": {
+        "stat": "agi",
+        "value": 35
+      },
+      "unique": false,
+      "starter": false,
+      "price": 95,
+      "description": "굳은 결투에서 빼낸 기사의 세검."
+    },
+    {
+      "id": "wpn4_scale_blade",
+      "name": "비늘 날",
+      "slot": "weapon",
+      "zone": 4,
+      "grade": "rare",
+      "stat": "agi",
+      "damage": 9,
+      "damageReduction": 0,
+      "maxHp": 0,
+      "statBonus": {
+        "agi": 8
+      },
+      "effects": [
+        "lifesteal:10"
+      ],
+      "requirement": {
+        "stat": "agi",
+        "value": 35
+      },
+      "unique": false,
+      "starter": false,
+      "price": 95,
+      "description": "파수꾼의 허물에서 떨어진 비늘을 간 날."
+    },
+    {
+      "id": "wpn4_first_branch",
+      "name": "첫 나무의 가지",
+      "slot": "weapon",
+      "zone": 4,
+      "grade": "common",
+      "stat": "wis",
+      "damage": 6,
+      "damageReduction": 0,
+      "maxHp": 0,
+      "statBonus": {
+        "wis": 6
+      },
+      "effects": [],
+      "requirement": {
+        "stat": "wis",
+        "value": 29
+      },
+      "unique": false,
+      "starter": false,
+      "price": 65,
+      "description": "숨 쉬는 나무에서 떨어진 가지."
+    },
+    {
+      "id": "wpn4_star_rod4",
+      "name": "별자리 지팡이",
+      "slot": "weapon",
+      "zone": 4,
+      "grade": "common",
+      "stat": "wis",
+      "damage": 7,
+      "damageReduction": 0,
+      "maxHp": 0,
+      "statBonus": {
+        "wis": 6
+      },
+      "effects": [],
+      "requirement": {
+        "stat": "wis",
+        "value": 29
+      },
+      "unique": false,
+      "starter": false,
+      "price": 65,
+      "description": "구덩이의 별자리를 새긴 지팡이."
+    },
+    {
+      "id": "wpn4_moth_lantern",
+      "name": "나방 등불",
+      "slot": "weapon",
+      "zone": 4,
+      "grade": "uncommon",
+      "stat": "wis",
+      "damage": 7,
+      "damageReduction": 0,
+      "maxHp": 0,
+      "statBonus": {
+        "wis": 7
+      },
+      "effects": [
+        "onSkill@30>weaken:0.7:1"
+      ],
+      "requirement": {
+        "stat": "wis",
+        "value": 32
+      },
+      "unique": false,
+      "starter": false,
+      "price": 80,
+      "description": "별빛 나방이 갇혀 빛나는 등불."
+    },
+    {
+      "id": "wpn4_warning_tablet",
+      "name": "경고 석판",
+      "slot": "weapon",
+      "zone": 4,
+      "grade": "uncommon",
+      "stat": "wis",
+      "damage": 7,
+      "damageReduction": 0,
+      "maxHp": 0,
+      "statBonus": {
+        "wis": 7
+      },
+      "effects": [
+        "skillDamageBonus:4"
+      ],
+      "requirement": {
+        "stat": "wis",
+        "value": 32
+      },
+      "unique": false,
+      "starter": false,
+      "price": 80,
+      "description": "첫 경고 비석에서 떨어진 작은 석판. 손에 쥐면 말이 들린다."
+    },
+    {
+      "id": "wpn4_seal_staff",
+      "name": "봉인의 지팡이",
+      "slot": "weapon",
+      "zone": 4,
+      "grade": "rare",
+      "stat": "wis",
+      "damage": 9,
+      "damageReduction": 0,
+      "maxHp": 0,
+      "statBonus": {
+        "wis": 8
+      },
+      "effects": [
+        "onBattleStart>shield:12:2",
+        "onSkill>heal:4"
+      ],
+      "requirement": {
+        "stat": "wis",
+        "value": 35
+      },
+      "unique": false,
+      "starter": false,
+      "price": 95,
+      "description": "봉인석 조각을 박은 지팡이."
+    },
+    {
+      "id": "wpn4_fallen_star_orb",
+      "name": "되살린 별의 구슬",
+      "slot": "weapon",
+      "zone": 4,
+      "grade": "rare",
+      "stat": "wis",
+      "damage": 9,
+      "damageReduction": 0,
+      "maxHp": 0,
+      "statBonus": {
+        "wis": 8
+      },
+      "effects": [
+        "skillDamageBonus:5",
+        "onSkill@30>cooldown:-1"
+      ],
+      "requirement": {
+        "stat": "wis",
+        "value": 35
+      },
+      "unique": false,
+      "starter": false,
+      "price": 95,
+      "description": "떨어지던 별을 붙잡아 만든 구슬."
+    },
+    {
+      "id": "wpn4_u_gate_maul",
+      "name": "문지기의 거석 망치",
+      "slot": "weapon",
+      "zone": 4,
+      "grade": "unique",
+      "stat": "str",
+      "damage": 10,
+      "damageReduction": 1,
+      "maxHp": 0,
+      "statBonus": {
+        "str": 9
+      },
+      "effects": [
+        "onBattleStart>shield:16:2",
+        "whileShield>basicAttackBonus:6"
+      ],
+      "requirement": {
+        "stat": "str",
+        "value": 35
+      },
+      "unique": true,
+      "starter": false,
+      "price": 110,
+      "description": "거석의 문 한 조각을 통째로 휘두른다."
+    },
+    {
+      "id": "wpn4_u_star_rapier",
+      "name": "꺼진 별의 세검",
+      "slot": "weapon",
+      "zone": 4,
+      "grade": "unique",
+      "stat": "agi",
+      "damage": 10,
+      "damageReduction": 0,
+      "maxHp": 0,
+      "statBonus": {
+        "agi": 9
+      },
+      "effects": [
+        "crit:1",
+        "evade:1",
+        "onCrit>bleed:4"
+      ],
+      "requirement": {
+        "stat": "agi",
+        "value": 35
+      },
+      "unique": true,
+      "starter": false,
+      "price": 110,
+      "description": "왕자가 훔친 별 조각을 박은 세검. 아직 희미하게 빛난다."
+    },
+    {
+      "id": "wpn4_u_first_warden_staff",
+      "name": "첫 숲지기의 지팡이",
+      "slot": "weapon",
+      "zone": 4,
+      "grade": "unique",
+      "stat": "wis",
+      "damage": 10,
+      "damageReduction": 0,
+      "maxHp": 0,
+      "statBonus": {
+        "wis": 9
+      },
+      "effects": [
+        "cooldownReduction:1",
+        "onSkill@30>vulnerable:1.3:1",
+        "onKill>heal:20"
+      ],
+      "requirement": {
+        "stat": "wis",
+        "value": 35
+      },
+      "unique": true,
+      "starter": false,
+      "price": 110,
+      "description": "가장 먼저 경고를 듣고 남은 자의 지팡이."
+    },
+    {
+      "id": "arm4_crystal_mail",
+      "name": "수정 사슬옷",
+      "slot": "armor",
+      "zone": 4,
+      "grade": "common",
+      "stat": "str",
+      "damage": null,
+      "damageReduction": 3,
+      "maxHp": 15,
+      "statBonus": {},
+      "effects": [],
+      "requirement": {
+        "stat": "str",
+        "value": 29
+      },
+      "unique": false,
+      "starter": false,
+      "price": 65,
+      "description": "고리마다 수정이 돋은 사슬옷."
+    },
+    {
+      "id": "arm4_moth_silk",
+      "name": "나방 비단옷",
+      "slot": "armor",
+      "zone": 4,
+      "grade": "common",
+      "stat": "agi",
+      "damage": null,
+      "damageReduction": 2,
+      "maxHp": 15,
+      "statBonus": {},
+      "effects": [],
+      "requirement": {
+        "stat": "agi",
+        "value": 29
+      },
+      "unique": false,
+      "starter": false,
+      "price": 65,
+      "description": "별빛 나방 고치에서 뽑은 비단."
+    },
+    {
+      "id": "arm4_megalith_plate",
+      "name": "거석 판갑",
+      "slot": "armor",
+      "zone": 4,
+      "grade": "uncommon",
+      "stat": "str",
+      "damage": null,
+      "damageReduction": 5,
+      "maxHp": 15,
+      "statBonus": {},
+      "effects": [
+        "onHurt@25>shield:8:1"
+      ],
+      "requirement": {
+        "stat": "str",
+        "value": 32
+      },
+      "unique": false,
+      "starter": false,
+      "price": 80,
+      "description": "거석 조각을 덧댄 판갑."
+    },
+    {
+      "id": "arm4_wolf_pelt",
+      "name": "태고의 늑대 가죽",
+      "slot": "armor",
+      "zone": 4,
+      "grade": "uncommon",
+      "stat": "agi",
+      "damage": null,
+      "damageReduction": 3,
+      "maxHp": 0,
+      "statBonus": {},
+      "effects": [
+        "evade:1"
+      ],
+      "requirement": {
+        "stat": "agi",
+        "value": 32
+      },
+      "unique": false,
+      "starter": false,
+      "price": 80,
+      "description": "늙은 늑대의 털가죽. 따뜻하다."
+    },
+    {
+      "id": "arm4_warden_robe",
+      "name": "숲지기 예복",
+      "slot": "armor",
+      "zone": 4,
+      "grade": "uncommon",
+      "stat": "wis",
+      "damage": null,
+      "damageReduction": 0,
+      "maxHp": 20,
+      "statBonus": {
+        "wis": 2
+      },
+      "effects": [
+        "immune:weaken"
+      ],
+      "requirement": {
+        "stat": "wis",
+        "value": 32
+      },
+      "unique": false,
+      "starter": false,
+      "price": 80,
+      "description": "쉼터 벽에 걸려 있던 숲지기의 예복."
+    },
+    {
+      "id": "arm4_expedition_plate",
+      "name": "원정대 기사 갑주",
+      "slot": "armor",
+      "zone": 4,
+      "grade": "rare",
+      "stat": "str",
+      "damage": null,
+      "damageReduction": 5,
+      "maxHp": 20,
+      "statBonus": {
+        "str": 2
+      },
+      "effects": [
+        "reflect:5"
+      ],
+      "requirement": {
+        "stat": "str",
+        "value": 35
+      },
+      "unique": false,
+      "starter": false,
+      "price": 95,
+      "description": "왕자를 따르던 기사단의 갑주."
+    },
+    {
+      "id": "arm4_starlight_vestment",
+      "name": "별빛 제의",
+      "slot": "armor",
+      "zone": 4,
+      "grade": "rare",
+      "stat": "wis",
+      "damage": null,
+      "damageReduction": 0,
+      "maxHp": 20,
+      "statBonus": {
+        "wis": 4
+      },
+      "effects": [
+        "onTurnStart>heal:4"
+      ],
+      "requirement": {
+        "stat": "wis",
+        "value": 35
+      },
+      "unique": false,
+      "starter": false,
+      "price": 95,
+      "description": "별자리를 수놓은 제의."
+    },
+    {
+      "id": "arm4_u_warden_scale",
+      "name": "파수꾼의 비늘 갑주",
+      "slot": "armor",
+      "zone": 4,
+      "grade": "unique",
+      "stat": "main",
+      "damage": null,
+      "damageReduction": 6,
+      "maxHp": 25,
+      "statBonus": {},
+      "effects": [
+        "immune:stun",
+        "onTurnStart>heal:4"
+      ],
+      "requirement": {
+        "stat": "main",
+        "value": 35
+      },
+      "unique": true,
+      "starter": false,
+      "price": 110,
+      "description": "파수꾼이 벗어 둔 비늘로 엮은 갑주. 어느 직업이든 걸칠 수 있다."
+    },
+    {
+      "id": "rng4_strength",
+      "name": "거석의 반지",
+      "slot": "ring",
+      "zone": 4,
+      "grade": "common",
+      "stat": "str",
+      "damage": null,
+      "damageReduction": 0,
+      "maxHp": 0,
+      "statBonus": {
+        "str": 11
+      },
+      "effects": [],
+      "requirement": {
+        "stat": "str",
+        "value": 29
+      },
+      "unique": false,
+      "starter": false,
+      "price": 65,
+      "description": "거석 조각을 깎은 묵직한 반지."
+    },
+    {
+      "id": "rng4_agility",
+      "name": "바람결 반지",
+      "slot": "ring",
+      "zone": 4,
+      "grade": "common",
+      "stat": "agi",
+      "damage": null,
+      "damageReduction": 0,
+      "maxHp": 0,
+      "statBonus": {
+        "agi": 11
+      },
+      "effects": [],
+      "requirement": {
+        "stat": "agi",
+        "value": 29
+      },
+      "unique": false,
+      "starter": false,
+      "price": 65,
+      "description": "고요의 숲에서만 바람 소리가 나는 반지."
+    },
+    {
+      "id": "rng4_wisdom",
+      "name": "별빛 고리",
+      "slot": "ring",
+      "zone": 4,
+      "grade": "common",
+      "stat": "wis",
+      "damage": null,
+      "damageReduction": 0,
+      "maxHp": 0,
+      "statBonus": {
+        "wis": 11
+      },
+      "effects": [],
+      "requirement": {
+        "stat": "wis",
+        "value": 29
+      },
+      "unique": false,
+      "starter": false,
+      "price": 65,
+      "description": "별 조각을 박은 은고리."
+    },
+    {
+      "id": "rng4_gate_ring",
+      "name": "문지기 인장",
+      "slot": "ring",
+      "zone": 4,
+      "grade": "uncommon",
+      "stat": "str",
+      "damage": null,
+      "damageReduction": 0,
+      "maxHp": 0,
+      "statBonus": {
+        "str": 12
+      },
+      "effects": [
+        "reflect:4"
+      ],
+      "requirement": {
+        "stat": "str",
+        "value": 32
+      },
+      "unique": false,
+      "starter": false,
+      "price": 80,
+      "description": "거석의 문 문자가 새겨진 인장."
+    },
+    {
+      "id": "rng4_pack_ring",
+      "name": "무리의 반지",
+      "slot": "ring",
+      "zone": 4,
+      "grade": "uncommon",
+      "stat": "agi",
+      "damage": null,
+      "damageReduction": 0,
+      "maxHp": 0,
+      "statBonus": {
+        "agi": 12
+      },
+      "effects": [
+        "crit:1"
+      ],
+      "requirement": {
+        "stat": "agi",
+        "value": 32
+      },
+      "unique": false,
+      "starter": false,
+      "price": 80,
+      "description": "늑대 무리의 털을 엮어 감은 반지."
+    },
+    {
+      "id": "rng4_tongue_ring",
+      "name": "수많은 언어의 반지",
+      "slot": "ring",
+      "zone": 4,
+      "grade": "uncommon",
+      "stat": "wis",
+      "damage": null,
+      "damageReduction": 0,
+      "maxHp": 0,
+      "statBonus": {
+        "wis": 12
+      },
+      "effects": [
+        "skillDamageBonus:4"
+      ],
+      "requirement": {
+        "stat": "wis",
+        "value": 32
+      },
+      "unique": false,
+      "starter": false,
+      "price": 80,
+      "description": "안쪽에 같은 말이 여러 언어로 새겨져 있다."
+    },
+    {
+      "id": "rng4_source_ring",
+      "name": "근원의 고리",
+      "slot": "ring",
+      "zone": 4,
+      "grade": "rare",
+      "stat": "str",
+      "damage": null,
+      "damageReduction": 0,
+      "maxHp": 0,
+      "statBonus": {
+        "str": 14
+      },
+      "effects": [
+        "lifesteal:10"
+      ],
+      "requirement": {
+        "stat": "str",
+        "value": 35
+      },
+      "unique": false,
+      "starter": false,
+      "price": 95,
+      "description": "근원의 뿌리 한 가닥이 감긴 반지. 쓸수록 따뜻해진다."
+    },
+    {
+      "id": "rng4_prince_ring",
+      "name": "왕자의 반지",
+      "slot": "ring",
+      "zone": 4,
+      "grade": "rare",
+      "stat": "agi",
+      "damage": null,
+      "damageReduction": 0,
+      "maxHp": 0,
+      "statBonus": {
+        "agi": 14
+      },
+      "effects": [
+        "evade:1",
+        "onCrit>empower:5:1"
+      ],
+      "requirement": {
+        "stat": "agi",
+        "value": 35
+      },
+      "unique": false,
+      "starter": false,
+      "price": 95,
+      "description": "\"돌아갈 날을 위해.\" 안쪽에 그렇게 새겨져 있다."
+    },
+    {
+      "id": "rng4_seal_ring",
+      "name": "봉인의 반지",
+      "slot": "ring",
+      "zone": 4,
+      "grade": "rare",
+      "stat": "wis",
+      "damage": null,
+      "damageReduction": 0,
+      "maxHp": 0,
+      "statBonus": {
+        "wis": 14
+      },
+      "effects": [
+        "onSkill>heal:6"
+      ],
+      "requirement": {
+        "stat": "wis",
+        "value": 35
+      },
+      "unique": false,
+      "starter": false,
+      "price": 95,
+      "description": "봉인석 조각을 박은 반지."
+    },
+    {
+      "id": "nck4_wolf_tooth",
+      "name": "늙은 늑대의 이빨",
+      "slot": "necklace",
+      "zone": 4,
+      "grade": "common",
+      "stat": "str",
+      "damage": null,
+      "damageReduction": 0,
+      "maxHp": 0,
+      "statBonus": {},
+      "effects": [
+        "basicAttackBonus:4"
+      ],
+      "requirement": {
+        "stat": "str",
+        "value": 29
+      },
+      "unique": false,
+      "starter": false,
+      "price": 65,
+      "description": "늙은 늑대가 남긴 이빨."
+    },
+    {
+      "id": "nck4_pond_coin",
+      "name": "연못 동전 목걸이",
+      "slot": "necklace",
+      "zone": 4,
+      "grade": "common",
+      "stat": "wis",
+      "damage": null,
+      "damageReduction": 0,
+      "maxHp": 0,
+      "statBonus": {},
+      "effects": [
+        "exploreBonus:4"
+      ],
+      "requirement": {
+        "stat": "wis",
+        "value": 29
+      },
+      "unique": false,
+      "starter": false,
+      "price": 65,
+      "description": "하늘 연못에서 건진 동전을 꿴 목걸이."
+    },
+    {
+      "id": "nck4_seal_shard",
+      "name": "봉인석 목걸이",
+      "slot": "necklace",
+      "zone": 4,
+      "grade": "uncommon",
+      "stat": "str",
+      "damage": null,
+      "damageReduction": 0,
+      "maxHp": 0,
+      "statBonus": {},
+      "effects": [
+        "onBattleStart>shield:10:2"
+      ],
+      "requirement": {
+        "stat": "str",
+        "value": 32
+      },
+      "unique": false,
+      "starter": false,
+      "price": 80,
+      "description": "제자리에 박지 못한 봉인석 조각."
+    },
+    {
+      "id": "nck4_moth_wing",
+      "name": "나방 날개 목걸이",
+      "slot": "necklace",
+      "zone": 4,
+      "grade": "uncommon",
+      "stat": "agi",
+      "damage": null,
+      "damageReduction": 0,
+      "maxHp": 0,
+      "statBonus": {
+        "agi": 2
+      },
+      "effects": [
+        "evade:1"
+      ],
+      "requirement": {
+        "stat": "agi",
+        "value": 32
+      },
+      "unique": false,
+      "starter": false,
+      "price": 80,
+      "description": "별빛 나방 여왕의 날개 조각."
+    },
+    {
+      "id": "nck4_silent_bell",
+      "name": "울리지 않는 종",
+      "slot": "necklace",
+      "zone": 4,
+      "grade": "uncommon",
+      "stat": "wis",
+      "damage": null,
+      "damageReduction": 0,
+      "maxHp": 0,
+      "statBonus": {},
+      "effects": [
+        "immune:poison",
+        "immune:bleed"
+      ],
+      "requirement": {
+        "stat": "wis",
+        "value": 32
+      },
+      "unique": false,
+      "starter": false,
+      "price": 80,
+      "description": "필요한 자에게만 울리는 작은 종."
+    },
+    {
+      "id": "nck4_warden_bundle",
+      "name": "숲지기의 이끼 꾸러미",
+      "slot": "necklace",
+      "zone": 4,
+      "grade": "rare",
+      "stat": "wis",
+      "damage": null,
+      "damageReduction": 0,
+      "maxHp": 0,
+      "statBonus": {
+        "wis": 3
+      },
+      "effects": [
+        "immune:stun",
+        "immune:weaken"
+      ],
+      "requirement": {
+        "stat": "wis",
+        "value": 35
+      },
+      "unique": false,
+      "starter": false,
+      "price": 95,
+      "description": "숲지기들이 파수꾼에게 바치던 이끼 꾸러미."
+    },
+    {
+      "id": "nck4_crystal_feather",
+      "name": "수정 깃털",
+      "slot": "necklace",
+      "zone": 4,
+      "grade": "rare",
+      "stat": "agi",
+      "damage": null,
+      "damageReduction": 0,
+      "maxHp": 0,
+      "statBonus": {
+        "agi": 3
+      },
+      "effects": [
+        "crit:1",
+        "onCrit>bleed:4"
+      ],
+      "requirement": {
+        "stat": "agi",
+        "value": 35
+      },
+      "unique": false,
+      "starter": false,
+      "price": 95,
+      "description": "수정으로 굳은 까마귀 깃털. 까마귀 손의 잔당이 남겼다."
+    },
+    {
+      "id": "wpn4_tide_hammer",
+      "name": "해일 망치",
+      "slot": "weapon",
+      "zone": 4,
+      "grade": "rare",
+      "stat": "str",
+      "damage": 9,
+      "damageReduction": 0,
+      "maxHp": 0,
+      "statBonus": {
+        "str": 8
+      },
+      "effects": [
+        "onHurt@50>momentum:1",
+        "crit:1"
+      ],
+      "requirement": {
+        "stat": "str",
+        "value": 35
+      },
+      "unique": false,
+      "starter": false,
+      "price": 95,
+      "description": "맞을수록 해일처럼 불어나는 힘."
+    },
+    {
+      "id": "nck4_war_horn",
+      "name": "태고의 뿔 나팔",
+      "slot": "necklace",
+      "zone": 4,
+      "grade": "uncommon",
+      "stat": "str",
+      "damage": null,
+      "damageReduction": 0,
+      "maxHp": 0,
+      "statBonus": {},
+      "effects": [
+        "onBattleStart>momentum:2",
+        "fullMomentum>damageReduction:3"
+      ],
+      "requirement": {
+        "stat": "str",
+        "value": 32
+      },
+      "unique": false,
+      "starter": false,
+      "price": 80,
+      "description": "늑대 우두머리의 뿔로 만든 나팔."
+    },
+    {
+      "id": "arm4_bastion_megalith",
+      "name": "거석 성채 갑주",
+      "slot": "armor",
+      "zone": 4,
+      "grade": "rare",
+      "stat": "str",
+      "damage": null,
+      "damageReduction": 5,
+      "maxHp": 20,
+      "statBonus": {},
+      "effects": [
+        "whileShield>reflect:6",
+        "onShieldBreak>damage:14"
+      ],
+      "requirement": {
+        "stat": "str",
+        "value": 35
+      },
+      "unique": false,
+      "starter": false,
+      "price": 95,
+      "description": "거석 원의 돌판을 덧댄 갑주."
+    },
+    {
+      "id": "rng4_bulwark_ring",
+      "name": "방벽의 문지기 반지",
+      "slot": "ring",
+      "zone": 4,
+      "grade": "uncommon",
+      "stat": "str",
+      "damage": null,
+      "damageReduction": 0,
+      "maxHp": 0,
+      "statBonus": {
+        "str": 12
+      },
+      "effects": [
+        "whileShield>basicAttackBonus:6"
+      ],
+      "requirement": {
+        "stat": "str",
+        "value": 32
+      },
+      "unique": false,
+      "starter": false,
+      "price": 80,
+      "description": "문지기를 잠재우던 숲지기의 반지."
+    },
+    {
+      "id": "wpn4_last_stand_blade",
+      "name": "최후의 대검",
+      "slot": "weapon",
+      "zone": 4,
+      "grade": "uncommon",
+      "stat": "str",
+      "damage": 8,
+      "damageReduction": 0,
+      "maxHp": 0,
+      "statBonus": {
+        "str": 7
+      },
+      "effects": [
+        "lowHp>skillDamageBonus:8"
+      ],
+      "requirement": {
+        "stat": "str",
+        "value": 32
+      },
+      "unique": false,
+      "starter": false,
+      "price": 80,
+      "description": "굳은 결투의 숲지기가 쥐고 있던 대검."
+    },
+    {
+      "id": "nck4_survivor_oath",
+      "name": "살아남은 자의 맹세",
+      "slot": "necklace",
+      "zone": 4,
+      "grade": "rare",
+      "stat": "str",
+      "damage": null,
+      "damageReduction": 0,
+      "maxHp": 0,
+      "statBonus": {
+        "str": 3
+      },
+      "effects": [
+        "lowHp>damageReduction:4",
+        "onKill>heal:18"
+      ],
+      "requirement": {
+        "stat": "str",
+        "value": 35
+      },
+      "unique": false,
+      "starter": false,
+      "price": 95,
+      "description": "돌아간 쌍둥이가 남긴 맹세."
+    },
+    {
+      "id": "wpn4_rending_claw",
+      "name": "찢는 발톱",
+      "slot": "weapon",
+      "zone": 4,
+      "grade": "uncommon",
+      "stat": "agi",
+      "damage": 7,
+      "damageReduction": 0,
+      "maxHp": 0,
+      "statBonus": {
+        "agi": 7
+      },
+      "effects": [
+        "onHit@40>bleed:3"
+      ],
+      "requirement": {
+        "stat": "agi",
+        "value": 32
+      },
+      "unique": false,
+      "starter": false,
+      "price": 80,
+      "description": "태고의 늑대 발톱을 박은 장갑 칼."
+    },
+    {
+      "id": "rng4_bloodmoon_ring",
+      "name": "핏빛 달 반지",
+      "slot": "ring",
+      "zone": 4,
+      "grade": "rare",
+      "stat": "agi",
+      "damage": null,
+      "damageReduction": 0,
+      "maxHp": 0,
+      "statBonus": {
+        "agi": 14
+      },
+      "effects": [
+        "ifBleeding>skillDamageBonus:8",
+        "ifBleeding>basicAttackBonus:4"
+      ],
+      "requirement": {
+        "stat": "agi",
+        "value": 35
+      },
+      "unique": false,
+      "starter": false,
+      "price": 95,
+      "description": "출혈을 보면 붉게 빛나는 반지."
+    },
+    {
+      "id": "nck4_first_strike_mark",
+      "name": "첫 칼의 표식",
+      "slot": "necklace",
+      "zone": 4,
+      "grade": "rare",
+      "stat": "agi",
+      "damage": null,
+      "damageReduction": 0,
+      "maxHp": 0,
+      "statBonus": {
+        "agi": 3
+      },
+      "effects": [
+        "crit:1",
+        "onFirstStrike>critBoost:4:2"
+      ],
+      "requirement": {
+        "stat": "agi",
+        "value": 35
+      },
+      "unique": false,
+      "starter": false,
+      "price": 95,
+      "description": "원정대 척후가 달던 표식."
+    },
+    {
+      "id": "arm4_scout_leather",
+      "name": "척후의 경갑",
+      "slot": "armor",
+      "zone": 4,
+      "grade": "uncommon",
+      "stat": "agi",
+      "damage": null,
+      "damageReduction": 3,
+      "maxHp": 15,
+      "statBonus": {},
+      "effects": [
+        "onCrit>heal:8"
+      ],
+      "requirement": {
+        "stat": "agi",
+        "value": 32
+      },
+      "unique": false,
+      "starter": false,
+      "price": 80,
+      "description": "원정대 척후가 입던 가벼운 갑옷."
+    },
+    {
+      "id": "wpn4_moth_crossbow",
+      "name": "나방 가루 석궁",
+      "slot": "weapon",
+      "zone": 4,
+      "grade": "rare",
+      "stat": "agi",
+      "damage": 9,
+      "damageReduction": 0,
+      "maxHp": 0,
+      "statBonus": {
+        "agi": 8
+      },
+      "effects": [
+        "onHit@40>poison:8:2",
+        "onCrit>vulnerable:1.3:1"
+      ],
+      "requirement": {
+        "stat": "agi",
+        "value": 35
+      },
+      "unique": false,
+      "starter": false,
+      "price": 95,
+      "description": "여왕의 가루를 화살촉에 바른 석궁."
+    },
+    {
+      "id": "rng4_dust_ring",
+      "name": "가루 반지",
+      "slot": "ring",
+      "zone": 4,
+      "grade": "uncommon",
+      "stat": "agi",
+      "damage": null,
+      "damageReduction": 0,
+      "maxHp": 0,
+      "statBonus": {
+        "agi": 12
+      },
+      "effects": [
+        "poisonBonus:3"
+      ],
+      "requirement": {
+        "stat": "agi",
+        "value": 32
+      },
+      "unique": false,
+      "starter": false,
+      "price": 80,
+      "description": "반지 홈에 나방 가루가 가득하다."
+    },
+    {
+      "id": "nck4_star_chant",
+      "name": "별의 영창 목걸이",
+      "slot": "necklace",
+      "zone": 4,
+      "grade": "rare",
+      "stat": "wis",
+      "damage": null,
+      "damageReduction": 0,
+      "maxHp": 0,
+      "statBonus": {
+        "wis": 3
+      },
+      "effects": [
+        "chantBonus:0.25"
+      ],
+      "requirement": {
+        "stat": "wis",
+        "value": 35
+      },
+      "unique": false,
+      "starter": false,
+      "price": 95,
+      "description": "꺼진 별의 조각을 꿴 목걸이. 영창에 별빛이 실린다."
+    },
+    {
+      "id": "rng4_tongues_echo",
+      "name": "메아리 언어 반지",
+      "slot": "ring",
+      "zone": 4,
+      "grade": "uncommon",
+      "stat": "wis",
+      "damage": null,
+      "damageReduction": 0,
+      "maxHp": 0,
+      "statBonus": {
+        "wis": 12
+      },
+      "effects": [
+        "onChant>empower:5:1"
+      ],
+      "requirement": {
+        "stat": "wis",
+        "value": 32
+      },
+      "unique": false,
+      "starter": false,
+      "price": 80,
+      "description": "수정 미로의 메아리를 가둔 반지."
+    },
+    {
+      "id": "wpn4_binding_star",
+      "name": "별을 묶는 홀",
+      "slot": "weapon",
+      "zone": 4,
+      "grade": "rare",
+      "stat": "wis",
+      "damage": 9,
+      "damageReduction": 0,
+      "maxHp": 0,
+      "statBonus": {
+        "wis": 8
+      },
+      "effects": [
+        "onSkill@30>weaken:0.7:1",
+        "ifDebuffed>skillDamageBonus:6"
+      ],
+      "requirement": {
+        "stat": "wis",
+        "value": 35
+      },
+      "unique": false,
+      "starter": false,
+      "price": 95,
+      "description": "봉인 해제 주문을 거꾸로 새긴 홀."
+    },
+    {
+      "id": "nck4_hex_locket",
+      "name": "원정대 마도사의 로켓",
+      "slot": "necklace",
+      "zone": 4,
+      "grade": "uncommon",
+      "stat": "wis",
+      "damage": null,
+      "damageReduction": 0,
+      "maxHp": 0,
+      "statBonus": {},
+      "effects": [
+        "debuffDuration:1",
+        "onSkill@30>vulnerable:1.3:1"
+      ],
+      "requirement": {
+        "stat": "wis",
+        "value": 32
+      },
+      "unique": false,
+      "starter": false,
+      "price": 80,
+      "description": "원정대 마도사가 품고 있던 로켓."
+    },
+    {
+      "id": "arm4_seal_robe",
+      "name": "봉인의 로브",
+      "slot": "armor",
+      "zone": 4,
+      "grade": "rare",
+      "stat": "wis",
+      "damage": null,
+      "damageReduction": 0,
+      "maxHp": 20,
+      "statBonus": {
+        "wis": 3
+      },
+      "effects": [
+        "chantShieldBonus:6",
+        "whileShield>skillDamageBonus:4"
+      ],
+      "requirement": {
+        "stat": "wis",
+        "value": 35
+      },
+      "unique": false,
+      "starter": false,
+      "price": 95,
+      "description": "봉인석 문양을 수놓은 로브."
+    },
+    {
+      "id": "rng4_crystal_ward",
+      "name": "수정 결계 고리",
+      "slot": "ring",
+      "zone": 4,
+      "grade": "uncommon",
+      "stat": "wis",
+      "damage": null,
+      "damageReduction": 0,
+      "maxHp": 0,
+      "statBonus": {
+        "wis": 12
+      },
+      "effects": [
+        "onBattleStart>shield:14:2"
+      ],
+      "requirement": {
+        "stat": "wis",
+        "value": 32
+      },
+      "unique": false,
+      "starter": false,
+      "price": 80,
+      "description": "수정 동굴의 결정으로 만든 고리."
+    },
+    {
+      "id": "arm4_healer_mantle",
+      "name": "숲지기 치유사의 망토",
+      "slot": "armor",
+      "zone": 4,
+      "grade": "rare",
+      "stat": "main",
+      "damage": null,
+      "damageReduction": 3,
+      "maxHp": 25,
+      "statBonus": {},
+      "effects": [
+        "healBonus:35",
+        "onHeal>empower:4:1"
+      ],
+      "requirement": {
+        "stat": "main",
+        "value": 35
+      },
+      "unique": false,
+      "starter": false,
+      "price": 95,
+      "description": "숲지기들이 지친 자를 덮어 주던 망토."
+    },
+    {
+      "id": "nck4_supply_charm",
+      "name": "원정대 보급 부적",
+      "slot": "necklace",
+      "zone": 4,
+      "grade": "uncommon",
+      "stat": "main",
+      "damage": null,
+      "damageReduction": 0,
+      "maxHp": 0,
+      "statBonus": {},
+      "effects": [
+        "freeItemUse:1",
+        "consumableBoost:25"
+      ],
+      "requirement": {
+        "stat": "main",
+        "value": 32
+      },
+      "unique": false,
+      "starter": false,
+      "price": 80,
+      "description": "원정대 보급관이 차고 있던 부적."
     }
   ],
   "consumables": [

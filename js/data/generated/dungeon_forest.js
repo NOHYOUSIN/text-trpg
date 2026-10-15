@@ -3,6 +3,7 @@ export const dungeonForestData = {
   "id": "forest",
   "name": "속삭이는 숲",
   "description": "스치는 잎새들이 사방에서 옥죄어 오고, 귓가를 맴도는 속삭임이 감각을 무디게 하는 오래된 숲입니다.\n심장부에 다가갈수록 속삭임은 거친 메아리가 되어 숲을 뒤흔들며 침입자를 밀어냅니다.\n결코 환영받지 못할 걸음이라는 것을 알면서도, 한번 발을 들인 자에게는 돌아설 길이 보이지 않습니다.\n밀어내는 목소리의 근원을 향해, 낡은 무기를 쥐고 가장 깊은 곳으로 나아가십시오.",
+  "endingText": "파수꾼이 무너지며 마지막으로 속삭인다. \"이제… 네가 들어야 한다.\" 발밑 깊은 곳에서 무언가 몸을 뒤척이다 잠잠해진다. 숲은 다시 고요하다. 이제 그 고요를 지키는 것은 당신이다.",
   "zones": [
     {
       "zone": 1,
@@ -80,14 +81,24 @@ export const dungeonForestData = {
       "zone": 4,
       "name": "태고의 성역",
       "rounds": 22,
-      "midBosses": [],
+      "midBosses": [
+        {
+          "round": 11,
+          "enemyIds": [
+            "ene4_gate_megalith",
+            "ene4_crystal_prince"
+          ]
+        }
+      ],
       "bossRound": 22,
-      "bossIds": [],
+      "bossIds": [
+        "ene4_whispering_warden"
+      ],
       "campRounds": [
         10,
         21
       ],
-      "entryText": "(4구역 콘텐츠는 이후 작성)"
+      "entryText": "숲이 끝나는 곳에서 하늘이 열린다. 거대한 돌기둥 사이로 수정이 별빛처럼 빛나고, 속삭임은 이제 귓가의 숨결처럼 가깝다. 제발, 돌아가라."
     }
   ],
   "places": [
@@ -1962,6 +1973,628 @@ export const dungeonForestData = {
         "evt3_star_record",
         "evt3_hermit_scholar",
         "evt3_quiet_cellar"
+      ]
+    },
+    {
+      "id": "plc4_megalith_gate",
+      "zone": 4,
+      "name": "거석의 문",
+      "descriptions": [
+        "하늘을 찌를 듯한 두 거석이 문처럼 서 있다. 표면에 수많은 언어로 같은 말이 새겨져 있다.",
+        "문 아래 돌바닥이 반들반들하다. 많은 이가 여기서 멈춰 섰다가 돌아갔다.",
+        "문 너머로 수정 빛이 어른거린다. 속삭임이 숨결처럼 귓가에 닿는다."
+      ],
+      "contentWeights": {
+        "combat": 40,
+        "event": 45,
+        "rest": 10,
+        "treasure": 5,
+        "shop": 0
+      },
+      "surpriseChance": 10,
+      "eliteBonus": 0,
+      "enemyPool": [
+        "ene4_megalith_guard",
+        "ene4_petrified_adventurer"
+      ],
+      "eventPool": [
+        "evt4_many_tongues",
+        "evt4_circle_trial",
+        "evt4_gate_question",
+        "evt4_gate_sleepers",
+        "evt4_megalith_sleep"
+      ]
+    },
+    {
+      "id": "plc4_starfall_field",
+      "zone": 4,
+      "name": "별이 내려앉은 들판",
+      "descriptions": [
+        "풀잎마다 작은 빛이 맺혀 있다. 밟을 때마다 별이 흩어지듯 날아오른다.",
+        "들판 한가운데 원정대의 깃발이 꽂혀 있다. 깃대에 수정이 돋았다.",
+        "하늘과 땅의 경계가 흐릿하다. 어디가 위인지 잠시 헷갈린다."
+      ],
+      "contentWeights": {
+        "combat": 45,
+        "event": 40,
+        "rest": 5,
+        "treasure": 10,
+        "shop": 0
+      },
+      "surpriseChance": 20,
+      "eliteBonus": 0,
+      "enemyPool": [
+        "ene4_star_moth",
+        "ene4_primeval_wolf"
+      ],
+      "eventPool": [
+        "evt4_star_field",
+        "evt4_glowing_cocoon",
+        "evt4_source_calls_back",
+        "evt4_falling_star",
+        "evt4_moth_queen_dust"
+      ]
+    },
+    {
+      "id": "plc4_crystal_cave",
+      "zone": 4,
+      "name": "수정 동굴",
+      "descriptions": [
+        "벽과 천장이 온통 수정이다. 내 모습이 수백 개로 비친다.",
+        "수정 속에 무언가 갇혀 있다. 사람의 손 같다.",
+        "동굴 깊은 곳에서 맑은 종소리 같은 울림이 이어진다."
+      ],
+      "contentWeights": {
+        "combat": 55,
+        "event": 30,
+        "rest": 0,
+        "treasure": 15,
+        "shop": 0
+      },
+      "surpriseChance": 30,
+      "eliteBonus": 5,
+      "enemyPool": [
+        "ene4_crystal_sprite",
+        "ene4_petrified_adventurer"
+      ],
+      "eventPool": [
+        "evt4_hand_in_crystal",
+        "evt4_crystal_echo",
+        "evt4_crystal_bloom",
+        "evt4_crystal_twin"
+      ]
+    },
+    {
+      "id": "plc4_first_trees",
+      "zone": 4,
+      "name": "첫 나무들의 숲",
+      "descriptions": [
+        "숲의 모든 나무보다 오래된 나무들이다. 줄기가 성벽보다 굵다.",
+        "나무껍질에 숲지기 문장이 새겨져 있다. 1구역에서 본 것보다 훨씬 오래되었다.",
+        "이 숲에서는 속삭임이 들리지 않는다. 대신 나무들이 숨을 쉰다."
+      ],
+      "contentWeights": {
+        "combat": 30,
+        "event": 50,
+        "rest": 10,
+        "treasure": 10,
+        "shop": 0
+      },
+      "surpriseChance": 15,
+      "eliteBonus": 0,
+      "enemyPool": [
+        "ene4_primeval_wolf",
+        "ene4_star_moth"
+      ],
+      "eventPool": [
+        "evt4_last_warden",
+        "evt4_breathing_trees",
+        "evt4_villager_news",
+        "evt4_warden_shelter",
+        "evt4_first_seed",
+        "evt4_warden_offerings",
+        "evt4_silent_bell"
+      ]
+    },
+    {
+      "id": "plc4_sky_pond",
+      "zone": 4,
+      "name": "하늘 연못",
+      "descriptions": [
+        "연못에 하늘이 비친다. 그런데 비친 하늘에는 꺼진 별 하나가 아직 빛난다.",
+        "연못가에 모험가들의 물병이 줄지어 놓여 있다. 모두 비었다.",
+        "물은 차고 맑다. 손을 담그자 피로가 빠져나간다."
+      ],
+      "contentWeights": {
+        "combat": 15,
+        "event": 45,
+        "rest": 35,
+        "treasure": 5,
+        "shop": 0
+      },
+      "surpriseChance": 5,
+      "eliteBonus": 0,
+      "enemyPool": [
+        "ene4_star_moth",
+        "ene4_crystal_sprite"
+      ],
+      "eventPool": [
+        "evt4_star_reflection",
+        "evt4_clear_spring_falls",
+        "evt4_behind_falls",
+        "evt4_pond_self",
+        "evt4_pond_offerings"
+      ]
+    },
+    {
+      "id": "plc4_stone_circle",
+      "zone": 4,
+      "name": "거석 원",
+      "descriptions": [
+        "거석들이 둥글게 서 있다. 가운데 바닥에 첫 경고의 문자가 새겨져 있다.",
+        "거석마다 얼굴이 새겨져 있다. 모두 안쪽, 성역의 심장 쪽을 지켜본다.",
+        "원 안에 들어서자 공기가 무거워진다. 무언가 이쪽을 잰다."
+      ],
+      "contentWeights": {
+        "combat": 55,
+        "event": 30,
+        "rest": 0,
+        "treasure": 15,
+        "shop": 0
+      },
+      "surpriseChance": 15,
+      "eliteBonus": 5,
+      "enemyPool": [
+        "ene4_megalith_guard",
+        "ene4_crystal_sprite"
+      ],
+      "eventPool": [
+        "evt4_many_tongues",
+        "evt4_circle_trial",
+        "evt4_gate_question",
+        "evt4_gate_sleepers",
+        "evt4_seal_stones",
+        "evt4_megalith_sleep"
+      ]
+    },
+    {
+      "id": "plc4_expedition_camp",
+      "zone": 4,
+      "name": "원정대 야영 터",
+      "descriptions": [
+        "천막들이 수정에 덮여 굳어 있다. 모닥불 자리까지 수정이 되었다.",
+        "보급 상자에 왕실 문장이 찍혀 있다. \"폐하의 명. 봉인을 열 것.\"",
+        "천막 하나에서 누군가 일지를 쓰다 만 채 굳어 있다."
+      ],
+      "contentWeights": {
+        "combat": 35,
+        "event": 45,
+        "rest": 0,
+        "treasure": 15,
+        "shop": 5
+      },
+      "surpriseChance": 15,
+      "eliteBonus": 0,
+      "enemyPool": [
+        "ene4_expedition_remnant",
+        "ene4_petrified_adventurer"
+      ],
+      "eventPool": [
+        "evt4_prince_journal",
+        "evt4_frozen_camp",
+        "evt4_crow_remnants",
+        "evt4_quartermaster",
+        "evt4_grave_curse",
+        "evt4_prince_reflection",
+        "evt4_expedition_banner",
+        "evt4_letter_to_prince",
+        "evt4_last_supper"
+      ]
+    },
+    {
+      "id": "plc4_petrified_path",
+      "zone": 4,
+      "name": "굳은 자들의 길",
+      "descriptions": [
+        "길 양옆에 수정으로 굳은 사람들이 줄지어 서 있다. 모두 성역 쪽을 향해 걷던 자세다.",
+        "굳은 자들의 옷차림이 제각각이다. 사냥꾼, 기사, 상인, 그리고 왕국 병사.",
+        "굳은 사람 하나의 입이 아주 천천히 움직인다. \"돌아…\""
+      ],
+      "contentWeights": {
+        "combat": 50,
+        "event": 40,
+        "rest": 0,
+        "treasure": 10,
+        "shop": 0
+      },
+      "surpriseChance": 25,
+      "eliteBonus": 5,
+      "enemyPool": [
+        "ene4_petrified_adventurer",
+        "ene4_expedition_remnant"
+      ],
+      "eventPool": [
+        "evt4_talking_statue",
+        "evt4_half_turned",
+        "evt4_source_calls_back",
+        "evt4_grave_curse",
+        "evt4_statue_line",
+        "evt4_letter_to_prince",
+        "evt4_frozen_duel"
+      ]
+    },
+    {
+      "id": "plc4_moth_nest",
+      "zone": 4,
+      "name": "별빛 나방 둥지",
+      "descriptions": [
+        "나무 사이에 거대한 고치가 매달려 있다. 고치 안에서 빛이 맥박친다.",
+        "나방 가루가 눈처럼 쌓여 있다. 밟으면 발자국마다 빛이 번진다.",
+        "날갯짓 소리가 머리 위를 가득 메운다. 하늘이 날개로 덮였다."
+      ],
+      "contentWeights": {
+        "combat": 60,
+        "event": 30,
+        "rest": 0,
+        "treasure": 10,
+        "shop": 0
+      },
+      "surpriseChance": 35,
+      "eliteBonus": 0,
+      "enemyPool": [
+        "ene4_star_moth",
+        "ene4_primeval_wolf"
+      ],
+      "eventPool": [
+        "evt4_star_field",
+        "evt4_glowing_cocoon",
+        "evt4_falling_star",
+        "evt4_moth_queen_dust"
+      ]
+    },
+    {
+      "id": "plc4_wolf_hill",
+      "zone": 4,
+      "name": "태고의 늑대 언덕",
+      "descriptions": [
+        "언덕 위 바위마다 깊은 발톱 자국이 있다. 사람 키보다 높은 곳에도 있다.",
+        "뼈가 쌓인 굴 입구가 보인다. 왕국 갑옷 조각이 섞여 있다.",
+        "바람에 낮은 울음이 실려 온다. 숲 초입의 늑대들과 같은 소리지만 훨씬 깊다."
+      ],
+      "contentWeights": {
+        "combat": 60,
+        "event": 30,
+        "rest": 0,
+        "treasure": 10,
+        "shop": 0
+      },
+      "surpriseChance": 30,
+      "eliteBonus": 5,
+      "enemyPool": [
+        "ene4_primeval_wolf",
+        "ene4_megalith_guard"
+      ],
+      "eventPool": [
+        "evt4_giant_skull",
+        "evt4_hound_and_wolves",
+        "evt4_marrow_spring",
+        "evt4_wolf_pups",
+        "evt4_old_wolf"
+      ]
+    },
+    {
+      "id": "plc4_warden_footprints",
+      "zone": 4,
+      "name": "파수꾼의 발자국",
+      "descriptions": [
+        "바위만 한 발자국이 이끼 위에 찍혀 있다. 발자국 안에 수정 꽃이 피었다.",
+        "발자국은 성역의 둘레를 따라 끝없이 이어진다. 누군가 이 길을 수천 년 돌았다.",
+        "발자국 하나가 아직 새것이다. 이끼가 눌린 채 일어나지 않았다."
+      ],
+      "contentWeights": {
+        "combat": 30,
+        "event": 55,
+        "rest": 5,
+        "treasure": 10,
+        "shop": 0
+      },
+      "surpriseChance": 15,
+      "eliteBonus": 0,
+      "enemyPool": [
+        "ene4_megalith_guard",
+        "ene4_star_moth"
+      ],
+      "eventPool": [
+        "evt4_warden_speaks",
+        "evt4_fresh_footprint",
+        "evt4_warden_errand",
+        "evt4_calm_seal",
+        "evt4_shed_scale",
+        "evt4_warden_offerings",
+        "evt4_scale_rain"
+      ]
+    },
+    {
+      "id": "plc4_crystal_falls",
+      "zone": 4,
+      "name": "수정 폭포",
+      "descriptions": [
+        "폭포가 떨어지다 말고 수정으로 굳었다. 물보라까지 그대로 멈춰 있다.",
+        "굳은 폭포 뒤로 동굴 입구가 보인다.",
+        "폭포 아래 웅덩이만은 아직 물이다. 맑고 따뜻하다."
+      ],
+      "contentWeights": {
+        "combat": 25,
+        "event": 45,
+        "rest": 20,
+        "treasure": 10,
+        "shop": 0
+      },
+      "surpriseChance": 10,
+      "eliteBonus": 0,
+      "enemyPool": [
+        "ene4_crystal_sprite",
+        "ene4_star_moth"
+      ],
+      "eventPool": [
+        "evt4_star_reflection",
+        "evt4_clear_spring_falls",
+        "evt4_behind_falls",
+        "evt4_pond_offerings"
+      ]
+    },
+    {
+      "id": "plc4_source_rift",
+      "zone": 4,
+      "name": "근원의 틈",
+      "descriptions": [
+        "땅이 깊게 갈라져 있다. 틈 아래로 숲 전체의 뿌리가 한곳으로 모여든다.",
+        "틈에서 따뜻한 바람이 올라온다. 숨결 같다.",
+        "틈 가장자리의 수정에 금이 가 있다. 봉인이 흔들린 자국이다."
+      ],
+      "contentWeights": {
+        "combat": 55,
+        "event": 35,
+        "rest": 0,
+        "treasure": 10,
+        "shop": 0
+      },
+      "surpriseChance": 40,
+      "eliteBonus": 5,
+      "enemyPool": [
+        "ene4_expedition_remnant",
+        "ene4_crystal_sprite"
+      ],
+      "eventPool": [
+        "evt4_root_confluence",
+        "evt4_cracked_seal",
+        "evt4_source_offer",
+        "evt4_source_calls_back",
+        "evt4_calm_seal",
+        "evt4_root_tremor",
+        "evt4_seal_stones",
+        "evt4_star_map"
+      ]
+    },
+    {
+      "id": "plc4_first_warning",
+      "zone": 4,
+      "name": "첫 경고 비석",
+      "descriptions": [
+        "이끼에 덮인 낮은 비석이 서 있다. 숲에서 본 모든 경고문의 시작이다.",
+        "비석 앞에 공물이 쌓여 있다. 숲지기들이 대대로 놓고 간 것이다.",
+        "비석에 손을 대자 속삭임이 또렷해진다. 처음으로 원망이 아니라 부탁처럼 들린다."
+      ],
+      "contentWeights": {
+        "combat": 20,
+        "event": 65,
+        "rest": 5,
+        "treasure": 10,
+        "shop": 0
+      },
+      "surpriseChance": 10,
+      "eliteBonus": 0,
+      "enemyPool": [
+        "ene4_megalith_guard",
+        "ene4_petrified_adventurer"
+      ],
+      "eventPool": [
+        "evt4_warden_speaks",
+        "evt4_name_returns",
+        "evt4_gate_sleepers",
+        "evt4_megalith_sleep"
+      ]
+    },
+    {
+      "id": "plc4_fallen_star_crater",
+      "zone": 4,
+      "name": "꺼진 별의 구덩이",
+      "descriptions": [
+        "둥근 구덩이 바닥에 빛을 잃은 거대한 수정이 박혀 있다. 한가운데가 깨져 비었다.",
+        "깨진 자리 둘레에 왕국 원정대의 곡괭이가 흩어져 있다.",
+        "구덩이 벽에 별자리가 새겨져 있다. 꺼진 별 자리만 긁혀 있다."
+      ],
+      "contentWeights": {
+        "combat": 30,
+        "event": 50,
+        "rest": 0,
+        "treasure": 20,
+        "shop": 0
+      },
+      "surpriseChance": 15,
+      "eliteBonus": 0,
+      "enemyPool": [
+        "ene4_expedition_remnant",
+        "ene4_crystal_sprite"
+      ],
+      "eventPool": [
+        "evt4_star_socket",
+        "evt4_cracked_seal",
+        "evt4_source_offer",
+        "evt4_calm_seal",
+        "evt4_falling_star",
+        "evt4_star_map"
+      ]
+    },
+    {
+      "id": "plc4_giant_bones",
+      "zone": 4,
+      "name": "잠든 거인의 뼈",
+      "descriptions": [
+        "언덕인 줄 알았던 것이 거대한 갈비뼈였다. 뼈 사이로 나무가 자란다.",
+        "뼈마디에 수정과 뿌리가 함께 엉켜 있다.",
+        "두개골 안이 동굴처럼 비어 있다. 안에서 바람 소리가 난다."
+      ],
+      "contentWeights": {
+        "combat": 45,
+        "event": 40,
+        "rest": 0,
+        "treasure": 15,
+        "shop": 0
+      },
+      "surpriseChance": 20,
+      "eliteBonus": 0,
+      "enemyPool": [
+        "ene4_primeval_wolf",
+        "ene4_megalith_guard"
+      ],
+      "eventPool": [
+        "evt4_giant_skull",
+        "evt4_hound_and_wolves",
+        "evt4_marrow_spring",
+        "evt4_wolf_pups",
+        "evt4_root_tremor",
+        "evt4_old_wolf"
+      ]
+    },
+    {
+      "id": "plc4_silent_grove",
+      "zone": 4,
+      "name": "고요의 숲",
+      "descriptions": [
+        "바람도, 새소리도 없다. 속삭임마저 숨을 죽였다.",
+        "나무 사이에 쉬어 간 흔적이 있다. 숲지기의 담요가 개어져 있다.",
+        "고요가 너무 깊어 내 심장 소리가 들린다."
+      ],
+      "contentWeights": {
+        "combat": 10,
+        "event": 40,
+        "rest": 45,
+        "treasure": 5,
+        "shop": 0
+      },
+      "surpriseChance": 0,
+      "eliteBonus": 0,
+      "enemyPool": [
+        "ene4_star_moth",
+        "ene4_primeval_wolf"
+      ],
+      "eventPool": [
+        "evt4_last_warden",
+        "evt4_breathing_trees",
+        "evt4_villager_news",
+        "evt4_warden_shelter",
+        "evt4_first_seed",
+        "evt4_pond_self",
+        "evt4_silent_bell"
+      ]
+    },
+    {
+      "id": "plc4_expedition_graves",
+      "zone": 4,
+      "name": "원정대 무덤",
+      "descriptions": [
+        "돌무덤이 줄지어 있다. 누군가 원정대원들을 묻어 주었다.",
+        "무덤마다 작은 수정이 놓여 있다. 묻어 준 자가 놓고 간 것이다.",
+        "가장 큰 무덤에는 이름 대신 \"돌아가지 못한 자들\"이라고 새겨져 있다."
+      ],
+      "contentWeights": {
+        "combat": 25,
+        "event": 50,
+        "rest": 0,
+        "treasure": 25,
+        "shop": 0
+      },
+      "surpriseChance": 15,
+      "eliteBonus": 0,
+      "enemyPool": [
+        "ene4_expedition_remnant",
+        "ene4_petrified_adventurer"
+      ],
+      "eventPool": [
+        "evt4_prince_journal",
+        "evt4_frozen_camp",
+        "evt4_crow_remnants",
+        "evt4_quartermaster",
+        "evt4_grave_curse",
+        "evt4_expedition_banner",
+        "evt4_frozen_duel",
+        "evt4_last_supper"
+      ]
+    },
+    {
+      "id": "plc4_crystal_maze",
+      "zone": 4,
+      "name": "수정 미로",
+      "descriptions": [
+        "수정 기둥이 미로처럼 늘어서 있다. 비친 내 모습이 길을 헷갈리게 한다.",
+        "수정 속 그림자 하나가 나와 다른 방향으로 걷는다.",
+        "미로 벽에 누군가 긁어 놓은 화살표가 있다. 화살표는 모두 바깥을 가리킨다."
+      ],
+      "contentWeights": {
+        "combat": 45,
+        "event": 45,
+        "rest": 0,
+        "treasure": 10,
+        "shop": 0
+      },
+      "surpriseChance": 30,
+      "eliteBonus": 0,
+      "enemyPool": [
+        "ene4_crystal_sprite",
+        "ene4_petrified_adventurer"
+      ],
+      "eventPool": [
+        "evt4_hand_in_crystal",
+        "evt4_talking_statue",
+        "evt4_name_returns",
+        "evt4_crystal_echo",
+        "evt4_half_turned",
+        "evt4_prince_reflection",
+        "evt4_crystal_bloom",
+        "evt4_statue_line",
+        "evt4_crystal_twin"
+      ]
+    },
+    {
+      "id": "plc4_heart_steps",
+      "zone": 4,
+      "name": "성역의 심장 앞 계단",
+      "descriptions": [
+        "하늘까지 이어질 듯한 돌계단이다. 계단 끝에서 거대한 숨소리가 들린다.",
+        "계단마다 숲지기들의 이름이 새겨져 있다. 맨 위 계단은 비어 있다.",
+        "계단 중간에 떠돌이 상인이 앉아 있다. \"여기까지 온 손님은 오랜만이오.\""
+      ],
+      "contentWeights": {
+        "combat": 20,
+        "event": 40,
+        "rest": 10,
+        "treasure": 0,
+        "shop": 30
+      },
+      "surpriseChance": 10,
+      "eliteBonus": 0,
+      "enemyPool": [
+        "ene4_megalith_guard",
+        "ene4_expedition_remnant"
+      ],
+      "eventPool": [
+        "evt4_fresh_footprint",
+        "evt4_stair_merchant",
+        "evt4_warden_errand",
+        "evt4_shed_scale",
+        "evt4_heart_door",
+        "evt4_scale_rain"
       ]
     }
   ],
@@ -28506,6 +29139,8375 @@ export const dungeonForestData = {
           }
         }
       ]
+    },
+    {
+      "id": "evt4_warden_speaks",
+      "zone": 4,
+      "title": "파수꾼이 말을 건다",
+      "description": "첫 경고 비석에 손을 대자 속삭임이 이름을 부른다. 3구역 우물에서 들었던 그 목소리다. \"너는 들었다. 그래도 왔구나. 그렇다면 알아야 한다. 내가 무엇을 누르고 있는지.\"",
+      "repeatable": false,
+      "requiresFlags": [
+        "whisperSpoke"
+      ],
+      "forbiddenFlags": [],
+      "group": "",
+      "choices": [
+        {
+          "id": "ask_what",
+          "order": 1,
+          "text": "\"무엇을 누르고 있느냐\"고 묻는다",
+          "verb": "persuade",
+          "condition": [],
+          "skillBonus": [],
+          "difficulty": "easy",
+          "outcomes": {
+            "fail": {
+              "text": "목소리가 대답 대신 한숨을 쉰다.",
+              "result": []
+            },
+            "partial": {
+              "text": "\"숲의 모든 뿌리가 시작된 것. 깨어나면 숲이 끝난다.\" 목소리가 잦아든다.",
+              "result": [
+                "hp:12",
+                "flag:heardWardenPlea"
+              ]
+            },
+            "success": {
+              "text": "목소리가 봉인의 모습을 보여 준다. 금 간 자리와, 그 자리를 메우는 법까지.",
+              "result": [
+                "hp:12",
+                "flag:heardWardenPlea",
+                "flag:knowsSealWeakness"
+              ]
+            }
+          }
+        },
+        {
+          "id": "promise_back",
+          "order": 2,
+          "text": "\"끝을 보고 돌아가겠다\"고 약속한다",
+          "verb": "",
+          "condition": [],
+          "skillBonus": [],
+          "difficulty": "none",
+          "outcomes": {
+            "success": {
+              "text": "\"약속은 여기서 지켜지지 않는다.\" 그래도 목소리가 조금 부드러워진다. 몸이 가볍다.",
+              "result": [
+                "hp:20",
+                "flag:heardWardenPlea"
+              ]
+            }
+          }
+        },
+        {
+          "id": "read_stone_all",
+          "order": 3,
+          "text": "비석의 문자를 끝까지 읽는다",
+          "verb": "insight",
+          "condition": [
+            "wis:32"
+          ],
+          "skillBonus": [],
+          "difficulty": "normal",
+          "outcomes": {
+            "fail": {
+              "text": "문자가 머릿속에서 뒤엉킨다.",
+              "result": [
+                "hp:-12"
+              ]
+            },
+            "partial": {
+              "text": "가장 오래된 경고의 뜻을 읽었다. \"우리가 지키니, 너희는 돌아가라.\"",
+              "result": [
+                "gold:12"
+              ]
+            },
+            "success": {
+              "text": "비석 아래쪽, 파수꾼이 스스로 새긴 기술 하나를 깨쳤다.",
+              "result": [
+                "skill:choice",
+                "flag:heardWardenPlea"
+              ]
+            }
+          }
+        },
+        {
+          "id": "defy_voice",
+          "order": 4,
+          "text": "\"네가 막는다면 너를 넘어가겠다\"고 말한다",
+          "verb": "threaten",
+          "condition": [],
+          "skillBonus": [],
+          "difficulty": "hard",
+          "outcomes": {
+            "fail": {
+              "text": "비석이 진동하며 거석 수호상이 깨어났다!",
+              "result": [
+                "fight:ene4_megalith_guard"
+              ]
+            },
+            "partial": {
+              "text": "목소리가 침묵한다.",
+              "result": []
+            },
+            "success": {
+              "text": "목소리가 웃는다. 슬픈 웃음이다. \"그래. 그런 자만이 여기까지 오지.\" 비석 밑 공물이 굴러 나온다.",
+              "result": [
+                "gold:14",
+                "item:random:consumable"
+              ]
+            }
+          }
+        },
+        {
+          "id": "leave_stone",
+          "order": 5,
+          "text": "비석에서 손을 뗀다",
+          "verb": "pass",
+          "condition": [],
+          "skillBonus": [],
+          "difficulty": "none",
+          "outcomes": {
+            "success": {
+              "text": "목소리가 귓가에서 멀어진다. \"제발…\"",
+              "result": []
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "evt4_star_socket",
+      "zone": 4,
+      "title": "별이 있던 자리",
+      "description": "꺼진 별의 구덩이 한가운데, 깨진 수정에 빈자리가 있다. 3구역 천문대에서 본 꺼진 별 자리와 모양이 같다. 빈자리 둘레에 원정대의 곡괭이 자국이 깊다.",
+      "repeatable": false,
+      "requiresFlags": [
+        "sawSanctumStar"
+      ],
+      "forbiddenFlags": [],
+      "group": "",
+      "choices": [
+        {
+          "id": "trace_marks",
+          "order": 1,
+          "text": "곡괭이 자국으로 무엇을 떼어 갔는지 짐작한다",
+          "verb": "insight",
+          "condition": [
+            "wis:29"
+          ],
+          "skillBonus": [],
+          "difficulty": "easy",
+          "outcomes": {
+            "fail": {
+              "text": "자국만 보고는 알 수 없다.",
+              "result": []
+            },
+            "partial": {
+              "text": "봉인의 한 조각을 떼어 갔다. 크기는 주먹만 하다.",
+              "result": [
+                "gold:10"
+              ]
+            },
+            "success": {
+              "text": "떼어 간 조각이 봉인의 열쇠였다. 왕자가 아직 그것을 가지고 있다.",
+              "result": [
+                "gold:8",
+                "flag:knowsPrinceShame"
+              ]
+            }
+          }
+        },
+        {
+          "id": "fill_socket",
+          "order": 2,
+          "text": "빈자리에 수정 조각들을 모아 채운다",
+          "verb": "force",
+          "condition": [
+            "str:32"
+          ],
+          "skillBonus": [],
+          "difficulty": "normal",
+          "outcomes": {
+            "fail": {
+              "text": "수정 조각이 손바닥을 베었다.",
+              "result": [
+                "hp:-14"
+              ]
+            },
+            "partial": {
+              "text": "빈자리가 조금 메워졌다. 구덩이가 희미하게 빛난다.",
+              "result": [
+                "hp:10"
+              ]
+            },
+            "success": {
+              "text": "빈자리가 메워지며 꺼진 별이 잠시 빛난다. 발밑의 진동이 잦아든다.",
+              "result": [
+                "hp:10",
+                "flag:mendedSeal"
+              ]
+            }
+          }
+        },
+        {
+          "id": "dig_shards",
+          "order": 3,
+          "text": "구덩이 바닥에서 떨어진 별 조각을 캔다",
+          "verb": "stealth",
+          "condition": [
+            "agi:32"
+          ],
+          "skillBonus": [],
+          "difficulty": "normal",
+          "outcomes": {
+            "fail": {
+              "text": "구덩이 벽이 무너져 깔릴 뻔했다.",
+              "result": [
+                "hp:-16"
+              ]
+            },
+            "partial": {
+              "text": "빛을 잃은 조각들을 챙겼다. 값은 나간다.",
+              "result": [
+                "gold:15"
+              ]
+            },
+            "success": {
+              "text": "아직 빛이 남은 조각과 원정대가 흘린 꾸러미를 찾았다.",
+              "result": [
+                "gold:12",
+                "item:random:consumable"
+              ]
+            }
+          }
+        },
+        {
+          "id": "rest_crater",
+          "order": 4,
+          "text": "구덩이 가장자리에서 별을 보며 쉰다",
+          "verb": "",
+          "condition": [],
+          "skillBonus": [],
+          "difficulty": "none",
+          "outcomes": {
+            "success": {
+              "text": "꺼진 별 자리 옆으로 다른 별들이 반짝인다. 숨이 고르게 돌아온다.",
+              "result": [
+                "hp:20"
+              ]
+            }
+          }
+        },
+        {
+          "id": "leave_crater",
+          "order": 5,
+          "text": "구덩이를 떠난다",
+          "verb": "pass",
+          "condition": [],
+          "skillBonus": [],
+          "difficulty": "none",
+          "outcomes": {
+            "success": {
+              "text": "빈자리가 등 뒤에서 어둡게 남는다.",
+              "result": []
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "evt4_last_warden",
+      "zone": 4,
+      "title": "마지막 숲지기",
+      "description": "첫 나무들 사이에 늙은 숲지기가 앉아 있다. 숲지기의 문장을 단 마지막 사람이다. 품속의 편지 이야기를 꺼내자 눈을 감는다. \"그 편지를 전해 준 이가 너였구나.\"",
+      "repeatable": false,
+      "requiresFlags": [
+        "deliveredLetter"
+      ],
+      "forbiddenFlags": [],
+      "group": "",
+      "choices": [
+        {
+          "id": "hear_oath",
+          "order": 1,
+          "text": "숲지기의 맹세를 듣는다",
+          "verb": "",
+          "condition": [],
+          "skillBonus": [],
+          "difficulty": "none",
+          "outcomes": {
+            "success": {
+              "text": "\"파수꾼이 누르고, 우리는 사람을 돌려보낸다. 그게 우리 일이었다.\" 숲지기가 낡은 망토를 건넨다.",
+              "result": [
+                "item:random:equipment",
+                "flag:wardenTrust"
+              ]
+            }
+          }
+        },
+        {
+          "id": "ask_warden_name",
+          "order": 2,
+          "text": "파수꾼의 이름을 묻는다",
+          "verb": "persuade",
+          "condition": [],
+          "skillBonus": [],
+          "difficulty": "normal",
+          "outcomes": {
+            "fail": {
+              "text": "숲지기가 고개를 젓는다.",
+              "result": []
+            },
+            "partial": {
+              "text": "\"이름은 오래전에 숲이 가져갔다.\" 숲지기가 약을 나눠 준다.",
+              "result": [
+                "item:con_potion",
+                "item:con_potion"
+              ]
+            },
+            "success": {
+              "text": "\"파수꾼은 원래 우리 중 하나였다. 가장 먼저 경고를 들은 자.\" 숲지기가 봉인을 돕는 주문을 가르쳐 준다.",
+              "result": [
+                "skill:choice",
+                "flag:wardenTrust"
+              ]
+            }
+          }
+        },
+        {
+          "id": "help_rounds",
+          "order": 3,
+          "text": "숲지기와 함께 성역 둘레를 돈다",
+          "verb": "force",
+          "condition": [
+            "str:29"
+          ],
+          "skillBonus": [],
+          "difficulty": "easy",
+          "outcomes": {
+            "fail": {
+              "text": "발이 걸려 넘어졌다.",
+              "result": [
+                "hp:-10"
+              ]
+            },
+            "partial": {
+              "text": "한 바퀴를 같이 돌았다. 숲지기가 쉬어 갈 곳을 알려 준다.",
+              "result": [
+                "hp:16"
+              ]
+            },
+            "success": {
+              "text": "숲지기가 봉인 둘레에 숨겨 둔 보급고를 연다.",
+              "result": [
+                "item:random:consumable",
+                "item:con_potion",
+                "flag:wardenTrust"
+              ]
+            }
+          }
+        },
+        {
+          "id": "study_runes",
+          "order": 4,
+          "text": "숲지기가 지키는 결계 문양을 배운다",
+          "verb": "insight",
+          "condition": [
+            "wis:32"
+          ],
+          "skillBonus": [],
+          "difficulty": "normal",
+          "outcomes": {
+            "fail": {
+              "text": "문양이 눈앞에서 흩어진다.",
+              "result": [
+                "hp:-10"
+              ]
+            },
+            "partial": {
+              "text": "문양 몇 개를 익혔다.",
+              "result": [
+                "gold:10"
+              ]
+            },
+            "success": {
+              "text": "결계 문양을 다 익혔다. 금 간 봉인을 잠시 메울 수 있을 것 같다.",
+              "result": [
+                "flag:knowsSealWeakness",
+                "flag:wardenTrust"
+              ]
+            }
+          }
+        },
+        {
+          "id": "leave_warden",
+          "order": 5,
+          "text": "인사하고 떠난다",
+          "verb": "pass",
+          "condition": [],
+          "skillBonus": [],
+          "difficulty": "none",
+          "outcomes": {
+            "success": {
+              "text": "\"돌아가라는 말은… 이제 안 하겠다.\" 숲지기가 등을 돌린다.",
+              "result": []
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "evt4_prince_journal",
+      "zone": 4,
+      "title": "왕자의 일지",
+      "description": "원정대 야영 터의 가장 큰 천막 안에 일지가 펼쳐져 있다. 왕실 문장이 찍혀 있다. 3구역에서 읽은 왕의 기록과 필체가 닮았다. 왕자의 것이다.",
+      "repeatable": false,
+      "requiresFlags": [
+        "knowsKingFolly"
+      ],
+      "forbiddenFlags": [],
+      "group": "",
+      "choices": [
+        {
+          "id": "read_journal",
+          "order": 1,
+          "text": "일지를 끝까지 읽는다",
+          "verb": "insight",
+          "condition": [
+            "wis:29"
+          ],
+          "skillBonus": [],
+          "difficulty": "easy",
+          "outcomes": {
+            "fail": {
+              "text": "글씨가 수정에 덮여 읽히지 않는다.",
+              "result": []
+            },
+            "partial": {
+              "text": "\"아버지의 명이다. 조각 하나만 더.\" 왕자는 끝까지 그 말을 되풀이했다.",
+              "result": [
+                "gold:10",
+                "flag:knowsPrinceShame"
+              ]
+            },
+            "success": {
+              "text": "마지막 장에 왕자의 고백이 있다. \"경고가 옳았다. 그러나 돌아갈 수 없다.\" 그가 두려워하는 것이 무엇인지 알았다.",
+              "result": [
+                "gold:8",
+                "flag:knowsPrinceShame",
+                "item:random:consumable"
+              ]
+            }
+          }
+        },
+        {
+          "id": "take_seal",
+          "order": 2,
+          "text": "일지에 끼워진 왕자의 인장을 챙긴다",
+          "verb": "stealth",
+          "condition": [
+            "agi:32"
+          ],
+          "skillBonus": [],
+          "difficulty": "normal",
+          "outcomes": {
+            "fail": {
+              "text": "천막 밖에서 원정대 잔병이 들어왔다!",
+              "result": [
+                "fight:ene4_expedition_remnant:ambushed"
+              ]
+            },
+            "partial": {
+              "text": "인장은 수정에 붙어 떨어지지 않았다. 옆의 금화만 챙겼다.",
+              "result": [
+                "gold:14"
+              ]
+            },
+            "success": {
+              "text": "인장을 챙겼다. 왕자 앞에서 쓸모가 있을 것이다.",
+              "result": [
+                "gold:8",
+                "flag:knowsPrinceShame"
+              ]
+            }
+          }
+        },
+        {
+          "id": "burn_journal",
+          "order": 3,
+          "text": "일지를 불태운다",
+          "verb": "force",
+          "condition": [
+            "str:29"
+          ],
+          "skillBonus": [],
+          "difficulty": "normal",
+          "outcomes": {
+            "fail": {
+              "text": "불길이 천막에 옮겨붙었다.",
+              "result": [
+                "hp:-14"
+              ]
+            },
+            "partial": {
+              "text": "일지가 탔다. 재 속에서 녹은 금붙이를 건졌다.",
+              "result": [
+                "gold:12"
+              ]
+            },
+            "success": {
+              "text": "일지가 타며 천막의 수정이 녹아내린다. 그 밑에 원정대 보급품이 있었다.",
+              "result": [
+                "item:random:equipment"
+              ]
+            }
+          }
+        },
+        {
+          "id": "pray_expedition",
+          "order": 4,
+          "text": "원정대원들을 위해 묵념한다",
+          "verb": "",
+          "condition": [],
+          "skillBonus": [],
+          "difficulty": "none",
+          "outcomes": {
+            "success": {
+              "text": "천막 둘레의 수정이 희미하게 빛난다. 마음이 가라앉는다.",
+              "result": [
+                "hp:16"
+              ]
+            }
+          }
+        },
+        {
+          "id": "close_journal",
+          "order": 5,
+          "text": "일지를 덮는다",
+          "verb": "pass",
+          "condition": [],
+          "skillBonus": [],
+          "difficulty": "none",
+          "outcomes": {
+            "success": {
+              "text": "\"조각 하나만 더.\" 그 문장이 오래 남는다.",
+              "result": []
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "evt4_root_confluence",
+      "zone": 4,
+      "title": "뿌리가 모이는 곳",
+      "description": "근원의 틈 아래로 숲의 모든 뿌리가 한곳으로 모인다. 3구역에서 본 왕좌의 뿌리, 대동맥도 여기서 시작되었다. 뿌리들이 모이는 매듭이 보인다.",
+      "repeatable": false,
+      "requiresFlags": [
+        "knowsThroneRoot"
+      ],
+      "forbiddenFlags": [],
+      "group": "",
+      "choices": [
+        {
+          "id": "cut_knot",
+          "order": 1,
+          "text": "매듭의 가는 뿌리 몇 가닥을 끊는다",
+          "verb": "force",
+          "condition": [
+            "str:32"
+          ],
+          "skillBonus": [],
+          "difficulty": "normal",
+          "outcomes": {
+            "fail": {
+              "text": "뿌리가 몸부림치며 잔병들의 시체를 일으켰다!",
+              "result": [
+                "fight:ene4_expedition_remnant"
+              ]
+            },
+            "partial": {
+              "text": "가는 뿌리 몇 가닥을 끊었다. 틈 아래 숨소리가 약해진다.",
+              "result": [
+                "gold:10"
+              ]
+            },
+            "success": {
+              "text": "매듭의 한쪽을 끊었다. 근원의 뿌리가 깨어나도 한쪽 팔이 느릴 것이다.",
+              "result": [
+                "flag:knowsSealWeakness"
+              ]
+            }
+          }
+        },
+        {
+          "id": "map_knot",
+          "order": 2,
+          "text": "매듭의 생김새를 기억해 둔다",
+          "verb": "insight",
+          "condition": [
+            "wis:32"
+          ],
+          "skillBonus": [],
+          "difficulty": "easy",
+          "outcomes": {
+            "fail": {
+              "text": "어지러워 눈을 돌렸다.",
+              "result": [
+                "hp:-10"
+              ]
+            },
+            "partial": {
+              "text": "매듭이 어디서 조이는지 보았다.",
+              "result": [
+                "hp:8"
+              ]
+            },
+            "success": {
+              "text": "매듭이 풀리는 순서를 알아냈다. 최종 싸움에서 쓸 수 있을 것이다.",
+              "result": [
+                "hp:8",
+                "flag:knowsSealWeakness"
+              ]
+            }
+          }
+        },
+        {
+          "id": "climb_down4",
+          "order": 3,
+          "text": "틈 아래로 내려가 뿌리 사이를 살핀다",
+          "verb": "stealth",
+          "condition": [
+            "agi:32"
+          ],
+          "skillBonus": [],
+          "difficulty": "hard",
+          "outcomes": {
+            "fail": {
+              "text": "뿌리가 몸을 휘감아 조였다.",
+              "result": [
+                "hp:-20"
+              ]
+            },
+            "partial": {
+              "text": "뿌리 사이에 걸린 원정대의 짐에서 금화를 챙겼다.",
+              "result": [
+                "gold:16"
+              ]
+            },
+            "success": {
+              "text": "뿌리 사이에서 원정대가 떨어뜨린 왕실 장비를 건졌다.",
+              "result": [
+                "item:random:equipment"
+              ]
+            }
+          }
+        },
+        {
+          "id": "pour_water4",
+          "order": 4,
+          "text": "해독제를 매듭에 붓는다",
+          "verb": "use",
+          "condition": [
+            "item:con_antidote"
+          ],
+          "skillBonus": [],
+          "difficulty": "none",
+          "outcomes": {
+            "success": {
+              "text": "매듭이 움찔하며 조금 풀린다. 틈에서 올라오는 바람이 식는다.",
+              "result": [
+                "item:-con_antidote",
+                "flag:knowsSealWeakness"
+              ]
+            }
+          }
+        },
+        {
+          "id": "leave_rift",
+          "order": 5,
+          "text": "틈에서 물러난다",
+          "verb": "pass",
+          "condition": [],
+          "skillBonus": [],
+          "difficulty": "none",
+          "outcomes": {
+            "success": {
+              "text": "틈 아래 숨소리가 길게 이어진다.",
+              "result": []
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "evt4_many_tongues",
+      "zone": 4,
+      "title": "수많은 언어의 경고",
+      "description": "거석의 문 표면에 수십 가지 언어로 같은 말이 새겨져 있다. 가장 아래 줄은 아직 새것이다. 누군가 최근에 덧새겼다. 끌과 망치가 바닥에 놓여 있다.",
+      "repeatable": false,
+      "requiresFlags": [],
+      "forbiddenFlags": [],
+      "group": "z4_gate",
+      "choices": [
+        {
+          "id": "read_tongues",
+          "order": 1,
+          "text": "아는 언어를 찾아 읽는다",
+          "verb": "insight",
+          "condition": [
+            "wis:29"
+          ],
+          "skillBonus": [],
+          "difficulty": "easy",
+          "outcomes": {
+            "fail": {
+              "text": "아는 글자가 하나도 없다.",
+              "result": []
+            },
+            "partial": {
+              "text": "\"돌아가라\"라는 말이 언어마다 조금씩 다르게 새겨져 있다. 문 틈에 끼인 동전을 찾았다.",
+              "result": [
+                "gold:10"
+              ]
+            },
+            "success": {
+              "text": "가장 오래된 줄의 뜻을 읽자 거석이 길을 비키듯 진동한다. 문 아래 숨은 칸이 열렸다.",
+              "result": [
+                "item:random:equipment",
+                "flag:knowsGateWord"
+              ]
+            }
+          }
+        },
+        {
+          "id": "carve_own",
+          "order": 2,
+          "text": "끌을 들어 내 언어로 한 줄 새긴다",
+          "verb": "force",
+          "condition": [
+            "str:29"
+          ],
+          "skillBonus": [],
+          "difficulty": "normal",
+          "outcomes": {
+            "fail": {
+              "text": "끌이 미끄러져 손을 찧었다.",
+              "result": [
+                "hp:-12"
+              ]
+            },
+            "partial": {
+              "text": "한 줄을 새겼다. 무슨 말을 새겼는지는 나만 안다.",
+              "result": [
+                "hp:10"
+              ]
+            },
+            "success": {
+              "text": "새기는 동안 거석이 숨을 고른다. 문지기가 나를 기억할 것 같다.",
+              "result": [
+                "hp:10",
+                "flag:knowsGateWord"
+              ]
+            }
+          }
+        },
+        {
+          "id": "climb_gate",
+          "order": 3,
+          "text": "거석을 타고 꼭대기에 오른다",
+          "verb": "stealth",
+          "condition": [
+            "agi:32"
+          ],
+          "skillBonus": [],
+          "difficulty": "normal",
+          "outcomes": {
+            "fail": {
+              "text": "손이 미끄러져 떨어졌다.",
+              "result": [
+                "hp:-18"
+              ]
+            },
+            "partial": {
+              "text": "꼭대기에서 성역이 내려다보인다. 새 둥지에서 반짝이는 것을 챙겼다.",
+              "result": [
+                "gold:14"
+              ]
+            },
+            "success": {
+              "text": "꼭대기에 숲지기들이 숨겨 둔 보급 상자가 있었다.",
+              "result": [
+                "item:random:consumable",
+                "item:con_potion"
+              ]
+            }
+          }
+        },
+        {
+          "id": "take_tools",
+          "order": 4,
+          "text": "끌과 망치를 챙겨 간다",
+          "verb": "",
+          "condition": [],
+          "skillBonus": [],
+          "difficulty": "none",
+          "outcomes": {
+            "success": {
+              "text": "잘 벼린 도구다. 숫돌로도 쓸 수 있겠다.",
+              "result": [
+                "item:con_whetstone"
+              ]
+            }
+          }
+        },
+        {
+          "id": "pass_gate4",
+          "order": 5,
+          "text": "문을 지나간다",
+          "verb": "pass",
+          "condition": [],
+          "skillBonus": [],
+          "difficulty": "none",
+          "outcomes": {
+            "success": {
+              "text": "등 뒤에서 수십 개의 언어가 한목소리로 속삭인다.",
+              "result": []
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "evt4_hand_in_crystal",
+      "zone": 4,
+      "title": "수정 속의 손",
+      "description": "동굴 벽 수정 속에 사람의 손이 갇혀 있다. 손가락이 아주 천천히 움직인다. 손바닥에 무언가를 쥐고 있다.",
+      "repeatable": false,
+      "requiresFlags": [],
+      "forbiddenFlags": [],
+      "group": "z4_crystal",
+      "choices": [
+        {
+          "id": "break_crystal",
+          "order": 1,
+          "text": "수정을 깨 손을 꺼낸다",
+          "verb": "force",
+          "condition": [
+            "str:32"
+          ],
+          "skillBonus": [],
+          "difficulty": "normal",
+          "outcomes": {
+            "fail": {
+              "text": "수정이 깨지며 정령들이 쏟아져 나왔다!",
+              "result": [
+                "fight:ene4_crystal_sprite"
+              ]
+            },
+            "partial": {
+              "text": "손이 쥔 것만 꺼냈다. 동전 주머니다.",
+              "result": [
+                "gold:14"
+              ]
+            },
+            "success": {
+              "text": "수정이 깨지고 손이 쥔 것을 내민다. 그리고 다시 굳는다.",
+              "result": [
+                "item:random:equipment"
+              ]
+            }
+          }
+        },
+        {
+          "id": "take_gently",
+          "order": 2,
+          "text": "손가락 사이로 쥔 것을 조심스럽게 빼낸다",
+          "verb": "stealth",
+          "condition": [
+            "agi:29"
+          ],
+          "skillBonus": [],
+          "difficulty": "easy",
+          "outcomes": {
+            "fail": {
+              "text": "손가락이 갑자기 오므라들어 손을 물었다.",
+              "result": [
+                "hp:-12"
+              ]
+            },
+            "partial": {
+              "text": "쥐고 있던 반지를 빼냈다.",
+              "result": [
+                "gold:12"
+              ]
+            },
+            "success": {
+              "text": "쥐고 있던 것은 약병이었다. 아직 따뜻하다.",
+              "result": [
+                "item:con_potion",
+                "item:random:consumable"
+              ]
+            }
+          }
+        },
+        {
+          "id": "hold_hand",
+          "order": 3,
+          "text": "수정 위에서 그 손을 잡아 준다",
+          "verb": "",
+          "condition": [],
+          "skillBonus": [],
+          "difficulty": "none",
+          "outcomes": {
+            "success": {
+              "text": "수정 너머로 손가락이 내 손을 한 번 쥔다. 이상하게 마음이 편하다.",
+              "result": [
+                "hp:16"
+              ]
+            }
+          }
+        },
+        {
+          "id": "read_crystal",
+          "order": 4,
+          "text": "수정에 비친 그림자로 손의 주인을 알아본다",
+          "verb": "insight",
+          "condition": [
+            "wis:32"
+          ],
+          "skillBonus": [],
+          "difficulty": "normal",
+          "outcomes": {
+            "fail": {
+              "text": "수정에 비친 것은 내 얼굴뿐이다.",
+              "result": [
+                "hp:-10"
+              ]
+            },
+            "partial": {
+              "text": "원정대 마도사였다. 손바닥에 주문이 새겨져 있다.",
+              "result": [
+                "gold:10"
+              ]
+            },
+            "success": {
+              "text": "원정대 마도사가 마지막으로 남긴 주문을 익혔다.",
+              "result": [
+                "skill:choice"
+              ]
+            }
+          }
+        },
+        {
+          "id": "pass_hand",
+          "order": 5,
+          "text": "지나간다",
+          "verb": "pass",
+          "condition": [],
+          "skillBonus": [],
+          "difficulty": "none",
+          "outcomes": {
+            "success": {
+              "text": "손가락이 계속 천천히 움직인다.",
+              "result": []
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "evt4_star_field",
+      "zone": 4,
+      "title": "들판의 별빛",
+      "description": "들판의 풀잎마다 맺힌 빛이 하나둘 떠오른다. 별빛 나방의 알이다. 알 무더기 가운데 원정대의 배낭이 반쯤 묻혀 있다.",
+      "repeatable": false,
+      "requiresFlags": [],
+      "forbiddenFlags": [],
+      "group": "z4_star",
+      "choices": [
+        {
+          "id": "dig_pack",
+          "order": 1,
+          "text": "알을 헤치고 배낭을 꺼낸다",
+          "verb": "force",
+          "condition": [
+            "str:29"
+          ],
+          "skillBonus": [],
+          "difficulty": "normal",
+          "outcomes": {
+            "fail": {
+              "text": "알이 깨지며 나방들이 몰려왔다!",
+              "result": [
+                "fight:ene4_star_moth"
+              ]
+            },
+            "partial": {
+              "text": "배낭끈만 끊어 왔다. 주머니에 금화가 있다.",
+              "result": [
+                "gold:12"
+              ]
+            },
+            "success": {
+              "text": "배낭을 통째로 꺼냈다. 원정대 보급품이 들어 있다.",
+              "result": [
+                "item:random:equipment"
+              ]
+            }
+          }
+        },
+        {
+          "id": "tiptoe_pack",
+          "order": 2,
+          "text": "알을 밟지 않고 배낭까지 걸어간다",
+          "verb": "stealth",
+          "condition": [
+            "agi:32"
+          ],
+          "skillBonus": [],
+          "difficulty": "normal",
+          "outcomes": {
+            "fail": {
+              "text": "알 하나를 밟았다. 빛 가루가 눈을 찔렀다.",
+              "result": [
+                "hp:-14"
+              ]
+            },
+            "partial": {
+              "text": "배낭 주머니만 털었다.",
+              "result": [
+                "gold:12"
+              ]
+            },
+            "success": {
+              "text": "배낭을 메고 조용히 빠져나왔다.",
+              "result": [
+                "gold:8",
+                "item:random:consumable"
+              ]
+            }
+          }
+        },
+        {
+          "id": "collect_light",
+          "order": 3,
+          "text": "떠오르는 빛을 병에 모은다",
+          "verb": "insight",
+          "condition": [
+            "wis:29"
+          ],
+          "skillBonus": [],
+          "difficulty": "easy",
+          "outcomes": {
+            "fail": {
+              "text": "빛이 병을 빠져나간다.",
+              "result": []
+            },
+            "partial": {
+              "text": "빛 몇 개를 모았다. 상처에 대니 따뜻하다.",
+              "result": [
+                "hp:14"
+              ]
+            },
+            "success": {
+              "text": "빛을 가득 모았다. 마시자 몸이 환해진다.",
+              "result": [
+                "hp:20",
+                "item:con_potion"
+              ]
+            }
+          }
+        },
+        {
+          "id": "lie_field",
+          "order": 4,
+          "text": "빛 사이에 누워 잠시 쉰다",
+          "verb": "",
+          "condition": [],
+          "skillBonus": [],
+          "difficulty": "none",
+          "outcomes": {
+            "success": {
+              "text": "별빛이 몸 위로 내려앉는다. 오래 걸은 다리가 풀린다.",
+              "result": [
+                "hp:18"
+              ]
+            }
+          }
+        },
+        {
+          "id": "pass_field",
+          "order": 5,
+          "text": "들판을 가로지른다",
+          "verb": "pass",
+          "condition": [],
+          "skillBonus": [],
+          "difficulty": "none",
+          "outcomes": {
+            "success": {
+              "text": "발밑에서 별이 흩어진다.",
+              "result": []
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "evt4_giant_skull",
+      "zone": 4,
+      "title": "거인의 두개골",
+      "description": "언덕만 한 두개골 안이 동굴처럼 비어 있다. 눈구멍으로 빛이 들어온다. 안쪽 벽에 늑대 발톱 자국과 사람의 낙서가 뒤섞여 있다.",
+      "repeatable": false,
+      "requiresFlags": [],
+      "forbiddenFlags": [],
+      "group": "z4_beast",
+      "choices": [
+        {
+          "id": "search_skull",
+          "order": 1,
+          "text": "두개골 안쪽을 뒤진다",
+          "verb": "stealth",
+          "condition": [
+            "agi:29"
+          ],
+          "skillBonus": [],
+          "difficulty": "easy",
+          "outcomes": {
+            "fail": {
+              "text": "어둠 속에서 늑대와 마주쳤다!",
+              "result": [
+                "fight:ene4_primeval_wolf:ambushed"
+              ]
+            },
+            "partial": {
+              "text": "먼저 온 자들이 남긴 금화를 찾았다.",
+              "result": [
+                "gold:14"
+              ]
+            },
+            "success": {
+              "text": "먼저 온 자들이 숨겨 둔 꾸러미를 찾았다.",
+              "result": [
+                "gold:8",
+                "item:random:consumable"
+              ]
+            }
+          }
+        },
+        {
+          "id": "read_graffiti",
+          "order": 2,
+          "text": "낙서를 읽는다",
+          "verb": "insight",
+          "condition": [
+            "wis:32"
+          ],
+          "skillBonus": [],
+          "difficulty": "normal",
+          "outcomes": {
+            "fail": {
+              "text": "낙서가 너무 많아 머리가 아프다.",
+              "result": [
+                "hp:-8"
+              ]
+            },
+            "partial": {
+              "text": "\"여기서 쉬어 가라. 늑대는 낮에 오지 않는다.\" 쉬었다.",
+              "result": [
+                "hp:18"
+              ]
+            },
+            "success": {
+              "text": "낙서 중 하나가 거인의 뼈 속 숨은 방을 가리킨다.",
+              "result": [
+                "item:random:equipment"
+              ]
+            }
+          }
+        },
+        {
+          "id": "pry_tooth",
+          "order": 3,
+          "text": "거인의 이빨 하나를 뽑는다",
+          "verb": "force",
+          "condition": [
+            "str:35"
+          ],
+          "skillBonus": [],
+          "difficulty": "hard",
+          "outcomes": {
+            "fail": {
+              "text": "이빨이 꿈쩍도 하지 않는다. 허리를 삐었다.",
+              "result": [
+                "hp:-14"
+              ]
+            },
+            "partial": {
+              "text": "이빨 조각을 떼어냈다. 값이 나간다.",
+              "result": [
+                "gold:16"
+              ]
+            },
+            "success": {
+              "text": "이빨을 통째로 뽑았다. 이빨 속에 굳은 정수가 박혀 있다.",
+              "result": [
+                "item:random:elixir"
+              ]
+            }
+          }
+        },
+        {
+          "id": "sleep_skull",
+          "order": 4,
+          "text": "눈구멍 아래에서 잠을 잔다",
+          "verb": "",
+          "condition": [],
+          "skillBonus": [],
+          "difficulty": "normal",
+          "outcomes": {
+            "fail": {
+              "text": "밤중에 늑대 울음에 깨어 한숨도 못 잤다.",
+              "result": [
+                "hp:4"
+              ]
+            },
+            "partial": {
+              "text": "조금 잤다.",
+              "result": [
+                "hp:14"
+              ]
+            },
+            "success": {
+              "text": "깊이 잤다. 거인의 품 같다.",
+              "result": [
+                "hp:26"
+              ]
+            }
+          }
+        },
+        {
+          "id": "pass_skull",
+          "order": 5,
+          "text": "두개골을 지나친다",
+          "verb": "pass",
+          "condition": [],
+          "skillBonus": [],
+          "difficulty": "none",
+          "outcomes": {
+            "success": {
+              "text": "눈구멍이 등 뒤에서 이쪽을 보는 것 같다.",
+              "result": []
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "evt4_breathing_trees",
+      "zone": 4,
+      "title": "숨 쉬는 나무",
+      "description": "첫 나무들의 줄기가 천천히 부풀었다 가라앉는다. 숨을 쉬고 있다. 나무 하나의 뿌리 사이에 숲지기의 보급함이 끼어 있다.",
+      "repeatable": false,
+      "requiresFlags": [],
+      "forbiddenFlags": [],
+      "group": "z4_grove",
+      "choices": [
+        {
+          "id": "breathe_with",
+          "order": 1,
+          "text": "나무에 기대 같은 박자로 숨을 쉰다",
+          "verb": "",
+          "condition": [],
+          "skillBonus": [],
+          "difficulty": "none",
+          "outcomes": {
+            "success": {
+              "text": "나무와 숨이 맞자 몸 깊은 곳까지 맑아진다.",
+              "result": [
+                "hp:22"
+              ]
+            }
+          }
+        },
+        {
+          "id": "pull_box",
+          "order": 2,
+          "text": "뿌리 사이에서 보급함을 꺼낸다",
+          "verb": "force",
+          "condition": [
+            "str:32"
+          ],
+          "skillBonus": [],
+          "difficulty": "normal",
+          "outcomes": {
+            "fail": {
+              "text": "뿌리가 조여 손이 끼었다.",
+              "result": [
+                "hp:-14"
+              ]
+            },
+            "partial": {
+              "text": "보급함 뚜껑만 뜯어냈다. 안의 동전을 챙겼다.",
+              "result": [
+                "gold:12"
+              ]
+            },
+            "success": {
+              "text": "보급함을 꺼냈다. 숲지기의 비상 물자가 가득하다.",
+              "result": [
+                "item:con_potion",
+                "item:con_bandage",
+                "item:random:consumable"
+              ]
+            }
+          }
+        },
+        {
+          "id": "listen_trees",
+          "order": 3,
+          "text": "나무들이 숨 사이에 내는 소리를 듣는다",
+          "verb": "insight",
+          "condition": [
+            "wis:32"
+          ],
+          "skillBonus": [],
+          "difficulty": "normal",
+          "outcomes": {
+            "fail": {
+              "text": "소리에 정신이 흐려진다.",
+              "result": [
+                "hp:-10"
+              ]
+            },
+            "partial": {
+              "text": "나무들이 무언가를 세고 있다. 봉인의 맥박이다.",
+              "result": [
+                "gold:8"
+              ]
+            },
+            "success": {
+              "text": "나무들이 봉인의 맥박을 세어 파수꾼에게 전하고 있었다. 그 박자를 익혔다.",
+              "result": [
+                "flag:knowsSealWeakness"
+              ]
+            }
+          }
+        },
+        {
+          "id": "climb_tree4",
+          "order": 4,
+          "text": "나무에 올라 숲을 내려다본다",
+          "verb": "stealth",
+          "condition": [
+            "agi:29"
+          ],
+          "skillBonus": [],
+          "difficulty": "easy",
+          "outcomes": {
+            "fail": {
+              "text": "가지가 휘어 떨어졌다.",
+              "result": [
+                "hp:-12"
+              ]
+            },
+            "partial": {
+              "text": "높은 가지의 새 둥지에서 반짝이는 것을 챙겼다.",
+              "result": [
+                "gold:12"
+              ]
+            },
+            "success": {
+              "text": "꼭대기에서 성역 전체의 길을 보았다. 둥지의 보석도 챙겼다.",
+              "result": [
+                "gold:10",
+                "item:random:consumable"
+              ]
+            }
+          }
+        },
+        {
+          "id": "pass_trees",
+          "order": 5,
+          "text": "나무들 사이를 조용히 지나간다",
+          "verb": "pass",
+          "condition": [],
+          "skillBonus": [],
+          "difficulty": "none",
+          "outcomes": {
+            "success": {
+              "text": "나무들의 숨소리가 등 뒤에서 이어진다.",
+              "result": []
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "evt4_frozen_camp",
+      "zone": 4,
+      "title": "굳은 야영지",
+      "description": "원정대 천막 하나 안에서 대원 셋이 둘러앉은 채 수정으로 굳어 있다. 가운데 지도가 펼쳐져 있다. 지도에는 성역의 심장까지 길이 그려져 있다.",
+      "repeatable": false,
+      "requiresFlags": [],
+      "forbiddenFlags": [],
+      "group": "z4_expedition",
+      "choices": [
+        {
+          "id": "take_map",
+          "order": 1,
+          "text": "지도를 빼 온다",
+          "verb": "stealth",
+          "condition": [
+            "agi:32"
+          ],
+          "skillBonus": [],
+          "difficulty": "normal",
+          "outcomes": {
+            "fail": {
+              "text": "지도를 당기자 대원 하나가 움직였다!",
+              "result": [
+                "fight:ene4_expedition_remnant:ambushed"
+              ]
+            },
+            "partial": {
+              "text": "지도 귀퉁이만 찢어 왔다.",
+              "result": [
+                "gold:10"
+              ]
+            },
+            "success": {
+              "text": "지도를 통째로 챙겼다. 수정 미로를 피하는 길이 그려져 있다.",
+              "result": [
+                "gold:8",
+                "item:random:consumable"
+              ]
+            }
+          }
+        },
+        {
+          "id": "study_map",
+          "order": 2,
+          "text": "지도를 그 자리에서 외운다",
+          "verb": "insight",
+          "condition": [
+            "wis:29"
+          ],
+          "skillBonus": [],
+          "difficulty": "easy",
+          "outcomes": {
+            "fail": {
+              "text": "선이 너무 많아 외울 수 없다.",
+              "result": []
+            },
+            "partial": {
+              "text": "지름길 몇 개를 외웠다.",
+              "result": [
+                "hp:10"
+              ]
+            },
+            "success": {
+              "text": "지도 귀퉁이에 적힌 원정대 창고 위치까지 외웠다.",
+              "result": [
+                "item:random:equipment"
+              ]
+            }
+          }
+        },
+        {
+          "id": "loot_packs4",
+          "order": 3,
+          "text": "대원들의 짐을 뒤진다",
+          "verb": "force",
+          "condition": [
+            "str:29"
+          ],
+          "skillBonus": [],
+          "difficulty": "normal",
+          "outcomes": {
+            "fail": {
+              "text": "굳은 팔을 건드려 수정 가시에 찔렸다.",
+              "result": [
+                "hp:-14"
+              ]
+            },
+            "partial": {
+              "text": "금화 몇 닢을 챙겼다.",
+              "result": [
+                "gold:14"
+              ]
+            },
+            "success": {
+              "text": "짐 속에서 왕실 보급품을 찾았다.",
+              "result": [
+                "gold:8",
+                "item:random:equipment"
+              ]
+            }
+          }
+        },
+        {
+          "id": "pay_respect",
+          "order": 4,
+          "text": "굳은 대원들 앞에 소모품 하나를 놓아 준다",
+          "verb": "use",
+          "condition": [
+            "item:con_potion"
+          ],
+          "skillBonus": [],
+          "difficulty": "none",
+          "outcomes": {
+            "success": {
+              "text": "물약을 놓자 수정이 희미하게 빛난다. 천막 한쪽이 열리며 숨겨진 상자가 드러난다.",
+              "result": [
+                "item:-con_potion",
+                "item:random:equipment"
+              ]
+            }
+          }
+        },
+        {
+          "id": "leave_camp4",
+          "order": 5,
+          "text": "천막을 나선다",
+          "verb": "pass",
+          "condition": [],
+          "skillBonus": [],
+          "difficulty": "none",
+          "outcomes": {
+            "success": {
+              "text": "대원들은 끝까지 지도를 내려다본다.",
+              "result": []
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "evt4_talking_statue",
+      "zone": 4,
+      "title": "말하는 굳은 자",
+      "description": "굳은 자들의 길에서 한 사람이 아직 말을 한다. 목 아래가 모두 수정이다. \"물… 아니, 물은 필요 없다. 내 말을 들어 다오.\"",
+      "repeatable": false,
+      "requiresFlags": [],
+      "forbiddenFlags": [],
+      "group": "z4_petrified",
+      "choices": [
+        {
+          "id": "listen_statue",
+          "order": 1,
+          "text": "그의 이야기를 끝까지 듣는다",
+          "verb": "",
+          "condition": [],
+          "skillBonus": [],
+          "difficulty": "none",
+          "outcomes": {
+            "success": {
+              "text": "\"우리는 경고를 시험이라 생각했다. 그래서 왔다.\" 그가 숨겨 둔 짐의 위치를 알려 준다.",
+              "result": [
+                "gold:10",
+                "item:random:consumable"
+              ]
+            }
+          }
+        },
+        {
+          "id": "free_statue",
+          "order": 2,
+          "text": "수정을 깨 그를 꺼내 준다",
+          "verb": "force",
+          "condition": [
+            "str:35"
+          ],
+          "skillBonus": [],
+          "difficulty": "hard",
+          "outcomes": {
+            "fail": {
+              "text": "수정이 깨지며 그가 비명을 지른다. 굳은 자들이 일제히 움직였다!",
+              "result": [
+                "fight:ene4_petrified_adventurer"
+              ]
+            },
+            "partial": {
+              "text": "수정 일부를 깼다. 그가 고맙다며 눈을 감는다.",
+              "result": [
+                "gold:10"
+              ]
+            },
+            "success": {
+              "text": "그가 수정에서 풀려나 쓰러진다. \"고맙다. 이걸 가져가라.\" 쥐고 있던 장비를 건넨다.",
+              "result": [
+                "item:random:equipment"
+              ]
+            }
+          }
+        },
+        {
+          "id": "ask_way_out",
+          "order": 3,
+          "text": "\"돌아가는 길을 아느냐\"고 묻는다",
+          "verb": "persuade",
+          "condition": [],
+          "skillBonus": [],
+          "difficulty": "easy",
+          "outcomes": {
+            "fail": {
+              "text": "그가 대답 대신 웃는다.",
+              "result": []
+            },
+            "partial": {
+              "text": "\"돌아가는 길은 없다. 앞으로만 있다.\" 그가 미로의 갈림길을 알려 준다.",
+              "result": [
+                "hp:12"
+              ]
+            },
+            "success": {
+              "text": "그가 굳기 전 외워 둔 미로의 길과 숨은 쉼터를 알려 준다.",
+              "result": [
+                "hp:16",
+                "item:con_potion"
+              ]
+            }
+          }
+        },
+        {
+          "id": "read_lips",
+          "order": 4,
+          "text": "그의 입 모양에서 굳기 전의 기억을 읽는다",
+          "verb": "insight",
+          "condition": [
+            "wis:32"
+          ],
+          "skillBonus": [],
+          "difficulty": "normal",
+          "outcomes": {
+            "fail": {
+              "text": "입 모양이 너무 느려 읽을 수 없다.",
+              "result": []
+            },
+            "partial": {
+              "text": "그는 숲지기를 비웃고 지나왔다고 했다.",
+              "result": [
+                "gold:10"
+              ]
+            },
+            "success": {
+              "text": "그가 굳기 전에 본 파수꾼의 모습을 들었다. 일격 다음에는 늘 몸을 숙인다고.",
+              "result": [
+                "gold:8",
+                "flag:heardWardenPlea"
+              ]
+            }
+          }
+        },
+        {
+          "id": "pass_statue",
+          "order": 5,
+          "text": "말을 끊고 지나간다",
+          "verb": "pass",
+          "condition": [],
+          "skillBonus": [],
+          "difficulty": "none",
+          "outcomes": {
+            "success": {
+              "text": "\"들어 다오…\" 목소리가 뒤에 남는다.",
+              "result": []
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "evt4_fresh_footprint",
+      "zone": 4,
+      "title": "새 발자국",
+      "description": "파수꾼의 발자국 가운데 하나가 아직 새것이다. 이끼가 눌린 채 일어나지 않았다. 발자국 안에 수정 꽃이 막 피어나고 있다.",
+      "repeatable": false,
+      "requiresFlags": [],
+      "forbiddenFlags": [],
+      "group": "z4_warden",
+      "choices": [
+        {
+          "id": "follow_prints",
+          "order": 1,
+          "text": "발자국을 따라간다",
+          "verb": "stealth",
+          "condition": [
+            "agi:32"
+          ],
+          "skillBonus": [],
+          "difficulty": "normal",
+          "outcomes": {
+            "fail": {
+              "text": "발자국을 따라가다 거석 수호상과 마주쳤다!",
+              "result": [
+                "fight:ene4_megalith_guard:ambushed"
+              ]
+            },
+            "partial": {
+              "text": "발자국은 성역 둘레를 돌아 제자리로 왔다. 길가에서 금화를 주웠다.",
+              "result": [
+                "gold:12"
+              ]
+            },
+            "success": {
+              "text": "발자국이 멈춘 곳에 파수꾼이 쉬던 자리가 있다. 그곳에서 떨어진 수정 비늘을 챙겼다.",
+              "result": [
+                "item:random:equipment"
+              ]
+            }
+          }
+        },
+        {
+          "id": "pick_flower",
+          "order": 2,
+          "text": "수정 꽃을 딴다",
+          "verb": "",
+          "condition": [],
+          "skillBonus": [],
+          "difficulty": "normal",
+          "outcomes": {
+            "fail": {
+              "text": "꽃을 따자 발밑이 울렸다. 손이 저리다.",
+              "result": [
+                "hp:-12"
+              ]
+            },
+            "partial": {
+              "text": "꽃이 손안에서 녹아 사라졌다. 따뜻하다.",
+              "result": [
+                "hp:12"
+              ]
+            },
+            "success": {
+              "text": "꽃을 품에 넣었다. 꽃이 맥박처럼 뛴다.",
+              "result": [
+                "item:random:consumable",
+                "hp:10"
+              ]
+            }
+          }
+        },
+        {
+          "id": "measure_print",
+          "order": 3,
+          "text": "발자국의 깊이와 간격으로 파수꾼을 가늠한다",
+          "verb": "insight",
+          "condition": [
+            "wis:29"
+          ],
+          "skillBonus": [],
+          "difficulty": "easy",
+          "outcomes": {
+            "fail": {
+              "text": "너무 커서 가늠이 되지 않는다.",
+              "result": []
+            },
+            "partial": {
+              "text": "파수꾼은 한쪽 발을 끈다. 지쳐 있다.",
+              "result": [
+                "gold:8"
+              ]
+            },
+            "success": {
+              "text": "파수꾼은 한쪽 발을 끌며, 봉인 쪽으로 몸이 늘 기울어 있다. 그쪽이 빈틈이다.",
+              "result": [
+                "gold:6",
+                "flag:heardWardenPlea"
+              ]
+            }
+          }
+        },
+        {
+          "id": "kneel_print",
+          "order": 4,
+          "text": "발자국 앞에 무릎 꿇고 쉰다",
+          "verb": "",
+          "condition": [],
+          "skillBonus": [],
+          "difficulty": "none",
+          "outcomes": {
+            "success": {
+              "text": "발자국 안의 이끼가 따뜻하다. 오래 걸은 자의 온기다.",
+              "result": [
+                "hp:18"
+              ]
+            }
+          }
+        },
+        {
+          "id": "pass_print",
+          "order": 5,
+          "text": "발자국을 밟지 않고 지나간다",
+          "verb": "pass",
+          "condition": [],
+          "skillBonus": [],
+          "difficulty": "none",
+          "outcomes": {
+            "success": {
+              "text": "발자국은 끝없이 성역을 돈다.",
+              "result": []
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "evt4_cracked_seal",
+      "zone": 4,
+      "title": "금 간 봉인",
+      "description": "근원의 틈 가장자리, 수정 판에 깊은 금이 가 있다. 금 사이로 따뜻한 바람이 새어 나온다. 숨결 같다. 금은 조금씩 넓어지고 있다.",
+      "repeatable": false,
+      "requiresFlags": [],
+      "forbiddenFlags": [],
+      "group": "z4_source",
+      "choices": [
+        {
+          "id": "seal_crack4",
+          "order": 1,
+          "text": "수정 조각과 흙으로 금을 메운다",
+          "verb": "force",
+          "condition": [
+            "str:32"
+          ],
+          "skillBonus": [],
+          "difficulty": "normal",
+          "outcomes": {
+            "fail": {
+              "text": "금에서 뿌리가 튀어나와 손을 휘감았다.",
+              "result": [
+                "hp:-16"
+              ]
+            },
+            "partial": {
+              "text": "금 일부를 메웠다. 바람이 약해진다.",
+              "result": [
+                "hp:8"
+              ]
+            },
+            "success": {
+              "text": "금을 메웠다. 발밑의 숨결이 한동안 잠잠해질 것이다.",
+              "result": [
+                "hp:8",
+                "flag:mendedSeal"
+              ]
+            }
+          }
+        },
+        {
+          "id": "peek_crack",
+          "order": 2,
+          "text": "금 사이로 아래를 들여다본다",
+          "verb": "insight",
+          "condition": [
+            "wis:35"
+          ],
+          "skillBonus": [],
+          "difficulty": "hard",
+          "outcomes": {
+            "fail": {
+              "text": "아래에서 무언가 눈을 떴다. 정신이 아득해진다.",
+              "result": [
+                "hp:-20"
+              ]
+            },
+            "partial": {
+              "text": "어둠뿐이다.",
+              "result": []
+            },
+            "success": {
+              "text": "근원의 뿌리가 보였다. 잠든 그것의 숨이 어디서 멈추는지 알았다.",
+              "result": [
+                "flag:knowsSealWeakness",
+                "skill:choice"
+              ]
+            }
+          }
+        },
+        {
+          "id": "mine_crystal",
+          "order": 3,
+          "text": "금 간 수정 판을 떼어 간다",
+          "verb": "stealth",
+          "condition": [
+            "agi:29"
+          ],
+          "skillBonus": [],
+          "difficulty": "normal",
+          "outcomes": {
+            "fail": {
+              "text": "수정 판이 무너져 바람에 휩쓸렸다.",
+              "result": [
+                "hp:-16"
+              ]
+            },
+            "partial": {
+              "text": "수정 조각을 떼어냈다. 값이 나간다.",
+              "result": [
+                "gold:16"
+              ]
+            },
+            "success": {
+              "text": "수정 판을 통째로 떼어냈다. 원정대가 노리던 값진 조각이다.",
+              "result": [
+                "gold:20"
+              ]
+            }
+          }
+        },
+        {
+          "id": "bandage_crack",
+          "order": 4,
+          "text": "붕대를 금에 감아 바람을 막는다",
+          "verb": "use",
+          "condition": [
+            "item:con_bandage"
+          ],
+          "skillBonus": [],
+          "difficulty": "none",
+          "outcomes": {
+            "success": {
+              "text": "엉성하지만 바람이 잦아든다. 속삭임이 고맙다고 말하는 것 같다.",
+              "result": [
+                "item:-con_bandage",
+                "hp:12",
+                "flag:mendedSeal"
+              ]
+            }
+          }
+        },
+        {
+          "id": "pass_crack",
+          "order": 5,
+          "text": "금을 두고 물러난다",
+          "verb": "pass",
+          "condition": [],
+          "skillBonus": [],
+          "difficulty": "none",
+          "outcomes": {
+            "success": {
+              "text": "금이 등 뒤에서 조금 더 넓어진다.",
+              "result": []
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "evt4_star_reflection",
+      "zone": 4,
+      "title": "연못에 비친 별",
+      "description": "하늘 연못에 비친 하늘에는 꺼진 별 하나가 아직 빛난다. 진짜 하늘에는 없는 별이다. 연못가에 먼저 온 자들의 빈 물병이 줄지어 있다.",
+      "repeatable": false,
+      "requiresFlags": [],
+      "forbiddenFlags": [],
+      "group": "z4_rest",
+      "choices": [
+        {
+          "id": "bathe_pond",
+          "order": 1,
+          "text": "연못에 몸을 담근다",
+          "verb": "",
+          "condition": [],
+          "skillBonus": [],
+          "difficulty": "none",
+          "outcomes": {
+            "success": {
+              "text": "물은 차고 맑다. 상처가 하나둘 닫힌다.",
+              "result": [
+                "hp:28"
+              ]
+            }
+          }
+        },
+        {
+          "id": "reach_star",
+          "order": 2,
+          "text": "물속의 별을 향해 손을 뻗는다",
+          "verb": "stealth",
+          "condition": [
+            "agi:32"
+          ],
+          "skillBonus": [],
+          "difficulty": "hard",
+          "outcomes": {
+            "fail": {
+              "text": "손이 물에 닿자 연못이 얼어붙었다. 손이 갇혔다.",
+              "result": [
+                "hp:-18"
+              ]
+            },
+            "partial": {
+              "text": "별은 손가락 사이로 흩어졌다. 손바닥에 빛이 남았다.",
+              "result": [
+                "hp:10"
+              ]
+            },
+            "success": {
+              "text": "별을 건졌다. 손안에서 작은 수정이 된다. 쥐자 힘이 스민다.",
+              "result": [
+                "item:random:elixir"
+              ]
+            }
+          }
+        },
+        {
+          "id": "fill_bottles",
+          "order": 3,
+          "text": "빈 물병들에 연못 물을 채워 둔다",
+          "verb": "force",
+          "condition": [
+            "str:29"
+          ],
+          "skillBonus": [],
+          "difficulty": "easy",
+          "outcomes": {
+            "fail": {
+              "text": "병을 나르다 미끄러졌다.",
+              "result": [
+                "hp:-8"
+              ]
+            },
+            "partial": {
+              "text": "물병을 채웠다. 하나는 챙겼다.",
+              "result": [
+                "item:con_potion"
+              ]
+            },
+            "success": {
+              "text": "물병을 모두 채우자 연못가의 수정이 반짝인다. 먼저 온 자들이 남긴 물건이 드러났다.",
+              "result": [
+                "item:con_potion",
+                "item:random:consumable"
+              ]
+            }
+          }
+        },
+        {
+          "id": "read_sky",
+          "order": 4,
+          "text": "비친 하늘과 진짜 하늘을 비교한다",
+          "verb": "insight",
+          "condition": [
+            "wis:29"
+          ],
+          "skillBonus": [],
+          "difficulty": "easy",
+          "outcomes": {
+            "fail": {
+              "text": "어느 쪽이 진짜인지 헷갈린다.",
+              "result": []
+            },
+            "partial": {
+              "text": "비친 하늘은 봉인이 온전하던 때의 하늘이다.",
+              "result": [
+                "hp:12"
+              ]
+            },
+            "success": {
+              "text": "비친 하늘에서 별이 놓였던 자리를 정확히 찾았다. 봉인을 메울 때 쓸 수 있다.",
+              "result": [
+                "hp:12",
+                "flag:mendedSeal"
+              ]
+            }
+          }
+        },
+        {
+          "id": "pass_pond",
+          "order": 5,
+          "text": "물만 한 모금 마시고 지나간다",
+          "verb": "pass",
+          "condition": [],
+          "skillBonus": [],
+          "difficulty": "none",
+          "outcomes": {
+            "success": {
+              "text": "차가운 물이 목을 적신다.",
+              "result": [
+                "hp:6"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "evt4_name_returns",
+      "zone": 4,
+      "title": "돌려받은 이름",
+      "description": "수정 미로 한가운데에서 2구역 고목 앞에서 대답했던 그 이름이 들린다. 이번에는 파수꾼의 목소리다. \"그 이름은 내 것이었다. 숲지기가 되기 전의 이름.\"",
+      "repeatable": false,
+      "requiresFlags": [
+        "answeredWhisper"
+      ],
+      "forbiddenFlags": [],
+      "group": "",
+      "choices": [
+        {
+          "id": "return_name",
+          "order": 1,
+          "text": "그 이름을 파수꾼에게 돌려준다",
+          "verb": "",
+          "condition": [],
+          "skillBonus": [],
+          "difficulty": "none",
+          "outcomes": {
+            "success": {
+              "text": "이름을 소리 내어 부르자 미로의 수정이 일제히 맑게 울린다. \"고맙다. 오래 잊고 있었다.\"",
+              "result": [
+                "hp:20",
+                "flag:heardWardenPlea"
+              ]
+            }
+          }
+        },
+        {
+          "id": "keep_name",
+          "order": 2,
+          "text": "이름을 내 것으로 간직한다",
+          "verb": "",
+          "condition": [],
+          "skillBonus": [],
+          "difficulty": "hard",
+          "outcomes": {
+            "fail": {
+              "text": "이름이 무겁게 짓누른다. 숨이 막힌다.",
+              "result": [
+                "hp:-20"
+              ]
+            },
+            "partial": {
+              "text": "이름이 가슴속에서 조용히 가라앉는다.",
+              "result": [
+                "hp:6"
+              ]
+            },
+            "success": {
+              "text": "이름에 깃든 오래된 힘이 몸에 스민다. 파수꾼이 쓰던 기술이다.",
+              "result": [
+                "skill:choice"
+              ]
+            }
+          }
+        },
+        {
+          "id": "ask_past",
+          "order": 3,
+          "text": "숲지기였던 시절을 묻는다",
+          "verb": "persuade",
+          "condition": [],
+          "skillBonus": [],
+          "difficulty": "easy",
+          "outcomes": {
+            "fail": {
+              "text": "목소리가 침묵한다.",
+              "result": []
+            },
+            "partial": {
+              "text": "\"나도 경고를 듣고 웃던 자였다. 그다음엔 경고하는 자가 되었다.\" 미로의 길이 하나 열린다.",
+              "result": [
+                "gold:12"
+              ]
+            },
+            "success": {
+              "text": "\"나는 첫 경고를 듣고 남았다. 아무도 대신하지 않았다.\" 미로가 열리며 숲지기의 유품이 드러난다.",
+              "result": [
+                "item:random:equipment",
+                "flag:heardWardenPlea"
+              ]
+            }
+          }
+        },
+        {
+          "id": "trace_voice",
+          "order": 4,
+          "text": "목소리를 따라 미로를 빠져나간다",
+          "verb": "insight",
+          "condition": [
+            "wis:32"
+          ],
+          "skillBonus": [],
+          "difficulty": "normal",
+          "outcomes": {
+            "fail": {
+              "text": "목소리가 사방에서 울려 길을 잃었다.",
+              "result": [
+                "hp:-14"
+              ]
+            },
+            "partial": {
+              "text": "미로를 빠져나왔다. 수정 벽에서 떨어진 조각을 챙겼다.",
+              "result": [
+                "gold:12"
+              ]
+            },
+            "success": {
+              "text": "목소리가 가장 짧은 길로 이끈다. 길 끝에 숲지기의 쉼터가 있었다.",
+              "result": [
+                "hp:18",
+                "item:con_potion"
+              ]
+            }
+          }
+        },
+        {
+          "id": "cover_ears4",
+          "order": 5,
+          "text": "귀를 막고 미로를 헤맨다",
+          "verb": "pass",
+          "condition": [],
+          "skillBonus": [],
+          "difficulty": "none",
+          "outcomes": {
+            "success": {
+              "text": "한참을 헤맨 끝에 겨우 빠져나왔다.",
+              "result": [
+                "hp:-6"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "evt4_clear_spring_falls",
+      "zone": 4,
+      "title": "맑은 물의 폭포",
+      "description": "굳은 수정 폭포 아래 웅덩이에 3구역에서 뿌리를 쫓아낸 그 맑은 물 냄새가 난다. 물이 닿은 수정에서만 뿌리가 자라지 않는다.",
+      "repeatable": false,
+      "requiresFlags": [
+        "purifiedRoots"
+      ],
+      "forbiddenFlags": [],
+      "group": "",
+      "choices": [
+        {
+          "id": "fill_flask",
+          "order": 1,
+          "text": "맑은 물을 병에 가득 담는다",
+          "verb": "",
+          "condition": [],
+          "skillBonus": [],
+          "difficulty": "none",
+          "outcomes": {
+            "success": {
+              "text": "병마다 물을 채웠다. 근원의 뿌리 앞에서 쓸 수 있을 것이다.",
+              "result": [
+                "item:con_antidote",
+                "item:con_antidote",
+                "flag:knowsSealWeakness"
+              ]
+            }
+          }
+        },
+        {
+          "id": "break_falls",
+          "order": 2,
+          "text": "굳은 폭포를 깨 물길을 다시 연다",
+          "verb": "force",
+          "condition": [
+            "str:35"
+          ],
+          "skillBonus": [],
+          "difficulty": "hard",
+          "outcomes": {
+            "fail": {
+              "text": "수정 파편이 쏟아져 몸을 베었다.",
+              "result": [
+                "hp:-20"
+              ]
+            },
+            "partial": {
+              "text": "폭포 일부가 다시 흐른다. 웅덩이가 넓어졌다.",
+              "result": [
+                "hp:12"
+              ]
+            },
+            "success": {
+              "text": "폭포가 다시 흐른다. 물줄기가 근원의 틈 쪽으로 흘러간다. 봉인이 조금 식는다.",
+              "result": [
+                "hp:12",
+                "flag:mendedSeal"
+              ]
+            }
+          }
+        },
+        {
+          "id": "find_source",
+          "order": 3,
+          "text": "물이 어디서 오는지 찾는다",
+          "verb": "insight",
+          "condition": [
+            "wis:29"
+          ],
+          "skillBonus": [],
+          "difficulty": "easy",
+          "outcomes": {
+            "fail": {
+              "text": "물길이 수정 속으로 사라진다.",
+              "result": []
+            },
+            "partial": {
+              "text": "폭포 뒤 동굴에서 물이 솟는다. 동굴 입구에서 금화를 주웠다.",
+              "result": [
+                "gold:12"
+              ]
+            },
+            "success": {
+              "text": "물은 첫 나무들의 뿌리에서 걸러져 온다. 숲이 스스로 봉인을 돕고 있었다.",
+              "result": [
+                "gold:8",
+                "flag:knowsSealWeakness"
+              ]
+            }
+          }
+        },
+        {
+          "id": "bathe_falls",
+          "order": 4,
+          "text": "웅덩이에 몸을 담근다",
+          "verb": "",
+          "condition": [],
+          "skillBonus": [],
+          "difficulty": "none",
+          "outcomes": {
+            "success": {
+              "text": "맑은 물이 몸 깊은 곳의 뿌리 독까지 씻어 낸다.",
+              "result": [
+                "hp:26"
+              ]
+            }
+          }
+        },
+        {
+          "id": "pass_falls",
+          "order": 5,
+          "text": "웅덩이를 지나간다",
+          "verb": "pass",
+          "condition": [],
+          "skillBonus": [],
+          "difficulty": "none",
+          "outcomes": {
+            "success": {
+              "text": "물소리가 등 뒤에서 맑게 이어진다.",
+              "result": []
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "evt4_crow_remnants",
+      "zone": 4,
+      "title": "까마귀 손의 잔당",
+      "description": "원정대 무덤 사이에서 까마귀 그림을 그린 도굴꾼 셋이 무덤을 파고 있다. \"두목이 죽고 나서야 알았지. 진짜 보물은 여기 있다고.\"",
+      "repeatable": false,
+      "requiresFlags": [
+        "knowsCrowhand"
+      ],
+      "forbiddenFlags": [],
+      "group": "",
+      "choices": [
+        {
+          "id": "stop_robbers",
+          "order": 1,
+          "text": "무덤에서 손을 떼라고 막아선다",
+          "verb": "threaten",
+          "condition": [],
+          "skillBonus": [],
+          "difficulty": "normal",
+          "outcomes": {
+            "fail": {
+              "text": "도굴꾼들이 무덤 속 원정대원을 일으켜 세웠다!",
+              "result": [
+                "fight:ene4_expedition_remnant"
+              ]
+            },
+            "partial": {
+              "text": "도굴꾼들이 투덜거리며 흩어진다.",
+              "result": [
+                "gold:6"
+              ]
+            },
+            "success": {
+              "text": "\"그 두목을 쓰러뜨린 놈이군.\" 도굴꾼들이 짐을 버리고 달아난다.",
+              "result": [
+                "gold:14",
+                "item:random:consumable"
+              ]
+            }
+          }
+        },
+        {
+          "id": "join_dig",
+          "order": 2,
+          "text": "몫을 나누기로 하고 함께 판다",
+          "verb": "force",
+          "condition": [
+            "str:29"
+          ],
+          "skillBonus": [],
+          "difficulty": "normal",
+          "outcomes": {
+            "fail": {
+              "text": "무덤에서 굳은 원정대원이 움직였다!",
+              "result": [
+                "fight:ene4_petrified_adventurer:ambushed"
+              ]
+            },
+            "partial": {
+              "text": "몫으로 금화를 받았다. 등 뒤가 서늘하다.",
+              "result": [
+                "gold:16",
+                "hp:-6"
+              ]
+            },
+            "success": {
+              "text": "왕실 장비를 몫으로 받았다. 무덤이 이쪽을 노려보는 것 같다.",
+              "result": [
+                "item:random:equipment",
+                "flag:robbedExpeditionGrave"
+              ]
+            }
+          }
+        },
+        {
+          "id": "use_crow_habit",
+          "order": 3,
+          "text": "까마귀 손의 버릇을 흉내 내 두목 행세를 한다",
+          "verb": "persuade",
+          "condition": [],
+          "skillBonus": [],
+          "difficulty": "hard",
+          "outcomes": {
+            "fail": {
+              "text": "\"두목은 죽었어, 이 사기꾼아!\" 도굴꾼들이 칼을 뽑는다.",
+              "result": [
+                "fight:ene4_expedition_remnant:ambushed"
+              ]
+            },
+            "partial": {
+              "text": "도굴꾼들이 어리둥절해하며 몫을 내민다.",
+              "result": [
+                "gold:12"
+              ]
+            },
+            "success": {
+              "text": "도굴꾼들이 무릎을 꿇는다. \"두목의 유품입니다.\" 까마귀 손이 아끼던 물건을 바친다.",
+              "result": [
+                "item:random:equipment",
+                "gold:8"
+              ]
+            }
+          }
+        },
+        {
+          "id": "rebury",
+          "order": 4,
+          "text": "도굴꾼들을 쫓아낸 뒤 무덤을 다시 덮는다",
+          "verb": "stealth",
+          "condition": [
+            "agi:32"
+          ],
+          "skillBonus": [],
+          "difficulty": "normal",
+          "outcomes": {
+            "fail": {
+              "text": "도굴꾼 하나가 등 뒤에서 덤볐다.",
+              "result": [
+                "hp:-14"
+              ]
+            },
+            "partial": {
+              "text": "무덤을 덮었다. 도굴꾼들이 흘린 금화를 챙겼다.",
+              "result": [
+                "gold:10"
+              ]
+            },
+            "success": {
+              "text": "무덤을 덮자 원정대 무덤의 수정들이 일제히 빛난다. 묻어 준 자가 남긴 꾸러미가 드러났다.",
+              "result": [
+                "gold:8",
+                "item:random:consumable",
+                "flag:wardenTrust"
+              ]
+            }
+          }
+        },
+        {
+          "id": "leave_robbers",
+          "order": 5,
+          "text": "못 본 척 지나간다",
+          "verb": "pass",
+          "condition": [],
+          "skillBonus": [],
+          "difficulty": "none",
+          "outcomes": {
+            "success": {
+              "text": "삽질 소리가 등 뒤에서 이어진다.",
+              "result": []
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "evt4_hound_and_wolves",
+      "zone": 4,
+      "title": "사냥개와 늑대",
+      "description": "함께 다니던 사냥개가 갑자기 멈춰 선다. 언덕 위에서 태고의 늑대들이 내려다본다. 사냥개가 꼬리를 낮추고 한 걸음 앞으로 나간다.",
+      "repeatable": false,
+      "requiresFlags": [
+        "houndCompanion"
+      ],
+      "forbiddenFlags": [],
+      "group": "",
+      "choices": [
+        {
+          "id": "let_hound_go",
+          "order": 1,
+          "text": "사냥개가 하는 대로 둔다",
+          "verb": "",
+          "condition": [],
+          "skillBonus": [],
+          "difficulty": "none",
+          "outcomes": {
+            "success": {
+              "text": "사냥개가 늑대들 앞에 몸을 낮춘다. 늑대들이 냄새를 맡더니 길을 연다. 언덕 너머에 늑대들이 지키던 굴이 있다.",
+              "result": [
+                "item:random:equipment"
+              ]
+            }
+          }
+        },
+        {
+          "id": "stand_with_hound",
+          "order": 2,
+          "text": "사냥개 옆에 서서 늑대들과 맞선다",
+          "verb": "force",
+          "condition": [
+            "str:32"
+          ],
+          "skillBonus": [],
+          "difficulty": "hard",
+          "outcomes": {
+            "fail": {
+              "text": "늑대들이 덤벼들었다!",
+              "result": [
+                "fight:ene4_primeval_wolf"
+              ]
+            },
+            "partial": {
+              "text": "늑대들이 물러난다. 사냥개가 다리를 절룩인다.",
+              "result": [
+                "hp:-8"
+              ]
+            },
+            "success": {
+              "text": "늑대 우두머리가 고개를 숙이고 물러난다. 언덕을 지나는 동안 늑대들이 따라오며 지켜 준다.",
+              "result": [
+                "hp:12",
+                "gold:10"
+              ]
+            }
+          }
+        },
+        {
+          "id": "read_wolves",
+          "order": 3,
+          "text": "늑대들의 몸짓을 읽는다",
+          "verb": "insight",
+          "condition": [
+            "wis:29"
+          ],
+          "skillBonus": [],
+          "difficulty": "easy",
+          "outcomes": {
+            "fail": {
+              "text": "늑대들이 이빨을 드러낸다. 물러났다.",
+              "result": [
+                "hp:-8"
+              ]
+            },
+            "partial": {
+              "text": "늑대들은 시험하는 중이다. 가만히 서 있자 사라졌다.",
+              "result": [
+                "gold:8"
+              ]
+            },
+            "success": {
+              "text": "늑대들은 숲 초입에서 구해 준 새끼의 냄새를 기억하고 있었다. 늑대들이 숨겨진 쉼터로 이끈다.",
+              "result": [
+                "hp:22"
+              ]
+            }
+          }
+        },
+        {
+          "id": "bandage_hound",
+          "order": 4,
+          "text": "긴장한 사냥개의 다친 발에 붕대를 감아 준다",
+          "verb": "use",
+          "condition": [
+            "item:con_bandage"
+          ],
+          "skillBonus": [],
+          "difficulty": "none",
+          "outcomes": {
+            "success": {
+              "text": "사냥개가 손을 핥는다. 늑대들이 그 모습을 보고 조용히 물러난다.",
+              "result": [
+                "item:-con_bandage",
+                "hp:14",
+                "gold:8"
+              ]
+            }
+          }
+        },
+        {
+          "id": "back_off_wolves",
+          "order": 5,
+          "text": "사냥개를 불러 돌아간다",
+          "verb": "pass",
+          "condition": [],
+          "skillBonus": [],
+          "difficulty": "none",
+          "outcomes": {
+            "success": {
+              "text": "늑대들의 울음이 언덕 너머로 길게 이어진다.",
+              "result": []
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "evt4_villager_news",
+      "zone": 4,
+      "title": "피난처에서 온 소식",
+      "description": "고요의 숲에 낯익은 아이가 숨을 헐떡이며 서 있다. 3구역 피난처의 아이다. \"다들 무사해요. 그런데 땅이 자꾸 흔들려요. 언니가 이걸 꼭 전하래요.\"",
+      "repeatable": false,
+      "requiresFlags": [
+        "rescuedVillagers"
+      ],
+      "forbiddenFlags": [],
+      "group": "",
+      "choices": [
+        {
+          "id": "take_package",
+          "order": 1,
+          "text": "아이가 가져온 꾸러미를 받는다",
+          "verb": "",
+          "condition": [],
+          "skillBonus": [],
+          "difficulty": "none",
+          "outcomes": {
+            "success": {
+              "text": "마을 사람들이 모은 약과 마른 빵이다. 쪽지에 \"꼭 돌아오세요\"라고 적혀 있다.",
+              "result": [
+                "item:con_potion",
+                "item:con_potion",
+                "item:con_bandage"
+              ]
+            }
+          }
+        },
+        {
+          "id": "send_child_back",
+          "order": 2,
+          "text": "아이를 안전한 길로 돌려보낸다",
+          "verb": "stealth",
+          "condition": [
+            "agi:29"
+          ],
+          "skillBonus": [],
+          "difficulty": "easy",
+          "outcomes": {
+            "fail": {
+              "text": "아이를 데려다주다 나방 떼를 만났다.",
+              "result": [
+                "hp:-14"
+              ]
+            },
+            "partial": {
+              "text": "아이를 거석의 문까지 데려다주었다.",
+              "result": [
+                "hp:6"
+              ]
+            },
+            "success": {
+              "text": "아이를 무사히 보냈다. 돌아오는 길에 숲지기의 숨은 보급함을 찾았다.",
+              "result": [
+                "item:random:consumable",
+                "gold:10"
+              ]
+            }
+          }
+        },
+        {
+          "id": "ask_tremor",
+          "order": 3,
+          "text": "땅이 언제부터 흔들렸는지 묻는다",
+          "verb": "insight",
+          "condition": [
+            "wis:32"
+          ],
+          "skillBonus": [],
+          "difficulty": "normal",
+          "outcomes": {
+            "fail": {
+              "text": "아이가 잘 모른다.",
+              "result": []
+            },
+            "partial": {
+              "text": "왕궁이 무너진 날부터 흔들림이 잦아졌다고 한다.",
+              "result": [
+                "gold:8"
+              ]
+            },
+            "success": {
+              "text": "흔들림은 성역 쪽에서 왔고, 밤마다 같은 박자였다. 봉인이 흔들리는 박자다.",
+              "result": [
+                "gold:6",
+                "flag:knowsSealWeakness"
+              ]
+            }
+          }
+        },
+        {
+          "id": "promise_child",
+          "order": 4,
+          "text": "\"꼭 돌아가겠다\"고 약속한다",
+          "verb": "",
+          "condition": [],
+          "skillBonus": [],
+          "difficulty": "none",
+          "outcomes": {
+            "success": {
+              "text": "아이가 새끼손가락을 내민다. 약속을 걸자 마음이 단단해진다.",
+              "result": [
+                "hp:18",
+                "flag:promisedReturn"
+              ]
+            }
+          }
+        },
+        {
+          "id": "leave_child",
+          "order": 5,
+          "text": "아이를 두고 서둘러 간다",
+          "verb": "pass",
+          "condition": [],
+          "skillBonus": [],
+          "difficulty": "none",
+          "outcomes": {
+            "success": {
+              "text": "아이가 한참 손을 흔든다.",
+              "result": []
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "evt4_circle_trial",
+      "zone": 4,
+      "title": "거석 원의 시험",
+      "description": "거석 원 한가운데 서면 거석들의 얼굴이 일제히 이쪽을 본다. 바닥에 \"버티는 자만 지나간다\"고 새겨져 있다.",
+      "repeatable": false,
+      "requiresFlags": [],
+      "forbiddenFlags": [],
+      "group": "z4_gate",
+      "choices": [
+        {
+          "id": "endure",
+          "order": 1,
+          "text": "원 한가운데에서 끝까지 버틴다",
+          "verb": "force",
+          "condition": [
+            "str:35"
+          ],
+          "skillBonus": [],
+          "difficulty": "hard",
+          "outcomes": {
+            "fail": {
+              "text": "거석들의 시선에 무릎이 꺾였다. 거석 수호상이 다가온다!",
+              "result": [
+                "fight:ene4_megalith_guard"
+              ]
+            },
+            "partial": {
+              "text": "버티다 원 밖으로 밀려났다. 손에 돌가루가 남았다.",
+              "result": [
+                "hp:-10",
+                "gold:10"
+              ]
+            },
+            "success": {
+              "text": "끝까지 버텼다. 거석들이 눈을 감고, 바닥이 열리며 공물이 드러난다.",
+              "result": [
+                "item:random:equipment",
+                "flag:knowsGateWord"
+              ]
+            }
+          }
+        },
+        {
+          "id": "walk_edge",
+          "order": 2,
+          "text": "원 가장자리를 따라 시선을 피해 지나간다",
+          "verb": "stealth",
+          "condition": [
+            "agi:29"
+          ],
+          "skillBonus": [],
+          "difficulty": "easy",
+          "outcomes": {
+            "fail": {
+              "text": "거석 하나와 눈이 마주쳤다.",
+              "result": [
+                "hp:-12"
+              ]
+            },
+            "partial": {
+              "text": "무사히 지나갔다.",
+              "result": []
+            },
+            "success": {
+              "text": "지나가며 거석 발치의 공물을 챙겼다.",
+              "result": [
+                "gold:14"
+              ]
+            }
+          }
+        },
+        {
+          "id": "read_faces",
+          "order": 3,
+          "text": "거석 얼굴들의 표정을 하나씩 읽는다",
+          "verb": "insight",
+          "condition": [
+            "wis:32"
+          ],
+          "skillBonus": [],
+          "difficulty": "normal",
+          "outcomes": {
+            "fail": {
+              "text": "얼굴들이 일그러지며 머리를 짓누른다.",
+              "result": [
+                "hp:-14"
+              ]
+            },
+            "partial": {
+              "text": "얼굴마다 경고를 남긴 숲지기들이다.",
+              "result": [
+                "gold:10"
+              ]
+            },
+            "success": {
+              "text": "얼굴들의 순서가 문지기를 잠재우는 말이었다.",
+              "result": [
+                "flag:knowsGateWord",
+                "gold:8"
+              ]
+            }
+          }
+        },
+        {
+          "id": "offer_stone",
+          "order": 4,
+          "text": "공물을 놓고 지나가게 해 달라고 빈다 (골드 15)",
+          "verb": "",
+          "condition": [
+            "gold:15"
+          ],
+          "skillBonus": [],
+          "difficulty": "none",
+          "outcomes": {
+            "success": {
+              "text": "거석들이 눈을 감는다. 원 가운데 바닥에서 따뜻한 기운이 올라온다.",
+              "result": [
+                "gold:-15",
+                "hp:22"
+              ]
+            }
+          }
+        },
+        {
+          "id": "go_around",
+          "order": 5,
+          "text": "원을 크게 돌아간다",
+          "verb": "pass",
+          "condition": [],
+          "skillBonus": [],
+          "difficulty": "none",
+          "outcomes": {
+            "success": {
+              "text": "거석들의 시선이 등 뒤에서 오래 따라온다.",
+              "result": []
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "evt4_crystal_echo",
+      "zone": 4,
+      "title": "수정의 메아리",
+      "description": "수정 미로에서 말을 하면 메아리가 다른 말로 돌아온다. \"돌아가라\"고 말하면 \"앞으로 가라\"가 돌아온다. 메아리 끝에 무언가 반짝인다.",
+      "repeatable": false,
+      "requiresFlags": [],
+      "forbiddenFlags": [],
+      "group": "z4_crystal",
+      "choices": [
+        {
+          "id": "speak_truth",
+          "order": 1,
+          "text": "내가 여기 온 이유를 말한다",
+          "verb": "persuade",
+          "condition": [],
+          "skillBonus": [],
+          "difficulty": "normal",
+          "outcomes": {
+            "fail": {
+              "text": "메아리가 비웃음으로 돌아온다. 수정 정령들이 몰려왔다!",
+              "result": [
+                "fight:ene4_crystal_sprite"
+              ]
+            },
+            "partial": {
+              "text": "메아리가 잠잠해진다.",
+              "result": [
+                "hp:8"
+              ]
+            },
+            "success": {
+              "text": "메아리가 같은 말로 돌아온다. 처음이다. 반짝이던 곳으로 가는 길이 열린다.",
+              "result": [
+                "item:random:equipment"
+              ]
+            }
+          }
+        },
+        {
+          "id": "follow_echo",
+          "order": 2,
+          "text": "메아리가 오는 방향을 따라간다",
+          "verb": "insight",
+          "condition": [
+            "wis:29"
+          ],
+          "skillBonus": [],
+          "difficulty": "normal",
+          "outcomes": {
+            "fail": {
+              "text": "메아리가 사방에서 와 길을 잃었다.",
+              "result": [
+                "hp:-14"
+              ]
+            },
+            "partial": {
+              "text": "메아리 끝에서 금화 무더기를 찾았다.",
+              "result": [
+                "gold:16"
+              ]
+            },
+            "success": {
+              "text": "메아리 끝에서 수정 속에 보관된 약병들을 찾았다.",
+              "result": [
+                "item:con_potion",
+                "item:random:consumable"
+              ]
+            }
+          }
+        },
+        {
+          "id": "shatter_echo",
+          "order": 3,
+          "text": "소리를 질러 수정을 깨뜨린다",
+          "verb": "force",
+          "condition": [
+            "str:32"
+          ],
+          "skillBonus": [],
+          "difficulty": "normal",
+          "outcomes": {
+            "fail": {
+              "text": "수정이 깨지며 파편이 쏟아졌다.",
+              "result": [
+                "hp:-16"
+              ]
+            },
+            "partial": {
+              "text": "수정 벽에 틈이 났다. 틈 사이 조각을 챙겼다.",
+              "result": [
+                "gold:12"
+              ]
+            },
+            "success": {
+              "text": "수정 벽이 무너지며 지름길과 숨은 상자가 드러났다.",
+              "result": [
+                "gold:8",
+                "item:random:consumable"
+              ]
+            }
+          }
+        },
+        {
+          "id": "stay_silent",
+          "order": 4,
+          "text": "말없이 미로를 걷는다",
+          "verb": "stealth",
+          "condition": [
+            "agi:32"
+          ],
+          "skillBonus": [],
+          "difficulty": "normal",
+          "outcomes": {
+            "fail": {
+              "text": "발소리 메아리에 정령들이 깨어났다.",
+              "result": [
+                "fight:ene4_crystal_sprite:ambushed"
+              ]
+            },
+            "partial": {
+              "text": "조용히 빠져나왔다.",
+              "result": []
+            },
+            "success": {
+              "text": "소리 없이 반짝이던 곳까지 가서 챙겼다.",
+              "result": [
+                "item:random:equipment"
+              ]
+            }
+          }
+        },
+        {
+          "id": "leave_echo",
+          "order": 5,
+          "text": "돌아 나간다",
+          "verb": "pass",
+          "condition": [],
+          "skillBonus": [],
+          "difficulty": "none",
+          "outcomes": {
+            "success": {
+              "text": "\"앞으로 가라.\" 메아리가 등 뒤에 남는다.",
+              "result": []
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "evt4_glowing_cocoon",
+      "zone": 4,
+      "title": "빛나는 고치",
+      "description": "나방 둥지 한가운데 사람만 한 고치가 매달려 있다. 고치 속 빛이 맥박친다. 여왕이 낳은 마지막 알이다.",
+      "repeatable": false,
+      "requiresFlags": [],
+      "forbiddenFlags": [],
+      "group": "z4_star",
+      "choices": [
+        {
+          "id": "cut_cocoon",
+          "order": 1,
+          "text": "고치를 갈라 속을 꺼낸다",
+          "verb": "",
+          "condition": [],
+          "skillBonus": [],
+          "difficulty": "hard",
+          "outcomes": {
+            "fail": {
+              "text": "고치가 터지며 나방 떼가 쏟아졌다!",
+              "result": [
+                "fight:ene4_star_moth:ambushed"
+              ]
+            },
+            "partial": {
+              "text": "고치 속은 빛나는 가루뿐이다. 그래도 값이 나간다.",
+              "result": [
+                "gold:14"
+              ]
+            },
+            "success": {
+              "text": "고치 속 응축된 별빛을 삼켰다. 몸 깊은 곳까지 빛이 번진다.",
+              "result": [
+                "item:random:elixir"
+              ]
+            }
+          }
+        },
+        {
+          "id": "carry_cocoon",
+          "order": 2,
+          "text": "고치를 통째로 떼어 간다",
+          "verb": "force",
+          "condition": [
+            "str:32"
+          ],
+          "skillBonus": [],
+          "difficulty": "normal",
+          "outcomes": {
+            "fail": {
+              "text": "고치를 떼자 여왕의 날갯짓이 들려왔다.",
+              "result": [
+                "hp:-16"
+              ]
+            },
+            "partial": {
+              "text": "고치 껍질 일부만 떼어냈다.",
+              "result": [
+                "gold:12"
+              ]
+            },
+            "success": {
+              "text": "고치를 떼어 상인에게 팔 만한 크기로 다듬었다.",
+              "result": [
+                "gold:20"
+              ]
+            }
+          }
+        },
+        {
+          "id": "watch_hatch",
+          "order": 3,
+          "text": "고치가 열리는 것을 지켜본다",
+          "verb": "insight",
+          "condition": [
+            "wis:32"
+          ],
+          "skillBonus": [],
+          "difficulty": "normal",
+          "outcomes": {
+            "fail": {
+              "text": "갓 나온 나방이 눈을 찔렀다.",
+              "result": [
+                "hp:-12"
+              ]
+            },
+            "partial": {
+              "text": "나방이 날아가며 빛 가루를 남겼다. 상처에 바르니 아문다.",
+              "result": [
+                "hp:16"
+              ]
+            },
+            "success": {
+              "text": "나방이 날아가며 둥지의 길을 비춘다. 둥지 깊은 곳의 보물을 찾았다.",
+              "result": [
+                "item:random:equipment"
+              ]
+            }
+          }
+        },
+        {
+          "id": "sneak_nest",
+          "order": 4,
+          "text": "고치를 두고 둥지 가장자리만 턴다",
+          "verb": "stealth",
+          "condition": [
+            "agi:29"
+          ],
+          "skillBonus": [],
+          "difficulty": "easy",
+          "outcomes": {
+            "fail": {
+              "text": "나방 가루를 들이마셨다.",
+              "result": [
+                "hp:-10"
+              ]
+            },
+            "partial": {
+              "text": "둥지 가장자리에서 금화를 찾았다.",
+              "result": [
+                "gold:12"
+              ]
+            },
+            "success": {
+              "text": "둥지에 걸린 원정대의 짐에서 보급품을 챙겼다.",
+              "result": [
+                "gold:8",
+                "item:random:consumable"
+              ]
+            }
+          }
+        },
+        {
+          "id": "leave_cocoon",
+          "order": 5,
+          "text": "고치를 건드리지 않는다",
+          "verb": "pass",
+          "condition": [],
+          "skillBonus": [],
+          "difficulty": "none",
+          "outcomes": {
+            "success": {
+              "text": "고치 속 빛이 천천히 뛴다.",
+              "result": []
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "evt4_marrow_spring",
+      "zone": 4,
+      "title": "뼈 속의 샘",
+      "description": "거인의 갈비뼈 사이 움푹한 곳에 맑은 물이 고여 있다. 뼈를 타고 스며 나온 물이다. 물가에 늑대 발자국과 사람 발자국이 함께 찍혀 있다.",
+      "repeatable": false,
+      "requiresFlags": [],
+      "forbiddenFlags": [],
+      "group": "z4_beast",
+      "choices": [
+        {
+          "id": "drink_marrow",
+          "order": 1,
+          "text": "샘물을 마신다",
+          "verb": "",
+          "condition": [],
+          "skillBonus": [],
+          "difficulty": "normal",
+          "outcomes": {
+            "fail": {
+              "text": "물이 너무 차서 속이 얼어붙는다.",
+              "result": [
+                "hp:-10"
+              ]
+            },
+            "partial": {
+              "text": "물이 달다. 기운이 돈다.",
+              "result": [
+                "hp:16"
+              ]
+            },
+            "success": {
+              "text": "물 속에 거인의 힘이 녹아 있다. 상처가 빠르게 아문다.",
+              "result": [
+                "hp:28"
+              ]
+            }
+          }
+        },
+        {
+          "id": "wait_drinkers",
+          "order": 2,
+          "text": "물가에 숨어 누가 오는지 기다린다",
+          "verb": "stealth",
+          "condition": [
+            "agi:32"
+          ],
+          "skillBonus": [],
+          "difficulty": "normal",
+          "outcomes": {
+            "fail": {
+              "text": "태고의 늑대가 먼저 냄새를 맡았다!",
+              "result": [
+                "fight:ene4_primeval_wolf:ambushed"
+              ]
+            },
+            "partial": {
+              "text": "아무도 오지 않았다. 쉬기만 했다.",
+              "result": [
+                "hp:12"
+              ]
+            },
+            "success": {
+              "text": "먼저 온 모험가가 물을 마시러 왔다가 짐을 두고 굳었다. 짐을 챙겼다.",
+              "result": [
+                "item:random:equipment"
+              ]
+            }
+          }
+        },
+        {
+          "id": "dig_spring",
+          "order": 3,
+          "text": "샘 바닥을 파 물길을 넓힌다",
+          "verb": "force",
+          "condition": [
+            "str:29"
+          ],
+          "skillBonus": [],
+          "difficulty": "easy",
+          "outcomes": {
+            "fail": {
+              "text": "뼈 조각에 손을 베었다.",
+              "result": [
+                "hp:-10"
+              ]
+            },
+            "partial": {
+              "text": "물길이 넓어졌다. 바닥에서 동전이 나왔다.",
+              "result": [
+                "gold:12"
+              ]
+            },
+            "success": {
+              "text": "바닥에서 원정대가 숨긴 보급 상자가 나왔다.",
+              "result": [
+                "item:random:consumable",
+                "item:con_potion"
+              ]
+            }
+          }
+        },
+        {
+          "id": "fill_and_go",
+          "order": 4,
+          "text": "물병만 채우고 떠난다",
+          "verb": "",
+          "condition": [],
+          "skillBonus": [],
+          "difficulty": "none",
+          "outcomes": {
+            "success": {
+              "text": "물병을 채웠다. 언젠가 쓸모가 있을 것이다.",
+              "result": [
+                "item:con_potion"
+              ]
+            }
+          }
+        },
+        {
+          "id": "pass_spring",
+          "order": 5,
+          "text": "지나간다",
+          "verb": "pass",
+          "condition": [],
+          "skillBonus": [],
+          "difficulty": "none",
+          "outcomes": {
+            "success": {
+              "text": "뼈 사이로 물방울 떨어지는 소리가 난다.",
+              "result": []
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "evt4_warden_shelter",
+      "zone": 4,
+      "title": "숲지기의 쉼터",
+      "description": "고요의 숲 나무 사이에 숲지기가 쉬어 가던 쉼터가 있다. 담요가 개어져 있고, 벽에 숲지기들의 이름이 새겨져 있다. 맨 아래 칸이 비어 있다.",
+      "repeatable": false,
+      "requiresFlags": [],
+      "forbiddenFlags": [],
+      "group": "z4_grove",
+      "choices": [
+        {
+          "id": "sleep_shelter",
+          "order": 1,
+          "text": "담요를 펴고 잔다",
+          "verb": "",
+          "condition": [],
+          "skillBonus": [],
+          "difficulty": "none",
+          "outcomes": {
+            "success": {
+              "text": "오랜만에 꿈도 없이 깊이 잤다.",
+              "result": [
+                "hp:28"
+              ]
+            }
+          }
+        },
+        {
+          "id": "carve_name",
+          "order": 2,
+          "text": "빈칸에 내 이름을 새긴다",
+          "verb": "",
+          "condition": [],
+          "skillBonus": [],
+          "difficulty": "normal",
+          "outcomes": {
+            "fail": {
+              "text": "이름을 새기자 손이 저려 온다. 무언가에 묶이는 느낌이다.",
+              "result": [
+                "hp:-12"
+              ]
+            },
+            "partial": {
+              "text": "이름을 새겼다. 아무 일도 없다.",
+              "result": [
+                "hp:8"
+              ]
+            },
+            "success": {
+              "text": "이름을 새기자 벽의 이름들이 희미하게 빛난다. 숲지기들이 나를 받아들인 것 같다.",
+              "result": [
+                "hp:10",
+                "flag:wardenTrust"
+              ]
+            }
+          }
+        },
+        {
+          "id": "search_shelter",
+          "order": 3,
+          "text": "쉼터의 보급품을 뒤진다",
+          "verb": "stealth",
+          "condition": [
+            "agi:29"
+          ],
+          "skillBonus": [],
+          "difficulty": "easy",
+          "outcomes": {
+            "fail": {
+              "text": "선반이 무너져 머리를 맞았다.",
+              "result": [
+                "hp:-10"
+              ]
+            },
+            "partial": {
+              "text": "마른 약초를 챙겼다.",
+              "result": [
+                "item:con_antidote"
+              ]
+            },
+            "success": {
+              "text": "숲지기들의 비상 보급품을 찾았다.",
+              "result": [
+                "item:con_potion",
+                "item:con_bandage",
+                "gold:8"
+              ]
+            }
+          }
+        },
+        {
+          "id": "read_names",
+          "order": 4,
+          "text": "벽의 이름을 처음부터 읽는다",
+          "verb": "insight",
+          "condition": [
+            "wis:32"
+          ],
+          "skillBonus": [],
+          "difficulty": "normal",
+          "outcomes": {
+            "fail": {
+              "text": "이름이 너무 많아 끝까지 못 읽었다.",
+              "result": []
+            },
+            "partial": {
+              "text": "가장 위 이름 옆에 \"첫 경고를 들은 자\"라고 적혀 있다.",
+              "result": [
+                "gold:8",
+                "flag:heardWardenPlea"
+              ]
+            },
+            "success": {
+              "text": "가장 위 이름이 파수꾼의 이름이다. 그 옆에 숲지기들이 파수꾼을 돕던 주문이 적혀 있다.",
+              "result": [
+                "skill:choice",
+                "flag:heardWardenPlea"
+              ]
+            }
+          }
+        },
+        {
+          "id": "leave_shelter",
+          "order": 5,
+          "text": "쉼터를 정돈해 두고 떠난다",
+          "verb": "pass",
+          "condition": [],
+          "skillBonus": [],
+          "difficulty": "none",
+          "outcomes": {
+            "success": {
+              "text": "다음에 올 누군가를 위해 담요를 다시 개어 둔다.",
+              "result": []
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "evt4_quartermaster",
+      "zone": 4,
+      "title": "원정대 보급관",
+      "description": "야영 터 보급 천막에서 원정대 보급관의 망령이 장부를 넘긴다. \"원정대원이면 보급품을 받아 가라. 아니면 값을 치르든가.\"",
+      "repeatable": false,
+      "requiresFlags": [],
+      "forbiddenFlags": [],
+      "group": "z4_expedition",
+      "choices": [
+        {
+          "id": "buy_supplies",
+          "order": 1,
+          "text": "값을 치르고 보급품을 받는다 (골드 20)",
+          "verb": "",
+          "condition": [
+            "gold:20"
+          ],
+          "skillBonus": [],
+          "difficulty": "none",
+          "outcomes": {
+            "success": {
+              "text": "보급관이 상자를 연다. \"왕실 보급품이다. 아껴 써라.\"",
+              "result": [
+                "gold:-20",
+                "item:random:equipment"
+              ]
+            }
+          }
+        },
+        {
+          "id": "pose_member",
+          "order": 2,
+          "text": "원정대원인 척한다",
+          "verb": "persuade",
+          "condition": [],
+          "skillBonus": [],
+          "difficulty": "hard",
+          "outcomes": {
+            "fail": {
+              "text": "\"원정대 명부에 없는 이름이다!\" 잔병들이 몰려왔다.",
+              "result": [
+                "fight:ene4_expedition_remnant"
+              ]
+            },
+            "partial": {
+              "text": "보급관이 미심쩍어하며 붕대 몇 개를 내준다.",
+              "result": [
+                "item:con_bandage"
+              ]
+            },
+            "success": {
+              "text": "보급관이 경례하며 보급품을 내준다. \"무운을 빈다, 대원.\"",
+              "result": [
+                "item:random:equipment",
+                "item:con_potion"
+              ]
+            }
+          }
+        },
+        {
+          "id": "check_ledger4",
+          "order": 3,
+          "text": "장부의 빈칸과 남은 재고를 맞춰 본다",
+          "verb": "insight",
+          "condition": [
+            "wis:29"
+          ],
+          "skillBonus": [],
+          "difficulty": "easy",
+          "outcomes": {
+            "fail": {
+              "text": "장부가 수정에 덮여 읽을 수 없다.",
+              "result": []
+            },
+            "partial": {
+              "text": "장부에 없는 재고 상자를 찾았다.",
+              "result": [
+                "gold:14"
+              ]
+            },
+            "success": {
+              "text": "장부에 \"왕자 전용\"이라 적힌 상자를 찾았다. 왕자의 약점이 적힌 의무 기록도 함께였다.",
+              "result": [
+                "item:random:consumable",
+                "flag:knowsPrinceShame"
+              ]
+            }
+          }
+        },
+        {
+          "id": "steal_crate",
+          "order": 4,
+          "text": "보급관이 장부를 보는 사이 상자를 들고 나온다",
+          "verb": "stealth",
+          "condition": [
+            "agi:32"
+          ],
+          "skillBonus": [],
+          "difficulty": "normal",
+          "outcomes": {
+            "fail": {
+              "text": "보급관이 고개를 들었다. 잔병이 달려온다!",
+              "result": [
+                "fight:ene4_expedition_remnant:ambushed"
+              ]
+            },
+            "partial": {
+              "text": "작은 상자 하나를 챙겼다.",
+              "result": [
+                "gold:12"
+              ]
+            },
+            "success": {
+              "text": "큰 상자를 통째로 들고 나왔다.",
+              "result": [
+                "item:random:equipment"
+              ]
+            }
+          }
+        },
+        {
+          "id": "leave_qm",
+          "order": 5,
+          "text": "천막을 나선다",
+          "verb": "pass",
+          "condition": [],
+          "skillBonus": [],
+          "difficulty": "none",
+          "outcomes": {
+            "success": {
+              "text": "보급관이 장부를 계속 넘긴다.",
+              "result": []
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "evt4_half_turned",
+      "zone": 4,
+      "title": "반쯤 굳은 사람",
+      "description": "굳은 자들의 길에서 아직 다리만 굳은 사람이 몸부림친다. 2구역에서 홀려 사라진 사냥꾼의 옷차림이다. \"살려 줘. 아직 위쪽은 괜찮아.\"",
+      "repeatable": false,
+      "requiresFlags": [],
+      "forbiddenFlags": [],
+      "group": "z4_petrified",
+      "choices": [
+        {
+          "id": "give_potion4",
+          "order": 1,
+          "text": "물약을 먹인다",
+          "verb": "use",
+          "condition": [
+            "item:con_potion"
+          ],
+          "skillBonus": [],
+          "difficulty": "none",
+          "outcomes": {
+            "success": {
+              "text": "수정이 무릎 아래에서 멈춘다. 사냥꾼이 울며 가진 것을 모두 내민다.",
+              "result": [
+                "item:-con_potion",
+                "item:random:equipment"
+              ]
+            }
+          }
+        },
+        {
+          "id": "break_legs",
+          "order": 2,
+          "text": "다리의 수정을 깨 준다",
+          "verb": "force",
+          "condition": [
+            "str:32"
+          ],
+          "skillBonus": [],
+          "difficulty": "hard",
+          "outcomes": {
+            "fail": {
+              "text": "수정이 깨지는 소리에 굳은 자들이 움직였다!",
+              "result": [
+                "fight:ene4_petrified_adventurer"
+              ]
+            },
+            "partial": {
+              "text": "수정 일부를 깼다. 사냥꾼이 기어서 빠져나간다.",
+              "result": [
+                "gold:10"
+              ]
+            },
+            "success": {
+              "text": "사냥꾼이 풀려났다. 고맙다며 미로를 피하는 길과 짐을 건넨다.",
+              "result": [
+                "gold:10",
+                "item:random:consumable"
+              ]
+            }
+          }
+        },
+        {
+          "id": "find_cure",
+          "order": 3,
+          "text": "수정이 퍼지는 모양을 보고 멈추는 법을 찾는다",
+          "verb": "insight",
+          "condition": [
+            "wis:35"
+          ],
+          "skillBonus": [],
+          "difficulty": "hard",
+          "outcomes": {
+            "fail": {
+              "text": "수정이 내 손에도 옮아왔다. 겨우 떼어냈다.",
+              "result": [
+                "hp:-16"
+              ]
+            },
+            "partial": {
+              "text": "수정이 퍼지는 속도를 늦췄다.",
+              "result": [
+                "hp:6"
+              ]
+            },
+            "success": {
+              "text": "수정은 맑은 물을 싫어한다. 해독제를 뿌려 멈추고 남은 방법도 기억해 두었다.",
+              "result": [
+                "item:con_antidote",
+                "flag:knowsSealWeakness"
+              ]
+            }
+          }
+        },
+        {
+          "id": "ask_hunter",
+          "order": 4,
+          "text": "어떻게 여기까지 왔는지 묻는다",
+          "verb": "persuade",
+          "condition": [],
+          "skillBonus": [],
+          "difficulty": "easy",
+          "outcomes": {
+            "fail": {
+              "text": "사냥꾼이 울기만 한다.",
+              "result": []
+            },
+            "partial": {
+              "text": "\"노래를 따라왔어. 정신을 차리니 여기였어.\" 사냥꾼이 지니고 있던 동전을 내민다.",
+              "result": [
+                "gold:10"
+              ]
+            },
+            "success": {
+              "text": "\"무녀의 노래가 끝나도 발이 멈추지 않았어. 성역이 부르고 있었던 거야.\" 사냥꾼이 숨겨 둔 약을 건넨다.",
+              "result": [
+                "gold:6",
+                "item:con_potion"
+              ]
+            }
+          }
+        },
+        {
+          "id": "walk_away",
+          "order": 5,
+          "text": "돌아보지 않고 지나간다",
+          "verb": "pass",
+          "condition": [],
+          "skillBonus": [],
+          "difficulty": "none",
+          "outcomes": {
+            "success": {
+              "text": "\"제발…\" 목소리가 점점 굳어 간다.",
+              "result": [
+                "hp:-6"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "evt4_stair_merchant",
+      "zone": 4,
+      "title": "계단의 상인",
+      "description": "성역의 심장 앞 계단 중간에 떠돌이 상인이 앉아 있다. 1구역 숲길에서 본 그 상인 같다. \"여기까지 온 손님은 오랜만이오. 마지막이니 좋은 물건만 꺼냈소.\"",
+      "repeatable": false,
+      "requiresFlags": [],
+      "forbiddenFlags": [],
+      "group": "z4_warden",
+      "choices": [
+        {
+          "id": "buy_elixir4",
+          "order": 1,
+          "text": "별빛 영약을 산다 (골드 35)",
+          "verb": "",
+          "condition": [
+            "gold:35"
+          ],
+          "skillBonus": [],
+          "difficulty": "none",
+          "outcomes": {
+            "success": {
+              "text": "\"꺼진 별 조각을 녹인 것이오.\" 상인이 약병을 건넨다.",
+              "result": [
+                "gold:-35",
+                "item:random:elixir"
+              ]
+            }
+          }
+        },
+        {
+          "id": "buy_gear4",
+          "order": 2,
+          "text": "좋은 장비를 산다 (골드 25)",
+          "verb": "",
+          "condition": [
+            "gold:25"
+          ],
+          "skillBonus": [],
+          "difficulty": "none",
+          "outcomes": {
+            "success": {
+              "text": "상인이 보따리에서 장비 하나를 꺼낸다. \"이게 마지막 하나요.\"",
+              "result": [
+                "gold:-25",
+                "item:random:equipment"
+              ]
+            }
+          }
+        },
+        {
+          "id": "haggle4",
+          "order": 3,
+          "text": "\"마지막이니 깎아 달라\"고 흥정한다",
+          "verb": "persuade",
+          "condition": [],
+          "skillBonus": [],
+          "difficulty": "normal",
+          "outcomes": {
+            "fail": {
+              "text": "\"마지막이라 더 못 깎소.\" 상인이 웃는다.",
+              "result": []
+            },
+            "partial": {
+              "text": "상인이 물약 하나를 덤으로 준다.",
+              "result": [
+                "item:con_potion"
+              ]
+            },
+            "success": {
+              "text": "상인이 껄껄 웃으며 장비 하나를 그냥 건넨다. \"돌아오면 값을 치르시오.\"",
+              "result": [
+                "item:random:equipment",
+                "flag:promisedReturn"
+              ]
+            }
+          }
+        },
+        {
+          "id": "ask_merchant",
+          "order": 4,
+          "text": "상인에게 어떻게 여기 있는지 묻는다",
+          "verb": "insight",
+          "condition": [
+            "wis:32"
+          ],
+          "skillBonus": [],
+          "difficulty": "normal",
+          "outcomes": {
+            "fail": {
+              "text": "상인이 대답을 피한다.",
+              "result": []
+            },
+            "partial": {
+              "text": "\"나도 경고를 들었소. 그래서 장사만 하고 돌아가지.\" 상인이 붕대를 쥐여 준다.",
+              "result": [
+                "item:con_bandage"
+              ]
+            },
+            "success": {
+              "text": "\"파수꾼은 내 오랜 손님이오. 늘 지쳐 있지.\" 상인이 파수꾼의 버릇을 들려준다.",
+              "result": [
+                "gold:6",
+                "flag:heardWardenPlea"
+              ]
+            }
+          }
+        },
+        {
+          "id": "pass_merchant",
+          "order": 5,
+          "text": "인사만 하고 계단을 오른다",
+          "verb": "pass",
+          "condition": [],
+          "skillBonus": [],
+          "difficulty": "none",
+          "outcomes": {
+            "success": {
+              "text": "\"살아서 내려오시오.\" 상인이 손을 흔든다.",
+              "result": []
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "evt4_source_offer",
+      "zone": 4,
+      "title": "근원의 제안",
+      "description": "근원의 틈에서 속삭임과 다른 목소리가 올라온다. 낮고 따뜻하다. \"파수꾼은 너를 막을 것이다. 나는 너를 도울 수 있다. 손을 내밀어라.\"",
+      "repeatable": false,
+      "requiresFlags": [],
+      "forbiddenFlags": [],
+      "group": "z4_source",
+      "choices": [
+        {
+          "id": "reach_hand",
+          "order": 1,
+          "text": "손을 내민다",
+          "verb": "",
+          "condition": [],
+          "skillBonus": [],
+          "difficulty": "hard",
+          "outcomes": {
+            "fail": {
+              "text": "뿌리가 팔을 타고 오른다. 겨우 뿌리쳤다.",
+              "result": [
+                "hp:-22"
+              ]
+            },
+            "partial": {
+              "text": "손끝이 따뜻해졌다가 식는다.",
+              "result": [
+                "hp:6"
+              ]
+            },
+            "success": {
+              "text": "뿌리가 손바닥에 힘을 흘려 넣는다. 강해졌다. 그런데 발밑이 크게 한 번 흔들린다.",
+              "result": [
+                "item:random:elixir",
+                "flag:touchedSource"
+              ]
+            }
+          }
+        },
+        {
+          "id": "refuse_source",
+          "order": 2,
+          "text": "\"너야말로 깨어나선 안 될 것\"이라고 거절한다",
+          "verb": "persuade",
+          "condition": [],
+          "skillBonus": [],
+          "difficulty": "easy",
+          "outcomes": {
+            "fail": {
+              "text": "목소리가 웃는다. 틈에서 바람이 거세진다.",
+              "result": [
+                "hp:-10"
+              ]
+            },
+            "partial": {
+              "text": "목소리가 물러난다.",
+              "result": [
+                "hp:8"
+              ]
+            },
+            "success": {
+              "text": "목소리가 물러나자 파수꾼의 속삭임이 들린다. \"잘했다.\" 몸이 가볍다.",
+              "result": [
+                "hp:16",
+                "flag:heardWardenPlea"
+              ]
+            }
+          }
+        },
+        {
+          "id": "trace_voice_src",
+          "order": 3,
+          "text": "목소리가 어디서 나는지 찾는다",
+          "verb": "insight",
+          "condition": [
+            "wis:35"
+          ],
+          "skillBonus": [],
+          "difficulty": "hard",
+          "outcomes": {
+            "fail": {
+              "text": "목소리에 끌려 틈 가장자리까지 갔다. 겨우 멈췄다.",
+              "result": [
+                "hp:-18"
+              ]
+            },
+            "partial": {
+              "text": "목소리는 틈 가장 깊은 곳에서 난다.",
+              "result": [
+                "gold:10"
+              ]
+            },
+            "success": {
+              "text": "목소리가 봉인의 금을 통해 새어 나온다. 그 금이 어디인지 정확히 알았다.",
+              "result": [
+                "flag:knowsSealWeakness",
+                "gold:8"
+              ]
+            }
+          }
+        },
+        {
+          "id": "throw_stone",
+          "order": 4,
+          "text": "틈에 돌을 던져 목소리를 끊는다",
+          "verb": "force",
+          "condition": [
+            "str:29"
+          ],
+          "skillBonus": [],
+          "difficulty": "normal",
+          "outcomes": {
+            "fail": {
+              "text": "돌이 튕겨 나와 이마를 맞았다.",
+              "result": [
+                "hp:-12"
+              ]
+            },
+            "partial": {
+              "text": "목소리가 끊겼다.",
+              "result": []
+            },
+            "success": {
+              "text": "돌이 금 사이에 끼어 목소리가 막혔다. 틈의 바람이 잦아든다.",
+              "result": [
+                "flag:mendedSeal"
+              ]
+            }
+          }
+        },
+        {
+          "id": "flee_source",
+          "order": 5,
+          "text": "귀를 막고 달아난다",
+          "verb": "pass",
+          "condition": [],
+          "skillBonus": [],
+          "difficulty": "none",
+          "outcomes": {
+            "success": {
+              "text": "\"다시 오게 될 것이다.\" 목소리가 등 뒤에서 웃는다.",
+              "result": []
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "evt4_behind_falls",
+      "zone": 4,
+      "title": "굳은 폭포 뒤",
+      "description": "굳은 수정 폭포 뒤에 동굴이 있다. 동굴 안은 따뜻하고 마른 이끼가 깔려 있다. 누군가 오래 머문 흔적이 있다.",
+      "repeatable": false,
+      "requiresFlags": [],
+      "forbiddenFlags": [],
+      "group": "z4_rest",
+      "choices": [
+        {
+          "id": "rest_cave",
+          "order": 1,
+          "text": "동굴에서 쉰다",
+          "verb": "",
+          "condition": [],
+          "skillBonus": [],
+          "difficulty": "none",
+          "outcomes": {
+            "success": {
+              "text": "폭포의 빛이 동굴 벽에 일렁인다. 깊이 쉬었다.",
+              "result": [
+                "hp:26"
+              ]
+            }
+          }
+        },
+        {
+          "id": "search_cave4",
+          "order": 2,
+          "text": "머문 자의 흔적을 뒤진다",
+          "verb": "stealth",
+          "condition": [
+            "agi:29"
+          ],
+          "skillBonus": [],
+          "difficulty": "easy",
+          "outcomes": {
+            "fail": {
+              "text": "이끼 밑 날카로운 수정에 찔렸다.",
+              "result": [
+                "hp:-10"
+              ]
+            },
+            "partial": {
+              "text": "작은 주머니를 찾았다.",
+              "result": [
+                "gold:12"
+              ]
+            },
+            "success": {
+              "text": "머문 자가 숨겨 둔 꾸러미를 찾았다.",
+              "result": [
+                "item:random:consumable",
+                "gold:8"
+              ]
+            }
+          }
+        },
+        {
+          "id": "read_wall4",
+          "order": 3,
+          "text": "동굴 벽의 낙서를 읽는다",
+          "verb": "insight",
+          "condition": [
+            "wis:29"
+          ],
+          "skillBonus": [],
+          "difficulty": "easy",
+          "outcomes": {
+            "fail": {
+              "text": "낙서가 지워져 있다.",
+              "result": []
+            },
+            "partial": {
+              "text": "\"파수꾼이 가끔 여기서 쉰다. 건드리지 마라.\" 그 옆에 동전이 놓여 있다.",
+              "result": [
+                "gold:10"
+              ]
+            },
+            "success": {
+              "text": "파수꾼이 쉬던 자리다. 남은 수정 비늘에서 파수꾼의 지친 박자를 느꼈다.",
+              "result": [
+                "hp:10",
+                "flag:heardWardenPlea"
+              ]
+            }
+          }
+        },
+        {
+          "id": "break_inner",
+          "order": 4,
+          "text": "동굴 안쪽 수정 벽을 깬다",
+          "verb": "force",
+          "condition": [
+            "str:32"
+          ],
+          "skillBonus": [],
+          "difficulty": "normal",
+          "outcomes": {
+            "fail": {
+              "text": "벽이 무너지며 정령들이 쏟아졌다!",
+              "result": [
+                "fight:ene4_crystal_sprite"
+              ]
+            },
+            "partial": {
+              "text": "벽 조각을 챙겼다.",
+              "result": [
+                "gold:14"
+              ]
+            },
+            "success": {
+              "text": "벽 너머 숨은 방에서 먼저 온 자의 장비를 찾았다.",
+              "result": [
+                "item:random:equipment"
+              ]
+            }
+          }
+        },
+        {
+          "id": "leave_cave4",
+          "order": 5,
+          "text": "동굴을 나선다",
+          "verb": "pass",
+          "condition": [],
+          "skillBonus": [],
+          "difficulty": "none",
+          "outcomes": {
+            "success": {
+              "text": "폭포의 빛이 등 뒤에서 일렁인다.",
+              "result": []
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "evt4_source_calls_back",
+      "zone": 4,
+      "title": "근원이 다시 부른다",
+      "description": "근원의 손을 잡았던 손바닥이 뜨겁다. 손금을 따라 가는 뿌리가 돋아 있다. 낮고 따뜻한 목소리가 다시 들린다. \"약속한 힘의 값을 받으러 왔다.\"",
+      "repeatable": false,
+      "requiresFlags": [
+        "touchedSource"
+      ],
+      "forbiddenFlags": [],
+      "group": "",
+      "choices": [
+        {
+          "id": "cut_palm",
+          "order": 1,
+          "text": "손바닥의 뿌리를 칼로 도려낸다",
+          "verb": "force",
+          "condition": [
+            "str:32"
+          ],
+          "skillBonus": [],
+          "difficulty": "normal",
+          "outcomes": {
+            "fail": {
+              "text": "뿌리가 팔 안쪽까지 뻗어 있었다. 피가 멈추지 않는다.",
+              "result": [
+                "hp:-22"
+              ]
+            },
+            "partial": {
+              "text": "뿌리를 도려냈다. 상처가 깊다.",
+              "result": [
+                "hp:-12"
+              ]
+            },
+            "success": {
+              "text": "뿌리를 깨끗이 도려냈다.",
+              "result": [
+                "hp:-5"
+              ]
+            }
+          }
+        },
+        {
+          "id": "wash_palm",
+          "order": 2,
+          "text": "해독제로 손을 씻는다",
+          "verb": "use",
+          "condition": [
+            "item:con_antidote"
+          ],
+          "skillBonus": [],
+          "difficulty": "none",
+          "outcomes": {
+            "success": {
+              "text": "뿌리가 시들어 떨어진다. 목소리가 짜증스럽게 물러난다.",
+              "result": [
+                "item:-con_antidote",
+                "hp:-4"
+              ]
+            }
+          }
+        },
+        {
+          "id": "resist_voice",
+          "order": 3,
+          "text": "목소리에 맞서 마음을 다잡는다",
+          "verb": "insight",
+          "condition": [
+            "wis:35"
+          ],
+          "skillBonus": [],
+          "difficulty": "hard",
+          "outcomes": {
+            "fail": {
+              "text": "목소리가 머릿속을 헤집는다.",
+              "result": [
+                "hp:-20"
+              ]
+            },
+            "partial": {
+              "text": "목소리가 잠시 물러났다. 손바닥이 욱신거린다.",
+              "result": [
+                "hp:-8"
+              ]
+            },
+            "success": {
+              "text": "목소리를 밀어냈다. 손바닥의 뿌리가 저절로 말라 떨어진다.",
+              "result": []
+            }
+          }
+        },
+        {
+          "id": "pay_gold_src",
+          "order": 4,
+          "text": "금화를 틈에 던져 값을 대신한다 (골드 25)",
+          "verb": "",
+          "condition": [
+            "gold:25"
+          ],
+          "skillBonus": [],
+          "difficulty": "none",
+          "outcomes": {
+            "success": {
+              "text": "금화가 틈으로 떨어지는 소리가 오래 이어진다. 목소리가 웃는다. \"이번만이다.\"",
+              "result": [
+                "gold:-25"
+              ]
+            }
+          }
+        },
+        {
+          "id": "ask_warden_help",
+          "order": 5,
+          "text": "파수꾼에게 도움을 청한다",
+          "verb": "persuade",
+          "condition": [],
+          "skillBonus": [],
+          "difficulty": "hard",
+          "outcomes": {
+            "fail": {
+              "text": "대답이 없다. 손바닥의 뿌리가 자란다.",
+              "result": [
+                "hp:-18"
+              ]
+            },
+            "partial": {
+              "text": "멀리서 속삭임이 들린다. 손바닥의 열이 조금 식는다.",
+              "result": [
+                "hp:-8"
+              ]
+            },
+            "success": {
+              "text": "\"어리석은 자여.\" 속삭임과 함께 뿌리가 얼어 부서진다. 파수꾼은 아직 나를 버리지 않았다.",
+              "result": [
+                "flag:heardWardenPlea"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "evt4_grave_curse",
+      "zone": 4,
+      "title": "원정대 무덤의 원한",
+      "description": "원정대 무덤에서 가져온 왕실 장비가 밤마다 무겁다. 굳은 원정대원 하나가 길을 막아선다. 수정 입술이 움직인다. \"돌려…놓아라…\"",
+      "repeatable": false,
+      "requiresFlags": [
+        "robbedExpeditionGrave"
+      ],
+      "forbiddenFlags": [],
+      "group": "",
+      "choices": [
+        {
+          "id": "give_back_gold",
+          "order": 1,
+          "text": "무덤 값을 금화로 치른다 (골드 25)",
+          "verb": "",
+          "condition": [
+            "gold:25"
+          ],
+          "skillBonus": [],
+          "difficulty": "none",
+          "outcomes": {
+            "success": {
+              "text": "원정대원이 금화를 받아 들고 굳는다. 길이 열린다.",
+              "result": [
+                "gold:-25"
+              ]
+            }
+          }
+        },
+        {
+          "id": "fight_through",
+          "order": 2,
+          "text": "밀치고 지나간다",
+          "verb": "force",
+          "condition": [
+            "str:35"
+          ],
+          "skillBonus": [],
+          "difficulty": "hard",
+          "outcomes": {
+            "fail": {
+              "text": "원정대원이 덤볐다. 그리고 다른 굳은 자들도 움직였다!",
+              "result": [
+                "hp:-8",
+                "fight:ene4_petrified_adventurer"
+              ]
+            },
+            "partial": {
+              "text": "밀치고 지나갔지만 수정 가시에 찔렸다.",
+              "result": [
+                "hp:-14"
+              ]
+            },
+            "success": {
+              "text": "원정대원을 밀어냈다. 그가 무너지며 수정이 된다.",
+              "result": [
+                "hp:-5"
+              ]
+            }
+          }
+        },
+        {
+          "id": "dodge_past",
+          "order": 3,
+          "text": "옆으로 빠져 달아난다",
+          "verb": "stealth",
+          "condition": [
+            "agi:32"
+          ],
+          "skillBonus": [],
+          "difficulty": "normal",
+          "outcomes": {
+            "fail": {
+              "text": "수정 손이 등을 할퀴었다.",
+              "result": [
+                "hp:-18"
+              ]
+            },
+            "partial": {
+              "text": "빠져나왔지만 한기가 따라온다.",
+              "result": [
+                "hp:-8"
+              ]
+            },
+            "success": {
+              "text": "따돌렸다.",
+              "result": []
+            }
+          }
+        },
+        {
+          "id": "promise_bury",
+          "order": 4,
+          "text": "\"끝나면 다시 묻어 주겠다\"고 약속한다",
+          "verb": "persuade",
+          "condition": [],
+          "skillBonus": [],
+          "difficulty": "hard",
+          "outcomes": {
+            "fail": {
+              "text": "원정대원이 믿지 않는다. 수정 손이 목을 조인다.",
+              "result": [
+                "hp:-20"
+              ]
+            },
+            "partial": {
+              "text": "원정대원이 망설이다 길을 비킨다. 한기가 남았다.",
+              "result": [
+                "hp:-8"
+              ]
+            },
+            "success": {
+              "text": "원정대원이 고개를 끄덕이고 굳는다. \"…믿는다.\"",
+              "result": []
+            }
+          }
+        },
+        {
+          "id": "offer_potion_grave",
+          "order": 5,
+          "text": "물약을 바친다",
+          "verb": "use",
+          "condition": [
+            "item:con_potion"
+          ],
+          "skillBonus": [],
+          "difficulty": "none",
+          "outcomes": {
+            "success": {
+              "text": "원정대원이 약병을 받고 길을 비킨다. \"…모자라다.\" 한기가 스친다.",
+              "result": [
+                "item:-con_potion",
+                "hp:-5"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "evt4_warden_errand",
+      "zone": 4,
+      "title": "숲지기의 부탁",
+      "description": "파수꾼의 발자국 옆에서 마지막 숲지기가 기다리고 있다. 손에 이끼로 엮은 작은 꾸러미를 들고 있다. \"파수꾼에게 이걸 전해 다오. 우리가 그를 잊지 않았다는 표시다.\"",
+      "repeatable": false,
+      "requiresFlags": [
+        "wardenTrust"
+      ],
+      "forbiddenFlags": [],
+      "group": "",
+      "choices": [
+        {
+          "id": "accept_errand",
+          "order": 1,
+          "text": "꾸러미를 받는다",
+          "verb": "",
+          "condition": [],
+          "skillBonus": [],
+          "difficulty": "none",
+          "outcomes": {
+            "success": {
+              "text": "꾸러미가 손안에서 따뜻하다. 숲지기가 고개를 숙인다. \"그리고 너도… 살아서 내려오너라.\"",
+              "result": [
+                "hp:14",
+                "flag:carriesWardenGift"
+              ]
+            }
+          }
+        },
+        {
+          "id": "open_bundle",
+          "order": 2,
+          "text": "꾸러미 안을 살짝 본다",
+          "verb": "insight",
+          "condition": [
+            "wis:32"
+          ],
+          "skillBonus": [],
+          "difficulty": "normal",
+          "outcomes": {
+            "fail": {
+              "text": "숲지기가 꾸러미를 거둬 간다. \"믿을 수 없는 자군.\"",
+              "result": []
+            },
+            "partial": {
+              "text": "이끼 속에 숲지기들의 이름을 새긴 나뭇조각이 있다.",
+              "result": [
+                "flag:carriesWardenGift"
+              ]
+            },
+            "success": {
+              "text": "나뭇조각마다 봉인을 돕는 주문이 새겨져 있다. 숲지기가 하나를 떼어 준다.",
+              "result": [
+                "flag:carriesWardenGift",
+                "skill:choice"
+              ]
+            }
+          }
+        },
+        {
+          "id": "ask_why_not",
+          "order": 3,
+          "text": "\"왜 직접 전하지 않느냐\"고 묻는다",
+          "verb": "persuade",
+          "condition": [],
+          "skillBonus": [],
+          "difficulty": "easy",
+          "outcomes": {
+            "fail": {
+              "text": "숲지기가 대답하지 않는다.",
+              "result": [
+                "flag:carriesWardenGift"
+              ]
+            },
+            "partial": {
+              "text": "\"파수꾼 앞에 서면 나도 돌아가지 못할 테니까.\" 숲지기가 약을 건넨다.",
+              "result": [
+                "flag:carriesWardenGift",
+                "item:con_potion"
+              ]
+            },
+            "success": {
+              "text": "\"파수꾼은 내 스승이었다. 마지막 모습을 보고 싶지 않다.\" 숲지기가 아끼던 장비를 건넨다.",
+              "result": [
+                "flag:carriesWardenGift",
+                "item:random:equipment"
+              ]
+            }
+          }
+        },
+        {
+          "id": "train_with_warden",
+          "order": 4,
+          "text": "전하기 전에 숲지기에게 싸움을 배운다",
+          "verb": "force",
+          "condition": [
+            "str:32"
+          ],
+          "skillBonus": [],
+          "difficulty": "normal",
+          "outcomes": {
+            "fail": {
+              "text": "숲지기의 지팡이에 정강이를 맞았다.",
+              "result": [
+                "hp:-14"
+              ]
+            },
+            "partial": {
+              "text": "몇 수를 배웠다.",
+              "result": [
+                "hp:8",
+                "flag:carriesWardenGift"
+              ]
+            },
+            "success": {
+              "text": "파수꾼의 일격을 받아넘기는 법을 배웠다.",
+              "result": [
+                "flag:carriesWardenGift",
+                "flag:knowsSealWeakness"
+              ]
+            }
+          }
+        },
+        {
+          "id": "refuse_errand",
+          "order": 5,
+          "text": "거절한다",
+          "verb": "pass",
+          "condition": [],
+          "skillBonus": [],
+          "difficulty": "none",
+          "outcomes": {
+            "success": {
+              "text": "숲지기가 꾸러미를 품에 다시 넣는다.",
+              "result": []
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "evt4_prince_reflection",
+      "zone": 4,
+      "title": "왕자의 그림자",
+      "description": "수정 미로의 벽 하나에 왕자의 모습이 비친다. 일지에서 읽은 그 얼굴이다. 그림자가 입을 연다. \"너는 내 일지를 읽었지. 그렇다면 알겠지. 나는 돌아가고 싶었다.\"",
+      "repeatable": false,
+      "requiresFlags": [
+        "knowsPrinceShame"
+      ],
+      "forbiddenFlags": [],
+      "group": "",
+      "choices": [
+        {
+          "id": "tell_him",
+          "order": 1,
+          "text": "\"돌아갈 수 있었다\"고 말해 준다",
+          "verb": "persuade",
+          "condition": [],
+          "skillBonus": [],
+          "difficulty": "normal",
+          "outcomes": {
+            "fail": {
+              "text": "그림자가 분노한다. 수정 정령들이 깨어났다!",
+              "result": [
+                "fight:ene4_crystal_sprite"
+              ]
+            },
+            "partial": {
+              "text": "그림자가 고개를 떨군다.",
+              "result": [
+                "hp:8"
+              ]
+            },
+            "success": {
+              "text": "그림자가 울음을 터뜨린다. 그가 쥐고 있던 별 조각의 빛이 흐려진다. 왕자는 마지막 힘을 다 쓰지 못할 것이다.",
+              "result": [
+                "hp:8",
+                "flag:princeWavers"
+              ]
+            }
+          }
+        },
+        {
+          "id": "break_mirror",
+          "order": 2,
+          "text": "그림자가 비친 수정을 깨뜨린다",
+          "verb": "force",
+          "condition": [
+            "str:32"
+          ],
+          "skillBonus": [],
+          "difficulty": "normal",
+          "outcomes": {
+            "fail": {
+              "text": "파편이 쏟아져 몸을 베었다.",
+              "result": [
+                "hp:-16"
+              ]
+            },
+            "partial": {
+              "text": "그림자가 흩어졌다. 파편 사이 조각을 챙겼다.",
+              "result": [
+                "gold:14"
+              ]
+            },
+            "success": {
+              "text": "그림자가 깨지며 왕자가 숨겨 둔 원정대 보물이 드러났다.",
+              "result": [
+                "item:random:equipment"
+              ]
+            }
+          }
+        },
+        {
+          "id": "study_shadow",
+          "order": 3,
+          "text": "그림자의 몸놀림을 지켜본다",
+          "verb": "insight",
+          "condition": [
+            "wis:29"
+          ],
+          "skillBonus": [],
+          "difficulty": "easy",
+          "outcomes": {
+            "fail": {
+              "text": "그림자가 너무 빨라 눈으로 따라갈 수 없다.",
+              "result": []
+            },
+            "partial": {
+              "text": "왕자는 찌른 다음 늘 왼쪽으로 빠진다.",
+              "result": [
+                "gold:8",
+                "flag:princeWavers"
+              ]
+            },
+            "success": {
+              "text": "왕자의 찌르기가 시작되는 어깨 움직임을 읽었다. 그리고 별 조각을 쥔 손이 떨린다는 것도.",
+              "result": [
+                "flag:princeWavers",
+                "item:random:consumable"
+              ]
+            }
+          }
+        },
+        {
+          "id": "show_seal",
+          "order": 4,
+          "text": "왕자의 인장을 그림자에 비춘다",
+          "verb": "stealth",
+          "condition": [
+            "agi:29"
+          ],
+          "skillBonus": [],
+          "difficulty": "normal",
+          "outcomes": {
+            "fail": {
+              "text": "그림자가 인장을 보고 덤벼들었다!",
+              "result": [
+                "fight:ene4_expedition_remnant:ambushed"
+              ]
+            },
+            "partial": {
+              "text": "그림자가 인장을 보고 사라졌다.",
+              "result": [
+                "gold:8"
+              ]
+            },
+            "success": {
+              "text": "그림자가 인장 앞에 무릎을 꿇는다. \"아버지…\" 그가 남긴 왕실 보급품이 드러난다.",
+              "result": [
+                "item:random:equipment",
+                "flag:princeWavers"
+              ]
+            }
+          }
+        },
+        {
+          "id": "pass_shadow",
+          "order": 5,
+          "text": "그림자를 지나친다",
+          "verb": "pass",
+          "condition": [],
+          "skillBonus": [],
+          "difficulty": "none",
+          "outcomes": {
+            "success": {
+              "text": "\"돌아가고 싶었다.\" 목소리가 미로에 맴돈다.",
+              "result": []
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "evt4_calm_seal",
+      "zone": 4,
+      "title": "잠잠해진 봉인",
+      "description": "메워 둔 봉인 둘레가 고요하다. 발밑의 숨결이 길고 느려졌다. 그 옆에 거대한 형체가 잠시 몸을 기대 쉬고 있다. 파수꾼이다. 눈은 감겨 있다.",
+      "repeatable": false,
+      "requiresFlags": [
+        "mendedSeal"
+      ],
+      "forbiddenFlags": [],
+      "group": "",
+      "choices": [
+        {
+          "id": "let_sleep",
+          "order": 1,
+          "text": "깨우지 않고 지켜본다",
+          "verb": "",
+          "condition": [],
+          "skillBonus": [],
+          "difficulty": "none",
+          "outcomes": {
+            "success": {
+              "text": "파수꾼의 숨이 고르다. 수천 년 만의 휴식일지도 모른다. 곁에서 함께 쉬었다.",
+              "result": [
+                "hp:26",
+                "flag:heardWardenPlea"
+              ]
+            }
+          }
+        },
+        {
+          "id": "strike_sleeping",
+          "order": 2,
+          "text": "잠든 틈에 먼저 일격을 가한다",
+          "verb": "force",
+          "condition": [
+            "str:35"
+          ],
+          "skillBonus": [],
+          "difficulty": "hard",
+          "outcomes": {
+            "fail": {
+              "text": "파수꾼이 눈을 떴다. 거석 수호상들이 일어선다!",
+              "result": [
+                "fight:ene4_megalith_guard:ambushed"
+              ]
+            },
+            "partial": {
+              "text": "일격을 넣었다. 파수꾼이 몸을 뒤척이다 사라진다.",
+              "result": [
+                "gold:10"
+              ]
+            },
+            "success": {
+              "text": "수정 비늘 하나를 떼어냈다. 파수꾼은 깨지 않았다. 그 자리가 약하다.",
+              "result": [
+                "item:random:equipment",
+                "flag:knowsSealWeakness"
+              ]
+            }
+          }
+        },
+        {
+          "id": "study_warden",
+          "order": 3,
+          "text": "잠든 파수꾼의 모습을 살핀다",
+          "verb": "insight",
+          "condition": [
+            "wis:32"
+          ],
+          "skillBonus": [],
+          "difficulty": "normal",
+          "outcomes": {
+            "fail": {
+              "text": "가까이 가다 숨결에 밀려났다.",
+              "result": [
+                "hp:-10"
+              ]
+            },
+            "partial": {
+              "text": "파수꾼의 몸 곳곳에 금이 가 있다. 봉인의 금과 같은 모양이다.",
+              "result": [
+                "gold:8"
+              ]
+            },
+            "success": {
+              "text": "파수꾼의 금과 봉인의 금이 같다. 둘은 하나다. 파수꾼이 무너지면 봉인도 흔들린다.",
+              "result": [
+                "flag:knowsSealWeakness",
+                "flag:heardWardenPlea"
+              ]
+            }
+          }
+        },
+        {
+          "id": "leave_gift4",
+          "order": 4,
+          "text": "곁에 다가가 꽃 한 송이를 놓아 둔다",
+          "verb": "stealth",
+          "condition": [
+            "agi:29"
+          ],
+          "skillBonus": [],
+          "difficulty": "easy",
+          "outcomes": {
+            "fail": {
+              "text": "발소리에 파수꾼이 몸을 뒤척였다. 물러났다.",
+              "result": [
+                "hp:-8"
+              ]
+            },
+            "partial": {
+              "text": "가까이 가지 못하고 멀리서 지켜보았다. 마음이 차분하다.",
+              "result": [
+                "hp:8"
+              ]
+            },
+            "success": {
+              "text": "조용히 곁에 다가가 이끼 위에 꽃 한 송이를 놓았다. 파수꾼의 숨이 한 번 길어진다.",
+              "result": [
+                "hp:14",
+                "flag:heardWardenPlea"
+              ]
+            }
+          }
+        },
+        {
+          "id": "leave_quietly",
+          "order": 5,
+          "text": "조용히 물러난다",
+          "verb": "pass",
+          "condition": [],
+          "skillBonus": [],
+          "difficulty": "none",
+          "outcomes": {
+            "success": {
+              "text": "등 뒤에서 긴 숨소리가 이어진다.",
+              "result": []
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "evt4_gate_question",
+      "zone": 4,
+      "title": "문지기의 물음",
+      "description": "거석의 문 앞에서 돌이 갈리는 목소리가 묻는다. \"무엇을 위해 왔느냐. 대답에 따라 문이 무거워지고, 가벼워진다.\"",
+      "repeatable": false,
+      "requiresFlags": [],
+      "forbiddenFlags": [],
+      "group": "z4_gate",
+      "choices": [
+        {
+          "id": "answer_treasure",
+          "order": 1,
+          "text": "\"보물을 위해\"라고 대답한다",
+          "verb": "",
+          "condition": [],
+          "skillBonus": [],
+          "difficulty": "normal",
+          "outcomes": {
+            "fail": {
+              "text": "문이 무거워진다. 거석 수호상이 앞을 막는다!",
+              "result": [
+                "fight:ene4_megalith_guard"
+              ]
+            },
+            "partial": {
+              "text": "문이 대답 없이 침묵한다. 발치에 동전 몇 닢이 떨어진다.",
+              "result": [
+                "gold:10"
+              ]
+            },
+            "success": {
+              "text": "\"정직하군.\" 문 아래 칸이 열린다.",
+              "result": [
+                "gold:18"
+              ]
+            }
+          }
+        },
+        {
+          "id": "answer_end",
+          "order": 2,
+          "text": "\"속삭임의 끝을 보기 위해\"라고 대답한다",
+          "verb": "insight",
+          "condition": [
+            "wis:32"
+          ],
+          "skillBonus": [],
+          "difficulty": "normal",
+          "outcomes": {
+            "fail": {
+              "text": "문이 웃는다. 돌가루가 쏟아졌다.",
+              "result": [
+                "hp:-12"
+              ]
+            },
+            "partial": {
+              "text": "문이 조금 가벼워진다.",
+              "result": [
+                "hp:10"
+              ]
+            },
+            "success": {
+              "text": "\"그 끝은 네 시작이다.\" 문이 가벼워지며 문지기를 잠재우는 말을 들려준다.",
+              "result": [
+                "hp:10",
+                "flag:knowsGateWord"
+              ]
+            }
+          }
+        },
+        {
+          "id": "stay_silent4",
+          "order": 3,
+          "text": "대답하지 않고 문을 민다",
+          "verb": "force",
+          "condition": [
+            "str:35"
+          ],
+          "skillBonus": [],
+          "difficulty": "hard",
+          "outcomes": {
+            "fail": {
+              "text": "문이 꿈쩍도 하지 않는다. 어깨가 빠질 뻔했다.",
+              "result": [
+                "hp:-16"
+              ]
+            },
+            "partial": {
+              "text": "문이 조금 밀렸다. 틈 사이로 빠져나갔다.",
+              "result": []
+            },
+            "success": {
+              "text": "문이 밀린다. \"말보다 힘이로군.\" 문이 공물 하나를 떨어뜨린다.",
+              "result": [
+                "item:random:equipment"
+              ]
+            }
+          }
+        },
+        {
+          "id": "ask_back",
+          "order": 4,
+          "text": "\"너는 무엇을 위해 서 있느냐\"고 되묻는다",
+          "verb": "persuade",
+          "condition": [],
+          "skillBonus": [],
+          "difficulty": "easy",
+          "outcomes": {
+            "fail": {
+              "text": "문이 침묵한다.",
+              "result": []
+            },
+            "partial": {
+              "text": "\"돌려보내기 위해.\" 문이 조금 가벼워진다.",
+              "result": [
+                "hp:10"
+              ]
+            },
+            "success": {
+              "text": "\"돌려보내기 위해. 그러나 너는 돌아가지 않겠지.\" 문이 숨겨 둔 숲지기의 보급품을 내준다.",
+              "result": [
+                "item:random:consumable",
+                "item:con_potion"
+              ]
+            }
+          }
+        },
+        {
+          "id": "pass_gate_q",
+          "order": 5,
+          "text": "대답 없이 돌아선다",
+          "verb": "pass",
+          "condition": [],
+          "skillBonus": [],
+          "difficulty": "none",
+          "outcomes": {
+            "success": {
+              "text": "문이 등 뒤에서 묻는다. \"무엇을 위해 왔느냐.\"",
+              "result": []
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "evt4_crystal_bloom",
+      "zone": 4,
+      "title": "수정 꽃밭",
+      "description": "수정 동굴 깊은 곳에 수정 꽃이 피어 있다. 꽃잎이 얇아 바람에도 운다. 꽃밭 가운데 굳은 채집꾼이 바구니를 들고 서 있다.",
+      "repeatable": false,
+      "requiresFlags": [],
+      "forbiddenFlags": [],
+      "group": "z4_crystal",
+      "choices": [
+        {
+          "id": "pick_quick",
+          "order": 1,
+          "text": "꽃이 울기 전에 재빨리 딴다",
+          "verb": "stealth",
+          "condition": [
+            "agi:32"
+          ],
+          "skillBonus": [],
+          "difficulty": "normal",
+          "outcomes": {
+            "fail": {
+              "text": "꽃이 일제히 울며 정령들이 깨어났다!",
+              "result": [
+                "fight:ene4_crystal_sprite:ambushed"
+              ]
+            },
+            "partial": {
+              "text": "꽃 몇 송이를 챙겼다. 값이 나간다.",
+              "result": [
+                "gold:14"
+              ]
+            },
+            "success": {
+              "text": "바구니 가득 땄다.",
+              "result": [
+                "gold:20"
+              ]
+            }
+          }
+        },
+        {
+          "id": "take_basket",
+          "order": 2,
+          "text": "굳은 채집꾼의 바구니를 받아 든다",
+          "verb": "force",
+          "condition": [
+            "str:29"
+          ],
+          "skillBonus": [],
+          "difficulty": "easy",
+          "outcomes": {
+            "fail": {
+              "text": "채집꾼의 손이 바구니를 놓지 않는다. 손가락에 베였다.",
+              "result": [
+                "hp:-10"
+              ]
+            },
+            "partial": {
+              "text": "바구니에 든 꽃을 챙겼다.",
+              "result": [
+                "gold:12"
+              ]
+            },
+            "success": {
+              "text": "바구니 밑바닥에 채집꾼의 약 꾸러미가 있었다.",
+              "result": [
+                "gold:8",
+                "item:con_potion",
+                "item:con_antidote"
+              ]
+            }
+          }
+        },
+        {
+          "id": "listen_bloom",
+          "order": 3,
+          "text": "꽃이 우는 소리를 듣는다",
+          "verb": "insight",
+          "condition": [
+            "wis:29"
+          ],
+          "skillBonus": [],
+          "difficulty": "easy",
+          "outcomes": {
+            "fail": {
+              "text": "소리가 귀를 찌른다.",
+              "result": [
+                "hp:-8"
+              ]
+            },
+            "partial": {
+              "text": "소리가 마음을 가라앉힌다.",
+              "result": [
+                "hp:16"
+              ]
+            },
+            "success": {
+              "text": "꽃의 울음에 맞춰 숨을 고르자 몸 깊은 곳까지 맑아진다.",
+              "result": [
+                "hp:24"
+              ]
+            }
+          }
+        },
+        {
+          "id": "crush_bloom",
+          "order": 4,
+          "text": "꽃밭을 밟고 지나간다",
+          "verb": "",
+          "condition": [],
+          "skillBonus": [],
+          "difficulty": "normal",
+          "outcomes": {
+            "fail": {
+              "text": "꽃 조각이 다리에 박혔다.",
+              "result": [
+                "hp:-14"
+              ]
+            },
+            "partial": {
+              "text": "꽃이 깨지며 길이 열렸다.",
+              "result": []
+            },
+            "success": {
+              "text": "깨진 꽃 사이에서 수정에 박힌 장비가 드러났다.",
+              "result": [
+                "item:random:equipment"
+              ]
+            }
+          }
+        },
+        {
+          "id": "pass_bloom",
+          "order": 5,
+          "text": "꽃밭을 돌아간다",
+          "verb": "pass",
+          "condition": [],
+          "skillBonus": [],
+          "difficulty": "none",
+          "outcomes": {
+            "success": {
+              "text": "꽃들이 바람에 작게 운다.",
+              "result": []
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "evt4_falling_star",
+      "zone": 4,
+      "title": "떨어지는 별",
+      "description": "들판 위로 별 하나가 천천히 떨어진다. 땅에 닿기 직전에 멈춰 떠 있다. 손을 뻗으면 닿을 것 같다.",
+      "repeatable": false,
+      "requiresFlags": [],
+      "forbiddenFlags": [],
+      "group": "z4_star",
+      "choices": [
+        {
+          "id": "catch_star",
+          "order": 1,
+          "text": "별을 붙잡는다",
+          "verb": "",
+          "condition": [],
+          "skillBonus": [],
+          "difficulty": "hard",
+          "outcomes": {
+            "fail": {
+              "text": "별이 손바닥을 태웠다.",
+              "result": [
+                "hp:-20"
+              ]
+            },
+            "partial": {
+              "text": "별이 손끝에서 흩어졌다. 따뜻한 기운이 남았다.",
+              "result": [
+                "hp:12"
+              ]
+            },
+            "success": {
+              "text": "별을 붙잡았다. 손안에서 작은 수정이 된다. 쥐자 힘이 스민다.",
+              "result": [
+                "item:random:elixir"
+              ]
+            }
+          }
+        },
+        {
+          "id": "jump_star",
+          "order": 2,
+          "text": "뛰어올라 별 아래 매달린 것을 잡는다",
+          "verb": "stealth",
+          "condition": [
+            "agi:35"
+          ],
+          "skillBonus": [],
+          "difficulty": "hard",
+          "outcomes": {
+            "fail": {
+              "text": "떨어져 굴렀다.",
+              "result": [
+                "hp:-16"
+              ]
+            },
+            "partial": {
+              "text": "별 아래 매달린 빛 가루를 쥐었다.",
+              "result": [
+                "gold:12"
+              ]
+            },
+            "success": {
+              "text": "별 아래 매달린 원정대 주머니를 낚아챘다.",
+              "result": [
+                "item:random:equipment"
+              ]
+            }
+          }
+        },
+        {
+          "id": "read_star",
+          "order": 3,
+          "text": "별이 왜 멈췄는지 살핀다",
+          "verb": "insight",
+          "condition": [
+            "wis:32"
+          ],
+          "skillBonus": [],
+          "difficulty": "normal",
+          "outcomes": {
+            "fail": {
+              "text": "빛에 눈이 부셨다.",
+              "result": [
+                "hp:-10"
+              ]
+            },
+            "partial": {
+              "text": "별이 꺼진 별 자리 쪽으로 끌려가고 있다.",
+              "result": [
+                "gold:10"
+              ]
+            },
+            "success": {
+              "text": "별이 봉인의 빈자리로 돌아가려 한다. 길을 비켜 주자 별이 날아가며 봉인 쪽에서 빛이 오른다.",
+              "result": [
+                "flag:mendedSeal"
+              ]
+            }
+          }
+        },
+        {
+          "id": "wish_star",
+          "order": 4,
+          "text": "별에 소원을 빈다",
+          "verb": "",
+          "condition": [],
+          "skillBonus": [],
+          "difficulty": "none",
+          "outcomes": {
+            "success": {
+              "text": "별이 한 번 깜박이고 날아간다. 마음이 가벼워졌다.",
+              "result": [
+                "hp:14"
+              ]
+            }
+          }
+        },
+        {
+          "id": "pass_star",
+          "order": 5,
+          "text": "별을 두고 지나간다",
+          "verb": "pass",
+          "condition": [],
+          "skillBonus": [],
+          "difficulty": "none",
+          "outcomes": {
+            "success": {
+              "text": "별이 천천히 하늘로 돌아간다.",
+              "result": []
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "evt4_wolf_pups",
+      "zone": 4,
+      "title": "태고의 새끼 늑대",
+      "description": "언덕 아래 굴에서 새끼 늑대 셋이 낑낑거린다. 어미는 보이지 않는다. 새끼 하나의 발에 원정대의 덫이 걸려 있다.",
+      "repeatable": false,
+      "requiresFlags": [],
+      "forbiddenFlags": [],
+      "group": "z4_beast",
+      "choices": [
+        {
+          "id": "free_pup",
+          "order": 1,
+          "text": "덫을 풀어 준다",
+          "verb": "force",
+          "condition": [
+            "str:29"
+          ],
+          "skillBonus": [],
+          "difficulty": "easy",
+          "outcomes": {
+            "fail": {
+              "text": "덫이 튕겨 손을 물었다.",
+              "result": [
+                "hp:-12"
+              ]
+            },
+            "partial": {
+              "text": "덫을 풀었다. 새끼가 절룩이며 굴로 들어간다.",
+              "result": [
+                "hp:6"
+              ]
+            },
+            "success": {
+              "text": "덫을 풀자 언덕 위에서 어미가 지켜본다. 어미가 굴 앞에 무언가를 떨어뜨리고 사라진다.",
+              "result": [
+                "item:random:equipment"
+              ]
+            }
+          }
+        },
+        {
+          "id": "bandage_pup",
+          "order": 2,
+          "text": "새끼의 발에 붕대를 감는다",
+          "verb": "use",
+          "condition": [
+            "item:con_bandage"
+          ],
+          "skillBonus": [],
+          "difficulty": "none",
+          "outcomes": {
+            "success": {
+              "text": "새끼가 손을 핥는다. 언덕 위에서 늑대들의 울음이 부드럽게 바뀐다.",
+              "result": [
+                "item:-con_bandage",
+                "hp:16",
+                "gold:8"
+              ]
+            }
+          }
+        },
+        {
+          "id": "wait_mother",
+          "order": 3,
+          "text": "어미가 돌아올 때까지 지켜 준다",
+          "verb": "insight",
+          "condition": [
+            "wis:32"
+          ],
+          "skillBonus": [],
+          "difficulty": "normal",
+          "outcomes": {
+            "fail": {
+              "text": "어미가 돌아와 오해했다. 덤벼든다!",
+              "result": [
+                "fight:ene4_primeval_wolf"
+              ]
+            },
+            "partial": {
+              "text": "어미가 돌아와 새끼를 물고 간다. 이쪽을 한 번 본다.",
+              "result": [
+                "hp:8"
+              ]
+            },
+            "success": {
+              "text": "어미가 돌아와 고개를 숙인다. 굴 안쪽의 원정대 유품을 밀어 준다.",
+              "result": [
+                "item:random:consumable",
+                "gold:10"
+              ]
+            }
+          }
+        },
+        {
+          "id": "take_trap",
+          "order": 4,
+          "text": "덫만 챙겨 간다",
+          "verb": "stealth",
+          "condition": [
+            "agi:29"
+          ],
+          "skillBonus": [],
+          "difficulty": "easy",
+          "outcomes": {
+            "fail": {
+              "text": "어미가 돌아왔다!",
+              "result": [
+                "fight:ene4_primeval_wolf:ambushed"
+              ]
+            },
+            "partial": {
+              "text": "덫을 챙겼다. 고철 값은 된다.",
+              "result": [
+                "gold:8"
+              ]
+            },
+            "success": {
+              "text": "덫에 달린 원정대 표식을 챙겼다. 값이 나간다.",
+              "result": [
+                "gold:14"
+              ]
+            }
+          }
+        },
+        {
+          "id": "pass_pups",
+          "order": 5,
+          "text": "지나간다",
+          "verb": "pass",
+          "condition": [],
+          "skillBonus": [],
+          "difficulty": "none",
+          "outcomes": {
+            "success": {
+              "text": "새끼들의 낑낑거림이 뒤에서 이어진다.",
+              "result": []
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "evt4_first_seed",
+      "zone": 4,
+      "title": "첫 나무의 씨앗",
+      "description": "가장 오래된 나무 아래에 주먹만 한 씨앗이 떨어져 있다. 3구역 뿌리 속 씨앗과 닮았지만 빛이 맑다. 나무가 숨을 멈추고 이쪽을 지켜본다.",
+      "repeatable": false,
+      "requiresFlags": [],
+      "forbiddenFlags": [],
+      "group": "z4_grove",
+      "choices": [
+        {
+          "id": "plant_seed",
+          "order": 1,
+          "text": "씨앗을 땅에 심어 준다",
+          "verb": "force",
+          "condition": [
+            "str:29"
+          ],
+          "skillBonus": [],
+          "difficulty": "easy",
+          "outcomes": {
+            "fail": {
+              "text": "땅이 단단해 손톱이 깨졌다.",
+              "result": [
+                "hp:-8"
+              ]
+            },
+            "partial": {
+              "text": "씨앗을 심었다. 나무가 다시 숨을 쉰다.",
+              "result": [
+                "hp:14"
+              ]
+            },
+            "success": {
+              "text": "씨앗을 심자 싹이 바로 돋는다. 나무가 가지 하나를 떨어뜨린다. 단단하다.",
+              "result": [
+                "hp:10",
+                "item:random:equipment"
+              ]
+            }
+          }
+        },
+        {
+          "id": "keep_seed",
+          "order": 2,
+          "text": "씨앗을 품에 넣는다",
+          "verb": "stealth",
+          "condition": [
+            "agi:32"
+          ],
+          "skillBonus": [],
+          "difficulty": "normal",
+          "outcomes": {
+            "fail": {
+              "text": "나무뿌리가 발목을 휘감았다.",
+              "result": [
+                "hp:-16"
+              ]
+            },
+            "partial": {
+              "text": "씨앗을 챙겼다. 품에서 따뜻하다.",
+              "result": [
+                "item:random:consumable"
+              ]
+            },
+            "success": {
+              "text": "씨앗을 챙겼다. 품에 두자 상처가 천천히 아문다.",
+              "result": [
+                "hp:20",
+                "item:random:consumable"
+              ]
+            }
+          }
+        },
+        {
+          "id": "compare_seed",
+          "order": 3,
+          "text": "3구역의 씨앗과 무엇이 다른지 살핀다",
+          "verb": "insight",
+          "condition": [
+            "wis:32"
+          ],
+          "skillBonus": [],
+          "difficulty": "normal",
+          "outcomes": {
+            "fail": {
+              "text": "어지럽다.",
+              "result": [
+                "hp:-10"
+              ]
+            },
+            "partial": {
+              "text": "이 씨앗은 근원이 아니라 숲에서 났다.",
+              "result": [
+                "gold:10"
+              ]
+            },
+            "success": {
+              "text": "근원의 씨앗은 빼앗고, 숲의 씨앗은 나눈다. 봉인을 메우는 것도 결국 숲이다.",
+              "result": [
+                "flag:knowsSealWeakness",
+                "gold:6"
+              ]
+            }
+          }
+        },
+        {
+          "id": "return_seed",
+          "order": 4,
+          "text": "씨앗을 나무뿌리 사이에 돌려놓는다",
+          "verb": "",
+          "condition": [],
+          "skillBonus": [],
+          "difficulty": "none",
+          "outcomes": {
+            "success": {
+              "text": "나무가 긴 숨을 내쉰다. 잎 사이로 햇빛이 한 줄기 내려온다.",
+              "result": [
+                "hp:16"
+              ]
+            }
+          }
+        },
+        {
+          "id": "pass_seed",
+          "order": 5,
+          "text": "지나간다",
+          "verb": "pass",
+          "condition": [],
+          "skillBonus": [],
+          "difficulty": "none",
+          "outcomes": {
+            "success": {
+              "text": "나무가 다시 숨을 쉰다.",
+              "result": []
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "evt4_expedition_banner",
+      "zone": 4,
+      "title": "원정대 깃발",
+      "description": "야영 터 한가운데 왕국 원정대 깃발이 꽂혀 있다. 깃발이 펄럭일 때마다 굳은 대원들이 조금씩 움직인다. 깃발이 그들을 붙잡고 있다.",
+      "repeatable": false,
+      "requiresFlags": [],
+      "forbiddenFlags": [],
+      "group": "z4_expedition",
+      "choices": [
+        {
+          "id": "pull_banner",
+          "order": 1,
+          "text": "깃발을 뽑는다",
+          "verb": "force",
+          "condition": [
+            "str:32"
+          ],
+          "skillBonus": [],
+          "difficulty": "normal",
+          "outcomes": {
+            "fail": {
+              "text": "깃발을 잡자 대원들이 일제히 돌아섰다!",
+              "result": [
+                "fight:ene4_expedition_remnant"
+              ]
+            },
+            "partial": {
+              "text": "깃발이 반쯤 뽑혔다. 대원들이 멈춘다.",
+              "result": [
+                "gold:10"
+              ]
+            },
+            "success": {
+              "text": "깃발을 뽑자 대원들이 하나둘 무너지며 수정이 된다. 깃대 속에 원정대 금고 열쇠가 있었다.",
+              "result": [
+                "item:random:equipment"
+              ]
+            }
+          }
+        },
+        {
+          "id": "burn_banner",
+          "order": 2,
+          "text": "깃발을 태운다",
+          "verb": "stealth",
+          "condition": [
+            "agi:29"
+          ],
+          "skillBonus": [],
+          "difficulty": "normal",
+          "outcomes": {
+            "fail": {
+              "text": "불을 붙이다 대원에게 들켰다.",
+              "result": [
+                "fight:ene4_expedition_remnant:ambushed"
+              ]
+            },
+            "partial": {
+              "text": "깃발이 타며 대원들이 잠잠해진다.",
+              "result": [
+                "hp:10"
+              ]
+            },
+            "success": {
+              "text": "깃발이 다 타자 대원들이 쉬듯 무너진다. 재 속에 금장식이 남았다.",
+              "result": [
+                "gold:16"
+              ]
+            }
+          }
+        },
+        {
+          "id": "read_banner",
+          "order": 3,
+          "text": "깃발에 수놓인 맹세를 읽는다",
+          "verb": "insight",
+          "condition": [
+            "wis:29"
+          ],
+          "skillBonus": [],
+          "difficulty": "easy",
+          "outcomes": {
+            "fail": {
+              "text": "수가 닳아 읽을 수 없다.",
+              "result": []
+            },
+            "partial": {
+              "text": "\"봉인을 열어 왕국을 영원하게.\" 깃발 아래 동전이 있다.",
+              "result": [
+                "gold:10"
+              ]
+            },
+            "success": {
+              "text": "맹세 아래 작게 수놓인 글이 있다. 왕자의 필체다. \"용서하라.\"",
+              "result": [
+                "gold:8",
+                "flag:knowsPrinceShame"
+              ]
+            }
+          }
+        },
+        {
+          "id": "salute_banner",
+          "order": 4,
+          "text": "깃발 앞에서 원정대를 위해 묵념한다",
+          "verb": "",
+          "condition": [],
+          "skillBonus": [],
+          "difficulty": "none",
+          "outcomes": {
+            "success": {
+              "text": "깃발이 한 번 크게 펄럭이고 멈춘다. 대원들도 멈춘다.",
+              "result": [
+                "hp:12"
+              ]
+            }
+          }
+        },
+        {
+          "id": "pass_banner",
+          "order": 5,
+          "text": "깃발을 지나간다",
+          "verb": "pass",
+          "condition": [],
+          "skillBonus": [],
+          "difficulty": "none",
+          "outcomes": {
+            "success": {
+              "text": "깃발이 등 뒤에서 펄럭인다.",
+              "result": []
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "evt4_statue_line",
+      "zone": 4,
+      "title": "줄 선 굳은 자들",
+      "description": "굳은 자들이 한 줄로 서 있다. 맨 앞 사람만 성역 반대쪽을 보고 있다. 그 사람의 손에 무언가가 쥐어져 있다.",
+      "repeatable": false,
+      "requiresFlags": [],
+      "forbiddenFlags": [],
+      "group": "z4_petrified",
+      "choices": [
+        {
+          "id": "read_order",
+          "order": 1,
+          "text": "굳은 순서를 보고 그들의 마지막을 짐작한다",
+          "verb": "insight",
+          "condition": [
+            "wis:32"
+          ],
+          "skillBonus": [],
+          "difficulty": "normal",
+          "outcomes": {
+            "fail": {
+              "text": "짐작이 서지 않는다.",
+              "result": []
+            },
+            "partial": {
+              "text": "맨 앞 사람만 돌아서려 했다. 그 때문에 가장 늦게 굳었다.",
+              "result": [
+                "gold:10"
+              ]
+            },
+            "success": {
+              "text": "맨 앞 사람은 돌아서려 했고, 그 손에 쥔 것은 숲지기의 부적이었다. 부적이 아직 따뜻하다.",
+              "result": [
+                "item:random:equipment"
+              ]
+            }
+          }
+        },
+        {
+          "id": "take_from_hand",
+          "order": 2,
+          "text": "맨 앞 사람의 손에서 쥔 것을 빼낸다",
+          "verb": "stealth",
+          "condition": [
+            "agi:32"
+          ],
+          "skillBonus": [],
+          "difficulty": "normal",
+          "outcomes": {
+            "fail": {
+              "text": "줄 전체가 움직였다!",
+              "result": [
+                "fight:ene4_petrified_adventurer:ambushed"
+              ]
+            },
+            "partial": {
+              "text": "쥔 것 대신 손목의 팔찌를 챙겼다.",
+              "result": [
+                "gold:14"
+              ]
+            },
+            "success": {
+              "text": "조심스럽게 빼냈다. 숲지기의 부적이다.",
+              "result": [
+                "item:random:equipment"
+              ]
+            }
+          }
+        },
+        {
+          "id": "turn_them",
+          "order": 3,
+          "text": "굳은 자들을 하나씩 성역 반대쪽으로 돌려세운다",
+          "verb": "force",
+          "condition": [
+            "str:35"
+          ],
+          "skillBonus": [],
+          "difficulty": "hard",
+          "outcomes": {
+            "fail": {
+              "text": "수정이 깨지며 손을 베었다.",
+              "result": [
+                "hp:-16"
+              ]
+            },
+            "partial": {
+              "text": "몇 사람을 돌려세웠다.",
+              "result": [
+                "hp:10"
+              ]
+            },
+            "success": {
+              "text": "모두 돌려세우자 굳은 자들의 얼굴이 조금 편안해진다. 줄 끝에서 그들이 남긴 짐이 드러난다.",
+              "result": [
+                "hp:10",
+                "item:random:consumable",
+                "gold:8"
+              ]
+            }
+          }
+        },
+        {
+          "id": "join_line",
+          "order": 4,
+          "text": "줄 끝에 잠시 서 본다",
+          "verb": "",
+          "condition": [],
+          "skillBonus": [],
+          "difficulty": "normal",
+          "outcomes": {
+            "fail": {
+              "text": "발끝부터 차가워진다. 겨우 물러났다.",
+              "result": [
+                "hp:-14"
+              ]
+            },
+            "partial": {
+              "text": "그들이 무엇을 봤는지 보인다. 성역의 심장이다.",
+              "result": [
+                "hp:6"
+              ]
+            },
+            "success": {
+              "text": "그들이 마지막으로 본 것을 보았다. 파수꾼이 그들을 하나하나 돌려보내려 했던 모습이다.",
+              "result": [
+                "flag:heardWardenPlea",
+                "hp:8"
+              ]
+            }
+          }
+        },
+        {
+          "id": "pass_line",
+          "order": 5,
+          "text": "줄을 지나간다",
+          "verb": "pass",
+          "condition": [],
+          "skillBonus": [],
+          "difficulty": "none",
+          "outcomes": {
+            "success": {
+              "text": "맨 앞 사람만이 이쪽을 본다.",
+              "result": []
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "evt4_shed_scale",
+      "zone": 4,
+      "title": "파수꾼의 허물",
+      "description": "발자국 끝에 거대한 수정 비늘이 떨어져 있다. 파수꾼의 몸에서 떨어진 것이다. 비늘 안쪽에 이끼가 자라고, 금이 가 있다.",
+      "repeatable": false,
+      "requiresFlags": [],
+      "forbiddenFlags": [],
+      "group": "z4_warden",
+      "choices": [
+        {
+          "id": "carry_scale",
+          "order": 1,
+          "text": "비늘을 방패처럼 들어 본다",
+          "verb": "force",
+          "condition": [
+            "str:35"
+          ],
+          "skillBonus": [],
+          "difficulty": "hard",
+          "outcomes": {
+            "fail": {
+              "text": "비늘이 너무 무겁다. 깔릴 뻔했다.",
+              "result": [
+                "hp:-16"
+              ]
+            },
+            "partial": {
+              "text": "비늘 조각을 떼어 챙겼다. 단단하다.",
+              "result": [
+                "gold:14"
+              ]
+            },
+            "success": {
+              "text": "비늘을 다듬어 쓸 만한 장비로 만들었다.",
+              "result": [
+                "item:random:equipment"
+              ]
+            }
+          }
+        },
+        {
+          "id": "read_cracks4",
+          "order": 2,
+          "text": "비늘의 금을 읽는다",
+          "verb": "insight",
+          "condition": [
+            "wis:32"
+          ],
+          "skillBonus": [],
+          "difficulty": "normal",
+          "outcomes": {
+            "fail": {
+              "text": "금이 너무 많다.",
+              "result": []
+            },
+            "partial": {
+              "text": "금은 봉인 쪽에서 시작된다.",
+              "result": [
+                "gold:10"
+              ]
+            },
+            "success": {
+              "text": "비늘의 금과 봉인의 금이 같은 모양이다. 파수꾼이 다칠 때마다 봉인도 흔들린다.",
+              "result": [
+                "flag:knowsSealWeakness",
+                "gold:6"
+              ]
+            }
+          }
+        },
+        {
+          "id": "moss_bed",
+          "order": 3,
+          "text": "비늘 안쪽의 이끼에 누워 쉰다",
+          "verb": "",
+          "condition": [],
+          "skillBonus": [],
+          "difficulty": "none",
+          "outcomes": {
+            "success": {
+              "text": "파수꾼의 온기가 아직 남아 있다. 깊이 쉬었다.",
+              "result": [
+                "hp:24"
+              ]
+            }
+          }
+        },
+        {
+          "id": "scrape_moss",
+          "order": 4,
+          "text": "비늘 안쪽의 이끼를 긁어 약으로 쓴다",
+          "verb": "stealth",
+          "condition": [
+            "agi:29"
+          ],
+          "skillBonus": [],
+          "difficulty": "easy",
+          "outcomes": {
+            "fail": {
+              "text": "비늘 모서리에 손을 베었다.",
+              "result": [
+                "hp:-10"
+              ]
+            },
+            "partial": {
+              "text": "이끼를 모아 상처에 발랐다.",
+              "result": [
+                "hp:14"
+              ]
+            },
+            "success": {
+              "text": "이끼를 모아 약으로 만들었다.",
+              "result": [
+                "item:con_potion",
+                "item:con_antidote"
+              ]
+            }
+          }
+        },
+        {
+          "id": "pass_scale",
+          "order": 5,
+          "text": "비늘을 두고 간다",
+          "verb": "pass",
+          "condition": [],
+          "skillBonus": [],
+          "difficulty": "none",
+          "outcomes": {
+            "success": {
+              "text": "비늘이 햇빛에 희미하게 빛난다.",
+              "result": []
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "evt4_root_tremor",
+      "zone": 4,
+      "title": "근원의 진동",
+      "description": "갑자기 땅이 크게 흔들린다. 근원의 틈 쪽에서 뿌리들이 솟구친다. 피할 곳은 거인의 뼈 아래와 틈 가장자리 바위 둘뿐이다.",
+      "repeatable": false,
+      "requiresFlags": [],
+      "forbiddenFlags": [],
+      "group": "z4_source",
+      "choices": [
+        {
+          "id": "run_bones",
+          "order": 1,
+          "text": "거인의 뼈 아래로 달린다",
+          "verb": "stealth",
+          "condition": [
+            "agi:32"
+          ],
+          "skillBonus": [],
+          "difficulty": "normal",
+          "outcomes": {
+            "fail": {
+              "text": "뿌리에 다리를 맞았다.",
+              "result": [
+                "hp:-18"
+              ]
+            },
+            "partial": {
+              "text": "뼈 아래로 피했다. 숨이 차다.",
+              "result": [
+                "hp:-6"
+              ]
+            },
+            "success": {
+              "text": "뼈 아래로 피했다. 진동에 떨어진 뼈 조각 속에서 반짝이는 것을 주웠다.",
+              "result": [
+                "gold:14"
+              ]
+            }
+          }
+        },
+        {
+          "id": "hold_rock",
+          "order": 2,
+          "text": "틈 가장자리 바위를 붙잡고 버틴다",
+          "verb": "force",
+          "condition": [
+            "str:32"
+          ],
+          "skillBonus": [],
+          "difficulty": "normal",
+          "outcomes": {
+            "fail": {
+              "text": "바위가 흔들려 틈 쪽으로 미끄러졌다.",
+              "result": [
+                "hp:-20"
+              ]
+            },
+            "partial": {
+              "text": "버텼다. 팔이 저리다.",
+              "result": [
+                "hp:-6"
+              ]
+            },
+            "success": {
+              "text": "버텼다. 진동이 멎자 틈 가장자리에 걸린 원정대 장비가 보인다.",
+              "result": [
+                "item:random:equipment"
+              ]
+            }
+          }
+        },
+        {
+          "id": "read_tremor",
+          "order": 3,
+          "text": "진동의 박자를 읽고 뿌리가 솟는 곳을 피한다",
+          "verb": "insight",
+          "condition": [
+            "wis:35"
+          ],
+          "skillBonus": [],
+          "difficulty": "hard",
+          "outcomes": {
+            "fail": {
+              "text": "박자를 잘못 읽었다. 뿌리가 몸을 쳤다.",
+              "result": [
+                "hp:-20"
+              ]
+            },
+            "partial": {
+              "text": "겨우 피했다.",
+              "result": []
+            },
+            "success": {
+              "text": "박자를 읽고 한 발짝도 다치지 않았다. 이 박자는 최종 싸움에서도 쓸모가 있을 것이다.",
+              "result": [
+                "flag:knowsSealWeakness"
+              ]
+            }
+          }
+        },
+        {
+          "id": "cover_head",
+          "order": 4,
+          "text": "바닥에 엎드려 머리를 감싼다",
+          "verb": "",
+          "condition": [],
+          "skillBonus": [],
+          "difficulty": "normal",
+          "outcomes": {
+            "fail": {
+              "text": "뿌리가 등을 긁고 지나갔다.",
+              "result": [
+                "hp:-16"
+              ]
+            },
+            "partial": {
+              "text": "흙더미를 뒤집어썼다.",
+              "result": [
+                "hp:-8"
+              ]
+            },
+            "success": {
+              "text": "진동이 머리 위로 지나갔다.",
+              "result": []
+            }
+          }
+        },
+        {
+          "id": "bandage_up",
+          "order": 5,
+          "text": "붕대로 다친 곳을 감으며 버틴다",
+          "verb": "use",
+          "condition": [
+            "item:con_bandage"
+          ],
+          "skillBonus": [],
+          "difficulty": "none",
+          "outcomes": {
+            "success": {
+              "text": "흔들림 속에서 붕대를 감았다. 다친 곳만 막았다.",
+              "result": [
+                "item:-con_bandage",
+                "hp:-4"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "evt4_pond_self",
+      "zone": 4,
+      "title": "연못 속의 나",
+      "description": "하늘 연못에 비친 내 얼굴이 조금 다르다. 이끼와 수정이 섞인 옷을 입고, 지쳐 보인다. 연못 속의 내가 입을 연다. \"돌아가라.\"",
+      "repeatable": false,
+      "requiresFlags": [],
+      "forbiddenFlags": [],
+      "group": "z4_rest",
+      "choices": [
+        {
+          "id": "answer_self",
+          "order": 1,
+          "text": "연못 속의 나에게 대답한다",
+          "verb": "persuade",
+          "condition": [],
+          "skillBonus": [],
+          "difficulty": "normal",
+          "outcomes": {
+            "fail": {
+              "text": "연못이 흔들리며 얼굴이 일그러진다. 머리가 아프다.",
+              "result": [
+                "hp:-12"
+              ]
+            },
+            "partial": {
+              "text": "연못 속의 내가 고개를 끄덕이고 사라진다.",
+              "result": [
+                "hp:12"
+              ]
+            },
+            "success": {
+              "text": "연못 속의 내가 웃는다. \"그래도 갈 거지. 나도 그랬으니까.\" 물속에서 무언가 떠오른다.",
+              "result": [
+                "item:random:equipment"
+              ]
+            }
+          }
+        },
+        {
+          "id": "touch_water",
+          "order": 2,
+          "text": "물에 손을 대 얼굴을 흩뜨린다",
+          "verb": "",
+          "condition": [],
+          "skillBonus": [],
+          "difficulty": "none",
+          "outcomes": {
+            "success": {
+              "text": "얼굴이 흩어지고 하늘만 남는다. 차가운 물에 정신이 맑아진다.",
+              "result": [
+                "hp:18"
+              ]
+            }
+          }
+        },
+        {
+          "id": "stare_long",
+          "order": 3,
+          "text": "연못 속의 나를 오래 바라본다",
+          "verb": "insight",
+          "condition": [
+            "wis:35"
+          ],
+          "skillBonus": [],
+          "difficulty": "hard",
+          "outcomes": {
+            "fail": {
+              "text": "연못 속의 내가 손을 뻗었다. 끌려 들어갈 뻔했다.",
+              "result": [
+                "hp:-18"
+              ]
+            },
+            "partial": {
+              "text": "연못 속의 내가 무엇을 지키는지 보인다. 성역의 심장이다.",
+              "result": [
+                "hp:8"
+              ]
+            },
+            "success": {
+              "text": "연못 속의 나는 파수꾼의 옷을 입고 있다. 그 옷의 금 간 곳을 기억해 두었다.",
+              "result": [
+                "flag:knowsSealWeakness",
+                "flag:heardWardenPlea"
+              ]
+            }
+          }
+        },
+        {
+          "id": "bathe_self",
+          "order": 4,
+          "text": "연못에 몸을 담근다",
+          "verb": "stealth",
+          "condition": [
+            "agi:29"
+          ],
+          "skillBonus": [],
+          "difficulty": "easy",
+          "outcomes": {
+            "fail": {
+              "text": "발이 미끄러져 물을 잔뜩 마셨다.",
+              "result": [
+                "hp:-8"
+              ]
+            },
+            "partial": {
+              "text": "물이 차고 맑다.",
+              "result": [
+                "hp:20"
+              ]
+            },
+            "success": {
+              "text": "물이 몸 깊은 곳까지 맑게 한다. 바닥에서 반짝이는 것도 건졌다.",
+              "result": [
+                "hp:20",
+                "gold:10"
+              ]
+            }
+          }
+        },
+        {
+          "id": "leave_pond_self",
+          "order": 5,
+          "text": "연못을 떠난다",
+          "verb": "pass",
+          "condition": [],
+          "skillBonus": [],
+          "difficulty": "none",
+          "outcomes": {
+            "success": {
+              "text": "\"돌아가라.\" 내 목소리가 등 뒤에 남는다.",
+              "result": []
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "evt4_gate_sleepers",
+      "zone": 4,
+      "title": "문 앞에 잠든 숲지기들",
+      "description": "거석의 문 발치에 숲지기 망령들이 웅크려 잠들어 있다. 문지기를 달래던 자들이다. 하나가 눈을 뜬다. \"문지기는 말을 기억한다. 우리가 가르쳐 준 말을.\"",
+      "repeatable": false,
+      "requiresFlags": [],
+      "forbiddenFlags": [],
+      "group": "z4_gate",
+      "choices": [
+        {
+          "id": "learn_word",
+          "order": 1,
+          "text": "문지기를 잠재우는 말을 배운다",
+          "verb": "insight",
+          "condition": [
+            "wis:29"
+          ],
+          "skillBonus": [],
+          "difficulty": "easy",
+          "outcomes": {
+            "fail": {
+              "text": "말이 혀에서 미끄러진다.",
+              "result": []
+            },
+            "partial": {
+              "text": "말의 앞부분을 배웠다.",
+              "result": [
+                "gold:10",
+                "flag:knowsGateWord"
+              ]
+            },
+            "success": {
+              "text": "말을 온전히 배웠다. 망령이 고개를 끄덕인다. \"문지기가 너를 알아볼 것이다.\"",
+              "result": [
+                "flag:knowsGateWord",
+                "item:random:consumable"
+              ]
+            }
+          }
+        },
+        {
+          "id": "guard_sleepers",
+          "order": 2,
+          "text": "잠든 망령들 곁을 지켜 준다",
+          "verb": "",
+          "condition": [],
+          "skillBonus": [],
+          "difficulty": "none",
+          "outcomes": {
+            "success": {
+              "text": "밤새 곁을 지켰다. 새벽에 망령들이 일어나 고개를 숙인다. \"우리 몫의 빚은 없던 것으로 하마.\"",
+              "result": [
+                "hp:12",
+                "flag:appeasedWardens"
+              ]
+            }
+          }
+        },
+        {
+          "id": "wake_all",
+          "order": 3,
+          "text": "망령들을 모두 깨워 함께 가자고 한다",
+          "verb": "persuade",
+          "condition": [],
+          "skillBonus": [],
+          "difficulty": "hard",
+          "outcomes": {
+            "fail": {
+              "text": "망령들이 노해 흩어지며 한기를 남긴다.",
+              "result": [
+                "hp:-16"
+              ]
+            },
+            "partial": {
+              "text": "망령 하나만 일어나 길을 안내한다.",
+              "result": [
+                "gold:10"
+              ]
+            },
+            "success": {
+              "text": "망령들이 일어선다. \"문 앞까지만이다.\" 그들이 문지기 앞에서 도울 것이다.",
+              "result": [
+                "flag:appeasedWardens",
+                "flag:knowsGateWord"
+              ]
+            }
+          }
+        },
+        {
+          "id": "rob_sleepers",
+          "order": 4,
+          "text": "망령들 곁의 공물을 챙긴다",
+          "verb": "stealth",
+          "condition": [
+            "agi:32"
+          ],
+          "skillBonus": [],
+          "difficulty": "normal",
+          "outcomes": {
+            "fail": {
+              "text": "망령이 눈을 떴다. 거석 수호상이 깨어난다!",
+              "result": [
+                "fight:ene4_megalith_guard:ambushed"
+              ]
+            },
+            "partial": {
+              "text": "공물 몇 개를 챙겼다.",
+              "result": [
+                "gold:16"
+              ]
+            },
+            "success": {
+              "text": "공물 가운데 숲지기의 장비를 챙겼다.",
+              "result": [
+                "item:random:equipment"
+              ]
+            }
+          }
+        },
+        {
+          "id": "pass_sleepers",
+          "order": 5,
+          "text": "조용히 지나간다",
+          "verb": "pass",
+          "condition": [],
+          "skillBonus": [],
+          "difficulty": "none",
+          "outcomes": {
+            "success": {
+              "text": "망령들이 다시 잠든다.",
+              "result": []
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "evt4_letter_to_prince",
+      "zone": 4,
+      "title": "왕에게서 온 편지",
+      "description": "원정대 야영 터 우편함에 봉인된 편지가 한 통 남아 있다. 받는 이는 왕자, 보낸 이는 3구역의 왕이다. 봉인이 아직 뜯기지 않았다.",
+      "repeatable": false,
+      "requiresFlags": [],
+      "forbiddenFlags": [],
+      "group": "z4_expedition",
+      "choices": [
+        {
+          "id": "open_letter4",
+          "order": 1,
+          "text": "편지를 뜯어 읽는다",
+          "verb": "insight",
+          "condition": [
+            "wis:29"
+          ],
+          "skillBonus": [],
+          "difficulty": "easy",
+          "outcomes": {
+            "fail": {
+              "text": "잉크가 번져 읽을 수 없다.",
+              "result": []
+            },
+            "partial": {
+              "text": "\"조각을 가져와라. 왕국은 영원해야 한다.\" 왕의 명령이다.",
+              "result": [
+                "gold:8",
+                "flag:knowsPrinceShame"
+              ]
+            },
+            "success": {
+              "text": "마지막 줄에 지워진 글이 있다. \"돌아와라, 아들아.\" 왕도 끝내 후회했다.",
+              "result": [
+                "flag:knowsPrinceShame",
+                "flag:princeWavers"
+              ]
+            }
+          }
+        },
+        {
+          "id": "keep_sealed",
+          "order": 2,
+          "text": "봉인을 뜯지 않고 왕자에게 전하려 챙긴다",
+          "verb": "",
+          "condition": [],
+          "skillBonus": [],
+          "difficulty": "none",
+          "outcomes": {
+            "success": {
+              "text": "편지를 품에 넣었다. 왕자 앞에서 꺼내 보일 수 있을 것이다.",
+              "result": [
+                "flag:princeWavers"
+              ]
+            }
+          }
+        },
+        {
+          "id": "forge_reply",
+          "order": 3,
+          "text": "왕의 필체를 흉내 내 \"돌아오라\"는 답장을 쓴다",
+          "verb": "stealth",
+          "condition": [
+            "agi:32"
+          ],
+          "skillBonus": [],
+          "difficulty": "hard",
+          "outcomes": {
+            "fail": {
+              "text": "필체가 엉망이다. 종이만 버렸다.",
+              "result": []
+            },
+            "partial": {
+              "text": "그럴듯하게 썼지만 왕실 인장이 없다.",
+              "result": [
+                "gold:6"
+              ]
+            },
+            "success": {
+              "text": "완벽하게 썼다. 왕자가 이걸 보면 흔들릴 것이다.",
+              "result": [
+                "flag:princeWavers",
+                "flag:knowsPrinceShame"
+              ]
+            }
+          }
+        },
+        {
+          "id": "burn_letter4",
+          "order": 4,
+          "text": "편지를 태운다",
+          "verb": "force",
+          "condition": [
+            "str:29"
+          ],
+          "skillBonus": [],
+          "difficulty": "normal",
+          "outcomes": {
+            "fail": {
+              "text": "불길에 우편함의 수정이 터졌다.",
+              "result": [
+                "hp:-14"
+              ]
+            },
+            "partial": {
+              "text": "편지가 탔다. 재 속에 금박 봉인이 남았다.",
+              "result": [
+                "gold:12"
+              ]
+            },
+            "success": {
+              "text": "편지가 타자 야영 터의 대원들이 일제히 고개를 떨군다. 그들이 지키던 보급품이 드러났다.",
+              "result": [
+                "item:random:equipment"
+              ]
+            }
+          }
+        },
+        {
+          "id": "leave_letter",
+          "order": 5,
+          "text": "편지를 두고 떠난다",
+          "verb": "pass",
+          "condition": [],
+          "skillBonus": [],
+          "difficulty": "none",
+          "outcomes": {
+            "success": {
+              "text": "편지는 오늘도 전해지지 않는다.",
+              "result": []
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "evt4_warden_offerings",
+      "zone": 4,
+      "title": "숲지기들의 공물",
+      "description": "첫 나무들 사이 작은 제단에 숲지기들이 대대로 남긴 공물이 쌓여 있다. 파수꾼에게 바치는 것이다. 맨 위의 이끼 꾸러미가 아직 새것이다.",
+      "repeatable": false,
+      "requiresFlags": [],
+      "forbiddenFlags": [],
+      "group": "z4_grove",
+      "choices": [
+        {
+          "id": "carry_offering",
+          "order": 1,
+          "text": "맨 위의 꾸러미를 파수꾼에게 가져가기로 한다",
+          "verb": "persuade",
+          "condition": [],
+          "skillBonus": [],
+          "difficulty": "easy",
+          "outcomes": {
+            "fail": {
+              "text": "꾸러미를 들자 나무들이 숨을 멈춘다. 내려놓았다.",
+              "result": []
+            },
+            "partial": {
+              "text": "꾸러미를 챙겼다. 나무들이 다시 숨을 쉰다.",
+              "result": [
+                "flag:carriesWardenGift"
+              ]
+            },
+            "success": {
+              "text": "꾸러미를 챙기자 나무 사이에서 숲지기의 목소리가 들린다. \"부탁한다.\" 몸이 가볍다.",
+              "result": [
+                "flag:carriesWardenGift",
+                "hp:16"
+              ]
+            }
+          }
+        },
+        {
+          "id": "add_offering",
+          "order": 2,
+          "text": "내 공물을 보탠다 (골드 15)",
+          "verb": "",
+          "condition": [
+            "gold:15"
+          ],
+          "skillBonus": [],
+          "difficulty": "none",
+          "outcomes": {
+            "success": {
+              "text": "공물을 보태자 제단의 이끼가 피어난다. 꾸러미 하나가 손에 들린다.",
+              "result": [
+                "gold:-15",
+                "flag:carriesWardenGift",
+                "hp:12"
+              ]
+            }
+          }
+        },
+        {
+          "id": "take_offerings",
+          "order": 3,
+          "text": "공물 중 쓸 만한 것을 챙긴다",
+          "verb": "stealth",
+          "condition": [
+            "agi:29"
+          ],
+          "skillBonus": [],
+          "difficulty": "normal",
+          "outcomes": {
+            "fail": {
+              "text": "나무뿌리가 발목을 휘감았다.",
+              "result": [
+                "hp:-16"
+              ]
+            },
+            "partial": {
+              "text": "금화 몇 닢을 챙겼다.",
+              "result": [
+                "gold:14"
+              ]
+            },
+            "success": {
+              "text": "숲지기들이 바친 장비를 챙겼다. 나무들이 숨을 죽인다.",
+              "result": [
+                "item:random:equipment"
+              ]
+            }
+          }
+        },
+        {
+          "id": "read_offerings",
+          "order": 4,
+          "text": "공물에 적힌 글을 읽는다",
+          "verb": "insight",
+          "condition": [
+            "wis:32"
+          ],
+          "skillBonus": [],
+          "difficulty": "normal",
+          "outcomes": {
+            "fail": {
+              "text": "글이 이끼에 덮였다.",
+              "result": []
+            },
+            "partial": {
+              "text": "\"오늘도 버텨 주어 고맙습니다.\" 같은 말이 대대로 적혀 있다.",
+              "result": [
+                "hp:12",
+                "flag:heardWardenPlea"
+              ]
+            },
+            "success": {
+              "text": "글 사이에 파수꾼을 잠시 쉬게 하는 주문이 있다.",
+              "result": [
+                "flag:carriesWardenGift",
+                "flag:heardWardenPlea"
+              ]
+            }
+          }
+        },
+        {
+          "id": "pass_offerings",
+          "order": 5,
+          "text": "지나간다",
+          "verb": "pass",
+          "condition": [],
+          "skillBonus": [],
+          "difficulty": "none",
+          "outcomes": {
+            "success": {
+              "text": "공물 위로 이끼가 천천히 자란다.",
+              "result": []
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "evt4_heart_door",
+      "zone": 4,
+      "title": "심장의 문 앞",
+      "description": "성역의 심장 앞 계단 끝, 거대한 수정 문이 숨 쉬듯 빛난다. 문 너머에서 파수꾼의 목소리가 아주 가깝게 들린다. \"여기가 마지막이다. 들어오기 전에 들어라.\"",
+      "repeatable": false,
+      "requiresFlags": [],
+      "forbiddenFlags": [],
+      "group": "z4_warden",
+      "choices": [
+        {
+          "id": "listen_door",
+          "order": 1,
+          "text": "문에 이마를 대고 끝까지 듣는다",
+          "verb": "",
+          "condition": [],
+          "skillBonus": [],
+          "difficulty": "none",
+          "outcomes": {
+            "success": {
+              "text": "\"나를 쓰러뜨리면 봉인이 흔들린다. 그때 누군가는 남아야 한다.\" 목소리가 잦아든다.",
+              "result": [
+                "hp:14",
+                "flag:heardWardenPlea"
+              ]
+            }
+          }
+        },
+        {
+          "id": "study_door",
+          "order": 2,
+          "text": "문의 수정 결을 읽는다",
+          "verb": "insight",
+          "condition": [
+            "wis:35"
+          ],
+          "skillBonus": [],
+          "difficulty": "hard",
+          "outcomes": {
+            "fail": {
+              "text": "빛에 눈이 멀 듯하다.",
+              "result": [
+                "hp:-18"
+              ]
+            },
+            "partial": {
+              "text": "결이 문 한가운데로 모인다.",
+              "result": [
+                "gold:10"
+              ]
+            },
+            "success": {
+              "text": "결이 모이는 곳이 봉인의 중심이다. 파수꾼이 무너질 때 그곳을 누르면 근원이 늦게 깨어난다.",
+              "result": [
+                "flag:knowsSealWeakness",
+                "flag:heardWardenPlea"
+              ]
+            }
+          }
+        },
+        {
+          "id": "push_door",
+          "order": 3,
+          "text": "문을 밀어 본다",
+          "verb": "force",
+          "condition": [
+            "str:35"
+          ],
+          "skillBonus": [],
+          "difficulty": "hard",
+          "outcomes": {
+            "fail": {
+              "text": "문이 밀어낸다. 계단 아래로 굴렀다.",
+              "result": [
+                "hp:-20"
+              ]
+            },
+            "partial": {
+              "text": "문이 꿈쩍도 하지 않는다.",
+              "result": []
+            },
+            "success": {
+              "text": "문이 아주 조금 열린다. 틈 사이로 파수꾼의 금 간 몸이 보인다.",
+              "result": [
+                "flag:knowsSealWeakness"
+              ]
+            }
+          }
+        },
+        {
+          "id": "rest_steps",
+          "order": 4,
+          "text": "계단에 앉아 마지막으로 숨을 고른다",
+          "verb": "",
+          "condition": [],
+          "skillBonus": [],
+          "difficulty": "none",
+          "outcomes": {
+            "success": {
+              "text": "계단에 새겨진 숲지기들의 이름을 쓰다듬으며 쉬었다.",
+              "result": [
+                "hp:24"
+              ]
+            }
+          }
+        },
+        {
+          "id": "turn_down",
+          "order": 5,
+          "text": "계단을 내려가 준비를 더 한다",
+          "verb": "pass",
+          "condition": [],
+          "skillBonus": [],
+          "difficulty": "none",
+          "outcomes": {
+            "success": {
+              "text": "\"그래. 서두를 것 없다.\" 목소리가 등 뒤에서 들린다.",
+              "result": []
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "evt4_seal_stones",
+      "zone": 4,
+      "title": "봉인석",
+      "description": "거석 원 바닥에 봉인석 일곱 개가 박혀 있다. 그중 셋이 빠져 나뒹군다. 원정대가 뽑아 놓고 가져가지 못한 것이다.",
+      "repeatable": false,
+      "requiresFlags": [],
+      "forbiddenFlags": [],
+      "group": "z4_gate",
+      "choices": [
+        {
+          "id": "replace_stones",
+          "order": 1,
+          "text": "봉인석을 제자리에 박는다",
+          "verb": "force",
+          "condition": [
+            "str:32"
+          ],
+          "skillBonus": [],
+          "difficulty": "normal",
+          "outcomes": {
+            "fail": {
+              "text": "봉인석이 너무 무겁다. 발등을 찧었다.",
+              "result": [
+                "hp:-14"
+              ]
+            },
+            "partial": {
+              "text": "하나를 제자리에 박았다.",
+              "result": [
+                "hp:8"
+              ]
+            },
+            "success": {
+              "text": "셋 모두 제자리에 박았다. 원 전체가 빛나며 발밑의 숨결이 잦아든다.",
+              "result": [
+                "hp:10",
+                "flag:mendedSeal"
+              ]
+            }
+          }
+        },
+        {
+          "id": "order_stones",
+          "order": 2,
+          "text": "봉인석의 문양을 맞춰 순서를 찾는다",
+          "verb": "insight",
+          "condition": [
+            "wis:32"
+          ],
+          "skillBonus": [],
+          "difficulty": "normal",
+          "outcomes": {
+            "fail": {
+              "text": "순서를 틀렸다. 원이 흔들린다.",
+              "result": [
+                "hp:-14"
+              ]
+            },
+            "partial": {
+              "text": "순서는 찾았지만 힘이 모자라 하나만 박았다.",
+              "result": [
+                "hp:6"
+              ]
+            },
+            "success": {
+              "text": "순서대로 박자 봉인석이 스스로 자리를 찾아 들어간다.",
+              "result": [
+                "flag:mendedSeal",
+                "gold:8"
+              ]
+            }
+          }
+        },
+        {
+          "id": "take_stone",
+          "order": 3,
+          "text": "봉인석 하나를 챙긴다",
+          "verb": "stealth",
+          "condition": [
+            "agi:29"
+          ],
+          "skillBonus": [],
+          "difficulty": "easy",
+          "outcomes": {
+            "fail": {
+              "text": "봉인석을 들자 거석 수호상이 깨어났다!",
+              "result": [
+                "fight:ene4_megalith_guard"
+              ]
+            },
+            "partial": {
+              "text": "작은 봉인석 조각을 챙겼다. 값이 나간다.",
+              "result": [
+                "gold:16"
+              ]
+            },
+            "success": {
+              "text": "봉인석 조각에 깃든 힘이 손에 스민다.",
+              "result": [
+                "item:random:elixir"
+              ]
+            }
+          }
+        },
+        {
+          "id": "roll_stones",
+          "order": 4,
+          "text": "봉인석을 굴려 원 가장자리에 모아 둔다",
+          "verb": "",
+          "condition": [],
+          "skillBonus": [],
+          "difficulty": "none",
+          "outcomes": {
+            "success": {
+              "text": "누군가 다시 박을 수 있도록 모아 두었다. 원이 조금 조용해진다.",
+              "result": [
+                "hp:10"
+              ]
+            }
+          }
+        },
+        {
+          "id": "pass_stones",
+          "order": 5,
+          "text": "지나간다",
+          "verb": "pass",
+          "condition": [],
+          "skillBonus": [],
+          "difficulty": "none",
+          "outcomes": {
+            "success": {
+              "text": "빠진 자리에서 따뜻한 바람이 새어 나온다.",
+              "result": []
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "evt4_crystal_twin",
+      "zone": 4,
+      "title": "수정 속의 쌍둥이",
+      "description": "수정 동굴 벽 두 곳에 똑같은 모험가가 굳어 있다. 하나는 웃고, 하나는 운다. 둘 사이에 \"돌아간 자와 남은 자\"라고 새겨져 있다.",
+      "repeatable": false,
+      "requiresFlags": [],
+      "forbiddenFlags": [],
+      "group": "z4_crystal",
+      "choices": [
+        {
+          "id": "free_smiling",
+          "order": 1,
+          "text": "웃는 쪽을 깨 꺼낸다",
+          "verb": "force",
+          "condition": [
+            "str:32"
+          ],
+          "skillBonus": [],
+          "difficulty": "normal",
+          "outcomes": {
+            "fail": {
+              "text": "수정 정령들이 쏟아졌다!",
+              "result": [
+                "fight:ene4_crystal_sprite"
+              ]
+            },
+            "partial": {
+              "text": "웃는 쪽은 비어 있었다. 껍데기 조각을 챙겼다.",
+              "result": [
+                "gold:14"
+              ]
+            },
+            "success": {
+              "text": "웃는 쪽 안에 쥐어진 장비가 있었다. 돌아간 자가 남긴 것이다.",
+              "result": [
+                "item:random:equipment"
+              ]
+            }
+          }
+        },
+        {
+          "id": "free_crying",
+          "order": 2,
+          "text": "우는 쪽을 깨 꺼낸다",
+          "verb": "stealth",
+          "condition": [
+            "agi:32"
+          ],
+          "skillBonus": [],
+          "difficulty": "normal",
+          "outcomes": {
+            "fail": {
+              "text": "수정 파편에 베였다.",
+              "result": [
+                "hp:-16"
+              ]
+            },
+            "partial": {
+              "text": "우는 쪽 손에 쥔 약병을 꺼냈다.",
+              "result": [
+                "item:con_potion"
+              ]
+            },
+            "success": {
+              "text": "우는 쪽 품에 숲지기의 약 꾸러미가 있었다.",
+              "result": [
+                "item:con_potion",
+                "item:random:consumable"
+              ]
+            }
+          }
+        },
+        {
+          "id": "read_twins",
+          "order": 3,
+          "text": "두 사람의 이야기를 새김글에서 읽는다",
+          "verb": "insight",
+          "condition": [
+            "wis:32"
+          ],
+          "skillBonus": [],
+          "difficulty": "normal",
+          "outcomes": {
+            "fail": {
+              "text": "새김글이 닳았다.",
+              "result": []
+            },
+            "partial": {
+              "text": "한 사람은 돌아갔고, 한 사람은 남아 숲지기가 되었다.",
+              "result": [
+                "gold:10"
+              ]
+            },
+            "success": {
+              "text": "남은 자가 첫 숲지기다. 돌아간 자는 형제를 두고 간 것을 평생 울었다.",
+              "result": [
+                "gold:8",
+                "flag:heardWardenPlea"
+              ]
+            }
+          }
+        },
+        {
+          "id": "touch_both",
+          "order": 4,
+          "text": "두 수정에 동시에 손을 댄다",
+          "verb": "",
+          "condition": [],
+          "skillBonus": [],
+          "difficulty": "normal",
+          "outcomes": {
+            "fail": {
+              "text": "양쪽에서 한기가 몰려왔다.",
+              "result": [
+                "hp:-14"
+              ]
+            },
+            "partial": {
+              "text": "양쪽 손바닥이 따뜻해졌다.",
+              "result": [
+                "hp:12"
+              ]
+            },
+            "success": {
+              "text": "두 수정이 함께 빛나며 상처가 아문다.",
+              "result": [
+                "hp:24"
+              ]
+            }
+          }
+        },
+        {
+          "id": "pass_twins",
+          "order": 5,
+          "text": "지나간다",
+          "verb": "pass",
+          "condition": [],
+          "skillBonus": [],
+          "difficulty": "none",
+          "outcomes": {
+            "success": {
+              "text": "웃는 얼굴과 우는 얼굴이 등 뒤에 남는다.",
+              "result": []
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "evt4_moth_queen_dust",
+      "zone": 4,
+      "title": "여왕의 가루",
+      "description": "나방 여왕이 머물던 자리에 금빛 가루가 수북하다. 가루를 만지면 손끝이 별처럼 빛난다. 가루 아래 원정대의 보급 상자가 묻혀 있다.",
+      "repeatable": false,
+      "requiresFlags": [],
+      "forbiddenFlags": [],
+      "group": "z4_star",
+      "choices": [
+        {
+          "id": "dig_dust",
+          "order": 1,
+          "text": "가루를 헤치고 상자를 꺼낸다",
+          "verb": "force",
+          "condition": [
+            "str:29"
+          ],
+          "skillBonus": [],
+          "difficulty": "normal",
+          "outcomes": {
+            "fail": {
+              "text": "가루가 날려 눈을 찔렀다. 나방들이 몰려온다!",
+              "result": [
+                "fight:ene4_star_moth:ambushed"
+              ]
+            },
+            "partial": {
+              "text": "상자 뚜껑만 뜯어 금화를 챙겼다.",
+              "result": [
+                "gold:14"
+              ]
+            },
+            "success": {
+              "text": "상자를 꺼냈다. 원정대 보급품이 그대로다.",
+              "result": [
+                "item:random:equipment"
+              ]
+            }
+          }
+        },
+        {
+          "id": "gather_dust",
+          "order": 2,
+          "text": "가루를 병에 모은다",
+          "verb": "stealth",
+          "condition": [
+            "agi:29"
+          ],
+          "skillBonus": [],
+          "difficulty": "easy",
+          "outcomes": {
+            "fail": {
+              "text": "가루를 들이마셨다.",
+              "result": [
+                "hp:-12"
+              ]
+            },
+            "partial": {
+              "text": "가루를 모았다. 값이 나간다.",
+              "result": [
+                "gold:14"
+              ]
+            },
+            "success": {
+              "text": "가루를 가득 모았다. 상처에 바르면 아문다.",
+              "result": [
+                "gold:8",
+                "item:con_potion"
+              ]
+            }
+          }
+        },
+        {
+          "id": "study_dust",
+          "order": 3,
+          "text": "가루가 빛나는 이유를 살핀다",
+          "verb": "insight",
+          "condition": [
+            "wis:29"
+          ],
+          "skillBonus": [],
+          "difficulty": "easy",
+          "outcomes": {
+            "fail": {
+              "text": "눈이 부셨다.",
+              "result": [
+                "hp:-8"
+              ]
+            },
+            "partial": {
+              "text": "가루는 꺼진 별의 빛을 머금었다.",
+              "result": [
+                "gold:10"
+              ]
+            },
+            "success": {
+              "text": "가루가 봉인의 빈자리를 메우던 빛이다. 한 줌을 챙겨 두었다.",
+              "result": [
+                "flag:mendedSeal",
+                "gold:6"
+              ]
+            }
+          }
+        },
+        {
+          "id": "roll_dust",
+          "order": 4,
+          "text": "가루 위에 누워 본다",
+          "verb": "",
+          "condition": [],
+          "skillBonus": [],
+          "difficulty": "none",
+          "outcomes": {
+            "success": {
+              "text": "온몸이 별빛처럼 빛난다. 피로가 씻겨 나간다.",
+              "result": [
+                "hp:20"
+              ]
+            }
+          }
+        },
+        {
+          "id": "pass_dust",
+          "order": 5,
+          "text": "지나간다",
+          "verb": "pass",
+          "condition": [],
+          "skillBonus": [],
+          "difficulty": "none",
+          "outcomes": {
+            "success": {
+              "text": "발자국마다 금빛이 번진다.",
+              "result": []
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "evt4_old_wolf",
+      "zone": 4,
+      "title": "늙은 늑대",
+      "description": "언덕 꼭대기에 털이 하얗게 센 늑대가 누워 있다. 숨이 가쁘다. 태고의 늑대들이 멀찍이 둘러앉아 지켜본다. 늙은 늑대가 이쪽을 보고 꼬리를 한 번 흔든다.",
+      "repeatable": false,
+      "requiresFlags": [],
+      "forbiddenFlags": [],
+      "group": "z4_beast",
+      "choices": [
+        {
+          "id": "sit_with_wolf",
+          "order": 1,
+          "text": "늙은 늑대 곁에 앉아 준다",
+          "verb": "",
+          "condition": [],
+          "skillBonus": [],
+          "difficulty": "none",
+          "outcomes": {
+            "success": {
+              "text": "늙은 늑대가 머리를 무릎에 기댄다. 숨이 조용히 멎는다. 늑대들이 고개를 숙이고, 우두머리가 길을 연다.",
+              "result": [
+                "hp:12",
+                "gold:10"
+              ]
+            }
+          }
+        },
+        {
+          "id": "feed_wolf",
+          "order": 2,
+          "text": "물약을 먹여 준다",
+          "verb": "use",
+          "condition": [
+            "item:con_potion"
+          ],
+          "skillBonus": [],
+          "difficulty": "none",
+          "outcomes": {
+            "success": {
+              "text": "늙은 늑대가 일어나 한 번 울고 다시 눕는다. 늑대들이 굴 안의 보물을 밀어 준다.",
+              "result": [
+                "item:-con_potion",
+                "item:random:equipment"
+              ]
+            }
+          }
+        },
+        {
+          "id": "read_pack",
+          "order": 3,
+          "text": "늑대들이 무엇을 기다리는지 살핀다",
+          "verb": "insight",
+          "condition": [
+            "wis:32"
+          ],
+          "skillBonus": [],
+          "difficulty": "normal",
+          "outcomes": {
+            "fail": {
+              "text": "늑대들이 이빨을 드러냈다. 물러났다.",
+              "result": [
+                "hp:-12"
+              ]
+            },
+            "partial": {
+              "text": "늑대들은 새 우두머리를 기다린다.",
+              "result": [
+                "gold:10"
+              ]
+            },
+            "success": {
+              "text": "늑대들은 늙은 늑대가 지키던 자리를 누가 이을지 지켜본다. 파수꾼과 같다.",
+              "result": [
+                "gold:8",
+                "flag:heardWardenPlea"
+              ]
+            }
+          }
+        },
+        {
+          "id": "take_den",
+          "order": 4,
+          "text": "늑대들이 늙은 늑대에게 정신이 팔린 틈에 굴을 뒤진다",
+          "verb": "stealth",
+          "condition": [
+            "agi:35"
+          ],
+          "skillBonus": [],
+          "difficulty": "hard",
+          "outcomes": {
+            "fail": {
+              "text": "늑대들이 돌아섰다!",
+              "result": [
+                "fight:ene4_primeval_wolf:ambushed"
+              ]
+            },
+            "partial": {
+              "text": "굴 입구에서 뼈 장신구를 챙겼다.",
+              "result": [
+                "gold:14"
+              ]
+            },
+            "success": {
+              "text": "굴 안쪽 먼저 온 자들의 짐을 챙겼다.",
+              "result": [
+                "item:random:equipment"
+              ]
+            }
+          }
+        },
+        {
+          "id": "leave_wolf",
+          "order": 5,
+          "text": "조용히 물러난다",
+          "verb": "pass",
+          "condition": [],
+          "skillBonus": [],
+          "difficulty": "none",
+          "outcomes": {
+            "success": {
+              "text": "늑대들의 낮은 울음이 언덕에 퍼진다.",
+              "result": []
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "evt4_silent_bell",
+      "zone": 4,
+      "title": "울리지 않는 종",
+      "description": "고요의 숲 한가운데 나무에 작은 종이 걸려 있다. 아무리 흔들어도 소리가 나지 않는다. 종 아래 \"필요한 자에게만 울린다\"고 새겨져 있다.",
+      "repeatable": false,
+      "requiresFlags": [],
+      "forbiddenFlags": [],
+      "group": "z4_grove",
+      "choices": [
+        {
+          "id": "ring_quiet",
+          "order": 1,
+          "text": "종을 조용히 한 번 흔든다",
+          "verb": "",
+          "condition": [],
+          "skillBonus": [],
+          "difficulty": "normal",
+          "outcomes": {
+            "fail": {
+              "text": "소리 대신 한기가 퍼진다.",
+              "result": [
+                "hp:-10"
+              ]
+            },
+            "partial": {
+              "text": "아무 소리도 나지 않지만 마음이 가라앉는다.",
+              "result": [
+                "hp:14"
+              ]
+            },
+            "success": {
+              "text": "종이 맑게 울린다. 숲 전체가 숨을 고르고, 몸 깊은 곳까지 맑아진다.",
+              "result": [
+                "hp:28"
+              ]
+            }
+          }
+        },
+        {
+          "id": "take_bell",
+          "order": 2,
+          "text": "종을 떼어 간다",
+          "verb": "stealth",
+          "condition": [
+            "agi:32"
+          ],
+          "skillBonus": [],
+          "difficulty": "normal",
+          "outcomes": {
+            "fail": {
+              "text": "나뭇가지가 손목을 휘감았다.",
+              "result": [
+                "hp:-14"
+              ]
+            },
+            "partial": {
+              "text": "종은 못 떼고 끈만 끊었다. 은실이다.",
+              "result": [
+                "gold:12"
+              ]
+            },
+            "success": {
+              "text": "종을 떼었다. 품에서 아주 작게 울린다.",
+              "result": [
+                "item:random:consumable",
+                "gold:8"
+              ]
+            }
+          }
+        },
+        {
+          "id": "read_bell",
+          "order": 3,
+          "text": "종에 새겨진 이름을 읽는다",
+          "verb": "insight",
+          "condition": [
+            "wis:29"
+          ],
+          "skillBonus": [],
+          "difficulty": "easy",
+          "outcomes": {
+            "fail": {
+              "text": "이름이 닳았다.",
+              "result": []
+            },
+            "partial": {
+              "text": "종을 만든 숲지기의 이름이다.",
+              "result": [
+                "gold:8"
+              ]
+            },
+            "success": {
+              "text": "종은 지친 파수꾼을 쉬게 하려고 만든 것이다. 울리는 법을 알았다.",
+              "result": [
+                "flag:carriesWardenGift",
+                "hp:10"
+              ]
+            }
+          }
+        },
+        {
+          "id": "sleep_bell",
+          "order": 4,
+          "text": "종 아래에서 잔다",
+          "verb": "",
+          "condition": [],
+          "skillBonus": [],
+          "difficulty": "none",
+          "outcomes": {
+            "success": {
+              "text": "꿈속에서 종이 울린다. 깨어나니 몸이 가볍다.",
+              "result": [
+                "hp:22"
+              ]
+            }
+          }
+        },
+        {
+          "id": "pass_bell",
+          "order": 5,
+          "text": "지나간다",
+          "verb": "pass",
+          "condition": [],
+          "skillBonus": [],
+          "difficulty": "none",
+          "outcomes": {
+            "success": {
+              "text": "종이 바람에 소리 없이 흔들린다.",
+              "result": []
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "evt4_frozen_duel",
+      "zone": 4,
+      "title": "굳은 결투",
+      "description": "굳은 자들의 길 끝에 두 사람이 칼을 맞댄 채 굳어 있다. 한쪽은 원정대 기사, 한쪽은 숲지기다. 숲지기의 등 뒤에 성역이 있다.",
+      "repeatable": false,
+      "requiresFlags": [],
+      "forbiddenFlags": [],
+      "group": "z4_petrified",
+      "choices": [
+        {
+          "id": "help_warden_side",
+          "order": 1,
+          "text": "숲지기 쪽 칼을 밀어 준다",
+          "verb": "force",
+          "condition": [
+            "str:35"
+          ],
+          "skillBonus": [],
+          "difficulty": "hard",
+          "outcomes": {
+            "fail": {
+              "text": "기사가 움직였다!",
+              "result": [
+                "fight:ene4_expedition_remnant"
+              ]
+            },
+            "partial": {
+              "text": "칼이 조금 밀렸다. 숲지기의 얼굴이 편안해진다.",
+              "result": [
+                "hp:10"
+              ]
+            },
+            "success": {
+              "text": "기사가 무너지고 숲지기가 칼을 내린다. 숲지기가 지키던 장비가 드러났다.",
+              "result": [
+                "item:random:equipment",
+                "flag:wardenTrust"
+              ]
+            }
+          }
+        },
+        {
+          "id": "study_duel",
+          "order": 2,
+          "text": "두 사람의 자세에서 검술을 읽는다",
+          "verb": "insight",
+          "condition": [
+            "wis:32"
+          ],
+          "skillBonus": [],
+          "difficulty": "normal",
+          "outcomes": {
+            "fail": {
+              "text": "어지럽다.",
+              "result": [
+                "hp:-10"
+              ]
+            },
+            "partial": {
+              "text": "기사의 자세에서 빈틈을 하나 찾았다.",
+              "result": [
+                "gold:10"
+              ]
+            },
+            "success": {
+              "text": "숲지기의 자세가 파수꾼의 자세와 같다. 받아넘기는 법을 익혔다.",
+              "result": [
+                "skill:choice"
+              ]
+            }
+          }
+        },
+        {
+          "id": "take_swords",
+          "order": 3,
+          "text": "두 사람의 칼을 빼낸다",
+          "verb": "stealth",
+          "condition": [
+            "agi:32"
+          ],
+          "skillBonus": [],
+          "difficulty": "normal",
+          "outcomes": {
+            "fail": {
+              "text": "칼을 빼자 두 사람이 무너지며 파편이 튀었다.",
+              "result": [
+                "hp:-16"
+              ]
+            },
+            "partial": {
+              "text": "기사의 칼 장식만 떼어냈다.",
+              "result": [
+                "gold:14"
+              ]
+            },
+            "success": {
+              "text": "두 칼을 빼냈다. 하나는 쓸 만하다.",
+              "result": [
+                "item:random:equipment"
+              ]
+            }
+          }
+        },
+        {
+          "id": "bury_duel",
+          "order": 4,
+          "text": "두 사람을 함께 묻어 준다",
+          "verb": "",
+          "condition": [],
+          "skillBonus": [],
+          "difficulty": "none",
+          "outcomes": {
+            "success": {
+              "text": "적이었던 둘을 나란히 묻었다. 마음이 무겁고도 가볍다.",
+              "result": [
+                "hp:14"
+              ]
+            }
+          }
+        },
+        {
+          "id": "pass_duel",
+          "order": 5,
+          "text": "지나간다",
+          "verb": "pass",
+          "condition": [],
+          "skillBonus": [],
+          "difficulty": "none",
+          "outcomes": {
+            "success": {
+              "text": "두 칼이 여전히 맞닿아 있다.",
+              "result": []
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "evt4_star_map",
+      "zone": 4,
+      "title": "구덩이의 별자리",
+      "description": "꺼진 별의 구덩이 벽에 별자리가 새겨져 있다. 별 하나하나에 작은 홈이 있다. 홈 몇 개에 수정 조각이 끼워져 있고, 나머지는 비어 있다.",
+      "repeatable": false,
+      "requiresFlags": [],
+      "forbiddenFlags": [],
+      "group": "z4_source",
+      "choices": [
+        {
+          "id": "fill_holes",
+          "order": 1,
+          "text": "흩어진 수정 조각을 홈에 끼운다",
+          "verb": "insight",
+          "condition": [
+            "wis:32"
+          ],
+          "skillBonus": [],
+          "difficulty": "normal",
+          "outcomes": {
+            "fail": {
+              "text": "조각이 맞지 않아 손을 베었다.",
+              "result": [
+                "hp:-12"
+              ]
+            },
+            "partial": {
+              "text": "몇 개를 끼웠다. 별자리가 희미하게 빛난다.",
+              "result": [
+                "hp:10"
+              ]
+            },
+            "success": {
+              "text": "별자리를 모두 채우자 구덩이가 빛난다. 봉인이 조금 안정된다.",
+              "result": [
+                "flag:mendedSeal",
+                "hp:10"
+              ]
+            }
+          }
+        },
+        {
+          "id": "pry_crystals",
+          "order": 2,
+          "text": "끼워진 수정 조각을 빼 간다",
+          "verb": "stealth",
+          "condition": [
+            "agi:29"
+          ],
+          "skillBonus": [],
+          "difficulty": "easy",
+          "outcomes": {
+            "fail": {
+              "text": "조각을 빼자 구덩이가 흔들렸다.",
+              "result": [
+                "hp:-14"
+              ]
+            },
+            "partial": {
+              "text": "조각 몇 개를 챙겼다. 값이 나간다.",
+              "result": [
+                "gold:16"
+              ]
+            },
+            "success": {
+              "text": "가장 밝은 조각을 챙겼다. 쥐자 힘이 스민다.",
+              "result": [
+                "item:random:elixir"
+              ]
+            }
+          }
+        },
+        {
+          "id": "copy_map",
+          "order": 3,
+          "text": "별자리를 베껴 둔다",
+          "verb": "force",
+          "condition": [
+            "str:29"
+          ],
+          "skillBonus": [],
+          "difficulty": "easy",
+          "outcomes": {
+            "fail": {
+              "text": "벽이 무너져 흙을 뒤집어썼다.",
+              "result": [
+                "hp:-8"
+              ]
+            },
+            "partial": {
+              "text": "베꼈다. 언젠가 쓸모가 있을 것이다.",
+              "result": [
+                "gold:8"
+              ]
+            },
+            "success": {
+              "text": "베끼다 별자리 아래 숨은 칸을 찾았다.",
+              "result": [
+                "item:random:consumable",
+                "gold:8"
+              ]
+            }
+          }
+        },
+        {
+          "id": "gaze_map",
+          "order": 4,
+          "text": "별자리를 바라보며 쉰다",
+          "verb": "",
+          "condition": [],
+          "skillBonus": [],
+          "difficulty": "none",
+          "outcomes": {
+            "success": {
+              "text": "별자리가 천천히 돈다. 숨이 고르게 돌아온다.",
+              "result": [
+                "hp:18"
+              ]
+            }
+          }
+        },
+        {
+          "id": "pass_map",
+          "order": 5,
+          "text": "지나간다",
+          "verb": "pass",
+          "condition": [],
+          "skillBonus": [],
+          "difficulty": "none",
+          "outcomes": {
+            "success": {
+              "text": "빈 홈들이 어둡게 남는다.",
+              "result": []
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "evt4_pond_offerings",
+      "zone": 4,
+      "title": "연못에 던진 동전",
+      "description": "하늘 연못 바닥에 동전이 반짝인다. 먼저 온 자들이 던진 것이다. 연못가에 \"돌아가게 해 달라\"는 쪽지들이 젖어 붙어 있다.",
+      "repeatable": false,
+      "requiresFlags": [],
+      "forbiddenFlags": [],
+      "group": "z4_rest",
+      "choices": [
+        {
+          "id": "fish_coins4",
+          "order": 1,
+          "text": "바닥의 동전을 건진다",
+          "verb": "stealth",
+          "condition": [
+            "agi:32"
+          ],
+          "skillBonus": [],
+          "difficulty": "normal",
+          "outcomes": {
+            "fail": {
+              "text": "물이 얼어붙어 손이 갇혔다.",
+              "result": [
+                "hp:-16"
+              ]
+            },
+            "partial": {
+              "text": "동전 한 줌을 건졌다.",
+              "result": [
+                "gold:16"
+              ]
+            },
+            "success": {
+              "text": "동전과 함께 바닥의 반지도 건졌다.",
+              "result": [
+                "gold:22"
+              ]
+            }
+          }
+        },
+        {
+          "id": "throw_coin4",
+          "order": 2,
+          "text": "나도 동전을 던지고 빈다 (골드 10)",
+          "verb": "",
+          "condition": [
+            "gold:10"
+          ],
+          "skillBonus": [],
+          "difficulty": "none",
+          "outcomes": {
+            "success": {
+              "text": "동전이 가라앉으며 연못이 한 번 빛난다. 마음이 맑아진다.",
+              "result": [
+                "gold:-10",
+                "hp:22"
+              ]
+            }
+          }
+        },
+        {
+          "id": "read_notes4",
+          "order": 3,
+          "text": "쪽지들을 읽는다",
+          "verb": "insight",
+          "condition": [
+            "wis:29"
+          ],
+          "skillBonus": [],
+          "difficulty": "easy",
+          "outcomes": {
+            "fail": {
+              "text": "쪽지가 젖어 읽을 수 없다.",
+              "result": []
+            },
+            "partial": {
+              "text": "\"돌아가게 해 달라.\" 모두 같은 소원이다. 마음이 무겁다.",
+              "result": [
+                "hp:6"
+              ]
+            },
+            "success": {
+              "text": "쪽지 하나는 숲지기가 쓴 것이다. \"이들이 모두 돌아가게 해 달라.\" 파수꾼의 소원이었다.",
+              "result": [
+                "hp:10",
+                "flag:heardWardenPlea"
+              ]
+            }
+          }
+        },
+        {
+          "id": "dry_notes",
+          "order": 4,
+          "text": "쪽지들을 말려 연못가에 가지런히 놓는다",
+          "verb": "force",
+          "condition": [
+            "str:29"
+          ],
+          "skillBonus": [],
+          "difficulty": "easy",
+          "outcomes": {
+            "fail": {
+              "text": "미끄러져 물에 빠졌다.",
+              "result": [
+                "hp:-8"
+              ]
+            },
+            "partial": {
+              "text": "쪽지를 말려 놓았다.",
+              "result": [
+                "hp:10"
+              ]
+            },
+            "success": {
+              "text": "쪽지를 말리다 쪽지 사이에 끼인 먼저 온 자의 약을 찾았다.",
+              "result": [
+                "hp:10",
+                "item:con_potion"
+              ]
+            }
+          }
+        },
+        {
+          "id": "pass_pond4",
+          "order": 5,
+          "text": "지나간다",
+          "verb": "pass",
+          "condition": [],
+          "skillBonus": [],
+          "difficulty": "none",
+          "outcomes": {
+            "success": {
+              "text": "바닥의 동전이 물결에 반짝인다.",
+              "result": []
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "evt4_megalith_sleep",
+      "zone": 4,
+      "title": "잠든 거석상",
+      "description": "거석 원 바깥에 거석상 하나가 무릎 꿇은 채 잠들어 있다. 등에 이끼가 두껍다. 등에 붙은 수정 판에 경고문이 반쯤 새겨져 있다.",
+      "repeatable": false,
+      "requiresFlags": [],
+      "forbiddenFlags": [],
+      "group": "z4_gate",
+      "choices": [
+        {
+          "id": "finish_carving",
+          "order": 1,
+          "text": "반쯤 새겨진 경고문을 마저 새긴다",
+          "verb": "force",
+          "condition": [
+            "str:32"
+          ],
+          "skillBonus": [],
+          "difficulty": "normal",
+          "outcomes": {
+            "fail": {
+              "text": "끌이 미끄러져 거석상이 깨어났다!",
+              "result": [
+                "fight:ene4_megalith_guard"
+              ]
+            },
+            "partial": {
+              "text": "몇 글자를 더 새겼다.",
+              "result": [
+                "hp:8"
+              ]
+            },
+            "success": {
+              "text": "경고문을 다 새기자 거석상이 고개를 숙이고 다시 잠든다. 발치에 공물이 굴러 나온다.",
+              "result": [
+                "item:random:equipment",
+                "flag:knowsGateWord"
+              ]
+            }
+          }
+        },
+        {
+          "id": "climb_back",
+          "order": 2,
+          "text": "등에 올라 이끼 속을 뒤진다",
+          "verb": "stealth",
+          "condition": [
+            "agi:29"
+          ],
+          "skillBonus": [],
+          "difficulty": "easy",
+          "outcomes": {
+            "fail": {
+              "text": "거석상이 몸을 뒤척여 떨어졌다.",
+              "result": [
+                "hp:-14"
+              ]
+            },
+            "partial": {
+              "text": "이끼 속에서 금화를 찾았다.",
+              "result": [
+                "gold:14"
+              ]
+            },
+            "success": {
+              "text": "이끼 속에서 숲지기가 숨긴 꾸러미를 찾았다.",
+              "result": [
+                "item:random:consumable",
+                "item:con_potion"
+              ]
+            }
+          }
+        },
+        {
+          "id": "read_carving",
+          "order": 3,
+          "text": "반쯤 새겨진 경고문을 읽는다",
+          "verb": "insight",
+          "condition": [
+            "wis:29"
+          ],
+          "skillBonus": [],
+          "difficulty": "easy",
+          "outcomes": {
+            "fail": {
+              "text": "읽을 수 없다.",
+              "result": []
+            },
+            "partial": {
+              "text": "\"돌아가라. 이 문은…\" 거기서 끊겼다.",
+              "result": [
+                "gold:8"
+              ]
+            },
+            "success": {
+              "text": "\"돌아가라. 이 문은 너를 위해 닫혀 있다.\" 문지기를 달래는 말이었다.",
+              "result": [
+                "flag:knowsGateWord"
+              ]
+            }
+          }
+        },
+        {
+          "id": "rest_by_statue",
+          "order": 4,
+          "text": "거석상에 기대 쉰다",
+          "verb": "",
+          "condition": [],
+          "skillBonus": [],
+          "difficulty": "none",
+          "outcomes": {
+            "success": {
+              "text": "거석상의 등이 햇볕에 따뜻하다. 깊이 쉬었다.",
+              "result": [
+                "hp:20"
+              ]
+            }
+          }
+        },
+        {
+          "id": "pass_statue4",
+          "order": 5,
+          "text": "지나간다",
+          "verb": "pass",
+          "condition": [],
+          "skillBonus": [],
+          "difficulty": "none",
+          "outcomes": {
+            "success": {
+              "text": "거석상이 잠든 채 숨을 쉰다.",
+              "result": []
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "evt4_last_supper",
+      "zone": 4,
+      "title": "원정대의 마지막 식탁",
+      "description": "원정대 무덤 옆에 차려진 식탁이 수정으로 굳었다. 빵과 잔이 그대로다. 식탁 끝에 빈 의자가 하나 있다. 왕자의 자리다.",
+      "repeatable": false,
+      "requiresFlags": [],
+      "forbiddenFlags": [],
+      "group": "z4_expedition",
+      "choices": [
+        {
+          "id": "sit_prince_seat",
+          "order": 1,
+          "text": "왕자의 자리에 앉는다",
+          "verb": "",
+          "condition": [],
+          "skillBonus": [],
+          "difficulty": "normal",
+          "outcomes": {
+            "fail": {
+              "text": "굳은 대원들이 일제히 고개를 돌렸다!",
+              "result": [
+                "fight:ene4_expedition_remnant:ambushed"
+              ]
+            },
+            "partial": {
+              "text": "아무 일도 없다. 식탁 밑에 동전이 있었다.",
+              "result": [
+                "gold:12"
+              ]
+            },
+            "success": {
+              "text": "대원들이 예를 갖추듯 고개를 숙인다. 식탁 위 왕자의 잔 밑에 왕실 보물이 있었다.",
+              "result": [
+                "item:random:equipment"
+              ]
+            }
+          }
+        },
+        {
+          "id": "break_bread",
+          "order": 2,
+          "text": "굳은 빵을 깨 속을 본다",
+          "verb": "force",
+          "condition": [
+            "str:29"
+          ],
+          "skillBonus": [],
+          "difficulty": "easy",
+          "outcomes": {
+            "fail": {
+              "text": "빵 속 수정 가시에 찔렸다.",
+              "result": [
+                "hp:-10"
+              ]
+            },
+            "partial": {
+              "text": "빵 속에 숨긴 금화가 나왔다.",
+              "result": [
+                "gold:14"
+              ]
+            },
+            "success": {
+              "text": "빵 속에 원정대 약사의 약병이 숨겨져 있었다.",
+              "result": [
+                "item:con_potion",
+                "item:random:consumable"
+              ]
+            }
+          }
+        },
+        {
+          "id": "toast",
+          "order": 3,
+          "text": "빈 잔을 들어 원정대를 위해 건배한다",
+          "verb": "",
+          "condition": [],
+          "skillBonus": [],
+          "difficulty": "none",
+          "outcomes": {
+            "success": {
+              "text": "잔이 맑게 운다. 무덤의 수정들이 한 번씩 빛난다.",
+              "result": [
+                "hp:16"
+              ]
+            }
+          }
+        },
+        {
+          "id": "read_place_cards",
+          "order": 4,
+          "text": "자리마다 놓인 이름표를 읽는다",
+          "verb": "insight",
+          "condition": [
+            "wis:32"
+          ],
+          "skillBonus": [],
+          "difficulty": "normal",
+          "outcomes": {
+            "fail": {
+              "text": "이름표가 굳어 읽히지 않는다.",
+              "result": []
+            },
+            "partial": {
+              "text": "원정대원들의 이름이다. 3구역에서 본 이름도 있다.",
+              "result": [
+                "gold:10"
+              ]
+            },
+            "success": {
+              "text": "왕자의 이름표 뒤에 \"돌아갈 날을 위해\"라고 적혀 있다. 왕자는 돌아갈 생각이었다.",
+              "result": [
+                "flag:princeWavers",
+                "gold:6"
+              ]
+            }
+          }
+        },
+        {
+          "id": "pass_supper",
+          "order": 5,
+          "text": "지나간다",
+          "verb": "pass",
+          "condition": [],
+          "skillBonus": [],
+          "difficulty": "none",
+          "outcomes": {
+            "success": {
+              "text": "빈 의자가 끝내 비어 있다.",
+              "result": []
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "evt4_scale_rain",
+      "zone": 4,
+      "title": "비늘 비",
+      "description": "파수꾼의 발자국 위로 수정 비늘이 비처럼 떨어진다. 파수꾼이 어디선가 몸을 떨고 있다. 비늘이 떨어질 때마다 땅이 울린다.",
+      "repeatable": false,
+      "requiresFlags": [],
+      "forbiddenFlags": [],
+      "group": "z4_warden",
+      "choices": [
+        {
+          "id": "dodge_scales",
+          "order": 1,
+          "text": "비늘을 피해 달린다",
+          "verb": "stealth",
+          "condition": [
+            "agi:35"
+          ],
+          "skillBonus": [],
+          "difficulty": "hard",
+          "outcomes": {
+            "fail": {
+              "text": "비늘에 몸 곳곳을 베였다.",
+              "result": [
+                "hp:-20"
+              ]
+            },
+            "partial": {
+              "text": "겨우 빠져나왔다.",
+              "result": [
+                "hp:-6"
+              ]
+            },
+            "success": {
+              "text": "비늘 비를 뚫고 지나가며 큰 비늘 하나를 챙겼다.",
+              "result": [
+                "item:random:equipment"
+              ]
+            }
+          }
+        },
+        {
+          "id": "shield_scale",
+          "order": 2,
+          "text": "큰 비늘을 들어 방패로 쓴다",
+          "verb": "force",
+          "condition": [
+            "str:32"
+          ],
+          "skillBonus": [],
+          "difficulty": "normal",
+          "outcomes": {
+            "fail": {
+              "text": "비늘이 무거워 넘어졌다.",
+              "result": [
+                "hp:-16"
+              ]
+            },
+            "partial": {
+              "text": "비늘 아래에서 비가 그치기를 기다렸다.",
+              "result": [
+                "hp:-4"
+              ]
+            },
+            "success": {
+              "text": "비늘 방패 아래에서 비를 피했다. 비가 그친 뒤 비늘 몇 장을 챙겼다.",
+              "result": [
+                "gold:18"
+              ]
+            }
+          }
+        },
+        {
+          "id": "read_rain",
+          "order": 3,
+          "text": "비늘이 떨어지는 방향으로 파수꾼이 있는 곳을 찾는다",
+          "verb": "insight",
+          "condition": [
+            "wis:32"
+          ],
+          "skillBonus": [],
+          "difficulty": "normal",
+          "outcomes": {
+            "fail": {
+              "text": "어지럽다.",
+              "result": [
+                "hp:-12"
+              ]
+            },
+            "partial": {
+              "text": "파수꾼은 심장 앞 계단 쪽에 있다.",
+              "result": [
+                "gold:8"
+              ]
+            },
+            "success": {
+              "text": "파수꾼은 봉인을 누르느라 몸을 떤다. 지금도 버티는 중이다.",
+              "result": [
+                "flag:heardWardenPlea",
+                "flag:knowsSealWeakness"
+              ]
+            }
+          }
+        },
+        {
+          "id": "wait_rain",
+          "order": 4,
+          "text": "나무 아래에서 비가 그치기를 기다린다",
+          "verb": "",
+          "condition": [],
+          "skillBonus": [],
+          "difficulty": "none",
+          "outcomes": {
+            "success": {
+              "text": "한참 기다렸다. 그사이 숨을 골랐다.",
+              "result": [
+                "hp:14"
+              ]
+            }
+          }
+        },
+        {
+          "id": "back_rain",
+          "order": 5,
+          "text": "왔던 길로 물러난다",
+          "verb": "pass",
+          "condition": [],
+          "skillBonus": [],
+          "difficulty": "none",
+          "outcomes": {
+            "success": {
+              "text": "비늘 비가 등 뒤에서 이어진다.",
+              "result": [
+                "hp:-4"
+              ]
+            }
+          }
+        }
+      ]
     }
   ],
   "enemies": [
@@ -29681,6 +38683,376 @@ export const dungeonForestData = {
         "폐허 전체가 숨을 쉰다. 도시를 삼킨 뿌리가 이번에는 침입자를 향한다.",
         "속삭임이 고함으로 바뀐다. 거대한 뿌리가 하늘을 가리며 내리친다."
       ]
+    },
+    {
+      "id": "ene4_crystal_sprite",
+      "zone": 4,
+      "name": "수정 정령",
+      "rank": "normal",
+      "hp": 170,
+      "damage": 10,
+      "agi": 6,
+      "damageReduction": 1,
+      "skills": [
+        "eskl_crystal_shard"
+      ],
+      "pattern": "default",
+      "goldMin": 12,
+      "goldMax": 17,
+      "description": "빛이 모여 사람 모양을 이룬 수정 조각들. 움직일 때마다 맑은 소리가 난다.",
+      "essence": "결정",
+      "base": "",
+      "effects": [],
+      "intros": []
+    },
+    {
+      "id": "ene4_primeval_wolf",
+      "zone": 4,
+      "name": "태고의 늑대",
+      "rank": "normal",
+      "hp": 190,
+      "damage": 11,
+      "agi": 9,
+      "damageReduction": 0,
+      "skills": [
+        "eskl_ancient_howl"
+      ],
+      "pattern": "default",
+      "goldMin": 12,
+      "goldMax": 18,
+      "description": "숲 초입의 늑대들보다 두 배는 크다. 털 끝에 별빛 같은 이슬이 맺혀 있다.",
+      "essence": "내단",
+      "base": "",
+      "effects": [
+        "crit:1"
+      ],
+      "intros": []
+    },
+    {
+      "id": "ene4_star_moth",
+      "zone": 4,
+      "name": "별빛 나방",
+      "rank": "normal",
+      "hp": 165,
+      "damage": 9,
+      "agi": 10,
+      "damageReduction": 0,
+      "skills": [
+        "eskl_star_dust"
+      ],
+      "pattern": "default",
+      "goldMin": 12,
+      "goldMax": 17,
+      "description": "날갯짓마다 반짝이는 가루가 흩날린다. 가루가 닿은 곳이 흐릿해진다.",
+      "essence": "정수",
+      "base": "",
+      "effects": [
+        "evade:1"
+      ],
+      "intros": []
+    },
+    {
+      "id": "ene4_megalith_guard",
+      "zone": 4,
+      "name": "거석 수호상",
+      "rank": "normal",
+      "hp": 225,
+      "damage": 11,
+      "agi": 0,
+      "damageReduction": 5,
+      "skills": [
+        "eskl_stone_slam"
+      ],
+      "pattern": "default",
+      "goldMin": 13,
+      "goldMax": 18,
+      "description": "이끼 낀 거석에 얼굴이 새겨져 있다. 태고부터 이 자리에 서 있었다.",
+      "essence": "정수",
+      "base": "",
+      "effects": [],
+      "intros": []
+    },
+    {
+      "id": "ene4_petrified_adventurer",
+      "zone": 4,
+      "name": "수정에 굳은 모험가",
+      "rank": "normal",
+      "hp": 200,
+      "damage": 11,
+      "agi": 4,
+      "damageReduction": 2,
+      "skills": [
+        "eskl_desperate_strike"
+      ],
+      "pattern": "default",
+      "goldMin": 12,
+      "goldMax": 18,
+      "description": "몸 절반이 수정으로 굳은 모험가. 입술이 겨우 움직인다. \"돌아… 가…\"",
+      "essence": "혼",
+      "base": "",
+      "effects": [],
+      "intros": []
+    },
+    {
+      "id": "ene4_expedition_remnant",
+      "zone": 4,
+      "name": "왕국 원정대 잔병",
+      "rank": "normal",
+      "hp": 205,
+      "damage": 12,
+      "agi": 3,
+      "damageReduction": 3,
+      "skills": [
+        "eskl_expedition_volley"
+      ],
+      "pattern": "default",
+      "goldMin": 13,
+      "goldMax": 18,
+      "description": "왕국 문장이 찍힌 갑옷에 수정이 돋았다. 원정대는 끝내 돌아가지 못했다.",
+      "essence": "혼",
+      "base": "",
+      "effects": [],
+      "intros": []
+    },
+    {
+      "id": "ene4_crystal_colony",
+      "zone": 4,
+      "name": "수정 군체",
+      "rank": "elite",
+      "hp": 360,
+      "damage": 12,
+      "agi": 5,
+      "damageReduction": 2,
+      "skills": [
+        "eskl_crystal_shard"
+      ],
+      "pattern": "default",
+      "goldMin": 28,
+      "goldMax": 36,
+      "description": "수정 정령 수십이 한데 엉겨 붙은 덩어리. 건드리면 조각이 튄다.",
+      "essence": "",
+      "base": "ene4_crystal_sprite",
+      "effects": [
+        "reflect:4"
+      ],
+      "intros": [
+        "수정 정령들이 한곳으로 모여든다. 맑은 소리가 겹쳐 귀가 아프다.",
+        "동굴 벽의 수정이 통째로 떨어져 나와 몸을 일으킨다."
+      ]
+    },
+    {
+      "id": "ene4_wolf_alpha",
+      "zone": 4,
+      "name": "태고의 늑대 우두머리",
+      "rank": "elite",
+      "hp": 360,
+      "damage": 12,
+      "agi": 10,
+      "damageReduction": 0,
+      "skills": [
+        "eskl_ancient_howl"
+      ],
+      "pattern": "default",
+      "goldMin": 28,
+      "goldMax": 36,
+      "description": "숲의 모든 늑대가 이 짐승의 핏줄이다. 눈빛이 오래되었다.",
+      "essence": "",
+      "base": "ene4_primeval_wolf",
+      "effects": [
+        "crit:1",
+        "evade:1"
+      ],
+      "intros": [
+        "언덕 위에서 거대한 늑대가 내려다본다. 울음 한 번에 숲이 조용해진다.",
+        "늑대 무리가 길을 연다. 그 사이로 우두머리가 천천히 걸어 나온다."
+      ]
+    },
+    {
+      "id": "ene4_moth_queen",
+      "zone": 4,
+      "name": "별빛 나방 여왕",
+      "rank": "elite",
+      "hp": 360,
+      "damage": 11,
+      "agi": 11,
+      "damageReduction": 0,
+      "skills": [
+        "eskl_star_dust"
+      ],
+      "pattern": "default",
+      "goldMin": 28,
+      "goldMax": 36,
+      "description": "날개를 펴면 밤하늘이 하나 열린다. 꺼진 별의 빛을 모으고 있다.",
+      "essence": "",
+      "base": "ene4_star_moth",
+      "effects": [
+        "evade:2"
+      ],
+      "intros": [
+        "하늘이 어두워지더니 별이 내려앉는다. 별이 아니라 날개다.",
+        "수천 마리 나방이 한 점으로 모인다. 그 가운데서 여왕이 날개를 편다."
+      ]
+    },
+    {
+      "id": "ene4_ancient_megalith",
+      "zone": 4,
+      "name": "고대 거석상",
+      "rank": "elite",
+      "hp": 380,
+      "damage": 12,
+      "agi": 0,
+      "damageReduction": 5,
+      "skills": [
+        "eskl_stone_slam",
+        "eskl_megalith_wall"
+      ],
+      "pattern": "default",
+      "goldMin": 28,
+      "goldMax": 36,
+      "description": "거석 원의 중심을 지키던 거상. 등에 첫 경고의 문자가 새겨져 있다.",
+      "essence": "",
+      "base": "ene4_megalith_guard",
+      "effects": [],
+      "intros": [
+        "땅이 흔들린다. 거석 원 한가운데 돌이 일어서서 사람의 형상을 이룬다.",
+        "\"여기서 멈춰라.\" 돌에 새겨진 글자가 빛나며 거상이 걸어 나온다."
+      ]
+    },
+    {
+      "id": "ene4_petrified_guide",
+      "zone": 4,
+      "name": "굳은 자들의 인도자",
+      "rank": "elite",
+      "hp": 360,
+      "damage": 12,
+      "agi": 5,
+      "damageReduction": 2,
+      "skills": [
+        "eskl_desperate_strike"
+      ],
+      "pattern": "default",
+      "goldMin": 28,
+      "goldMax": 36,
+      "description": "먼저 온 자들을 이끌던 모험가. 수정이 심장까지 닿았는데도 멈추지 않는다.",
+      "essence": "",
+      "base": "ene4_petrified_adventurer",
+      "effects": [
+        "lifesteal:10"
+      ],
+      "intros": [
+        "굳은 자들이 일제히 고개를 돌린다. 그 앞에 선 자가 수정 검을 든다. \"너도… 여기서 멈추게 될 거다.\"",
+        "\"경고는 들었다. 그래도 왔다. 너처럼.\" 수정에 덮인 인도자가 걸어 나온다."
+      ]
+    },
+    {
+      "id": "ene4_expedition_mage",
+      "zone": 4,
+      "name": "원정대 마도사",
+      "rank": "elite",
+      "hp": 360,
+      "damage": 12,
+      "agi": 4,
+      "damageReduction": 2,
+      "skills": [
+        "eskl_expedition_volley",
+        "eskl_expedition_hex"
+      ],
+      "pattern": "default",
+      "goldMin": 28,
+      "goldMax": 36,
+      "description": "봉인을 풀기 위해 왕이 보낸 마도사. 손에 쥔 지팡이가 수정으로 변했다.",
+      "essence": "",
+      "base": "ene4_expedition_remnant",
+      "effects": [],
+      "intros": [
+        "\"폐하의 명이다. 봉인을 열어라!\" 수정 지팡이 끝에 빛이 모인다.",
+        "원정대 깃발 아래 마도사가 주문을 외운다. 백 년째 같은 주문이다."
+      ]
+    },
+    {
+      "id": "ene4_gate_megalith",
+      "zone": 4,
+      "name": "거석의 문지기",
+      "rank": "midboss",
+      "hp": 480,
+      "damage": 12,
+      "agi": 0,
+      "damageReduction": 5,
+      "skills": [
+        "eskl_gate_seal",
+        "eskl_gate_crush",
+        "eskl_tremor"
+      ],
+      "pattern": "hpBelowHalf:eskl_gate_crush",
+      "goldMin": 28,
+      "goldMax": 34,
+      "description": "성역 입구의 거석 문 그 자체. 태고부터 침입자를 돌려보내 왔다.",
+      "essence": "",
+      "base": "",
+      "effects": [],
+      "intros": [
+        "거석의 문이 스스로 움직인다. 돌과 돌이 맞물리며 거대한 팔이 된다.",
+        "\"돌아가라.\" 문에 새겨진 수많은 경고문이 한꺼번에 빛난다.",
+        "문이 열리는 대신 일어선다. 성역은 그렇게 지켜져 왔다."
+      ]
+    },
+    {
+      "id": "ene4_crystal_prince",
+      "zone": 4,
+      "name": "수정에 먹힌 왕자",
+      "rank": "midboss",
+      "hp": 405,
+      "damage": 12,
+      "agi": 11,
+      "damageReduction": 0,
+      "skills": [
+        "eskl_prince_thrust",
+        "eskl_stolen_star"
+      ],
+      "pattern": "hpBelowHalfOnce:eskl_stolen_star",
+      "goldMin": 28,
+      "goldMax": 34,
+      "description": "뿌리 왕의 맏아들. 원정대를 이끌고 성역에서 봉인 조각을 훔쳐 간 장본인. 몸이 수정으로 변해 가는데도 성역을 떠나지 못한다.",
+      "essence": "",
+      "base": "",
+      "effects": [
+        "crit:1",
+        "evade:1"
+      ],
+      "intros": [
+        "\"아버지의 명이었다. 나는 틀리지 않았다.\" 수정 갑옷의 왕자가 검을 뽑는다.",
+        "원정대 깃발 아래 왕관을 쓴 젊은이가 서 있다. 얼굴 절반이 수정이다. \"한 조각만 더 있으면 된다.\"",
+        "\"경고? 아버지도 그 말을 비웃으셨지.\" 왕자의 손에서 꺼진 별의 조각이 희미하게 빛난다."
+      ]
+    },
+    {
+      "id": "ene4_whispering_warden",
+      "zone": 4,
+      "name": "속삭이는 파수꾼",
+      "rank": "final",
+      "hp": 900,
+      "damage": 14,
+      "agi": 4,
+      "damageReduction": 4,
+      "skills": [
+        "eskl_final_warning",
+        "eskl_warden_strike",
+        "eskl_seal_tremor",
+        "eskl_source_awaken",
+        "eskl_source_root"
+      ],
+      "pattern": "hpBelowHalfOnce:eskl_source_awaken;hpBelowHalf:eskl_source_root",
+      "goldMin": 45,
+      "goldMax": 55,
+      "description": "이끼와 수정과 별빛으로 엮인 태고의 존재. 성역 아래 잠든 근원의 뿌리를 오랜 세월 혼자 눌러 왔다. 속삭이는 숲의 모든 경고는 이 존재의 목소리였다.",
+      "essence": "",
+      "base": "",
+      "effects": [],
+      "intros": [
+        "거대한 형체가 성역의 심장 앞을 막아선다. 수많은 목소리가 하나로 겹친다. \"여기까지 왔구나. 제발… 돌아가라.\"",
+        "속삭임이 처음으로 얼굴을 갖는다. 이끼와 수정과 별빛으로 엮인 파수꾼이 고개를 숙인다. \"너를 막지 못하면, 저것이 깨어난다.\"",
+        "발밑 깊은 곳에서 무언가 뒤척인다. 파수꾼이 몸을 일으킨다. \"마지막 경고다.\""
+      ]
     }
   ],
   "enemySkills": [
@@ -30223,6 +39595,202 @@ export const dungeonForestData = {
         "empower:99"
       ],
       "description": "뿌리 전체가 미친 듯이 요동친다."
+    },
+    {
+      "id": "eskl_crystal_shard",
+      "name": "수정 파편",
+      "type": "attack",
+      "baseEffect": 12,
+      "cooldown": 3,
+      "effects": [
+        "bleed:2"
+      ],
+      "description": "날카로운 수정 조각이 소나기처럼 쏟아진다."
+    },
+    {
+      "id": "eskl_ancient_howl",
+      "name": "태고의 울음",
+      "type": "buff",
+      "baseEffect": 4,
+      "cooldown": 4,
+      "effects": [
+        "empower:2"
+      ],
+      "description": "오래된 울음이 숲을 흔든다. 늑대의 이빨이 더 깊이 박힌다."
+    },
+    {
+      "id": "eskl_star_dust",
+      "name": "별빛 가루",
+      "type": "attack",
+      "baseEffect": 8,
+      "cooldown": 3,
+      "effects": [
+        "weaken:0.7:2"
+      ],
+      "description": "반짝이는 가루가 눈과 손끝을 흐리게 한다."
+    },
+    {
+      "id": "eskl_stone_slam",
+      "name": "거석 내리찍기",
+      "type": "attack",
+      "baseEffect": 16,
+      "cooldown": 4,
+      "effects": [
+        "stun:1"
+      ],
+      "description": "거석이 통째로 내려앉는다."
+    },
+    {
+      "id": "eskl_megalith_wall",
+      "name": "거석 방벽",
+      "type": "defense",
+      "baseEffect": 40,
+      "cooldown": 4,
+      "effects": [
+        "shield:2"
+      ],
+      "description": "돌판이 솟아올라 몸을 감싼다."
+    },
+    {
+      "id": "eskl_desperate_strike",
+      "name": "절박한 일격",
+      "type": "attack",
+      "baseEffect": 14,
+      "cooldown": 3,
+      "effects": [
+        "bleed:2"
+      ],
+      "description": "굳어 가는 팔로 마지막 힘을 쥐어짠다."
+    },
+    {
+      "id": "eskl_expedition_volley",
+      "name": "원정대 일제 사격",
+      "type": "attack",
+      "baseEffect": 13,
+      "cooldown": 3,
+      "effects": [
+        "vulnerable:1.3:1"
+      ],
+      "description": "수정 화살촉이 한꺼번에 날아든다."
+    },
+    {
+      "id": "eskl_expedition_hex",
+      "name": "봉인 해제 주문",
+      "type": "debuff",
+      "baseEffect": 0,
+      "cooldown": 4,
+      "effects": [
+        "weaken:0.7:2",
+        "vulnerable:1.3:2"
+      ],
+      "description": "봉인을 풀려던 주문이 몸을 옭아맨다."
+    },
+    {
+      "id": "eskl_gate_seal",
+      "name": "봉인의 벽",
+      "type": "defense",
+      "baseEffect": 35,
+      "cooldown": 4,
+      "effects": [
+        "shield:2"
+      ],
+      "description": "거석 문에 새겨진 문자가 빛나며 벽을 이룬다."
+    },
+    {
+      "id": "eskl_gate_crush",
+      "name": "문지기의 짓누름",
+      "type": "attack",
+      "baseEffect": 24,
+      "cooldown": 3,
+      "effects": [],
+      "description": "거석의 팔이 하늘을 가리고 내려온다."
+    },
+    {
+      "id": "eskl_tremor",
+      "name": "지진",
+      "type": "attack",
+      "baseEffect": 12,
+      "cooldown": 5,
+      "effects": [
+        "stun:1"
+      ],
+      "description": "성역의 땅 전체가 한 번 울린다."
+    },
+    {
+      "id": "eskl_prince_thrust",
+      "name": "왕자의 찌르기",
+      "type": "attack",
+      "baseEffect": 16,
+      "cooldown": 3,
+      "effects": [
+        "bleed:3"
+      ],
+      "description": "수정 검이 빛처럼 꽂힌다."
+    },
+    {
+      "id": "eskl_stolen_star",
+      "name": "훔친 별",
+      "type": "buff",
+      "baseEffect": 6,
+      "cooldown": 99,
+      "effects": [
+        "empower:99"
+      ],
+      "description": "왕자가 꺼진 별의 조각을 가슴에 박는다. 수정이 온몸으로 번진다."
+    },
+    {
+      "id": "eskl_final_warning",
+      "name": "마지막 경고",
+      "type": "debuff",
+      "baseEffect": 0,
+      "cooldown": 4,
+      "effects": [
+        "weaken:0.7:2",
+        "vulnerable:1.3:2"
+      ],
+      "description": "\"돌아가라!\" 숲의 모든 속삭임이 한 목소리로 터져 나온다."
+    },
+    {
+      "id": "eskl_warden_strike",
+      "name": "파수꾼의 일격",
+      "type": "attack",
+      "baseEffect": 20,
+      "cooldown": 3,
+      "effects": [],
+      "description": "이끼와 수정으로 엮인 팔이 내리친다."
+    },
+    {
+      "id": "eskl_seal_tremor",
+      "name": "봉인의 진동",
+      "type": "attack",
+      "baseEffect": 12,
+      "cooldown": 5,
+      "effects": [
+        "stun:1"
+      ],
+      "description": "봉인을 누르던 힘이 땅을 타고 번진다."
+    },
+    {
+      "id": "eskl_source_awaken",
+      "name": "근원이 깨어난다",
+      "type": "buff",
+      "baseEffect": 6,
+      "cooldown": 99,
+      "effects": [
+        "empower:99"
+      ],
+      "description": "봉인이 흔들린다. 발밑 깊은 곳에서 무언가 눈을 뜬다. 파수꾼이 비명처럼 외친다. \"늦었다!\""
+    },
+    {
+      "id": "eskl_source_root",
+      "name": "근원의 뿌리",
+      "type": "attack",
+      "baseEffect": 26,
+      "cooldown": 4,
+      "effects": [
+        "bleed:3"
+      ],
+      "description": "땅을 뚫고 솟은 근원의 뿌리가 파수꾼과 침입자를 가리지 않고 휘감는다."
     }
   ],
   "campOptions": [
@@ -30443,6 +40011,149 @@ export const dungeonForestData = {
       ],
       "surprise": false,
       "resultText": "뿌리가 맑은 물을 싫어한다. 몸에 밴 물 냄새에 뿌리가 움찔한다."
+    },
+    {
+      "id": "camp4_gate_word",
+      "zone": 4,
+      "round": 10,
+      "text": "문지기를 잠재우는 말을 되뇌며 문 앞에 선다",
+      "requiresFlags": [
+        "knowsGateWord"
+      ],
+      "bossId": "ene4_gate_megalith",
+      "effects": [
+        "immune:stun",
+        "onBattleStart>empower:5:99"
+      ],
+      "surprise": false,
+      "resultText": "\"이 문은 너를 위해 닫혀 있다.\" 그 말을 알기에, 문이 흔들려도 발이 흔들리지 않는다."
+    },
+    {
+      "id": "camp4_gate_wardens",
+      "zone": 4,
+      "round": 10,
+      "text": "숲지기 망령들과 함께 문 앞으로 간다",
+      "requiresFlags": [
+        "appeasedWardens"
+      ],
+      "bossId": "ene4_gate_megalith",
+      "effects": [
+        "onBattleStart>shield:20:2",
+        "onBattleStart>empower:4:99"
+      ],
+      "surprise": false,
+      "resultText": "빚을 갚은 망령들이 곁에 선다. 푸른 빛이 몸을 감싼다."
+    },
+    {
+      "id": "camp4_prince_shame",
+      "zone": 4,
+      "round": 10,
+      "text": "왕자가 숨긴 부끄러움을 떠올리며 찌르기에 대비한다",
+      "requiresFlags": [
+        "knowsPrinceShame"
+      ],
+      "bossId": "ene4_crystal_prince",
+      "effects": [
+        "immune:bleed",
+        "crit:1"
+      ],
+      "surprise": false,
+      "resultText": "찌른 다음엔 왼쪽으로 빠진다. 그리고 그는 아버지의 명령을 부끄러워한다."
+    },
+    {
+      "id": "camp4_prince_waver",
+      "zone": 4,
+      "round": 10,
+      "text": "왕자가 흔들린 틈을 노린다",
+      "requiresFlags": [
+        "princeWavers"
+      ],
+      "bossId": "ene4_crystal_prince",
+      "effects": [
+        "onBattleStart>empower:4:99"
+      ],
+      "surprise": true,
+      "resultText": "\"돌아와라, 아들아.\" 그 말을 들은 왕자가 검을 늦게 뽑는다."
+    },
+    {
+      "id": "camp4_warden_plea",
+      "zone": 4,
+      "round": 21,
+      "text": "파수꾼의 부탁을 떠올리며 마지막 경고를 받아들인다",
+      "requiresFlags": [
+        "heardWardenPlea"
+      ],
+      "bossId": "ene4_whispering_warden",
+      "effects": [
+        "immune:weaken",
+        "immune:vulnerable"
+      ],
+      "surprise": false,
+      "resultText": "\"돌아가라.\" 이제 그 말은 저주가 아니라 부탁이다. 흔들리지 않는다."
+    },
+    {
+      "id": "camp4_seal_weakness",
+      "zone": 4,
+      "round": 21,
+      "text": "봉인의 중심과 파수꾼의 금을 노릴 준비를 한다",
+      "requiresFlags": [
+        "knowsSealWeakness"
+      ],
+      "bossId": "ene4_whispering_warden",
+      "effects": [
+        "onBattleStart>empower:5:99",
+        "crit:1"
+      ],
+      "surprise": false,
+      "resultText": "파수꾼의 금과 봉인의 금은 같다. 어디를 쳐야 하는지, 어디를 눌러야 하는지 안다."
+    },
+    {
+      "id": "camp4_mended_seal",
+      "zone": 4,
+      "round": 21,
+      "text": "메워 둔 봉인을 믿고 근원의 뿌리에 대비한다",
+      "requiresFlags": [
+        "mendedSeal"
+      ],
+      "bossId": "ene4_whispering_warden",
+      "effects": [
+        "immune:bleed",
+        "onBattleStart>shield:20:2"
+      ],
+      "surprise": false,
+      "resultText": "봉인이 단단하다. 근원이 깨어나도 뿌리가 깊이 파고들지 못할 것이다."
+    },
+    {
+      "id": "camp4_warden_gift",
+      "zone": 4,
+      "round": 21,
+      "text": "숲지기들의 꾸러미를 품고 파수꾼 앞에 선다",
+      "requiresFlags": [
+        "carriesWardenGift"
+      ],
+      "bossId": "ene4_whispering_warden",
+      "effects": [
+        "immune:stun",
+        "onBattleStart>empower:4:99"
+      ],
+      "surprise": false,
+      "resultText": "꾸러미가 따뜻하다. 파수꾼이 이것을 알아볼 것이다. 봉인의 진동에도 쓰러지지 않는다."
+    },
+    {
+      "id": "camp4_source_power",
+      "zone": 4,
+      "round": 21,
+      "text": "근원이 준 힘을 끌어 쓴다",
+      "requiresFlags": [
+        "touchedSource"
+      ],
+      "bossId": "ene4_whispering_warden",
+      "effects": [
+        "onBattleStart>empower:8:99",
+        "maxHp:-30"
+      ],
+      "surprise": false,
+      "resultText": "손바닥의 뿌리가 꿈틀거린다. 힘이 넘친다. 그러나 몸 어딘가가 비어 간다."
     }
   ]
 };

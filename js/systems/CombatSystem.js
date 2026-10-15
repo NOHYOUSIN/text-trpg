@@ -1,15 +1,15 @@
-import { catalog } from "../data/catalog.js?v=20261016-040625";
-import { COMBAT, DICE, EFFECT_TIERS } from "../data/rules.js?v=20261016-040625";
-import { Enemy } from "../models/Enemy.js?v=20261016-040625";
-import { capEvade, capLifesteal, critMinFrom, runAbilities } from "./AbilitySystem.js?v=20261016-040625";
-import { burstBonus, conditionalBonus, effectValue } from "./BuildEffects.js?v=20261016-040625";
-import { applyReduction, computeEffect, describeCalculation, describeRoll, rollTier } from "./DamageSystem.js?v=20261016-040625";
-import { consumableEffects, isElixir } from "./ConsumableEffects.js?v=20261016-040625";
-import { chooseEnemySkillId } from "./EnemyAI.js?v=20261016-040625";
-import { attackSkillBase, basicAttackBase, supportAmount } from "./FormulaSystem.js?v=20261016-040625";
-import { parseEffects, STATUS_LABELS, toStatusSpec } from "./EffectParser.js?v=20261016-040625";
-import { josa } from "./Josa.js?v=20261016-040625";
-import { clamp, formatNumber as fmt, roundValue } from "./NumberRules.js?v=20261016-040625";
+import { catalog } from "../data/catalog.js?v=20261016-055455";
+import { COMBAT, DICE, EFFECT_TIERS } from "../data/rules.js?v=20261016-055455";
+import { Enemy } from "../models/Enemy.js?v=20261016-055455";
+import { capEvade, capLifesteal, critMinFrom, runAbilities } from "./AbilitySystem.js?v=20261016-055455";
+import { burstBonus, conditionalBonus, effectValue } from "./BuildEffects.js?v=20261016-055455";
+import { applyReduction, computeEffect, describeCalculation, describeRoll, rollTier } from "./DamageSystem.js?v=20261016-055455";
+import { consumableEffects, isElixir } from "./ConsumableEffects.js?v=20261016-055455";
+import { chooseEnemySkillId } from "./EnemyAI.js?v=20261016-055455";
+import { attackSkillBase, basicAttackBase, supportAmount } from "./FormulaSystem.js?v=20261016-055455";
+import { parseEffects, STATUS_LABELS, toStatusSpec } from "./EffectParser.js?v=20261016-055455";
+import { josa } from "./Josa.js?v=20261016-055455";
+import { clamp, formatNumber as fmt, roundValue } from "./NumberRules.js?v=20261016-055455";
 import {
   absorbWithShield,
   applyStatus,
@@ -25,8 +25,8 @@ import {
   removeStatus,
   durationText,
   statusValueText,
-} from "./StatusSystem.js?v=20261016-040625";
-import { getClassTrait, getProfile } from "./TraitSystem.js?v=20261016-040625";
+} from "./StatusSystem.js?v=20261016-055455";
+import { getClassTrait, getProfile } from "./TraitSystem.js?v=20261016-055455";
 
 const SELF_EFFECTS = new Set(["guard", "shield", "empower", "cleanse", "reflect", "critBoost"]);
 const CRITICAL_TIER = EFFECT_TIERS.find((tier) => tier.id === "critical");
@@ -84,6 +84,11 @@ export class Combat {
     this.actor = null;
 
     const profile = getProfile(adventurer, { extraSources: boon ? [boon] : [] });
+
+    // 이번 전투에만 최대 HP가 줄면(정비 특별 선택지 maxHp:-N) 지금 HP도 그 안으로 맞춘다.
+    if (boon && adventurer.hp > profile.maxHp) {
+      adventurer.hp = profile.maxHp;
+    }
     this.trait = getClassTrait(adventurer.classId);
     this.player = {
       kind: "player",

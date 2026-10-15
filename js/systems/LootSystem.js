@@ -1,4 +1,4 @@
-import { catalog } from "../data/catalog.js?v=20261016-040625";
+import { catalog } from "../data/catalog.js?v=20261016-055455";
 import {
   BOSS_REWARD_CANDIDATES,
   BOSS_REWARD_GRADE,
@@ -8,10 +8,10 @@ import {
   LOOT,
   REWARD_CHOICE,
   SKILL_POOL,
-} from "../data/rules.js?v=20261016-040625";
-import { isElixir } from "./ConsumableEffects.js?v=20261016-040625";
-import { pickBossElixir, pickEssence, pickRandomElixir, rollElixirStat } from "./ElixirSystem.js?v=20261016-040625";
-import { mainStatsOf } from "./TraitSystem.js?v=20261016-040625";
+} from "../data/rules.js?v=20261016-055455";
+import { isElixir } from "./ConsumableEffects.js?v=20261016-055455";
+import { pickBossElixir, pickEssence, pickRandomElixir, rollElixirStat } from "./ElixirSystem.js?v=20261016-055455";
+import { mainStatsOf } from "./TraitSystem.js?v=20261016-055455";
 
 const GRADE_ORDER = ["common", "uncommon", "rare", "unique"];
 

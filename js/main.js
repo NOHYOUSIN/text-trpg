@@ -1,5 +1,5 @@
-import { GameManager } from "./core/GameManager.js?v=20261016-040625";
-import { MobileUI } from "./ui/MobileUI.js?v=20261016-040625";
+import { GameManager } from "./core/GameManager.js?v=20261016-055455";
+import { MobileUI } from "./ui/MobileUI.js?v=20261016-055455";
 
 const sceneRoot = document.querySelector("#scene");
 const settingsButton = document.querySelector("#settings-button");

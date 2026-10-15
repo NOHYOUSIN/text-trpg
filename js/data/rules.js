@@ -82,8 +82,8 @@ export const GRADE_WEIGHTS_BY_ZONE = Object.freeze({
 // 보스 보상 후보의 확정 등급
 // 엘리트는 중간보스보다 한 단계 낮다. 최종 보스는 보상 없이 탐험이 끝난다.
 export const BOSS_REWARD_GRADE = Object.freeze({
-  elite: { 1: "common", 2: "uncommon", 3: "uncommon" },
-  midboss: { 1: "uncommon", 2: "rare", 3: "rare" },
+  elite: { 1: "common", 2: "uncommon", 3: "uncommon", 4: "rare" },
+  midboss: { 1: "uncommon", 2: "rare", 3: "rare", 4: "unique" },
   boss: { 1: "rare", 2: "unique", 3: "unique" },
 });
 

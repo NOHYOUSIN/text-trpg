@@ -1,5 +1,5 @@
-import { ABILITY } from "../data/rules.js?v=20261016-040625";
-import { getStatus, hasStatus } from "./StatusSystem.js?v=20261016-040625";
+import { ABILITY } from "../data/rules.js?v=20261016-055455";
+import { getStatus, hasStatus } from "./StatusSystem.js?v=20261016-055455";
 
 // 빌드 축 확장 (2026-10-16, 기획 문서 8장): 조건부 수치와 "모으기·터뜨리기" 계산.
 // 전투(CombatSystem)는 여기서 값만 받아 쓴다.
