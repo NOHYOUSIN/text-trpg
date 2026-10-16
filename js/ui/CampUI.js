@@ -1,4 +1,4 @@
-import { renderScene } from "./SceneUI.js?v=20261016-055455";
+import { renderScene } from "./SceneUI.js?v=20261016-205734";
 
 // 정비 라운드: 갈림길 대신 고정 선택지 두 개 (2026-10-13)
 // skillFloor: 성장의 바닥 보장(장착 스킬이 모자랄 때) — 탐색 결과가 스킬 후보 skillFloor개 중 선택으로 확정된다. 0이면 평소대로.

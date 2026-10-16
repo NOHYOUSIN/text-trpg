@@ -1,9 +1,9 @@
-import { catalog, getItem } from "../data/catalog.js?v=20261016-055455";
-import { REWARD_CHOICE } from "../data/rules.js?v=20261016-055455";
-import { parseToken } from "./EffectParser.js?v=20261016-055455";
-import { josa } from "./Josa.js?v=20261016-055455";
-import { formatNumber as fmt, roundValue } from "./NumberRules.js?v=20261016-055455";
-import { getMaxHp } from "./TraitSystem.js?v=20261016-055455";
+import { catalog, getItem } from "../data/catalog.js?v=20261016-205734";
+import { REWARD_CHOICE } from "../data/rules.js?v=20261016-205734";
+import { parseToken } from "./EffectParser.js?v=20261016-205734";
+import { josa } from "./Josa.js?v=20261016-205734";
+import { formatNumber as fmt, roundValue } from "./NumberRules.js?v=20261016-205734";
+import { getMaxHp } from "./TraitSystem.js?v=20261016-205734";
 
 // 사건 결과 표기(hp:-0.5;gold:3;item:...;fight:...)를 적용한다.
 // 아이템·스킬 획득은 인벤토리·획득 화면이 처리하도록 acquisitions로 돌려준다.

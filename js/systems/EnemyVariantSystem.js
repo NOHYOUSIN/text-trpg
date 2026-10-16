@@ -1,5 +1,5 @@
-import { ENEMY_VARIANT, VETERAN } from "../data/rules.js?v=20261016-055455";
-import { roundValue } from "./NumberRules.js?v=20261016-055455";
+import { ENEMY_VARIANT, VETERAN } from "../data/rules.js?v=20261016-205734";
+import { roundValue } from "./NumberRules.js?v=20261016-205734";
 
 // 일반 전투의 적을 정예·엘리트로 바꿀지 정한다.
 // 엘리트는 같은 계열(base)의 엘리트를 우선 고르고, 없으면 구역의 아무 엘리트나 고른다.

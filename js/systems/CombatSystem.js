@@ -1,15 +1,15 @@
-import { catalog } from "../data/catalog.js?v=20261016-055455";
-import { COMBAT, DICE, EFFECT_TIERS } from "../data/rules.js?v=20261016-055455";
-import { Enemy } from "../models/Enemy.js?v=20261016-055455";
-import { capEvade, capLifesteal, critMinFrom, runAbilities } from "./AbilitySystem.js?v=20261016-055455";
-import { burstBonus, conditionalBonus, effectValue } from "./BuildEffects.js?v=20261016-055455";
-import { applyReduction, computeEffect, describeCalculation, describeRoll, rollTier } from "./DamageSystem.js?v=20261016-055455";
-import { consumableEffects, isElixir } from "./ConsumableEffects.js?v=20261016-055455";
-import { chooseEnemySkillId } from "./EnemyAI.js?v=20261016-055455";
-import { attackSkillBase, basicAttackBase, supportAmount } from "./FormulaSystem.js?v=20261016-055455";
-import { parseEffects, STATUS_LABELS, toStatusSpec } from "./EffectParser.js?v=20261016-055455";
-import { josa } from "./Josa.js?v=20261016-055455";
-import { clamp, formatNumber as fmt, roundValue } from "./NumberRules.js?v=20261016-055455";
+import { catalog } from "../data/catalog.js?v=20261016-205734";
+import { COMBAT, DICE, EFFECT_TIERS } from "../data/rules.js?v=20261016-205734";
+import { Enemy } from "../models/Enemy.js?v=20261016-205734";
+import { capEvade, capLifesteal, critMinFrom, runAbilities } from "./AbilitySystem.js?v=20261016-205734";
+import { burstBonus, conditionalBonus, effectValue } from "./BuildEffects.js?v=20261016-205734";
+import { applyReduction, computeEffect, describeCalculation, describeRoll, rollTier } from "./DamageSystem.js?v=20261016-205734";
+import { consumableEffects, isElixir } from "./ConsumableEffects.js?v=20261016-205734";
+import { chooseEnemySkillId } from "./EnemyAI.js?v=20261016-205734";
+import { attackSkillBase, basicAttackBase, supportAmount } from "./FormulaSystem.js?v=20261016-205734";
+import { parseEffects, STATUS_LABELS, toStatusSpec } from "./EffectParser.js?v=20261016-205734";
+import { josa } from "./Josa.js?v=20261016-205734";
+import { clamp, formatNumber as fmt, roundValue } from "./NumberRules.js?v=20261016-205734";
 import {
   absorbWithShield,
   applyStatus,
@@ -25,8 +25,8 @@ import {
   removeStatus,
   durationText,
   statusValueText,
-} from "./StatusSystem.js?v=20261016-055455";
-import { getClassTrait, getProfile } from "./TraitSystem.js?v=20261016-055455";
+} from "./StatusSystem.js?v=20261016-205734";
+import { getClassTrait, getProfile } from "./TraitSystem.js?v=20261016-205734";
 
 const SELF_EFFECTS = new Set(["guard", "shield", "empower", "cleanse", "reflect", "critBoost"]);
 const CRITICAL_TIER = EFFECT_TIERS.find((tier) => tier.id === "critical");
@@ -314,6 +314,12 @@ export class Combat {
   chantMultiplierOf(user) {
     const raw = this.trait.chantMultiplier + user.profile.modifiers.chantBonus + user.chantBoost;
     return Math.round(Math.min(this.trait.chantMultiplierMax ?? raw, raw) * 100) / 100;
+  }
+
+  // 도적 기민함: 상대가 독·출혈·약화·취약 중 하나라도 걸려 있으면 ×1.2, 아니면 1(기절은 세지 않음)
+  debuffedMultiplierAgainst(defender) {
+    const { debuffedMultiplier, debuffedStatuses = [] } = this.trait;
+    return debuffedMultiplier && debuffedStatuses.some((type) => hasStatus(defender, type)) ? debuffedMultiplier : 1;
   }
 
   // 전사 기세 최대치(기본 5 + 장비). 전사가 아니면 0(기세 없음)
@@ -679,7 +685,9 @@ export class Combat {
     // 전사 기세: 단계·그 밖의 배율 없이 더한다. 빗나감(효과 없음)이면 더하지 않는다.
     const momentumBonus = momentum && tier.multiplier > 0 ? attacker.momentum ?? 0 : 0;
     const burst = tier.multiplier > 0 ? extra : 0;
-    const raw = computed + momentumBonus + burst;
+    // 도적 기민함: 약화된 상대에게 주는 공격 피해 배율(momentum은 플레이어의 기본공격·공격 스킬에만 켜진다)
+    const agile = momentum && tier.multiplier > 0 ? this.debuffedMultiplierAgainst(defender) : 1;
+    const raw = roundValue((computed + momentumBonus + burst) * agile);
     const reduction = this.reductionOf(defender);
     const afterReduction = applyReduction(raw, reduction, tier);
     // 보호막이 공격 피해를 먼저 막는다(독·출혈·반사는 막지 못한다).
@@ -704,7 +712,11 @@ export class Combat {
     }
 
     const calc = describeCalculation({ base, flat, tier, multipliers: all, raw: computed, reduction, final: afterReduction });
-    const extras = [momentumBonus ? `기세 +${fmt(momentumBonus)}` : "", burst ? `${extraNote} = +${fmt(burst)}` : ""].filter(Boolean);
+    const extras = [
+      momentumBonus ? `기세 +${fmt(momentumBonus)}` : "",
+      burst ? `${extraNote} = +${fmt(burst)}` : "",
+      agile !== 1 ? `기민함 ×${agile}` : "",
+    ].filter(Boolean);
     this.log("damage", text, extras.length ? `${calc} (${extras.join(", ")} 포함)` : calc, fx);
 
     if (hadShield && !hasStatus(defender, "shield")) {

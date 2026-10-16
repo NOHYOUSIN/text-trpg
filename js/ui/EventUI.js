@@ -1,5 +1,5 @@
-import { checkCondition, getSkillBonus, VERB_TAGS } from "../systems/EventSystem.js?v=20261016-055455";
-import { renderScene } from "./SceneUI.js?v=20261016-055455";
+import { checkCondition, getSkillBonus, VERB_TAGS } from "../systems/EventSystem.js?v=20261016-205734";
+import { renderScene } from "./SceneUI.js?v=20261016-205734";
 
 // 사건 선택지. 조건을 채우지 못한 선택지는 흐리게 보여 주고 필요한 조건을 적는다.
 // 행동 동사가 있으면 [힘]처럼 방식을 붙인다. 난이도는 표시하지 않는다.

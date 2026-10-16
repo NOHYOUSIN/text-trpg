@@ -7449,7 +7449,7 @@ export const commonData = {
       "id": "rogue",
       "name": "도적",
       "mainStat": "agi",
-      "maxHp": 65,
+      "maxHp": 70,
       "stats": {
         "str": 2,
         "agi": 5,
@@ -7465,7 +7465,7 @@ export const commonData = {
       ],
       "startGold": 5,
       "traitName": "기민함",
-      "traitDesc": "정규 전투에서 선공하면 첫 행동의 피해 ×1.5. 기습 판정 보정 ±3."
+      "traitDesc": "정규 전투에서 선공하면 첫 행동의 피해 ×1.5. 상대가 독·출혈·약화·취약 중 하나라도 걸려 있으면 기본공격과 공격 스킬의 피해 ×1.2. 기습 판정 보정 ±3."
     },
     {
       "id": "mage",

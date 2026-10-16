@@ -1,9 +1,9 @@
-import { catalog } from "../data/catalog.js?v=20261016-055455";
-import { CLASS_TRAITS } from "../data/rules.js?v=20261016-055455";
-import { capEvade, capLifesteal, critMinFrom, parseAbility } from "./AbilitySystem.js?v=20261016-055455";
-import { parseToken } from "./EffectParser.js?v=20261016-055455";
-import { maxHpFrom, supportAmount } from "./FormulaSystem.js?v=20261016-055455";
-import { roundValue } from "./NumberRules.js?v=20261016-055455";
+import { catalog } from "../data/catalog.js?v=20261016-205734";
+import { CLASS_TRAITS } from "../data/rules.js?v=20261016-205734";
+import { capEvade, capLifesteal, critMinFrom, parseAbility } from "./AbilitySystem.js?v=20261016-205734";
+import { parseToken } from "./EffectParser.js?v=20261016-205734";
+import { maxHpFrom, supportAmount } from "./FormulaSystem.js?v=20261016-205734";
+import { roundValue } from "./NumberRules.js?v=20261016-205734";
 
 export const STAT_KEYS = ["str", "agi", "wis"];
 

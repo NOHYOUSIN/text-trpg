@@ -1,11 +1,11 @@
-import { GRADES } from "../data/rules.js?v=20261016-055455";
-import { formatNumber as fmt } from "../systems/NumberRules.js?v=20261016-055455";
-import { rankNameClasses } from "./BossIntroUI.js?v=20261016-055455";
-import { playCombatFx } from "./CombatFx.js?v=20261016-055455";
-import { isLogPlaybackEnabled, readCalcSetting, writeCalcSetting } from "./Settings.js?v=20261016-055455";
-import { statusChip } from "./StatusTooltip.js?v=20261016-055455";
-import { attachLongPressInfo, showLongPressHintOnce } from "./InfoPopup.js?v=20261016-055455";
-import { describeConsumable, describeSkill } from "./ItemText.js?v=20261016-055455";
+import { GRADES } from "../data/rules.js?v=20261016-205734";
+import { formatNumber as fmt } from "../systems/NumberRules.js?v=20261016-205734";
+import { rankNameClasses } from "./BossIntroUI.js?v=20261016-205734";
+import { playCombatFx } from "./CombatFx.js?v=20261016-205734";
+import { isLogPlaybackEnabled, readCalcSetting, writeCalcSetting } from "./Settings.js?v=20261016-205734";
+import { statusChip } from "./StatusTooltip.js?v=20261016-205734";
+import { attachLongPressInfo, showLongPressHintOnce } from "./InfoPopup.js?v=20261016-205734";
+import { describeConsumable, describeSkill } from "./ItemText.js?v=20261016-205734";
 
 const SKILL_TYPE_LABELS = {
   attack: "공격",

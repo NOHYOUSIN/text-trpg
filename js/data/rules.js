@@ -34,7 +34,9 @@ export const EXPLORE_DIFFICULTIES = Object.freeze({
 export const CLASS_TRAITS = Object.freeze({
   // 기세: 공격으로 피해를 받을 때마다 1 쌓인다(최대 5). 기본공격·공격 스킬 피해에 단계 배율 없이 더한다. (2026-10-13, 투지 대체)
   warrior: { momentumMax: 5 },
-  rogue: { firstStrikeMultiplier: 1.5, surpriseModifier: 3 },
+  // 기민함 지속 효과 (2026-10-16): 상대가 debuffedStatuses 중 하나라도 걸려 있으면 기본공격·공격 스킬 피해 ×debuffedMultiplier.
+  // 단계 배율·터뜨리기를 더한 피해에 곱하고 그다음 피해 감소를 뺀다. 지속 피해·반사·장비 처치/피격 피해에는 적용하지 않는다.
+  rogue: { firstStrikeMultiplier: 1.5, surpriseModifier: 3, debuffedMultiplier: 1.2, debuffedStatuses: ["poison", "bleed", "weaken", "vulnerable"] },
   // 영창: 기본공격 대신 영창하고, 다음 기본공격·스킬 효과 ×1.75 (2026-10-13)
   // 영창 보호막: [영창] 행동 때 보호막 (2 + 지혜 × 0.3), 1턴, 주사위 없음. 전투 시작 때는 주지 않는다. (2026-10-13)
   // 영창 배율 상한 ×2.5(장비 chantBonus·마력 응축 chantBoost 포함, 2026-10-16)

@@ -1,4 +1,4 @@
-import { HELP_SECTIONS } from "../data/helpText.js?v=20261016-055455";
+import { HELP_SECTIONS } from "../data/helpText.js?v=20261016-205734";
 
 const SEEN_KEY = "trpg-webgame-help-seen";
 

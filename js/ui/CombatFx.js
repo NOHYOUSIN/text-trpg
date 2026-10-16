@@ -1,5 +1,5 @@
-import { formatNumber as fmt } from "../systems/NumberRules.js?v=20261016-055455";
-import { isScreenFxEnabled } from "./Settings.js?v=20261016-055455";
+import { formatNumber as fmt } from "../systems/NumberRules.js?v=20261016-205734";
+import { isScreenFxEnabled } from "./Settings.js?v=20261016-205734";
 
 // 전투 연출: 판정 결과에 따라 정보 칸을 흔들고, 피해·회복 숫자와 상태 이름을 띄운다.
 // 화면 연출 설정을 끄면 아무것도 하지 않는다. 흔들림은 CSS에서 동작 줄이기 설정을 따른다.

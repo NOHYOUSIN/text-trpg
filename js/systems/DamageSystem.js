@@ -1,5 +1,5 @@
-import { COMBAT, DICE, EFFECT_TIERS } from "../data/rules.js?v=20261016-055455";
-import { clamp, formatNumber as fmt, roundValue } from "./NumberRules.js?v=20261016-055455";
+import { COMBAT, DICE, EFFECT_TIERS } from "../data/rules.js?v=20261016-205734";
+import { clamp, formatNumber as fmt, roundValue } from "./NumberRules.js?v=20261016-205734";
 
 const CRITICAL = EFFECT_TIERS.find((tier) => tier.id === "critical");
 const NONE = EFFECT_TIERS.find((tier) => tier.id === "none");

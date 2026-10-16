@@ -38579,8 +38579,8 @@ export const dungeonForestData = {
       "zone": 3,
       "name": "뿌리에 삼켜진 기사단장",
       "rank": "midboss",
-      "hp": 320,
-      "damage": 9,
+      "hp": 380,
+      "damage": 10,
       "agi": 2,
       "damageReduction": 3,
       "skills": [
@@ -38606,8 +38606,8 @@ export const dungeonForestData = {
       "zone": 3,
       "name": "까마귀 손",
       "rank": "midboss",
-      "hp": 270,
-      "damage": 9,
+      "hp": 320,
+      "damage": 10,
       "agi": 10,
       "damageReduction": 0,
       "skills": [
@@ -38635,8 +38635,8 @@ export const dungeonForestData = {
       "zone": 3,
       "name": "뿌리 왕좌의 왕",
       "rank": "boss",
-      "hp": 520,
-      "damage": 10,
+      "hp": 620,
+      "damage": 11,
       "agi": 1,
       "damageReduction": 3,
       "skills": [
@@ -38662,8 +38662,8 @@ export const dungeonForestData = {
       "zone": 3,
       "name": "왕궁을 삼킨 뿌리",
       "rank": "boss",
-      "hp": 500,
-      "damage": 9,
+      "hp": 600,
+      "damage": 10,
       "agi": 3,
       "damageReduction": 2,
       "skills": [
@@ -39030,7 +39030,7 @@ export const dungeonForestData = {
       "zone": 4,
       "name": "속삭이는 파수꾼",
       "rank": "final",
-      "hp": 900,
+      "hp": 800,
       "damage": 14,
       "agi": 4,
       "damageReduction": 4,
@@ -39774,7 +39774,7 @@ export const dungeonForestData = {
       "id": "eskl_source_awaken",
       "name": "근원이 깨어난다",
       "type": "buff",
-      "baseEffect": 6,
+      "baseEffect": 4,
       "cooldown": 99,
       "effects": [
         "empower:99"

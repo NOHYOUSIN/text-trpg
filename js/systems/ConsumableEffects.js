@@ -1,4 +1,4 @@
-import { parseToken } from "./EffectParser.js?v=20261016-055455";
+import { parseToken } from "./EffectParser.js?v=20261016-205734";
 
 // 소모품 효과 목록. 여러 효과는 ";"로 잇는다(예: 붕대 "heal;cure:bleed"). (2026-10-13)
 export function consumableEffects(item) {
